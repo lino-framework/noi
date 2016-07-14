@@ -1,4 +1,4 @@
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2016 Luc Saffre
 #
 # This file is part of Lino Noi.
 #
@@ -17,7 +17,7 @@
 # <http://www.gnu.org/licenses/>.
 
 """
-Lino Noi extension of :mod:`lino_xl.lib.contacts`.
+Lino Noi extension of :mod:`lino_xl.lib.topics`.
 
 .. autosummary::
    :toctree:
@@ -26,7 +26,7 @@ Lino Noi extension of :mod:`lino_xl.lib.contacts`.
 
 """
 
-from lino_xl.lib.contacts import Plugin
+from lino_xl.lib.topics import Plugin
 
 
 # class Plugin(Plugin):

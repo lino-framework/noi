@@ -1,4 +1,5 @@
-# Copyright 2015 Luc Saffre
+# -*- coding: UTF-8 -*-
+# Copyright 2015-2016 Luc Saffre
 #
 # This file is part of Lino Noi.
 #
@@ -16,20 +17,26 @@
 # License along with Lino Noi.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""
-Lino Noi extension of :mod:`lino_xl.lib.contacts`.
-
-.. autosummary::
-   :toctree:
-
-    models
+"""Database models for this plugin.
 
 """
 
-from lino_xl.lib.contacts import Plugin
+from lino.api import dd, _
+
+from lino_xl.lib.topics.models import *
 
 
-# class Plugin(Plugin):
-    
-#     extends_models = ['Company']
+class TopicDetail(dd.DetailLayout):
+    main = """
+    id ref name topic_group
+    description
+    tickets.TicketsByTopic topics.InterestsByTopic
+    """
 
+
+# @dd.receiver(dd.post_analyze)
+# def my_details(sender, **kw):
+#     contacts = sender.models.contacts
+#     contacts.Companies.set_detail_layout(contacts.CompanyDetail())
+
+Topics.set_detail_layout(TopicDetail())

@@ -23,7 +23,7 @@
 
 SETUP_INFO = dict(
     name='lino-noi',
-    version='0.0.2',  # since 20150918
+    version='0.0.3',  # since 20160712
     install_requires=['lino_xl'],
     test_suite='tests',
     description=("The Lino application used by the Lino team for "
@@ -69,7 +69,6 @@ SETUP_INFO.update(packages=[
     'lino_noi.lib.tickets',
     'lino_noi.lib.tickets.fixtures',
     'lino_noi.lib.faculties',
-    'lino_noi.lib.faculties.fixtures',
     'lino_noi.lib.clocking',
     'lino_noi.lib.clocking.fixtures',
     'lino_noi.lib.public',

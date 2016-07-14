@@ -42,8 +42,8 @@ class Faculties(dd.Table):
 
 class AllFaculties(Faculties):
     label = _("Faculties (all)")
-    column_names = 'ref name affinity topic_group parent *'
-    order_by = ["parent", "seqno"]
+    column_names = 'name affinity topic_group parent *'
+    order_by = ["name"]
 
 
 class TopLevelFaculties(Faculties):
@@ -57,7 +57,9 @@ class TopLevelFaculties(Faculties):
 class FacultiesByParent(Faculties):
     master_key = 'parent'
     column_names = 'seqno name affinity topic_group *'
-    order_by = ["ref"]
+    order_by = ["seqno"]
+    # order_by = ["parent", "seqno"]
+    # order_by = ["name"]
     
 
 class Competences(dd.Table):

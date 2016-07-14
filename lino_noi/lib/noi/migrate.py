@@ -26,7 +26,7 @@ This module is used because a :ref:`noi` Site has
 """
 
 from django.conf import settings
-from lino.api import rt
+from lino.api import dd, rt
 from lino.utils.dpy import Migrator, override
 
 
@@ -51,7 +51,7 @@ class Migrator(Migrator):
         tickets_Site = rt.models.tickets.Site
         tickets_Interest = rt.models.topics.Interest
         tickets_Ticket = rt.models.tickets.Ticket
-        Partner = rt.models.contacts.Partner
+        Partner = dd.resolve_model(dd.plugins.topics.partner_model)
 
         @override(globals_dict)
         def create_tickets_site(id, partner_id, name, remark):
@@ -147,4 +147,33 @@ class Migrator(Migrator):
             kw.update(topic_group_id=product_cat_id)
             return faculties_Faculty(**kw)
 
-        return '1.0.1'
+        return '0.0.2'
+
+    def migrate_from_0_0_2(self, globals_dict):
+
+        bv2kw = globals_dict['bv2kw']
+        faculties_Faculty = rt.models.faculties.Faculty
+        tickets_Site = rt.models.tickets.Site
+
+        @override(globals_dict)
+        def create_faculties_faculty(id, ref, seqno, parent_id, name, affinity, product_cat_id):
+            kw = dict()
+            kw.update(id=id)
+            # kw.update(ref=ref)
+            kw.update(seqno=seqno)
+            kw.update(parent_id=parent_id)
+            if name is not None: kw.update(bv2kw('name',name))
+            kw.update(affinity=affinity)
+            # kw.update(product_cat_id=product_cat_id)
+            return faculties_Faculty(**kw)
+
+        @override(globals_dict)
+        def create_tickets_site(id, partner_id, name, remark):
+            kw = dict()
+            kw.update(id=id)
+            # kw.update(partner_id=partner_id)
+            kw.update(name=name)
+            kw.update(remark=remark)
+            return tickets_Site(**kw)
+
+        return '0.0.3'

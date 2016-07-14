@@ -56,10 +56,10 @@ from lino.api import dd, rt, _, pgettext
 from lino.utils.xmlgen.html import E
 
 from lino_xl.lib.cal.mixins import daterange_text
-from lino.modlib.contacts.mixins import ContactRelated
+from lino_xl.lib.contacts.mixins import ContactRelated
 from lino.modlib.users.mixins import UserAuthored
 from lino.modlib.comments.mixins import RFC
-from lino.modlib.notifier.mixins import Observable
+from lino.modlib.notify.mixins import Observable
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino.utils import join_elems
 
@@ -156,7 +156,7 @@ class Project(mixins.DatePeriod, TimeInvestment,
         verbose_name=_("Assign tickets to"),
         blank=True, null=True,
         help_text=_("The user to whom new tickets will be assigned."))
-    type = models.ForeignKey('tickets.ProjectType', blank=True, null=True)
+    type = dd.ForeignKey('tickets.ProjectType', blank=True, null=True)
     description = dd.RichTextField(_("Description"), blank=True)
     srcref_url_template = models.CharField(blank=True, max_length=200)
     changeset_url_template = models.CharField(blank=True, max_length=200)
@@ -202,6 +202,9 @@ class Site(dd.Model):
         verbose_name_plural = _('Sites')
 
     partner = dd.ForeignKey('contacts.Partner', blank=True, null=True)
+    responsible_user = dd.ForeignKey(
+        'users.User', verbose_name=_("Responsible"),
+        blank=True, null=True)
     name = models.CharField(_("Designation"), max_length=200)
     remark = models.CharField(_("Remark"), max_length=200, blank=True)
 
