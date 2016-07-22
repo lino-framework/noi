@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2015 Luc Saffre
+# Copyright 2014-2016 Luc Saffre
 # License: BSD (see file COPYING for details)
 """
 Database models for `lino_xl.lib.humanlinks`.
@@ -82,7 +82,6 @@ ProjectEvents.add_item_instance(PeriodStarted('started'))
 ProjectEvents.add_item_instance(PeriodActive('active'))
 ProjectEvents.add_item_instance(PeriodEnded('ended'))
 ProjectEvents.add_item_instance(TicketEventModified('modified'))
-
 
 
 class TicketStates(dd.Workflow):
@@ -174,9 +173,8 @@ add('30', _("Sleeping"), 'sleeping')
     # required=dict(states=['new']),
     # action_name=_("Wait for feedback"),
     # help_text=_("Waiting for feedback from partner."))
-# add('40', _("Fixed"), 'fixed',
-#     # required=dict(states=['todo']),
-#     help_text=_("Has been fixed. Waiting to be tested."))
+add('40', _("Ready"), 'ready',
+    help_text=_("Has been fixed. Ready for release. Waiting to be tested."))
 add('50', _("Done"), 'done')
 # add('50', _("Tested"), 'tested',
 #     # required=dict(states=['fixed']),
@@ -207,15 +205,22 @@ still may want to report it.
 def tickets_workflows(sender=None, **kw):
     """
     """
-    TicketStates.sticky.add_transition(required_states="new")
-    TicketStates.talk.add_transition(required_states="new todo")
-    TicketStates.todo.add_transition(required_states="new talk")
+    TicketStates.sticky.add_transition(
+        required_states="new")
+    TicketStates.talk.add_transition(
+        required_states="new todo ready")
+    TicketStates.todo.add_transition(
+        required_states="new talk ready")
     # TicketStates.cancelled.add_transition(states="todo new callback")
     # TicketStates.new.add_transition(states="todo callback fixed tested")
-    TicketStates.sleeping.add_transition(required_states="todo new talk")
-    TicketStates.done.add_transition(required_states="todo new talk sleeping")
+    TicketStates.sleeping.add_transition(
+        required_states="talk todo new talk")
+    TicketStates.ready.add_transition(
+        required_states="talk todo new")
+    TicketStates.done.add_transition(
+        required_states="new talk todo ready sleeping")
     TicketStates.refused.add_transition(
-        required_states="todo new talk sleeping")
+        required_states="todo talk new talk sleeping")
 
     TicketStates.favorite_states = (TicketStates.sticky, )
     TicketStates.work_states = (TicketStates.todo, TicketStates.new)

@@ -61,7 +61,7 @@ from lino.api import dd, rt, _
 from lino.utils.xmlgen.html import E
 from lino.utils.quantities import Duration
 
-from lino_xl.lib.cal.mixins import StartedEnded
+from lino_xl.lib.cal.mixins import Started, Ended
 from lino.modlib.users.mixins import UserAuthored
 
 from .actions import EndSession, PrintActivityReport, EndTicketSession
@@ -77,7 +77,7 @@ class SessionType(mixins.BabelNamed):
         verbose_name_plural = _('Session Types')
 
 
-class Session(UserAuthored, StartedEnded):
+class Session(UserAuthored, Started, Ended):
     """A Session is when a user works on a given ticket.
 
     .. attribute:: start_time
@@ -115,7 +115,7 @@ class Session(UserAuthored, StartedEnded):
     # break_time = models.TimeField(
     #     blank=True, null=True,
     #     verbose_name=_("Break Time"))
-    break_time = dd.DurationField(_("Break Time"), blank=True)
+    break_time = dd.DurationField(_("Break Time"), blank=True, null=True)
     faculty = dd.ForeignKey(
         'faculties.Faculty', related_name="sessions_by_faculty",
         blank=True, null=True)

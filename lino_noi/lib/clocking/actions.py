@@ -74,7 +74,7 @@ class EndTicketSession(dd.Action):
     # label = u"↘"  # u"\u2198"
     label = u"◉"  # FISHEYE (U+25C9)
     help_text = _("End the active session on this ticket.")
-    show_in_workflow = False
+    show_in_workflow = True
     show_in_bbar = False
     required_roles = dd.login_required()
     readonly = False
@@ -116,7 +116,7 @@ class StartTicketSession(dd.Action):
     label = u"▶"  # BLACK RIGHT-POINTING TRIANGLE (U+25B6)
     help_text = _("Start a session on this ticket.")
     # icon_name = 'emoticon_smile'
-    show_in_workflow = False
+    show_in_workflow = True
     show_in_bbar = False
     readonly = False
 
@@ -145,12 +145,13 @@ class StartTicketSession(dd.Action):
         ar.set_response(refresh=True)
 
 
-dd.inject_action(
-    dd.plugins.clocking.ticket_model,
-    start_session=StartTicketSession())
-dd.inject_action(
-    dd.plugins.clocking.ticket_model,
-    end_session=EndTicketSession())
+if dd.is_installed('clocking'):  # Sphinx autodoc
+    dd.inject_action(
+        dd.plugins.clocking.ticket_model,
+        start_session=StartTicketSession())
+    dd.inject_action(
+        dd.plugins.clocking.ticket_model,
+        end_session=EndTicketSession())
 
 
 class PrintActivityReport(DirectPrintAction):
