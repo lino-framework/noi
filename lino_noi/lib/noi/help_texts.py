@@ -15,6 +15,7 @@ installed or activated) by a given milestone (to a given site)."""),
     'lino_noi.lib.tickets.roles.Triager' : _("""A user who is responsible for triaging new tickets."""),
     'lino_noi.lib.tickets.ui.DuplicatesByTicket' : _("""Shows the tickets which are marked as duplicates of this
 (i.e. whose duplicate_of field points to this ticket."""),
+    'lino_noi.lib.tickets.ui.ActiveTickets.model' : _("""alias of Ticket"""),
     'lino_noi.lib.deploy.models.Deployment.milestone' : _("""The milestone (and site) of this deployment."""),
     'lino_noi.lib.tickets.ui.ActiveProjects.model' : _("""alias of Project"""),
     'lino_noi.lib.tickets.models.ProjectType' : _("""The type of a Project."""),
@@ -38,15 +39,12 @@ publicly visible anywhere."""),
 describe in more detail what this ticket is about. If the
 ticket has evolved during time, it should reflect the latest
 version."""),
-    'lino_noi.lib.tickets.ui.MyKnownProblems.model' : _("""alias of Ticket"""),
     'lino_noi.lib.tickets.choicelists.LinkTypes' : _("""The possible values of a lino_noi.lib.tickets.models.Link."""),
     'lino_noi.lib.tickets.models.TimeInvestment.closed' : _("""Whether this investment is closed, i.e. certain things should
 not change anymore."""),
     'lino_noi.lib.clocking.models.Session.faculty' : _("""The faculty that has been used during this session. On a new
 session this defaults to the needed faculty currently specified
 on the ticket."""),
-    'lino_noi.lib.tickets.ui.MyKnownProblems' : _("""For users whose user_site is set, show the known problems on
-their site."""),
     'lino_noi.lib.clocking.ui.SessionsByTicket.slave_summary' : _("""This panel shows:"""),
     'lino_noi.projects.care.roles.Developer' : _("""alias of CareUser"""),
     'lino_noi.lib.tickets.models.TimeInvestment' : _("""Model mixin for things which represent a time investment.  This
@@ -72,6 +70,7 @@ worker, or our general todo list)"""),
 faculties"""),
     'lino_noi.lib.tickets.models.Ticket.assigned_to' : _("""The user who is working on this ticket."""),
     'lino_noi.lib.tickets.choicelists.TicketStates.sticky' : _("""Special state for permanent tickets which have no lifecycle."""),
+    'lino_noi.lib.clocking.roles.Worker' : _("""A user who is candidate for working on a ticket."""),
     'lino_noi.lib.deploy.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_noi.lib.tickets.choicelists.TicketStates.new' : _("""Somebody reported this ticket, but there was no response so
 far.
@@ -90,13 +89,13 @@ equivalent to those having their state set to new."""),
     'lino_noi.lib.tickets.ui.Tickets.show_private' : _("""Show only (or hide) tickets that are marked private."""),
     'lino_noi.lib.tickets.models.TimeInvestment.planned_time' : _("""The time (in hours) we plan to work on this project or ticket."""),
     'lino_noi.lib.tickets.ui.Tickets.show_assigned' : _("""Show only (or hide) tickets which are assigned to somebody."""),
-    'lino_noi.lib.tickets.models.Ticket.reporter' : _("""The user who is reported this ticket."""),
-    'lino_noi.lib.tickets.roles.Worker' : _("""A user who is candidate for working on a ticket."""),
+    'lino_noi.lib.tickets.models.Ticket.reporter' : _("""The user who reported this ticket."""),
     'lino_noi.lib.tickets.models.Ticket.upgrade_notes' : _("""A formatted text field meant for writing instructions for the
 hoster's site administrator when doing an upgrade where this
 ticket is being deployed."""),
     'lino_noi.lib.deploy.models.Milestone.closed' : _("""Closed milestones are hidden in most lists."""),
     'lino_noi.lib.tickets.ui.Tickets' : _("""Global list of all tickets."""),
+    'lino_noi.lib.tickets.ui.Tickets.feasable_by' : _("""Show only tickets for which I am competent."""),
     'lino_noi.lib.noi.roles.Consultant' : _("""A consultant is somebody who may both report tickets and work
 on them."""),
     'lino_noi.lib.faculties.models.Competence' : _("""A competence is when a given user is declared to be competent
@@ -121,6 +120,8 @@ assignee) must test it, then leave the ticket at todo."""),
     'lino_noi.lib.noi.roles.SiteAdmin' : _("""Like a developer, plus site admin and staff"""),
     'lino_noi.lib.clocking.ui.ProjectHasSessions' : _("""Select only projects for which there has been at least one session
 during the given period."""),
+    'lino_noi.lib.tickets.ui.ActiveTickets' : _("""Active tickets are those which are neither closed nor in standby
+mode."""),
     'lino_noi.lib.clocking.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_noi.lib.tickets.ui.TicketsToDo.model' : _("""alias of Ticket"""),
     'lino_noi.lib.tickets.ui.TicketsToDo' : _("""Shows a list of tickets "to do". This means attributed to me and
