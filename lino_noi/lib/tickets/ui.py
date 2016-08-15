@@ -496,7 +496,7 @@ class SuggestedTickets(Tickets):
     params_panel_hidden = True
     params_layout = """
     reporter feasable_by site project state
-    start_date end_date observed_event topic"""
+    show_assigned show_active topic"""
     
     @classmethod
     def param_defaults(self, ar, **kw):
@@ -596,11 +596,14 @@ class TicketsToDo(Tickets):
     state "confirmed".
 
     """
-    required_roles = dd.login_required()
     label = _("Tickets to do")
+    required_roles = dd.login_required()
     order_by = ["-priority", "-deadline", "-id"]
-    column_names = 'overview:50 priority #deadline waiting_for ' \
+    column_names = 'overview:50 priority deadline waiting_for ' \
                    'workflow_buttons:40 *'
+    params_layout = """
+    reporter site project state 
+    start_date end_date observed_event topic feasable_by"""
 
     @classmethod
     def param_defaults(self, ar, **kw):
@@ -629,6 +632,17 @@ class ActiveTickets(Tickets):
         # kw.update(show_closed=dd.YesNo.no)
         # kw.update(show_standby=dd.YesNo.no)
         return kw
+
+
+class MyTickets(My, Tickets):
+    """Show the tickets reported by me."""
+    required_roles = dd.login_required()
+    order_by = ["-id"]
+    column_names = 'overview:50 faculty topic ' \
+                   'workflow_buttons:40 *'
+    params_layout = """
+    reporter site project state 
+    start_date end_date observed_event topic feasable_by"""
 
 
 # class InterestingTickets(ActiveTickets):
@@ -704,10 +718,6 @@ class TicketsBySite(Tickets):
         kw.update(end_date=dd.today())
         kw.update(observed_event=TicketEvents.todo)
         return kw
-
-class MyTickets(My, Tickets):
-    required_roles = dd.login_required()
-
 
 
 # class MyKnownProblems(Tickets):
