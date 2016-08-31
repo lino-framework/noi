@@ -89,10 +89,11 @@ These user roles are defined in :mod:`lino_noi.projects.care.roles`
 ------ ----------- -----------
  000    anonymous   Anonym
  100    user        Benutzer
- 500    manager     Manager
+ 500    connector   Connector
  900    admin       Verwalter
 ====== =========== ===========
 <BLANKLINE>
+
 
 >>> rt.show('users.Users')
 ============== ================ ========= ==============
@@ -294,3 +295,31 @@ In :ref:`care` we don't call them "tickets" but "pleas" (German
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 Keine Daten anzuzeigen
 
+
+Rating tickets
+==============
+
+>>> base = '/choices/tickets/Tickets/rating'
+>>> show_choices("robin", base + '?query=')
+<br/>
+Excellent
+Good
+OK
+Suboptimal
+Bad
+
+>>> show_choices("rolf", base + '?query=')
+<br/>
+Ausgezeichnet
+Gut
+OK
+Suboptimal
+Schlecht
+
+>>> show_choices("romain", base + '?query=')
+<br/>
+Excellent
+Bien
+Suffisant
+Insuffisant
+Mauvais
