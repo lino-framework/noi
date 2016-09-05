@@ -1,1 +1,2 @@
+git+https://github.com/lino-framework/lino.git#egg=lino
 git+https://github.com/lino-framework/xl.git
