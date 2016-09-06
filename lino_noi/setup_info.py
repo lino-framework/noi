@@ -29,7 +29,25 @@ SETUP_INFO = dict(
     test_suite='tests',
     description=("The Lino application used by the Lino team for "
                  "managing their work on the Lino project"),
-    long_description="""Lino Noi is a customizable ticket management and time tracking
+    long_description="""\
+.. image:: https://readthedocs.org/projects/lino/badge/?version=latest
+    :alt: Documentation Status
+    :scale: 100%
+    :target: http://lino.readthedocs.io/en/latest/?badge=latest
+
+.. image:: https://coveralls.io/repos/github/khchine5/noi/badge.svg?branch=master
+    :target: https://coveralls.io/github/khchine5/noi?branch=master
+
+.. image:: https://travis-ci.org/khchine5/noi.svg?branch=master
+    :target: https://travis-ci.org/khchine5/noi?branch=master
+
+.. image:: https://img.shields.io/pypi/v/lino-noi.svg
+    :target: https://pypi.python.org/pypi/lino-noi/
+
+.. image:: https://img.shields.io/pypi/l/lino-noi.svg
+    :target: https://pypi.python.org/pypi/lino-noi/
+
+Lino Noi is a customizable ticket management and time tracking
 system to use when time is more than money.
 It is used by the `Lino <http://www.lino-framework.org/>`__ team for
 managing their work on the Lino project.
