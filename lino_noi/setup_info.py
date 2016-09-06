@@ -17,15 +17,11 @@
 # License along with Lino Noi.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-# How to test just this module:
-#   $ python setup.py test -s tests.PackagesTests
-#
-
 SETUP_INFO = dict(
     name='lino-noi',
     version='0.0.3',  # since 20160712
     install_requires=['lino-xl'],
-    # tests_require=['pytest'],
+    tests_require=['pytest'],
     test_suite='tests',
     description=("The Lino application used by the Lino team for "
                  "managing their work on the Lino project"),
