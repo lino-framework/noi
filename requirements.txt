@@ -1,2 +1,3 @@
-git+https://github.com/lino-framework/lino.git#egg=lino
-git+https://github.com/lino-framework/xl.git
+-e git+https://github.com/lino-framework/atelier.git#egg=atelier
+-e git+https://github.com/lino-framework/lino.git#egg=lino
+-e git+https://github.com/lino-framework/xl.git#egg=lino_xl
