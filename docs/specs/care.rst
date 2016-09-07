@@ -84,14 +84,14 @@ Users
 These user roles are defined in :mod:`lino_noi.projects.care.roles`
 
 >>> rt.show('users.UserProfiles')
-====== =========== ===========
+====== =========== ============
  Wert   name        Text
------- ----------- -----------
+------ ----------- ------------
  000    anonymous   Anonym
  100    user        Benutzer
- 500    connector   Connector
+ 500    connector   Vermittler
  900    admin       Verwalter
-====== =========== ===========
+====== =========== ============
 <BLANKLINE>
 
 
@@ -210,7 +210,7 @@ verbose_name and verbose_name_plural options of `faculties.Faculty`.
 ==== =========================================================================================== ========== ======= ==================== ================ =========
  ID   Zusammenfassung                                                                             Anfrager   Thema   Fähigkeit            Arbeitsablauf    Projekt
 ---- ------------------------------------------------------------------------------------------- ---------- ------- -------------------- ---------------- ---------
- 8    Wer fährt für mich nach Aachen Pampers kaufen?                                              axel               Botengänge           **Verweigert**
+ 8    Wer fährt für mich nach Aachen Pampers kaufen?                                              axel               Botengänge           **Storniert**
  7    Wer kann meine Abschlussarbeit korrekturlesen?                                              dora                                    **Erledigt**
  6    Wer hilft meinem Sohn sich auf die Mathearbeit am 21.05. vorzubereiten? 5. Schuljahr PDS.   berta              Matheunterricht      **Bereit**
  5    Wer macht Musik auf meinem Geburtstag am 12.12.2012 ?                                       axel               Musik                **Schläft**
@@ -300,30 +300,33 @@ Pleas (Tickets)
 Keine Daten anzuzeigen
 
 
-Rating tickets
-==============
+Rating a ticket
+===============
 
 >>> base = '/choices/tickets/Tickets/rating'
 >>> show_choices("robin", base + '?query=')
 <br/>
-Excellent
+Very good
 Good
-OK
-Suboptimal
-Bad
+Satisfying
+Deficient
+Insufficient
+Unratable
 
 >>> show_choices("rolf", base + '?query=')
 <br/>
-Ausgezeichnet
+Sehr gut
 Gut
-OK
-Suboptimal
-Schlecht
+Ausreichend
+Mangelhaft
+Ungenügend
+Nicht bewertbar
 
 >>> show_choices("romain", base + '?query=')
 <br/>
-Excellent
+Très bien
 Bien
-Suffisant
+Satisfaisant
+Médiocre
 Insuffisant
-Mauvais
+Nicht bewertbar
