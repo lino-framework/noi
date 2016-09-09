@@ -243,14 +243,14 @@ In :ref:`care` we don't call them "tickets" but "pleas" (German
 - Konfigurierung :
   - System : Site-Parameter, Hilfetexte, Benutzer
   - Orte : Länder, Orte
-  - Benutzer : Themen, Themengruppen
+  - Themen : Themen, Themengruppen
   - Büro : Auszugsarten, Meine Einfügetexte
   - Bitten : Projekte, Projekte (Hierarchie), Project Types, Ticket types, Umfelder
   - Fähigkeiten : Fähigkeiten (Hierarchie), Fähigkeiten (alle)
   - Arbeitszeit : Session Types
 - Explorer :
   - System : Datenbankmodelle, Vollmachten, Benutzerarten, Benachrichtigungen, Änderungen
-  - Benutzer : Interessen
+  - Themen : Interessen
   - Büro : Favoriten, Auszüge, Kommentare, Einfügetexte
   - Bitten : Verknüpfungen, Zustände
   - Fähigkeiten : Kompetenzen
@@ -330,3 +330,48 @@ Satisfaisant
 Médiocre
 Insuffisant
 Nicht bewertbar
+
+
+The detail layout of a ticket
+=============================
+
+Here is a textual description of the fields and their layout used in
+the detail window of a ticket.
+
+>>> from lino.utils.diag import py2rst
+>>> print(py2rst(tickets.Tickets.detail_layout, True))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
+(main) [visible for all]:
+- **Général** (general):
+  - (general_1):
+    - (general1):
+      - (general1_1): **Zusammenfassung** (summary), **ID** (id), **Deadline** (deadline)
+      - (general1_2): **Anfrager** (reporter), **Fähigkeit** (faculty), **Thema** (topic), **Attribué à** (assigned_to)
+      - (general1_3): **Umfeld** (site), **État** (workflow_buttons), **Bewertung** (rating)
+    - **Zuweisbare Arbeiter** (faculties.AssignableWorkersByTicket) [visible for connector admin]
+  - (general_2): **Description** (description), **Kommentare** (CommentsByRFC) [visible for user connector admin], **Sitzungen** (SessionsByTicket) [visible for connector admin]
+- **History** (history_tab_1) [visible for connector admin]:
+  - **Änderungen** (changes.ChangesByMaster) [visible for user connector admin]
+  - **Beobachtet durch** (stars.StarsByController) [visible for user connector admin]
+- **Mehr** (more) [visible for connector admin]:
+  - (more1) [visible for all]:
+    - (more1_1): **Créé** (created), **Modifié** (modified), **Ticket type** (ticket_type)
+    - (more1_2): **État** (state), **Priorité** (priority), **Projekt** (project)
+  - (more_2) [visible for all]: **Lösung** (upgrade_notes), **Verknüpfungen** (LinksByTicket) [visible for connector admin]
+<BLANKLINE>
+
+
+Topic groups
+============
+
+
+>>> show_menu_path(topics.TopicGroups, language='en')
+Configure --> Topics --> Topic groups
+
+>>> rt.show(topics.TopicGroups)
+==== ============= ================== ================== =============
+ ID   Désignation   Désignation (en)   Désignation (fr)   Description
+---- ------------- ------------------ ------------------ -------------
+ 1    Sprachen      Languages          Langues
+==== ============= ================== ================== =============
+<BLANKLINE>

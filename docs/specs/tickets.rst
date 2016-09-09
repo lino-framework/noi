@@ -250,109 +250,6 @@ My tickets
 <BLANKLINE>
 
 
-Topics
-========
-
-The :attr:`topic <lino_noi.lib.tickets.models.Ticket.topic>` of a
-ticket is what Trac calls "component". Topics are a "customer-side"
-classification of the different components which are being developed
-by the team that uses a given Lino Noi site.
-
-There are 4 topics in the demo database.
-
->>> rt.show(topics.Topics)
-=========== ============== ================== ================== =============
- Reference   Designation    Designation (de)   Designation (fr)   Topic group
------------ -------------- ------------------ ------------------ -------------
- linõ        Lino Core
- welfäre     Lino Welfare
- così        Lino Cosi
- faggio      Lino Voga
-=========== ============== ================== ================== =============
-<BLANKLINE>
-
-
-Choosing a topic
-================
-
-When choosing a topic, the search text looks in both the reference and
-the designation:
-
->>> base = '/choices/tickets/Tickets/topic'
->>> show_choices("robin", base + '?query=')
-<br/>
-Lino Core
-Lino Welfare
-Lino Cosi
-Lino Voga
-
-Note that we have a topic whose `ref` is different from `name`, and
-that the search works in both fields:
-
->>> obj = topics.Topic.get_by_ref('faggio')
->>> print(obj.ref)
-faggio
->>> print(obj.name)
-Lino Voga
-
->>> show_choices("robin", base + '?query=fag')
-Lino Voga
-
->>> show_choices("robin", base + '?query=voga')
-Lino Voga
-
-
-Interests
-=========
-
-Every partner can have its list of "interests". They will get notified
-about changes in these topics even when they did not report the
-ticket.
-
-
->>> obj = contacts.Partner.objects.get(name="welket")
->>> rt.show(topics.InterestsByPartner, obj)
-... #doctest: +REPORT_UDIFF
-==============
- Topic
---------------
- Lino Core
- Lino Welfare
- Lino Cosi
-==============
-<BLANKLINE>
-
->>> obj = topics.Topic.objects.get(ref="welfäre")
->>> rt.show(topics.InterestsByTopic, obj)
-... #doctest: +REPORT_UDIFF
-=========
- Partner
----------
- welket
- welsch
-=========
-<BLANKLINE>
-
-
-
-Filtering tickets by topic
-==========================
-
->>> pv = dict(topic=rt.models.topics.Topic.get_by_ref("così"))
->>> rt.show(tickets.Tickets, param_values=pv)
-... #doctest: +REPORT_UDIFF
-==== =========================== ================= =========== =============== ============== =========
- ID   Summary                     Reporter          Topic       Faculty         Workflow       Project
----- --------------------------- ----------------- ----------- --------------- -------------- ---------
- 13   Bar cannot foo              Rolf Rompen       Lino Cosi   Documentation   **Sleeping**   linö
- 9    Foo never matches Bar       luc               Lino Cosi   Testing         **New**        téam
- 5    Cannot create Foo           Romain Raffault   Lino Cosi                   **Sleeping**
- 1    Föö fails to bar when baz   jean              Lino Cosi                   **New**        linö
-==== =========================== ================= =========== =============== ============== =========
-<BLANKLINE>
- 
-
-
 
 Sites
 =====
@@ -564,3 +461,38 @@ Filtering tickets
  1    Föö fails to bar when baz                   jean              Lino Cosi                      **New** → [📌] [🗪] [🐜] [🕸] [☐] [☑] [🗑] [▶] [☆]   linö
 ==== =========================================== ================= ============== =============== =============================================== ==========
 <BLANKLINE>
+
+
+
+The detail layout of a ticket
+=============================
+
+Here is a textual description of the fields and their layout used in
+the detail window of a ticket.
+
+>>> from lino.utils.diag import py2rst
+>>> print(py2rst(tickets.Tickets.detail_layout, True))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
+(main) [visible for all]:
+- **General** (general):
+  - (general_1):
+    - (general1):
+      - (general1_1): **Summary** (summary), **ID** (id), **Reporter** (reporter)
+      - (general1_2): **Site** (site), **Topic** (topic), **Project** (project), **Private** (private)
+      - (general1_3): **Workflow** (workflow_buttons), **Assigned to** (assigned_to), **Faculty** (faculty)
+    - **Deployments** (deploy.DeploymentsByTicket) [visible for user consultant hoster developer senior admin]
+  - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user consultant hoster developer senior admin], **Sessions** (SessionsByTicket) [visible for consultant hoster developer senior admin]
+- **More** (more):
+  - (more_1):
+    - (more1):
+      - (more1_1): **Created** (created), **Modified** (modified), **Reported for** (reported_for), **Ticket type** (ticket_type)
+      - (more1_2): **State** (state), **Duplicate of** (duplicate_of), **Planned time** (planned_time), **Priority** (priority)
+    - **Duplicates** (DuplicatesByTicket)
+  - (more_2): **Upgrade notes** (upgrade_notes), **Dependencies** (LinksByTicket) [visible for senior admin]
+- **History** (history_tab_1) [visible for senior admin]:
+  - **Changes** (changes.ChangesByMaster) [visible for user consultant hoster developer senior admin]
+  - **Starred by** (stars.StarsByController) [visible for user consultant hoster developer senior admin]
+<BLANKLINE>
+
+
+
