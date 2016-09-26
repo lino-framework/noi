@@ -373,8 +373,8 @@ class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
 
     .. attribute:: waiting_for
 
-        An unformatted one-line text which describes what this ticket
-        is waiting for.
+        What to do next. An unformatted one-line text which describes
+        what this ticket is waiting for.
 
     .. attribute:: upgrade_notes
 
@@ -425,6 +425,11 @@ class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
 
         TODO: Triagers should have a table of tickets having this
         field non-empty and are still in an active state.
+
+    .. attribute:: priority
+
+        How urgent this ticket is. This should be a value between 0
+        and 100.
 
     """
 
@@ -477,28 +482,22 @@ class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
     reporter = dd.ForeignKey(
         settings.SITE.user_model,
         verbose_name=_("Reporter"),
-        related_name="reported_tickets",
-        help_text=_("The user who reported this ticket."))
+        related_name="reported_tickets")
     state = TicketStates.field(
         default=TicketStates.new.as_callable)
     rating = Ratings.field(blank=True)
     waiting_for = models.CharField(
-        _("Waiting for"), max_length=200,
-        blank=True,
-        help_text=_("What to do next."))
+        _("Waiting for"), max_length=200, blank=True)
 
     deadline = models.DateField(
         verbose_name=_("Deadline"),
         blank=True, null=True)
 
-    priority = models.SmallIntegerField(
-        _("Priority"), default=0,
-        help_text=_("Value between 0 and 100."))
+    priority = models.SmallIntegerField(_("Priority"), default=100)
 
     # deprecated fields:
     feedback = models.BooleanField(
-        _("Feedback"), default=False,
-        help_text=_("Ticket is waiting for feedback from somebody else."))
+        _("Feedback"), default=False)
     standby = models.BooleanField(_("Standby"), default=False)
 
     spawn_triggered = SpawnTicket(
