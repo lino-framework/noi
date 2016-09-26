@@ -99,8 +99,8 @@ reporter (a user)."""),
     'lino_noi.lib.tickets.models.Ticket.reporter' : _("""The user who reported this ticket."""),
     'lino_noi.lib.tickets.models.Ticket.assigned_to' : _("""The user who is working on this ticket."""),
     'lino_noi.lib.tickets.models.Ticket.state' : _("""The state of this ticket. See TicketStates"""),
-    'lino_noi.lib.tickets.models.Ticket.waiting_for' : _("""An unformatted one-line text which describes what this ticket
-is waiting for."""),
+    'lino_noi.lib.tickets.models.Ticket.waiting_for' : _("""What to do next. An unformatted one-line text which describes
+what this ticket is waiting for."""),
     'lino_noi.lib.tickets.models.Ticket.upgrade_notes' : _("""A formatted text field meant for writing instructions for the
 hoster's site administrator when doing an upgrade where this
 ticket is being deployed."""),
@@ -110,6 +110,8 @@ ticket has evolved during time, it should reflect the latest
 version."""),
     'lino_noi.lib.tickets.models.Ticket.duplicate_of' : _("""A pointer to the ticket which is the cause of this ticket."""),
     'lino_noi.lib.tickets.models.Ticket.deadline' : _("""Specify that the ticket must be done for a given date."""),
+    'lino_noi.lib.tickets.models.Ticket.priority' : _("""How urgent this ticket is. This should be a value between 0
+and 100."""),
     'lino_noi.lib.tickets.roles.Triager' : _("""A user who is responsible for triaging new tickets."""),
     'lino_noi.lib.tickets.ui.ActiveProjects' : _("""Show a list of active projects."""),
     'lino_noi.lib.tickets.ui.ActiveProjects.model' : _("""alias of Project"""),
@@ -137,7 +139,7 @@ mode."""),
     'lino_noi.lib.tickets.ui.ActiveTickets.model' : _("""alias of Ticket"""),
     'lino_noi.lib.tickets.ui.MyTickets' : _("""Show the tickets reported by me."""),
     'lino_noi.lib.tickets.ui.MyTickets.model' : _("""alias of Ticket"""),
-    'lino_noi.lib.users.models.User.callme_mode' : _("""Others can call me"""),
+    'lino_noi.lib.users.models.User.callme_mode' : _("""Whether other users can see my contact data."""),
     'lino_noi.lib.users.models.UserDetail' : _("""Layout of User Detail in Lino Noi."""),
     'lino_noi.projects.bs3.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Noi."""),
     'lino_noi.projects.care.roles.SimpleUser' : _("""A simple user is a person who can log into the application in
