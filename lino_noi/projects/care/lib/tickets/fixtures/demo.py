@@ -54,8 +54,11 @@ def T(reporter, summary, **kw):
     kw.update(
         summary=summary,
         reporter=rt.modules.users.User.objects.get(username=reporter))
-    kw.update(state=STATES.pop())
-    return rt.modules.tickets.Ticket(**kw)
+    # every third ticket gets a manual state, the others get default
+    # value:
+    if rt.models.tickets.Ticket.objects.count() % 3 == 0:
+        kw.update(state=STATES.pop())
+    return rt.models.tickets.Ticket(**kw)
 
 
 def competence(user, faculty, **kw):

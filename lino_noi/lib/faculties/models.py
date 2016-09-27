@@ -48,6 +48,7 @@ class Faculty(BabelNamed, Hierarchical, Sequenced):
     class Meta:
         verbose_name = _("Faculty")
         verbose_name_plural = _("Faculties")
+        ordering = ['name']
 
     affinity = models.IntegerField(
         _("Affinity"), blank=True, default=MAX_WEIGHT,

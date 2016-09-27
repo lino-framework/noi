@@ -30,19 +30,18 @@ has does more usage of them.
 
 >>> rt.show(faculties.TopLevelFaculties)
 ... #doctest: +REPORT_UDIFF
-======== =============== ================== ================== ========== ================
- No.      Designation     Designation (de)   Designation (fr)   Children   Parent faculty
--------- --------------- ------------------ ------------------ ---------- ----------------
- 1        Analysis        Analysis           Analysis
- 2        Code changes    Code changes       Code changes
- 3        Documentation   Documentation      Documentation
- 4        Testing         Testing            Testing
- 5        Configuration   Configuration      Configuration
- 6        Enhancement     Enhancement        Enhancement
- 7        Optimization    Optimization       Optimization
- 8        Offer           Offer              Offer
- **36**
-======== =============== ================== ================== ========== ================
+=============== ================== ================== ==== ========== ================
+ Designation     Designation (de)   Designation (fr)   ID   Children   Parent faculty
+--------------- ------------------ ------------------ ---- ---------- ----------------
+ Analysis        Analysis           Analysis           1
+ Code changes    Code changes       Code changes       2
+ Configuration   Configuration      Configuration      5
+ Documentation   Documentation      Documentation      3
+ Enhancement     Enhancement        Enhancement        6
+ Offer           Offer              Offer              8
+ Optimization    Optimization       Optimization       7
+ Testing         Testing            Testing            4
+=============== ================== ================== ==== ========== ================
 <BLANKLINE>
 
 
@@ -73,3 +72,13 @@ has does more usage of them.
 ==== ================= =============== ========== ========
 <BLANKLINE>
 
+
+>>> show_choices('axel', '/choices/faculties/CompetencesByUser/faculty')
+Analysis
+Code changes
+Configuration
+Documentation
+Enhancement
+Offer
+Optimization
+Testing

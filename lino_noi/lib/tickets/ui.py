@@ -440,9 +440,6 @@ class Tickets(dd.Table):
 
 
         active_states = TicketStates.filter(active=True)
-        # active_states = (
-        #     TicketStates.todo, TicketStates.talk, TicketStates.ready)
-        # print 20160810, active_states
         if pv.show_active == dd.YesNo.no:
             qs = qs.exclude(state__in=active_states)
         elif pv.show_assigned == dd.YesNo.yes:
@@ -593,13 +590,13 @@ class TicketsToTalk(Tickets):
 
 class TicketsToDo(Tickets):
     """Shows a list of tickets "to do". This means attributed to me and
-    state "confirmed".
+    in an active state.
 
     """
     label = _("Tickets to do")
     required_roles = dd.login_required()
     order_by = ["-priority", "-deadline", "-id"]
-    column_names = 'overview:50 priority deadline waiting_for ' \
+    column_names = 'overview:50 priority deadline reporter ' \
                    'workflow_buttons:40 *'
     params_layout = """
     reporter site project state 
@@ -608,14 +605,14 @@ class TicketsToDo(Tickets):
     @classmethod
     def param_defaults(self, ar, **kw):
         kw = super(TicketsToDo, self).param_defaults(ar, **kw)
-        kw.update(state=TicketStates.todo)
+        # kw.update(state=TicketStates.todo)
+        kw.update(show_active=dd.YesNo.yes)
         kw.update(assigned_to=ar.get_user())
         return kw
 
 
 class ActiveTickets(Tickets):
-    """Active tickets are those which are neither closed nor in standby
-    mode.
+    """Show all tickets that are in an active state.
 
     """
     label = _("Active tickets")
@@ -635,14 +632,22 @@ class ActiveTickets(Tickets):
 
 
 class MyTickets(My, Tickets):
-    """Show the tickets reported by me."""
+    """Show all active tickets reported by me."""
     required_roles = dd.login_required()
     order_by = ["-id"]
-    column_names = 'overview:50 faculty topic ' \
+    column_names = 'overview:50 faculty topic assigned_to ' \
                    'workflow_buttons:40 *'
     params_layout = """
     reporter site project state 
     start_date end_date observed_event topic feasable_by"""
+
+    @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(MyTickets, self).param_defaults(ar, **kw)
+        kw.update(show_active=dd.YesNo.yes)
+        # kw.update(show_closed=dd.YesNo.no)
+        # kw.update(show_standby=dd.YesNo.no)
+        return kw
 
 
 # class InterestingTickets(ActiveTickets):
