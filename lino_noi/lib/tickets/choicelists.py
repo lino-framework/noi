@@ -19,6 +19,7 @@ from lino.modlib.system.choicelists import (
     ObservedEvent, PeriodStarted, PeriodActive, PeriodEnded)
 
 from lino.api import dd, _
+from .roles import Triager
 
 
 from datetime import datetime, time
@@ -143,13 +144,13 @@ add = TicketStates.add_item
 #     action_name=_("Start"),
 #     help_text=_("Ticket has been assigned to somebody who is assigned on it."))
 add('10', _("New"), 'new',
-    button_text=u"📥")  # INBOX TRAY (U+1F4E5)
+    button_text=u"📥", active=True)  # INBOX TRAY (U+1F4E5)
 add('15', _("Talk"), 'talk', active=True,
     button_text=u"🗪")  # TWO SPEECH BUBBLES (U+1F5EA)
 add('20', _("ToDo"), 'todo', active=True,
     button_text=u"🐜")  # ANT (U+1F41C)
 add('21', _("Sticky"), 'sticky',
-    button_text=u"📌")  # PUSHPIN (U+1F4CC)
+    button_text=u"📌", active=True)  # PUSHPIN (U+1F4CC)
 add('30', _("Sleeping"), 'sleeping',
     # button_text=u"🐌")  # SNAIL (U+1F40C)
     button_text=u"🕸")  # SPIDER WEB (U+1F578)	
@@ -190,6 +191,24 @@ because this is a more general term.
 
 """
 
+
+class MarkDone(dd.ChangeStateAction):
+    """Mark this ticket as done. Can be done only by the reporter when a
+    rating has been set or by a triager (independently of any rating).
+
+    """
+    label = _("Done")
+    button_text = TicketStates.done.button_text
+    required_states = 'ready'
+
+    def get_action_permission(self, ar, obj, state):
+        me = ar.get_user()
+        if not me.profile.has_required_roles([Triager]):
+            if not obj.rating or obj.reporter != me:
+                return False
+        return super(MarkDone, self).get_action_permission(ar, obj, state)
+
+
 # class TicketStateGroups(dd.Choice):
 #     def __init__(self, 
 # class TicketStateGroups(dd.ChoiceList):
@@ -213,9 +232,10 @@ def tickets_workflows(sender=None, **kw):
     TicketStates.sleeping.add_transition(
         required_states="talk todo new talk")
     TicketStates.ready.add_transition(
-        required_states="talk todo new")
-    TicketStates.done.add_transition(
-        required_states="new talk todo ready sleeping")
+        required_states="new talk todo")
+    TicketStates.done.add_transition(MarkDone)
+    # TicketStates.done.add_transition(
+    #     required_states="new talk todo ready sleeping")
     TicketStates.cancelled.add_transition(
         required_states="todo talk new talk sleeping")
 

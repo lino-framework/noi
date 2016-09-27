@@ -13,7 +13,8 @@ ROOTDIR = Path(__file__).parent.parent
 SETUP_INFO = {}
 
 # load SETUP_INFO:
-execfile(ROOTDIR.child('lino_noi', 'setup_info.py'), globals())
+fn = ROOTDIR.child('lino_noi', 'setup_info.py')
+exec(compile(open(fn, "rb").read(), fn, 'exec'))
 
 from lino.utils.pythontest import TestCase
 

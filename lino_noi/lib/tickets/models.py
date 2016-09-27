@@ -39,6 +39,8 @@ assignee don't need to star a ticket in order to get notified.
 
 from __future__ import unicode_literals
 
+import six
+
 from django.conf import settings
 from django.db import models
 from django.db.models import Q
@@ -121,6 +123,7 @@ class TicketType(mixins.BabelNamed):
         #~ verbose_name_plural = _('Repositories')
 
 
+@dd.python_2_unicode_compatible
 class Project(mixins.DatePeriod, TimeInvestment,
               mixins.Hierarchical, mixins.Referrable,
               ContactRelated):
@@ -156,7 +159,7 @@ class Project(mixins.DatePeriod, TimeInvestment,
     # root = models.ForeignKey(
     #     'self', blank=True, null=True, verbose_name=_("Root"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.ref or self.name
 
     @dd.displayfield(_("Activity overview"))
@@ -188,6 +191,7 @@ class Project(mixins.DatePeriod, TimeInvestment,
     #     super(Project, self).save(*args, **kwargs)
 
 
+@dd.python_2_unicode_compatible
 class Site(dd.Model):
     class Meta:
         app_label = 'tickets'
@@ -201,10 +205,11 @@ class Site(dd.Model):
     name = models.CharField(_("Designation"), max_length=200)
     remark = models.CharField(_("Remark"), max_length=200, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
+@dd.python_2_unicode_compatible
 class Link(dd.Model):
 
     class Meta:
@@ -234,11 +239,11 @@ class Link(dd.Model):
         # print('20140204 type_as_child', self.type)
         return self.type.as_child()
 
-    def __unicode__(self):
+    def __str__(self):
         if self.type is None:
-            return super(Link, self).__unicode__()
+            return "Link object"  # super(Link, self).__unicode__()
         return _("%(child)s is %(what)s") % dict(
-            child=unicode(self.child),
+            child=six.text_type(self.child),
             what=self.type_of_parent_text())
 
     def type_of_parent_text(self):
@@ -346,6 +351,7 @@ class SpawnTicket(dd.Action):
         ar.goto_instance(c)
 
 
+@dd.python_2_unicode_compatible
 class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
              ChangeObservable):
     """A **Ticket** is a concrete question or problem formulated by a
@@ -430,6 +436,10 @@ class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
 
         How urgent this ticket is. This should be a value between 0
         and 100.
+
+    .. attribute:: rating
+
+        How the reporter rates this ticket.
 
     """
 
@@ -555,7 +565,7 @@ class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
     # def get_choices_text(self, request, actor, field):
     #     return "{0} ({1})".format(self, self.summary)
 
-    def __unicode__(self):
+    def __str__(self):
         if self.nickname:
             return "#{0} ({1})".format(self.id, self.nickname)
         return "#{0} ({1})".format(self.id, self.summary)

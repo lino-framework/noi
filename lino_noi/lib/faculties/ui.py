@@ -50,8 +50,8 @@ class AllFaculties(Faculties):
 class TopLevelFaculties(Faculties):
     label = _("Faculties (tree)")
     required_roles = dd.required(dd.SiteStaff)
-    order_by = ["seqno"]
-    column_names = 'seqno name children_summary parent *'
+    order_by = ["name"]
+    column_names = 'name id children_summary parent *'
     filter = models.Q(parent__isnull=True)
     variable_row_height = True
 

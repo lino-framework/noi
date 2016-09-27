@@ -99,11 +99,12 @@ class Site(Site):
     def get_admin_main_items(self, ar):
         if ar.get_user().authenticated:
             yield self.actors.notify.MyNotifications
+            yield self.actors.clocking.WorkedHours
             yield self.actors.tickets.TicketsToDo
             yield self.actors.tickets.SuggestedTickets
+            yield self.actors.tickets.MyTickets
             # yield self.actors.tickets.ActiveTickets
             # yield self.actors.tickets.InterestingTickets
-            yield self.actors.clocking.WorkedHours
         else:
             yield self.actors.tickets.PublicTickets
         # yield self.actors.tickets.ActiveProjects
