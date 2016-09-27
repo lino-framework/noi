@@ -50,6 +50,7 @@ class SessionType(mixins.BabelNamed):
         verbose_name_plural = _('Session Types')
 
 
+@dd.python_2_unicode_compatible
 class Session(UserAuthored, Started, Ended):
     """A **Session** is when a user works during a given lapse of time on
     a given Ticket.
@@ -119,7 +120,7 @@ class Session(UserAuthored, Started, Ended):
     end_session = EndThisSession()
     # print_activity_report = PrintActivityReport()
 
-    def __unicode__(self):
+    def __str__(self):
         if self.start_time and self.end_time:
             return u"%s %s-%s" % (
                 self.start_date.strftime(settings.SITE.date_format_strftime),

@@ -20,6 +20,7 @@
 
 
 """
+import six
 
 from lino_noi.lib.clocking.ui import *
 from lino.api import _
@@ -77,7 +78,7 @@ class WorkedHours(dd.VentilatingTable):
         # pv.update(observed_event=dd.PeriodEvents.active)
         # pv.update(user=ar.param_values.user)
         # sar = ar.spawn(MySessionsByDate, param_values=pv)
-        elems = [obj.sar.ar2button(label=unicode(obj))]
+        elems = [obj.sar.ar2button(label=six.text_type(obj))]
         tickets = [
             ar.obj2html(t, "#{0}".format(t.id), title=t.summary)
             for t in obj._tickets]
@@ -123,7 +124,7 @@ class WorkedHours(dd.VentilatingTable):
             return dd.VirtualField(dd.DurationField(verbose_name), func)
 
         for p in Project.objects.filter(parent__isnull=True).order_by('ref'):
-            yield w(p, unicode(p))
+            yield w(p, six.text_type(p))
         yield w(None, _("Total"))
 
 
@@ -280,7 +281,7 @@ class ProjectsByReport(Projects, InvestedTime):
         lst = []
         for ticket in obj._tickets:
             lst.append(ar.obj2html(
-                ticket, text="#%d" % ticket.id, title=unicode(ticket)))
+                ticket, text="#%d" % ticket.id, title=six.text_type(ticket)))
         return E.p(*join_elems(lst, ', '))
 
     @dd.displayfield(_("Total time"))
