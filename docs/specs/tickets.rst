@@ -348,18 +348,12 @@ My tickets
  `#106 (Ticket 89) <Detail>`__                           Lino Voga      marc          **Talk** → [🐜] [🕸] [☐] [🗑] [▶] [☆]
  `#99 (Ticket 82) <Detail>`__                            Lino Core      luc           **ToDo** → [🗪] [🕸] [☐] [🗑] [▶] [☆]
  `#92 (Ticket 75) <Detail>`__                            Lino Welfare   jean          **Sticky** → [▶] [☆]
- `#85 (Ticket 68) <Detail>`__                            Lino Cosi                    **Sleeping** → [🗑] [▶] [☆]
  `#78 (Ticket 61) <Detail>`__                            Lino Voga      luc           **Ready** → [🗪] [🐜] [☑] [▶] [☆]
- `#71 (Ticket 54) <Detail>`__                            Lino Core      jean          **Done** → [▶] [☆]
- `#64 (Ticket 47) <Detail>`__                            Lino Welfare   mathieu       **Cancelled** → [▶] [☆]
  `#57 (Ticket 40) <Detail>`__                            Lino Cosi                    **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑] [▶] [☆]
  `#50 (Ticket 33) <Detail>`__                            Lino Voga      jean          **Talk** → [🐜] [🕸] [☐] [🗑] [▶] [☆]
  `#43 (Ticket 26) <Detail>`__                            Lino Core      mathieu       **ToDo** → [🗪] [🕸] [☐] [🗑] [▶] [☆]
  `#36 (Ticket 19) <Detail>`__                            Lino Welfare   marc          **Sticky** → [▶] [☆]
- `#29 (Ticket 12) <Detail>`__                            Lino Cosi                    **Sleeping** → [🗑] [▶] [☆]
  `#22 (Ticket 5) <Detail>`__                             Lino Voga      mathieu       **Ready** → [🗪] [🐜] [☑] [▶] [☆]
- `#15 (Bars have no foo) <Detail>`__                     Lino Core      marc          **Done** → [▶] [☆]
- `#8 (Is there any Bar in Foo?) <Detail>`__              Lino Welfare   luc           **Cancelled** → [▶] [☆]
  `#1 (Föö fails to bar when baz) <Detail>`__             Lino Cosi                    **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑] [▶] [☆]
 ============================================= ========= ============== ============= ===========================================
 <BLANKLINE>

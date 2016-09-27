@@ -442,7 +442,7 @@ class Tickets(dd.Table):
         active_states = TicketStates.filter(active=True)
         if pv.show_active == dd.YesNo.no:
             qs = qs.exclude(state__in=active_states)
-        elif pv.show_assigned == dd.YesNo.yes:
+        elif pv.show_active == dd.YesNo.yes:
             qs = qs.filter(state__in=active_states)
 
         if pv.has_project == dd.YesNo.no:
