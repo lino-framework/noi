@@ -1,8 +1,9 @@
 -e git+https://github.com/lino-framework/atelier.git#egg=atelier
 -e git+https://github.com/lino-framework/lino.git#egg=lino
 -e git+https://github.com/lino-framework/xl.git#egg=lino_xl
+-e git+https://github.com/eliben/pycparser@release_v2.14
 pytest
-cairocffi==0.6
+
 
 
 
