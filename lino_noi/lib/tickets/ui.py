@@ -599,7 +599,7 @@ class TicketsToDo(Tickets):
     column_names = 'overview:50 priority deadline reporter ' \
                    'workflow_buttons:40 *'
     params_layout = """
-    reporter site project state 
+    reporter assigned_to site project state 
     start_date end_date observed_event topic feasable_by"""
 
     @classmethod
