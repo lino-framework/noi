@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2016 Luc Saffre
-# License: BSD (see file COPYING for details)"""Database models for lino_noi.projects.team.lib.clocking.
+# License: BSD (see file COPYING for details)
+
+"""Database models for lino_noi.projects.team.lib.clocking.
 
 
 """
