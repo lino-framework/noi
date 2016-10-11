@@ -21,6 +21,7 @@
 """Tables for `lino_noi.lib.clocking`.
 
 """
+import sys
 
 
 from django.conf import settings
@@ -45,6 +46,11 @@ from .roles import Worker
 
 MIN_DURATION = Duration('0:01')
 
+def ensureUtf(s):
+    if sys.version_info < (3,):
+        return unicode(s)
+    else:
+        return str(s)
 
 class TicketHasSessions(ObservedEvent):
     """Select only tickets for which there has been at least one session
@@ -192,7 +198,7 @@ class SessionsByTicket(Sessions):
 
         if len(active_sessions) > 0:
             elems.append(E.p(
-                unicode(_("Active sessions")), ": ",
+                ensureUtf(_("Active sessions")), ": ",
                 *join_elems(active_sessions, ', ')))
 
         # Button for starting a session from ticket
@@ -265,16 +271,16 @@ class InvestedTime(dd.Table):
         #     lst.append(_("site-specific"))
         if obj.site is not None:  # and obj.site != mi.interesting_for:
             lst.append(tpl.format(
-                unicode(_("Site")), unicode(obj.site)))
+                ensureUtf(_("Site")), ensureUtf(obj.site)))
         if obj.reporter is not None:
             lst.append(tpl.format(
-                unicode(_("Reporter")), unicode(obj.reporter)))
+                ensureUtf(_("Reporter")), ensureUtf(obj.reporter)))
         if obj.project is not None:
             lst.append(tpl.format(
-                unicode(_("Project")), unicode(obj.project)))
+                ensureUtf(_("Project")), ensureUtf(obj.project)))
         if obj.topic is not None:
             lst.append(tpl.format(
-                unicode(_("Topic")), unicode(obj.topic)))
+                ensureUtf(_("Topic")), ensureUtf(obj.topic)))
         return E.p(*join_elems(lst, '. '))
 
 
