@@ -39,7 +39,7 @@ class Tests(RemoteAuthTestCase):
     maxDiff = None
 
     def test01(self):
-        from lino.modlib.users.choicelists import UserProfiles
+        from lino.modlib.users.choicelists import UserTypes
         User = rt.modules.users.User
         Faculty = rt.models.faculties.Faculty
         Competence = rt.models.faculties.Competence
@@ -50,15 +50,15 @@ class Tests(RemoteAuthTestCase):
         special = create(Faculty, name="Special work", parent=general)
 
         alex = create(User, username='alex',
-                       profile=UserProfiles.user,
+                       profile=UserTypes.user,
                        language="en")
         
         bruno = create(User, username='bruno',
-                       profile=UserProfiles.user,
+                       profile=UserTypes.user,
                        language="en")
         
         berta = create(User, username='berta',
-                       profile=UserProfiles.user,
+                       profile=UserTypes.user,
                        language="en")
         
         create(Competence, user=bruno, faculty=special)

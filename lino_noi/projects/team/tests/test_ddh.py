@@ -36,7 +36,7 @@ class DDHTests(RemoteAuthTestCase):
     maxDiff = None
 
     def test01(self):
-        from lino.modlib.users.choicelists import UserProfiles
+        from lino.modlib.users.choicelists import UserTypes
         Ticket = rt.modules.tickets.Ticket
         # Session = rt.modules.clocking.Session
         User = rt.modules.users.User
@@ -45,7 +45,7 @@ class DDHTests(RemoteAuthTestCase):
         ct_Ticket = ContentType.objects.get_for_model(Ticket)
 
         robin = create(User, username='robin',
-                       profile=UserProfiles.admin,
+                       profile=UserTypes.admin,
                        language="en")
 
         def createit():

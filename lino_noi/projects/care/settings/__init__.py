@@ -27,7 +27,7 @@ class Site(Site):
     verbose_name = "Lino Care"
 
     demo_fixtures = ['std', 'demo', 'demo2']
-    user_profiles_module = 'lino_noi.projects.care.roles'
+    user_types_module = 'lino_noi.projects.care.roles'
 
     def setup_plugins(self):
         super(Site, self).setup_plugins()

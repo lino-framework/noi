@@ -364,7 +364,7 @@ To-Do list
 ==========
 
 >>> rt.login('luc').user.profile
-users.UserProfiles.developer:400
+users.UserTypes.developer:400
 
 >>> rt.login('luc').show(tickets.TicketsToDo)
 ... #doctest: +REPORT_UDIFF

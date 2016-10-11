@@ -12,7 +12,7 @@ from lino_xl.lib.contacts.roles import ContactsUser
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino_noi.lib.tickets.roles import Triager
 from lino_noi.lib.clocking.roles import Worker
-from lino.modlib.users.choicelists import UserProfiles
+from lino.modlib.users.choicelists import UserTypes
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -44,8 +44,8 @@ class SiteAdmin(SiteAdmin, OfficeStaff, Helper, ContactsUser,
 #Developer = SimpleUser
 
 
-UserProfiles.clear()
-add = UserProfiles.add_item
+UserTypes.clear()
+add = UserTypes.add_item
 add('000', _("Anonymous"),        UserRole, 'anonymous',
     readonly=True, authenticated=False)
 add('100', _("User"), SimpleUser, 'user')

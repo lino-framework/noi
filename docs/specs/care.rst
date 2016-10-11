@@ -87,7 +87,7 @@ Users
 
 These user roles are defined in :mod:`lino_noi.projects.care.roles`
 
->>> rt.show('users.UserProfiles')
+>>> rt.show('users.UserTypes')
 ====== =========== ============
  Wert   name        Text
 ------ ----------- ------------

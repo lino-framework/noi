@@ -36,12 +36,12 @@ def tickets_objects():
     Link = rt.models.tickets.Link
     LinkTypes = rt.models.tickets.LinkTypes
 
-    cons = rt.models.users.UserProfiles.consultant
-    dev = rt.models.users.UserProfiles.developer
+    cons = rt.models.users.UserTypes.consultant
+    dev = rt.models.users.UserTypes.developer
     yield User(username="mathieu", profile=cons)
     yield User(username="marc", profile=cons)
     yield User(username="luc", profile=dev)
-    yield User(username="jean", profile=rt.models.users.UserProfiles.senior)
+    yield User(username="jean", profile=rt.models.users.UserTypes.senior)
 
     USERS = Cycler(User.objects.all())
 
@@ -154,9 +154,9 @@ def clockings_objects():
     Session = rt.models.clocking.Session
     Ticket = rt.models.tickets.Ticket
     User = rt.models.users.User
-    UserProfiles = rt.models.users.UserProfiles
-    # devs = (UserProfiles.developer, UserProfiles.senior)
-    devs = [p for p in UserProfiles.items()
+    UserTypes = rt.models.users.UserTypes
+    # devs = (UserTypes.developer, UserTypes.senior)
+    devs = [p for p in UserTypes.items()
             if p.has_required_roles([Worker])
             and not p.has_required_roles([SiteAdmin])]
     workers = User.objects.filter(profile__in=devs)

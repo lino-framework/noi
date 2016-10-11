@@ -15,7 +15,7 @@ STATES = Cycler(TicketStates.objects())
 
 def U(username, **kw):
     kw.update(username=username,
-              profile=rt.modules.users.UserProfiles.user)
+              profile=rt.modules.users.UserTypes.user)
     return rt.modules.users.User(**kw)
 
 
