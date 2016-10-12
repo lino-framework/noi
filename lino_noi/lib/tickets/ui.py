@@ -1,22 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2011-2016 Luc Saffre
-#
-# This file is part of Lino Noi.
-#
-# Lino Noi is free software: you can redistribute it and/or modify it
-# under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# Lino Noi is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public
-# License along with Lino Noi.  If not, see
-# <http://www.gnu.org/licenses/>.
-
+# License: BSD (see file COPYING for details)
 
 """Database models for this plugin.
 
@@ -226,11 +210,11 @@ class LinksByTicket(Links):
                     i = (lnk.type.as_parent(), lnk.child)
                 links.append(i)
 
-        def by_age(a, b):
-            return cmp(b[1].modified, a[1].modified)
+        def by_age(a):
+            return a[1].modified
 
         try:
-            links.sort(by_age)
+            links.sort(key=by_age)
         # except AttributeError:
         except (AttributeError, ValueError):
             # AttributeError: 'str' object has no attribute 'as_date'
@@ -442,7 +426,7 @@ class Tickets(dd.Table):
         active_states = TicketStates.filter(active=True)
         if pv.show_active == dd.YesNo.no:
             qs = qs.exclude(state__in=active_states)
-        elif pv.show_assigned == dd.YesNo.yes:
+        elif pv.show_active == dd.YesNo.yes:
             qs = qs.filter(state__in=active_states)
 
         if pv.has_project == dd.YesNo.no:
@@ -599,7 +583,7 @@ class TicketsToDo(Tickets):
     column_names = 'overview:50 priority deadline reporter ' \
                    'workflow_buttons:40 *'
     params_layout = """
-    reporter site project state 
+    reporter assigned_to site project state 
     start_date end_date observed_event topic feasable_by"""
 
     @classmethod

@@ -16,7 +16,7 @@ def makeuser(username):
     User = rt.modules.users.User
     u, created = User.objects.get_or_create(username=username.strip())
     if created:
-        # u.profile = rt.modules.users.UserProfiles.admin
+        # u.profile = rt.modules.users.UserTypes.admin
         # u.set_password('1234')
         # u.modified = datetime.datetime.now()
         u.full_clean()

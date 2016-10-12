@@ -65,7 +65,7 @@ User types
 
 A default Lino Noi site has the following user profiles:
 
->>> rt.show(users.UserProfiles)
+>>> rt.show(users.UserTypes)
 ======= ============ ==================
  value   name         text
 ------- ------------ ------------------
@@ -98,14 +98,14 @@ A **senior** is a developer who additionaly can triage tickets.
 Here is a list of user profiles of those who can work on tickets:
 
 >>> from lino_noi.lib.clocking.roles import Worker
->>> UserProfiles = rt.modules.users.UserProfiles
->>> [p.name for p in UserProfiles.items()
+>>> UserTypes = rt.modules.users.UserTypes
+>>> [p.name for p in UserTypes.items()
 ...     if p.has_required_roles([Worker])]
 ['consultant', 'hoster', 'developer', 'senior', 'admin']
 
 And here are those who don't work:
 
->>> [p.name for p in UserProfiles.items()
+>>> [p.name for p in UserTypes.items()
 ...    if not p.has_required_roles([Worker])]
 ['anonymous', 'user']
 

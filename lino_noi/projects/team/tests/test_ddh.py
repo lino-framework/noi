@@ -1,20 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 Luc Saffre
-# This file is part of Lino Noi.
-#
-# Lino Noi is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# Lino Noi is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public
-# License along with Lino Noi.  If not, see
-# <http://www.gnu.org/licenses/>.
+# License: BSD (see file COPYING for details)
 
 """Runs some tests about the disable-delete handler and cascading deletes.
 
@@ -50,7 +36,7 @@ class DDHTests(RemoteAuthTestCase):
     maxDiff = None
 
     def test01(self):
-        from lino.modlib.users.choicelists import UserProfiles
+        from lino.modlib.users.choicelists import UserTypes
         Ticket = rt.modules.tickets.Ticket
         # Session = rt.modules.clocking.Session
         User = rt.modules.users.User
@@ -59,7 +45,7 @@ class DDHTests(RemoteAuthTestCase):
         ct_Ticket = ContentType.objects.get_for_model(Ticket)
 
         robin = create(User, username='robin',
-                       profile=UserProfiles.admin,
+                       profile=UserTypes.admin,
                        language="en")
 
         def createit():

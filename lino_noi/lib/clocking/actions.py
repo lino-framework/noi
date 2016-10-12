@@ -1,22 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2016 Luc Saffre
-#
-# This file is part of Lino Noi.
-#
-# Lino Noi is free software: you can redistribute it and/or modify it
-# under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# Lino Noi is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public
-# License along with Lino Noi.  If not, see
-# <http://www.gnu.org/licenses/>.
-
+# License: BSD (see file COPYING for details)
 """Defines actions for this plugin."""
 
 
@@ -29,6 +13,7 @@ from lino.mixins.periods import Monthly
 from lino.modlib.printing.mixins import DirectPrintAction
 from lino.core.roles import SiteUser
 from .roles import Worker
+from lino_noi.lib.tickets.roles import Triager
 
 class EndSession(dd.Action):
     """Close a given session, i.e. stop working on that ticket for this
@@ -88,9 +73,11 @@ class EndTicketSession(EndSession):
         if not super(EndTicketSession, self).get_action_permission(
                 ar, obj, state):
             return False
+        user = ar.get_user()
+            
         Session = rt.modules.clocking.Session
         qs = Session.objects.filter(
-            user=ar.get_user(), ticket=obj, end_time__isnull=True)
+            user=user, ticket=obj, end_time__isnull=True)
         if qs.count() == 0:
             return False
         return True
@@ -107,6 +94,7 @@ class EndTicketSession(EndSession):
 
 
 class StartTicketSession(dd.Action):
+    """Start a session on this ticket."""
     # label = _("Start session")
     # label = u"\u262d"
     # label = u"\u2692"
@@ -115,27 +103,27 @@ class StartTicketSession(dd.Action):
     # label = u"\u231a\u2197"
     # label = u"↗"  # \u2197
     label = u"▶"  # BLACK RIGHT-POINTING TRIANGLE (U+25B6)
-    help_text = _("Start a session on this ticket.")
     # icon_name = 'emoticon_smile'
     show_in_workflow = True
     show_in_bbar = False
-    readonly = False
+    readonly = True
     required_roles = dd.required(Worker)
 
     def get_action_permission(self, ar, obj, state):
         if obj.standby or obj.closed:
             return False
-        u = ar.get_user()
-        # if not u.profile.has_required_roles([SiteUser]):
-            # avoid query with AnonymousUser
-            # return False
+        user = ar.get_user()
+        if not obj.state.active and not user.profile.has_required_roles([Triager]):
+            return False
+        if not super(StartTicketSession, self).get_action_permission(
+                ar, obj, state):
+            return False
         Session = rt.modules.clocking.Session
         qs = Session.objects.filter(
-            user=u, ticket=obj, end_time__isnull=True)
+            user=user, ticket=obj, end_time__isnull=True)
         if qs.count():
             return False
-        return super(StartTicketSession, self).get_action_permission(
-            ar, obj, state)
+        return True
 
     def run_from_ui(self, ar, **kw):
         me = ar.get_user()
