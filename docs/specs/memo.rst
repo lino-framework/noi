@@ -36,6 +36,7 @@ Usage examples:
 
 - ``[url http://www.example.com]``
 - ``[url http://www.example.com example]``
+- ``[url http://www.example.com another example]``
 
 ..  test:
     >>> ses = rt.login()
@@ -43,7 +44,21 @@ Usage examples:
     See <a href="http://www.example.com" target="_blank">http://www.example.com</a>.
     >>> print(ses.parse_memo("See [url http://www.example.com example]."))
     See <a href="http://www.example.com" target="_blank">example</a>.
+    
+    >>> print(ses.parse_memo("""See [url https://www.example.com
+    ... another example]."""))
+    See <a href="https://www.example.com" target="_blank">another example</a>.
 
+    A possible situation is that you forgot the space:
+    
+    >>> print(ses.parse_memo("See [urlhttp://www.example.com]."))
+    See [urlhttp://www.example.com].
+
+    A pitfall is when your editor inserted a non-breaking space:
+    
+    >>> print(ses.parse_memo("See [url&nbsp;http://www.example.com example]."))
+    See <a href="&nbsp;http://www.example.com" target="_blank">example</a>.
+    
 
 ticket
 ======
