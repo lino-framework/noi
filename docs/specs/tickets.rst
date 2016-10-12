@@ -10,7 +10,6 @@ Ticket management in Lino Noi
     $ python setup.py test -s tests.SpecsTests.test_tickets
     
     doctest init:
-
     >>> import lino
     >>> lino.startup('lino_noi.projects.team.settings.demo')
     >>> from lino.api.doctest import *
@@ -170,7 +169,7 @@ In our demo database, tickets are distributed over the different
 projects as follows (not a realistic distribution):
 
 >>> for p in tickets.Project.objects.all():
-...     print p.ref, p.tickets_by_project.count()
+...         print p.ref, p.tickets_by_project.count()
 linö 23
 téam 23
 docs 23
