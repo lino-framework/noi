@@ -226,11 +226,11 @@ class LinksByTicket(Links):
                     i = (lnk.type.as_parent(), lnk.child)
                 links.append(i)
 
-        def by_age(a, b):
-            return cmp(b[1].modified, a[1].modified)
+        def by_age(a):
+            return a[1].modified
 
         try:
-            links.sort(by_age)
+            links.sort(key=by_age)
         # except AttributeError:
         except (AttributeError, ValueError):
             # AttributeError: 'str' object has no attribute 'as_date'
