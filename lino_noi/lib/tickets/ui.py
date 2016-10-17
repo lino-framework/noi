@@ -602,7 +602,7 @@ class TicketsToDo(Tickets):
     def param_defaults(self, ar, **kw):
         kw = super(TicketsToDo, self).param_defaults(ar, **kw)
         # kw.update(state=TicketStates.todo)
-        kw.update(show_active=dd.YesNo.yes)
+        kw.update(show_todo=dd.YesNo.yes)
         kw.update(assigned_to=ar.get_user())
         return kw
 
