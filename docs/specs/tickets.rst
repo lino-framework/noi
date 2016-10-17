@@ -634,6 +634,9 @@ Filtering tickets
 | show_active     | Active          | Show only (or hide) tickets which are active (i.e. state is Talk |
 |                 |                 | or ToDo).                                                        |
 +-----------------+-----------------+------------------------------------------------------------------+
+| show_todo       | To do           | Show only (or hide) tickets which are todo (i.e. state is New    |
+|                 |                 | or ToDo).                                                        |
++-----------------+-----------------+------------------------------------------------------------------+
 | show_private    | Private         | Show only (or hide) tickets that are marked private.             |
 +-----------------+-----------------+------------------------------------------------------------------+
 | start_date      | Period from     | Start date of observed period                                    |

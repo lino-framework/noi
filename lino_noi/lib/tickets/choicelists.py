@@ -72,7 +72,7 @@ ProjectEvents.add_item_instance(TicketEventModified('modified'))
 
 class TicketState(dd.State):
     active = False
-
+    show_in_todo = False
    
 class TicketStates(dd.Workflow):
 
@@ -134,6 +134,7 @@ class TicketStates(dd.Workflow):
     item_class = TicketState
     column_names = "value name text button_text active"
     active = models.BooleanField(_("Active"), default=False)
+    show_in_todo = models.BooleanField(_("To do"), default=False)
     required_roles = dd.required(dd.SiteStaff)
     
 
@@ -144,10 +145,10 @@ add = TicketStates.add_item
 #     action_name=_("Start"),
 #     help_text=_("Ticket has been assigned to somebody who is assigned on it."))
 add('10', _("New"), 'new',
-    button_text=u"📥", active=True)  # INBOX TRAY (U+1F4E5)
+    button_text=u"📥", active=True, show_in_todo=True)  # INBOX TRAY (U+1F4E5)
 add('15', _("Talk"), 'talk', active=True,
     button_text=u"🗪")  # TWO SPEECH BUBBLES (U+1F5EA)
-add('20', _("ToDo"), 'todo', active=True,
+add('20', _("ToDo"), 'todo', active=True, show_in_todo=True,
     button_text=u"🐜")  # ANT (U+1F41C)
 add('21', _("Sticky"), 'sticky',
     button_text=u"📌", active=True)  # PUSHPIN (U+1F4CC)
