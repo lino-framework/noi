@@ -367,26 +367,19 @@ users.UserTypes.developer:400
 
 >>> rt.login('luc').show(tickets.TicketsToDo)
 ... #doctest: +REPORT_UDIFF
-=================================== ========== ========== ================= ====================================
- Overview                            Priority   Deadline   Reporter          Workflow
------------------------------------ ---------- ---------- ----------------- ------------------------------------
- `#115 (Ticket 98) <Detail>`__       100                   marc              [▶] [☆] **ToDo**
- `#110 (Ticket 93) <Detail>`__       100                   Romain Raffault   [▶] [☆] **Ready**
- `#99 (Ticket 82) <Detail>`__        100                   jean              [▶] [☆] **ToDo**
- `#94 (Ticket 77) <Detail>`__        100                   marc              [▶] [☆] **Ready**
- `#83 (Ticket 66) <Detail>`__        100                   Rolf Rompen       [▶] [☆] **ToDo**
- `#78 (Ticket 61) <Detail>`__        100                   jean              [▶] [☆] **Ready**
- `#67 (Ticket 50) <Detail>`__        100                   mathieu           [▶] [☆] **ToDo**
- `#62 (Ticket 45) <Detail>`__        100                   Rolf Rompen       [▶] [☆] **Ready**
- `#51 (Ticket 34) <Detail>`__        100                   luc               [▶] [☆] **ToDo** → [🗪] [🕸] [☐] [🗑]
- `#46 (Ticket 29) <Detail>`__        100                   mathieu           [▶] [☆] **Ready**
- `#35 (Ticket 18) <Detail>`__        100                   Robin Rood        [▶] [☆] **ToDo**
- `#30 (Ticket 13) <Detail>`__        100                   luc               [▶] [☆] **Ready** → [🗪] [🐜]
- `#19 (Ticket 2) <Detail>`__         100                   Romain Raffault   [▶] [☆] **ToDo**
- `#14 (Bar cannot baz) <Detail>`__   100                   Robin Rood        [▶] [☆] **Ready**
- `#3 (Baz sucks) <Detail>`__         100                   marc              [☆] **ToDo**
- **Total (15 rows)**                 **1500**
-=================================== ========== ========== ================= ====================================
+=============================== ========== ========== ================= ====================================
+ Overview                        Priority   Deadline   Reporter          Workflow
+------------------------------- ---------- ---------- ----------------- ------------------------------------
+ `#115 (Ticket 98) <Detail>`__   100                   marc              [▶] [☆] **ToDo**
+ `#99 (Ticket 82) <Detail>`__    100                   jean              [▶] [☆] **ToDo**
+ `#83 (Ticket 66) <Detail>`__    100                   Rolf Rompen       [▶] [☆] **ToDo**
+ `#67 (Ticket 50) <Detail>`__    100                   mathieu           [▶] [☆] **ToDo**
+ `#51 (Ticket 34) <Detail>`__    100                   luc               [▶] [☆] **ToDo** → [🗪] [🕸] [☐] [🗑]
+ `#35 (Ticket 18) <Detail>`__    100                   Robin Rood        [▶] [☆] **ToDo**
+ `#19 (Ticket 2) <Detail>`__     100                   Romain Raffault   [▶] [☆] **ToDo**
+ `#3 (Baz sucks) <Detail>`__     100                   marc              [☆] **ToDo**
+ **Total (8 rows)**              **800**
+=============================== ========== ========== ================= ====================================
 <BLANKLINE>
 
 
