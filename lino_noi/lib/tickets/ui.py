@@ -311,6 +311,11 @@ class Tickets(dd.Table):
 
         Show only (or hide) tickets that are marked private.
 
+    .. attribute:: show_todo
+
+        Show only (or hide) tickets which are todo (i.e. state is New
+        or ToDo).
+
     .. attribute:: show_active
 
         Show only (or hide) tickets which are active (i.e. state is Talk
@@ -372,12 +377,13 @@ class Tickets(dd.Table):
             blank=True, help_text=_("Only rows having this state.")),
         show_assigned=dd.YesNo.field(_("Assigned"), blank=True),
         show_active=dd.YesNo.field(_("Active"), blank=True),
+        show_todo=dd.YesNo.field(_("To do"), blank=True),
         has_project=dd.YesNo.field(_("Has project"), blank=True),
         show_private=dd.YesNo.field(_("Private"), blank=True))
 
     params_layout = """
     reporter assigned_to interesting_for site project state has_project
-    show_assigned show_active #show_closed #show_standby show_private \
+    show_assigned show_active show_todo #show_standby show_private \
     start_date end_date observed_event topic feasable_by"""
     # simple_parameters = ('reporter', 'assigned_to', 'state', 'project')
 
@@ -428,6 +434,12 @@ class Tickets(dd.Table):
             qs = qs.exclude(state__in=active_states)
         elif pv.show_active == dd.YesNo.yes:
             qs = qs.filter(state__in=active_states)
+
+        todo_states = TicketStates.filter(show_in_todo=True)
+        if pv.show_todo == dd.YesNo.no:
+            qs = qs.exclude(state__in=todo_states)
+        elif pv.show_todo == dd.YesNo.yes:
+            qs = qs.filter(state__in=todo_states)
 
         if pv.has_project == dd.YesNo.no:
             qs = qs.filter(project__isnull=True)
@@ -590,7 +602,7 @@ class TicketsToDo(Tickets):
     def param_defaults(self, ar, **kw):
         kw = super(TicketsToDo, self).param_defaults(ar, **kw)
         # kw.update(state=TicketStates.todo)
-        kw.update(show_active=dd.YesNo.yes)
+        kw.update(show_todo=dd.YesNo.yes)
         kw.update(assigned_to=ar.get_user())
         return kw
 

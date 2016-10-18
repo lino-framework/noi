@@ -122,6 +122,8 @@ and 100."""),
     'lino_noi.lib.tickets.ui.Tickets' : _("""Global list of all tickets."""),
     'lino_noi.lib.tickets.ui.Tickets.site' : _("""Select a site if you want to see only tickets for this site."""),
     'lino_noi.lib.tickets.ui.Tickets.show_private' : _("""Show only (or hide) tickets that are marked private."""),
+    'lino_noi.lib.tickets.ui.Tickets.show_todo' : _("""Show only (or hide) tickets which are todo (i.e. state is New
+or ToDo)."""),
     'lino_noi.lib.tickets.ui.Tickets.show_active' : _("""Show only (or hide) tickets which are active (i.e. state is Talk
 or ToDo)."""),
     'lino_noi.lib.tickets.ui.Tickets.show_assigned' : _("""Show only (or hide) tickets which are assigned to somebody."""),
