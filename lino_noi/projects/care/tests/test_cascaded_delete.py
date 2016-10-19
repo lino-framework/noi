@@ -72,7 +72,7 @@ class Tests(RemoteAuthTestCase):
             Ticket, summary="Need special help",
             reporter=berta, faculty=special)
 
-        self.assertEqual(ticket1.state, TicketStates.todo)
+        self.assertEqual(ticket1.state, TicketStates.new)
 
         ar = rt.actors.faculties.AssignableWorkersByTicket.request(ticket1)
         s = ar.to_rst()

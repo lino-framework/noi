@@ -42,6 +42,7 @@ class Site(Site):
         # remove whole plugin:
         # kw.update(products=None)
         # kw.update(clocking=None)
+        kw.update(blogs=None)
         kw.update(deploy=None)
         kw.update(contacts=None)
         kw.update(lists=None)

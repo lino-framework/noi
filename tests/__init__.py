@@ -97,4 +97,7 @@ class ProjectsTests(BaseTestCase):
     def test_teamadm(self):
         self.run_django_manage_test('lino_noi/projects/bs3')
 
+    def test_care(self):
+        self.run_django_manage_test('lino_noi/projects/care')
+
 

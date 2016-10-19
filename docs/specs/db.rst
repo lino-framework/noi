@@ -19,11 +19,14 @@ This document describes the database structure.
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-35 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, users, office, countries, contacts, topics, notify, changes, stars, uploads, outbox, xl, excerpts, comments, noi, tickets, faculties, deploy, clocking, lists, export_excel, tinymce, smtpd, weasyprint, appypod, wkhtmltopdf.
-44 models:
+36 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, users, office, countries, contacts, topics, notify, changes, stars, uploads, outbox, xl, excerpts, comments, noi, tickets, faculties, deploy, clocking, lists, blogs, export_excel, tinymce, smtpd, weasyprint, appypod, wkhtmltopdf.
+47 models:
 =========================== ============================ ========= =======
  Name                        Default table                #fields   #rows
 --------------------------- ---------------------------- --------- -------
+ blogs.Entry                 blogs.Entries                10        3
+ blogs.EntryType             blogs.EntryTypes             6         3
+ blogs.Tagging               blogs.Taggings               3         3
  changes.Change              changes.Changes              9         0
  clocking.ServiceReport      clocking.ServiceReports      7         1
  clocking.Session            clocking.Sessions            12        17
@@ -35,7 +38,7 @@ This document describes the database structure.
  contacts.Person             contacts.Persons             26        0
  contacts.Role               contacts.Roles               4         0
  contacts.RoleType           contacts.RoleTypes           4         0
- contenttypes.ContentType    gfks.ContentTypes            3         45
+ contenttypes.ContentType    gfks.ContentTypes            3         48
  countries.Country           countries.Countries          6         8
  countries.Place             countries.Places             8         78
  deploy.Deployment           deploy.Deployments           4         0
@@ -87,8 +90,8 @@ users.UserTypes.admin:900
 >>> ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Persons, Organizations, Partners, Partner Lists
-- Office : My Notifications, My Stars, My Uploads, My Outbox, My Excerpts, My Comments
-- Tickets :  My Tickets, Where I can help, Tickets to do, Active tickets, Tickets, Unassigned Tickets, Active projects
+- Office : My Notifications, My Stars, My Uploads, My Outbox, My Excerpts, My Comments, My Blog Entries
+- Tickets : My Tickets, Where I can help, Tickets to do, Active tickets, Tickets, Unassigned Tickets, Active projects
 - Clocking : Sessions
 - Reports :
   - System : Broken GFKs
@@ -101,6 +104,7 @@ users.UserTypes.admin:900
   - Tickets : Projects, Projects (tree), Project Types, Ticket types, Sites
   - Faculties : Faculties (tree), Faculties (all)
   - Clocking : Session Types
+  - Blog : Blog Entry Types
 - Explorer :
   - System : content types, Authorities, User types, Notifications, Changes
   - Contacts : Contact Persons, Interests, List memberships
@@ -109,6 +113,7 @@ users.UserTypes.admin:900
   - Faculties : Competences
   - Deploy : Milestones, Deployments
   - Clocking : Sessions
+  - Blog : Blog Entries, Taggings
 - Site : About
 
 

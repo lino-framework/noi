@@ -612,6 +612,7 @@ def setup_memo_commands(sender=None, **kwargs):
 
     def ticket2html(parser, s):
         ar = parser.context['ar']
+        dd.logger.info("20161019 %s", ar.renderer)
         pk = int(s)
         obj = sender.site.models.tickets.Ticket.objects.get(pk=pk)
         text = "#{0}".format(obj.id)

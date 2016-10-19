@@ -18,6 +18,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 from lino.projects.std.settings import *
+from lino.core.requests import BaseRequest
 
 
 class Site(Site):
@@ -61,6 +62,7 @@ class Site(Site):
         yield 'lino_noi.lib.deploy'
         yield 'lino_noi.projects.team.lib.clocking'
         yield 'lino_xl.lib.lists'
+        yield 'lino_xl.lib.blogs'
 
         # yield 'lino.modlib.uploads'
         # yield 'lino_xl.lib.excerpts'
@@ -81,6 +83,10 @@ class Site(Site):
         return kw
 
     def get_admin_main_items(self, ar):
+        
+        if self.is_installed('blogs'):
+            yield self.models.blogs.Entry.latest_entries(ar, max_num=10)
+        
         if ar.get_user().authenticated:
             yield self.actors.notify.MyNotifications
             yield self.actors.clocking.WorkedHours
@@ -90,6 +96,9 @@ class Site(Site):
             # yield self.actors.tickets.ActiveTickets
             # yield self.actors.tickets.InterestingTickets
         else:
+            # yield self.actors.blogs.LatestEntries
+            # from lino_xl.lib.blogs.models import latest_entries
+            # yield latest_entries(ar)
             yield self.actors.tickets.PublicTickets
         # yield self.actors.tickets.ActiveProjects
 
