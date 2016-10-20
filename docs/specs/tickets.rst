@@ -589,10 +589,17 @@ Dependencies between tickets
 Comments
 ========
 
-Currently the demo database contains no comments...
+Currently the demo database contains just some comments...
 
->>> rt.show(comments.Comments)
-No data to display
+>>> rt.show(comments.Comments, column_names="id user short_text")
+==== ================= ===================
+ ID   Author            Short text
+---- ----------------- -------------------
+ 1    Romain Raffault   Hackerish comment
+ 2    Rolf Rompen       Hackerish comment
+ 3    Robin Rood        Hackerish comment
+==== ================= ===================
+<BLANKLINE>
 
 
 >>> obj = tickets.Ticket.objects.get(pk=7)
