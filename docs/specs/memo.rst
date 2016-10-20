@@ -23,6 +23,8 @@ formatted HTML text which can contain links, tables, headers, enumerations...
 ... and it can additionally contain :mod:`memo <lino.utils.memo>`
 markup. Examples:
 
+.. _memo.url:
+
 url
 ===
 
@@ -60,6 +62,8 @@ Usage examples:
     See <a href="&nbsp;http://www.example.com" target="_blank">example</a>.
     
 
+.. _memo.ticket:
+
 ticket
 ======
 
@@ -89,3 +93,31 @@ Or the plain text renderer will render:
 >>> ses = rt.login()
 >>> print(ses.parse_memo("See [ticket 1]."))
 See <a href="Detail" title="F&#246;&#246; fails to bar when baz">#1</a>.
+
+
+.. _memo.py:
+
+py
+==
+
+Refer to a Python object.
+
+Usage examples:
+
+- ``[py lino]``
+- ``[py lino.utils.memo]``
+- ``[py lino_noi.lib.tickets.models.Project]``
+- ``[py lino_noi.lib.tickets.models.Project tickets.Project]``
+  
+..  
+    >>> ses = rt.login()
+    >>> print(ses.parse_memo("[py lino]."))
+    <a href="https://github.com/lsaffre/lino/blob/master/lino/__init__.py" target="_blank">lino</a>.
+    >>> print(ses.parse_memo("[py lino_noi.lib.tickets.models.Project]."))
+    <a href="https://github.com/lsaffre/noi/blob/master/lino_noi/lib/tickets/models.py" target="_blank">lino_noi.lib.tickets.models.Project</a>.
+    >>> print(ses.parse_memo("[py lino_noi.lib.tickets.models.Project.foo]."))
+    <a href="https://github.com/lsaffre/noi/blob/master/lino_noi/lib/tickets/models.py" target="_blank">lino_noi.lib.tickets.models.Project.foo</a>.
+
+
+    >>> print(ses.parse_memo("[py lino_noi.lib.tickets.models.Project Project]."))
+    <a href="https://github.com/lsaffre/noi/blob/master/lino_noi/lib/tickets/models.py" target="_blank">Project</a>.
