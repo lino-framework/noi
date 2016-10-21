@@ -25,6 +25,10 @@ Lino Noi:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_foreign_keys())
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
+- blogs.Entry :
+  - CASCADE : blogs.Tagging.entry
+- blogs.EntryType :
+  - PROTECT : blogs.Entry.entry_type
 - clocking.SessionType :
   - PROTECT : clocking.Session.session_type
 - contacts.Company :
@@ -39,7 +43,7 @@ Lino Noi:
 - contacts.RoleType :
   - PROTECT : contacts.Role.type, excerpts.Excerpt.contact_role, tickets.Project.contact_role
 - contenttypes.ContentType :
-  - PROTECT : changes.Change.master_type, changes.Change.object_type, comments.Comment.owner_type, excerpts.Excerpt.owner_type, excerpts.ExcerptType.content_type, gfks.HelpText.content_type, notify.Notification.owner_type, outbox.Attachment.owner_type, outbox.Mail.owner_type, stars.Star.owner_type, uploads.Upload.owner_type
+  - PROTECT : blogs.Entry.owner_type, changes.Change.master_type, changes.Change.object_type, comments.Comment.owner_type, excerpts.Excerpt.owner_type, excerpts.ExcerptType.content_type, gfks.HelpText.content_type, notify.Notification.owner_type, outbox.Attachment.owner_type, outbox.Mail.owner_type, stars.Star.owner_type, uploads.Upload.owner_type
 - countries.Country :
   - PROTECT : contacts.Partner.country, countries.Place.country
 - countries.Place :
@@ -69,6 +73,7 @@ Lino Noi:
 - tickets.TicketType :
   - PROTECT : tickets.Ticket.ticket_type
 - topics.Topic :
+  - CASCADE : blogs.Tagging.topic
   - PROTECT : faculties.Competence.topic, tickets.Ticket.topic, topics.Interest.topic
 - topics.TopicGroup :
   - PROTECT : faculties.Faculty.topic_group, topics.Topic.topic_group
@@ -76,7 +81,4 @@ Lino Noi:
   - PROTECT : uploads.Upload.type
 - users.User :
   - CASCADE : faculties.Competence.user
-  - PROTECT : changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, excerpts.Excerpt.user, notify.Notification.user, outbox.Mail.user, stars.Star.user, tickets.Project.assign_to, tickets.Ticket.assigned_to, tickets.Ticket.reporter, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user
-<BLANKLINE>
-
-
+  - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, excerpts.Excerpt.user, notify.Notification.user, outbox.Mail.user, stars.Star.user, tickets.Project.assign_to, tickets.Ticket.assigned_to, tickets.Ticket.reporter, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user

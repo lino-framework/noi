@@ -25,9 +25,14 @@ from __future__ import unicode_literals
 
 import six
 
+from importlib import import_module
+import inspect
+    
 from django.conf import settings
 from django.db import models
 from django.db.models import Q
+
+from atelier.sphinxconf.base import srcref
 
 from lino import mixins
 from lino.api import dd, rt, _, pgettext
@@ -609,9 +614,10 @@ dd.inject_field(
 
 @dd.receiver(dd.post_ui_build)
 def setup_memo_commands(sender=None, **kwargs):
-
+    """See :doc:`/specs/memo`."""
     def ticket2html(parser, s):
         ar = parser.context['ar']
+        # dd.logger.info("20161019 %s", ar.renderer)
         pk = int(s)
         obj = sender.site.models.tickets.Ticket.objects.get(pk=pk)
         text = "#{0}".format(obj.id)
@@ -622,10 +628,31 @@ def setup_memo_commands(sender=None, **kwargs):
         # return '<a href="{0}" title="{2}">{1}</a>'.format(url, text, title)
 
     sender.memo_parser.register_command('ticket', ticket2html)
-    # sender.site.plugins.bootstrap3.renderer.memo_parser.register_command(
-    #     'ticket', ticket2html)
-    # sender.site.plugins.extjs.renderer.memo_parser.register_command(
-    #     'ticket', ticket2html)
+
+
+    def py2html(parser, s):
+        args = s.split(None, 1)
+        if len(args) == 1:
+            txt = s
+        else:
+            s = args[0]
+            txt = args[1]
+        parts = s.split('.')
+        obj = import_module(parts[0])
+        for p in parts[1:]:
+            try:
+                obj = getattr(obj, p)
+            except AttributeError:
+                break
+        mod = inspect.getmodule(obj)
+        url = srcref(mod)
+        # fn = inspect.getsourcefile(obj)
+        if url:
+            # lines = inspect.getsourcelines(s)
+            return '<a href="{0}" target="_blank">{1}</a>'.format(url, txt)
+        return "<pre>{}</pre>".format(s)
+    sender.memo_parser.register_command('py', py2html)
+
 
     # rnd = sender.site.plugins.extjs.renderer
     

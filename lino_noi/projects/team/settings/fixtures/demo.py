@@ -35,6 +35,9 @@ def tickets_objects():
     Site = rt.models.tickets.Site
     Link = rt.models.tickets.Link
     LinkTypes = rt.models.tickets.LinkTypes
+    EntryType = rt.models.blogs.EntryType
+    Entry = rt.models.blogs.Entry
+    Tagging = rt.models.blogs.Tagging
 
     cons = rt.models.users.UserTypes.consultant
     dev = rt.models.users.UserTypes.developer
@@ -147,6 +150,32 @@ def tickets_objects():
         parent=Ticket.objects.get(pk=1),
         child=Ticket.objects.get(pk=2))
 
+    yield EntryType(**dd.str2kw('name', _('Release note')))
+    yield EntryType(**dd.str2kw('name', _('Feature')))
+    yield EntryType(**dd.str2kw('name', _('Upgrade instruction')))
+    
+    ETYPES = Cycler(EntryType.objects.all())
+    TIMES = Cycler('12:34', '8:30', '3:45', '6:02')
+    blogger = USERS.pop()
+    
+    def entry(offset, title, body, **kwargs):
+        kwargs['user'] = blogger
+        kwargs['entry_type'] = ETYPES.pop()
+        kwargs['pub_date'] = dd.today(offset)
+        kwargs['pub_time'] = TIMES.pop()
+        return Entry(title=title, body=body, **kwargs)
+    
+    yield entry(-3, "Hello, world!", "This is our first blog entry.")
+    e = entry(-2, "Hello again", "Our second blog entry is about [ticket 1]")
+    yield e
+    yield Tagging(entry=e, topic=TOPICS.pop())
+    
+    e = entry(-1, "Our third entry", """\
+    Yet another blog entry about [ticket 1] and [ticket 2].
+    This entry has two taggings""")
+    yield e
+    yield Tagging(entry=e, topic=TOPICS.pop())
+    yield Tagging(entry=e, topic=TOPICS.pop())
 
 def clockings_objects():
     # was previously in clockings
