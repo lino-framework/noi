@@ -8,7 +8,7 @@ class Site(Site):
 
     the_demo_date = datetime.date(2015, 5, 23)
 
-    languages = "de en fr"
+    languages = "en de fr"
 
     def unused_setup_plugins(self):
         """Change the default value of certain plugin settings.

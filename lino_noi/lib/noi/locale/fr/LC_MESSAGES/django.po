@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-noi 0.0.2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-18 11:04+0300\n"
-"PO-Revision-Date: 2016-09-07 16:25+0300\n"
+"POT-Creation-Date: 2016-10-22 04:40+0300\n"
+"PO-Revision-Date: 2016-10-22 04:43+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: fr\n"
 "Language-Team: fr <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: lino_noi/lib/clocking/__init__.py:22 lino_noi/lib/users/models.py:84
 msgid "Clocking"
@@ -67,8 +68,8 @@ msgid "Summary of the session."
 msgstr ""
 
 #: lino_noi/lib/clocking/models.py:95 lino_noi/lib/clocking/ui.py:247
-#: lino_noi/lib/deploy/models.py:43 lino_noi/lib/tickets/models.py:140
-#: lino_noi/lib/tickets/models.py:451
+#: lino_noi/lib/deploy/models.py:43 lino_noi/lib/tickets/models.py:145
+#: lino_noi/lib/tickets/models.py:456
 #: lino_noi/projects/team/lib/clocking/ui.py:61
 msgid "Description"
 msgstr ""
@@ -110,12 +111,12 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
-#: lino_noi/lib/clocking/ui.py:261 lino_noi/lib/tickets/models.py:478
+#: lino_noi/lib/clocking/ui.py:261 lino_noi/lib/tickets/models.py:483
 #: lino_noi/lib/tickets/ui.py:357
 msgid "Reporter"
 msgstr ""
 
-#: lino_noi/lib/clocking/ui.py:264 lino_noi/lib/tickets/models.py:128
+#: lino_noi/lib/clocking/ui.py:264 lino_noi/lib/tickets/models.py:133
 msgid "Project"
 msgstr ""
 
@@ -131,7 +132,7 @@ msgid "General"
 msgstr ""
 
 #: lino_noi/lib/contacts/models.py:23 lino_noi/lib/tickets/__init__.py:23
-#: lino_noi/lib/tickets/models.py:438
+#: lino_noi/lib/tickets/models.py:443
 #: lino_noi/projects/team/lib/clocking/ui.py:265
 msgid "Tickets"
 msgstr ""
@@ -180,7 +181,7 @@ msgstr ""
 msgid "In printed document include a list of other changes since this date"
 msgstr ""
 
-#: lino_noi/lib/deploy/models.py:48 lino_noi/lib/tickets/models.py:75
+#: lino_noi/lib/deploy/models.py:48 lino_noi/lib/tickets/models.py:80
 msgid "Closed"
 msgstr ""
 
@@ -192,7 +193,7 @@ msgstr ""
 msgid "Deployments"
 msgstr ""
 
-#: lino_noi/lib/deploy/models.py:83 lino_noi/lib/tickets/models.py:190
+#: lino_noi/lib/deploy/models.py:83 lino_noi/lib/tickets/models.py:195
 msgid "Remark"
 msgstr ""
 
@@ -215,8 +216,8 @@ msgstr ""
 
 #: lino_noi/lib/faculties/models.py:41
 msgid ""
-"How much workers enjoy to get a new ticket in this faculty.A number "
-"between -{0} and +{0}."
+"How much workers enjoy to get a new ticket in this faculty.A number between -"
+"{0} and +{0}."
 msgstr ""
 
 #: lino_noi/lib/faculties/models.py:48
@@ -241,8 +242,8 @@ msgstr ""
 
 #: lino_noi/lib/faculties/models.py:77
 msgid ""
-"How much this user likes to get a new ticket in this faculty.A number "
-"between -{0} and +{0}."
+"How much this user likes to get a new ticket in this faculty.A number between -"
+"{0} and +{0}."
 msgstr ""
 
 #: lino_noi/lib/faculties/models.py:83
@@ -760,13 +761,11 @@ msgstr ""
 msgid "Administrator"
 msgstr ""
 
-#: lino_noi/lib/tickets/choicelists.py:32
-#: lino_noi/lib/tickets/choicelists.py:64
+#: lino_noi/lib/tickets/choicelists.py:32 lino_noi/lib/tickets/choicelists.py:64
 msgid "Observed event"
 msgstr ""
 
-#: lino_noi/lib/tickets/choicelists.py:33
-#: lino_noi/lib/tickets/choicelists.py:65
+#: lino_noi/lib/tickets/choicelists.py:33 lino_noi/lib/tickets/choicelists.py:65
 msgid "Observed events"
 msgstr ""
 
@@ -857,11 +856,11 @@ msgstr ""
 
 #: lino_noi/lib/tickets/choicelists.py:310
 msgid "Rating"
-msgstr ""
+msgstr "Évaluation"
 
 #: lino_noi/lib/tickets/choicelists.py:311
 msgid "Ratings"
-msgstr ""
+msgstr "Évaluations"
 
 #: lino_noi/lib/tickets/choicelists.py:315
 msgid "Very good"
@@ -885,174 +884,174 @@ msgstr "Insuffisant"
 
 #: lino_noi/lib/tickets/choicelists.py:320
 msgid "Unratable"
-msgstr ""
+msgstr "Non évaluable"
 
-#: lino_noi/lib/tickets/models.py:76 lino_noi/lib/tickets/ui.py:382
+#: lino_noi/lib/tickets/models.py:81 lino_noi/lib/tickets/ui.py:382
 msgid "Private"
-msgstr ""
+msgstr "Privé"
 
-#: lino_noi/lib/tickets/models.py:79
+#: lino_noi/lib/tickets/models.py:84
 msgid "Planned time"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:91
+#: lino_noi/lib/tickets/models.py:96
 msgid "Project Type"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:92
+#: lino_noi/lib/tickets/models.py:97
 msgid "Project Types"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:100
+#: lino_noi/lib/tickets/models.py:105
 msgid "Ticket type"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:101
+#: lino_noi/lib/tickets/models.py:106
 msgid "Ticket types"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:129
+#: lino_noi/lib/tickets/models.py:134
 msgid "Projects"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:131
+#: lino_noi/lib/tickets/models.py:136
 msgid "Name"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:136
+#: lino_noi/lib/tickets/models.py:141
 msgid "Assign tickets to"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:138
+#: lino_noi/lib/tickets/models.py:143
 msgid "The user to whom new tickets will be assigned."
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:149
+#: lino_noi/lib/tickets/models.py:154
 msgid "Activity overview"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:182
+#: lino_noi/lib/tickets/models.py:187
 msgctxt "Ticketing"
 msgid "Site"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:183
+#: lino_noi/lib/tickets/models.py:188
 msgctxt "Ticketing"
 msgid "Sites"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:189
+#: lino_noi/lib/tickets/models.py:194
 msgid "Designation"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:201
+#: lino_noi/lib/tickets/models.py:206
 msgid "Dependency"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:202 lino_noi/lib/tickets/ui.py:176
+#: lino_noi/lib/tickets/models.py:207 lino_noi/lib/tickets/ui.py:176
 msgid "Dependencies"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:208
+#: lino_noi/lib/tickets/models.py:213
 msgid "Parent"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:213
+#: lino_noi/lib/tickets/models.py:218
 msgid "Child"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:216 lino_noi/lib/tickets/models.py:221
+#: lino_noi/lib/tickets/models.py:221 lino_noi/lib/tickets/models.py:226
 msgid "Type"
-msgstr ""
-
-#: lino_noi/lib/tickets/models.py:229
-#, python-format
-msgid "%(child)s is %(what)s"
 msgstr ""
 
 #: lino_noi/lib/tickets/models.py:234
 #, python-format
+msgid "%(child)s is %(what)s"
+msgstr ""
+
+#: lino_noi/lib/tickets/models.py:239
+#, python-format
 msgid "%(type)s of %(parent)s"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:312
+#: lino_noi/lib/tickets/models.py:317
 msgid "Spawn a new child ticket {0} this one."
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:322
+#: lino_noi/lib/tickets/models.py:327
 msgid "New ticket {0} #{1}"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:333
+#: lino_noi/lib/tickets/models.py:338
 msgid "New ticket {0} has been spawned as child of {1}."
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:437
+#: lino_noi/lib/tickets/models.py:442
 msgid "Ticket"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:446
+#: lino_noi/lib/tickets/models.py:451
 msgid "Nickname"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:448
+#: lino_noi/lib/tickets/models.py:453
 msgctxt "Ticket"
 msgid "Summary"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:450
+#: lino_noi/lib/tickets/models.py:455
 msgid "Short summary of the problem."
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:452
+#: lino_noi/lib/tickets/models.py:457
 msgid "Upgrade notes"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:455
+#: lino_noi/lib/tickets/models.py:460
 msgid "Duplicate of"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:462
+#: lino_noi/lib/tickets/models.py:467
 msgid "Milestone for which this ticket has been reported."
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:468
+#: lino_noi/lib/tickets/models.py:473
 msgid "The milestone for which this ticket has been fixed."
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:484
+#: lino_noi/lib/tickets/models.py:489
 msgid "Waiting for"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:487
+#: lino_noi/lib/tickets/models.py:492
 msgid "Deadline"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:490
+#: lino_noi/lib/tickets/models.py:495
 msgid "Priority"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:494
+#: lino_noi/lib/tickets/models.py:499
 msgid "Feedback"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:495
+#: lino_noi/lib/tickets/models.py:500
 msgid "Standby"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:498
+#: lino_noi/lib/tickets/models.py:503
 msgid "Spawn triggered ticket"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:570
+#: lino_noi/lib/tickets/models.py:575
 msgid "Overview"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:586
+#: lino_noi/lib/tickets/models.py:591
 msgid "{user} worked on [ticket {t}]"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:598
+#: lino_noi/lib/tickets/models.py:603
 msgid "Current project"
 msgstr ""
 
@@ -1085,13 +1084,11 @@ msgstr ""
 msgid "Create dependency as "
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:283
-#: lino_noi/projects/care/lib/tickets/models.py:46
+#: lino_noi/lib/tickets/ui.py:283 lino_noi/projects/care/lib/tickets/models.py:46
 msgid "History"
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:294
-#: lino_noi/projects/care/lib/tickets/models.py:51
+#: lino_noi/lib/tickets/ui.py:294 lino_noi/projects/care/lib/tickets/models.py:51
 #: lino_noi/projects/team/lib/tickets/models.py:35
 msgid "More"
 msgstr ""
@@ -1243,19 +1240,23 @@ msgstr "Demandes introduites"
 msgid "Solution"
 msgstr ""
 
-#: lino_noi/projects/care/lib/tickets/fixtures/demo.py:67
+#: lino_noi/projects/care/lib/tickets/fixtures/demo.py:65
+msgid "At home"
+msgstr ""
+
+#: lino_noi/projects/care/lib/tickets/fixtures/demo.py:70
 msgid "Languages"
 msgstr ""
 
-#: lino_noi/projects/care/lib/tickets/fixtures/demo.py:69
+#: lino_noi/projects/care/lib/tickets/fixtures/demo.py:72
 msgid "French"
 msgstr ""
 
-#: lino_noi/projects/care/lib/tickets/fixtures/demo.py:71
+#: lino_noi/projects/care/lib/tickets/fixtures/demo.py:74
 msgid "German"
 msgstr ""
 
-#: lino_noi/projects/care/lib/tickets/fixtures/demo.py:73
+#: lino_noi/projects/care/lib/tickets/fixtures/demo.py:76
 msgid "English"
 msgstr ""
 
@@ -1295,64 +1296,26 @@ msgstr ""
 msgid "Total time"
 msgstr ""
 
-#: lino_noi/projects/team/settings/fixtures/demo.py:48
+#: lino_noi/projects/team/settings/fixtures/demo.py:51
 msgid "Bugfix"
 msgstr ""
 
-#: lino_noi/projects/team/settings/fixtures/demo.py:49
+#: lino_noi/projects/team/settings/fixtures/demo.py:52
 msgid "Enhancement"
 msgstr ""
 
-#: lino_noi/projects/team/settings/fixtures/demo.py:50
+#: lino_noi/projects/team/settings/fixtures/demo.py:53
 msgid "Upgrade"
 msgstr ""
 
-#~ msgid "OK"
-#~ msgstr "Suffisant"
+#: lino_noi/projects/team/settings/fixtures/demo.py:153
+msgid "Release note"
+msgstr ""
 
-#~ msgid "Suboptimal"
-#~ msgstr "Insuffisant"
+#: lino_noi/projects/team/settings/fixtures/demo.py:154
+msgid "Feature"
+msgstr ""
 
-#~ msgid "Bad"
-#~ msgstr "Mauvais"
-
-#~ msgid "Excellent"
-#~ msgstr "Excellent"
-
-#~ msgid ""
-#~ msgstr ""
-
-#~ msgid "A Session is when a user works on a given ticket."
-#~ msgstr ""
-
-#~ msgid "To close a session means to stop working on that ticket for this time."
-#~ msgstr ""
-
-#~ msgid "Call me"
-#~ msgstr ""
-
-#~ msgid "Others can call me"
-#~ msgstr ""
-
-#~ msgid "What to do next."
-#~ msgstr ""
-
-#~ msgid "Value between 0 and 100."
-#~ msgstr ""
-
-#~ msgid "Ticket is waiting for feedback from somebody else."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Shows a list of tickets \"to do\". This means attributed to me and\n"
-#~ "state \"confirmed\"."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Active tickets are those which are neither closed nor in standby\n"
-#~ "mode."
-#~ msgstr ""
-
-#~ msgid "Show the tickets reported by me."
-#~ msgstr ""
-
+#: lino_noi/projects/team/settings/fixtures/demo.py:155
+msgid "Upgrade instruction"
+msgstr ""

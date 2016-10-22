@@ -9,18 +9,19 @@ from lino.utils.cycler import Cycler
 from lino_noi.lib.tickets.choicelists import TicketStates
 
 from lino.api.dd import str2kw
+from lino.api import dd
 
 STATES = Cycler(TicketStates.objects())
 
 
-def U(username, **kw):
-    kw.update(username=username,
-              profile=rt.modules.users.UserTypes.user)
+def user(username, user_type, **kw):
+    kw.update(username=username, profile=user_type)
     return rt.modules.users.User(**kw)
 
 
-def F(name, name_fr, **kw):
-    kw.update(name=name, name_fr=name_fr)
+def faculty(name, fr, en, **kw):
+    kw.update(**dd.babelkw('name', de=name, fr=fr, en=en))
+    # kw.update(name=name, name_fr=name_fr, name_en=name_en)
     return rt.modules.faculties.Faculty(**kw)
 
 
@@ -34,10 +35,11 @@ def Topic(name, **kw):
     return rt.modules.topics.Topic(**kw)
 
 
-def T(reporter, summary, **kw):
-    kw.update(
-        summary=summary,
-        reporter=rt.modules.users.User.objects.get(username=reporter))
+def ticket(reporter, summary, en, **kw):
+    u = rt.models.users.User.objects.get(username=reporter)
+    if en and u.language != 'de':
+        summary = en
+    kw.update(summary=summary, reporter=u)
     # every third ticket gets a manual state, the others get default
     # value:
     if rt.models.tickets.Ticket.objects.count() % 3 == 0:
@@ -53,13 +55,14 @@ def competence(user, faculty, **kw):
 
 
 def objects():
-    yield U("axel")
-    yield U("berta")
-    yield U("christa")
-    yield U("dora")
-    yield U("eric")
+    UserTypes = rt.actors.users.UserTypes
+    yield user("alex", UserTypes.user)
+    yield user("berta", UserTypes.user)
+    yield user("christa", UserTypes.user)
+    yield user("dora", UserTypes.user)
+    yield user("eric", UserTypes.connector)
 
-    yield S("Bei mir zu Hause")
+    yield S(_("At home"))  # "Bei mir zu Hause"
     yield S("AZ Ephata")
     yield S("Eupen")
 
@@ -79,73 +82,120 @@ def objects():
     # guitar = Topic(_("Guitar"), topic_group=music)
     # yield guitar
 
-    edu = F("Unterricht", "Cours")
+    edu = faculty("Unterricht", "Cours", "Teaching")
     yield edu
-    yield F("Französischunterricht", "Cours de francais", parent=edu)
-    yield F("Deutschunterricht", "Cours d'allemand", parent=edu)
-    math = F("Matheunterricht", "Cours de maths", parent=edu)
+    yield faculty(
+        "Französischunterricht", "Cours de francais", "French lessons",
+        parent=edu)
+    yield faculty("Deutschunterricht", "Cours d'allemand",
+                  "German lessons", parent=edu)
+    math = faculty(
+        "Matheunterricht", "Cours de maths", "Maths lessons",
+        parent=edu)
     yield math
     
-    music = F("Musik", "Musique")
+    music = faculty("Musik", "Musique", "Music")
     yield music
-    guitar = F("Gitarrenunterricht", "Cours de guitare", parent=music)
+    guitar = faculty(
+        "Gitarrenunterricht",
+        "Cours de guitare", "Guitar lessons", parent=music)
     yield guitar
-    piano = F("Klavierunterricht", "Cours de piano", parent=music)
+    piano = faculty(
+        "Klavierunterricht",
+        "Cours de piano", "Piano lessons", parent=music)
     yield piano
 
-    home = F("Haus und Garten", "Maison et jardin")
+    home = faculty(
+        "Haus und Garten", "Maison et jardin", "Home & Garden")
     yield home
 
-    yield F("Nähen", "Couture", parent=home)
-    garden = F("Gartenarbeiten", "Travaux de jardin", parent=home)
+    yield faculty(
+        "Kleider reparieren", "Réparer des vètements",
+        "Repairing clothes", parent=home)
+    garden = faculty(
+        "Gartenarbeiten", "Travaux de jardin", "Garden works",
+        parent=home)
     yield garden
-    handwerk = F("Handwerksarbeiten", "Travaux de réparation", parent=home)
-    yield handwerk
+    repair = faculty(
+        "Reparaturarbeiten", "Travaux de réparation", "Repair works",
+        parent=home)
+    yield repair
+    renovate = faculty(
+        "Renovierung", "Rénovation", "Renovation",
+        parent=home)
+    yield renovate
 
-    yield F("Fahrdienst", "Voiture")
-    commissions = F("Botengänge", "Commissions")
+    yield faculty("Fahrdienst", "Voiture", "Car driving")
+    commissions = faculty("Botengänge", "Commissions", "Shopping")
     yield commissions
-    yield F("Friseur", "Coiffure")
-    yield F("Babysitting", "Garde enfant")
-    yield F("Gesellschafter für Senioren",
-            "Rencontres personnes agées")
-    yield F("Hunde spazierenführen", "Chiens")
-    traduire = F("Übersetzungsarbeiten", "Traductions", topic_group=lng)
+    yield faculty("Friseur", "Coiffure", "Hair cutting")
+    yield faculty("Babysitting", "Garde enfant", "Babysitting")
+    yield faculty("Gesellschafter für Senioren",
+                  "Rencontres personnes agées",
+                  "Mentoring elderly people")
+    yield faculty(
+        "Hunde spazierenführen", "Chiens", "Go out with dogs")
+    traduire = faculty(
+        "Übersetzungsarbeiten",
+        "Traductions", "Translations", topic_group=lng)
     yield traduire
-    yield F("Briefe beantworten", "Répondre au courrier")
+    yield faculty("Briefe schreiben", "Écrire des lettres",
+                  "Write letters")
 
-    yield T("berta", "Mein Wasserhahn tropft, wer kann mir helfen?",
-            faculty=handwerk)
-    yield T("christa",
-            "Mein Rasen muss gemäht werden. Donnerstags oder Samstags")
-    yield T("dora",
-            "Wer kann meinem Sohn Klavierunterricht geben?",
-            faculty=piano)
-    yield T("axel",
-            "Wer kann meiner Tochter Gitarreunterricht geben?",
-            faculty=guitar)
-    yield T("axel",
-            "Wer macht Musik auf meinem Geburtstag am 12.12.2012 ?",
-            faculty=music)
-    yield T("berta",
-            "Wer hilft meinem Sohn sich auf die Mathearbeit am "
-            "21.05. vorzubereiten? 5. Schuljahr PDS.", faculty=math)
-    yield T("dora",
-            "Wer kann meine Abschlussarbeit korrekturlesen?",
-            description="Für 5. Jahr RSI zum Thema \"Das "
-            "Liebesleben der Kängurus\"  "
-            "Muss am 21.05. eingereicht "
-            "werden.")
-    yield T("axel",
-            "Wer fährt für mich nach Aachen Pampers kaufen?",
-            description="Ich darf selber nicht über die Grenze.",
-            faculty=commissions)
+    yield ticket(
+        "berta",
+        "Mein Wasserhahn tropft, wer kann mir helfen?",
+        "My faucet is dripping, who can help?",
+        faculty=repair)
+    yield ticket(
+        "christa",
+        "Mein Rasen muss gemäht werden. Donnerstags oder Samstags",
+        "My lawn needs mowing. On Thursday or Saturday."
+        "")
+    yield ticket(
+        "dora",
+        "Wer kann meinem Sohn Klavierunterricht geben?",
+        "Who can give piano lessons to my son?",
+        faculty=piano)
+    yield ticket(
+        "alex",
+        "Wer kann meiner Tochter Gitarreunterricht geben?",
+        "Who can give guitar lessons to my daughter?",
+        faculty=guitar)
+    yield ticket(
+        "alex",
+        "Wer macht Musik auf meinem Geburtstag?",
+        "Who would play music on my birthday party?",
+        deadline=dd.demo_date(-20),
+        faculty=music)
+    yield ticket(
+        "berta",
+        "Wer hilft meinem Sohn sich auf die Mathearbeit am "
+        "21.05. vorzubereiten? 5. Schuljahr PDS.",
+        "Who helps my sont to prepare for a maths test on May 21?"
+        " (5. grade PDS)",
+        deadline=dd.demo_date().replace(month=5, day=21),
+        faculty=math)
+    yield ticket(
+        "dora",
+        "Wer kann meine Abschlussarbeit korrekturlesen?",
+        "Who can review my final work?",
+        deadline=dd.demo_date().replace(month=3, day=12),
+        description="Für 5. Jahr RSI zum Thema \"Das "
+        "Liebesleben der Kängurus\"  "
+        "Muss am 12.03. eingereicht werden.")
+    yield ticket(
+        "alex",
+        "Wer fährt für mich nach Aachen Windeln kaufen?",
+        "Who would buy diapers for me in Aachen?",
+        description="Ich darf selber nicht über die Grenze.",
+        faculty=commissions)
 
-    yield competence('axel', traduire, topic=fr)
+    yield competence('alex', traduire, topic=fr)
     yield competence('berta', traduire, topic=fr)
     yield competence('berta', traduire, topic=de)
-    yield competence('axel', commissions)
-    yield competence('axel', handwerk)
+    yield competence('alex', garden)
+    yield competence('alex', repair)
     yield competence('christa', piano)
     yield competence('eric', guitar)
 

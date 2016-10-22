@@ -9,7 +9,8 @@ ns.setup_from_tasks(
     cleanable_files=['docs/api/lino_noi.*'],
     demo_projects=[
         'lino_noi.projects.team.settings.demo',
-        'lino_noi.projects.care.settings.demo'])
+        'lino_noi.projects.care.settings.demo',
+        'lino_noi.projects.care_de.settings'])
 
 # The following demo databases use the database file of team, so there is no
 # need initialize them:
