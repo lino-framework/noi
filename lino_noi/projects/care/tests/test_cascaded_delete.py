@@ -78,23 +78,25 @@ class Tests(RemoteAuthTestCase):
         s = ar.to_rst()
         # print(s)
         self.assertEquivalent("""
-==============
- Benutzername
---------------
+==========
+ Username
+----------
  alex
-==============""", s)
+==========
+""", s)
 
 
         ar = rt.actors.faculties.AssignableWorkersByTicket.request(ticket2)
         s = ar.to_rst()
         # print(s)
         self.assertEquivalent("""
-==============
- Benutzername
---------------
+==========
+ Username
+----------
  alex
  bruno
-==============""", s)
+==========
+""", s)
 
 
         # cannot delete a faculty when there are competences referring
@@ -104,8 +106,8 @@ class Tests(RemoteAuthTestCase):
             self.fail("Expected veto")
         except Warning as e:
             self.assertEqual(
-                six.text_type(e), "Kann Fähigkeit Special work nicht "
-                "löschen weil 1 Kompetenzen darauf verweisen.")
+                six.text_type(e), "Cannot delete Faculty Special work "
+                "because 1 Competences refer to it.")
 
         # you cannot delete a faculty when it is the parent of other
         # faculties
@@ -114,8 +116,8 @@ class Tests(RemoteAuthTestCase):
             self.fail("Expected veto")
         except Warning as e:
             self.assertEqual(
-                six.text_type(e), "Kann Fähigkeit General work nicht "
-                "löschen weil 1 Kompetenzen darauf verweisen.")
+                six.text_type(e), "Cannot delete Faculty General work "
+                "because 1 Competences refer to it.")
             
         # deleting a user will automatically delete all their
         # competences:

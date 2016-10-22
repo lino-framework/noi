@@ -112,6 +112,7 @@ SETUP_INFO.update(packages=[
     'lino_noi.projects.care.lib',
     'lino_noi.projects.care.lib.tickets',
     'lino_noi.projects.care.lib.tickets.fixtures',
+    'lino_noi.projects.care_de',
     'lino_noi.projects.public.settings',
     'lino_noi.projects.public.tests',
 ])

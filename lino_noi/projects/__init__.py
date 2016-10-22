@@ -20,5 +20,6 @@ run :manage:`runserver` in these demo projects.
    bs3
    public
    care
+   care_de
 
 """
