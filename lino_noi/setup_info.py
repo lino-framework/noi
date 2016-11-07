@@ -8,7 +8,7 @@
 SETUP_INFO = dict(
     name='lino-noi',
     version='0.0.3',  # since 20160712
-    install_requires=['lino-xl'],
+    install_requires=['lino-xl', 'channels'],
     # tests_require=['pytest'],
     test_suite='tests',
     description=("The Lino application used by the Lino team for "
