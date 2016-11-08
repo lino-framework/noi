@@ -115,7 +115,8 @@ class Projects(dd.Table):
 
 class AllProjects(Projects):
     required_roles = dd.required(dd.SiteStaff)
-    
+
+
 class ActiveProjects(Projects):
     """Show a list of active projects.
 
@@ -134,7 +135,7 @@ class ActiveProjects(Projects):
         kw.update(observed_event=ProjectEvents.active)
         return kw
 
-    
+
 class ProjectsByParent(Projects):
     master_key = 'parent'
     label = _("Subprojects")
@@ -172,7 +173,6 @@ class Links(dd.Table):
 
 
 class LinksByTicket(Links):
-
     label = _("Dependencies")
     required_roles = dd.required(Triager)
     master = 'tickets.Ticket'
@@ -245,7 +245,7 @@ class LinksByTicket(Links):
         if ar.renderer.is_interactive and sar.get_permission():
             btn = sar.ar2button(obj)
             elems += [E.br(), btn]
-        
+
         sar = self.insert_action.request_from(ar)
         if ar.renderer.is_interactive and sar.get_permission():
             actions = []
@@ -350,8 +350,8 @@ class Tickets(dd.Table):
 
     parameters = mixins.ObservedPeriod(
         observed_event=TicketEvents.field(blank=True),
-        topic=dd.ForeignKey('topics.Topic', blank=True,),
-        site=dd.ForeignKey('tickets.Site', blank=True,),
+        topic=dd.ForeignKey('topics.Topic', blank=True, ),
+        site=dd.ForeignKey('tickets.Site', blank=True, ),
         reporter=dd.ForeignKey(
             settings.SITE.user_model,
             verbose_name=_("Reporter"),
@@ -385,13 +385,14 @@ class Tickets(dd.Table):
     reporter assigned_to interesting_for site project state has_project
     show_assigned show_active show_todo #show_standby show_private \
     start_date end_date observed_event topic feasable_by"""
+
     # simple_parameters = ('reporter', 'assigned_to', 'state', 'project')
 
     @classmethod
     def get_simple_parameters(cls):
         s = super(Tickets, cls).get_simple_parameters()
         s |= set(('reporter', 'assigned_to',
-                  'state', 'project' ,'topic', 'site'))
+                  'state', 'project', 'topic', 'site'))
         return s
 
     @classmethod
@@ -405,10 +406,10 @@ class Tickets(dd.Table):
         if pv.feasable_by:
             faculties = set()
             for fac in rt.models.faculties.Faculty.objects.filter(
-                competence__user=pv.feasable_by):
+                    competence__user=pv.feasable_by):
                 faculties |= set(fac.get_parental_line())
             qs = qs.filter(Q(faculty__in=faculties))
-            
+
         if pv.interesting_for:
 
             interests = pv.interesting_for.interests_by_partner.values(
@@ -427,7 +428,6 @@ class Tickets(dd.Table):
             qs = qs.filter(assigned_to__isnull=True)
         elif pv.show_assigned == dd.YesNo.yes:
             qs = qs.filter(assigned_to__isnull=False)
-
 
         active_states = TicketStates.filter(active=True)
         if pv.show_active == dd.YesNo.no:
@@ -456,6 +456,12 @@ class Tickets(dd.Table):
         elif pv.show_private == dd.YesNo.yes:
             qs = qs.filter(Q(private=True) | Q(project__private=True))
         # print 20150512, qs.query
+        # 1253
+        if pv.start_date:
+            qs = qs.filter(created__gte=pv.start_date)
+        if pv.end_date:
+            qs = qs.filter(created__lte=pv.end_date)
+
         return qs
 
     @classmethod
@@ -468,8 +474,10 @@ class Tickets(dd.Table):
                 pv.start_date,
                 pv.end_date)
 
+
 class AllTickets(Tickets):
     required_roles = dd.login_required(dd.SiteStaff)
+
 
 class DuplicatesByTicket(Tickets):
     """Shows the tickets which are marked as duplicates of this
@@ -490,7 +498,7 @@ class SuggestedTickets(Tickets):
     params_layout = """
     reporter feasable_by site project state
     show_assigned show_active topic"""
-    
+
     @classmethod
     def param_defaults(self, ar, **kw):
         kw = super(SuggestedTickets, self).param_defaults(ar, **kw)
@@ -498,9 +506,6 @@ class SuggestedTickets(Tickets):
         kw.update(show_active=dd.YesNo.yes)
         kw.update(feasable_by=ar.get_user())
         return kw
-
-
-    
 
 
 class UnassignedTickets(Tickets):
@@ -699,8 +704,10 @@ class Sites(dd.Table):
     TicketsBySite
     """
 
+
 class AllSites(Sites):
     required_roles = dd.required(dd.SiteStaff)
+
 
 class SitesByPartner(Sites):
     master_key = 'partner'
@@ -720,7 +727,6 @@ class TicketsBySite(Tickets):
         kw.update(observed_event=TicketEvents.todo)
         return kw
 
-
 # class MyKnownProblems(Tickets):
 #     """For users whose `user_site` is set, show the known problems on
 #     their site.
@@ -734,7 +740,7 @@ class TicketsBySite(Tickets):
 #     # def get_master_instance(self, ar, model, pk):
 #     #     u = ar.get_user()
 #     #     return u.user_site
-        
+
 #     @classmethod
 #     def get_request_queryset(self, ar):
 #         u = ar.get_user()
@@ -762,5 +768,3 @@ class TicketsBySite(Tickets):
 #             msg = _("There are {0} known problems for {1}.")
 #             msg = msg.format(count, ar.get_user().user_site)
 #             yield ar.href_to_request(sar, msg)
-
-
