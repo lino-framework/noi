@@ -169,22 +169,20 @@ Partner #100 ('welket')
 
 >>> rt.show(clocking.TicketsByReport, obj)
 ... #doctest: -REPORT_UDIFF
-==== ========================================================================================================== =========== ===========
- ID   Description                                                                                                State       Time
----- ---------------------------------------------------------------------------------------------------------- ----------- -----------
- 4    Foo and bar don't baz. Site: welket. Reporter: mathieu. Project: docs. Topic: Lino Welfare                 Sticky      0:00
- 7    No Foo after deleting Bar. Site: welket. Reporter: Robin Rood. Project: shop. Topic: Lino Core             Done        2:18
- 8    Is there any Bar in Foo?. Site: welsch. Reporter: jean. Project: linö. Topic: Lino Welfare                 Cancelled   3:29
- 10   Where can I find a Foo when bazing Bazes?. Site: welket. Reporter: marc. Project: docs. Topic: Lino Voga   Talk        3:53
- 11   Class-based Foos and Bars?. Site: welsch. Reporter: mathieu. Project: research. Topic: Lino Core           ToDo        0:10
- 12   Foo cannot bar. Site: pypi. Reporter: Romain Raffault. Project: shop. Topic: Lino Welfare                  Sticky      1:30
- 15   Bars have no foo. Site: pypi. Reporter: jean. Project: docs. Topic: Lino Core                              Done        0:05
- 16   How to get bar from foo. Site: welket. Reporter: luc. Project: research. Topic: Lino Welfare               Cancelled   2:02
- 19   Ticket 2. Site: welket. Reporter: Romain Raffault. Project: téam. Topic: Lino Core                         ToDo        1:02
- 20   Ticket 3. Site: welsch. Reporter: Rolf Rompen. Project: docs. Topic: Lino Welfare                          Sticky      0:12
- 22   Ticket 5. Site: welket. Reporter: jean. Project: shop. Topic: Lino Voga                                    Ready       3:29
-                                                                                                                             **18:10**
-==== ========================================================================================================== =========== ===========
+==== ================================================================================================ =========== ===========
+ ID   Description                                                                                      State       Time
+---- ------------------------------------------------------------------------------------------------ ----------- -----------
+ 4    Foo and bar don't baz. Reporter: mathieu. Project: docs. Topic: Lino Welfare                     Sticky      0:00
+ 7    No Foo after deleting Bar. Site: welket. Reporter: Robin Rood. Project: shop. Topic: Lino Core   Done        2:18
+ 8    Is there any Bar in Foo?. Reporter: jean. Project: linö. Topic: Lino Welfare                     Cancelled   3:29
+ 11   Class-based Foos and Bars?. Site: pypi. Reporter: mathieu. Project: research. Topic: Lino Core   ToDo        0:10
+ 12   Foo cannot bar. Reporter: Romain Raffault. Project: shop. Topic: Lino Welfare                    Sticky      1:30
+ 15   Bars have no foo. Site: welsch. Reporter: jean. Project: docs. Topic: Lino Core                  Done        0:05
+ 16   How to get bar from foo. Reporter: luc. Project: research. Topic: Lino Welfare                   Cancelled   2:02
+ 19   Ticket 2. Site: welket. Reporter: Romain Raffault. Project: téam. Topic: Lino Core               ToDo        1:02
+ 20   Ticket 3. Reporter: Rolf Rompen. Project: docs. Topic: Lino Welfare                              Sticky      0:12
+                                                                                                                   **10:48**
+==== ================================================================================================ =========== ===========
 <BLANKLINE>
 
 
@@ -193,16 +191,16 @@ The :class:`ProjectsByReport
 table lists all projects and the time invested.
 
 >>> rt.show(clocking.ProjectsByReport, obj)
-==================== =============== ======== ====================================================== =========== ============
- Reference            Name            Parent   Tickets                                                Time        Total time
--------------------- --------------- -------- ------------------------------------------------------ ----------- ------------
- docs                 Documentatión   linö     `#20 <Detail>`__, `#15 <Detail>`__, `#10 <Detail>`__   4:10        6:22
- linö                 Framewörk                `#8 <Detail>`__                                        3:29        10:53
- research             Research        docs     `#16 <Detail>`__, `#11 <Detail>`__                     2:12        2:12
- shop                 Shop                     `#22 <Detail>`__, `#12 <Detail>`__, `#7 <Detail>`__    7:17        7:17
- téam                 Téam            linö     `#19 <Detail>`__                                       1:02        1:02
- **Total (5 rows)**                                                                                   **18:10**
-==================== =============== ======== ====================================================== =========== ============
+==================== =============== ======== ==================================== =========== ============
+ Reference            Name            Parent   Tickets                              Time        Total time
+-------------------- --------------- -------- ------------------------------------ ----------- ------------
+ docs                 Documentatión   linö     `#20 <Detail>`__, `#15 <Detail>`__   0:17        2:29
+ linö                 Framewörk                `#8 <Detail>`__                      3:29        6:60
+ research             Research        docs     `#16 <Detail>`__, `#11 <Detail>`__   2:12        2:12
+ shop                 Shop                     `#12 <Detail>`__, `#7 <Detail>`__    3:48        3:48
+ téam                 Téam            linö     `#19 <Detail>`__                     1:02        1:02
+ **Total (5 rows)**                                                                 **10:48**
+==================== =============== ======== ==================================== =========== ============
 <BLANKLINE>
 
 
