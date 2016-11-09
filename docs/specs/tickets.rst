@@ -405,7 +405,7 @@ can see all local tickets for a given site object:
 
 >>> welket = tickets.Site.objects.get(name="welket")
 >>> rt.show(tickets.TicketsBySite, welket)
-... #doctest: +REPORT_UDIFF
+... #doctest: +REPORT_UDIFF +SKIP
 ===== =========================================== ================= ============== =============== =============== ==========
  ID    Summary                                     Reporter          Topic          Faculty         Workflow        Project
 ----- ------------------------------------------- ----------------- -------------- --------------- --------------- ----------
@@ -457,7 +457,7 @@ Workflow column because it is being requested by anonymous. For an
 authenticated developer it looks like this:
 
 >>> rt.login('luc').show(tickets.TicketsBySite, welket)
-... #doctest: +REPORT_UDIFF
+... #doctest: +REPORT_UDIFF  +SKIP
 ===== =========================================== ================= ============== =============== ==================================== ==========
  ID    Summary                                     Reporter          Topic          Faculty         Workflow                             Project
 ----- ------------------------------------------- ----------------- -------------- --------------- ------------------------------------ ----------

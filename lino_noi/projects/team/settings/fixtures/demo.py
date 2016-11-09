@@ -100,22 +100,23 @@ def tickets_objects():
     TicketStates = rt.models.tickets.TicketStates
     TSTATES = Cycler(TicketStates.objects())
 
+    num = [0]
+    
     def ticket(summary, **kwargs):
-        site = SITES.pop()
+        num[0] += 1
         kwargs.update(
             ticket_type=TYPES.pop(), summary=summary,
             reporter=USERS.pop(),
-            site=site,
             state=TSTATES.pop(),
             topic=TOPICS.pop())
-            
+        if num[0] % 2:
+            kwargs.update(site=SITES.pop())
         if False:
             kwargs.update(project=PROJECTS.pop())
         return Ticket(**kwargs)
 
-    welket = Site.objects.get(name="welket")
     yield ticket(
-        "Föö fails to bar when baz", site=welket, project=PROJECTS.pop())
+        "Föö fails to bar when baz", project=PROJECTS.pop())
     yield ticket("Bar is not always baz", project=PROJECTS.pop())
     yield ticket("Baz sucks")
     yield ticket("Foo and bar don't baz", project=PROJECTS.pop())
