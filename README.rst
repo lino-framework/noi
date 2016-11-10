@@ -6,7 +6,6 @@ The ``lino-noi`` package
 
 .. image:: https://readthedocs.org/projects/lino/badge/?version=latest
     :alt: Documentation Status
-    :scale: 100%
     :target: http://lino.readthedocs.io/en/latest/?badge=latest
 
 .. image:: https://coveralls.io/repos/github/khchine5/noi/badge.svg?branch=master

@@ -586,7 +586,7 @@ class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
         for star in rt.models.stars.Star.for_obj(self):
             yield star.user
 
-    def get_notify_body(self, ar):
+    def get_notify_body(self, ar, cw):
         return E.tostring(E.p(
             _("{user} worked on [ticket {t}]").format(
                 user=ar.get_user(), t=self.id)))
