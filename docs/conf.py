@@ -154,3 +154,4 @@ html_use_opensearch = ''
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'noi'
 
+suppress_warnings = ['image.nonlocal_uri']
