@@ -51,7 +51,7 @@ This document describes the database structure.
  lists.List                  lists.Lists                  7         8
  lists.ListType              lists.ListTypes              4         3
  lists.Member                lists.Members                5         0
- notify.Notification         notify.Notifications         9         3
+ notify.Message         notify.Messages         9         3
  outbox.Attachment           outbox.Attachments           4         0
  outbox.Mail                 outbox.Mails                 9         0
  outbox.Recipient            outbox.Recipients            6         0
@@ -90,7 +90,7 @@ users.UserTypes.admin:900
 >>> ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Persons, Organizations, Partners, Partner Lists
-- Office : My Notifications, My Stars, My Uploads, My Outbox, My Excerpts, My Comments, My Blog Entries
+- Office : My Messages, My Stars, My Uploads, My Outbox, My Excerpts, My Comments, My Blog Entries
 - Tickets : My Tickets, Where I can help, Tickets to do, Active tickets, Tickets, Unassigned Tickets, Active projects
 - Clocking : Sessions
 - Reports :
@@ -106,7 +106,7 @@ users.UserTypes.admin:900
   - Clocking : Session Types
   - Blog : Blog Entry Types
 - Explorer :
-  - System : content types, Authorities, User types, Notifications, Changes
+  - System : content types, Authorities, User types, Messages, Changes
   - Contacts : Contact Persons, Interests, List memberships
   - Office : Stars, Uploads, Upload Areas, Outgoing Mails, Attachments, Excerpts, Comments, Text Field Templates
   - Tickets : Dependencies, States

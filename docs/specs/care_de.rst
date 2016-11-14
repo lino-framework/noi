@@ -226,7 +226,7 @@ Das Hauptmenü
 
 >>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Büro : Meine Benachrichtigungen, Meine Favoriten, Meine Auszüge, Meine Kommentare
+- Büro : Meine Mitteilungen, Meine Favoriten, Meine Auszüge, Meine Kommentare
 - Bitten : Meine Bitten, Wo ich helfen kann, Zu tun, Aktive Bitten, Bitten, Nicht zugewiesene Bitten, Aktive Projekte
 - Arbeitszeit : Sitzungen
 - Berichte :
@@ -241,7 +241,7 @@ Das Hauptmenü
   - Fähigkeiten : Fähigkeiten (Hierarchie), Fähigkeiten (alle)
   - Arbeitszeit : Session Types
 - Explorer :
-  - System : Datenbankmodelle, Vollmachten, Benutzerarten, Benachrichtigungen, Änderungen
+  - System : Datenbankmodelle, Vollmachten, Benutzerarten, Mitteilungen, Änderungen
   - Themen : Interessen
   - Büro : Favoriten, Auszüge, Kommentare, Einfügetexte
   - Bitten : Verknüpfungen, Zustände
@@ -254,7 +254,7 @@ Das Hauptmenü
 
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Büro : Meine Benachrichtigungen, Meine Favoriten, Meine Auszüge, Meine Kommentare
+- Büro : Meine Mitteilungen, Meine Favoriten, Meine Auszüge, Meine Kommentare
 - Bitten : Meine Bitten, Wo ich helfen kann, Zu tun
 - Konfigurierung :
  - Orte : Länder
