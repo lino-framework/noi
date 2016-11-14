@@ -19,18 +19,31 @@ Lino Care, ein soziales Ticketing-System
 .. contents::
   :local:
 
-Projektbeschreibung
-===================
+Übersicht
+=========
 
-Ziel des Projekts ist die Vermittlung kostenloser Freundschaftsdienste
-zwischen Immigranten und Hiesigen zwecks Förderung der Integration.
+**Lino Care** ist eine Variante von :ref:`noi`, die angepasst wurde
+für den Einsatz in Organisationen, die Menschen helfen, füreinander zu
+sorgen.
+
+Während :ref:`noi` als Ticketing-System für das :ref:`Lino-Team
+<lino.team>` und andere Softwareprojekte benutzt wird, entstand *Lino
+Care* aus der Beobachtung, dass die meisten Konzepte dieser Software
+für soziale Zwecke wiederverwertet werden können. Ein anderer Kontext,
+aber ähnliche Datenstrukturen. Was Programmierer ein *Ticket* nennen,
+nennen wir in Lino Care eine *Bitte*.
+
+Jede Bitte hat einen "Reporter" (den Hilfesuchenden) sowie einen
+zugewiesenen "Verantwortlichen" (der sich "darum kümmert").  Außerdem
+ist auch wichtig der Status einer Bitte: Offen, Erledigt, "Wartet auf
+Reaktion von Dritten", "Wartet auf einen neuen Verantwortlichen", usw.
 
 Es geht um *kostenlosen* Austausch. Hier wird weder von Geld noch von
 sonstigen Zahlungseinheiten gesprochen. Es geht nicht um Abrechnen von
 Leistungen und Gegenleistungen, sondern um das Kennenlernen und
 Vernetzung von Kontakten.
 
-Im Gegensatz zur Patenschaftsbörse wird hier nur immer ein
+Im Gegensatz zur Patenschaftsbörse wird hier immer nur ein
 punktuelles, zeitlich begrenztes Engagement erwartet.
 
 Im Gegensatz zu Projekten wie `Helpific <https://helpific.com>`__ gibt
@@ -54,17 +67,8 @@ zu sammeln. Diese Mitarbeiter können ihre Informationen und Berichte
 entweder selber eingeben, oder diese "Computerarbeit" durch einen
 spezialisierten Mitarbeiter im Büro erledigen lassen.
 
-
-Funktionsbeschreibung
-=====================
-
-Die Anwendung basiert auf einem Ticketing-System, wie es in der
-Softwareentwicklung benutzt wird. Jede Hilfeanfrage wird zu einem
-"Ticket".  Ein Ticket hat einen "Besitzer" (der Hilfesuchende) sowie
-einen zugewiesenen "Verantwortlichen" (der sich "darum kümmert").
-Außerdem ist auch wichtig der Status eines Tickets: Offen, Erledigt,
-"Wartet auf Reaktion von Dritten", "Wartet auf einen neuen
-Verantwortlichen", usw.
+Optionen
+========
 
 Die Mitarbeiter können Berichte ihrer Gespräche und Aktionen in die
 Datenbank eintragen, die andere Mitarbeiter später lesen
@@ -79,22 +83,41 @@ kein Geld bekommt.
 Geschichte
 ==========
 
+Lino Care wird im Rahmen eines Projektes der **Oikos VoG** entwickelt,
+dessen Ziel die Vermittlung kostenloser Freundschaftsdienste zwischen
+Immigranten und Hiesigen zwecks Förderung der Integration ist.  Das
+Projekt wird mitgetragen von der `König-Baudouin-Stiftung
+<https://www.kbs-frb.be/fr/Activities/Grants/2016/2016D36000204568>`__
+and dem `Kiwanis
+<http://www.kiwanis.be/eupen/unterstutzte-soz-projekte>`_.
+
 Im **Oktober 2015** hatten Johannes und Luc zwei Analysegespräche, bei
-denen die Grundidee für Lino Care entstand.  Im **April 2016** trafen
-sie sich wieder und entdeckten bei einem weiteren Analysegespräch,
-dass `Lino Noi <http://noi.lino-framework.org/index.html>`_ fast ohne
-Änderungen für diese Anwendung verwendet werden könnte.  Ein früher
-Prototyp wurde am Donnerstag 21. April 2016 in Nispert vorgestellt und
-besprochen. Eine Woche später begutachteten Anna und Luc zum ersten
-Mal gemeinsam die frisch eingerichtete Datenbank.
+denen die Grundidee für Lino Care entstand.  Im **April 2016**
+entdeckten sie bei einem weiteren Analysegespräch, dass `Lino Noi
+<http://noi.lino-framework.org/index.html>`_ fast ohne Änderungen für
+diese Anwendung verwendet werden könnte.  Ein früher Prototyp wurde am
+Donnerstag 21. April 2016 in Nispert vorgestellt und besprochen. Eine
+Woche später begutachteten Anna und Luc zum ersten Mal gemeinsam die
+frisch eingerichtete Datenbank.
 
+Seitdem geht das Projekt nur langsam voran und wurde auch noch nicht
+einer breiteren Öffentlichkeit vorgestellt, weil die VoG Oikos im
+Sommer 2016 die meisten Mitarbeiter kündigen musste (aus Gründen, die
+nichts mit dem Projekt zu tun haben).  Zur Zeit finden Überlegungen
+darüber statt, wer die Trägerschaft übernehmen soll.
 
+Technische Spezifikation
+========================
+
+Der Rest dieses Dokuments ist eine eher technische Beschreibung der
+Funktionalitäten von Lino Care. Es geht stellenweise sehr ins Detail,
+weil es auch Teil der Test-Suite ist.
 
 
 Benutzer
 ========
 
-Lino Care kennt folgenden Benutzerarten:
+Lino Care kennt folgenden *Benutzerarten*:
 
 >>> rt.show('users.UserTypes')
 ====== =========== ============
@@ -108,7 +131,7 @@ Lino Care kennt folgenden Benutzerarten:
 <BLANKLINE>
 
 
-In der Demo-Datenbank  gibt es folgende Benutzer:
+In der Demo-Datenbank gibt es folgende Benutzer:
 
 >>> rt.show('users.Users')
 ============== ============= ========= ==============
