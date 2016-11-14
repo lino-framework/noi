@@ -88,7 +88,7 @@ class Site(Site):
             yield self.models.blogs.Entry.latest_entries(ar, max_num=10)
         
         if ar.get_user().authenticated:
-            yield self.actors.notify.MyNotifications
+            yield self.actors.notify.MyMessages
             yield self.actors.clocking.WorkedHours
             yield self.actors.tickets.TicketsToDo
             yield self.actors.tickets.SuggestedTickets
