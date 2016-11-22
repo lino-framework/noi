@@ -222,7 +222,7 @@ verbose_name and verbose_name_plural options of `faculties.Faculty`.
 
 >>> rt.show('tickets.Tickets')
 ==== ========================================================================= ========== ======= ================ ========== =========
- ID   Summary                                                                   Reporter   Topic   Faculty          Workflow   Project
+ ID   Summary                                                                   Reporter   Topic   Faculty          Actions    Project
 ---- ------------------------------------------------------------------------- ---------- ------- ---------------- ---------- ---------
  8    Who would buy diapers for me in Aachen?                                   alex               Shopping         **New**
  7    Who can review my final work?                                             dora                                **ToDo**
@@ -289,7 +289,7 @@ My pleas
 >>> rt.login('christa').show(tickets.MyTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ================================================================== ========= ======= ============= ===========================================
- Overview                                                           Faculty   Topic   Assigned to   Workflow
+ Overview                                                           Faculty   Topic   Assigned to   Actions
 ------------------------------------------------------------------ --------- ------- ------------- -------------------------------------------
  `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__                                   [✋] [☆] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]
 ================================================================== ========= ======= ============= ===========================================
@@ -302,7 +302,7 @@ Where I can help
 >>> rt.login('christa').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ============================================================== ========== ======= =============== =================
- Overview                                                       Reporter   Topic   Faculty         Workflow
+ Overview                                                       Reporter   Topic   Faculty         Actions
 -------------------------------------------------------------- ---------- ------- --------------- -----------------
  `#5 (Who would play music on my birthday party?) <Detail>`__   alex               Music           [✋] [☆] **New**
  `#3 (Who can give piano lessons to my son?) <Detail>`__        dora               Piano lessons   [✋] [☆] **New**
@@ -347,7 +347,7 @@ the detail window of a ticket.
     - (general1):
       - (general1_1): **Summary** (summary), **ID** (id), **Deadline** (deadline)
       - (general1_2): **Reporter** (reporter), **Faculty** (faculty), **Topic** (topic), **Assigned to** (assigned_to)
-      - (general1_3): **Site** (site), **Workflow** (workflow_buttons), **Rating** (rating)
+      - (general1_3): **Site** (site), **Actions** (workflow_buttons), **Rating** (rating)
     - **Assignable workers** (faculties.AssignableWorkersByTicket) [visible for connector admin]
   - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user connector admin], **Sessions** (SessionsByTicket) [visible for connector admin]
 - **History** (history_tab_1) [visible for connector admin]:

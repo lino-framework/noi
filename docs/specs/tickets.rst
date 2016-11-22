@@ -154,7 +154,7 @@ assigned to a project:
 >>> rt.show(tickets.Tickets, param_values=pv)
 ... #doctest: +REPORT_UDIFF
 ==== =================== ================= =========== ========= ============== =========
- ID   Summary             Reporter          Topic       Faculty   Workflow       Project
+ ID   Summary             Reporter          Topic       Faculty   Actions        Project
 ---- ------------------- ----------------- ----------- --------- -------------- ---------
  5    Cannot create Foo   Romain Raffault   Lino Cosi             **Sleeping**
  3    Baz sucks           marc              Lino Core             **ToDo**
@@ -341,7 +341,7 @@ My tickets
 >>> rt.login('jean').show(tickets.MyTickets)
 ... #doctest: +REPORT_UDIFF
 ============================================= ========= ============== ============= ===========================================
- Overview                                      Faculty   Topic          Assigned to   Workflow
+ Overview                                      Faculty   Topic          Assigned to   Actions
 --------------------------------------------- --------- -------------- ------------- -------------------------------------------
  `#113 (Ticket 96) <Detail>`__                           Lino Cosi                    [▶] [☆] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]
  `#106 (Ticket 89) <Detail>`__                           Lino Voga      marc          [▶] [☆] **Talk** → [🐜] [🕸] [☐] [🗑]
@@ -368,7 +368,7 @@ users.UserTypes.developer:400
 >>> rt.login('luc').show(tickets.TicketsToDo)
 ... #doctest: +REPORT_UDIFF
 =============================== ========== ========== ================= ====================================
- Overview                        Priority   Deadline   Reporter          Workflow
+ Overview                        Priority   Deadline   Reporter          Actions
 ------------------------------- ---------- ---------- ----------------- ------------------------------------
  `#115 (Ticket 98) <Detail>`__   100                   marc              [▶] [☆] **ToDo**
  `#99 (Ticket 82) <Detail>`__    100                   jean              [▶] [☆] **ToDo**
@@ -407,7 +407,7 @@ can see all local tickets for a given site object:
 >>> rt.show(tickets.TicketsBySite, welket)
 ... #doctest: +REPORT_UDIFF +SKIP
 ===== =========================================== ================= ============== =============== =============== ==========
- ID    Summary                                     Reporter          Topic          Faculty         Workflow        Project
+ ID    Summary                                     Reporter          Topic          Faculty         Actions         Project
 ----- ------------------------------------------- ----------------- -------------- --------------- --------------- ----------
  115   Ticket 98                                   marc              Lino Core                      **ToDo**        docs
  112   Ticket 95                                   Robin Rood        Lino Welfare                   **Cancelled**   shop
@@ -453,13 +453,13 @@ can see all local tickets for a given site object:
 
 
 Note that the above table shows no state change actions in the
-Workflow column because it is being requested by anonymous. For an
+Actions column because it is being requested by anonymous. For an
 authenticated developer it looks like this:
 
 >>> rt.login('luc').show(tickets.TicketsBySite, welket)
 ... #doctest: +REPORT_UDIFF  +SKIP
 ===== =========================================== ================= ============== =============== ==================================== ==========
- ID    Summary                                     Reporter          Topic          Faculty         Workflow                             Project
+ ID    Summary                                     Reporter          Topic          Faculty         Actions                              Project
 ----- ------------------------------------------- ----------------- -------------- --------------- ------------------------------------ ----------
  115   Ticket 98                                   marc              Lino Core                      [▶] [☆] **ToDo**                     docs
  112   Ticket 95                                   Robin Rood        Lino Welfare                   [☆] **Cancelled**                    shop
@@ -653,7 +653,7 @@ Filtering tickets
 >>> rt.login('robin').show(rt.actors.tickets.Tickets)
 ... #doctest: +REPORT_UDIFF +ELLIPSIS
 ===== =========================================== ================= ============== =============== =========================================== ==========
- ID    Summary                                     Reporter          Topic          Faculty         Workflow                                    Project
+ ID    Summary                                     Reporter          Topic          Faculty         Actions                                     Project
 ----- ------------------------------------------- ----------------- -------------- --------------- ------------------------------------------- ----------
  116   Ticket 99                                   mathieu           Lino Welfare                   [▶] [☆] **Sticky**                          research
  115   Ticket 98                                   marc              Lino Core                      [▶] [☆] **ToDo** → [🗪] [🕸] [☐] [🗑]          docs
@@ -700,7 +700,7 @@ the detail window of a ticket.
     - (general1):
       - (general1_1): **Summary** (summary), **ID** (id), **Reporter** (reporter)
       - (general1_2): **Site** (site), **Topic** (topic), **Project** (project), **Private** (private)
-      - (general1_3): **Workflow** (workflow_buttons), **Assigned to** (assigned_to), **Faculty** (faculty)
+      - (general1_3): **Actions** (workflow_buttons), **Assigned to** (assigned_to), **Faculty** (faculty)
     - **Deployments** (deploy.DeploymentsByTicket) [visible for user consultant hoster developer senior admin]
   - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user consultant hoster developer senior admin], **Sessions** (SessionsByTicket) [visible for consultant hoster developer senior admin]
 - **More** (more):
