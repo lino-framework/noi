@@ -26,13 +26,13 @@ This document describes and tests the print to pdf function.
 >>> def mytest(k):
 ...     url = 'http://127.0.0.1:8000/api/{0}?an=as_pdf'.format(k)
 ...     res = test_client.get(url, REMOTE_USER='robin')
-...     assert res.status_code == 200
+...     assert res.status_code == 200, "Request to {} got status code {}".format(url, res.status_code)
 ...     result = json.loads(res.content)
 ...     assert result['success']
 ...     print(result['open_url'])
 
->>> mytest("tickets/TicketsToDo")  #doctest: -SKIP
+>>> mytest("tickets/TicketsToDo")  #doctest: +SKIP
 /media/cache/appypdf/127.0.0.1/tickets.TicketsToDo.pdf
 
->>> mytest("tickets/Tickets")  #doctest: -SKIP
-/media/cache/appypdf/127.0.0.1/tickets.Tickets.pdf
+>>> mytest("tickets/AllTickets")  #doctest: +SKIP
+/media/cache/appypdf/127.0.0.1/tickets.AllTickets.pdf
