@@ -6,6 +6,8 @@ from ..settings import *
 class Site(Site):
     """Defines and instantiates a demo version of Lino Care."""
 
+    # default_ui = 'lino_extjs6.extjs6'
+    
     the_demo_date = datetime.date(2015, 5, 23)
 
     languages = "en de fr"

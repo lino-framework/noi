@@ -230,7 +230,7 @@ Fähigkeiten
 
 >>> rt.show('tickets.Tickets')
 ==== =========================================================================================== ========== ======= ==================== ================ =========
- ID   Zusammenfassung                                                                             Anfrager   Thema   Fähigkeit            Arbeitsablauf    Projekt
+ ID   Zusammenfassung                                                                             Anfrager   Thema   Fähigkeit            Aktionen         Projekt
 ---- ------------------------------------------------------------------------------------------- ---------- ------- -------------------- ---------------- ---------
  8    Wer fährt für mich nach Aachen Windeln kaufen?                                              alex               Botengänge           **Neu**
  7    Wer kann meine Abschlussarbeit korrekturlesen?                                              dora                                    **ZuTun**
@@ -295,7 +295,7 @@ Meine Bitten
 >>> rt.login('christa').show(tickets.MyTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ============================================================================ =========== ======= =============== ===========================================
- Overview                                                                     Fähigkeit   Thema   Zugewiesen zu   Arbeitsablauf
+ Overview                                                                     Fähigkeit   Thema   Zugewiesen zu   Aktionen
 ---------------------------------------------------------------------------- ----------- ------- --------------- -------------------------------------------
  `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__                                       [✋] [☆] **Neu** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]
 ============================================================================ =========== ======= =============== ===========================================
@@ -308,7 +308,7 @@ Where I can help
 >>> rt.login('christa').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ================================================================= ========== ======= =================== =================
- Overview                                                          Anfrager   Thema   Fähigkeit           Arbeitsablauf
+ Overview                                                          Anfrager   Thema   Fähigkeit           Aktionen
 ----------------------------------------------------------------- ---------- ------- ------------------- -----------------
  `#5 (Wer macht Musik auf meinem Geburtstag?) <Detail>`__          alex               Musik               [✋] [☆] **Neu**
  `#3 (Wer kann meinem Sohn Klavierunterricht geben?) <Detail>`__   dora               Klavierunterricht   [✋] [☆] **Neu**
@@ -371,7 +371,7 @@ the detail window of a ticket.
     - (general1):
       - (general1_1): **Zusammenfassung** (summary), **ID** (id), **Deadline** (deadline)
       - (general1_2): **Anfrager** (reporter), **Fähigkeit** (faculty), **Thema** (topic), **Zugewiesen zu** (assigned_to)
-      - (general1_3): **Umfeld** (site), **Arbeitsablauf** (workflow_buttons), **Bewertung** (rating)
+      - (general1_3): **Umfeld** (site), **Aktionen** (workflow_buttons), **Bewertung** (rating)
     - **Zuweisbare Arbeiter** (faculties.AssignableWorkersByTicket) [visible for connector admin]
   - (general_2): **Beschreibung** (description), **Kommentare** (CommentsByRFC) [visible for user connector admin], **Sitzungen** (SessionsByTicket) [visible for connector admin]
 - **History** (history_tab_1) [visible for connector admin]:

@@ -122,7 +122,7 @@ Filtering tickets by topic
 >>> rt.show(tickets.Tickets, param_values=pv)
 ... #doctest: +REPORT_UDIFF
 ===== =========================== ================= =========== =============== ============== ==========
- ID    Summary                     Reporter          Topic       Faculty         Workflow       Project
+ ID    Summary                     Reporter          Topic       Faculty         Actions        Project
 ----- --------------------------- ----------------- ----------- --------------- -------------- ----------
  113   Ticket 96                   jean              Lino Cosi                   **New**        linö
  109   Ticket 92                   mathieu           Lino Cosi                   **Sleeping**   téam
