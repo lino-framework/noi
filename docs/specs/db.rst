@@ -91,7 +91,7 @@ users.UserTypes.admin:900
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Persons, Organizations, Partners, Partner Lists
 - Office : My Messages, My Stars, My Uploads, My Outbox, My Excerpts, My Comments, My Blog Entries
-- Tickets : My Tickets, Where I can help, Tickets to do, Active tickets, Tickets, Unassigned Tickets, Active projects
+- Tickets : My Tickets, Where I can help, Tickets to do, Active tickets, All tickets, Unassigned Tickets, Active projects
 - Clocking : Sessions
 - Reports :
   - System : Broken GFKs

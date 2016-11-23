@@ -476,6 +476,7 @@ class Tickets(dd.Table):
 
 
 class AllTickets(Tickets):
+    label = _("All tickets")
     required_roles = dd.login_required(dd.SiteStaff)
 
 

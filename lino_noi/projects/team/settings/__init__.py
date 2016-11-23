@@ -18,8 +18,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 from lino.projects.std.settings import *
-from lino.core.requests import BaseRequest
-
+from lino.api.ad import _
 
 class Site(Site):
 
@@ -109,6 +108,9 @@ class Site(Site):
         tb.add_action(self.modules.tickets.TicketsToTalk)
         tb.add_action(self.modules.tickets.TicketsToDo)
         tb.add_action(self.modules.tickets.AllTickets)
+        tb.add_action(
+            self.modules.tickets.AllTickets.insert_action,
+            label=_("Submit a ticket"))
 
     def unused_do_site_startup(self):
         """Defines an emitter to send notification emails about changes in

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-noi 0.0.3\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-22 04:40+0300\n"
+"POT-Creation-Date: 2016-11-23 06:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,7 +124,7 @@ msgstr ""
 
 #: lino_noi/lib/contacts/models.py:19 lino_noi/lib/tickets/ui.py:68
 #: lino_noi/lib/tickets/ui.py:279 lino_noi/lib/users/models.py:79
-#: lino_noi/projects/care/lib/tickets/models.py:36
+#: lino_noi/projects/care/lib/tickets/models.py:37
 #: lino_noi/projects/team/lib/tickets/models.py:24
 msgid "General"
 msgstr ""
@@ -1068,15 +1068,15 @@ msgstr ""
 msgid "Only projects interesting for this partner."
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:125
+#: lino_noi/lib/tickets/ui.py:126
 msgid "Active projects"
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:140
+#: lino_noi/lib/tickets/ui.py:141
 msgid "Subprojects"
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:145
+#: lino_noi/lib/tickets/ui.py:146
 msgid "Projects (tree)"
 msgstr ""
 
@@ -1085,12 +1085,12 @@ msgid "Create dependency as "
 msgstr ""
 
 #: lino_noi/lib/tickets/ui.py:283
-#: lino_noi/projects/care/lib/tickets/models.py:46
+#: lino_noi/projects/care/lib/tickets/models.py:47
 msgid "History"
 msgstr ""
 
 #: lino_noi/lib/tickets/ui.py:294
-#: lino_noi/projects/care/lib/tickets/models.py:51
+#: lino_noi/projects/care/lib/tickets/models.py:52
 #: lino_noi/projects/team/lib/tickets/models.py:35
 msgid "More"
 msgstr ""
@@ -1129,54 +1129,58 @@ msgid "Has project"
 msgstr ""
 
 #: lino_noi/lib/tickets/ui.py:479
+msgid "All tickets"
+msgstr ""
+
+#: lino_noi/lib/tickets/ui.py:488
 msgid "Duplicates"
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:486
+#: lino_noi/lib/tickets/ui.py:495
 msgid "Where I can help"
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:508
+#: lino_noi/lib/tickets/ui.py:514
 msgid "Unassigned Tickets"
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:534
+#: lino_noi/lib/tickets/ui.py:540
 msgid "Public tickets"
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:557
+#: lino_noi/lib/tickets/ui.py:563
 msgid "Tickets to triage"
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:558
+#: lino_noi/lib/tickets/ui.py:564
 msgid "Triage"
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:573
+#: lino_noi/lib/tickets/ui.py:579
 msgid "Tickets to talk"
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:592
+#: lino_noi/lib/tickets/ui.py:598
 msgid "Tickets to do"
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:614
+#: lino_noi/lib/tickets/ui.py:620
 msgid "Active tickets"
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:665
+#: lino_noi/lib/tickets/ui.py:671
 msgid "Fixed tickets"
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:672
+#: lino_noi/lib/tickets/ui.py:678
 msgid "Reported tickets"
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:679
+#: lino_noi/lib/tickets/ui.py:685
 msgid "Reported tickets "
 msgstr ""
 
-#: lino_noi/lib/tickets/ui.py:711
+#: lino_noi/lib/tickets/ui.py:719
 msgid "Known problems"
 msgstr ""
 
@@ -1238,7 +1242,11 @@ msgstr ""
 msgid "Introduced pleas"
 msgstr ""
 
-#: lino_noi/projects/care/lib/tickets/models.py:25
+#: lino_noi/projects/care/lib/tickets/models.py:23
+msgid "All pleas"
+msgstr ""
+
+#: lino_noi/projects/care/lib/tickets/models.py:26
 msgid "Solution"
 msgstr ""
 
@@ -1260,6 +1268,10 @@ msgstr ""
 
 #: lino_noi/projects/care/lib/tickets/fixtures/demo.py:76
 msgid "English"
+msgstr ""
+
+#: lino_noi/projects/care/settings/__init__.py:67
+msgid "Submit a plea"
 msgstr ""
 
 #: lino_noi/projects/team/lib/clocking/models.py:19
@@ -1298,6 +1310,10 @@ msgstr ""
 msgid "Total time"
 msgstr ""
 
+#: lino_noi/projects/team/settings/__init__.py:113
+msgid "Submit a ticket"
+msgstr ""
+
 #: lino_noi/projects/team/settings/fixtures/demo.py:51
 msgid "Bugfix"
 msgstr ""
@@ -1310,15 +1326,15 @@ msgstr ""
 msgid "Upgrade"
 msgstr ""
 
-#: lino_noi/projects/team/settings/fixtures/demo.py:153
+#: lino_noi/projects/team/settings/fixtures/demo.py:154
 msgid "Release note"
 msgstr ""
 
-#: lino_noi/projects/team/settings/fixtures/demo.py:154
+#: lino_noi/projects/team/settings/fixtures/demo.py:155
 msgid "Feature"
 msgstr ""
 
-#: lino_noi/projects/team/settings/fixtures/demo.py:155
+#: lino_noi/projects/team/settings/fixtures/demo.py:156
 msgid "Upgrade instruction"
 msgstr ""
 

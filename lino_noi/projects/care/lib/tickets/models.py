@@ -20,6 +20,7 @@ TicketsToDo._label = _("Pleas to to")
 TicketsFixed._label = _("Fixed pleas")
 TicketsReported._label = _("Introduced pleas")
 TicketsByReporter._label = _("Introduced pleas")
+AllTickets._label = _("All pleas")
 
 dd.update_field(
     'tickets.Ticket', 'upgrade_notes', verbose_name=_("Solution"))

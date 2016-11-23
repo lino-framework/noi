@@ -244,7 +244,7 @@ The main menu
 >>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Büro : Meine Mitteilungen, Meine Favoriten, Meine Auszüge, Meine Kommentare
-- Bitten : Meine Bitten, Wo ich helfen kann, Zu tun, Aktive Bitten, Bitten, Nicht zugewiesene Bitten, Aktive Projekte
+- Bitten : Meine Bitten, Wo ich helfen kann, Zu tun, Aktive Bitten, Alle Bitten, Nicht zugewiesene Bitten, Aktive Projekte
 - Arbeitszeit : Sitzungen
 - Berichte :
   - System : Broken GFKs
