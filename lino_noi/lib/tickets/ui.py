@@ -340,11 +340,15 @@ class Tickets(dd.Table):
     column_names = 'id summary:50 reporter:10 topic faculty ' \
                    'workflow_buttons:30 project:10 *'
     detail_layout = TicketDetail()
-    insert_layout = dd.InsertLayout("""
-    # reporter #product
+    insert_layout = """
     summary
-    description
-    """, window_size=(70, 20))
+    reporter
+    """
+    # insert_layout = dd.InsertLayout("""
+    # # reporter #product
+    # summary
+    # description
+    # """, window_size=(70, 20))
 
     detail_html_template = "tickets/Ticket/detail.html"
 

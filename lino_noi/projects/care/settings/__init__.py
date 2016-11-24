@@ -57,13 +57,17 @@ class Site(Site):
 
     def setup_quicklinks(self, ar, tb):
         # super(Site, self).setup_quicklinks(ar, tb)
-        tb.add_action(self.modules.tickets.MyTickets)
+        a = self.actors.users.MySettings.default_action
+        tb.add_instance_action(
+            ar.get_user(), action=a, label=_("My settings"))
+        
+        # tb.add_action(self.modules.tickets.MyTickets)
         # tb.add_action(self.modules.tickets.TicketsToTriage)
         # tb.add_action(self.modules.tickets.TicketsToTalk)
         # tb.add_action(self.modules.tickets.TicketsToDo)
         tb.add_action(self.modules.tickets.AllTickets)
         tb.add_action(
-            self.modules.tickets.AllTickets.insert_action,
+            self.modules.tickets.MyTickets.insert_action,
             label=_("Submit a plea"))
 
 

@@ -75,7 +75,7 @@ class UserDetail(UserDetail):
 
     general = dd.Panel("""
     box1:45 clocking:15
-    remarks:40 users.AuthoritiesGiven:20
+    topics.InterestsByPartner faculties.CompetencesByUser
     """, label=_("General"))
 
     clocking = dd.Panel("""
@@ -90,7 +90,7 @@ class UserDetail(UserDetail):
     box1 = """
     username profile:20 partner user_site
     language id created modified
-    callme_mode notifyme_mode
+    callme_mode mail_mode
     """
 
     # cal_left = """
@@ -105,7 +105,7 @@ class UserDetail(UserDetail):
 
     contact = dd.Panel("""
     address_box info_box
-    topics.InterestsByPartner faculties.CompetencesByUser
+    remarks:40 users.AuthoritiesGiven:20
     """, label=_("Contact"))
 
     info_box = """
