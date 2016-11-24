@@ -85,9 +85,11 @@ class Site(Site):
         
         if self.is_installed('blogs'):
             yield self.models.blogs.Entry.latest_entries(ar, max_num=10)
-        
-        if ar.get_user().authenticated:
-            yield self.actors.notify.MyMessages
+
+        me = ar.get_user()
+        if me.authenticated:
+            if me.mail_mode != self.actors.notify.MailModes.immediately:
+                yield self.actors.notify.MyMessages
             yield self.actors.clocking.WorkedHours
             yield self.actors.tickets.TicketsToDo
             yield self.actors.tickets.SuggestedTickets
@@ -111,6 +113,14 @@ class Site(Site):
         tb.add_action(
             self.modules.tickets.AllTickets.insert_action,
             label=_("Submit a ticket"))
+
+        a = self.actors.users.MySettings.default_action
+        tb.add_instance_action(ar.get_user(), action=a)
+        # handler = self.action_call(None, a, dict(record_id=user.pk))
+        # handler = "function(){%s}" % handler
+        # mysettings = dict(text=_("My settings"),
+        #                   handler=js_code(handler))
+        
 
     def unused_do_site_startup(self):
         """Defines an emitter to send notification emails about changes in
