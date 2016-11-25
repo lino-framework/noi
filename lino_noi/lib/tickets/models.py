@@ -515,9 +515,9 @@ class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
         if me is not None:
             if self.reporter_id is None:
                 self.reporter = me
-            if self.assigned_to_id is None:
-                if me.profile.has_required_roles([Triager]):
-                    self.assigned_to = me
+            # if self.assigned_to_id is None:
+            #     if me.profile.has_required_roles([Triager]):
+            #         self.assigned_to = me
         if self.reporter_id and self.reporter.user_site:
             self.site = self.reporter.user_site
         super(Ticket, self).on_create(ar)
