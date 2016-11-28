@@ -243,7 +243,7 @@ The main menu
 
 >>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Büro : Meine Mitteilungen, Meine Favoriten, Meine Auszüge, Meine Kommentare
+- Büro : Meine Benachrichtigungen, Meine Favoriten, Meine Auszüge, Meine Kommentare
 - Bitten : Meine Bitten, Wo ich helfen kann, Zu tun, Aktive Bitten, Alle Bitten, Nicht zugewiesene Bitten, Aktive Projekte
 - Arbeitszeit : Sitzungen
 - Berichte :
@@ -258,7 +258,7 @@ The main menu
   - Fähigkeiten : Fähigkeiten (Hierarchie), Fähigkeiten (alle)
   - Arbeitszeit : Session Types
 - Explorer :
-  - System : Datenbankmodelle, Vollmachten, Benutzerarten, Mitteilungen, Änderungen
+  - System : Datenbankmodelle, Vollmachten, Benutzerarten, Benachrichtigungen, Änderungen, All dashboard widgets
   - Themen : Interessen
   - Büro : Favoriten, Auszüge, Kommentare, Einfügetexte
   - Bitten : Verknüpfungen, Zustände
@@ -271,7 +271,7 @@ The main menu
 
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Office : My Messages, My Stars, My Excerpts, My Comments
+- Office : My Notification messages, My Stars, My Excerpts, My Comments
 - Pleas : My Pleas, Where I can help, Pleas to to
 - Configure :
   - Places : Countries

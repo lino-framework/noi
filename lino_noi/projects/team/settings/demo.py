@@ -9,6 +9,7 @@ class Site(Site):
     the_demo_date = datetime.date(2015, 5, 23)
 
     languages = "en de fr"
+    use_websockets = False
 
     # default_ui = 'lino_extjs6.extjs6'
 
@@ -23,6 +24,7 @@ class Site(Site):
         """
         super(Site, self).setup_plugins()
         self.plugins.excerpts.configure(responsible_user='jean')
+
 
 SITE = Site(globals())
 # SITE.plugins.extjs6.configure(theme_name='theme-classic')
