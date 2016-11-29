@@ -6,7 +6,12 @@ env:
   - DJANGO=1.8
   - DJANGO=1.9
   - DJANGO=1.10
-# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+
+before_install:
+  - sudo apt-get install tidy
+  - sudo apt-get install -y libreoffice python3-uno
+  - libreoffice '--accept=socket,host=127.0.0.1,port=8100;urp;' &
+
 install:
   - pip install -U setuptools
   - pip install coveralls
@@ -14,7 +19,7 @@ install:
   - pip install -U pytest-cov
   - pip install -r requirements.txt
   - pip install -e .
-# command to run tests, e.g. python setup.py test
+
 script:
   - export LINO_CACHE_ROOT=$TRAVIS_BUILD_DIR/lino_cache
   - mkdir $LINO_CACHE_ROOT

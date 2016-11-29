@@ -71,7 +71,7 @@ dd.update_field('users.User', 'remarks', verbose_name=_("About me"))
 class UserDetail(UserDetail):
     """Layout of User Detail in Lino Noi."""
 
-    main = "general contact"
+    main = "general contact dashboard.WidgetsByUser"
 
     general = dd.Panel("""
     box1:45 clocking:15

@@ -71,6 +71,7 @@ class Site(Site):
         yield 'lino.modlib.weasyprint'
         yield 'lino_xl.lib.appypod'
         yield 'lino.modlib.wkhtmltopdf'
+        yield 'lino.modlib.dashboard'
 
         # yield 'lino.modlib.awesomeuploader'
 
@@ -81,15 +82,20 @@ class Site(Site):
         # `auth=True`. In Lino Noi everybody can see everything.
         return kw
 
-    def get_admin_main_items(self, ar):
-        
-        if self.is_installed('blogs'):
-            yield self.models.blogs.Entry.latest_entries(ar, max_num=10)
-
-        me = ar.get_user()
+    def get_admin_main_items(self, me):
+        from lino.core.dashboard import ActorItem
         if me.authenticated:
-            if me.mail_mode != self.actors.notify.MailModes.immediately:
-                yield self.actors.notify.MyMessages
+            # yield ActorItem(
+            #     self.actors.notify.MyMessages, header_level=None)
+            yield self.actors.notify.MyMessages
+        if self.is_installed('blogs'):
+            yield ActorItem(
+                self.actors.blogs.LatestEntries, header_level=None)
+            # yield CustomItem(
+            #     'blogs.Entry.latest_entries',
+            #     self.models.blogs.Entry.latest_entries, max_num=10)
+
+        if me.authenticated:
             yield self.actors.clocking.WorkedHours
             yield self.actors.tickets.TicketsToDo
             yield self.actors.tickets.SuggestedTickets
