@@ -271,7 +271,7 @@ class LinksByTicket(Links):
 
 
 class TicketDetail(dd.DetailLayout):
-    main = "general more history_tab votes.VotesByVotable"
+    main = "general more history_tab"
 
     general = dd.Panel("""
     general1
@@ -279,7 +279,7 @@ class TicketDetail(dd.DetailLayout):
     """, label=_("General"))
 
     history_tab = dd.Panel("""
-    changes.ChangesByMaster:50 stars.StarsByController:20
+    changes.ChangesByMaster:50 #stars.StarsByController:20
     """, label=_("History"), required_roles=dd.login_required(Triager))
 
     general1 = """

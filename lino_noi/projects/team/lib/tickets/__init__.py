@@ -12,3 +12,15 @@
 """
 
 from lino_noi.lib.tickets import *
+
+class Plugin(Plugin):
+    """Adds the :mod:`lino_noi.lib.votes` plugin.
+    """
+
+    needs_plugins = [
+        'lino_xl.lib.excerpts',
+        'lino_xl.lib.topics',
+        'lino.modlib.comments', 'lino.modlib.changes',
+        'lino_noi.lib.votes',
+        'lino_noi.lib.noi']
+

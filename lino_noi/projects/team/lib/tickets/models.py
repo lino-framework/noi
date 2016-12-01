@@ -17,6 +17,7 @@ class TicketDetail(TicketDetail):
     `faculties`
 
     """
+    main = "general more history_tab votes.VotesByVotable"
     
     general = dd.Panel("""
     general1:60 deploy.DeploymentsByTicket:20
