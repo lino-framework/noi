@@ -713,6 +713,7 @@ the detail window of a ticket.
 - **History** (history_tab_1) [visible for senior admin]:
   - **Changes** (changes.ChangesByMaster) [visible for user consultant hoster developer senior admin]
   - **Starred by** (stars.StarsByController) [visible for user consultant hoster developer senior admin]
+- **Votes** (votes.VotesByVotable) [visible for user consultant hoster developer senior admin]    
 <BLANKLINE>
 
 

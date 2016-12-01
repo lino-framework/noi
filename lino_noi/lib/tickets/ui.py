@@ -271,7 +271,7 @@ class LinksByTicket(Links):
 
 
 class TicketDetail(dd.DetailLayout):
-    main = "general more history_tab"
+    main = "general more history_tab votes.VotesByVotable"
 
     general = dd.Panel("""
     general1

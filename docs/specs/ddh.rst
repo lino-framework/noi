@@ -69,7 +69,7 @@ Lino Noi:
 - tickets.Site :
   - PROTECT : deploy.Milestone.site, tickets.Ticket.site, users.User.user_site
 - tickets.Ticket :
-  - PROTECT : clocking.Session.ticket, deploy.Deployment.ticket, tickets.Link.child, tickets.Link.parent, tickets.Ticket.duplicate_of
+  - PROTECT : clocking.Session.ticket, deploy.Deployment.ticket, tickets.Link.child, tickets.Link.parent, tickets.Ticket.duplicate_of, votes.Vote.votable
 - tickets.TicketType :
   - PROTECT : tickets.Ticket.ticket_type
 - topics.Topic :
@@ -81,4 +81,4 @@ Lino Noi:
   - PROTECT : uploads.Upload.type
 - users.User :
   - CASCADE : faculties.Competence.user
-  - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, dashboard.Widget.user, excerpts.Excerpt.user, notify.Message.user, outbox.Mail.user, stars.Star.user, tickets.Project.assign_to, tickets.Ticket.assigned_to, tickets.Ticket.reporter, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user
+  - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, dashboard.Widget.user, excerpts.Excerpt.user, notify.Message.user, outbox.Mail.user, stars.Star.user, tickets.Project.assign_to, tickets.Ticket.assigned_to, tickets.Ticket.reporter, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user, votes.Vote.user

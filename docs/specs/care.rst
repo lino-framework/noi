@@ -241,37 +241,37 @@ and topic.
 The main menu
 =============
 
->>> rt.login('rolf').show_menu()
+>>> rt.login('robin').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Büro : Meine Benachrichtigungen, Meine Favoriten, Meine Auszüge, Meine Kommentare
-- Bitten : Meine Bitten, Wo ich helfen kann, Zu tun, Aktive Bitten, Alle Bitten, Nicht zugewiesene Bitten, Aktive Projekte
-- Arbeitszeit : Sitzungen
-- Berichte :
+- Office : My Votes, My Notification messages, My Stars, My Excerpts, My Comments
+- Pleas : My Pleas, Where I can help, Pleas to to, Active pleas, All pleas, Unassigned pleas, Active projects
+- Clocking : Sessions
+- Reports :
   - System : Broken GFKs
-  - Arbeitszeit : Dienstleistungsberichte
-- Konfigurierung :
-  - System : Site-Parameter, Hilfetexte, Benutzer
-  - Orte : Länder, Orte
-  - Themen : Themen, Themengruppen
-  - Büro : Auszugsarten, Meine Einfügetexte
-  - Bitten : Projekte, Projekte (Hierarchie), Project Types, Ticket types, Umfelder
-  - Fähigkeiten : Fähigkeiten (Hierarchie), Fähigkeiten (alle)
-  - Arbeitszeit : Session Types
+  - Clocking : Service Reports
+- Configure :
+  - System : Site Parameters, Help Texts, Users
+  - Places : Countries, Places
+  - Topics : Topics, Topic groups
+  - Office : Excerpt Types, My Text Field Templates
+  - Pleas : Projects, Projects (tree), Project Types, Ticket types, Sites
+  - Faculties : Faculties (tree), Faculties (all)
+  - Clocking : Session Types
 - Explorer :
-  - System : Datenbankmodelle, Vollmachten, Benutzerarten, Benachrichtigungen, Änderungen, All dashboard widgets
-  - Themen : Interessen
-  - Büro : Favoriten, Auszüge, Kommentare, Einfügetexte
-  - Bitten : Verknüpfungen, Zustände
-  - Fähigkeiten : Kompetenzen
-  - Arbeitszeit : Sitzungen
-- Site : Info
+  - System : content types, Authorities, User types, Notification messages, Changes, All dashboard widgets
+  - Topics : Interests
+  - Pleas : Votes, Vote states, Dependencies, States
+  - Office : Stars, Excerpts, Comments, Text Field Templates
+  - Faculties : Competences
+  - Clocking : Sessions
+- Site : About
 
 
 **Simple** users have a very limited menu:
 
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Office : My Notification messages, My Stars, My Excerpts, My Comments
+- Office : My Votes, My Notification messages, My Stars, My Excerpts, My Comments
 - Pleas : My Pleas, Where I can help, Pleas to to
 - Configure :
   - Places : Countries
@@ -318,10 +318,10 @@ My to-do list
 No data to display
 
 
-Rating a ticket
-===============
+Rating a help offer
+===================
 
->>> base = '/choices/tickets/Tickets/rating'
+>>> base = '/choices/votes/Votes/rating'
 >>> show_choices("robin", base + '?query=')
 <br/>
 Very good
@@ -347,12 +347,13 @@ the detail window of a ticket.
     - (general1):
       - (general1_1): **Summary** (summary), **ID** (id), **Deadline** (deadline)
       - (general1_2): **Reporter** (reporter), **Faculty** (faculty), **Topic** (topic), **Assigned to** (assigned_to)
-      - (general1_3): **Site** (site), **Actions** (workflow_buttons), **Rating** (rating)
+      - (general1_3): **Site** (site), **Actions** (workflow_buttons)
     - **Assignable workers** (faculties.AssignableWorkersByTicket) [visible for connector admin]
   - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user connector admin], **Sessions** (SessionsByTicket) [visible for connector admin]
 - **History** (history_tab_1) [visible for connector admin]:
   - **Changes** (changes.ChangesByMaster) [visible for user connector admin]
   - **Starred by** (stars.StarsByController) [visible for user connector admin]
+- **Votes** (votes.VotesByVotable) [visible for user connector admin]
 - **More** (more) [visible for connector admin]:
   - (more1) [visible for all]:
     - (more1_1): **Created** (created), **Modified** (modified), **Ticket type** (ticket_type)

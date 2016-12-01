@@ -12,6 +12,7 @@
     clocking
     tickets
     topics
+    votes
     faculties
     deploy
 

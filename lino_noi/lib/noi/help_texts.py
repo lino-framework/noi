@@ -53,7 +53,7 @@ on them."""),
 on them."""),
     'lino_noi.lib.noi.roles.Senior' : _("""A senior developer is a developer who is additionally
 responsible for triaging tickets"""),
-    'lino_noi.lib.noi.roles.SiteAdmin' : _("""Like a developer, plus site admin and staff"""),
+    'lino_noi.lib.noi.roles.SiteAdmin' : _("""Can do everything."""),
     'lino_noi.lib.tickets.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_noi.lib.tickets.choicelists.TicketStates' : _("""The state of a ticket (new, open, closed, ...)"""),
     'lino_noi.lib.tickets.choicelists.TicketStates.new' : _("""Somebody reported this ticket, but there was no response so
@@ -79,8 +79,7 @@ needs to be done by the reporter (e.g. testing,
 confirmation, documentation,..)"""),
     'lino_noi.lib.tickets.choicelists.TicketStates.done' : _("""The ticket has been done."""),
     'lino_noi.lib.tickets.choicelists.TicketStates.cancelled' : _("""It has been decided that we won't fix this ticket."""),
-    'lino_noi.lib.tickets.choicelists.MarkDone' : _("""Mark this ticket as done. Can be done only by the reporter when a
-rating has been set or by a triager (independently of any rating)."""),
+    'lino_noi.lib.tickets.choicelists.MarkDone' : _("""Mark this ticket as done."""),
     'lino_noi.lib.tickets.choicelists.LinkTypes' : _("""The possible values of a lino_noi.lib.tickets.models.Link."""),
     'lino_noi.lib.tickets.choicelists.LinkTypes.requires' : _("""The parent ticket requires the child ticket."""),
     'lino_noi.lib.tickets.choicelists.LinkTypes.triggers' : _("""The parent ticket triggers the child ticket."""),
@@ -146,13 +145,36 @@ in an active state."""),
     'lino_noi.lib.tickets.ui.MyTickets.model' : _("""alias of Ticket"""),
     'lino_noi.lib.users.models.User.callme_mode' : _("""Whether other users can see my contact data."""),
     'lino_noi.lib.users.models.UserDetail' : _("""Layout of User Detail in Lino Noi."""),
+    'lino_noi.lib.votes.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_noi.lib.votes.Plugin.votable_model' : _("""The things we are voting about. A string referring to the model
+which represents a votable in your application.  Default value is
+'tickets.Ticket' (referring to
+lino_noi.lib.tickets.models.Ticket)."""),
+    'lino_noi.lib.votes.choicelists.VoteStates' : _("""The list of possible states of a vote.  This is used as choicelist
+for the state
+field of a vote."""),
+    'lino_noi.lib.votes.choicelists.VoteStates.interested' : _("""I am interested, I want to get notified when something
+happens."""),
+    'lino_noi.lib.votes.models.Vote' : _("""A link between two persons."""),
+    'lino_noi.lib.votes.models.Vote.votable' : _("""The ticket (or other votable) being voted."""),
+    'lino_noi.lib.votes.models.Vote.user' : _("""The user who is voting."""),
+    'lino_noi.lib.votes.models.Vote.state' : _("""The state of this vote.  Pointer to VoteStates."""),
+    'lino_noi.lib.votes.models.Vote.priority' : _("""My personal priority for this ticket."""),
+    'lino_noi.lib.votes.models.Vote.rating' : _("""How the ticket reporter rates my help on this ticket."""),
+    'lino_noi.lib.votes.models.Vote.remark' : _("""Why I am interested in this ticket."""),
+    'lino_noi.lib.votes.models.Vote.nickname' : _("""My nickname for this ticket. Optional."""),
+    'lino_noi.lib.votes.models.MyVotes' : _("""Show all my votes."""),
+    'lino_noi.lib.votes.models.MyVotes.model' : _("""alias of Vote"""),
+    'lino_noi.lib.votes.models.VotesByVotable' : _("""Show all votes on this object."""),
+    'lino_noi.lib.votes.models.VotesByVotable.master' : _("""alias of Ticket"""),
+    'lino_noi.lib.votes.models.VotesByVotable.model' : _("""alias of Vote"""),
     'lino_noi.projects.bs3.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Noi."""),
     'lino_noi.projects.care.roles.SimpleUser' : _("""A simple user is a person who can log into the application in
 order to manage their own pleas and competences and potentially
 can respond to other user's pleas."""),
     'lino_noi.projects.care.roles.Connector' : _("""A connector is a person who knows other persons and who
 introduces pleas on their behalf."""),
-    'lino_noi.projects.care.roles.SiteAdmin' : _("""A site administrator can create new users."""),
+    'lino_noi.projects.care.roles.SiteAdmin' : _("""A site administrator can do everything."""),
     'lino_noi.projects.care.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Care."""),
     'lino_noi.projects.public.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Noi."""),
     'lino_noi.projects.team.lib.clocking.models.ServiceReport' : _("""A service report is a document used in various discussions with

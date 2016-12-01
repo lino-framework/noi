@@ -19,8 +19,8 @@ This document describes the database structure.
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-37 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, users, office, countries, contacts, topics, notify, changes, stars, uploads, outbox, xl, excerpts, comments, noi, tickets, faculties, deploy, clocking, lists, blogs, export_excel, tinymce, smtpd, weasyprint, appypod, wkhtmltopdf, dashboard.
-48 models:
+38 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, users, office, countries, contacts, topics, votes, notify, changes, stars, uploads, outbox, xl, excerpts, comments, noi, tickets, faculties, deploy, clocking, lists, blogs, export_excel, tinymce, smtpd, weasyprint, appypod, wkhtmltopdf, dashboard.
+49 models:
 =========================== ============================ ========= =======
  Name                        Default table                #fields   #rows
 --------------------------- ---------------------------- --------- -------
@@ -38,7 +38,7 @@ This document describes the database structure.
  contacts.Person             contacts.Persons             26        0
  contacts.Role               contacts.Roles               4         0
  contacts.RoleType           contacts.RoleTypes           4         0
- contenttypes.ContentType    gfks.ContentTypes            3         49
+ contenttypes.ContentType    gfks.ContentTypes            3         50
  countries.Country           countries.Countries          6         8
  countries.Place             countries.Places             8         78
  dashboard.Widget            dashboard.Widgets            5         0
@@ -62,7 +62,7 @@ This document describes the database structure.
  tickets.Project             tickets.Projects             17        5
  tickets.ProjectType         tickets.ProjectTypes         4         0
  tickets.Site                tickets.Sites                4         3
- tickets.Ticket              tickets.Tickets              27        116
+ tickets.Ticket              tickets.Tickets              26        116
  tickets.TicketType          tickets.TicketTypes          4         3
  tinymce.TextFieldTemplate   tinymce.TextFieldTemplates   5         2
  topics.Interest             topics.Interests             3         6
@@ -72,50 +72,9 @@ This document describes the database structure.
  uploads.UploadType          uploads.UploadTypes          8         0
  users.Authority             users.Authorities            3         0
  users.User                  users.Users                  17        7
+ votes.Vote                  votes.Votes                  9         20
 =========================== ============================ ========= =======
 <BLANKLINE>
-
-
-Menus
------
-
-System administrator
---------------------
-
-Rolf is a system administrator, he has a complete menu.
-
->>> ses = rt.login('robin') 
->>> ses.user.profile
-users.UserTypes.admin:900
-
->>> ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Contacts : Persons, Organizations, Partners, Partner Lists
-- Office : My Notification messages, My Stars, My Uploads, My Outbox, My Excerpts, My Comments, My Blog Entries
-- Tickets : My Tickets, Where I can help, Tickets to do, Active tickets, All tickets, Unassigned Tickets, Active projects
-- Clocking : Sessions
-- Reports :
-  - System : Broken GFKs
-  - Clocking : Service Reports
-- Configure :
-  - System : Site Parameters, Help Texts, Users
-  - Places : Countries, Places
-  - Contacts : Organization types, Functions, Topics, Topic groups, List Types
-  - Office : Upload Types, Excerpt Types, My Text Field Templates
-  - Tickets : Projects, Projects (tree), Project Types, Ticket types, Sites
-  - Faculties : Faculties (tree), Faculties (all)
-  - Clocking : Session Types
-  - Blog : Blog Entry Types
-- Explorer :
-  - System : content types, Authorities, User types, Notification messages, Changes, All dashboard widgets
-  - Contacts : Contact Persons, Interests, List memberships
-  - Office : Stars, Uploads, Upload Areas, Outgoing Mails, Attachments, Excerpts, Comments, Text Field Templates
-  - Tickets : Dependencies, States
-  - Faculties : Competences
-  - Deploy : Milestones, Deployments
-  - Clocking : Sessions
-  - Blog : Blog Entries, Taggings
-- Site : About
 
 
 
