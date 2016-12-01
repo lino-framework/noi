@@ -193,6 +193,7 @@ class Migrator(Migrator):
         # cal_EventType = resolve_model("cal.EventType")
         # users_User = resolve_model("users.User")
         votes_Vote = rt.models.votes.Vote
+        tickets_Ticket = rt.models.tickets.Ticket
         
         @override(globals_dict)
         def create_stars_star(id, user_id, owner_type_id, owner_id, nickname):
@@ -204,6 +205,41 @@ class Migrator(Migrator):
             kw.update(votable_id=owner_id)
             kw.update(nickname=nickname)
             return votes_Vote(**kw)
+
+        @override(globals_dict)
+        def create_tickets_ticket(id, modified, created, assigned_to_id, closed, private, planned_time, project_id, site_id, topic_id, nickname, summary, description, upgrade_notes, ticket_type_id, duplicate_of_id, reported_for_id, fixed_for_id, reporter_id, state, rating, waiting_for, deadline, priority, feedback, standby, faculty_id):
+            if state: state = settings.SITE.modules.tickets.TicketStates.get_by_value(state)
+            # if rating: rating = settings.SITE.modules.tickets.Ratings.get_by_value(rating)
+            kw = dict()
+            kw.update(id=id)
+            kw.update(modified=modified)
+            kw.update(created=created)
+            kw.update(assigned_to_id=assigned_to_id)
+            kw.update(closed=closed)
+            kw.update(private=private)
+            kw.update(planned_time=planned_time)
+            kw.update(project_id=project_id)
+            kw.update(site_id=site_id)
+            kw.update(topic_id=topic_id)
+            kw.update(nickname=nickname)
+            kw.update(summary=summary)
+            kw.update(description=description)
+            kw.update(upgrade_notes=upgrade_notes)
+            kw.update(ticket_type_id=ticket_type_id)
+            kw.update(duplicate_of_id=duplicate_of_id)
+            kw.update(reported_for_id=reported_for_id)
+            kw.update(fixed_for_id=fixed_for_id)
+            kw.update(reporter_id=reporter_id)
+            kw.update(state=state)
+            # kw.update(rating=rating)
+            kw.update(waiting_for=waiting_for)
+            kw.update(deadline=deadline)
+            kw.update(priority=priority)
+            kw.update(feedback=feedback)
+            kw.update(standby=standby)
+            kw.update(faculty_id=faculty_id)
+            return tickets_Ticket(**kw)
+        
         
         return '2016.12.0'
     
