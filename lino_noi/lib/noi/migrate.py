@@ -192,11 +192,11 @@ class Migrator(Migrator):
         new_content_type_id = globals_dict['new_content_type_id']
         # cal_EventType = resolve_model("cal.EventType")
         # users_User = resolve_model("users.User")
-        votes_Vote = resolve_model("votes.Vote")
+        votes_Vote = rt.models.votes.Vote
         
         @override(globals_dict)
         def create_stars_star(id, user_id, owner_type_id, owner_id, nickname):
-            owner_type_id = new_content_type_id(owner_type_id)
+            # owner_type_id = new_content_type_id(owner_type_id)
             kw = dict()
             kw.update(id=id)
             kw.update(user_id=user_id)
