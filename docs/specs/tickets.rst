@@ -340,21 +340,21 @@ My tickets
 
 >>> rt.login('jean').show(tickets.MyTickets)
 ... #doctest: +REPORT_UDIFF
-============================================= ========= ============== ============= ===========================================
+============================================= ========= ============== ============= =======================================
  Overview                                      Faculty   Topic          Assigned to   Actions
---------------------------------------------- --------- -------------- ------------- -------------------------------------------
- `#113 (Ticket 96) <Detail>`__                           Lino Cosi                    [▶] [☆] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]
- `#106 (Ticket 89) <Detail>`__                           Lino Voga      marc          [▶] [☆] **Talk** → [🐜] [🕸] [☐] [🗑]
- `#99 (Ticket 82) <Detail>`__                            Lino Core      luc           [▶] [☆] **ToDo** → [🗪] [🕸] [☐] [🗑]
- `#92 (Ticket 75) <Detail>`__                            Lino Welfare   jean          [▶] [☆] **Sticky**
- `#78 (Ticket 61) <Detail>`__                            Lino Voga      luc           [▶] [☆] **Ready** → [🗪] [🐜] [☑]
- `#57 (Ticket 40) <Detail>`__                            Lino Cosi                    [▶] [☆] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]
- `#50 (Ticket 33) <Detail>`__                            Lino Voga      jean          [▶] [☆] **Talk** → [🐜] [🕸] [☐] [🗑]
- `#43 (Ticket 26) <Detail>`__                            Lino Core      mathieu       [▶] [☆] **ToDo** → [🗪] [🕸] [☐] [🗑]
- `#36 (Ticket 19) <Detail>`__                            Lino Welfare   marc          [▶] [☆] **Sticky**
- `#22 (Ticket 5) <Detail>`__                             Lino Voga      mathieu       [▶] [☆] **Ready** → [🗪] [🐜] [☑]
- `#1 (Föö fails to bar when baz) <Detail>`__             Lino Cosi                    [▶] [☆] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]
-============================================= ========= ============== ============= ===========================================
+--------------------------------------------- --------- -------------- ------------- ---------------------------------------
+ `#113 (Ticket 96) <Detail>`__                           Lino Cosi                    [▶] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]
+ `#106 (Ticket 89) <Detail>`__                           Lino Voga      marc          [▶] **Talk** → [🐜] [🕸] [☐] [🗑]
+ `#99 (Ticket 82) <Detail>`__                            Lino Core      luc           [▶] **ToDo** → [🗪] [🕸] [☐] [🗑]
+ `#92 (Ticket 75) <Detail>`__                            Lino Welfare   jean          [▶] **Sticky**
+ `#78 (Ticket 61) <Detail>`__                            Lino Voga      luc           [▶] **Ready** → [🗪] [🐜] [☑]
+ `#57 (Ticket 40) <Detail>`__                            Lino Cosi                    [▶] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]
+ `#50 (Ticket 33) <Detail>`__                            Lino Voga      jean          [▶] **Talk** → [🐜] [🕸] [☐] [🗑]
+ `#43 (Ticket 26) <Detail>`__                            Lino Core      mathieu       [▶] **ToDo** → [🗪] [🕸] [☐] [🗑]
+ `#36 (Ticket 19) <Detail>`__                            Lino Welfare   marc          [▶] **Sticky**
+ `#22 (Ticket 5) <Detail>`__                             Lino Voga      mathieu       [▶] **Ready** → [🗪] [🐜] [☑]
+ `#1 (Föö fails to bar when baz) <Detail>`__             Lino Cosi                    [▶] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]
+============================================= ========= ============== ============= =======================================
 <BLANKLINE>
 
 
@@ -367,19 +367,19 @@ users.UserTypes.developer:400
 
 >>> rt.login('luc').show(tickets.TicketsToDo)
 ... #doctest: +REPORT_UDIFF
-=============================== ========== ========== ================= ====================================
+=============================== ========== ========== ================= ================================
  Overview                        Priority   Deadline   Reporter          Actions
-------------------------------- ---------- ---------- ----------------- ------------------------------------
- `#115 (Ticket 98) <Detail>`__   100                   marc              [▶] [☆] **ToDo**
- `#99 (Ticket 82) <Detail>`__    100                   jean              [▶] [☆] **ToDo**
- `#83 (Ticket 66) <Detail>`__    100                   Rolf Rompen       [▶] [☆] **ToDo**
- `#67 (Ticket 50) <Detail>`__    100                   mathieu           [▶] [☆] **ToDo**
- `#51 (Ticket 34) <Detail>`__    100                   luc               [▶] [☆] **ToDo** → [🗪] [🕸] [☐] [🗑]
- `#35 (Ticket 18) <Detail>`__    100                   Robin Rood        [▶] [☆] **ToDo**
- `#19 (Ticket 2) <Detail>`__     100                   Romain Raffault   [▶] [☆] **ToDo**
- `#3 (Baz sucks) <Detail>`__     100                   marc              [☆] **ToDo**
+------------------------------- ---------- ---------- ----------------- --------------------------------
+ `#115 (Ticket 98) <Detail>`__   100                   marc              [▶] **ToDo**
+ `#99 (Ticket 82) <Detail>`__    100                   jean              [▶] **ToDo**
+ `#83 (Ticket 66) <Detail>`__    100                   Rolf Rompen       [▶] **ToDo**
+ `#67 (Ticket 50) <Detail>`__    100                   mathieu           [▶] **ToDo**
+ `#51 (Ticket 34) <Detail>`__    100                   luc               [▶] **ToDo** → [🗪] [🕸] [☐] [🗑]
+ `#35 (Ticket 18) <Detail>`__    100                   Robin Rood        [▶] **ToDo**
+ `#19 (Ticket 2) <Detail>`__     100                   Romain Raffault   [▶] **ToDo**
+ `#3 (Baz sucks) <Detail>`__     100                   marc              **ToDo**
  **Total (8 rows)**              **800**
-=============================== ========== ========== ================= ====================================
+=============================== ========== ========== ================= ================================
 <BLANKLINE>
 
 
@@ -458,49 +458,49 @@ authenticated developer it looks like this:
 
 >>> rt.login('luc').show(tickets.TicketsBySite, welket)
 ... #doctest: +REPORT_UDIFF  +SKIP
-===== =========================================== ================= ============== =============== ==================================== ==========
- ID    Summary                                     Reporter          Topic          Faculty         Actions                              Project
------ ------------------------------------------- ----------------- -------------- --------------- ------------------------------------ ----------
- 115   Ticket 98                                   marc              Lino Core                      [▶] [☆] **ToDo**                     docs
- 112   Ticket 95                                   Robin Rood        Lino Welfare                   [☆] **Cancelled**                    shop
- 109   Ticket 92                                   mathieu           Lino Cosi                      [☆] **Sleeping**                     téam
- 106   Ticket 89                                   jean              Lino Voga                      [▶] [☆] **Talk**                     research
- 103   Ticket 86                                   Romain Raffault   Lino Core                      [☆] **Done**                         linö
- 100   Ticket 83                                   luc               Lino Welfare                   [▶] [☆] **Sticky**                   docs
- 97    Ticket 80                                   Rolf Rompen       Lino Cosi                      [▶] [☆] **New**                      shop
- 94    Ticket 77                                   marc              Lino Voga                      [▶] [☆] **Ready**                    téam
- 91    Ticket 74                                   Robin Rood        Lino Core                      [▶] [☆] **ToDo**                     research
- 88    Ticket 71                                   mathieu           Lino Welfare                   [☆] **Cancelled**                    linö
- 85    Ticket 68                                   jean              Lino Cosi                      [☆] **Sleeping**                     docs
- 82    Ticket 65                                   Romain Raffault   Lino Voga                      [▶] [☆] **Talk**                     shop
- 79    Ticket 62                                   luc               Lino Core                      [☆] **Done**                         téam
- 76    Ticket 59                                   Rolf Rompen       Lino Welfare                   [▶] [☆] **Sticky**                   research
- 73    Ticket 56                                   marc              Lino Cosi                      [▶] [☆] **New**                      linö
- 70    Ticket 53                                   Robin Rood        Lino Voga                      [▶] [☆] **Ready**                    docs
- 67    Ticket 50                                   mathieu           Lino Core                      [▶] [☆] **ToDo**                     shop
- 64    Ticket 47                                   jean              Lino Welfare                   [☆] **Cancelled**                    téam
- 61    Ticket 44                                   Romain Raffault   Lino Cosi                      [☆] **Sleeping**                     research
- 58    Ticket 41                                   luc               Lino Voga                      [▶] [☆] **Talk** → [🐜] [🕸] [☐] [🗑]   linö
- 55    Ticket 38                                   Rolf Rompen       Lino Core                      [☆] **Done**                         docs
- 52    Ticket 35                                   marc              Lino Welfare                   [▶] [☆] **Sticky**                   shop
- 49    Ticket 32                                   Robin Rood        Lino Cosi                      [▶] [☆] **New**                      téam
- 46    Ticket 29                                   mathieu           Lino Voga                      [▶] [☆] **Ready**                    research
- 43    Ticket 26                                   jean              Lino Core                      [▶] [☆] **ToDo**                     linö
- 40    Ticket 23                                   Romain Raffault   Lino Welfare                   [☆] **Cancelled**                    docs
- 37    Ticket 20                                   luc               Lino Cosi                      [☆] **Sleeping** → [🗑]               shop
- 34    Ticket 17                                   Rolf Rompen       Lino Voga                      [▶] [☆] **Talk**                     téam
- 31    Ticket 14                                   marc              Lino Core                      [☆] **Done**                         research
- 28    Ticket 11                                   Robin Rood        Lino Welfare                   [▶] [☆] **Sticky**                   linö
- 25    Ticket 8                                    mathieu           Lino Cosi                      [▶] [☆] **New**                      docs
- 22    Ticket 5                                    jean              Lino Voga                      [▶] [☆] **Ready**                    shop
- 19    Ticket 2                                    Romain Raffault   Lino Core                      [▶] [☆] **ToDo**                     téam
- 16    How to get bar from foo                     luc               Lino Welfare                   [☆] **Cancelled**                    research
- 13    Bar cannot foo                              Rolf Rompen       Lino Cosi      Documentation   [☆] **Sleeping**                     linö
- 10    Where can I find a Foo when bazing Bazes?   marc              Lino Voga                      [▶] [☆] **Talk**                     docs
- 7     No Foo after deleting Bar                   Robin Rood        Lino Core                      [☆] **Done**                         shop
- 4     Foo and bar don't baz                       mathieu           Lino Welfare                   [▶] [☆] **Sticky**                   docs
- 1     Föö fails to bar when baz                   jean              Lino Cosi                      [▶] [☆] **New**                      linö
-===== =========================================== ================= ============== =============== ==================================== ==========
+===== =========================================== ================= ============== =============== ================================ ==========
+ ID    Summary                                     Reporter          Topic          Faculty         Actions                          Project
+----- ------------------------------------------- ----------------- -------------- --------------- -------------------------------- ----------
+ 115   Ticket 98                                   marc              Lino Core                      [▶] **ToDo**                     docs
+ 112   Ticket 95                                   Robin Rood        Lino Welfare                   **Cancelled**                    shop
+ 109   Ticket 92                                   mathieu           Lino Cosi                      **Sleeping**                     téam
+ 106   Ticket 89                                   jean              Lino Voga                      [▶] **Talk**                     research
+ 103   Ticket 86                                   Romain Raffault   Lino Core                      **Done**                         linö
+ 100   Ticket 83                                   luc               Lino Welfare                   [▶] **Sticky**                   docs
+ 97    Ticket 80                                   Rolf Rompen       Lino Cosi                      [▶] **New**                      shop
+ 94    Ticket 77                                   marc              Lino Voga                      [▶] **Ready**                    téam
+ 91    Ticket 74                                   Robin Rood        Lino Core                      [▶] **ToDo**                     research
+ 88    Ticket 71                                   mathieu           Lino Welfare                   **Cancelled**                    linö
+ 85    Ticket 68                                   jean              Lino Cosi                      **Sleeping**                     docs
+ 82    Ticket 65                                   Romain Raffault   Lino Voga                      [▶] **Talk**                     shop
+ 79    Ticket 62                                   luc               Lino Core                      **Done**                         téam
+ 76    Ticket 59                                   Rolf Rompen       Lino Welfare                   [▶] **Sticky**                   research
+ 73    Ticket 56                                   marc              Lino Cosi                      [▶] **New**                      linö
+ 70    Ticket 53                                   Robin Rood        Lino Voga                      [▶] **Ready**                    docs
+ 67    Ticket 50                                   mathieu           Lino Core                      [▶] **ToDo**                     shop
+ 64    Ticket 47                                   jean              Lino Welfare                   **Cancelled**                    téam
+ 61    Ticket 44                                   Romain Raffault   Lino Cosi                      **Sleeping**                     research
+ 58    Ticket 41                                   luc               Lino Voga                      [▶] **Talk** → [🐜] [🕸] [☐] [🗑]   linö
+ 55    Ticket 38                                   Rolf Rompen       Lino Core                      **Done**                         docs
+ 52    Ticket 35                                   marc              Lino Welfare                   [▶] **Sticky**                   shop
+ 49    Ticket 32                                   Robin Rood        Lino Cosi                      [▶] **New**                      téam
+ 46    Ticket 29                                   mathieu           Lino Voga                      [▶] **Ready**                    research
+ 43    Ticket 26                                   jean              Lino Core                      [▶] **ToDo**                     linö
+ 40    Ticket 23                                   Romain Raffault   Lino Welfare                   **Cancelled**                    docs
+ 37    Ticket 20                                   luc               Lino Cosi                      **Sleeping** → [🗑]               shop
+ 34    Ticket 17                                   Rolf Rompen       Lino Voga                      [▶] **Talk**                     téam
+ 31    Ticket 14                                   marc              Lino Core                      **Done**                         research
+ 28    Ticket 11                                   Robin Rood        Lino Welfare                   [▶] **Sticky**                   linö
+ 25    Ticket 8                                    mathieu           Lino Cosi                      [▶] **New**                      docs
+ 22    Ticket 5                                    jean              Lino Voga                      [▶] **Ready**                    shop
+ 19    Ticket 2                                    Romain Raffault   Lino Core                      [▶] **ToDo**                     téam
+ 16    How to get bar from foo                     luc               Lino Welfare                   **Cancelled**                    research
+ 13    Bar cannot foo                              Rolf Rompen       Lino Cosi      Documentation   **Sleeping**                     linö
+ 10    Where can I find a Foo when bazing Bazes?   marc              Lino Voga                      [▶] **Talk**                     docs
+ 7     No Foo after deleting Bar                   Robin Rood        Lino Core                      **Done**                         shop
+ 4     Foo and bar don't baz                       mathieu           Lino Welfare                   [▶] **Sticky**                   docs
+ 1     Föö fails to bar when baz                   jean              Lino Cosi                      [▶] **New**                      linö
+===== =========================================== ================= ============== =============== ================================ ==========
 <BLANKLINE>
 
 
@@ -652,32 +652,32 @@ Filtering tickets
 
 >>> rt.login('robin').show(rt.actors.tickets.Tickets)
 ... #doctest: +REPORT_UDIFF +ELLIPSIS
-===== =========================================== ================= ============== =============== =========================================== ==========
- ID    Summary                                     Reporter          Topic          Faculty         Actions                                     Project
------ ------------------------------------------- ----------------- -------------- --------------- ------------------------------------------- ----------
- 116   Ticket 99                                   mathieu           Lino Welfare                   [▶] [☆] **Sticky**                          research
- 115   Ticket 98                                   marc              Lino Core                      [▶] [☆] **ToDo** → [🗪] [🕸] [☐] [🗑]          docs
- 114   Ticket 97                                   luc               Lino Voga                      [▶] [☆] **Talk** → [🐜] [🕸] [☐] [🗑]          téam
+===== =========================================== ================= ============== =============== ======================================= ==========
+ ID    Summary                                     Reporter          Topic          Faculty         Actions                                 Project
+----- ------------------------------------------- ----------------- -------------- --------------- --------------------------------------- ----------
+ 116   Ticket 99                                   mathieu           Lino Welfare                   [▶] **Sticky**                          research
+ 115   Ticket 98                                   marc              Lino Core                      [▶] **ToDo** → [🗪] [🕸] [☐] [🗑]          docs
+ 114   Ticket 97                                   luc               Lino Voga                      [▶] **Talk** → [🐜] [🕸] [☐] [🗑]          téam
  ...
- 18    Ticket 1                                    mathieu           Lino Voga                      [▶] [☆] **Talk** → [🐜] [🕸] [☐] [🗑]          linö
- 17    Ticket 0                                    marc              Lino Cosi                      [▶] [☆] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]   shop
- 16    How to get bar from foo                     luc               Lino Welfare                   [▶] [☆] **Cancelled**                       research
- 15    Bars have no foo                            jean              Lino Core                      [▶] [☆] **Done**                            docs
- 14    Bar cannot baz                              Robin Rood        Lino Voga                      [▶] [☆] **Ready** → [🗪] [🐜] [☑]             téam
- 13    Bar cannot foo                              Rolf Rompen       Lino Cosi      Documentation   [▶] [☆] **Sleeping** → [🗑]                  linö
- 12    Foo cannot bar                              Romain Raffault   Lino Welfare   Code changes    [▶] [☆] **Sticky**                          shop
- 11    Class-based Foos and Bars?                  mathieu           Lino Core                      [▶] [☆] **ToDo** → [🗪] [🕸] [☐] [🗑]          research
- 10    Where can I find a Foo when bazing Bazes?   marc              Lino Voga                      [▶] [☆] **Talk** → [🐜] [🕸] [☐] [🗑]          docs
- 9     Foo never matches Bar                       luc               Lino Cosi      Testing         [▶] [☆] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]   téam
- 8     Is there any Bar in Foo?                    jean              Lino Welfare                   [▶] [☆] **Cancelled**                       linö
- 7     No Foo after deleting Bar                   Robin Rood        Lino Core                      [▶] [☆] **Done**                            shop
- 6     Sell bar in baz                             Rolf Rompen       Lino Voga      Analysis        [▶] [☆] **Ready** → [🗪] [🐜] [☑]             research
- 5     Cannot create Foo                           Romain Raffault   Lino Cosi                      [▶] [☆] **Sleeping** → [🗑]
- 4     Foo and bar don't baz                       mathieu           Lino Welfare                   [▶] [☆] **Sticky**                          docs
- 3     Baz sucks                                   marc              Lino Core                      [▶] [☆] **ToDo** → [🗪] [🕸] [☐] [🗑]
- 2     Bar is not always baz                       luc               Lino Voga                      [▶] [☆] **Talk** → [🐜] [🕸] [☐] [🗑]          téam
- 1     Föö fails to bar when baz                   jean              Lino Cosi                      [▶] [☆] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]   linö
-===== =========================================== ================= ============== =============== =========================================== ==========
+ 18    Ticket 1                                    mathieu           Lino Voga                      [▶] **Talk** → [🐜] [🕸] [☐] [🗑]          linö
+ 17    Ticket 0                                    marc              Lino Cosi                      [▶] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]   shop
+ 16    How to get bar from foo                     luc               Lino Welfare                   [▶] **Cancelled**                       research
+ 15    Bars have no foo                            jean              Lino Core                      [▶] **Done**                            docs
+ 14    Bar cannot baz                              Robin Rood        Lino Voga                      [▶] **Ready** → [🗪] [🐜] [☑]             téam
+ 13    Bar cannot foo                              Rolf Rompen       Lino Cosi      Documentation   [▶] **Sleeping** → [🗑]                  linö
+ 12    Foo cannot bar                              Romain Raffault   Lino Welfare   Code changes    [▶] **Sticky**                          shop
+ 11    Class-based Foos and Bars?                  mathieu           Lino Core                      [▶] **ToDo** → [🗪] [🕸] [☐] [🗑]          research
+ 10    Where can I find a Foo when bazing Bazes?   marc              Lino Voga                      [▶] **Talk** → [🐜] [🕸] [☐] [🗑]          docs
+ 9     Foo never matches Bar                       luc               Lino Cosi      Testing         [▶] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]   téam
+ 8     Is there any Bar in Foo?                    jean              Lino Welfare                   [▶] **Cancelled**                       linö
+ 7     No Foo after deleting Bar                   Robin Rood        Lino Core                      [▶] **Done**                            shop
+ 6     Sell bar in baz                             Rolf Rompen       Lino Voga      Analysis        [▶] **Ready** → [🗪] [🐜] [☑]             research
+ 5     Cannot create Foo                           Romain Raffault   Lino Cosi                      [▶] **Sleeping** → [🗑]
+ 4     Foo and bar don't baz                       mathieu           Lino Welfare                   [▶] **Sticky**                          docs
+ 3     Baz sucks                                   marc              Lino Core                      [▶] **ToDo** → [🗪] [🕸] [☐] [🗑]
+ 2     Bar is not always baz                       luc               Lino Voga                      [▶] **Talk** → [🐜] [🕸] [☐] [🗑]          téam
+ 1     Föö fails to bar when baz                   jean              Lino Cosi                      [▶] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]   linö
+===== =========================================== ================= ============== =============== ======================================= ==========
 <BLANKLINE>
 
 
@@ -710,9 +710,7 @@ the detail window of a ticket.
       - (more1_2): **State** (state), **Duplicate of** (duplicate_of), **Planned time** (planned_time), **Priority** (priority)
     - **Duplicates** (DuplicatesByTicket)
   - (more_2): **Upgrade notes** (upgrade_notes), **Dependencies** (LinksByTicket) [visible for senior admin]
-- **History** (history_tab_1) [visible for senior admin]:
-  - **Changes** (changes.ChangesByMaster) [visible for user consultant hoster developer senior admin]
-  - **Starred by** (stars.StarsByController) [visible for user consultant hoster developer senior admin]
+- **History** (changes.ChangesByMaster) [visible for senior admin]
 - **Votes** (votes.VotesByVotable) [visible for user consultant hoster developer senior admin]    
 <BLANKLINE>
 

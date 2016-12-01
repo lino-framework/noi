@@ -181,3 +181,29 @@ class Migrator(Migrator):
             globals_dict.update(create_tickets_deployment=noop)
             globals_dict.update(create_tickets_milestone=noop)
         return '1.0.2'
+    
+    def migrate_from_1_0_2(self, globals_dict):
+        """
+        - convert stars.Star to votes.Vote
+        
+        """
+
+        # bv2kw = globals_dict['bv2kw']
+        new_content_type_id = globals_dict['new_content_type_id']
+        # cal_EventType = resolve_model("cal.EventType")
+        # users_User = resolve_model("users.User")
+        votes_Vote = resolve_model("votes.Vote")
+        
+        @override(globals_dict)
+        def create_stars_star(id, user_id, owner_type_id, owner_id, nickname):
+            owner_type_id = new_content_type_id(owner_type_id)
+            kw = dict()
+            kw.update(id=id)
+            kw.update(user_id=user_id)
+            # kw.update(owner_type_id=owner_type_id)
+            kw.update(votable_id=owner_id)
+            kw.update(nickname=nickname)
+            return votes_Vote(**kw)
+        
+        return '2016.12.0'
+    
