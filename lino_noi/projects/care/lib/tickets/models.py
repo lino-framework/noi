@@ -29,7 +29,7 @@ dd.update_field(
 #     'tickets.Ticket', 'state', default=TicketStates.todo.as_callable)
 
 class TicketDetail(TicketDetail):
-    main = "general history_tab more"
+    main = "general history_tab votes.VotesByVotable more"
 
     general = dd.Panel("""
     general1:60 faculties.AssignableWorkersByTicket:20
@@ -39,7 +39,7 @@ class TicketDetail(TicketDetail):
     general1 = """
     summary:40 id:6 deadline
     reporter:12 faculty topic assigned_to
-    site workflow_buttons rating
+    site workflow_buttons
     """
 
     history_tab = dd.Panel("""

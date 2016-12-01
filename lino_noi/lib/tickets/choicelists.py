@@ -194,20 +194,22 @@ because this is a more general term.
 
 
 class MarkDone(dd.ChangeStateAction):
-    """Mark this ticket as done. Can be done only by the reporter when a
-    rating has been set or by a triager (independently of any rating).
+    """Mark this ticket as done.
+
+    (obsolete:) Can be done only by the reporter when a rating has
+    been set or by a triager (independently of any rating).
 
     """
     label = _("Done")
     button_text = TicketStates.done.button_text
     required_states = 'ready'
 
-    def get_action_permission(self, ar, obj, state):
-        me = ar.get_user()
-        if not me.profile.has_required_roles([Triager]):
-            if not obj.rating or obj.reporter != me:
-                return False
-        return super(MarkDone, self).get_action_permission(ar, obj, state)
+    # def get_action_permission(self, ar, obj, state):
+    #     me = ar.get_user()
+    #     if not me.profile.has_required_roles([Triager]):
+    #         if not obj.rating or obj.reporter != me:
+    #             return False
+    #     return super(MarkDone, self).get_action_permission(ar, obj, state)
 
 
 # class TicketStateGroups(dd.Choice):
@@ -304,19 +306,5 @@ add('40', 'obsoletes', _("Obsoletes"), _("Obsoleted by"))
 # add('50', 'duplicates', _("Duplicates"), _("Duplicate of"))
 
 # LinkTypes.addable_types = [LinkTypes.requires, LinkTypes.duplicates]
-
-
-class Ratings(dd.ChoiceList):
-    verbose_name = _("Rating")
-    verbose_name_plural = _("Ratings")
-
-    
-add = Ratings.add_item
-add('10', _("Very good"))
-add('20', _("Good"))
-add('30', _("Satisfying"))
-add('40', _("Deficient"))
-add('50', _("Insufficient"))
-add('90', _("Unratable"))
 
 

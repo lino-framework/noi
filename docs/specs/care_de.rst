@@ -249,7 +249,7 @@ Das Hauptmenü
 
 >>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Büro : Meine Benachrichtigungen, Meine Favoriten, Meine Auszüge, Meine Kommentare
+- Büro : Meine Hilfsangebote, Meine Benachrichtigungen, Meine Favoriten, Meine Auszüge, Meine Kommentare
 - Bitten : Meine Bitten, Wo ich helfen kann, Zu tun, Aktive Bitten, Alle Bitten, Nicht zugewiesene Bitten, Aktive Projekte
 - Arbeitszeit : Sitzungen
 - Berichte :
@@ -266,8 +266,8 @@ Das Hauptmenü
 - Explorer :
   - System : Datenbankmodelle, Vollmachten, Benutzerarten, Benachrichtigungen, Änderungen, All dashboard widgets
   - Themen : Interessen
+  - Bitten : Hilfsangebote, Angebotszustände, Verknüpfungen, Zustände
   - Büro : Favoriten, Auszüge, Kommentare, Einfügetexte
-  - Bitten : Verknüpfungen, Zustände
   - Fähigkeiten : Kompetenzen
   - Arbeitszeit : Sitzungen
 - Site : Info
@@ -277,7 +277,7 @@ Das Hauptmenü
 
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Büro : Meine Benachrichtigungen, Meine Favoriten, Meine Auszüge, Meine Kommentare
+- Büro : Meine Hilfsangebote, Meine Benachrichtigungen, Meine Favoriten, Meine Auszüge, Meine Kommentare
 - Bitten : Meine Bitten, Wo ich helfen kann, Zu tun
 - Konfigurierung :
   - Orte : Länder
@@ -323,11 +323,11 @@ My to-do list
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 Keine Daten anzuzeigen
 
+Rating a help offer
+===================
 
-Rating a ticket
-===============
 
->>> base = '/choices/tickets/Tickets/rating'
+>>> base = '/choices/votes/Votes/rating'
 >>> show_choices("rolf", base + '?query=')
 <br/>
 Sehr gut
@@ -335,24 +335,6 @@ Gut
 Ausreichend
 Mangelhaft
 Ungenügend
-Nicht bewertbar
-
->>> show_choices("robin", base + '?query=')  #doctest: +SKIP
-<br/>
-Very good
-Good
-Satisfying
-Deficient
-Insufficient
-Unratable
-
->>> show_choices("romain", base + '?query=')  #doctest: +SKIP
-<br/>
-Très bien
-Bien
-Satisfaisant
-Médiocre
-Insuffisant
 Nicht bewertbar
 
 
@@ -371,12 +353,13 @@ the detail window of a ticket.
     - (general1):
       - (general1_1): **Zusammenfassung** (summary), **ID** (id), **Deadline** (deadline)
       - (general1_2): **Anfrager** (reporter), **Fähigkeit** (faculty), **Thema** (topic), **Zugewiesen zu** (assigned_to)
-      - (general1_3): **Umfeld** (site), **Aktionen** (workflow_buttons), **Bewertung** (rating)
+      - (general1_3): **Umfeld** (site), **Aktionen** (workflow_buttons)
     - **Zuweisbare Arbeiter** (faculties.AssignableWorkersByTicket) [visible for connector admin]
   - (general_2): **Beschreibung** (description), **Kommentare** (CommentsByRFC) [visible for user connector admin], **Sitzungen** (SessionsByTicket) [visible for connector admin]
 - **History** (history_tab_1) [visible for connector admin]:
   - **Änderungen** (changes.ChangesByMaster) [visible for user connector admin]
   - **Beobachtet durch** (stars.StarsByController) [visible for user connector admin]
+- **Hilfsangebote** (votes.VotesByVotable) [visible for user connector admin]
 - **Mehr** (more) [visible for connector admin]:
   - (more1) [visible for all]:
     - (more1_1): **Erstellt** (created), **Bearbeitet** (modified), **Ticket type** (ticket_type)

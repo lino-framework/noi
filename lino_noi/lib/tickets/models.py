@@ -45,9 +45,10 @@ from lino.modlib.users.mixins import UserAuthored, Assignable
 from lino.modlib.comments.mixins import RFC
 from lino.modlib.notify.mixins import ChangeObservable
 from lino_xl.lib.excerpts.mixins import Certifiable
+from lino_noi.lib.votes.mixins import Votable
 from lino.utils import join_elems
 
-from .choicelists import TicketEvents, TicketStates, LinkTypes, Ratings
+from .choicelists import TicketEvents, TicketStates, LinkTypes
 from .roles import Triager
 
 
@@ -342,7 +343,7 @@ class SpawnTicket(dd.Action):
 
 @dd.python_2_unicode_compatible
 class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
-             ChangeObservable):
+             ChangeObservable, Votable):
     """A **Ticket** is a concrete question or problem formulated by a
     :attr:`reporter` (a user).
     
@@ -484,7 +485,7 @@ class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
         related_name="reported_tickets")
     state = TicketStates.field(
         default=TicketStates.new.as_callable)
-    rating = Ratings.field(blank=True)
+    # rating = Ratings.field(blank=True)
     waiting_for = models.CharField(
         _("Waiting for"), max_length=200, blank=True)
 
@@ -591,6 +592,8 @@ class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
             _("{user} worked on [ticket {t}]").format(
                 user=ar.get_user(), t=self.id)))
 
+    def get_vote_rater(self, vote):
+        return self.reporter
 
 # dd.update_field(Ticket, 'user', verbose_name=_("Reporter"))
 

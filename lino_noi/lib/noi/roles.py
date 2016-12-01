@@ -9,11 +9,12 @@ from lino.core.roles import UserRole, SiteAdmin
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino_noi.lib.tickets.roles import Triager
 from lino_noi.lib.clocking.roles import Worker
+from lino_noi.lib.votes.roles import VotesStaff, VotesUser
 from lino.modlib.users.choicelists import UserTypes
 from django.utils.translation import ugettext_lazy as _
 
 
-class EndUser(OfficeUser):
+class EndUser(OfficeUser, VotesUser):
     """An **end user** is somebody who uses our software and may report
     tickets, but won't work on them.
 
@@ -38,16 +39,15 @@ class Developer(Consultant):
 
 
 class Senior(Developer, Triager):
-    """A **senior developer** is a developer who is additionally
+    """A **senior developer** is a *developer* who is additionally
     responsible for triaging tickets
 
     """
     pass
 
 
-class SiteAdmin(Senior, SiteAdmin, OfficeStaff):
-    """Like a developer, plus site admin and staff"""
-    pass
+class SiteAdmin(Senior, SiteAdmin, OfficeStaff, VotesStaff):
+    """Can do everything."""
 
 UserTypes.clear()
 add = UserTypes.add_item
