@@ -202,6 +202,7 @@ class Migrator(Migrator):
             kw.update(id=id)
             kw.update(user_id=user_id)
             # kw.update(owner_type_id=owner_type_id)
+            kw.update(created=dd.now())
             kw.update(votable_id=owner_id)
             kw.update(nickname=nickname)
             return votes_Vote(**kw)
