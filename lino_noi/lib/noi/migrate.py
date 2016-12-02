@@ -187,7 +187,7 @@ class Migrator(Migrator):
         - convert stars.Star to votes.Vote
         
         """
-
+        from django.utils import timezone
         # bv2kw = globals_dict['bv2kw']
         new_content_type_id = globals_dict['new_content_type_id']
         # cal_EventType = resolve_model("cal.EventType")
@@ -202,7 +202,7 @@ class Migrator(Migrator):
             kw.update(id=id)
             kw.update(user_id=user_id)
             # kw.update(owner_type_id=owner_type_id)
-            kw.update(created=dd.now())
+            kw.update(created=timezone.now())
             kw.update(votable_id=owner_id)
             kw.update(nickname=nickname)
             return votes_Vote(**kw)
