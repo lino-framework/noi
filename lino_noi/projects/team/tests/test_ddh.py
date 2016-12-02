@@ -37,12 +37,11 @@ class DDHTests(RemoteAuthTestCase):
 
     def test01(self):
         from lino.modlib.users.choicelists import UserTypes
-        Ticket = rt.modules.tickets.Ticket
-        # Session = rt.modules.clocking.Session
-        User = rt.modules.users.User
-        Star = rt.modules.stars.Star
-        ContentType = rt.modules.contenttypes.ContentType
-        ct_Ticket = ContentType.objects.get_for_model(Ticket)
+        Ticket = rt.models.tickets.Ticket
+        User = rt.models.users.User
+        Star = rt.models.votes.Vote
+        # ContentType = rt.modules.contenttypes.ContentType
+        # ct_Ticket = ContentType.objects.get_for_model(Ticket)
 
         robin = create(User, username='robin',
                        profile=UserTypes.admin,
@@ -69,7 +68,7 @@ class DDHTests(RemoteAuthTestCase):
                     "because 1 Tickets refer to it.")
 
         
-        create(Star, owner=obj, user=robin)
+        create(Star, votable=obj, user=robin)
         
         try:
             robin.delete()
@@ -77,7 +76,7 @@ class DDHTests(RemoteAuthTestCase):
         except Warning as e:
             self.assertEqual(
                 str(e), "Cannot delete User robin "
-                "because 1 Stars refer to it.")
+                "because 1 Tickets refer to it.")
 
         self.assertEqual(Star.objects.count(), 1)
         self.assertEqual(Ticket.objects.count(), 1)
@@ -88,4 +87,4 @@ class DDHTests(RemoteAuthTestCase):
         except Warning as e:
             self.assertEqual(
                 str(e), "Cannot delete Ticket #2 (Test) because "
-                "1 Stars refer to it.")
+                "1 Votes refer to it.")

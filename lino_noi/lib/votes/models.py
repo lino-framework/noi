@@ -3,7 +3,7 @@
 #
 # License: BSD (see file COPYING for details)
 """
-Database models for `lino_xl.lib.humanlinks`.
+Database models for this plugin.
 
 """
 
@@ -28,7 +28,8 @@ config = dd.plugins.votes
 
 @dd.python_2_unicode_compatible
 class Vote(UserAuthored, Created):
-    """A link between two persons.
+    """A **vote** is when a user has an opinion or interest about a given
+    ticket (or any other votable).
 
     .. attribute:: votable
 

@@ -584,8 +584,10 @@ class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
     def get_change_observers(self):
         yield self.assigned_to
         yield self.reporter
-        for star in rt.models.stars.Star.for_obj(self):
-            yield star.user
+        # for star in rt.models.stars.Star.for_obj(self):
+        #     yield star.user
+        for vote in rt.models.votes.Vote.objects.filter(votable=self):
+            yield vote.user
 
     def get_notify_message(self, ar, cw):
         return E.tostring(E.p(

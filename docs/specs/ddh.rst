@@ -43,7 +43,7 @@ Lino Noi:
 - contacts.RoleType :
   - PROTECT : contacts.Role.type, excerpts.Excerpt.contact_role, tickets.Project.contact_role
 - contenttypes.ContentType :
-  - PROTECT : blogs.Entry.owner_type, changes.Change.master_type, changes.Change.object_type, comments.Comment.owner_type, excerpts.Excerpt.owner_type, excerpts.ExcerptType.content_type, gfks.HelpText.content_type, notify.Message.owner_type, outbox.Attachment.owner_type, outbox.Mail.owner_type, stars.Star.owner_type, uploads.Upload.owner_type
+  - PROTECT : blogs.Entry.owner_type, changes.Change.master_type, changes.Change.object_type, comments.Comment.owner_type, excerpts.Excerpt.owner_type, excerpts.ExcerptType.content_type, gfks.HelpText.content_type, notify.Message.owner_type, outbox.Attachment.owner_type, outbox.Mail.owner_type, uploads.Upload.owner_type
 - countries.Country :
   - PROTECT : contacts.Partner.country, countries.Place.country
 - countries.Place :
@@ -81,4 +81,4 @@ Lino Noi:
   - PROTECT : uploads.Upload.type
 - users.User :
   - CASCADE : faculties.Competence.user
-  - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, dashboard.Widget.user, excerpts.Excerpt.user, notify.Message.user, outbox.Mail.user, stars.Star.user, tickets.Project.assign_to, tickets.Ticket.assigned_to, tickets.Ticket.reporter, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user, votes.Vote.user
+  - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, dashboard.Widget.user, excerpts.Excerpt.user, notify.Message.user, outbox.Mail.user, tickets.Project.assign_to, tickets.Ticket.assigned_to, tickets.Ticket.reporter, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user, votes.Vote.user

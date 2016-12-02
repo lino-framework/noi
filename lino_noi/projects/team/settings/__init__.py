@@ -19,11 +19,12 @@ from __future__ import unicode_literals
 
 from lino.projects.std.settings import *
 from lino.api.ad import _
+from lino_noi import SETUP_INFO
 
 class Site(Site):
 
     verbose_name = "Lino Noi"
-    version = '1.0.2'
+    version = SETUP_INFO['version']
 
     url = "http://noi.lino-framework.org/"
     server_url = "http://team.lino-framework.org/"
