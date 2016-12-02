@@ -24,6 +24,7 @@ assignee don't need to star a ticket in order to get notified.
 from __future__ import unicode_literals
 
 import six
+from builtins import str
 
 from importlib import import_module
 import inspect
@@ -233,7 +234,7 @@ class Link(dd.Model):
         if self.type is None:
             return "Link object"  # super(Link, self).__unicode__()
         return _("%(child)s is %(what)s") % dict(
-            child=six.text_type(self.child),
+            child=str(self.child),
             what=self.type_of_parent_text())
 
     def type_of_parent_text(self):
