@@ -605,6 +605,7 @@ class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
         if not self.state.active and not user.profile.has_required_roles(
                 [Triager]):
             return False
+        return True
         
 # dd.update_field(Ticket, 'user', verbose_name=_("Reporter"))
 
