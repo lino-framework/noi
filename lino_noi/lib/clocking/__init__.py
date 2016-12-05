@@ -10,6 +10,7 @@ Adds functionality for managing worktime clocking.
     actions
     roles
     ui
+    mixins
 
 """
 
@@ -24,10 +25,21 @@ class Plugin(ad.Plugin):
     needs_plugins = ['lino_noi.lib.noi']
 
     ticket_model = 'contacts.Partner'
+    """The model that is to be used as the "workable".
+
+    This must be a subclass of
+    :class:`lino_noi.lib.clocking.mixins.Workable`
+
+    """
 
     def on_site_startup(self, site):
         from lino.core.utils import resolve_model
+        from .mixins import Workable
         self.ticket_model = resolve_model(self.ticket_model)
+        if not issubclass(self.ticket_model, Workable):
+            msg = "Your plugins.clocking.ticket_model ({}) is not workable"
+            msg = msg.format(self.ticket_model)
+            raise Exception(msg)
 
     def setup_main_menu(self, site, profile, m):
         p = self.get_menu_group()

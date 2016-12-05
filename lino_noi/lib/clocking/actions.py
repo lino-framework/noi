@@ -110,10 +110,8 @@ class StartTicketSession(dd.Action):
     required_roles = dd.required(Worker)
 
     def get_action_permission(self, ar, obj, state):
-        if obj.standby or obj.closed:
-            return False
         user = ar.get_user()
-        if not obj.state.active and not user.profile.has_required_roles([Triager]):
+        if not obj.is_workable_for(user):
             return False
         if not super(StartTicketSession, self).get_action_permission(
                 ar, obj, state):
@@ -133,6 +131,8 @@ class StartTicketSession(dd.Action):
         ses.full_clean()
         ses.save()
         ar.set_response(refresh=True)
+
+        
 
 
 if dd.is_installed('clocking'):  # Sphinx autodoc
