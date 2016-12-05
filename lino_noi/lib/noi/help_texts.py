@@ -155,7 +155,10 @@ for the state
 field of a vote."""),
     'lino_noi.lib.votes.choicelists.VoteStates.interested' : _("""I am interested, I want to get notified when something
 happens."""),
-    'lino_noi.lib.votes.models.Vote' : _("""A link between two persons."""),
+    'lino_noi.lib.votes.mixins.Votable' : _("""Base class for models that can be used as
+lino_noi.lib.votes.Plugin.votable_model."""),
+    'lino_noi.lib.votes.models.Vote' : _("""A vote is when a user has an opinion or interest about a given
+ticket (or any other votable)."""),
     'lino_noi.lib.votes.models.Vote.votable' : _("""The ticket (or other votable) being voted."""),
     'lino_noi.lib.votes.models.Vote.user' : _("""The user who is voting."""),
     'lino_noi.lib.votes.models.Vote.state' : _("""The state of this vote.  Pointer to VoteStates."""),
@@ -181,6 +184,7 @@ introduces pleas on their behalf."""),
 a stakeholder."""),
     'lino_noi.projects.team.lib.clocking.models.ServiceReport.user' : _("""This can be empty and will then show the working time of all
 users."""),
+    'lino_noi.projects.team.lib.tickets.Plugin' : _("""Adds the lino_noi.lib.votes plugin."""),
     'lino_noi.projects.team.lib.tickets.models.TicketDetail' : _("""Customized detail_lyout for Tickets.  Replaces waiting_for by
 faculties"""),
     'lino_noi.projects.team.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Noi."""),

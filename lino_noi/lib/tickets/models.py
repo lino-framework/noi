@@ -24,6 +24,7 @@ assignee don't need to star a ticket in order to get notified.
 from __future__ import unicode_literals
 
 import six
+from builtins import str
 
 from importlib import import_module
 import inspect
@@ -46,6 +47,7 @@ from lino.modlib.comments.mixins import RFC
 from lino.modlib.notify.mixins import ChangeObservable
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino_noi.lib.votes.mixins import Votable
+from lino_noi.lib.clocking.mixins import Workable
 from lino.utils import join_elems
 
 from .choicelists import TicketEvents, TicketStates, LinkTypes
@@ -233,7 +235,7 @@ class Link(dd.Model):
         if self.type is None:
             return "Link object"  # super(Link, self).__unicode__()
         return _("%(child)s is %(what)s") % dict(
-            child=six.text_type(self.child),
+            child=str(self.child),
             what=self.type_of_parent_text())
 
     def type_of_parent_text(self):
@@ -343,7 +345,7 @@ class SpawnTicket(dd.Action):
 
 @dd.python_2_unicode_compatible
 class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
-             ChangeObservable, Votable):
+             ChangeObservable, Votable, Workable):
     """A **Ticket** is a concrete question or problem formulated by a
     :attr:`reporter` (a user).
     
@@ -597,16 +599,15 @@ class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
     def get_vote_rater(self, vote):
         return self.reporter
 
+    def is_workable_for(self, user):
+        if self.standby or self.closed:
+            return False
+        if not self.state.active and not user.profile.has_required_roles(
+                [Triager]):
+            return False
+        return True
+        
 # dd.update_field(Ticket, 'user', verbose_name=_("Reporter"))
-
-
-if False:  # removed current_project field because it caused circular
-           # dependency (and was not useful)
-    dd.inject_field(
-        'users.User', 'current_project',
-        dd.ForeignKey(
-            'tickets.Project', verbose_name=_("Current project"),
-            blank=True, null=True, related_name="users_by_project"))
 
 
 dd.inject_field(

@@ -461,10 +461,12 @@ class Tickets(dd.Table):
             qs = qs.filter(Q(private=True) | Q(project__private=True))
         # print 20150512, qs.query
         # 1253
-        if pv.start_date:
-            qs = qs.filter(created__gte=pv.start_date)
-        if pv.end_date:
-            qs = qs.filter(created__lte=pv.end_date)
+        
+        # the following caused a RuntimeWarning and was useless since
+        # the same filter is applied by
+        # pv.observed_event.add_filter(qs, pv) above: if
+        # pv.start_date: qs = qs.filter(created__gte=pv.start_date) if
+        # pv.end_date: qs = qs.filter(created__lte=pv.end_date)
 
         return qs
 
