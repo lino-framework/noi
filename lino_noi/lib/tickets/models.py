@@ -344,8 +344,8 @@ class SpawnTicket(dd.Action):
 
 
 @dd.python_2_unicode_compatible
-class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
-             ChangeObservable, Votable, Workable):
+class Ticket(UserAuthored, mixins.CreatedModified, Assignable,
+             TimeInvestment, RFC, ChangeObservable, Votable, Workable):
     """A **Ticket** is a concrete question or problem formulated by a
     :attr:`reporter` (a user).
     
@@ -353,13 +353,18 @@ class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
     related to other tickets which may belong to other projects.
 
 
+    .. attribute:: user
+
+        The user who entered this ticket and is responsible for
+        managing it.
+
     .. attribute:: reporter
 
-        The user who reported this ticket.
+        The user who is asking for help.
 
     .. attribute:: assigned_to
 
-        The user who is working on this ticket.
+        No longer used. The user who is working on this ticket.
 
         If this field is empty and :attr:`project` is not empty, then
         default value is taken from :attr:`Project.assign_to`.
@@ -485,8 +490,7 @@ class Ticket(mixins.CreatedModified, Assignable, TimeInvestment, RFC,
         settings.SITE.user_model,
         verbose_name=_("Reporter"),
         related_name="reported_tickets")
-    state = TicketStates.field(
-        default=TicketStates.new.as_callable)
+    state = TicketStates.field(default=TicketStates.as_callable('new'))
     # rating = Ratings.field(blank=True)
     waiting_for = models.CharField(
         _("Waiting for"), max_length=200, blank=True)

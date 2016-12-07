@@ -15,12 +15,13 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
 from django.db import models
+from django.conf import settings
 
 from lino.api import dd, rt
 from lino.modlib.users.mixins import UserAuthored, My
-from lino.mixins import Created
+from lino.mixins import Created, ObservedPeriod
 from .roles import VotesUser, VotesStaff
-from .choicelists import VoteStates
+from .choicelists import VoteStates, VoteEvents
 from .choicelists import Ratings
 
 config = dd.plugins.votes
@@ -69,7 +70,7 @@ class Vote(UserAuthored, Created):
         verbose_name_plural = _("Votes")
         abstract = dd.is_abstract_model(__name__, 'Vote')
 
-    state = VoteStates.field(default=VoteStates.interested.as_callable)
+    state = VoteStates.field(default=VoteStates.as_callable('watching'))
     votable = dd.ForeignKey(
         config.votable_model, verbose_name=_("Votable"))
     priority = models.SmallIntegerField(_("Priority"), default=0)
@@ -100,6 +101,52 @@ class Votes(dd.Table):
     """, window_size=(40, 'auto'))
     required_roles = dd.required(VotesUser)
 
+    parameters = ObservedPeriod(
+        observed_event=VoteEvents.field(blank=True),
+        reporter=dd.ForeignKey(
+            settings.SITE.user_model,
+            verbose_name=_("Reporter"),
+            blank=True, null=True,
+            help_text=_("Only rows reported by this user.")),
+        show_todo=dd.YesNo.field(_("To do"), blank=True),
+        state=VoteStates.field(
+            blank=True, help_text=_("Only rows having this state.")))
+
+    params_layout = """
+    user state reporter show_todo
+    start_date end_date observed_event"""
+
+    @classmethod
+    def get_simple_parameters(cls):
+        s = super(Votes, cls).get_simple_parameters()
+        s.add('state')
+        return s
+
+    @classmethod
+    def get_request_queryset(self, ar):
+        qs = super(Votes, self).get_request_queryset(ar)
+        pv = ar.param_values
+
+        if pv.show_todo == dd.YesNo.no:
+            qs = qs.exclude(state__in=VoteStates.todo_states)
+        elif pv.show_todo == dd.YesNo.yes:
+            qs = qs.filter(state__in=VoteStates.todo_states)
+
+        if pv.observed_event:
+            qs = pv.observed_event.add_filter(qs, pv)
+        return qs
+
+    @classmethod
+    def get_title_tags(self, ar):
+        for t in super(Votes, self).get_title_tags(ar):
+            yield t
+        pv = ar.param_values
+        if pv.start_date or pv.end_date:
+            yield daterange_text(
+                pv.start_date,
+                pv.end_date)
+
+
 
 class AllVotes(Votes):
     required_roles = dd.required(VotesStaff)
@@ -111,6 +158,14 @@ class MyVotes(My, Votes):
     column_names = "votable state priority rating nickname *"
     order_by = ['-id']
     
+    @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(MyVotes, self).param_defaults(ar, **kw)
+        # kw.update(state=TicketStates.todo)
+        kw.update(show_todo=dd.YesNo.yes)
+        return kw
+
+
 class VotesByVotable(Votes):
     """Show all votes on this object.
 
@@ -118,6 +173,26 @@ class VotesByVotable(Votes):
     label = _("Votes")
     master_key = 'votable'
     column_names = 'user state priority rating *'
+
+
+# class MyOfferedVotes(MyVotes):
+#     """List of my help offers to other users' requests.
+
+#     Only those which need my attention. 
+
+#     """
+    
+#     column_names = "votable state priority rating nickname *"
+#     order_by = ['-id']
+    
+# class MyRequestedVotes(MyVotes):
+#     """List of other user's help offers on my requests. 
+
+#     Only those which need my attention. 
+
+#     """
+#     column_names = "votable state priority rating nickname *"
+#     order_by = ['-id']
     
 
 from lino.utils.xmlgen.html import E

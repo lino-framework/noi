@@ -37,21 +37,21 @@ When end_time is empty, it means that he is still working.
 ================================================= ========= ============ ============ ============ ========== ============ ========= ===========
  Ticket                                            Worker    Start date   Start time   End Date     End Time   Break Time   Summary   Duration
 ------------------------------------------------- --------- ------------ ------------ ------------ ---------- ------------ --------- -----------
- #2 (Bar is not always baz)                        jean      23/05/2015   09:00:00
- #3 (Baz sucks)                                    luc       23/05/2015   09:00:00
- #4 (Foo and bar don't baz)                        marc      23/05/2015   09:00:00
- #6 (Sell bar in baz)                              mathieu   23/05/2015   09:00:00
- #7 (No Foo after deleting Bar)                    jean      22/05/2015   09:00:00     22/05/2015   11:18:00                          2:18
- #8 (Is there any Bar in Foo?)                     luc       22/05/2015   09:00:00     22/05/2015   12:29:00                          3:29
+ #4 (Foo and bar don't baz)                        jean      23/05/2015   09:00:00
+ #1 (Föö fails to bar when baz)                    luc       23/05/2015   09:00:00
+ #5 (Cannot create Foo)                            marc      23/05/2015   09:00:00
+ #2 (Bar is not always baz)                        mathieu   23/05/2015   09:00:00
+ #21 (Ticket 4)                                    jean      22/05/2015   09:00:00     22/05/2015   11:18:00                          2:18
+ #13 (Bar cannot foo)                              luc       22/05/2015   09:00:00     22/05/2015   12:29:00                          3:29
  #10 (Where can I find a Foo when bazing Bazes?)   marc      22/05/2015   09:00:00     22/05/2015   12:53:00                          3:53
- #11 (Class-based Foos and Bars?)                  mathieu   22/05/2015   09:00:00     22/05/2015   09:10:00                          0:10
- #20 (Ticket 3)                                    marc      20/05/2015   09:05:00     20/05/2015   09:17:00                          0:12
- #12 (Foo cannot bar)                              jean      20/05/2015   09:00:00     20/05/2015   10:30:00                          1:30
- #14 (Bar cannot baz)                              luc       20/05/2015   09:00:00     20/05/2015   09:37:00                          0:37
- #15 (Bars have no foo)                            marc      20/05/2015   09:00:00     20/05/2015   09:05:00                          0:05
- #16 (How to get bar from foo)                     mathieu   20/05/2015   09:00:00     20/05/2015   11:02:00                          2:02
- #18 (Ticket 1)                                    jean      19/05/2015   09:00:00     19/05/2015   09:10:00                          0:10
- #19 (Ticket 2)                                    luc       19/05/2015   09:00:00     19/05/2015   10:02:00                          1:02
+ #14 (Bar cannot baz)                              mathieu   22/05/2015   09:00:00     22/05/2015   09:10:00                          0:10
+ #39 (Ticket 22)                                   marc      20/05/2015   09:05:00     20/05/2015   09:17:00                          0:12
+ #25 (Ticket 8)                                    jean      20/05/2015   09:00:00     20/05/2015   10:30:00                          1:30
+ #30 (Ticket 13)                                   luc       20/05/2015   09:00:00     20/05/2015   09:37:00                          0:37
+ #22 (Ticket 5)                                    marc      20/05/2015   09:00:00     20/05/2015   09:05:00                          0:05
+ #19 (Ticket 2)                                    mathieu   20/05/2015   09:00:00     20/05/2015   11:02:00                          2:02
+ #38 (Ticket 21)                                   jean      19/05/2015   09:00:00     19/05/2015   09:10:00                          0:10
+ #34 (Ticket 17)                                   luc       19/05/2015   09:00:00     19/05/2015   10:02:00                          1:02
  **Total (17 rows)**                                                                                                                  **15:28**
 ================================================= ========= ============ ============ ============ ========== ============ ========= ===========
 <BLANKLINE>
@@ -62,15 +62,17 @@ Some sessions are on private tickets:
 >>> from django.db.models import Q
 >>> rt.show(clocking.Sessions, column_names="ticket user duration ticket__project", filter=Q(ticket__private=True))
 ... #doctest: -REPORT_UDIFF
-============================ ======== ========== =========
- Ticket                       Worker   Duration   Project
----------------------------- -------- ---------- ---------
- #2 (Bar is not always baz)   jean                téam
- #3 (Baz sucks)               luc
- #14 (Bar cannot baz)         luc      0:37       téam
- #19 (Ticket 2)               luc      1:02       téam
- **Total (4 rows)**                    **1:39**
-============================ ======== ========== =========
+============================ ========= ========== =========
+ Ticket                       Worker    Duration   Project
+---------------------------- --------- ---------- ---------
+ #5 (Cannot create Foo)       marc
+ #2 (Bar is not always baz)   mathieu              téam
+ #14 (Bar cannot baz)         mathieu   0:10       téam
+ #39 (Ticket 22)              marc      0:12       téam
+ #19 (Ticket 2)               mathieu   2:02       téam
+ #34 (Ticket 17)              luc       1:02       téam
+ **Total (6 rows)**                     **3:26**
+============================ ========= ========== =========
 <BLANKLINE>
 
 
@@ -82,20 +84,19 @@ working hours.
 
 >>> rt.login('jean').show(clocking.WorkedHours)
 ... #doctest: -REPORT_UDIFF
-======================================= ========== ========== ==========
- Description                             linö       shop       Total
---------------------------------------- ---------- ---------- ----------
- **Sat 23/05/2015** (`#2 <Detail>`__)    0:01                  0:01
- **Fri 22/05/2015** (`#7 <Detail>`__)               2:18       2:18
- **Thu 21/05/2015**                                            0:00
- **Wed 20/05/2015** (`#12 <Detail>`__)              1:30       1:30
- **Tue 19/05/2015** (`#18 <Detail>`__)   0:10                  0:10
- **Mon 18/05/2015**                                            0:00
- **Sun 17/05/2015**                                            0:00
- **Total (7 rows)**                      **0:11**   **3:48**   **3:59**
-======================================= ========== ========== ==========
+======================================= ========== ====== ==========
+ Description                             linö       shop   Total
+--------------------------------------- ---------- ------ ----------
+ **Sat 23/05/2015** (`#4 <Detail>`__)    0:01              0:01
+ **Fri 22/05/2015** (`#21 <Detail>`__)   2:18              2:18
+ **Thu 21/05/2015**                                        0:00
+ **Wed 20/05/2015** (`#25 <Detail>`__)   1:30              1:30
+ **Tue 19/05/2015** (`#38 <Detail>`__)   0:10              0:10
+ **Mon 18/05/2015**                                        0:00
+ **Sun 17/05/2015**                                        0:00
+ **Total (7 rows)**                      **3:59**          **3:59**
+======================================= ========== ====== ==========
 <BLANKLINE>
-
 
 
 In the "description" column you see a list of the tickets on which you
@@ -108,6 +109,11 @@ started some days ago.
     ...     qs = tickets.Project.objects.filter(tickets_by_project__sessions_by_ticket__user=u).distinct()
     ...     if qs.count() > 1:
     ...         print u.username, "worked on", [o for o in qs]
+    jean worked on [Project #3 ('docs'), Project #4 ('research'), Project #1 ('lin\xf6')]
+    luc worked on [Project #1 ('lin\xf6'), Project #3 ('docs'), Project #2 ('t\xe9am')]
+    marc worked on [Project #3 ('docs'), Project #5 ('shop'), Project #2 ('t\xe9am'), Project #1 ('lin\xf6')]
+    mathieu worked on [Project #2 ('t\xe9am'), Project #4 ('research')]
+    
     jean worked on [Project #2 ('t\xe9am'), Project #5 ('shop'), Project #1 ('lin\xf6')]
     luc worked on [Project #1 ('lin\xf6'), Project #2 ('t\xe9am')]
     marc worked on [Project #3 ('docs'), Project #4 ('research')]
@@ -169,20 +175,19 @@ Partner #100 ('welket')
 
 >>> rt.show(clocking.TicketsByReport, obj)
 ... #doctest: -REPORT_UDIFF
-==== ================================================================================================ =========== ===========
- ID   Description                                                                                      State       Time
----- ------------------------------------------------------------------------------------------------ ----------- -----------
- 4    Foo and bar don't baz. Reporter: mathieu. Project: docs. Topic: Lino Welfare                     Sticky      0:00
- 7    No Foo after deleting Bar. Site: welket. Reporter: Robin Rood. Project: shop. Topic: Lino Core   Done        2:18
- 8    Is there any Bar in Foo?. Reporter: jean. Project: linö. Topic: Lino Welfare                     Cancelled   3:29
- 11   Class-based Foos and Bars?. Site: pypi. Reporter: mathieu. Project: research. Topic: Lino Core   ToDo        0:10
- 12   Foo cannot bar. Reporter: Romain Raffault. Project: shop. Topic: Lino Welfare                    Sticky      1:30
- 15   Bars have no foo. Site: welsch. Reporter: jean. Project: docs. Topic: Lino Core                  Done        0:05
- 16   How to get bar from foo. Reporter: luc. Project: research. Topic: Lino Welfare                   Cancelled   2:02
- 19   Ticket 2. Site: welket. Reporter: Romain Raffault. Project: téam. Topic: Lino Core               ToDo        1:02
- 20   Ticket 3. Reporter: Rolf Rompen. Project: docs. Topic: Lino Welfare                              Sticky      0:12
-                                                                                                                   **10:48**
-==== ================================================================================================ =========== ===========
+==== ========================================================================================== ======== ===========
+ ID   Description                                                                                State    Time
+---- ------------------------------------------------------------------------------------------ -------- -----------
+ 1    Föö fails to bar when baz. Site: welket. Reporter: jean. Project: linö. Topic: Lino Cosi   New      0:00
+ 4    Foo and bar don't baz. Reporter: Robin Rood. Project: docs. Topic: Lino Welfare            Sticky   0:00
+ 13   Bar cannot foo. Site: welket. Reporter: jean. Project: linö. Topic: Lino Cosi              Sticky   3:29
+ 19   Ticket 2. Site: welket. Reporter: marc. Project: téam. Topic: Lino Core                    New      2:02
+ 21   Ticket 4. Site: welsch. Reporter: Robin Rood. Project: research. Topic: Lino Cosi          Opened   2:18
+ 25   Ticket 8. Site: welket. Reporter: Robin Rood. Project: docs. Topic: Lino Cosi              Ready    1:30
+ 31   Ticket 14. Site: welket. Reporter: marc. Project: research. Topic: Lino Core               Sticky   3:29
+ 43   Ticket 26. Site: welket. Reporter: luc. Project: linö. Topic: Lino Core                    Ready    2:18
+                                                                                                          **15:06**
+==== ========================================================================================== ======== ===========
 <BLANKLINE>
 
 
@@ -194,12 +199,11 @@ table lists all projects and the time invested.
 ==================== =============== ======== ==================================== =========== ============
  Reference            Name            Parent   Tickets                              Time        Total time
 -------------------- --------------- -------- ------------------------------------ ----------- ------------
- docs                 Documentatión   linö     `#20 <Detail>`__, `#15 <Detail>`__   0:17        2:29
- linö                 Framewörk                `#8 <Detail>`__                      3:29        6:60
- research             Research        docs     `#16 <Detail>`__, `#11 <Detail>`__   2:12        2:12
- shop                 Shop                     `#12 <Detail>`__, `#7 <Detail>`__    3:48        3:48
- téam                 Téam            linö     `#19 <Detail>`__                     1:02        1:02
- **Total (5 rows)**                                                                 **10:48**
+ docs                 Documentatión   linö     `#25 <Detail>`__                     1:30        7:17
+ linö                 Framewörk                `#43 <Detail>`__, `#13 <Detail>`__   5:47        15:06
+ research             Research        docs     `#31 <Detail>`__, `#21 <Detail>`__   5:47        5:47
+ téam                 Téam            linö     `#19 <Detail>`__                     2:02        2:02
+ **Total (4 rows)**                                                                 **15:06**
 ==================== =============== ======== ==================================== =========== ============
 <BLANKLINE>
 

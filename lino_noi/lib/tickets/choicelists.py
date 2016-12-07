@@ -2,9 +2,7 @@
 # Copyright 2014-2016 Luc Saffre
 # License: BSD (see file COPYING for details)
 """
-Database models for `lino_xl.lib.humanlinks`.
-
-.. autosummary::
+Choicelists for this plugin.
 
 """
 
@@ -20,7 +18,6 @@ from lino.modlib.system.choicelists import (
 
 from lino.api import dd, _
 from .roles import Triager
-
 
 from datetime import datetime, time
 combine = datetime.combine
@@ -136,121 +133,8 @@ class TicketStates(dd.Workflow):
     active = models.BooleanField(_("Active"), default=False)
     show_in_todo = models.BooleanField(_("To do"), default=False)
     required_roles = dd.required(dd.SiteStaff)
+    # max_length = 3
     
-
-add = TicketStates.add_item
-
-# add('10', _("Assigned"), 'assigned',
-#     required=dict(states=['', 'active']),
-#     action_name=_("Start"),
-#     help_text=_("Ticket has been assigned to somebody who is assigned on it."))
-add('10', _("New"), 'new',
-    button_text=u"📥", active=True, show_in_todo=True)  # INBOX TRAY (U+1F4E5)
-add('15', _("Talk"), 'talk', active=True,
-    button_text=u"🗪")  # TWO SPEECH BUBBLES (U+1F5EA)
-add('20', _("ToDo"), 'todo', active=True, show_in_todo=True,
-    button_text=u"🐜")  # ANT (U+1F41C)
-add('21', _("Sticky"), 'sticky',
-    button_text=u"📌", active=True)  # PUSHPIN (U+1F4CC)
-add('30', _("Sleeping"), 'sleeping',
-    # button_text=u"🐌")  # SNAIL (U+1F40C)
-    button_text=u"🕸")  # SPIDER WEB (U+1F578)	
-# add('30', _("Callback"), 'callback',
-    # required=dict(states=['new']),
-    # action_name=_("Wait for feedback"),
-    # help_text=_("Waiting for feedback from partner."))
-add('40', _("Ready"), 'ready',
-    # help_text=_(
-    #     "Has been fixed. Ready for release. Waiting to be tested."),
-    active=True,
-    button_text="\u2610")  # BALLOT BOX
-add('50', _("Done"), 'done',
-    button_text="\u2611")  # BALLOT BOX WITH CHECK
-
-# add('50', _("Tested"), 'tested',
-#     # required=dict(states=['fixed']),
-#     help_text=_("Has been fixed and tested."))
-# add('60', _("Refused"), 'refused',
-add('60', _("Cancelled"), 'cancelled',
-    # required=dict(states="tested new todo callback"),
-    # help_text=_("It has been decided that we won't fix this ticket."))
-    button_text=u"🗑")  # WASTEBASKET (U+1F5D1)
-# add('90', _("Cancelled"), 'cancelled',
-#     # required=dict(states=['new todo waiting']),
-#     help_text=_("Has been cancelled for some reason."))
-
-"""Difference between Cancelled and Refused was that: Canceled means
-that we don't want to talk about this ticket anymore.  Refused makes
-sense for tickets which had been asked by a partner. In that case we
-still may want to report it.
-
-Also remember this thought: Should we add a new ticket state "dropped"
-or "withdrawn" ("Verworfen", "Widerrufen") to indicate that the
-*reporter* decided to cancel their plea? This is different from
-"refused".  --> Solution seems to rename "refused" to "cancelled"
-because this is a more general term.
-
-"""
-
-
-class MarkDone(dd.ChangeStateAction):
-    """Mark this ticket as done.
-
-    (obsolete:) Can be done only by the reporter when a rating has
-    been set or by a triager (independently of any rating).
-
-    """
-    label = _("Done")
-    button_text = TicketStates.done.button_text
-    required_states = 'ready'
-
-    # def get_action_permission(self, ar, obj, state):
-    #     me = ar.get_user()
-    #     if not me.profile.has_required_roles([Triager]):
-    #         if not obj.rating or obj.reporter != me:
-    #             return False
-    #     return super(MarkDone, self).get_action_permission(ar, obj, state)
-
-
-# class TicketStateGroups(dd.Choice):
-#     def __init__(self, 
-# class TicketStateGroups(dd.ChoiceList):
-#     verbose_name = _("Dependency type")
-# add = DependencyTypes.add_item
-# add('10', _("Duplicate"), 'duplicate')
-
-
-@dd.receiver(dd.pre_analyze)
-def tickets_workflows(sender=None, **kw):
-    """
-    """
-    TicketStates.sticky.add_transition(
-        required_states="new")
-    TicketStates.talk.add_transition(
-        required_states="new todo ready")
-    TicketStates.todo.add_transition(
-        required_states="new talk ready")
-    # TicketStates.cancelled.add_transition(states="todo new callback")
-    # TicketStates.new.add_transition(states="todo callback fixed tested")
-    TicketStates.sleeping.add_transition(
-        required_states="talk todo new talk")
-    TicketStates.ready.add_transition(
-        required_states="new talk todo")
-    TicketStates.done.add_transition(MarkDone)
-    # TicketStates.done.add_transition(
-    #     required_states="new talk todo ready sleeping")
-    TicketStates.cancelled.add_transition(
-        required_states="todo talk new talk sleeping")
-
-    TicketStates.favorite_states = (TicketStates.sticky, )
-    TicketStates.work_states = (TicketStates.todo, TicketStates.new)
-    TicketStates.waiting_states = (TicketStates.done, )
-
-    # not used:
-    # TicketStates.idle_states = (
-    #     TicketStates.fixed, TicketStates.tested,
-    #     TicketStates.callback, TicketStates.cancelled)
-
 
 class LinkType(dd.Choice):
 

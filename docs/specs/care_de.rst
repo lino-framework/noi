@@ -233,7 +233,7 @@ Fähigkeiten
  ID   Zusammenfassung                                                                             Anfrager   Thema   Fähigkeit            Aktionen         Projekt
 ---- ------------------------------------------------------------------------------------------- ---------- ------- -------------------- ---------------- ---------
  8    Wer fährt für mich nach Aachen Windeln kaufen?                                              alex               Botengänge           **Neu**
- 7    Wer kann meine Abschlussarbeit korrekturlesen?                                              dora                                    **ZuTun**
+ 7    Wer kann meine Abschlussarbeit korrekturlesen?                                              dora                                    **Opened**
  6    Wer hilft meinem Sohn sich auf die Mathearbeit am 21.05. vorzubereiten? 5. Schuljahr PDS.   berta              Matheunterricht      **Neu**
  5    Wer macht Musik auf meinem Geburtstag?                                                      alex               Musik                **Neu**
  4    Wer kann meiner Tochter Gitarreunterricht geben?                                            alex               Gitarrenunterricht   **Besprechen**
@@ -249,7 +249,7 @@ Das Hauptmenü
 
 >>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Büro : Meine Hilfsangebote, Meine Benachrichtigungen, Meine Favoriten, Meine Auszüge, Meine Kommentare
+- Büro : Meine Hilfsangebote, Meine Auszüge, Meine Kommentare, Meine Benachrichtigungen
 - Bitten : Meine Bitten, Wo ich helfen kann, Zu tun, Aktive Bitten, Alle Bitten, Nicht zugewiesene Bitten, Aktive Projekte
 - Arbeitszeit : Sitzungen
 - Berichte :
@@ -267,7 +267,7 @@ Das Hauptmenü
   - System : Datenbankmodelle, Vollmachten, Benutzerarten, Benachrichtigungen, Änderungen, All dashboard widgets
   - Themen : Interessen
   - Bitten : Hilfsangebote, Angebotszustände, Verknüpfungen, Zustände
-  - Büro : Favoriten, Auszüge, Kommentare, Einfügetexte
+  - Büro : Auszüge, Kommentare, Einfügetexte
   - Fähigkeiten : Kompetenzen
   - Arbeitszeit : Sitzungen
 - Site : Info
@@ -277,7 +277,7 @@ Das Hauptmenü
 
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Büro : Meine Hilfsangebote, Meine Benachrichtigungen, Meine Favoriten, Meine Auszüge, Meine Kommentare
+- Büro : Meine Hilfsangebote, Meine Auszüge, Meine Kommentare, Meine Benachrichtigungen
 - Bitten : Meine Bitten, Wo ich helfen kann, Zu tun
 - Konfigurierung :
   - Orte : Länder
@@ -294,11 +294,11 @@ Meine Bitten
   
 >>> rt.login('christa').show(tickets.MyTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-============================================================================ =========== ======= =============== ===========================================
+============================================================================ =========== ======= =============== ===========================
  Overview                                                                     Fähigkeit   Thema   Zugewiesen zu   Aktionen
----------------------------------------------------------------------------- ----------- ------- --------------- -------------------------------------------
- `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__                                       [✋] [☆] **Neu** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]
-============================================================================ =========== ======= =============== ===========================================
+---------------------------------------------------------------------------- ----------- ------- --------------- ---------------------------
+ `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__                                       [✋] **Neu** → [♥] [☉] [⚔]
+============================================================================ =========== ======= =============== ===========================
 <BLANKLINE>
 
 
@@ -307,12 +307,12 @@ Where I can help
 
 >>> rt.login('christa').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-================================================================= ========== ======= =================== =================
+================================================================= ========== ======= =================== =============
  Overview                                                          Anfrager   Thema   Fähigkeit           Aktionen
------------------------------------------------------------------ ---------- ------- ------------------- -----------------
- `#5 (Wer macht Musik auf meinem Geburtstag?) <Detail>`__          alex               Musik               [✋] [☆] **Neu**
- `#3 (Wer kann meinem Sohn Klavierunterricht geben?) <Detail>`__   dora               Klavierunterricht   [✋] [☆] **Neu**
-================================================================= ========== ======= =================== =================
+----------------------------------------------------------------- ---------- ------- ------------------- -------------
+ `#5 (Wer macht Musik auf meinem Geburtstag?) <Detail>`__          alex               Musik               [✋] **Neu**
+ `#3 (Wer kann meinem Sohn Klavierunterricht geben?) <Detail>`__   dora               Klavierunterricht   [✋] **Neu**
+================================================================= ========== ======= =================== =============
 <BLANKLINE>
 
 
@@ -356,9 +356,7 @@ the detail window of a ticket.
       - (general1_3): **Umfeld** (site), **Aktionen** (workflow_buttons)
     - **Zuweisbare Arbeiter** (faculties.AssignableWorkersByTicket) [visible for connector admin]
   - (general_2): **Beschreibung** (description), **Kommentare** (CommentsByRFC) [visible for user connector admin], **Sitzungen** (SessionsByTicket) [visible for connector admin]
-- **History** (history_tab_1) [visible for connector admin]:
-  - **Änderungen** (changes.ChangesByMaster) [visible for user connector admin]
-  - **Beobachtet durch** (stars.StarsByController) [visible for user connector admin]
+- **History** (changes.ChangesByMaster) [visible for connector admin]
 - **Hilfsangebote** (votes.VotesByVotable) [visible for user connector admin]
 - **Mehr** (more) [visible for connector admin]:
   - (more1) [visible for all]:
