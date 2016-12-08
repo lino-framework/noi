@@ -11,6 +11,7 @@ The main plugin for Lino Noi.
     fixtures.linotickets
     migrate
     roles
+    workflows
 
 """
 
@@ -19,3 +20,4 @@ from lino.api.ad import Plugin
 
 class Plugin(Plugin):
     pass
+

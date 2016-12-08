@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.utils.translation import ugettext_lazy as _
 help_texts = {
     'lino_noi.lib.clocking.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_noi.lib.clocking.Plugin.ticket_model' : _("""The model that is to be used as the "workable"."""),
     'lino_noi.lib.clocking.actions.EndSession' : _("""Close a given session, i.e. stop working on that ticket for this
 time.  Common base for EndThisSession and
 EndTicketSession."""),
@@ -11,6 +12,7 @@ EndTicketSession."""),
     'lino_noi.lib.clocking.actions.EndTicketSession' : _("""End your running session on this ticket."""),
     'lino_noi.lib.clocking.actions.StartTicketSession' : _("""Start a session on this ticket."""),
     'lino_noi.lib.clocking.actions.PrintActivityReport' : _("""Print an activity report."""),
+    'lino_noi.lib.clocking.mixins.Workable' : _("""Base class for things that workers can work on."""),
     'lino_noi.lib.clocking.models.SessionType' : _("""The type of a Session."""),
     'lino_noi.lib.clocking.models.Session' : _("""A Session is when a user works during a given lapse of time on
 a given Ticket."""),
@@ -54,6 +56,10 @@ on them."""),
     'lino_noi.lib.noi.roles.Senior' : _("""A senior developer is a developer who is additionally
 responsible for triaging tickets"""),
     'lino_noi.lib.noi.roles.SiteAdmin' : _("""Can do everything."""),
+    'lino_noi.lib.noi.workflows.MarkTicketOpened' : _("""Mark this ticket as open."""),
+    'lino_noi.lib.noi.workflows.MarkTicketStarted' : _("""Mark this ticket as started."""),
+    'lino_noi.lib.noi.workflows.MarkTicketClosed' : _("""Mark this ticket as closed."""),
+    'lino_noi.lib.noi.workflows.MarkVoteReady' : _("""Mark this vote as ready."""),
     'lino_noi.lib.tickets.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_noi.lib.tickets.choicelists.TicketStates' : _("""The state of a ticket (new, open, closed, ...)"""),
     'lino_noi.lib.tickets.choicelists.TicketStates.new' : _("""Somebody reported this ticket, but there was no response so
@@ -79,7 +85,6 @@ needs to be done by the reporter (e.g. testing,
 confirmation, documentation,..)"""),
     'lino_noi.lib.tickets.choicelists.TicketStates.done' : _("""The ticket has been done."""),
     'lino_noi.lib.tickets.choicelists.TicketStates.cancelled' : _("""It has been decided that we won't fix this ticket."""),
-    'lino_noi.lib.tickets.choicelists.MarkDone' : _("""Mark this ticket as done."""),
     'lino_noi.lib.tickets.choicelists.LinkTypes' : _("""The possible values of a lino_noi.lib.tickets.models.Link."""),
     'lino_noi.lib.tickets.choicelists.LinkTypes.requires' : _("""The parent ticket requires the child ticket."""),
     'lino_noi.lib.tickets.choicelists.LinkTypes.triggers' : _("""The parent ticket triggers the child ticket."""),
@@ -98,8 +103,10 @@ publicly visible anywhere."""),
 See Ticket.assigned_to."""),
     'lino_noi.lib.tickets.models.Ticket' : _("""A Ticket is a concrete question or problem formulated by a
 reporter (a user)."""),
-    'lino_noi.lib.tickets.models.Ticket.reporter' : _("""The user who reported this ticket."""),
-    'lino_noi.lib.tickets.models.Ticket.assigned_to' : _("""The user who is working on this ticket."""),
+    'lino_noi.lib.tickets.models.Ticket.user' : _("""The user who entered this ticket and is responsible for
+managing it."""),
+    'lino_noi.lib.tickets.models.Ticket.reporter' : _("""The user who is asking for help."""),
+    'lino_noi.lib.tickets.models.Ticket.assigned_to' : _("""No longer used. The user who is working on this ticket."""),
     'lino_noi.lib.tickets.models.Ticket.state' : _("""The state of this ticket. See TicketStates"""),
     'lino_noi.lib.tickets.models.Ticket.waiting_for' : _("""What to do next. An unformatted one-line text which describes
 what this ticket is waiting for."""),
@@ -153,8 +160,6 @@ lino_noi.lib.tickets.models.Ticket)."""),
     'lino_noi.lib.votes.choicelists.VoteStates' : _("""The list of possible states of a vote.  This is used as choicelist
 for the state
 field of a vote."""),
-    'lino_noi.lib.votes.choicelists.VoteStates.interested' : _("""I am interested, I want to get notified when something
-happens."""),
     'lino_noi.lib.votes.mixins.Votable' : _("""Base class for models that can be used as
 lino_noi.lib.votes.Plugin.votable_model."""),
     'lino_noi.lib.votes.models.Vote' : _("""A vote is when a user has an opinion or interest about a given

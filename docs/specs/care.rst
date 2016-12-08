@@ -221,18 +221,18 @@ verbose_name and verbose_name_plural options of `faculties.Faculty`.
 <BLANKLINE>
 
 >>> rt.show('tickets.Tickets')
-==== ========================================================================= ========== ======= ================ ========== =========
- ID   Summary                                                                   Reporter   Topic   Faculty          Actions    Project
----- ------------------------------------------------------------------------- ---------- ------- ---------------- ---------- ---------
+==== ========================================================================= ========== ======= ================ ============ =========
+ ID   Summary                                                                   Reporter   Topic   Faculty          Actions      Project
+---- ------------------------------------------------------------------------- ---------- ------- ---------------- ------------ ---------
  8    Who would buy diapers for me in Aachen?                                   alex               Shopping         **New**
- 7    Who can review my final work?                                             dora                                **ToDo**
+ 7    Who can review my final work?                                             dora                                **Opened**
  6    Who helps my sont to prepare for a maths test on May 21? (5. grade PDS)   berta              Maths lessons    **New**
  5    Who would play music on my birthday party?                                alex               Music            **New**
  4    Who can give guitar lessons to my daughter?                               alex               Guitar lessons   **Talk**
  3    Who can give piano lessons to my son?                                     dora               Piano lessons    **New**
  2    My lawn needs mowing. On Thursday or Saturday.                            christa                             **New**
  1    My faucet is dripping, who can help?                                      berta              Repair works     **New**
-==== ========================================================================= ========== ======= ================ ========== =========
+==== ========================================================================= ========== ======= ================ ============ =========
 <BLANKLINE>
 
 TODO: show how the choices for Ticket.assigned_to depend on faculty
@@ -243,7 +243,7 @@ The main menu
 
 >>> rt.login('robin').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Office : My Votes, My Notification messages, My Stars, My Excerpts, My Comments
+- Office : My Votes, My Excerpts, My Comments, My Notification messages
 - Pleas : My Pleas, Where I can help, Pleas to to, Active pleas, All pleas, Unassigned pleas, Active projects
 - Clocking : Sessions
 - Reports :
@@ -261,7 +261,7 @@ The main menu
   - System : content types, Authorities, User types, Notification messages, Changes, All dashboard widgets
   - Topics : Interests
   - Pleas : Votes, Vote states, Dependencies, States
-  - Office : Stars, Excerpts, Comments, Text Field Templates
+  - Office : Excerpts, Comments, Text Field Templates
   - Faculties : Competences
   - Clocking : Sessions
 - Site : About
@@ -271,7 +271,7 @@ The main menu
 
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Office : My Votes, My Notification messages, My Stars, My Excerpts, My Comments
+- Office : My Votes, My Excerpts, My Comments, My Notification messages
 - Pleas : My Pleas, Where I can help, Pleas to to
 - Configure :
   - Places : Countries
@@ -288,11 +288,11 @@ My pleas
   
 >>> rt.login('christa').show(tickets.MyTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-================================================================== ========= ======= ============= ===========================================
+================================================================== ========= ======= ============= ===========================
  Overview                                                           Faculty   Topic   Assigned to   Actions
------------------------------------------------------------------- --------- ------- ------------- -------------------------------------------
- `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__                                   [✋] [☆] **New** → [📌] [🗪] [🐜] [🕸] [☐] [🗑]
-================================================================== ========= ======= ============= ===========================================
+------------------------------------------------------------------ --------- ------- ------------- ---------------------------
+ `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__                                   [✋] **New** → [♥] [☉] [⚔]
+================================================================== ========= ======= ============= ===========================
 <BLANKLINE>
 
 
@@ -301,12 +301,12 @@ Where I can help
 
 >>> rt.login('christa').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-============================================================== ========== ======= =============== =================
+============================================================== ========== ======= =============== =============
  Overview                                                       Reporter   Topic   Faculty         Actions
--------------------------------------------------------------- ---------- ------- --------------- -----------------
- `#5 (Who would play music on my birthday party?) <Detail>`__   alex               Music           [✋] [☆] **New**
- `#3 (Who can give piano lessons to my son?) <Detail>`__        dora               Piano lessons   [✋] [☆] **New**
-============================================================== ========== ======= =============== =================
+-------------------------------------------------------------- ---------- ------- --------------- -------------
+ `#5 (Who would play music on my birthday party?) <Detail>`__   alex               Music           [✋] **New**
+ `#3 (Who can give piano lessons to my son?) <Detail>`__        dora               Piano lessons   [✋] **New**
+============================================================== ========== ======= =============== =============
 <BLANKLINE>
 
 
@@ -350,9 +350,7 @@ the detail window of a ticket.
       - (general1_3): **Site** (site), **Actions** (workflow_buttons)
     - **Assignable workers** (faculties.AssignableWorkersByTicket) [visible for connector admin]
   - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user connector admin], **Sessions** (SessionsByTicket) [visible for connector admin]
-- **History** (history_tab_1) [visible for connector admin]:
-  - **Changes** (changes.ChangesByMaster) [visible for user connector admin]
-  - **Starred by** (stars.StarsByController) [visible for user connector admin]
+- **History** (changes.ChangesByMaster) [visible for connector admin]
 - **Votes** (votes.VotesByVotable) [visible for user connector admin]
 - **More** (more) [visible for connector admin]:
   - (more1) [visible for all]:

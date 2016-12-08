@@ -43,7 +43,7 @@ class TicketDetail(TicketDetail):
     """
 
     history_tab = dd.Panel("""
-    changes.ChangesByMaster:50 stars.StarsByController:20
+    changes.ChangesByMaster:50 #stars.StarsByController:20
     """, label=_("History"), required_roles=dd.login_required(Triager))
 
     more = dd.Panel("""

@@ -378,9 +378,14 @@ class Tickets(dd.Table):
             'tickets.Project',
             blank=True, null=True),
         state=TicketStates.field(
-            blank=True, help_text=_("Only rows having this state.")),
-        show_assigned=dd.YesNo.field(_("Assigned"), blank=True),
-        show_active=dd.YesNo.field(_("Active"), blank=True),
+            blank=True,
+            help_text=_("Only rows having this state.")),
+        show_assigned=dd.YesNo.field(
+            _("Assigned"), blank=True,
+            help_text=_("Whether to show assigned tickets")),
+        show_active=dd.YesNo.field(
+            _("Active"), blank=True,
+            help_text=_("Whether to show active tickets")),
         show_todo=dd.YesNo.field(_("To do"), blank=True),
         has_project=dd.YesNo.field(_("Has project"), blank=True),
         show_private=dd.YesNo.field(_("Private"), blank=True))
@@ -545,17 +550,17 @@ class TicketsByTopic(Tickets):
 class PublicTickets(Tickets):
     label = _("Public tickets")
     order_by = ["-priority", "-id"]
-    column_names = 'overview:50 state:10 ticket_type:10 project:10 topic:10 priority:3 *'
+    column_names = 'overview:50 ticket_type:10 topic:10 priority:3 *'
     filter = models.Q(assigned_to=None)
 
     @classmethod
     def param_defaults(self, ar, **kw):
         kw = super(PublicTickets, self).param_defaults(ar, **kw)
-        kw.update(show_assigned=dd.YesNo.no)
+        # kw.update(show_assigned=dd.YesNo.no)
         kw.update(show_private=dd.YesNo.no)
-        kw.update(show_active=dd.YesNo.yes)
+        # kw.update(show_active=dd.YesNo.yes)
         # kw.update(show_closed=dd.YesNo.no)
-        # kw.update(state=TicketStates.todo)
+        kw.update(state=TicketStates.opened)
         return kw
 
 
@@ -775,3 +780,4 @@ class TicketsBySite(Tickets):
 #             msg = _("There are {0} known problems for {1}.")
 #             msg = msg.format(count, ar.get_user().user_site)
 #             yield ar.href_to_request(sar, msg)
+

@@ -61,7 +61,7 @@ This document describes the database structure.
  tickets.Project             tickets.Projects             17        5
  tickets.ProjectType         tickets.ProjectTypes         4         0
  tickets.Site                tickets.Sites                4         3
- tickets.Ticket              tickets.Tickets              26        116
+ tickets.Ticket              tickets.Tickets              27        116
  tickets.TicketType          tickets.TicketTypes          4         3
  tinymce.TextFieldTemplate   tinymce.TextFieldTemplates   5         2
  topics.Interest             topics.Interests             3         6
@@ -71,7 +71,7 @@ This document describes the database structure.
  uploads.UploadType          uploads.UploadTypes          8         0
  users.Authority             users.Authorities            3         0
  users.User                  users.Users                  17        7
- votes.Vote                  votes.Votes                  9         20
+ votes.Vote                  votes.Votes                  9         96
 =========================== ============================ ========= =======
 <BLANKLINE>
 

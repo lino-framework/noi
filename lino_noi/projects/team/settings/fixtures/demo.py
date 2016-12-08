@@ -97,23 +97,33 @@ def tickets_objects():
 
     PROJECTS = Cycler(Project.objects.all())
     SITES = Cycler(Site.objects.all())
+    
     TicketStates = rt.models.tickets.TicketStates
     TSTATES = Cycler(TicketStates.objects())
+    
+    Vote = rt.models.votes.Vote
+    VoteStates = rt.models.votes.VoteStates
+    VSTATES = Cycler(VoteStates.objects())
 
     num = [0]
     
     def ticket(summary, **kwargs):
         num[0] += 1
+        u = USERS.pop()
         kwargs.update(
             ticket_type=TYPES.pop(), summary=summary,
-            reporter=USERS.pop(),
+            reporter=u,
+            user=u,
             state=TSTATES.pop(),
             topic=TOPICS.pop())
         if num[0] % 2:
             kwargs.update(site=SITES.pop())
         if False:
             kwargs.update(project=PROJECTS.pop())
-        return Ticket(**kwargs)
+        obj = Ticket(**kwargs)
+        yield obj
+        if obj.state.active:
+            yield Vote(votable=obj, user=USERS.pop(), state=VSTATES.pop())
 
     yield ticket(
         "Föö fails to bar when baz", project=PROJECTS.pop())
@@ -180,6 +190,7 @@ def tickets_objects():
 
 def clockings_objects():
     # was previously in clockings
+    Vote = rt.models.votes.Vote
     SessionType = rt.models.clocking.SessionType
     Session = rt.models.clocking.Session
     Ticket = rt.models.tickets.Ticket
@@ -198,15 +209,16 @@ def clockings_objects():
     # every fourth ticket is unassigned and thus listed in
     # PublicTickets
     # for i, t in enumerate(Ticket.objects.exclude(private=True)):
-    for i, t in enumerate(Ticket.objects.all()):
-        if i % 4:
-            t.assigned_to = WORKERS.pop()
-            yield t
+    # for i, t in enumerate(Ticket.objects.all()):
+    #     if i % 4:
+    #         t.assigned_to = WORKERS.pop()
+    #         yield t
 
     for u in workers:
 
-        TICKETS = Cycler(Ticket.objects.filter(assigned_to=u))
-        if len(TICKETS) == 0:
+        VOTES = Cycler(Vote.objects.filter(user=u))
+        # TICKETS = Cycler(Ticket.objects.filter(assigned_to=u))
+        if len(VOTES) == 0:
             continue
 
         for offset in (0, -1, -3, -4):
@@ -216,7 +228,8 @@ def clockings_objects():
             ts = datetime.datetime.combine(date, datetime.time(9, 0, 0))
             for i in range(7):
                 obj = Session(
-                    ticket=TICKETS.pop(), session_type=TYPES.pop(), user=u)
+                    ticket=VOTES.pop().votable,
+                    session_type=TYPES.pop(), user=u)
                 obj.set_datetime('start', ts)
                 d = DURATIONS.pop()
                 worked += d

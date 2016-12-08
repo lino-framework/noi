@@ -39,7 +39,7 @@ def ticket(reporter, summary, en, **kw):
     u = rt.models.users.User.objects.get(username=reporter)
     if en and u.language != 'de':
         summary = en
-    kw.update(summary=summary, reporter=u)
+    kw.update(summary=summary, reporter=u, user=u)
     # every third ticket gets a manual state, the others get default
     # value:
     if rt.models.tickets.Ticket.objects.count() % 3 == 0:

@@ -44,23 +44,21 @@ The demo database contains the following data:
 
 >>> rt.show(tickets.PublicTickets)
 ... #doctest: -REPORT_UDIFF
-============================================= ======= ============= ========== =========== ==========
- Overview                                      State   Ticket type   Project    Topic       Priority
---------------------------------------------- ------- ------------- ---------- ----------- ----------
- `#113 (Ticket 96) <Detail>`__                 New     Enhancement   linö       Lino Cosi   100
- `#105 (Ticket 88) <Detail>`__                 New     Upgrade       docs       Lino Cosi   100
- `#97 (Ticket 80) <Detail>`__                  New     Bugfix        shop       Lino Cosi   100
- `#81 (Ticket 64) <Detail>`__                  New     Upgrade       research   Lino Cosi   100
- `#73 (Ticket 56) <Detail>`__                  New     Bugfix        linö       Lino Cosi   100
- `#65 (Ticket 48) <Detail>`__                  New     Enhancement   docs       Lino Cosi   100
- `#57 (Ticket 40) <Detail>`__                  New     Upgrade       shop       Lino Cosi   100
- `#41 (Ticket 24) <Detail>`__                  New     Enhancement   research   Lino Cosi   100
- `#33 (Ticket 16) <Detail>`__                  New     Upgrade       linö       Lino Cosi   100
- `#25 (Ticket 8) <Detail>`__                   New     Bugfix        docs       Lino Cosi   100
- `#17 (Ticket 0) <Detail>`__                   New     Enhancement   shop       Lino Cosi   100
- `#1 (Föö fails to bar when baz) <Detail>`__   New     Bugfix        linö       Lino Cosi   100
- **Total (12 rows)**                                                                        **1200**
-============================================= ======= ============= ========== =========== ==========
+=================================== ============= ============== ==========
+ Overview                            Ticket type   Topic          Priority
+----------------------------------- ------------- -------------- ----------
+ `#111 (Ticket 94) <Detail>`__       Upgrade       Lino Core      100
+ `#102 (Ticket 85) <Detail>`__       Upgrade       Lino Voga      100
+ `#93 (Ticket 76) <Detail>`__        Upgrade       Lino Cosi      100
+ `#75 (Ticket 58) <Detail>`__        Upgrade       Lino Core      100
+ `#66 (Ticket 49) <Detail>`__        Upgrade       Lino Voga      100
+ `#57 (Ticket 40) <Detail>`__        Upgrade       Lino Cosi      100
+ `#48 (Ticket 31) <Detail>`__        Upgrade       Lino Welfare   100
+ `#30 (Ticket 13) <Detail>`__        Upgrade       Lino Voga      100
+ `#21 (Ticket 4) <Detail>`__         Upgrade       Lino Cosi      100
+ `#12 (Foo cannot bar) <Detail>`__   Upgrade       Lino Welfare   100
+ **Total (10 rows)**                                              **1000**
+=================================== ============= ============== ==========
 <BLANKLINE>
 
 
@@ -72,7 +70,7 @@ This data is being rendered using plain bootstrap HTML:
 >>> soup = BeautifulSoup(res.content, "lxml")
 >>> links = soup.find_all('a')
 >>> len(links)
-41
+39
 >>> print(links[0].get('href'))
 /?ul=de
 >>> print(links[1].get('href'))
@@ -94,7 +92,7 @@ This data is being rendered using plain bootstrap HTML:
 
 >>> print(soup.get_text(' ', strip=True))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF +ELLIPSIS
-Tickets Home en de fr Site About #13 (Bar cannot foo) << < > >> State: Sleeping
+Tickets Home en de fr Site About #13 (Bar cannot foo) << < > >> State: Sticky
 <BLANKLINE>
 <BLANKLINE>
-(last update ...) Reported by: Rolf Rompen ... Topic: Lino Cosi Site: welket Linking to #1 and to blog . This is Lino Noi ... using ...
+(last update ...) Reported by: jean ... Topic: Lino Cosi Site: welket Linking to #1 and to blog . This is Lino Noi ... using ...

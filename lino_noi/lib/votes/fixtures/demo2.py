@@ -28,6 +28,5 @@ def objects():
             USERS.pop()  # not every user votes
             obj = Vote(
                 state=STATES.pop(), user=USERS.pop(), votable=TICKETS.pop())
-            if obj.user == obj.votable.reporter:
-                obj.state = VoteStates.active
-            yield obj
+            if obj.user != obj.votable.user:
+                yield obj

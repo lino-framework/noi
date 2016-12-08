@@ -36,6 +36,7 @@ class Site(Site):
     project_model = 'tickets.Project'
     textfield_format = 'html'
     user_types_module = 'lino_noi.lib.noi.roles'
+    workflows_module = 'lino_noi.lib.noi.workflows'
     obj2text_template = "**{0}**"
 
     default_build_method = 'appyodt'

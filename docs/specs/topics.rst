@@ -121,39 +121,39 @@ Filtering tickets by topic
 >>> pv = dict(topic=rt.models.topics.Topic.get_by_ref("così"))
 >>> rt.show(tickets.Tickets, param_values=pv)
 ... #doctest: +REPORT_UDIFF
-===== =========================== ================= =========== =============== ============== ==========
- ID    Summary                     Reporter          Topic       Faculty         Actions        Project
------ --------------------------- ----------------- ----------- --------------- -------------- ----------
- 113   Ticket 96                   jean              Lino Cosi                   **New**        linö
- 109   Ticket 92                   mathieu           Lino Cosi                   **Sleeping**   téam
- 105   Ticket 88                   Robin Rood        Lino Cosi                   **New**        docs
- 101   Ticket 84                   marc              Lino Cosi                   **Sleeping**   research
- 97    Ticket 80                   Rolf Rompen       Lino Cosi                   **New**        shop
- 93    Ticket 76                   luc               Lino Cosi                   **Sleeping**   linö
- 89    Ticket 72                   Romain Raffault   Lino Cosi                   **New**        téam
- 85    Ticket 68                   jean              Lino Cosi                   **Sleeping**   docs
- 81    Ticket 64                   mathieu           Lino Cosi                   **New**        research
- 77    Ticket 60                   Robin Rood        Lino Cosi                   **Sleeping**   shop
- 73    Ticket 56                   marc              Lino Cosi                   **New**        linö
- 69    Ticket 52                   Rolf Rompen       Lino Cosi                   **Sleeping**   téam
- 65    Ticket 48                   luc               Lino Cosi                   **New**        docs
- 61    Ticket 44                   Romain Raffault   Lino Cosi                   **Sleeping**   research
- 57    Ticket 40                   jean              Lino Cosi                   **New**        shop
- 53    Ticket 36                   mathieu           Lino Cosi                   **Sleeping**   linö
- 49    Ticket 32                   Robin Rood        Lino Cosi                   **New**        téam
- 45    Ticket 28                   marc              Lino Cosi                   **Sleeping**   docs
- 41    Ticket 24                   Rolf Rompen       Lino Cosi                   **New**        research
- 37    Ticket 20                   luc               Lino Cosi                   **Sleeping**   shop
- 33    Ticket 16                   Romain Raffault   Lino Cosi                   **New**        linö
- 29    Ticket 12                   jean              Lino Cosi                   **Sleeping**   téam
- 25    Ticket 8                    mathieu           Lino Cosi                   **New**        docs
- 21    Ticket 4                    Robin Rood        Lino Cosi                   **Sleeping**   research
- 17    Ticket 0                    marc              Lino Cosi                   **New**        shop
- 13    Bar cannot foo              Rolf Rompen       Lino Cosi   Documentation   **Sleeping**   linö
- 9     Foo never matches Bar       luc               Lino Cosi   Testing         **New**        téam
- 5     Cannot create Foo           Romain Raffault   Lino Cosi                   **Sleeping**
- 1     Föö fails to bar when baz   jean              Lino Cosi                   **New**        linö
-===== =========================== ================= =========== =============== ============== ==========
+===== =========================== ================= =========== =============== =============== ==========
+ ID    Summary                     Reporter          Topic       Faculty         Actions         Project
+----- --------------------------- ----------------- ----------- --------------- --------------- ----------
+ 113   Ticket 96                   Robin Rood        Lino Cosi                   **Started**     linö
+ 109   Ticket 92                   Rolf Rompen       Lino Cosi                   **New**         téam
+ 105   Ticket 88                   jean              Lino Cosi                   **Sleeping**    docs
+ 101   Ticket 84                   Robin Rood        Lino Cosi                   **Talk**        research
+ 97    Ticket 80                   jean              Lino Cosi                   **Ready**       shop
+ 93    Ticket 76                   jean              Lino Cosi                   **Opened**      linö
+ 89    Ticket 72                   luc               Lino Cosi                   **Closed**      téam
+ 85    Ticket 68                   luc               Lino Cosi                   **Sticky**      docs
+ 81    Ticket 64                   luc               Lino Cosi                   **Cancelled**   research
+ 77    Ticket 60                   marc              Lino Cosi                   **Started**     shop
+ 73    Ticket 56                   luc               Lino Cosi                   **New**         linö
+ 69    Ticket 52                   mathieu           Lino Cosi                   **Sleeping**    téam
+ 65    Ticket 48                   marc              Lino Cosi                   **Talk**        docs
+ 61    Ticket 44                   mathieu           Lino Cosi                   **Ready**       research
+ 57    Ticket 40                   mathieu           Lino Cosi                   **Opened**      shop
+ 53    Ticket 36                   Romain Raffault   Lino Cosi                   **Closed**      linö
+ 49    Ticket 32                   Romain Raffault   Lino Cosi                   **Sticky**      téam
+ 45    Ticket 28                   Romain Raffault   Lino Cosi                   **Cancelled**   docs
+ 41    Ticket 24                   Rolf Rompen       Lino Cosi                   **Started**     research
+ 37    Ticket 20                   Romain Raffault   Lino Cosi                   **New**         shop
+ 33    Ticket 16                   Robin Rood        Lino Cosi                   **Sleeping**    linö
+ 29    Ticket 12                   Rolf Rompen       Lino Cosi                   **Talk**        téam
+ 25    Ticket 8                    Robin Rood        Lino Cosi                   **Ready**       docs
+ 21    Ticket 4                    Robin Rood        Lino Cosi                   **Opened**      research
+ 17    Ticket 0                    jean              Lino Cosi                   **Closed**      shop
+ 13    Bar cannot foo              jean              Lino Cosi   Documentation   **Sticky**      linö
+ 9     Foo never matches Bar       jean              Lino Cosi   Testing         **Cancelled**   téam
+ 5     Cannot create Foo           luc               Lino Cosi                   **Started**
+ 1     Föö fails to bar when baz   jean              Lino Cosi                   **New**         linö
+===== =========================== ================= =========== =============== =============== ==========
 <BLANKLINE>
 
  

@@ -1,5 +1,4 @@
 # Copyright 2016 Luc Saffre
-#
 # License: BSD (see file COPYING for details)
 
 """Adds voting functionality.
