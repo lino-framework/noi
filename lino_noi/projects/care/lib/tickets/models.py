@@ -38,7 +38,7 @@ class TicketDetail(TicketDetail):
 
     general1 = """
     summary:40 id:6 deadline
-    reporter:12 faculty topic assigned_to
+    reporter:12 faculty topic #assigned_to
     site workflow_buttons
     """
 

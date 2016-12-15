@@ -81,4 +81,4 @@ Lino Noi:
   - PROTECT : uploads.Upload.type
 - users.User :
   - CASCADE : faculties.Competence.user
-  - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, dashboard.Widget.user, excerpts.Excerpt.user, notify.Message.user, outbox.Mail.user, tickets.Project.assign_to, tickets.Ticket.assigned_to, tickets.Ticket.reporter, tickets.Ticket.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user, votes.Vote.user
+  - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, dashboard.Widget.user, excerpts.Excerpt.user, notify.Message.user, outbox.Mail.user, tickets.Project.assign_to, tickets.Ticket.reporter, tickets.Ticket.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user, votes.Vote.user

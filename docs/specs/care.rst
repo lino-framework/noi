@@ -288,11 +288,11 @@ My pleas
   
 >>> rt.login('christa').show(tickets.MyTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-================================================================== ========= ======= ============= ===========================
- Overview                                                           Faculty   Topic   Assigned to   Actions
------------------------------------------------------------------- --------- ------- ------------- ---------------------------
- `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__                                   [✋] **New** → [♥] [☉] [⚔]
-================================================================== ========= ======= ============= ===========================
+================================================================== ========= ======= ===========================
+ Overview                                                           Faculty   Topic   Actions
+------------------------------------------------------------------ --------- ------- ---------------------------
+ `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__                     [☆] **New** → [♥] [☉] [⚔]
+================================================================== ========= ======= ===========================
 <BLANKLINE>
 
 
@@ -304,8 +304,8 @@ Where I can help
 ============================================================== ========== ======= =============== =============
  Overview                                                       Reporter   Topic   Faculty         Actions
 -------------------------------------------------------------- ---------- ------- --------------- -------------
- `#5 (Who would play music on my birthday party?) <Detail>`__   alex               Music           [✋] **New**
- `#3 (Who can give piano lessons to my son?) <Detail>`__        dora               Piano lessons   [✋] **New**
+ `#5 (Who would play music on my birthday party?) <Detail>`__   alex               Music           [☆] **New**
+ `#3 (Who can give piano lessons to my son?) <Detail>`__        dora               Piano lessons   [☆] **New**
 ============================================================== ========== ======= =============== =============
 <BLANKLINE>
 
@@ -346,7 +346,7 @@ the detail window of a ticket.
   - (general_1):
     - (general1):
       - (general1_1): **Summary** (summary), **ID** (id), **Deadline** (deadline)
-      - (general1_2): **Reporter** (reporter), **Faculty** (faculty), **Topic** (topic), **Assigned to** (assigned_to)
+      - (general1_2): **Reporter** (reporter), **Faculty** (faculty), **Topic** (topic)
       - (general1_3): **Site** (site), **Actions** (workflow_buttons)
     - **Assignable workers** (faculties.AssignableWorkersByTicket) [visible for connector admin]
   - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user connector admin], **Sessions** (SessionsByTicket) [visible for connector admin]

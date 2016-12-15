@@ -29,6 +29,7 @@ class Site(Site):
 
     demo_fixtures = ['std', 'demo', 'demo2']
     user_types_module = 'lino_noi.projects.care.roles'
+    workflows_module = 'lino_noi.projects.care.workflows'
 
     def get_apps_modifiers(self, **kw):
         kw = super(Site, self).get_apps_modifiers(**kw)

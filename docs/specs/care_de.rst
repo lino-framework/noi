@@ -294,11 +294,11 @@ Meine Bitten
   
 >>> rt.login('christa').show(tickets.MyTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-============================================================================ =========== ======= =============== ===========================
- Overview                                                                     Fähigkeit   Thema   Zugewiesen zu   Aktionen
----------------------------------------------------------------------------- ----------- ------- --------------- ---------------------------
- `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__                                       [✋] **Neu** → [♥] [☉] [⚔]
-============================================================================ =========== ======= =============== ===========================
+============================================================================ =========== ======= ===========================
+ Overview                                                                     Fähigkeit   Thema   Aktionen
+---------------------------------------------------------------------------- ----------- ------- ---------------------------
+ `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__                       [☆] **Neu** → [♥] [☉] [⚔]
+============================================================================ =========== ======= ===========================
 <BLANKLINE>
 
 
@@ -310,8 +310,8 @@ Where I can help
 ================================================================= ========== ======= =================== =============
  Overview                                                          Anfrager   Thema   Fähigkeit           Aktionen
 ----------------------------------------------------------------- ---------- ------- ------------------- -------------
- `#5 (Wer macht Musik auf meinem Geburtstag?) <Detail>`__          alex               Musik               [✋] **Neu**
- `#3 (Wer kann meinem Sohn Klavierunterricht geben?) <Detail>`__   dora               Klavierunterricht   [✋] **Neu**
+ `#5 (Wer macht Musik auf meinem Geburtstag?) <Detail>`__          alex               Musik               [☆] **Neu**
+ `#3 (Wer kann meinem Sohn Klavierunterricht geben?) <Detail>`__   dora               Klavierunterricht   [☆] **Neu**
 ================================================================= ========== ======= =================== =============
 <BLANKLINE>
 
@@ -352,7 +352,7 @@ the detail window of a ticket.
   - (general_1):
     - (general1):
       - (general1_1): **Zusammenfassung** (summary), **ID** (id), **Deadline** (deadline)
-      - (general1_2): **Anfrager** (reporter), **Fähigkeit** (faculty), **Thema** (topic), **Zugewiesen zu** (assigned_to)
+      - (general1_2): **Anfrager** (reporter), **Fähigkeit** (faculty), **Thema** (topic)
       - (general1_3): **Umfeld** (site), **Aktionen** (workflow_buttons)
     - **Zuweisbare Arbeiter** (faculties.AssignableWorkersByTicket) [visible for connector admin]
   - (general_2): **Beschreibung** (description), **Kommentare** (CommentsByRFC) [visible for user connector admin], **Sitzungen** (SessionsByTicket) [visible for connector admin]
