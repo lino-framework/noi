@@ -40,6 +40,8 @@ class Site(Site):
     obj2text_template = "**{0}**"
 
     default_build_method = 'appyodt'
+    
+    # TODO: move migrator to lino_noi.projects.team
     migration_class = 'lino_noi.lib.noi.migrate.Migrator'
 
     def get_installed_apps(self):

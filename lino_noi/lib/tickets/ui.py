@@ -285,7 +285,7 @@ class TicketDetail(dd.DetailLayout):
     general1 = """
     summary:40 id:6 reporter:12
     site topic project private
-    workflow_buttons assigned_to waiting_for
+    workflow_buttons #assigned_to waiting_for
     """
 
     more = dd.Panel("""
@@ -400,7 +400,7 @@ class Tickets(dd.Table):
     @classmethod
     def get_simple_parameters(cls):
         s = super(Tickets, cls).get_simple_parameters()
-        s |= set(('reporter', 'assigned_to',
+        s |= set(('reporter',  # 'assigned_to',
                   'state', 'project', 'topic', 'site'))
         return s
 
@@ -433,10 +433,13 @@ class Tickets(dd.Table):
         # elif pv.show_closed == dd.YesNo.yes:
         #     qs = qs.filter(closed=True)
 
+        if pv.assigned_to:
+            qs = qs.filter(vote__user=pv.assigned_to).distinct()
+            
         if pv.show_assigned == dd.YesNo.no:
-            qs = qs.filter(assigned_to__isnull=True)
+            qs = qs.filter(vote__isnull=False).distinct()
         elif pv.show_assigned == dd.YesNo.yes:
-            qs = qs.filter(assigned_to__isnull=False)
+            qs = qs.filter(vote__isnull=True).distinct()
 
         active_states = TicketStates.filter(active=True)
         if pv.show_active == dd.YesNo.no:
@@ -526,8 +529,15 @@ class UnassignedTickets(Tickets):
     required_roles = dd.login_required(Triager)
 
     @classmethod
-    def get_queryset(self, ar):
-        return self.model.objects.filter(assigned_to=None)
+    def param_defaults(self, ar, **kw):
+        kw = super(UnassignedTickets, self).param_defaults(ar, **kw)
+        kw.update(show_assigned=dd.YesNo.no)
+        # kw.update(show_private=dd.YesNo.no)
+        # kw.update(show_active=dd.YesNo.yes)
+        # kw.update(show_closed=dd.YesNo.no)
+        kw.update(state=TicketStates.opened)
+        return kw
+
 
 
 class TicketsByProject(Tickets):
@@ -551,7 +561,7 @@ class PublicTickets(Tickets):
     label = _("Public tickets")
     order_by = ["-priority", "-id"]
     column_names = 'overview:50 ticket_type:10 topic:10 priority:3 *'
-    filter = models.Q(assigned_to=None)
+    # filter = models.Q(assigned_to=None)
 
     @classmethod
     def param_defaults(self, ar, **kw):
@@ -575,7 +585,7 @@ class TicketsToTriage(Tickets):
     button_label = _("Triage")
     order_by = ["-id"]
     column_names = 'overview:50 topic:10 reporter:10 project:10 ' \
-                   'assigned_to:10 ticket_type:10 workflow_buttons:40 *'
+                   '#assigned_to:10 ticket_type:10 workflow_buttons:40 *'
 
     @classmethod
     def param_defaults(self, ar, **kw):
@@ -633,7 +643,7 @@ class ActiveTickets(Tickets):
     order_by = ["-id"]
     # order_by = ["-modified", "id"]
     column_names = 'overview:50 topic:10 reporter:10 project:10 ' \
-                   'assigned_to:10 ticket_type:10 workflow_buttons:40 *'
+                   '#assigned_to:10 ticket_type:10 workflow_buttons:40 *'
 
     @classmethod
     def param_defaults(self, ar, **kw):
@@ -648,7 +658,7 @@ class MyTickets(My, Tickets):
     """Show all active tickets reported by me."""
     required_roles = dd.login_required()
     order_by = ["-id"]
-    column_names = 'overview:50 faculty topic assigned_to ' \
+    column_names = 'overview:50 faculty topic #assigned_to ' \
                    'workflow_buttons:40 *'
     params_layout = """
     reporter site project state 

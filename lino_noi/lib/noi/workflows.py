@@ -73,7 +73,7 @@ else:
     TicketStates.sleeping.button_text = "☾"  # LAST QUARTER MOON (U+263E)
     TicketStates.ready.button_text = "☐"  # BALLOT BOX \u2610
     TicketStates.closed.button_text = "☑"  # BALLOT BOX WITH CHECK \u2611
-    TicketStates.cancelled.button_text="☒"  # BALLOT BOX WITH X (U+2612)	
+    TicketStates.cancelled.button_text="☒"  # BALLOT BOX WITH X (U+2612)
 
 add = VoteStates.add_item
 add('10', _("Watching"), 'watching')
@@ -154,7 +154,7 @@ class VoteAction(dd.ChangeStateAction, NotifyingAction):
     managed_by_votable_author = False
     
     def get_notify_owner(self, ar, obj):
-        return obj.votable
+        return obj.votable.get_notify_owner(ar, obj)
 
     def get_notify_recipients(self, ar, obj):
         yield obj.votable.get_notify_recipients(ar)

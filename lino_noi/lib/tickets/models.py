@@ -44,7 +44,6 @@ from lino_xl.lib.cal.mixins import daterange_text
 from lino_xl.lib.contacts.mixins import ContactRelated
 from lino.modlib.users.mixins import UserAuthored, Assignable
 from lino.modlib.comments.mixins import RFC
-from lino.modlib.notify.mixins import ChangeObservable
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino_noi.lib.votes.mixins import Votable
 from lino_noi.lib.clocking.mixins import Workable
@@ -344,8 +343,8 @@ class SpawnTicket(dd.Action):
 
 
 @dd.python_2_unicode_compatible
-class Ticket(UserAuthored, mixins.CreatedModified, Assignable,
-             TimeInvestment, RFC, ChangeObservable, Votable, Workable):
+class Ticket(UserAuthored, mixins.CreatedModified,
+             TimeInvestment, RFC, Votable, Workable):
     """A **Ticket** is a concrete question or problem formulated by a
     :attr:`reporter` (a user).
     
@@ -544,8 +543,8 @@ class Ticket(UserAuthored, mixins.CreatedModified, Assignable,
             if me and not self.project and me.current_project:
                 self.project = me.current_project
         if self.project:
-            if not self.assigned_to and self.project.assign_to:
-                self.assigned_to = self.project.assign_to
+            # if not self.assigned_to and self.project.assign_to:
+            #     self.assigned_to = self.project.assign_to
             if not self.project.private:
                 self.private = False
 
@@ -586,14 +585,6 @@ class Ticket(UserAuthored, mixins.CreatedModified, Assignable,
         # return ar.obj2html(self, "#{0}".self.id)
         return ar.obj2html(self)
         # return E.span(ar.obj2html(self), ' ', self.summary)
-
-    def get_change_observers(self):
-        yield self.assigned_to
-        yield self.reporter
-        # for star in rt.models.stars.Star.for_obj(self):
-        #     yield star.user
-        for vote in rt.models.votes.Vote.objects.filter(votable=self):
-            yield vote.user
 
     def get_notify_message(self, ar, cw):
         return E.tostring(E.p(

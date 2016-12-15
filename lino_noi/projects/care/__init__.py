@@ -7,9 +7,10 @@ introduction.
 .. autosummary::
    :toctree:
 
-   settings
-   roles
    lib
+   roles
+   settings
+   workflows
 
 """
 

@@ -71,8 +71,7 @@ class Vote(UserAuthored, Created):
         abstract = dd.is_abstract_model(__name__, 'Vote')
 
     state = VoteStates.field(default=VoteStates.as_callable('watching'))
-    votable = dd.ForeignKey(
-        config.votable_model, verbose_name=_("Votable"))
+    votable = dd.ForeignKey(config.votable_model)
     priority = models.SmallIntegerField(_("Priority"), default=0)
     rating = Ratings.field(blank=True)
     remark = dd.RichTextField(_("Remark"), blank=True)
@@ -93,12 +92,7 @@ class Vote(UserAuthored, Created):
 
 class Votes(dd.Table):
     model = 'votes.Vote'
-    stay_in_grid = True
-    detail_layout = dd.FormLayout("""
-    user
-    votable
-    state priority rating
-    """, window_size=(40, 'auto'))
+    # stay_in_grid = True
     required_roles = dd.required(VotesUser)
 
     parameters = ObservedPeriod(
@@ -115,6 +109,27 @@ class Votes(dd.Table):
     params_layout = """
     user state reporter show_todo
     start_date end_date observed_event"""
+
+    detail_layout = dd.FormLayout("""
+    state
+    priority
+    rating
+    """, window_size=(40, 'auto'))
+
+    @classmethod
+    def do_setup(self):
+        self.detail_action.hide_top_toolbar = True
+
+    @classmethod
+    def get_detail_title(self, ar, obj):
+        """Overrides the default beaviour
+
+        """
+        me = ar.get_user()
+        if me == obj.user:
+            return _("My vote about #{}").format(obj.pk)
+        else:
+            return _("{}'s vote about #{}").format(me, obj.pk)
 
     @classmethod
     def get_simple_parameters(cls):
@@ -165,7 +180,6 @@ class MyVotes(My, Votes):
         kw.update(show_todo=dd.YesNo.yes)
         return kw
 
-
 class VotesByVotable(Votes):
     """Show all votes on this object.
 
@@ -173,7 +187,6 @@ class VotesByVotable(Votes):
     label = _("Votes")
     master_key = 'votable'
     column_names = 'user state priority rating *'
-
 
 # class MyOfferedVotes(MyVotes):
 #     """List of my help offers to other users' requests.
