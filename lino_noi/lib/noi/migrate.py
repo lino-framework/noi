@@ -285,7 +285,7 @@ class Migrator(Migrator):
             if not assigned_to_id:
                 return ticket
             vote = votes_Vote(
-                ticket=ticket, user_id=assigned_to_id,
+                votable=ticket, user_id=assigned_to_id,
                 state=settings.SITE.models.votes.VoteStates.assigned)
             return (ticket, vote)
 
