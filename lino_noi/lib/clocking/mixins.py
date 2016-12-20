@@ -32,8 +32,9 @@ class Workable(dd.Model):
     class Meta:
         abstract = True
 
-    start_session = StartTicketSession()
-    end_session = EndTicketSession()
+    if dd.is_installed('clocking'):
+        start_session = StartTicketSession()
+        end_session = EndTicketSession()
 
     def is_workable_for(self, user):
         """Return True if the given user can start a working session on this

@@ -245,25 +245,21 @@ The main menu
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Office : My Votes, My Excerpts, My Comments, My Notification messages
 - Pleas : My Pleas, Where I can help, Pleas to to, Active pleas, All pleas, Unassigned pleas, Active projects
-- Clocking : Sessions
 - Reports :
   - System : Broken GFKs
-  - Clocking : Service Reports
 - Configure :
   - System : Site Parameters, Help Texts, Users
   - Places : Countries, Places
   - Topics : Topics, Topic groups
-  - Office : Excerpt Types, My Text Field Templates
+  - Office : Excerpt Types
   - Pleas : Projects, Projects (tree), Project Types, Ticket types, Sites
   - Faculties : Faculties (tree), Faculties (all)
-  - Clocking : Session Types
 - Explorer :
-  - System : content types, Authorities, User types, Notification messages, Changes, All dashboard widgets
+  - System : content types, Authorities, User types, Notification messages, Changes
   - Topics : Interests
   - Pleas : Votes, Vote states, Dependencies, States
-  - Office : Excerpts, Comments, Text Field Templates
+  - Office : Excerpts, Comments
   - Faculties : Competences
-  - Clocking : Sessions
 - Site : About
 
 
@@ -273,9 +269,6 @@ The main menu
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Office : My Votes, My Excerpts, My Comments, My Notification messages
 - Pleas : My Pleas, Where I can help, Pleas to to
-- Configure :
-  - Places : Countries
-  - Office : My Text Field Templates
 - Site : About
 
 Lists of pleas
@@ -291,7 +284,7 @@ My pleas
 ================================================================== ========= ======= ===========================
  Overview                                                           Faculty   Topic   Actions
 ------------------------------------------------------------------ --------- ------- ---------------------------
- `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__                     [☆] **New** → [♥] [☉] [⚔]
+ `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__                     [☆] **New** → [☎] [☉] [☐]
 ================================================================== ========= ======= ===========================
 <BLANKLINE>
 
@@ -349,7 +342,7 @@ the detail window of a ticket.
       - (general1_2): **Reporter** (reporter), **Faculty** (faculty), **Topic** (topic)
       - (general1_3): **Site** (site), **Actions** (workflow_buttons)
     - **Assignable workers** (faculties.AssignableWorkersByTicket) [visible for connector admin]
-  - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user connector admin], **Sessions** (SessionsByTicket) [visible for connector admin]
+  - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user connector admin]
 - **History** (changes.ChangesByMaster) [visible for connector admin]
 - **Votes** (votes.VotesByVotable) [visible for user connector admin]
 - **More** (more) [visible for connector admin]:

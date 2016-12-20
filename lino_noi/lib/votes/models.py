@@ -112,7 +112,7 @@ class Votes(dd.Table):
 
     detail_layout = dd.FormLayout("""
     state
-    priority
+    priority nickname
     rating
     """, window_size=(40, 'auto'))
 

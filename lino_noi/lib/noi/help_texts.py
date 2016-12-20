@@ -151,8 +151,13 @@ in an active state."""),
     'lino_noi.lib.tickets.ui.ActiveTickets.model' : _("""alias of Ticket"""),
     'lino_noi.lib.tickets.ui.MyTickets' : _("""Show all active tickets reported by me."""),
     'lino_noi.lib.tickets.ui.MyTickets.model' : _("""alias of Ticket"""),
+    'lino_noi.lib.users.desktop.UserDetail' : _("""Layout of User Detail in Lino Noi."""),
+    'lino_noi.lib.users.desktop.RegisterUser' : _("""Fill a form in order to register as a new system user."""),
+    'lino_noi.lib.users.desktop.NewUsers' : _("""List of new users to be confirmed by the system admin."""),
+    'lino_noi.lib.users.models.VerifyUser' : _("""Enter your verification code."""),
     'lino_noi.lib.users.models.User.callme_mode' : _("""Whether other users can see my contact data."""),
-    'lino_noi.lib.users.models.UserDetail' : _("""Layout of User Detail in Lino Noi."""),
+    'lino_noi.lib.users.models.User.verification_code' : _("""A random string set for every new user. Used for
+online_registration."""),
     'lino_noi.lib.votes.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_noi.lib.votes.Plugin.votable_model' : _("""The things we are voting about. A string referring to the model
 which represents a votable in your application.  Default value is

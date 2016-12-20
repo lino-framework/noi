@@ -65,11 +65,13 @@ if settings.SITE.use_new_unicode_symbols:
 
 else:    
     TicketStates.new.button_text ="⛶"  # SQUARE FOUR CORNERS (U+26F6)
-    TicketStates.talk.button_text ="⚔"  # CROSSED SWORDS (U+2694)	
+    # TicketStates.talk.button_text = "⚔"  # CROSSED SWORDS (U+2694)
+    TicketStates.talk.button_text = "☎"  # Black Telephone (U+260E)
     TicketStates.opened.button_text = "☉"  # SUN (U+2609)	
     # TicketStates.started.button_text="☭"  # HAMMER AND SICKLE (U+262D)
     TicketStates.started.button_text = "⚒"  # HAMMER AND PICK (U+2692
-    TicketStates.sticky.button_text="♥"  # BLACK HEART SUIT (U+2665)
+    # TicketStates.sticky.button_text="♥"  # BLACK HEART SUIT (U+2665)
+    TicketStates.sticky.button_text="♾"  # (U+267E)
     TicketStates.sleeping.button_text = "☾"  # LAST QUARTER MOON (U+263E)
     TicketStates.ready.button_text = "☐"  # BALLOT BOX \u2610
     TicketStates.closed.button_text = "☑"  # BALLOT BOX WITH CHECK \u2611
@@ -216,10 +218,12 @@ TicketStates.sticky.add_transition(
     required_states="new")
 TicketStates.new.add_transition(
     required_states="sticky")
+TicketStates.talk.add_transition(MarkTicketTalk)
 TicketStates.opened.add_transition(MarkTicketOpened)
 TicketStates.started.add_transition(MarkTicketStarted)
+TicketStates.ready.add_transition(
+    required_states="new opened started talk")
 TicketStates.closed.add_transition(MarkTicketClosed)
-TicketStates.talk.add_transition(MarkTicketTalk)
 
 VoteStates.watching.add_transition(
     required_states="candidate assigned")
