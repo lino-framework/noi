@@ -15,12 +15,14 @@ from django.conf import settings
 from lino.api import dd, rt
 from lino.utils.dpy import Migrator, override
 
+
 def noop(*args):
     return None
 
 
 class Migrator(Migrator):
     "The standard migrator for :ref:`noi`."
+
     def migrate_from_0_0_1(self, globals_dict):
         """
         - Convert products to topics.
@@ -68,7 +70,7 @@ class Migrator(Migrator):
         def create_products_productcat(id, name, description):
             kw = dict()
             kw.update(id=id)
-            if name is not None: kw.update(bv2kw('name',name))
+            if name is not None: kw.update(bv2kw('name', name))
             kw.update(description=description)
             return products_ProductCat(**kw)
 
@@ -77,13 +79,16 @@ class Migrator(Migrator):
             kw = dict()
             kw.update(id=id)
             kw.update(ref=ref)
-            if name is not None: kw.update(bv2kw('name',name))
-            if description is not None: kw.update(bv2kw('description',description))
+            if name is not None: kw.update(bv2kw('name', name))
+            if description is not None: kw.update(bv2kw('description', description))
             kw.update(topic_group_id=cat_id)
             return products_Product(**kw)
 
         @override(globals_dict)
-        def create_tickets_ticket(id, modified, created, closed, private, planned_time, project_id, site_id, product_id, nickname, summary, description, upgrade_notes, ticket_type_id, duplicate_of_id, reported_for_id, fixed_for_id, assigned_to_id, reporter_id, state, waiting_for, deadline, priority, feedback, standby, faculty_id):
+        def create_tickets_ticket(id, modified, created, closed, private, planned_time, project_id, site_id, product_id,
+                                  nickname, summary, description, upgrade_notes, ticket_type_id, duplicate_of_id,
+                                  reported_for_id, fixed_for_id, assigned_to_id, reporter_id, state, waiting_for,
+                                  deadline, priority, feedback, standby, faculty_id):
             if state: state = settings.SITE.modules.tickets.TicketStates.get_by_value(state)
             kw = dict()
             kw.update(id=id)
@@ -131,7 +136,7 @@ class Migrator(Migrator):
             kw.update(id=id)
             kw.update(ref=ref)
             kw.update(parent_id=parent_id)
-            if name is not None: kw.update(bv2kw('name',name))
+            if name is not None: kw.update(bv2kw('name', name))
             kw.update(affinity=affinity)
             kw.update(topic_group_id=product_cat_id)
             return faculties_Faculty(**kw)
@@ -151,7 +156,7 @@ class Migrator(Migrator):
             # kw.update(ref=ref)
             kw.update(seqno=seqno)
             kw.update(parent_id=parent_id)
-            if name is not None: kw.update(bv2kw('name',name))
+            if name is not None: kw.update(bv2kw('name', name))
             kw.update(affinity=affinity)
             # kw.update(product_cat_id=product_cat_id)
             return faculties_Faculty(**kw)
@@ -181,7 +186,7 @@ class Migrator(Migrator):
             globals_dict.update(create_tickets_deployment=noop)
             globals_dict.update(create_tickets_milestone=noop)
         return '1.0.2'
-    
+
     def migrate_from_1_0_2(self, globals_dict):
         """
         - convert stars.Star to votes.Vote
@@ -194,7 +199,7 @@ class Migrator(Migrator):
         # users_User = resolve_model("users.User")
         votes_Vote = rt.models.votes.Vote
         tickets_Ticket = rt.models.tickets.Ticket
-        
+
         @override(globals_dict)
         def create_stars_star(id, user_id, owner_type_id, owner_id, nickname):
             # owner_type_id = new_content_type_id(owner_type_id)
@@ -208,7 +213,10 @@ class Migrator(Migrator):
             return votes_Vote(**kw)
 
         @override(globals_dict)
-        def create_tickets_ticket(id, modified, created, assigned_to_id, closed, private, planned_time, project_id, site_id, topic_id, nickname, summary, description, upgrade_notes, ticket_type_id, duplicate_of_id, reported_for_id, fixed_for_id, reporter_id, state, rating, waiting_for, deadline, priority, feedback, standby, faculty_id):
+        def create_tickets_ticket(id, modified, created, assigned_to_id, closed, private, planned_time, project_id,
+                                  site_id, topic_id, nickname, summary, description, upgrade_notes, ticket_type_id,
+                                  duplicate_of_id, reported_for_id, fixed_for_id, reporter_id, state, rating,
+                                  waiting_for, deadline, priority, feedback, standby, faculty_id):
             if state: state = settings.SITE.modules.tickets.TicketStates.get_by_value(state)
             # if rating: rating = settings.SITE.modules.tickets.Ratings.get_by_value(rating)
             kw = dict()
@@ -240,8 +248,7 @@ class Migrator(Migrator):
             kw.update(standby=standby)
             kw.update(faculty_id=faculty_id)
             return tickets_Ticket(**kw)
-        
-        
+
         return '2016.12.0'
 
     def migrate_from_2016_12_0(self, globals_dict):
@@ -251,8 +258,12 @@ class Migrator(Migrator):
         """
         votes_Vote = rt.models.votes.Vote
         tickets_Ticket = rt.models.tickets.Ticket
+
         @override(globals_dict)
-        def create_tickets_ticket(id, modified, created, assigned_to_id, closed, private, planned_time, project_id, site_id, topic_id, nickname, summary, description, upgrade_notes, ticket_type_id, duplicate_of_id, reported_for_id, fixed_for_id, reporter_id, state, waiting_for, deadline, priority, feedback, standby, faculty_id):
+        def create_tickets_ticket(id, modified, created, assigned_to_id, closed, private, planned_time, project_id,
+                                  site_id, topic_id, nickname, summary, description, upgrade_notes, ticket_type_id,
+                                  duplicate_of_id, reported_for_id, fixed_for_id, reporter_id, state, waiting_for,
+                                  deadline, priority, feedback, standby, faculty_id):
             if state: state = settings.SITE.modules.tickets.TicketStates.get_by_value(state)
             kw = dict()
             kw.update(id=id)
@@ -285,7 +296,7 @@ class Migrator(Migrator):
             if not assigned_to_id:
                 return ticket
             vote = votes_Vote(
-                ticket=ticket, user_id=assigned_to_id,
+                votable=ticket, user_id=assigned_to_id, created=created,
                 state=settings.SITE.models.votes.VoteStates.assigned)
             return (ticket, vote)
 
