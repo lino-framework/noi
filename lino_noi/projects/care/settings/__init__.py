@@ -31,6 +31,7 @@ class Site(Site):
     user_types_module = 'lino_noi.projects.care.roles'
     workflows_module = 'lino_noi.projects.care.workflows'
     use_websockets = False
+    textfield_format = 'plain'
 
     def get_apps_modifiers(self, **kw):
         kw = super(Site, self).get_apps_modifiers(**kw)

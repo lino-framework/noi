@@ -88,14 +88,8 @@ add('50', _("Done"), 'done')
 VoteStates.todo_states = VoteStates.filter(show_in_todo=True)
 
 
-class TicketAction(dd.ChangeStateAction, NotifyingAction):
+class TicketAction(dd.ChangeStateAction):
     
-    def get_notify_owner(self, ar, obj):
-        return obj
-
-    def get_notify_recipients(self, ar, obj):
-        yield obj.get_notify_recipients(ar)
-
     def get_action_permission(self, ar, obj, state):
         me = ar.get_user()
         if obj.user != me:
@@ -104,7 +98,16 @@ class TicketAction(dd.ChangeStateAction, NotifyingAction):
         return super(TicketAction,
                      self).get_action_permission(ar, obj, state)
 
-class MarkTicketOpened(TicketAction):
+class NotifyingTicketAction(TicketAction):
+    
+    def get_notify_owner(self, ar, obj):
+        return obj
+
+    def get_notify_recipients(self, ar, obj):
+        yield obj.get_notify_recipients(ar)
+
+    
+class MarkTicketOpened(NotifyingTicketAction):
     """Mark this ticket as open.
     """
     label = pgettext("verb", "Open")
@@ -113,23 +116,23 @@ class MarkTicketOpened(TicketAction):
 
     def get_notify_subject(self, ar, obj):
         subject = _("{user} opened {ticket}.").format(
-            user=obj.user, ticket=obj)
+            user=ar.get_user(), ticket=obj)
         return subject
     
     
-class MarkTicketStarted(TicketAction):
+class MarkTicketStarted(NotifyingTicketAction):
     """Mark this ticket as started.
     """
-    label = _("Activate")
+    label = pgettext("verb", "Start")
     required_states = 'opened'
 
     def get_notify_subject(self, ar, obj):
         subject = _("{user} activated {ticket}.").format(
-            user=obj.user, ticket=obj)
+            user=ar.get_user(), ticket=obj)
         return subject
     
     
-class MarkTicketClosed(TicketAction):
+class MarkTicketClosed(NotifyingTicketAction):
     """Mark this ticket as closed.
     """
     label = pgettext("verb", "Close")
@@ -137,10 +140,10 @@ class MarkTicketClosed(TicketAction):
 
     def get_notify_subject(self, ar, obj):
         subject = _("{user} activated {ticket}.").format(
-            user=obj.user, ticket=obj)
+            user=ar.get_user(), ticket=obj)
         return subject
 
-class MarkTicketTalk(TicketAction):
+class MarkTicketTalk(NotifyingTicketAction):
     """Mark this ticket as talk.
     """
     label = pgettext("verb", "Talk")
@@ -148,7 +151,7 @@ class MarkTicketTalk(TicketAction):
 
     def get_notify_subject(self, ar, obj):
         subject = _("{user} wants to talk about {ticket}.").format(
-            user=obj.user, ticket=obj)
+            user=ar.get_user(), ticket=obj)
         return subject
 
 class VoteAction(dd.ChangeStateAction, NotifyingAction):
