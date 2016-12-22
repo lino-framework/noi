@@ -89,7 +89,11 @@ VoteStates.todo_states = VoteStates.filter(show_in_todo=True)
 
 
 class TicketAction(dd.ChangeStateAction):
-    
+    """Base class for ticket actions.
+
+    Make sure that only *triagers* can act on tickets of other users.
+
+    """
     def get_action_permission(self, ar, obj, state):
         me = ar.get_user()
         if obj.user != me:
@@ -98,61 +102,61 @@ class TicketAction(dd.ChangeStateAction):
         return super(TicketAction,
                      self).get_action_permission(ar, obj, state)
 
-class NotifyingTicketAction(TicketAction):
+# class NotifyingTicketAction(TicketAction):
     
-    def get_notify_owner(self, ar, obj):
-        return obj
+#     def get_notify_owner(self, ar, obj):
+#         return obj
 
-    def get_notify_recipients(self, ar, obj):
-        yield obj.get_notify_recipients(ar)
+#     def get_notify_recipients(self, ar, obj):
+#         yield obj.get_notify_recipients(ar)
 
     
-class MarkTicketOpened(NotifyingTicketAction):
+class MarkTicketOpened(TicketAction):
     """Mark this ticket as open.
     """
     label = pgettext("verb", "Open")
     required_states = 'new closed'
     show_in_bbar = True
 
-    def get_notify_subject(self, ar, obj):
-        subject = _("{user} opened {ticket}.").format(
-            user=ar.get_user(), ticket=obj)
-        return subject
+    # def get_notify_subject(self, ar, obj):
+    #     subject = _("{user} opened {ticket}.").format(
+    #         user=ar.get_user(), ticket=obj)
+    #     return subject
     
     
-class MarkTicketStarted(NotifyingTicketAction):
+class MarkTicketStarted(TicketAction):
     """Mark this ticket as started.
     """
     label = pgettext("verb", "Start")
-    required_states = 'opened'
+    required_states = 'talk opened'
 
-    def get_notify_subject(self, ar, obj):
-        subject = _("{user} activated {ticket}.").format(
-            user=ar.get_user(), ticket=obj)
-        return subject
+    # def get_notify_subject(self, ar, obj):
+    #     subject = _("{user} activated {ticket}.").format(
+    #         user=ar.get_user(), ticket=obj)
+    #     return subject
     
+class MarkTicketReady(TicketAction):
+    """Mark this ticket as ready.
+    """
+    required_states = "new opened started talk"
     
-class MarkTicketClosed(NotifyingTicketAction):
+class MarkTicketClosed(TicketAction):
     """Mark this ticket as closed.
     """
     label = pgettext("verb", "Close")
-    required_states = 'started opened'
+    required_states = 'talk started opened'
 
-    def get_notify_subject(self, ar, obj):
-        subject = _("{user} activated {ticket}.").format(
-            user=ar.get_user(), ticket=obj)
-        return subject
 
-class MarkTicketTalk(NotifyingTicketAction):
+class MarkTicketTalk(TicketAction):
     """Mark this ticket as talk.
     """
     label = pgettext("verb", "Talk")
     required_states = "new opened started sleeping ready"
 
-    def get_notify_subject(self, ar, obj):
-        subject = _("{user} wants to talk about {ticket}.").format(
-            user=ar.get_user(), ticket=obj)
-        return subject
+    # def get_notify_subject(self, ar, obj):
+    #     subject = _("{user} wants to talk about {ticket}.").format(
+    #         user=ar.get_user(), ticket=obj)
+    #     return subject
 
 class VoteAction(dd.ChangeStateAction, NotifyingAction):
     
@@ -224,8 +228,7 @@ TicketStates.new.add_transition(
 TicketStates.talk.add_transition(MarkTicketTalk)
 TicketStates.opened.add_transition(MarkTicketOpened)
 TicketStates.started.add_transition(MarkTicketStarted)
-TicketStates.ready.add_transition(
-    required_states="new opened started talk")
+TicketStates.ready.add_transition(MarkTicketReady)
 TicketStates.closed.add_transition(MarkTicketClosed)
 
 VoteStates.watching.add_transition(
