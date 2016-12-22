@@ -151,6 +151,10 @@ in an active state."""),
     'lino_noi.lib.tickets.ui.ActiveTickets.model' : _("""alias of Ticket"""),
     'lino_noi.lib.tickets.ui.MyTickets' : _("""Show all active tickets reported by me."""),
     'lino_noi.lib.tickets.ui.MyTickets.model' : _("""alias of Ticket"""),
+    'lino_noi.lib.users.choicelists.UserStates' : _("""The list of possible choices for the state field
+of a User."""),
+    'lino_noi.lib.users.choicelists.MarkUserActive' : _("""Activate this user. This requires that the user has confirmed their
+verifcation code, and that a username and password are set."""),
     'lino_noi.lib.users.desktop.UserDetail' : _("""Layout of User Detail in Lino Noi."""),
     'lino_noi.lib.users.desktop.RegisterUser' : _("""Fill a form in order to register as a new system user."""),
     'lino_noi.lib.users.desktop.NewUsers' : _("""List of new users to be confirmed by the system admin."""),
