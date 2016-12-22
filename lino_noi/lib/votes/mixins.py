@@ -91,6 +91,6 @@ class Votable(ChangeObservable):
 
     def get_change_observers(self):
         for vote in rt.models.votes.Vote.objects.filter(votable=self):
-            yield vote.user
+            yield (vote.user, vote.mail_mode or vote.user.mail_mode)
 
     

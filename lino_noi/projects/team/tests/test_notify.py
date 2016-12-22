@@ -17,13 +17,15 @@ Or::
 
 """
 
-
 from __future__ import unicode_literals
+
+import datetime
 
 from mock import patch
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.utils.timezone import make_aware
 
 from lino import AFTER18
 from lino.api import rt
@@ -37,6 +39,7 @@ from lino.utils.instantiator import create
 
 from lino.modlib.notify.models import send_pending_emails_daily
 from lino.modlib.notify.models import send_pending_emails_often
+from lino.modlib.notify.choicelists import MailModes
 
 import contextlib
 
@@ -109,8 +112,14 @@ class TestCase(TestCase):
         self.assertEqual(msg.user, aline)
         self.assertEqual(msg.body, """\
 robin commented on #1 (Save the world): I don't agree.""")
-
-
+        
+        # manually set created timestamp so we can test on it later.
+        now = datetime.datetime(2016, 12, 22, 19, 45, 55)
+        if settings.USE_TZ:
+            now = make_aware(now)
+        msg.created = now
+        msg.save()
+        
         settings.SERVER_EMAIL = 'root@example.com'
         
         with capture_stdout() as out:
@@ -118,23 +127,27 @@ robin commented on #1 (Save the world): I don't agree.""")
 
         out = out.getvalue().strip()
         # print(out)
-        self.assertEquivalent(out, """send email
+        expected = """send email
 Sender: root@example.com
 To: aline@example.com
-Subject: [Django] Change in Comment #1
+Subject: [Django] 1 notifications
 
 <body>
-<p>aline,</p>
+Dear aline,
+You have 1 unseen notifications
 
+<div>
+<H3>22/12/2016 19:45</H3>
 robin commented on #1 (Save the world): I don't agree.
+</div>
 
-<p>Subsequent changes to Comment #1 will not be notified until you visit http://team.lino-framework.org/ and mark this notification as seen.</p>
-
-</body>
-""")
+<body>
+"""
+        self.assertEquivalent(expected, out)
         
         self.assertEqual(logger.debug.call_count, 1)
         logger.debug.assert_called_with(
-            "Send out emails for %d messages.", 1)
-        logger.info.assert_called_with(
-            'Notify %s users about %s', 1, 'Change by robin')
+            'Send out %s summaries for %d users.',
+            MailModes.immediately, 1)
+        # logger.info.assert_called_with(
+        #     'Notify %s users about %s', 1, 'Change by robin')
