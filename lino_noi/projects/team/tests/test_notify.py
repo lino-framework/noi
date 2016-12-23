@@ -124,7 +124,7 @@ robin commented on #1 (Save the world): I don't agree.""")
         
         with capture_stdout() as out:
             send_pending_emails_often()
-
+            
         out = out.getvalue().strip()
         # print(out)
         expected = """send email
@@ -148,6 +148,6 @@ robin commented on #1 (Save the world): I don't agree.
         self.assertEqual(logger.debug.call_count, 1)
         logger.debug.assert_called_with(
             'Send out %s summaries for %d users.',
-            MailModes.immediately, 1)
+            MailModes.often, 1)
         # logger.info.assert_called_with(
         #     'Notify %s users about %s', 1, 'Change by robin')
