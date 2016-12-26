@@ -103,7 +103,7 @@ class Sessions(dd.Table):
     session_type
     """
 
-    order_by = ['-start_date', '-start_time']
+    order_by = ['-start_date', '-start_time', 'id']
     # order_by = ['start_date', 'start_time']
     # stay_in_grid = True
     parameters = ObservedPeriod(

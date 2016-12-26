@@ -44,7 +44,7 @@ class SiteAdmin(SiteAdmin, OfficeStaff, Helper, ContactsUser,
 UserTypes.clear()
 add = UserTypes.add_item
 add('000', _("Anonymous"),        UserRole, 'anonymous',
-    readonly=True, authenticated=False)
+    readonly=False, authenticated=False)
 add('100', _("User"), SimpleUser, 'user')
 add('500', _("Connector"), Connector, 'connector')
 add('900', _("Administrator"),    SiteAdmin, 'admin')

@@ -7,6 +7,8 @@ Lino Noi extension of :mod:`lino.modlib.users`.
    :toctree:
 
     models
+    choicelists
+    desktop
     fixtures.demo
     fixtures.demo2
 

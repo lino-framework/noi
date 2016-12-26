@@ -101,7 +101,8 @@ class Site(Site):
             #     self.models.blogs.Entry.latest_entries, max_num=10)
 
         if me.authenticated:
-            yield self.actors.clocking.WorkedHours
+            if self.is_installed('clocking'):
+                yield self.actors.clocking.WorkedHours
             yield self.actors.tickets.TicketsToDo
             yield self.actors.tickets.SuggestedTickets
             yield self.actors.tickets.MyTickets

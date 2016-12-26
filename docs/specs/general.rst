@@ -113,7 +113,7 @@ And here are those who don't work:
 Users
 =====
 
->>> rt.show(users.UsersOverview)
+>>> rt.show('users.UsersOverview')
 ========== ================== ==========
  Username   User type          Language
 ---------- ------------------ ----------

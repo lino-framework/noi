@@ -19,12 +19,12 @@ from django.conf import settings
 
 from lino.api import dd, rt
 from lino.modlib.users.mixins import UserAuthored, My
+from lino.modlib.notify.choicelists import MailModes
 from lino.mixins import Created, ObservedPeriod
+from lino_xl.lib.cal.mixins import daterange_text
 from .roles import VotesUser, VotesStaff
 from .choicelists import VoteStates, VoteEvents
 from .choicelists import Ratings
-
-config = dd.plugins.votes
 
 
 @dd.python_2_unicode_compatible
@@ -71,12 +71,12 @@ class Vote(UserAuthored, Created):
         abstract = dd.is_abstract_model(__name__, 'Vote')
 
     state = VoteStates.field(default=VoteStates.as_callable('watching'))
-    votable = dd.ForeignKey(config.votable_model)
+    votable = dd.ForeignKey(dd.plugins.votes.votable_model)
     priority = models.SmallIntegerField(_("Priority"), default=0)
     rating = Ratings.field(blank=True)
-    remark = dd.RichTextField(_("Remark"), blank=True)
+    # remark = dd.RichTextField(_("Remark"), blank=True)
     nickname = models.CharField(_("Nickname"), max_length=50, blank=True)
-
+    mail_mode = MailModes.field(blank=True)
 
     def __str__(self):
         return _("{0.user} {0.state} on {0.votable}").format(self)
@@ -104,16 +104,18 @@ class Votes(dd.Table):
             help_text=_("Only rows reported by this user.")),
         show_todo=dd.YesNo.field(_("To do"), blank=True),
         state=VoteStates.field(
-            blank=True, help_text=_("Only rows having this state.")))
+            blank=True, help_text=_("Only rows having this state.")),
+        mail_mode=MailModes.field(
+            blank=True, help_text=_("Only rows having this mail mode.")))
 
     params_layout = """
-    user state reporter show_todo
+    user mail_mode state reporter show_todo 
     start_date end_date observed_event"""
 
     detail_layout = dd.FormLayout("""
-    state
-    priority
-    rating
+    state mail_mode
+    priority nickname
+    rating 
     """, window_size=(40, 'auto'))
 
     @classmethod
@@ -135,6 +137,7 @@ class Votes(dd.Table):
     def get_simple_parameters(cls):
         s = super(Votes, cls).get_simple_parameters()
         s.add('state')
+        s.add('mail_mode')
         return s
 
     @classmethod

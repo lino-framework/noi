@@ -1,3 +1,5 @@
+# import os ; print "20161219 %s (pid:%s)" % (__name__, os.getpid())
+
 import datetime
 
 from ..settings import *
@@ -25,8 +27,9 @@ class Site(Site):
         if self.is_installed('excerpts'):
             self.plugins.excerpts.configure(responsible_user='robin')
 
-
+            # print "20161219 a"
 SITE = Site(globals())
+# print "20161219 b"
 DEBUG = True
 
 # the following line should not be active in a checked-in version
