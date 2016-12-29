@@ -18,7 +18,16 @@ from lino.api import dd
 from .roles import VotesStaff
 
 class VoteState(dd.State):
-    show_in_todo = False
+    """The state of a vote.
+
+    .. attribute:: vote_name
+
+        Translatable text. How a vote is called when in this state.
+
+    """
+    def __init__(self, value, text, vote_name, name=None, **kwargs):
+        super(VoteState, self).__init__(value, text, name)
+        self.vote_name = vote_name
 
 
 class VoteStates(dd.Workflow):
@@ -26,7 +35,7 @@ class VoteStates(dd.Workflow):
     for the :attr:`state <lino_noi.lib.votes.models.Vote.state>`
     field of a vote.
 
-    See :mod:`lino_noi.lib.noi.workflows`.
+    This list is populated in :mod:`lino_noi.lib.noi.workflows`.
 
     """
     required_roles = dd.required(VotesStaff)
@@ -34,7 +43,7 @@ class VoteStates(dd.Workflow):
     verbose_name_plural = _("Vote states")
     item_class = VoteState
     # max_length = 3
-    todo_states = []
+    # todo_states = []
 
 
 class Ratings(dd.ChoiceList):
@@ -71,5 +80,18 @@ class VoteEventCreated(ObservedEvent):
         return qs
 
 VoteEvents.add_item_instance(VoteEventCreated('created'))
+
+
+class VoteView(dd.Choice):
+    show_states = set([])
+    
+    # def __init__(self, value, text=None, name=None, **kwargs):
+    #     super(VoteView, self).__init__(value, text)
+    # def __init__():
+
+class VoteViews(dd.ChoiceList):
+    verbose_name = _("Vote view")
+    verbose_name_plural = _("Vote views")
+    item_class = VoteView
 
 

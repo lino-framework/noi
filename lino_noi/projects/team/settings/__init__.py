@@ -41,6 +41,8 @@ class Site(Site):
 
     default_build_method = 'appyodt'
     
+    root_urlconf = 'lino_noi.projects.team.urls'
+    
     # TODO: move migrator to lino_noi.projects.team
     migration_class = 'lino_noi.lib.noi.migrate.Migrator'
 
@@ -81,6 +83,7 @@ class Site(Site):
         # yield 'lino.modlib.awesomeuploader'
 
         yield 'lino_noi.lib.noi'
+        yield 'lino.modlib.restful'
 
     def get_default_required(self, **kw):
         # overrides the default behaviour which would add
@@ -103,9 +106,11 @@ class Site(Site):
         if me.authenticated:
             if self.is_installed('clocking'):
                 yield self.actors.clocking.WorkedHours
-            yield self.actors.tickets.TicketsToDo
-            yield self.actors.tickets.SuggestedTickets
+            # yield self.actors.tickets.TicketsToDo
             yield self.actors.tickets.MyTickets
+            yield self.actors.tickets.SuggestedTickets
+            yield self.actors.votes.MyOffers
+            yield self.actors.votes.MyTasks
             # yield self.actors.tickets.ActiveTickets
             # yield self.actors.tickets.InterestingTickets
         else:

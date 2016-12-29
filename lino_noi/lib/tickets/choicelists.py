@@ -128,6 +128,8 @@ class TicketStates(dd.Workflow):
         It has been decided that we won't fix this ticket.
 
     """
+    # verbose_name = _("Ticket state")
+    verbose_name_plural = _("Ticket states")
     item_class = TicketState
     column_names = "value name text button_text active"
     active = models.BooleanField(_("Active"), default=False)

@@ -37,7 +37,8 @@ class Plugin(ad.Plugin):
     def setup_main_menu(config, site, profile, m):
         mg = site.plugins.office
         m = m.add_menu(mg.app_label, mg.verbose_name)
-        m.add_action('votes.MyVotes')
+        m.add_action('votes.MyOffers')
+        m.add_action('votes.MyTasks')
 
     def setup_explorer_menu(config, site, profile, m):
         p = site.plugins.tickets

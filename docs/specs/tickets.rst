@@ -366,19 +366,16 @@ To-Do list
 >>> rt.login('luc').user.profile
 users.UserTypes.developer:400
 
->>> rt.login('luc').show(votes.MyVotes)
+>>> rt.login('luc').show(votes.MyTasks)
 ... #doctest: +REPORT_UDIFF
-=============================== ============ ========== ======== ==========
- Ticket                          Vote state   Priority   Rating   Nickname
-------------------------------- ------------ ---------- -------- ----------
- #8 (Is there any Bar in Foo?)   Assigned     0
- #110 (Ticket 93)                Ready        0
- #93 (Ticket 76)                 Assigned     0
- #76 (Ticket 59)                 Candidate    0
- #64 (Ticket 47)                 Assigned     0
- #47 (Ticket 30)                 Candidate    0
- #34 (Ticket 17)                 Ready        0
-=============================== ============ ========== ======== ==========
+========== ====================== ======== ========== ==================================
+ Priority   Ticket                 Author   Nickname   Actions
+---------- ---------------------- -------- ---------- ----------------------------------
+ 0          #93 (Ticket 76)        jean                **Assigned** → [Watching] [Done]
+ 0          #76 (Ticket 59)        jean                **Done**
+ 0          #30 (Ticket 13)        jean                **Assigned** → [Watching] [Done]
+ 0          #13 (Bar cannot foo)   jean                **Done**
+========== ====================== ======== ========== ==================================
 <BLANKLINE>
 
 
@@ -576,9 +573,11 @@ Filtering tickets
 +-----------------+-----------------+---------------------------------------------------------------+
 | Internal name   | Verbose name    | Help text                                                     |
 +=================+=================+===============================================================+
-| reporter        | Reporter        | Only rows reporter by this user.                              |
+| reporter        | Reporter        | Only rows reported by this user.                              |
 +-----------------+-----------------+---------------------------------------------------------------+
-| assigned_to     | Assigned to     | Only tickets assigned to this user.                           |
+| assigned_to     | Voted by        | Only tickets having a vote by this user.                      |
++-----------------+-----------------+---------------------------------------------------------------+
+| not_assigned_to | Not voted by    | Only tickets having no vote by this user.                     |
 +-----------------+-----------------+---------------------------------------------------------------+
 | interesting_for | Interesting for | Only tickets interesting for this partner.                    |
 +-----------------+-----------------+---------------------------------------------------------------+
@@ -717,14 +716,14 @@ Filtering tickets
  17    Ticket 0                                    jean              Lino Cosi                      [▶] [☆] **Closed** → [☉]               shop
  16    How to get bar from foo                     Rolf Rompen       Lino Welfare                   [▶] [★] **Ready** → [☎]                research
  15    Bars have no foo                            Romain Raffault   Lino Core                      [▶] [☆] **Sleeping** → [☎]             docs
- 14    Bar cannot baz                              marc              Lino Voga                      [▶] [★] **Started** → [☎] [☐] [☑]      téam
+ 14    Bar cannot baz                              marc              Lino Voga                      [▶] [☆] **Started** → [☎] [☐] [☑]      téam
  13    Bar cannot foo                              jean              Lino Cosi      Documentation   [▶] [☆] **Sticky** → [⛶]               linö
  12    Foo cannot bar                              Rolf Rompen       Lino Welfare   Code changes    [▶] [★] **Opened** → [☎] [⚒] [☐] [☑]   shop
  11    Class-based Foos and Bars?                  mathieu           Lino Core                      [▶] [☆] **Talk** → [⚒] [☐] [☑]         research
  10    Where can I find a Foo when bazing Bazes?   luc               Lino Voga                      [▶] [☆] **New** → [♾] [☎] [☉] [☐]      docs
  9     Foo never matches Bar                       jean              Lino Cosi      Testing         [▶] [☆] **Cancelled**                  téam
  8     Is there any Bar in Foo?                    Robin Rood        Lino Welfare                   [▶] [☆] **Closed** → [☉]               linö
- 7     No Foo after deleting Bar                   Romain Raffault   Lino Core                      [▶] [★] **Ready** → [☎]                shop
+ 7     No Foo after deleting Bar                   Romain Raffault   Lino Core                      [▶] [☆] **Ready** → [☎]                shop
  6     Sell bar in baz                             mathieu           Lino Voga      Analysis        [▶] [☆] **Sleeping** → [☎]             research
  5     Cannot create Foo                           luc               Lino Cosi                      [▶] [☆] **Started** → [☎] [☐] [☑]
  4     Foo and bar don't baz                       Robin Rood        Lino Welfare                   [▶] [☆] **Sticky** → [⛶]               docs

@@ -2,10 +2,22 @@
 # Copyright 2015-2016 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""Defines the standard user roles for `presto` and `lino_noi`."""
+"""Defines a set of user roles and fills
+:class:`lino.modlib.users.choicelists.UserTypes`.
+
+This is used as the :attr:`user_types_module
+<lino.core.site.Site.user_types_module>` for
+:mod:`lino_noi.projects.team`.
+
+TODO: move this to :mod:`lino_noi.projects.team.roles` because 
+this is used only by :mod:`lino_noi.projects.team`
+while :mod:`lino_noi.projects.care` does not use this module at all.
+
+"""
 
 
 from lino.core.roles import UserRole, SiteAdmin
+from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino_noi.lib.tickets.roles import Triager
 from lino_noi.lib.clocking.roles import Worker
@@ -22,7 +34,7 @@ class EndUser(OfficeUser, VotesUser):
     pass
 
 
-class Consultant(EndUser, Worker):
+class Consultant(EndUser, Worker, ExcerptsUser):
     """A **consultant** is somebody who may both report tickets and work
     on them.
 
@@ -38,7 +50,7 @@ class Developer(Consultant):
     pass
 
 
-class Senior(Developer, Triager):
+class Senior(Developer, Triager, ExcerptsStaff):
     """A **senior developer** is a *developer* who is additionally
     responsible for triaging tickets
 

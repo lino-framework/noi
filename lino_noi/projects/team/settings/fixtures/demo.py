@@ -15,11 +15,17 @@ from lino_xl.lib.cal.choicelists import DurationUnits
 from lino_noi.lib.clocking.roles import Worker
 from lino.utils.quantities import Duration
 
+def vote(user, ticket, state, **kw):
+    u = rt.models.users.User.objects.get(username=user)
+    t = rt.models.tickets.Ticket.objects.get(pk=ticket)
+    s = rt.models.votes.VoteStates.get_by_name(state)
+    return rt.models.votes.Vote(user=u, votable=t, state=s, **kw)
 
 def objects():
     yield tickets_objects()
     yield clockings_objects()
     yield faculties_objects()
+    yield votes_objects()
 
 
 def tickets_objects():
@@ -317,3 +323,9 @@ def faculties_objects():
     Foo_never_matches_Bar = rt.models.tickets.Ticket.objects.get(summary='Foo never matches Bar')
     Foo_never_matches_Bar.faculty = Testing
     Foo_never_matches_Bar.save()
+
+def votes_objects():
+
+    yield vote('mathieu', 1, 'candidate')
+    yield vote('luc', 1, 'candidate')
+    yield vote('jean', 2, 'assigned')

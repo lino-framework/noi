@@ -591,9 +591,9 @@ class Ticket(UserAuthored, mixins.CreatedModified,
             _("{user} worked on [ticket {t}]").format(
                 user=ar.get_user(), t=self.id)))
 
-    def get_vote_rater(self, vote):
+    def get_vote_rater(self):
         return self.reporter
-
+       
     def is_workable_for(self, user):
         if self.standby or self.closed:
             return False

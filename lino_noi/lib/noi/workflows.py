@@ -2,12 +2,11 @@
 # Copyright 2016 Luc Saffre
 #
 # License: BSD (see file COPYING for details)
-"""Defines the default workflows for :ref:`noi` applications.
+"""The default :attr:`workflows_module
+<lino.core.site.Site.workflows_module>` for :ref:`noi` applications.
 
 This workflow requires that both :mod:`lino_noi.lib.tickets` and
 :mod:`lino_noi.lib.votes` are installed.
-
-See also :attr:`lino.core.site.Site.workflows_module`.
 
 If :attr:`use_new_unicode_symbols
 <lino.core.site.Site.use_new_unicode_symbols>` is True, ticket states
@@ -28,7 +27,7 @@ from django.conf import settings
 
 from lino_noi.lib.tickets.choicelists import TicketStates
 from lino_noi.lib.tickets.roles import Triager
-from lino_noi.lib.votes.choicelists import VoteStates
+from lino_noi.lib.votes.choicelists import VoteStates, VoteViews
 from lino.modlib.notify.actions import NotifyingAction
 
 """
@@ -76,17 +75,6 @@ else:
     TicketStates.ready.button_text = "☐"  # BALLOT BOX \u2610
     TicketStates.closed.button_text = "☑"  # BALLOT BOX WITH CHECK \u2611
     TicketStates.cancelled.button_text="☒"  # BALLOT BOX WITH X (U+2612)
-
-add = VoteStates.add_item
-add('10', _("Watching"), 'watching')
-add('20', _("Candidate"), 'candidate', show_in_todo=True)
-add('30', _("Assigned"), 'assigned', show_in_todo=True)
-add('40', _("Ready"), 'ready', show_in_todo=True)
-add('50', _("Done"), 'done')
-
-# VoteStates.default_value = 'watching'
-VoteStates.todo_states = VoteStates.filter(show_in_todo=True)
-
 
 class TicketAction(dd.ChangeStateAction):
     """Base class for ticket actions.
@@ -158,9 +146,52 @@ class MarkTicketTalk(TicketAction):
     #         user=ar.get_user(), ticket=obj)
     #     return subject
 
+
+TicketStates.sticky.add_transition(
+    required_states="new")
+TicketStates.new.add_transition(
+    required_states="sticky")
+TicketStates.talk.add_transition(MarkTicketTalk)
+TicketStates.opened.add_transition(MarkTicketOpened)
+TicketStates.started.add_transition(MarkTicketStarted)
+TicketStates.ready.add_transition(MarkTicketReady)
+TicketStates.closed.add_transition(MarkTicketClosed)
+
+
+add = VoteStates.add_item
+add('10', _("Watching"), _("Interest"), 'watching')
+add('20', _("Candidate"), _("Offer"), 'candidate', show_in_todo=True)
+add('30', _("Assigned"), _("Job to do"), 'assigned', show_in_todo=True)
+add('40', _("Done"), _("Job done"), 'done')
+add('50', _("Rated"), _("Job rated"), 'rated')
+add('60', _("Cancelled"), _("Cancelled offer"), 'cancelled')  # Absage
+
+
+add = VoteViews.add_item
+add('10', _("Offers"), 'offers', show_states=set([
+    VoteStates.candidate]))
+add('20', _("Tasks"), 'tasks', show_states=set([
+    VoteStates.assigned, VoteStates.done]))
+
+
+# VoteStates.default_value = 'watching'
+# VoteStates.offers_states = 
+# VoteStates.tasks_states = 
+
+
 class VoteAction(dd.ChangeStateAction, NotifyingAction):
     
     managed_by_votable_author = False
+    msg_template = _("{user} marked {vote} as {state}.")
+    
+    def get_notify_subject(self, ar, obj):
+        subject = _(self.msg_template).format(
+            user=ar.get_user(),
+            voter=obj.user,
+            vote=obj,
+            state=obj.state,
+            ticket=obj.votable)
+        return subject
     
     def get_notify_owner(self, ar, obj):
         return obj.votable.get_notify_owner(ar, obj)
@@ -185,59 +216,62 @@ class MarkVoteAssigned(VoteAction):
     label = pgettext("verb", "Assign")
     managed_by_votable_author = True
     required_states = 'candidate'
+    msg_template = _("{user} assigned {voter} for {ticket}.")
 
-    def get_notify_subject(self, ar, obj):
-        subject = _("{author} assigned {user} for {ticket}.").format(
-            author=ar.get_user(),
-            user=obj.user,
-            ticket=obj.votable)
-        return subject
 
-class MarkVoteReady(VoteAction):
-    """Mark this vote as ready."""
-    label = _("Ready")
-    managed_by_votable_author = False
-    required_states = 'assigned'
-
-    def get_notify_subject(self, ar, obj):
-        subject = _("{user} marked {ticket} as ready.").format(
-            author=ar.get_user(),
-            user=obj.user,
-            ticket=obj.votable)
-        return subject
+class MarkVoteCancelled(VoteAction):
+    
+    label = pgettext("verb", "Cancel")
+    managed_by_votable_author = True
+    required_states = 'candidate assigned'
+    msg_template = _("{user} cancelled {vote} for {ticket}.")
 
 
 class MarkVoteDone(VoteAction):
     
     label = _("Done")
-    managed_by_votable_author = True
-    required_states = 'ready'
+    managed_by_votable_author = False
+    required_states = 'assigned'
+    msg_template = _("{user} confirmed {ticket} {state} by {voter}.")
 
-    def get_notify_subject(self, ar, obj):
-        subject = _("{author} confirmed {ticket} done by {user}.").format(
-            author=ar.get_user(),
-            user=obj.user,
-            ticket=obj.votable)
-        return subject
+    
+class MarkVoteCandidate(VoteAction):
+    
+    label = _("Candidate")
+    managed_by_votable_author = False
+    msg_template = _("{user} candidates for {ticket}.")
+    required_states = "watching open"
     
 
-TicketStates.sticky.add_transition(
-    required_states="new")
-TicketStates.new.add_transition(
-    required_states="sticky")
-TicketStates.talk.add_transition(MarkTicketTalk)
-TicketStates.opened.add_transition(MarkTicketOpened)
-TicketStates.started.add_transition(MarkTicketStarted)
-TicketStates.ready.add_transition(MarkTicketReady)
-TicketStates.closed.add_transition(MarkTicketClosed)
+class MarkVoteCandidate(VoteAction):
+    
+    label = _("Candidate")
+    managed_by_votable_author = False
+    msg_template = _("{user} candidates for {ticket}.")
+    required_states = "watching"
+    
+
+class MarkVoteRated(VoteAction):
+    """Mark this vote as rated."""
+    label = _("Rated")
+    managed_by_votable_author = True
+    required_states = 'assigned done'
+    
+    def get_action_permission(self, ar, obj, state):
+        if not obj.rating:
+            return False
+        return super(MarkVoteRated,
+                     self).get_action_permission(ar, obj, state)
+
+
 
 VoteStates.watching.add_transition(
     required_states="candidate assigned")
-VoteStates.candidate.add_transition(
-    required_states="watching assigned")
+VoteStates.candidate.add_transition(MarkVoteCandidate)
 VoteStates.assigned.add_transition(MarkVoteAssigned)
-VoteStates.assigned.add_transition(MarkVoteReady)
-VoteStates.assigned.add_transition(MarkVoteDone)
+VoteStates.done.add_transition(MarkVoteDone)
+VoteStates.rated.add_transition(MarkVoteRated)
+VoteStates.cancelled.add_transition(MarkVoteCancelled)
 
 
 

@@ -23,7 +23,7 @@ from lino.modlib.notify.choicelists import MailModes
 from lino.mixins import Created, ObservedPeriod
 from lino_xl.lib.cal.mixins import daterange_text
 from .roles import VotesUser, VotesStaff
-from .choicelists import VoteStates, VoteEvents
+from .choicelists import VoteStates, VoteEvents, VoteViews
 from .choicelists import Ratings
 
 
@@ -78,14 +78,20 @@ class Vote(UserAuthored, Created):
     nickname = models.CharField(_("Nickname"), max_length=50, blank=True)
     mail_mode = MailModes.field(blank=True)
 
+    quick_search_fields = "nickname votable__summary votable__description"
+    workflow_state_field = 'state'
+    
     def __str__(self):
-        return _("{0.user} {0.state} on {0.votable}").format(self)
+        # return _("{0.user} {0.state} on {0.votable}").format(self)
+        return _("{user}'s {vote} on {votable}").format(
+            user=self.user, vote=self.state.vote_name,
+            votable=self.votable)
 
     def disabled_fields(self, ar):
         df = super(Vote, self).disabled_fields(ar)
         me = ar.get_user()
         if not me.profile.has_required_roles([VotesStaff]):
-            if me != self.votable.get_vote_rater(self):
+            if me != self.votable.get_vote_rater():
                 df.add('rating')
         return df
 
@@ -102,14 +108,15 @@ class Votes(dd.Table):
             verbose_name=_("Reporter"),
             blank=True, null=True,
             help_text=_("Only rows reported by this user.")),
-        show_todo=dd.YesNo.field(_("To do"), blank=True),
+        # show_todo=dd.YesNo.field(_("To do"), blank=True),
+        vote_view=VoteViews.field(blank=True),
         state=VoteStates.field(
             blank=True, help_text=_("Only rows having this state.")),
         mail_mode=MailModes.field(
             blank=True, help_text=_("Only rows having this mail mode.")))
 
     params_layout = """
-    user mail_mode state reporter show_todo 
+    user mail_mode state reporter vote_view
     start_date end_date observed_event"""
 
     detail_layout = dd.FormLayout("""
@@ -145,10 +152,12 @@ class Votes(dd.Table):
         qs = super(Votes, self).get_request_queryset(ar)
         pv = ar.param_values
 
-        if pv.show_todo == dd.YesNo.no:
-            qs = qs.exclude(state__in=VoteStates.todo_states)
-        elif pv.show_todo == dd.YesNo.yes:
-            qs = qs.filter(state__in=VoteStates.todo_states)
+        if pv.vote_view:
+            qs = qs.filter(state__in=pv.vote_view.show_states)
+        # if pv.show_todo == dd.YesNo.no:
+        #     qs = qs.exclude(state__in=VoteStates.todo_states)
+        # elif pv.show_todo == dd.YesNo.yes:
+        #     qs = qs.filter(state__in=VoteStates.todo_states)
 
         if pv.observed_event:
             qs = pv.observed_event.add_filter(qs, pv)
@@ -156,9 +165,11 @@ class Votes(dd.Table):
 
     @classmethod
     def get_title_tags(self, ar):
+        pv = ar.param_values
+        if pv.vote_view:
+            pv.vote_view.text
         for t in super(Votes, self).get_title_tags(ar):
             yield t
-        pv = ar.param_values
         if pv.start_date or pv.end_date:
             yield daterange_text(
                 pv.start_date,
@@ -167,21 +178,35 @@ class Votes(dd.Table):
 
 
 class AllVotes(Votes):
+    label = _("All votes")
     required_roles = dd.required(VotesStaff)
+    column_names = "id votable user priority nickname rating mail_mode workflow_buttons *"
     
-class MyVotes(My, Votes):
-    """Show all my votes.
-
-    """
-    column_names = "votable state priority rating nickname *"
+    
+class MyOffers(My, Votes):
+    """Show your votes in states watching and candidate"""
+    column_names = "votable votable__user workflow_buttons *"
     order_by = ['-id']
+    label = _("My offers")
     
     @classmethod
     def param_defaults(self, ar, **kw):
-        kw = super(MyVotes, self).param_defaults(ar, **kw)
-        # kw.update(state=TicketStates.todo)
-        kw.update(show_todo=dd.YesNo.yes)
+        kw = super(MyOffers, self).param_defaults(ar, **kw)
+        kw.update(vote_view=VoteViews.offers)
         return kw
+
+
+class MyTasks(My, Votes):    
+    column_names = "priority votable votable__user nickname workflow_buttons *"
+    order_by = ['priority', '-id']
+    label = _("My tasks")
+    
+    @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(MyTasks, self).param_defaults(ar, **kw)
+        kw.update(vote_view=VoteViews.tasks)
+        return kw
+
 
 class VotesByVotable(Votes):
     """Show all votes on this object.

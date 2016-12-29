@@ -11,6 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd, rt
 from lino.utils.xmlgen.html import E, lines2p
+from lino.utils.instantiator import create_row
 from lino.modlib.notify.mixins import ChangeObservable
 from .roles import SimpleVotesUser
 
@@ -24,7 +25,7 @@ def get_favourite(obj, user):
 
 
 class CreateVote(dd.Action):
-    """Define your opinion about this object.
+    """Define your vote about this object.
 
     visible only when you don't yet have a vote on this
     object. Clicking it will create a default vote object and show
@@ -38,10 +39,10 @@ class CreateVote(dd.Action):
     required_roles = dd.required(SimpleVotesUser)
 
     def get_action_permission(self, ar, obj, state):
-        vote = get_favourite(obj, ar.get_user())
-        if vote is not None:
+        if not super(CreateVote, self).get_action_permission(ar, obj, state):
             return False
-        return super(CreateVote, self).get_action_permission(ar, obj, state)
+        vote = get_favourite(obj, ar.get_user())
+        return vote is None
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
@@ -53,7 +54,7 @@ class CreateVote(dd.Action):
 
 
 class EditVote(dd.Action):
-    """Edit your opinion about this object.
+    """Edit your vote about this object.
     """
     sort_index = 100
     button_text = u"★"  # 2605
@@ -62,10 +63,10 @@ class EditVote(dd.Action):
     show_in_bbar = False
 
     def get_action_permission(self, ar, obj, state):
-        vote = get_favourite(obj, ar.get_user())
-        if vote is None:
+        if not super(EditVote, self).get_action_permission(ar, obj, state):
             return False
-        return super(EditVote, self).get_action_permission(ar, obj, state)
+        vote = get_favourite(obj, ar.get_user())
+        return vote is not None
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
@@ -85,12 +86,33 @@ class Votable(ChangeObservable):
     create_vote = CreateVote()
     edit_vote = EditVote()
 
-    def get_vote_rater(self, vote):
-        """Return the user who is allowed to rate votes on this votable."""
+    def get_vote_rater(self):
+        """Return the user who is allowed to rate votes on this votable.
+
+        If this returns something, then a vote will automatically be
+        created.
+
+        """
         return None
+
+    # def get_votable_author(self):
+    #     """Return the user who is the author of this votable.
+
+    #     """
+    #     return None
 
     def get_change_observers(self):
         for vote in rt.models.votes.Vote.objects.filter(votable=self):
             yield (vote.user, vote.mail_mode or vote.user.mail_mode)
 
-    
+    def after_ui_save(self, ar, cw):
+        super(Votable, self).after_ui_save(ar, cw)
+        if cw is None:
+            user = self.get_vote_rater()
+            if user:
+                # vote = get_favourite(self, user)
+                # if vote is None:
+                create_row(rt.models.votes.Vote,
+                           user=user, votable=self,
+                           state=rt.actors.votes.VoteStates.watching)
+
