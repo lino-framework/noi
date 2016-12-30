@@ -213,8 +213,10 @@ Fähigkeiten
  4    alex       Gartenarbeiten         100
  5    alex       Reparaturarbeiten      100
  6    christa    Klavierunterricht      100
- 7    eric       Gitarrenunterricht     100
-                                        **700**
+ 7    dora       Reparaturarbeiten      100
+ 8    eric       Gitarrenunterricht     100
+ 9    dora       Botengänge             100
+                                        **900**
 ==== ========== ====================== =========== =============
 <BLANKLINE>
 
@@ -229,18 +231,18 @@ Fähigkeiten
 <BLANKLINE>
 
 >>> rt.show('tickets.Tickets')
-==== =========================================================================================== ========== ======= ==================== ================ =========
- ID   Zusammenfassung                                                                             Anfrager   Thema   Fähigkeit            Aktionen         Projekt
----- ------------------------------------------------------------------------------------------- ---------- ------- -------------------- ---------------- ---------
- 8    Wer fährt für mich nach Aachen Windeln kaufen?                                              alex               Botengänge           **Neu**
- 7    Wer kann meine Abschlussarbeit korrekturlesen?                                              dora                                    **Offen**
- 6    Wer hilft meinem Sohn sich auf die Mathearbeit am 21.05. vorzubereiten? 5. Schuljahr PDS.   berta              Matheunterricht      **Neu**
- 5    Wer macht Musik auf meinem Geburtstag?                                                      alex               Musik                **Neu**
- 4    Wer kann meiner Tochter Gitarreunterricht geben?                                            alex               Gitarrenunterricht   **Besprechen**
- 3    Wer kann meinem Sohn Klavierunterricht geben?                                               dora               Klavierunterricht    **Neu**
- 2    Mein Rasen muss gemäht werden. Donnerstags oder Samstags                                    christa                                 **Neu**
- 1    Mein Wasserhahn tropft, wer kann mir helfen?                                                berta              Reparaturarbeiten    **Neu**
-==== =========================================================================================== ========== ======= ==================== ================ =========
+==== =========================================================================================== ========== ======= ==================== ================= =========
+ ID   Zusammenfassung                                                                             Anfrager   Thema   Fähigkeit            Aktionen          Projekt
+---- ------------------------------------------------------------------------------------------- ---------- ------- -------------------- ----------------- ---------
+ 8    Wer fährt für mich nach Aachen Windeln kaufen?                                              alex               Botengänge           **Geschlossen**
+ 7    Wer kann meine Abschlussarbeit korrekturlesen?                                              dora                                    **Bereit**
+ 6    Wer hilft meinem Sohn sich auf die Mathearbeit am 21.05. vorzubereiten? 5. Schuljahr PDS.   berta              Matheunterricht      **Schläft**
+ 5    Wer macht Musik auf meinem Geburtstag?                                                      alex               Musik                **Gestartet**
+ 4    Wer kann meiner Tochter Gitarreunterricht geben?                                            alex               Gitarrenunterricht   **Offen**
+ 3    Wer kann meinem Sohn Klavierunterricht geben?                                               dora               Klavierunterricht    **Besprechen**
+ 2    Mein Rasen muss gemäht werden. Donnerstags oder Samstags                                    christa            Gartenarbeiten       **Neu**
+ 1    Mein Wasserhahn tropft, wer kann mir helfen?                                                berta              Reparaturarbeiten    **Geschlossen**
+==== =========================================================================================== ========== ======= ==================== ================= =========
 <BLANKLINE>
 
 
@@ -249,7 +251,7 @@ Das Hauptmenü
 
 >>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Büro : Meine Hilfsangebote, Meine Auszüge, Meine Kommentare, Meine Benachrichtigungen
+- Büro : Meine Angebote, Meine Aufgaben, Meine Auszüge, Meine Kommentare, Meine Benachrichtigungen
 - Bitten : Meine Bitten, Wo ich helfen kann, Zu tun, Aktive Bitten, Alle Bitten, Nicht zugewiesene Bitten, Aktive Projekte
 - Berichte :
   - System : Broken GFKs
@@ -263,7 +265,7 @@ Das Hauptmenü
 - Explorer :
   - System : Datenbankmodelle, Vollmachten, Benutzerarten, Benachrichtigungen, Änderungen
   - Themen : Interessen
-  - Bitten : Hilfsangebote, Angebotszustände, Verknüpfungen, Zustände
+  - Bitten : Alle Stellungnahmen, Stellungnahmezustände, Verknüpfungen, Ticketzustände
   - Büro : Auszüge, Kommentare
   - Fähigkeiten : Kompetenzen
 - Site : Info
@@ -273,7 +275,7 @@ Das Hauptmenü
 
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Büro : Meine Hilfsangebote, Meine Auszüge, Meine Kommentare, Meine Benachrichtigungen
+- Büro : Meine Angebote, Meine Aufgaben, Meine Kommentare, Meine Benachrichtigungen
 - Bitten : Meine Bitten, Wo ich helfen kann, Zu tun
 - Site : Info
 
@@ -283,38 +285,79 @@ Bittenlisten
 
 Meine Bitten
 ------------
-
   
 >>> rt.login('christa').show(tickets.MyTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-============================================================================ =========== ======= ===========================
- Overview                                                                     Fähigkeit   Thema   Aktionen
----------------------------------------------------------------------------- ----------- ------- ---------------------------
- `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__                        [☆] **Neu** → [☎] [☉] [☐]
-============================================================================ =========== ======= ===========================
+============================================================================ ================ ======= ===========================
+ Overview                                                                     Fähigkeit        Thema   Aktionen
+---------------------------------------------------------------------------- ---------------- ------- ---------------------------
+ `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__   Gartenarbeiten           [☆] **Neu** → [☎] [☉] [☐]
+============================================================================ ================ ======= ===========================
 <BLANKLINE>
 
 
 Where I can help
 ----------------
 
->>> rt.login('christa').show(tickets.SuggestedTickets)
+>>> rt.login('alex').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-================================================================= ========== ======= =================== =============
- Overview                                                          Anfrager   Thema   Fähigkeit           Aktionen
------------------------------------------------------------------ ---------- ------- ------------------- -------------
- `#5 (Wer macht Musik auf meinem Geburtstag?) <Detail>`__          alex               Musik               [☆] **Neu**
- `#3 (Wer kann meinem Sohn Klavierunterricht geben?) <Detail>`__   dora               Klavierunterricht   [☆] **Neu**
-================================================================= ========== ======= =================== =============
+============================================================================ ========== ======= ================ =============
+ Overview                                                                     Anfrager   Thema   Fähigkeit        Aktionen
+---------------------------------------------------------------------------- ---------- ------- ---------------- -------------
+ `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__   christa            Gartenarbeiten   [☆] **Neu**
+============================================================================ ========== ======= ================ =============
+<BLANKLINE>
+
+>>> rt.login('berta').show(tickets.SuggestedTickets)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+Keine Daten anzuzeigen
+
+>>> rt.login('eric').show(tickets.SuggestedTickets)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+==================================================================== ========== ======= ==================== ===============
+ Overview                                                             Anfrager   Thema   Fähigkeit            Aktionen
+-------------------------------------------------------------------- ---------- ------- -------------------- ---------------
+ `#4 (Wer kann meiner Tochter Gitarreunterricht geben?) <Detail>`__   alex               Gitarrenunterricht   [☆] **Offen**
+==================================================================== ========== ======= ==================== ===============
+<BLANKLINE>
+
+
+Meine Hilfsangebote
+-------------------
+
+>>> rt.login('christa').show(votes.MyOffers)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+==================================================== ======= ============================
+ Bitte                                                Autor   Aktionen
+---------------------------------------------------- ------- ----------------------------
+ #5 (Wer macht Musik auf meinem Geburtstag?)          alex    **Kandidat** → [Interesse]
+ #3 (Wer kann meinem Sohn Klavierunterricht geben?)   dora    **Kandidat** → [Interesse]
+==================================================== ======= ============================
+<BLANKLINE>
+
+
+>>> rt.login('eric').show(votes.MyOffers)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+============================================= ======= ================================================
+ Bitte                                         Autor   Aktionen
+--------------------------------------------- ------- ------------------------------------------------
+ #5 (Wer macht Musik auf meinem Geburtstag?)   alex    **Kandidat** → [Interesse] [Zuweisen] [Cancel]
+============================================= ======= ================================================
 <BLANKLINE>
 
 
 My to-do list
 -------------
 
->>> rt.login('christa').show(tickets.TicketsToDo)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-Keine Daten anzuzeigen
+>>> rt.login('dora').show(votes.MyTasks)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+=========== ===================================================== ======= ========= =========================================
+ Priorität   Bitte                                                 Autor   Rufname   Aktionen
+----------- ----------------------------------------------------- ------- --------- -----------------------------------------
+ 0           #8 (Wer fährt für mich nach Aachen Windeln kaufen?)   alex              **Zugewiesen** → [Interesse] [Erledigt]
+=========== ===================================================== ======= ========= =========================================
+<BLANKLINE>
+
 
 Rating a help offer
 ===================
@@ -350,7 +393,7 @@ the detail window of a ticket.
     - **Zuweisbare Arbeiter** (faculties.AssignableWorkersByTicket) [visible for connector admin]
   - (general_2): **Beschreibung** (description), **Kommentare** (CommentsByRFC) [visible for user connector admin]
 - **History** (changes.ChangesByMaster) [visible for connector admin]
-- **Hilfsangebote** (votes.VotesByVotable) [visible for user connector admin]
+- **Stellungnahmen** (votes.VotesByVotable) [visible for user connector admin]
 - **Mehr** (more) [visible for connector admin]:
   - (more1) [visible for all]:
     - (more1_1): **Erstellt** (created), **Bearbeitet** (modified), **Ticket type** (ticket_type)

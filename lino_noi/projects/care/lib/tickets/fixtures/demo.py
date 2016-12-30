@@ -11,7 +11,7 @@ from lino_noi.lib.tickets.choicelists import TicketStates
 from lino.api.dd import str2kw
 from lino.api import dd
 
-STATES = Cycler(TicketStates.objects())
+TICKET_STATES = Cycler(TicketStates.objects())
 
 
 def user(username, user_type, **kw):
@@ -40,10 +40,9 @@ def ticket(reporter, summary, en, **kw):
     if en and u.language != 'de':
         summary = en
     kw.update(summary=summary, reporter=u, user=u)
-    # every third ticket gets a manual state, the others get default
-    # value:
-    if rt.models.tickets.Ticket.objects.count() % 3 == 0:
-        kw.update(state=STATES.pop())
+    # if no manual state is specified, take a random one:
+    if not 'state' in kw:
+        kw.update(state=TICKET_STATES.pop())
     return rt.models.tickets.Ticket(**kw)
 
 
@@ -52,6 +51,14 @@ def competence(user, faculty, **kw):
         user=rt.modules.users.User.objects.get(username=user))
     kw.update(faculty=faculty)
     return rt.modules.faculties.Competence(**kw)
+
+
+def vote(user, ticket, state, **kw):
+    u = rt.models.users.User.objects.get(username=user)
+    t = rt.models.tickets.Ticket.objects.get(pk=ticket)
+    s = rt.models.votes.VoteStates.get_by_name(state)
+    return rt.models.votes.Vote(user=u, votable=t, state=s, **kw)
+
 
 
 def objects():
@@ -142,27 +149,28 @@ def objects():
     yield faculty("Briefe schreiben", "Écrire des lettres",
                   "Write letters")
 
-    yield ticket(
+    yield ticket(  #1
         "berta",
         "Mein Wasserhahn tropft, wer kann mir helfen?",
         "My faucet is dripping, who can help?",
+        state=TicketStates.closed,
         faculty=repair)
-    yield ticket(
+    yield ticket(  #2
         "christa",
         "Mein Rasen muss gemäht werden. Donnerstags oder Samstags",
         "My lawn needs mowing. On Thursday or Saturday."
-        "")
-    yield ticket(
+        "", faculty=garden)
+    yield ticket(  #3
         "dora",
         "Wer kann meinem Sohn Klavierunterricht geben?",
         "Who can give piano lessons to my son?",
         faculty=piano)
-    yield ticket(
+    yield ticket(  #4
         "alex",
         "Wer kann meiner Tochter Gitarreunterricht geben?",
         "Who can give guitar lessons to my daughter?",
         faculty=guitar)
-    yield ticket(
+    yield ticket(  #5
         "alex",
         "Wer macht Musik auf meinem Geburtstag?",
         "Who would play music on my birthday party?",
@@ -184,7 +192,7 @@ def objects():
         description="Für 5. Jahr RSI zum Thema \"Das "
         "Liebesleben der Kängurus\"  "
         "Muss am 12.03. eingereicht werden.")
-    yield ticket(
+    yield ticket(  #8
         "alex",
         "Wer fährt für mich nach Aachen Windeln kaufen?",
         "Who would buy diapers for me in Aachen?",
@@ -197,5 +205,14 @@ def objects():
     yield competence('alex', garden)
     yield competence('alex', repair)
     yield competence('christa', piano)
+    yield competence('dora', repair)
     yield competence('eric', guitar)
+    yield competence('dora', commissions)
 
+    yield vote('alex', 1, 'done')
+    yield vote('dora', 1, 'cancelled')
+    yield vote('christa', 3, 'candidate')
+    
+    yield vote('christa', 5, 'candidate')
+    yield vote('eric', 5, 'candidate')
+    yield vote('dora', 8, 'assigned')

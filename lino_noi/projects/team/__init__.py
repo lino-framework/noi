@@ -9,6 +9,7 @@ for software developer teams.
 
    settings
    lib
+   urls
 
 """
 

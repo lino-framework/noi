@@ -36,7 +36,7 @@ from lino.utils import join_elems
 
 from .choicelists import TicketEvents, ProjectEvents, TicketStates, LinkTypes
 
-from .roles import Triager
+from .roles import Triager, SiteUser
 
 
 class ProjectTypes(dd.Table):
@@ -360,12 +360,17 @@ class Tickets(dd.Table):
             settings.SITE.user_model,
             verbose_name=_("Reporter"),
             blank=True, null=True,
-            help_text=_("Only rows reporter by this user.")),
+            help_text=_("Only rows reported by this user.")),
         assigned_to=dd.ForeignKey(
             settings.SITE.user_model,
-            verbose_name=_("Assigned to"),
+            verbose_name=_("Voted by"),
             blank=True, null=True,
-            help_text=_("Only tickets assigned to this user.")),
+            help_text=_("Only tickets having a vote by this user.")),
+        not_assigned_to=dd.ForeignKey(
+            settings.SITE.user_model,
+            verbose_name=_("Not voted by"),
+            blank=True, null=True,
+            help_text=_("Only tickets having no vote by this user.")),
         feasable_by=dd.ForeignKey(
             settings.SITE.user_model,
             verbose_name=_("Feasable by"), blank=True, null=True),
@@ -391,7 +396,7 @@ class Tickets(dd.Table):
         show_private=dd.YesNo.field(_("Private"), blank=True))
 
     params_layout = """
-    reporter assigned_to interesting_for site project state has_project
+    reporter assigned_to not_assigned_to interesting_for site project state has_project
     show_assigned show_active show_todo #show_standby show_private \
     start_date end_date observed_event topic feasable_by"""
 
@@ -435,6 +440,9 @@ class Tickets(dd.Table):
 
         if pv.assigned_to:
             qs = qs.filter(vote__user=pv.assigned_to).distinct()
+            
+        if pv.not_assigned_to:
+            qs = qs.exclude(vote__user=pv.not_assigned_to).distinct()
             
         if pv.show_assigned == dd.YesNo.no:
             qs = qs.filter(vote__isnull=False).distinct()
@@ -491,7 +499,7 @@ class Tickets(dd.Table):
 
 class AllTickets(Tickets):
     label = _("All tickets")
-    required_roles = dd.login_required(dd.SiteStaff)
+    required_roles = dd.login_required(Triager)
 
 
 class DuplicatesByTicket(Tickets):
@@ -505,8 +513,8 @@ class DuplicatesByTicket(Tickets):
 
 
 class SuggestedTickets(Tickets):
-    required_roles = dd.login_required()
     label = _("Where I can help")
+    required_roles = dd.login_required()
     column_names = 'overview:50 reporter:10 topic faculty ' \
                    'workflow_buttons:30 *'
     params_panel_hidden = True
@@ -517,9 +525,11 @@ class SuggestedTickets(Tickets):
     @classmethod
     def param_defaults(self, ar, **kw):
         kw = super(SuggestedTickets, self).param_defaults(ar, **kw)
-        kw.update(show_assigned=dd.YesNo.no)
+        me = ar.get_user()
+        kw.update(not_assigned_to=me)
+        kw.update(feasable_by=me)
+        # kw.update(show_assigned=dd.YesNo.no)
         kw.update(show_active=dd.YesNo.yes)
-        kw.update(feasable_by=ar.get_user())
         return kw
 
 
