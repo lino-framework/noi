@@ -77,6 +77,7 @@ if dd.is_installed('tickets'):
 
     class AssignableWorkersByTicket(dd.Table):
         model = 'users.User'
+        use_as_default_table = False
         # model = 'faculties.Competence'
         master = 'tickets.Ticket'
         column_names = 'username #faculties_competence_set_by_user__affinity *'

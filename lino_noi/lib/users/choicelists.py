@@ -31,7 +31,7 @@ class MarkUserActive(dd.ChangeStateAction):
     label = _("Activate")
     required_states = 'new'
     required_roles = dd.required(SiteAdmin)
-    show_in_bbar = True
+    # show_in_bbar = True
     
     def get_action_permission(self, ar, obj, state):
         if not obj.profile or not obj.username:

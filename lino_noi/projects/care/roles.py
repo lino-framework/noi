@@ -5,6 +5,7 @@
 """Defines user roles for the Care variant of Lino Noi."""
 
 
+from lino.api import dd
 from lino.core.roles import UserRole, SiteAdmin
 from lino.modlib.users.roles import Helper
 # from lino.modlib.office.roles import OfficeStaff
@@ -40,11 +41,10 @@ class SiteAdmin(SiteAdmin, OfficeStaff, Helper, ContactsUser,
     """A **site administrator** can do everything."""
 
 
-
 UserTypes.clear()
 add = UserTypes.add_item
-add('000', _("Anonymous"),        UserRole, 'anonymous',
-    readonly=False, authenticated=False)
+add('000', _("Anonymous"), UserRole, 'anonymous',
+    readonly=not dd.plugins.users.online_registration)
 add('100', _("User"), SimpleUser, 'user')
 add('500', _("Connector"), Connector, 'connector')
 add('900', _("Administrator"),    SiteAdmin, 'admin')

@@ -15,6 +15,9 @@ from lino.core import actions
 from lino_noi.lib.clocking.roles import Worker
 from .choicelists import UserStates
 
+from lino.modlib.users.actions import SendWelcomeMail
+#from .models import VerifyUser
+
 class UserDetail(UserDetail):
     """Layout of User Detail in Lino Noi."""
 
@@ -76,7 +79,7 @@ class UserDetail(UserDetail):
 Users.detail_layout = UserDetail()
 Users.parameters.update(user_state=UserStates.field(blank=True))
 # Users.simple_parameters = ['profile', 'user_state']
-Users.workflow_state_field = 'user_state'
+# Users.workflow_state_field = 'user_state'
 
 class OtherUsers(Users):
     hide_top_toolbar = True
@@ -116,7 +119,7 @@ class RegisterUser(actions.InsertRow):
         return _("Register new user")
 
 
-class RegisterUsers(Users):
+class Register(Users):
     use_as_default_table = False
     insert_layout = RegisterUserLayout()
     # default_list_action_name = 'insert'
@@ -141,6 +144,7 @@ class NewUsers(Users):
     column_names = 'created first_name last_name username profile workflow_buttons *'
     order_by = ['created']
 
+    send_welcome_email = SendWelcomeMail()
 
     @classmethod
     def param_defaults(self, ar, **kw):

@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2015-2016 Luc Saffre
 # License: BSD (see file COPYING for details)
-"""Database models for :mod:`lino_noi.modlib.users`.
+"""Database models for this plugin.
 
 """
 
@@ -24,25 +24,78 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     # thanks to http://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits-in-python
     return ''.join(random.SystemRandom().choice(chars) for _ in range(size))
 
+from lino.core.actions import SubmitInsert
+
+
+class CheckedSubmitInsert(SubmitInsert):
+    """Like the standard :class:`lino.core.actions.SubmitInsert`, but
+    checks certain things before accepting the new user.
+
+    """
+    def run_from_ui(self, ar, **kw):
+        obj = ar.create_instance_from_request()
+        qs = obj.__class__.objects.filter(username=obj.username)
+        if len(qs) > 0:
+            msg = _("The username {} is taken. "
+                    "Please choose another one").format(obj.username)
+
+            ar.error(msg)
+            return
+        
+        def ok(ar2):
+            self.save_new_instance(ar2, obj)
+            ar2.success(_("Your request has been registered. "
+                          "An email will shortly be sent to {0}"
+                          "Please check your emails.").format(
+                              obj.email))
+            ar2.set_response(close_window=True)
+            # logger.info("20140512 CheckedSubmitInsert")
+
+        ok(ar)
+
+
 class VerifyUser(dd.Action):
     """Enter your verification code."""
     label = _("Verify")
-    http_method = 'POST'
-    select_rows = False
-    show_in_bbar = True
+    # http_method = 'POST'
+    # select_rows = False
+    # default_format = 'json'
+    required_roles = set([])
+    # required_roles = dd.required(SiteAdmin)
+    show_in_bbar = False
+    show_in_workflow = True
     parameters = dict(
         email=models.EmailField(_('e-mail address')),
         verification_code=models.CharField(
             _("Verification code"), max_length=50))
+    params_layout = """
+    email
+    # instruct
+    verification_code
+    """
+    # def get_action_title(self, ar):
+    #     return _("Register new user")
+
+    # @dd.constant()
+    # def instruct(self, *args):
+    #     return _("Enter the verification code you received.")
     
+    def get_action_permission(self, ar, obj, state):
+        if not obj.verification_code:
+            return False
+        return super(
+            VerifyUser, self).get_action_permission(ar, obj, state)
+
     def run_from_ui(self, ar, **kw):
+        assert len(ar.selected_rows) == 1
+        user = ar.selected_rows[0]
         pv = ar.action_param_values
-        qs = rt.models.users.User.objects.exclude(verification_code='')
-        try:
-            user = qs.get(email=pv.email)
-        except Exception:
-            msg = _("Invalid email address")
-            return ar.error(msg)
+        # qs = rt.models.users.User.objects.exclude(verification_code='')
+        # try:
+        #     user = qs.get(email=pv.email)
+        # except Exception:
+        #     msg = _("Invalid email address")
+        #     return ar.error(msg)
         if user.verification_code != pv.verification_code:
             msg = _("Invalid verification code")
             return ar.error(msg)
@@ -69,6 +122,8 @@ class User(User, Contactable, AddressLocation, Addressable):
 
     """
 
+    workflow_state_field = 'user_state'
+
     class Meta(User.Meta):
         app_label = 'users'
         abstract = dd.is_abstract_model(__name__, 'User')
@@ -80,7 +135,8 @@ class User(User, Contactable, AddressLocation, Addressable):
     
     user_state = UserStates.field(default=UserStates.as_callable('new'))
 
-    verify_user = VerifyUser()
+    submit_insert = CheckedSubmitInsert()
+    verify = VerifyUser()
 
     def on_create(self, ar):
         self.verification_code = id_generator(12)
