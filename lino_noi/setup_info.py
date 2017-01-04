@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2016 Luc Saffre
+# Copyright 2014-2017 Luc Saffre
 #
 # This file is part of Lino Noi.
 #
@@ -20,7 +20,7 @@
 SETUP_INFO = dict(
     name='lino-noi',
     version='2016.12.1',
-    install_requires=['lino-xl', 'channels', 'rest_framework'],
+    install_requires=['lino-xl', 'channels', 'djangorestframework'],
     tests_require=['pytest', 'mock'],
     test_suite='tests',
     description=("The Lino application used by the Lino team for "
