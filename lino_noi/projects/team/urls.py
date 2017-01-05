@@ -1,6 +1,17 @@
+# -*- coding: UTF-8 -*-
+# Copyright 2016-2017 Luc Saffre
+# License: BSD (see file COPYING for details)
+"""Adds customized urlpatters when use_restful is True.
+
+"""
+
+from __future__ import unicode_literals
 from django.conf.urls import url, include
 from lino.api import rt
 # from lino_noi.libdjango.contrib.auth.models import User
+
+from lino.core.urls import urlpatterns
+
 from rest_framework import serializers, viewsets, routers
 
 Ticket = rt.models.tickets.Ticket
@@ -11,7 +22,7 @@ class TicketSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Ticket
         fields = ('id', 'reporter' ) # , 'state')
-        
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
@@ -34,7 +45,6 @@ router.register(r'tickets', TicketViewSet)
 router.register(r'users', UserViewSet)
 
 
-from lino.core.urls import urlpatterns
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns += [

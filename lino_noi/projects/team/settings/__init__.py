@@ -57,8 +57,9 @@ class Site(Site):
         # yield 'lino.modlib.bootstrap3'
         yield 'lino.modlib.gfks'
         # yield 'lino.modlib.system'
-        yield 'lino.modlib.users'
+        # yield 'lino.modlib.users'
         yield 'lino_noi.lib.contacts'
+        yield 'lino_noi.lib.users'
         # yield 'lino_xl.lib.cal'
         # yield 'lino_noi.lib.products'
 

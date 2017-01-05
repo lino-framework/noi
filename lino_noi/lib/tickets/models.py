@@ -586,10 +586,10 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         return ar.obj2html(self)
         # return E.span(ar.obj2html(self), ' ', self.summary)
 
-    def get_notify_message(self, ar, cw):
-        return E.tostring(E.p(
-            _("{user} worked on [ticket {t}]").format(
-                user=ar.get_user(), t=self.id)))
+    # def get_notify_message(self, ar, cw):
+    #     return E.tostring(E.p(
+    #         _("{user} worked on [ticket {t}]").format(
+    #             user=ar.get_user(), t=self.id)))
 
     def get_vote_rater(self):
         return self.reporter

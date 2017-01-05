@@ -9,7 +9,16 @@ for software developer teams.
 
    settings
    lib
-   urls
+  
+
+.. module:: lino_noi.projects.team.urls
+
+Adds customized urlpatters when use_restful is True.
+
+.. data:: urlpatterns
+
+    Blabla.
+
 
 """
 

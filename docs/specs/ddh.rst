@@ -45,9 +45,9 @@ Lino Noi:
 - contenttypes.ContentType :
   - PROTECT : blogs.Entry.owner_type, changes.Change.master_type, changes.Change.object_type, comments.Comment.owner_type, excerpts.Excerpt.owner_type, excerpts.ExcerptType.content_type, gfks.HelpText.content_type, notify.Message.owner_type, outbox.Attachment.owner_type, outbox.Mail.owner_type, uploads.Upload.owner_type
 - countries.Country :
-  - PROTECT : contacts.Partner.country, countries.Place.country
+  - PROTECT : contacts.Partner.country, countries.Place.country, users.User.country
 - countries.Place :
-  - PROTECT : contacts.Partner.city, contacts.Partner.region, countries.Place.parent
+  - PROTECT : contacts.Partner.city, contacts.Partner.region, countries.Place.parent, users.User.city, users.User.region
 - deploy.Milestone :
   - PROTECT : deploy.Deployment.milestone, tickets.Ticket.fixed_for, tickets.Ticket.reported_for
 - excerpts.Excerpt :
