@@ -25,7 +25,7 @@ class UserDetail(UserDetail):
 
     general = dd.Panel("""
     box1:45 clocking:15
-    topics.InterestsByPartner faculties.CompetencesByUser
+    faculties.CompetencesByUser
     """, label=_("General"))
 
     if dd.is_installed('clocking'):

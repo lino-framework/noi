@@ -19,7 +19,7 @@ class CompanyDetail(CompanyDetail):
     """, label=_("General"))
 
     tickets = dd.Panel("""
-    tickets.ProjectsByCompany
+    tickets.ProjectsByCompany topics.InterestsByPartner
     """, label=_("Tickets"))
 
 
