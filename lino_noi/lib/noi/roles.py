@@ -42,7 +42,7 @@ class Consultant(EndUser, Worker, ExcerptsUser):
     pass
 
 
-class Developer(Consultant):
+class Developer(Triager, Consultant):
     """A **developer** is somebody who may both report tickets and work
     on them.
 
