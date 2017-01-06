@@ -368,14 +368,14 @@ users.UserTypes.developer:400
 
 >>> rt.login('luc').show(votes.MyTasks)
 ... #doctest: +REPORT_UDIFF
-========== ====================== ======== ========== ==================================
+========== ====================== ======== ========== ===========================================
  Priority   Ticket                 Author   Nickname   Actions
----------- ---------------------- -------- ---------- ----------------------------------
- 0          #93 (Ticket 76)        jean                **Assigned** → [Watching] [Done]
+---------- ---------------------- -------- ---------- -------------------------------------------
+ 0          #93 (Ticket 76)        jean                **Assigned** → [Watching] [Done] [Cancel]
  0          #76 (Ticket 59)        jean                **Done**
- 0          #30 (Ticket 13)        jean                **Assigned** → [Watching] [Done]
+ 0          #30 (Ticket 13)        jean                **Assigned** → [Watching] [Done] [Cancel]
  0          #13 (Bar cannot foo)   jean                **Done**
-========== ====================== ======== ========== ==================================
+========== ====================== ======== ========== ===========================================
 <BLANKLINE>
 
 
@@ -758,8 +758,8 @@ the detail window of a ticket.
       - (more1_1): **Created** (created), **Modified** (modified), **Reported for** (reported_for), **Ticket type** (ticket_type)
       - (more1_2): **State** (state), **Duplicate of** (duplicate_of), **Planned time** (planned_time), **Priority** (priority)
     - **Duplicates** (DuplicatesByTicket)
-  - (more_2): **Upgrade notes** (upgrade_notes), **Dependencies** (LinksByTicket) [visible for senior admin]
-- **History** (changes.ChangesByMaster) [visible for senior admin]
+  - (more_2): **Upgrade notes** (upgrade_notes), **Dependencies** (LinksByTicket) [visible for developer senior admin]
+- **History** (changes.ChangesByMaster) [visible for developer senior admin]
 - **Votes** (votes.VotesByVotable) [visible for user consultant hoster developer senior admin]
 <BLANKLINE>
 
