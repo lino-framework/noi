@@ -1,12 +1,12 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2016 Luc Saffre
+# Copyright 2011-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 from __future__ import unicode_literals
 
 from django.db import models
 
 from lino.api import dd, rt, _
-from lino.modlib.users.mixins import ByUser
+from lino.modlib.users.mixins import My
 from lino_noi.lib.tickets.roles import Triager
 
 class Faculties(dd.Table):
@@ -70,7 +70,7 @@ class CompetencesByFaculty(Competences):
     order_by = ["user"]
 
 
-class MyCompetences(ByUser, CompetencesByUser):
+class MyCompetences(My, CompetencesByUser):
     pass
 
 if dd.is_installed('tickets'):

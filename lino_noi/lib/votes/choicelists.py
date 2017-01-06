@@ -82,16 +82,20 @@ class VoteEventCreated(ObservedEvent):
 VoteEvents.add_item_instance(VoteEventCreated('created'))
 
 
-class VoteView(dd.Choice):
-    show_states = set([])
+# class VoteView(dd.Choice):
+#     show_states = set([])
     
-    # def __init__(self, value, text=None, name=None, **kwargs):
-    #     super(VoteView, self).__init__(value, text)
-    # def __init__():
+#     # def __init__(self, value, text=None, name=None, **kwargs):
+#     #     super(VoteView, self).__init__(value, text)
+#     # def __init__():
 
-class VoteViews(dd.ChoiceList):
-    verbose_name = _("Vote view")
-    verbose_name_plural = _("Vote views")
-    item_class = VoteView
+# class VoteViews(dd.ChoiceList):
+#     """The list of known vote views.
+
+#     This list is populated in :mod:`lino_noi.lib.noi.workflows`.
+#     """
+#     verbose_name = _("Vote view")
+#     verbose_name_plural = _("Vote views")
+#     item_class = VoteView
 
 

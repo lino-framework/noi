@@ -396,7 +396,7 @@ class Tickets(dd.Table):
         show_private=dd.YesNo.field(_("Private"), blank=True))
 
     params_layout = """
-    reporter assigned_to not_assigned_to interesting_for site project state has_project
+    user reporter assigned_to not_assigned_to interesting_for site project state has_project
     show_assigned show_active show_todo #show_standby show_private \
     start_date end_date observed_event topic feasable_by"""
 

@@ -27,7 +27,7 @@ from django.conf import settings
 
 from lino_noi.lib.tickets.choicelists import TicketStates
 from lino_noi.lib.tickets.roles import Triager
-from lino_noi.lib.votes.choicelists import VoteStates, VoteViews
+from lino_noi.lib.votes.choicelists import VoteStates #, VoteViews
 from lino.modlib.notify.actions import NotifyingAction
 
 """
@@ -132,7 +132,7 @@ class MarkTicketClosed(TicketAction):
     """Mark this ticket as closed.
     """
     label = pgettext("verb", "Close")
-    required_states = 'talk started opened'
+    required_states = 'talk started opened ready'
 
 
 class MarkTicketTalk(TicketAction):
@@ -167,11 +167,11 @@ add('50', _("Rated"), _("Job rated"), 'rated')
 add('60', _("Cancelled"), _("Cancelled offer"), 'cancelled')  # Absage
 
 
-add = VoteViews.add_item
-add('10', _("Offers"), 'offers', show_states=set([
-    VoteStates.candidate]))
-add('20', _("Tasks"), 'tasks', show_states=set([
-    VoteStates.assigned, VoteStates.done]))
+# add = VoteViews.add_item
+# add('10', _("Offers"), 'offers', show_states=set([
+#     VoteStates.candidate]))
+# add('20', _("Tasks"), 'tasks', show_states=set([
+#     VoteStates.assigned, VoteStates.done]))
 
 
 # VoteStates.default_value = 'watching'
