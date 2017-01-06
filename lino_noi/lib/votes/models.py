@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016 Luc Saffre
+# Copyright 2016-2017 Luc Saffre
 #
 # License: BSD (see file COPYING for details)
 """
@@ -18,12 +18,13 @@ from django.db import models
 from django.conf import settings
 
 from lino.api import dd, rt
+from lino.core.utils import lazy_format
 from lino.modlib.users.mixins import UserAuthored, My
 from lino.modlib.notify.choicelists import MailModes
 from lino.mixins import Created, ObservedPeriod
 from lino_xl.lib.cal.mixins import daterange_text
 from .roles import VotesUser, VotesStaff
-from .choicelists import VoteStates, VoteEvents, VoteViews
+from .choicelists import VoteStates, VoteEvents  # , VoteViews
 from .choicelists import Ratings
 
 
@@ -95,6 +96,44 @@ class Vote(UserAuthored, Created):
                 df.add('rating')
         return df
 
+    @classmethod
+    def get_parameter_fields(cls, **fields):
+        fields.update(
+            reporter=dd.ForeignKey(
+                settings.SITE.user_model,
+                verbose_name=_("Reporter"),
+                blank=True, null=True,
+                help_text=_(
+                    "Only rows on votables reported by this user.")),
+            # show_todo=dd.YesNo.field(_("To do"), blank=True),
+            # vote_view=VoteViews.field(blank=True),
+            state=VoteStates.field(
+                blank=True, help_text=_("Only rows having this state.")),
+            mail_mode=MailModes.field(
+                blank=True, help_text=_("Only rows having this mail mode.")))
+        model = dd.plugins.votes.votable_model
+        fld = model._meta.get_field('state')
+        hlp = lazy_format(
+            _("Only rows whose {model} has this state."),
+            model=model._meta.verbose_name)
+        lbl = lazy_format(
+            _("{model} state"), model=model._meta.verbose_name)
+        fields.update(
+            votable_state=fld.choicelist.field(
+                lbl, blank=True, help_text=hlp))
+        return super(Vote, cls).get_parameter_fields(**fields)
+
+    @dd.displayfield(_("Votable"))
+    def votable_info(self, ar):
+        if ar is None:
+            return ''
+        return E.span(
+            ar.obj2html(self.votable), _(" by "),
+            ar.obj2html(self.votable.reporter))
+
+
+dd.update_field(Vote, 'user', verbose_name=_("Voter"))
+
 
 class Votes(dd.Table):
     model = 'votes.Vote'
@@ -102,21 +141,10 @@ class Votes(dd.Table):
     required_roles = dd.required(VotesUser)
 
     parameters = ObservedPeriod(
-        observed_event=VoteEvents.field(blank=True),
-        reporter=dd.ForeignKey(
-            settings.SITE.user_model,
-            verbose_name=_("Reporter"),
-            blank=True, null=True,
-            help_text=_("Only rows reported by this user.")),
-        # show_todo=dd.YesNo.field(_("To do"), blank=True),
-        vote_view=VoteViews.field(blank=True),
-        state=VoteStates.field(
-            blank=True, help_text=_("Only rows having this state.")),
-        mail_mode=MailModes.field(
-            blank=True, help_text=_("Only rows having this mail mode.")))
+        observed_event=VoteEvents.field(blank=True))
 
     params_layout = """
-    user mail_mode state reporter vote_view
+    user mail_mode state votable_state reporter 
     start_date end_date observed_event"""
 
     detail_layout = dd.FormLayout("""
@@ -125,9 +153,20 @@ class Votes(dd.Table):
     rating 
     """, window_size=(40, 'auto'))
 
+    filter_vote_states = set([])
+
+    # @classmethod
+    # def on_analyze(self, site):
+    #     super(Votes, self).on_analyze(site)
+        
     @classmethod
     def do_setup(self):
         self.detail_action.hide_top_toolbar = True
+        if isinstance(self.filter_vote_states, six.string_types):
+            v = set()
+            for k in self.filter_vote_states.split():
+                v.add(VoteStates.get_by_name(k))
+            self.filter_vote_states  = v
 
     @classmethod
     def get_detail_title(self, ar, obj):
@@ -152,8 +191,9 @@ class Votes(dd.Table):
         qs = super(Votes, self).get_request_queryset(ar)
         pv = ar.param_values
 
-        if pv.vote_view:
-            qs = qs.filter(state__in=pv.vote_view.show_states)
+        if len(self.filter_vote_states):
+            qs = qs.filter(state__in=self.filter_vote_states)
+            
         # if pv.show_todo == dd.YesNo.no:
         #     qs = qs.exclude(state__in=VoteStates.todo_states)
         # elif pv.show_todo == dd.YesNo.yes:
@@ -162,12 +202,12 @@ class Votes(dd.Table):
         if pv.observed_event:
             qs = pv.observed_event.add_filter(qs, pv)
         return qs
-
+       
     @classmethod
     def get_title_tags(self, ar):
         pv = ar.param_values
-        if pv.vote_view:
-            pv.vote_view.text
+        # if pv.vote_view:
+        #     pv.vote_view.text
         for t in super(Votes, self).get_title_tags(ar):
             yield t
         if pv.start_date or pv.end_date:
@@ -185,28 +225,19 @@ class AllVotes(Votes):
     
 class MyOffers(My, Votes):
     """Show your votes in states watching and candidate"""
-    column_names = "votable votable__user workflow_buttons *"
-    order_by = ['-id']
     label = _("My offers")
+    column_names = "votable_info workflow_buttons *"
+    order_by = ['-id']
+    filter_vote_states = "candidate"
     
-    @classmethod
-    def param_defaults(self, ar, **kw):
-        kw = super(MyOffers, self).param_defaults(ar, **kw)
-        kw.update(vote_view=VoteViews.offers)
-        return kw
-
 
 class MyTasks(My, Votes):    
-    column_names = "priority votable votable__user nickname workflow_buttons *"
-    order_by = ['priority', '-id']
+    """Show your votes in states assigned and done"""
     label = _("My tasks")
+    column_names = "priority votable_info workflow_buttons *"
+    order_by = ['priority', '-id']
+    filter_vote_states = "assigned done"
     
-    @classmethod
-    def param_defaults(self, ar, **kw):
-        kw = super(MyTasks, self).param_defaults(ar, **kw)
-        kw.update(vote_view=VoteViews.tasks)
-        return kw
-
 
 class VotesByVotable(Votes):
     """Show all votes on this object.

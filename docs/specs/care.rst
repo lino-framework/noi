@@ -283,12 +283,12 @@ his job. Dora's vote has been cancelled.
 
 >>> show_votes(1)
 #1 (My faucet is dripping, who can help?)
-======== ============ ========== ========
- Author   Vote state   Priority   Rating
--------- ------------ ---------- --------
- alex     Done         0
- dora     Cancelled    0
-======== ============ ========== ========
+======= ============ ========== ========
+ Voter   Vote state   Priority   Rating
+------- ------------ ---------- --------
+ alex    Done         0
+ dora    Cancelled    0
+======= ============ ========== ========
 <BLANKLINE>
 
 
@@ -301,7 +301,7 @@ No data to display
 >>> show_votes(3)
 #3 (Who can give piano lessons to my son?)
 ========= ============ ========== ========
- Author    Vote state   Priority   Rating
+ Voter     Vote state   Priority   Rating
 --------- ------------ ---------- --------
  christa   Candidate    0
 ========= ============ ========== ========
@@ -314,7 +314,7 @@ No data to display
 >>> show_votes(5)
 #5 (Who would play music on my birthday party?)
 ========= ============ ========== ========
- Author    Vote state   Priority   Rating
+ Voter     Vote state   Priority   Rating
 --------- ------------ ---------- --------
  christa   Candidate    0
  eric      Candidate    0

@@ -442,7 +442,7 @@ class Ticket(UserAuthored, mixins.CreatedModified,
     quick_search_fields = "summary description"
 
     workflow_state_field = 'state'
-    author_field_name = 'reporter'
+    # author_field_name = 'reporter'
 
     class Meta:
         app_label = 'tickets'

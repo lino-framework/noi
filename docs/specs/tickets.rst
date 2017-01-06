@@ -360,22 +360,24 @@ My tickets
 <BLANKLINE>
 
 
-To-Do list
-==========
+My tasks ("To-Do list")
+=======================
+
+Shows your votes having states `assigned` and `done`.
 
 >>> rt.login('luc').user.profile
 users.UserTypes.developer:400
 
 >>> rt.login('luc').show(votes.MyTasks)
 ... #doctest: +REPORT_UDIFF
-========== ====================== ======== ========== ===========================================
- Priority   Ticket                 Author   Nickname   Actions
----------- ---------------------- -------- ---------- -------------------------------------------
- 0          #93 (Ticket 76)        jean                **Assigned** → [Watching] [Done] [Cancel]
- 0          #76 (Ticket 59)        jean                **Done**
- 0          #30 (Ticket 13)        jean                **Assigned** → [Watching] [Done] [Cancel]
- 0          #13 (Bar cannot foo)   jean                **Done**
-========== ====================== ======== ========== ===========================================
+========== ======================================================== ===========================================
+ Priority   Votable                                                  Actions
+---------- -------------------------------------------------------- -------------------------------------------
+ 0          `#93 (Ticket 76) <Detail>`__ by `jean <Detail>`__        **Assigned** → [Watching] [Done] [Cancel]
+ 0          `#76 (Ticket 59) <Detail>`__ by `jean <Detail>`__        **Done**
+ 0          `#30 (Ticket 13) <Detail>`__ by `jean <Detail>`__        **Assigned** → [Watching] [Done] [Cancel]
+ 0          `#13 (Bar cannot foo) <Detail>`__ by `jean <Detail>`__   **Done**
+========== ======================================================== ===========================================
 <BLANKLINE>
 
 
@@ -573,6 +575,8 @@ Filtering tickets
 +-----------------+-----------------+---------------------------------------------------------------+
 | Internal name   | Verbose name    | Help text                                                     |
 +=================+=================+===============================================================+
+| user            | Author          |                                                               |
++-----------------+-----------------+---------------------------------------------------------------+
 | reporter        | Reporter        | Only rows reported by this user.                              |
 +-----------------+-----------------+---------------------------------------------------------------+
 | assigned_to     | Voted by        | Only tickets having a vote by this user.                      |
@@ -608,6 +612,7 @@ Filtering tickets
 +-----------------+-----------------+---------------------------------------------------------------+
 | feasable_by     | Feasable by     | Show only tickets for which I am competent.                   |
 +-----------------+-----------------+---------------------------------------------------------------+
+
 
 >>> rt.login('robin').show(rt.actors.tickets.Tickets)
 ... #doctest: +REPORT_UDIFF +ELLIPSIS
