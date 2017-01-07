@@ -123,13 +123,12 @@ class Vote(UserAuthored, Created):
                 lbl, blank=True, help_text=hlp))
         return super(Vote, cls).get_parameter_fields(**fields)
 
-    @dd.displayfield(_("Votable"))
-    def votable_info(self, ar):
-        if ar is None:
+    @dd.displayfield(_("Description"))
+    def votable_overview(self, ar):
+        obj = self.votable
+        if ar is None or obj is None:
             return ''
-        return E.span(
-            ar.obj2html(self.votable), _(" by "),
-            ar.obj2html(self.votable.reporter))
+        return obj.get_overview(ar)
 
 
 dd.update_field(Vote, 'user', verbose_name=_("Voter"))
@@ -226,7 +225,7 @@ class AllVotes(Votes):
 class MyOffers(My, Votes):
     """Show your votes in states watching and candidate"""
     label = _("My offers")
-    column_names = "votable_info workflow_buttons *"
+    column_names = "votable_overview workflow_buttons *"
     order_by = ['-id']
     filter_vote_states = "candidate"
     
@@ -234,7 +233,7 @@ class MyOffers(My, Votes):
 class MyTasks(My, Votes):    
     """Show your votes in states assigned and done"""
     label = _("My tasks")
-    column_names = "priority votable_info workflow_buttons *"
+    column_names = "votable_overview priority workflow_buttons *"
     order_by = ['priority', '-id']
     filter_vote_states = "assigned done"
     

@@ -105,7 +105,8 @@ class Site(Site):
             label=_("Submit a ticket"))
 
         a = self.actors.users.MySettings.default_action
-        tb.add_instance_action(ar.get_user(), action=a)
+        tb.add_instance_action(
+            ar.get_user(), action=a, label=_("My settings"))
         # handler = self.action_call(None, a, dict(record_id=user.pk))
         # handler = "function(){%s}" % handler
         # mysettings = dict(text=_("My settings"),

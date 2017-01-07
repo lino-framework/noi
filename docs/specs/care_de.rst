@@ -287,12 +287,12 @@ Meine Bitten
 ------------
   
 >>> rt.login('christa').show(tickets.MyTickets)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-============================================================================ ================ ======= ===========================
- Overview                                                                     Fähigkeit        Thema   Aktionen
----------------------------------------------------------------------------- ---------------- ------- ---------------------------
- `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__   Gartenarbeiten           [☆] **Neu** → [☎] [☉] [☐]
-============================================================================ ================ ======= ===========================
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+==================================================================================================== ================ ===========================
+ Beschreibung                                                                                         Fähigkeit        Aktionen
+---------------------------------------------------------------------------------------------------- ---------------- ---------------------------
+ `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__ by `christa <Detail>`__   Gartenarbeiten   [☆] **Neu** → [☎] [☉] [☐]
+==================================================================================================== ================ ===========================
 <BLANKLINE>
 
 
@@ -301,11 +301,11 @@ Where I can help
 
 >>> rt.login('alex').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-============================================================================ ========== ======= ================ =============
- Overview                                                                     Anfrager   Thema   Fähigkeit        Aktionen
----------------------------------------------------------------------------- ---------- ------- ---------------- -------------
- `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__   christa            Gartenarbeiten   [☆] **Neu**
-============================================================================ ========== ======= ================ =============
+==================================================================================================== ================ =============
+ Beschreibung                                                                                         Fähigkeit        Aktionen
+---------------------------------------------------------------------------------------------------- ---------------- -------------
+ `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__ by `christa <Detail>`__   Gartenarbeiten   [☆] **Neu**
+==================================================================================================== ================ =============
 <BLANKLINE>
 
 >>> rt.login('berta').show(tickets.SuggestedTickets)
@@ -314,11 +314,11 @@ Keine Daten anzuzeigen
 
 >>> rt.login('eric').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-==================================================================== ========== ======= ==================== ===============
- Overview                                                             Anfrager   Thema   Fähigkeit            Aktionen
--------------------------------------------------------------------- ---------- ------- -------------------- ---------------
- `#4 (Wer kann meiner Tochter Gitarreunterricht geben?) <Detail>`__   alex               Gitarrenunterricht   [☆] **Offen**
-==================================================================== ========== ======= ==================== ===============
+========================================================================================= ==================== ===============
+ Beschreibung                                                                              Fähigkeit            Aktionen
+----------------------------------------------------------------------------------------- -------------------- ---------------
+ `#4 (Wer kann meiner Tochter Gitarreunterricht geben?) <Detail>`__ by `alex <Detail>`__   Gitarrenunterricht   [☆] **Offen**
+========================================================================================= ==================== ===============
 <BLANKLINE>
 
 
@@ -326,9 +326,9 @@ Meine Hilfsangebote
 -------------------
 
 >>> rt.login('christa').show(votes.MyOffers)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ====================================================================================== ============================
- Votable                                                                                Aktionen
+ Beschreibung                                                                           Aktionen
 -------------------------------------------------------------------------------------- ----------------------------
  `#5 (Wer macht Musik auf meinem Geburtstag?) <Detail>`__ by `alex <Detail>`__          **Kandidat** → [Interesse]
  `#3 (Wer kann meinem Sohn Klavierunterricht geben?) <Detail>`__ by `dora <Detail>`__   **Kandidat** → [Interesse]
@@ -337,9 +337,9 @@ Meine Hilfsangebote
 
 
 >>> rt.login('eric').show(votes.MyOffers)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 =============================================================================== ================================================
- Votable                                                                         Aktionen
+ Beschreibung                                                                    Aktionen
 ------------------------------------------------------------------------------- ------------------------------------------------
  `#5 (Wer macht Musik auf meinem Geburtstag?) <Detail>`__ by `alex <Detail>`__   **Kandidat** → [Interesse] [Zuweisen] [Cancel]
 =============================================================================== ================================================
@@ -352,11 +352,11 @@ My to-do list
 
 >>> rt.login('dora').show(votes.MyTasks)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-=========== ======================================================================================= =========================================
- Priorität   Votable                                                                                 Aktionen
------------ --------------------------------------------------------------------------------------- -----------------------------------------
- 0           `#8 (Wer fährt für mich nach Aachen Windeln kaufen?) <Detail>`__ by `alex <Detail>`__   **Zugewiesen** → [Interesse] [Erledigt]
-=========== ======================================================================================= =========================================
+======================================================================================= =========== =========================================
+ Beschreibung                                                                            Priorität   Aktionen
+--------------------------------------------------------------------------------------- ----------- -----------------------------------------
+ `#8 (Wer fährt für mich nach Aachen Windeln kaufen?) <Detail>`__ by `alex <Detail>`__   0           **Zugewiesen** → [Interesse] [Erledigt]
+======================================================================================= =========== =========================================
 <BLANKLINE>
 
 

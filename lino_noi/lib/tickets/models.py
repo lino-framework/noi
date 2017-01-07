@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2016 Luc Saffre
+# Copyright 2011-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 """This module adds models for Projects, Tickets & Co.
 
@@ -578,12 +578,19 @@ class Ticket(UserAuthored, mixins.CreatedModified,
             return []
         return site.milestones_by_site.all()
 
-    @dd.displayfield(_("Overview"))
+    def get_overview(self, ar):
+        return E.span(
+            ar.obj2html(self), _(" by "),
+            ar.obj2html(self.reporter))
+
+    @dd.displayfield(_("Description"))
     def overview(self, ar):
         if ar is None:
             return ''
+        return self.get_overview(ar)
+        
         # return ar.obj2html(self, "#{0}".self.id)
-        return ar.obj2html(self)
+        # return ar.obj2html(self)
         # return E.span(ar.obj2html(self), ' ', self.summary)
 
     # def get_notify_message(self, ar, cw):
