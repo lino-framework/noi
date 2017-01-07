@@ -72,6 +72,7 @@ class Site(Site):
         yield 'lino_xl.lib.lists'
         yield 'lino_xl.lib.blogs'
 
+        yield 'lino.modlib.notify'
         # yield 'lino.modlib.uploads'
         # yield 'lino_xl.lib.excerpts'
         yield 'lino.modlib.export_excel'
@@ -91,36 +92,6 @@ class Site(Site):
         # overrides the default behaviour which would add
         # `auth=True`. In Lino Noi everybody can see everything.
         return kw
-
-    def get_admin_main_items(self, me):
-        from lino.core.dashboard import ActorItem
-        if me.authenticated:
-            # yield ActorItem(
-            #     self.actors.notify.MyMessages, header_level=None)
-            yield self.actors.notify.MyMessages
-        if self.is_installed('blogs'):
-            yield ActorItem(
-                self.actors.blogs.LatestEntries, header_level=None)
-            # yield CustomItem(
-            #     'blogs.Entry.latest_entries',
-            #     self.models.blogs.Entry.latest_entries, max_num=10)
-
-        if me.authenticated:
-            if self.is_installed('clocking'):
-                yield self.actors.clocking.WorkedHours
-            # yield self.actors.tickets.TicketsToDo
-            yield self.actors.tickets.MyTickets
-            yield self.actors.tickets.SuggestedTickets
-            yield self.actors.votes.MyOffers
-            yield self.actors.votes.MyTasks
-            # yield self.actors.tickets.ActiveTickets
-            # yield self.actors.tickets.InterestingTickets
-        else:
-            # yield self.actors.blogs.LatestEntries
-            # from lino_xl.lib.blogs.models import latest_entries
-            # yield latest_entries(ar)
-            yield self.actors.tickets.PublicTickets
-        # yield self.actors.tickets.ActiveProjects
 
     def setup_quicklinks(self, ar, tb):
         super(Site, self).setup_quicklinks(ar, tb)

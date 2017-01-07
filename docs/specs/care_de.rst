@@ -263,7 +263,7 @@ Das Hauptmenü
   - Bitten : Projekte, Projekte (Hierarchie), Project Types, Ticket types, Umfelder
   - Fähigkeiten : Fähigkeiten (Hierarchie), Fähigkeiten (alle)
 - Explorer :
-  - System : Datenbankmodelle, Vollmachten, Benutzerarten, Benachrichtigungen, Änderungen
+  - System : Datenbankmodelle, Vollmachten, Benutzerarten, Änderungen, Benachrichtigungen
   - Themen : Interessen
   - Bitten : Alle Stellungnahmen, Stellungnahmezustände, Verknüpfungen, Ticketzustände
   - Büro : Auszüge, Kommentare

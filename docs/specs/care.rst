@@ -339,7 +339,7 @@ The main menu
   - Pleas : Projects, Projects (tree), Project Types, Ticket types, Sites
   - Faculties : Faculties (tree), Faculties (all)
 - Explorer :
-  - System : content types, Authorities, User types, Notification messages, Changes
+  - System : content types, Authorities, User types, Changes, Notification messages
   - Topics : Interests
   - Pleas : All votes, Vote states, Dependencies, Ticket states
   - Office : Excerpts, Comments
