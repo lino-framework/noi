@@ -339,7 +339,7 @@ The main menu
   - Pleas : Projects, Projects (tree), Project Types, Ticket types, Sites
   - Faculties : Faculties (tree), Faculties (all)
 - Explorer :
-  - System : content types, Authorities, User types, Notification messages, Changes
+  - System : content types, Authorities, User types, Changes, Notification messages
   - Topics : Interests
   - Pleas : All votes, Vote states, Dependencies, Ticket states
   - Office : Excerpts, Comments
@@ -365,11 +365,11 @@ My pleas
   
 >>> rt.login('christa').show(tickets.MyTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-================================================================== ============== ======= ===========================
- Overview                                                           Faculty        Topic   Actions
------------------------------------------------------------------- -------------- ------- ---------------------------
- `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__   Garden works           [☆] **New** → [☎] [☉] [☐]
-================================================================== ============== ======= ===========================
+========================================================================================== ============== ===========================
+ Description                                                                                Faculty        Actions
+------------------------------------------------------------------------------------------ -------------- ---------------------------
+ `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__ by `christa <Detail>`__   Garden works   [☆] **New** → [☎] [☉] [☐]
+========================================================================================== ============== ===========================
 <BLANKLINE>
 
 
@@ -378,11 +378,11 @@ Where I can help
 
 >>> rt.login('eric').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-=============================================================== ========== ======= ================ ================
- Overview                                                        Reporter   Topic   Faculty          Actions
---------------------------------------------------------------- ---------- ------- ---------------- ----------------
- `#4 (Who can give guitar lessons to my daughter?) <Detail>`__   alex               Guitar lessons   [☆] **Opened**
-=============================================================== ========== ======= ================ ================
+==================================================================================== ================ ================
+ Description                                                                          Faculty          Actions
+------------------------------------------------------------------------------------ ---------------- ----------------
+ `#4 (Who can give guitar lessons to my daughter?) <Detail>`__ by `alex <Detail>`__   Guitar lessons   [☆] **Opened**
+==================================================================================== ================ ================
 <BLANKLINE>
 
 
@@ -391,13 +391,13 @@ My to-do list
 -------------
 
 >>> rt.login('christa').show(tickets.TicketsToDo)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-============================================================== ========== ============ ========== =================
- Overview                                                       Priority   Deadline     Reporter   Actions
--------------------------------------------------------------- ---------- ------------ ---------- -----------------
- `#5 (Who would play music on my birthday party?) <Detail>`__   100        03/05/2015   alex       [★] **Started**
- **Total (1 rows)**                                             **100**
-============================================================== ========== ============ ========== =================
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+=================================================================================== ========== ============ ========== =================
+ Description                                                                         Priority   Deadline     Reporter   Actions
+----------------------------------------------------------------------------------- ---------- ------------ ---------- -----------------
+ `#5 (Who would play music on my birthday party?) <Detail>`__ by `alex <Detail>`__   100        03/05/2015   alex       [★] **Started**
+ **Total (1 rows)**                                                                  **100**
+=================================================================================== ========== ============ ========== =================
 <BLANKLINE>
 
 

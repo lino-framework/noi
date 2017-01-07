@@ -84,16 +84,22 @@ class Vote(UserAuthored, Created):
     
     def __str__(self):
         # return _("{0.user} {0.state} on {0.votable}").format(self)
+        if self.votable_id:
+            return _("{user}'s {vote} on {votable}").format(
+                user=self.user, vote=self.state.vote_name,
+                votable=self.votable)
+                
         return _("{user}'s {vote} on {votable}").format(
             user=self.user, vote=self.state.vote_name,
-            votable=self.votable)
+            votable=None)
 
     def disabled_fields(self, ar):
         df = super(Vote, self).disabled_fields(ar)
-        me = ar.get_user()
-        if not me.profile.has_required_roles([VotesStaff]):
-            if me != self.votable.get_vote_rater():
-                df.add('rating')
+        if self.votable_id:
+            me = ar.get_user()
+            if not me.profile.has_required_roles([VotesStaff]):
+                if me != self.votable.get_vote_rater():
+                    df.add('rating')
         return df
 
     @classmethod
@@ -123,13 +129,11 @@ class Vote(UserAuthored, Created):
                 lbl, blank=True, help_text=hlp))
         return super(Vote, cls).get_parameter_fields(**fields)
 
-    @dd.displayfield(_("Votable"))
-    def votable_info(self, ar):
-        if ar is None:
+    @dd.displayfield(_("Description"))
+    def votable_overview(self, ar):
+        if ar is None or self.votable_id is None:
             return ''
-        return E.span(
-            ar.obj2html(self.votable), _(" by "),
-            ar.obj2html(self.votable.reporter))
+        return self.votable.get_overview(ar)
 
 
 dd.update_field(Vote, 'user', verbose_name=_("Voter"))
@@ -226,7 +230,7 @@ class AllVotes(Votes):
 class MyOffers(My, Votes):
     """Show your votes in states watching and candidate"""
     label = _("My offers")
-    column_names = "votable_info workflow_buttons *"
+    column_names = "votable_overview workflow_buttons *"
     order_by = ['-id']
     filter_vote_states = "candidate"
     
@@ -234,7 +238,7 @@ class MyOffers(My, Votes):
 class MyTasks(My, Votes):    
     """Show your votes in states assigned and done"""
     label = _("My tasks")
-    column_names = "priority votable_info workflow_buttons *"
+    column_names = "votable_overview priority workflow_buttons *"
     order_by = ['priority', '-id']
     filter_vote_states = "assigned done"
     

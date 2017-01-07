@@ -47,3 +47,7 @@ class Plugin(ad.Plugin):
         m.add_action('votes.VoteStates')
 
 
+    def get_dashboard_items(self, user):
+        if user.authenticated:
+            yield self.site.actors.votes.MyOffers
+            yield self.site.actors.votes.MyTasks

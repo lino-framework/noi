@@ -342,21 +342,21 @@ My tickets
 
 >>> rt.login('jean').show(tickets.MyTickets)
 ... #doctest: +REPORT_UDIFF
-============================================= =============== ============== ======================================
- Overview                                      Faculty         Topic          Actions
---------------------------------------------- --------------- -------------- --------------------------------------
- `#110 (Ticket 93) <Detail>`__                                 Lino Voga      [▶] [☆] **Talk** → [⚒] [☐] [☑]
- `#97 (Ticket 80) <Detail>`__                                  Lino Cosi      [▶] [☆] **Ready** → [☎] [☑]
- `#93 (Ticket 76) <Detail>`__                                  Lino Cosi      [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]
- `#76 (Ticket 59) <Detail>`__                                  Lino Welfare   [▶] [☆] **Sticky** → [⛶]
- `#64 (Ticket 47) <Detail>`__                                  Lino Welfare   [▶] [☆] **New** → [♾] [☎] [☉] [☐]
- `#59 (Ticket 42) <Detail>`__                                  Lino Core      [▶] [☆] **Started** → [☎] [☐] [☑]
- `#47 (Ticket 30) <Detail>`__                                  Lino Core      [▶] [☆] **Talk** → [⚒] [☐] [☑]
- `#34 (Ticket 17) <Detail>`__                                  Lino Voga      [▶] [☆] **Ready** → [☎] [☑]
- `#30 (Ticket 13) <Detail>`__                                  Lino Voga      [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]
- `#13 (Bar cannot foo) <Detail>`__             Documentation   Lino Cosi      [▶] [☆] **Sticky** → [⛶]
- `#1 (Föö fails to bar when baz) <Detail>`__                   Lino Cosi      [▶] [☆] **New** → [♾] [☎] [☉] [☐]
-============================================= =============== ============== ======================================
+================================================================== =============== ======================================
+ Description                                                        Faculty         Actions
+------------------------------------------------------------------ --------------- --------------------------------------
+ `#110 (Ticket 93) <Detail>`__ by `jean <Detail>`__                                 [▶] [☆] **Talk** → [⚒] [☐] [☑]
+ `#97 (Ticket 80) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **Ready** → [☎] [☑]
+ `#93 (Ticket 76) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]
+ `#76 (Ticket 59) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **Sticky** → [⛶]
+ `#64 (Ticket 47) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+ `#59 (Ticket 42) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **Started** → [☎] [☐] [☑]
+ `#47 (Ticket 30) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **Talk** → [⚒] [☐] [☑]
+ `#34 (Ticket 17) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **Ready** → [☎] [☑]
+ `#30 (Ticket 13) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]
+ `#13 (Bar cannot foo) <Detail>`__ by `jean <Detail>`__             Documentation   [▶] [☆] **Sticky** → [⛶]
+ `#1 (Föö fails to bar when baz) <Detail>`__ by `jean <Detail>`__                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+================================================================== =============== ======================================
 <BLANKLINE>
 
 
@@ -370,14 +370,14 @@ users.UserTypes.developer:400
 
 >>> rt.login('luc').show(votes.MyTasks)
 ... #doctest: +REPORT_UDIFF
-========== ======================================================== ===========================================
- Priority   Votable                                                  Actions
----------- -------------------------------------------------------- -------------------------------------------
- 0          `#93 (Ticket 76) <Detail>`__ by `jean <Detail>`__        **Assigned** → [Watching] [Done] [Cancel]
- 0          `#76 (Ticket 59) <Detail>`__ by `jean <Detail>`__        **Done**
- 0          `#30 (Ticket 13) <Detail>`__ by `jean <Detail>`__        **Assigned** → [Watching] [Done] [Cancel]
- 0          `#13 (Bar cannot foo) <Detail>`__ by `jean <Detail>`__   **Done**
-========== ======================================================== ===========================================
+======================================================== ========== ===========================================
+ Description                                              Priority   Actions
+-------------------------------------------------------- ---------- -------------------------------------------
+ `#93 (Ticket 76) <Detail>`__ by `jean <Detail>`__        0          **Assigned** → [Watching] [Done] [Cancel]
+ `#76 (Ticket 59) <Detail>`__ by `jean <Detail>`__        0          **Done**
+ `#30 (Ticket 13) <Detail>`__ by `jean <Detail>`__        0          **Assigned** → [Watching] [Done] [Cancel]
+ `#13 (Bar cannot foo) <Detail>`__ by `jean <Detail>`__   0          **Done**
+======================================================== ========== ===========================================
 <BLANKLINE>
 
 

@@ -513,9 +513,13 @@ class DuplicatesByTicket(Tickets):
 
 
 class SuggestedTickets(Tickets):
+    """Shows the tickets of other users which need help on a faculty for
+    which I am competent.
+
+    """
     label = _("Where I can help")
     required_roles = dd.login_required()
-    column_names = 'overview:50 reporter:10 topic faculty ' \
+    column_names = 'overview:50 #topic faculty ' \
                    'workflow_buttons:30 *'
     params_panel_hidden = True
     params_layout = """
@@ -668,11 +672,11 @@ class MyTickets(My, Tickets):
     """Show all active tickets reported by me."""
     required_roles = dd.login_required()
     order_by = ["-id"]
-    column_names = 'overview:50 faculty topic #assigned_to ' \
+    column_names = 'overview:50 faculty #topic ' \
                    'workflow_buttons:40 *'
     params_layout = """
-    reporter site project state 
-    start_date end_date observed_event topic feasable_by"""
+    user reporter site project state
+    start_date end_date observed_event topic feasable_by show_active"""
 
     @classmethod
     def param_defaults(self, ar, **kw):

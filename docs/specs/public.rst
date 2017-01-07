@@ -36,21 +36,21 @@ The demo database contains the following data:
 
 >>> rt.show(tickets.PublicTickets)
 ... #doctest: +REPORT_UDIFF
-=================================== ============= ============== ==========
- Overview                            Ticket type   Topic          Priority
------------------------------------ ------------- -------------- ----------
- `#111 (Ticket 94) <Detail>`__       Upgrade       Lino Core      100
- `#102 (Ticket 85) <Detail>`__       Upgrade       Lino Voga      100
- `#93 (Ticket 76) <Detail>`__        Upgrade       Lino Cosi      100
- `#75 (Ticket 58) <Detail>`__        Upgrade       Lino Core      100
- `#66 (Ticket 49) <Detail>`__        Upgrade       Lino Voga      100
- `#57 (Ticket 40) <Detail>`__        Upgrade       Lino Cosi      100
- `#48 (Ticket 31) <Detail>`__        Upgrade       Lino Welfare   100
- `#30 (Ticket 13) <Detail>`__        Upgrade       Lino Voga      100
- `#21 (Ticket 4) <Detail>`__         Upgrade       Lino Cosi      100
- `#12 (Foo cannot bar) <Detail>`__   Upgrade       Lino Welfare   100
- **Total (10 rows)**                                              **1000**
-=================================== ============= ============== ==========
+==================================================== ============= ============== ==========
+ Description                                          Ticket type   Topic          Priority
+---------------------------------------------------- ------------- -------------- ----------
+ `#111 (Ticket 94) <Detail>`__ by *marc*              Upgrade       Lino Core      100
+ `#102 (Ticket 85) <Detail>`__ by *luc*               Upgrade       Lino Voga      100
+ `#93 (Ticket 76) <Detail>`__ by *jean*               Upgrade       Lino Cosi      100
+ `#75 (Ticket 58) <Detail>`__ by *Rolf Rompen*        Upgrade       Lino Core      100
+ `#66 (Ticket 49) <Detail>`__ by *Romain Raffault*    Upgrade       Lino Voga      100
+ `#57 (Ticket 40) <Detail>`__ by *mathieu*            Upgrade       Lino Cosi      100
+ `#48 (Ticket 31) <Detail>`__ by *marc*               Upgrade       Lino Welfare   100
+ `#30 (Ticket 13) <Detail>`__ by *jean*               Upgrade       Lino Voga      100
+ `#21 (Ticket 4) <Detail>`__ by *Robin Rood*          Upgrade       Lino Cosi      100
+ `#12 (Foo cannot bar) <Detail>`__ by *Rolf Rompen*   Upgrade       Lino Welfare   100
+ **Total (10 rows)**                                                               **1000**
+==================================================== ============= ============== ==========
 <BLANKLINE>
 
 The home page:

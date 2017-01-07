@@ -57,3 +57,10 @@ class Plugin(ad.Plugin):
         # m.add_action('tickets.Projects')
         m.add_action('tickets.Links')
         m.add_action('tickets.TicketStates')
+        
+    def get_dashboard_items(self, user):
+        if user.authenticated:
+            yield self.site.actors.tickets.MyTickets
+            yield self.site.actors.tickets.SuggestedTickets
+        else:
+            yield self.site.actors.tickets.PublicTickets
