@@ -251,7 +251,7 @@ class Migrator(Migrator):
 
         return '2016.12.0'
 
-    def migrate_from_2016_12_0(self, globals_dict):
+    def unused_migrate_from_2016_12_0(self, globals_dict):
         """
         - convert Ticket.assigned_to to votes
         
