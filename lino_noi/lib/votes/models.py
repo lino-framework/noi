@@ -84,16 +84,22 @@ class Vote(UserAuthored, Created):
     
     def __str__(self):
         # return _("{0.user} {0.state} on {0.votable}").format(self)
+        if self.votable_id:
+            return _("{user}'s {vote} on {votable}").format(
+                user=self.user, vote=self.state.vote_name,
+                votable=self.votable)
+                
         return _("{user}'s {vote} on {votable}").format(
             user=self.user, vote=self.state.vote_name,
-            votable=self.votable)
+            votable=None)
 
     def disabled_fields(self, ar):
         df = super(Vote, self).disabled_fields(ar)
-        me = ar.get_user()
-        if not me.profile.has_required_roles([VotesStaff]):
-            if me != self.votable.get_vote_rater():
-                df.add('rating')
+        if self.votable_id:
+            me = ar.get_user()
+            if not me.profile.has_required_roles([VotesStaff]):
+                if me != self.votable.get_vote_rater():
+                    df.add('rating')
         return df
 
     @classmethod
@@ -125,10 +131,9 @@ class Vote(UserAuthored, Created):
 
     @dd.displayfield(_("Description"))
     def votable_overview(self, ar):
-        obj = self.votable
-        if ar is None or obj is None:
+        if ar is None or self.votable_id is None:
             return ''
-        return obj.get_overview(ar)
+        return self.votable.get_overview(ar)
 
 
 dd.update_field(Vote, 'user', verbose_name=_("Voter"))
