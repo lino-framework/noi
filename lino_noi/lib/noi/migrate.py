@@ -213,12 +213,11 @@ class Migrator(Migrator):
             return votes_Vote(**kw)
 
         @override(globals_dict)
-        def create_tickets_ticket(id, modified, created, assigned_to_id, closed, private, planned_time, project_id,
-                                  site_id, topic_id, nickname, summary, description, upgrade_notes, ticket_type_id,
-                                  duplicate_of_id, reported_for_id, fixed_for_id, reporter_id, state, rating,
-                                  waiting_for, deadline, priority, feedback, standby, faculty_id):
+        def create_tickets_ticket(id, modified, created, assigned_to_id, closed, private, planned_time, project_id, site_id, topic_id, nickname, summary, description, upgrade_notes,
+            ticket_type_id, duplicate_of_id, reporter_id, state, rating, waiting_for, deadline,
+            priority, feedback, standby, faculty_id):
             if state: state = settings.SITE.modules.tickets.TicketStates.get_by_value(state)
-            # if rating: rating = settings.SITE.modules.tickets.Ratings.get_by_value(rating)
+            if rating: rating = settings.SITE.modules.tickets.Ratings.get_by_value(rating)
             kw = dict()
             kw.update(id=id)
             kw.update(modified=modified)
@@ -236,8 +235,6 @@ class Migrator(Migrator):
             kw.update(upgrade_notes=upgrade_notes)
             kw.update(ticket_type_id=ticket_type_id)
             kw.update(duplicate_of_id=duplicate_of_id)
-            kw.update(reported_for_id=reported_for_id)
-            kw.update(fixed_for_id=fixed_for_id)
             kw.update(reporter_id=reporter_id)
             kw.update(state=state)
             # kw.update(rating=rating)
