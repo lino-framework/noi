@@ -122,6 +122,8 @@ class Site(Site):
         wc(self.modules.comments.Comment, master_key='owner')
         if self.is_installed('extjs'):
             self.plugins.extjs.autorefresh_seconds = 0
+        if self.is_installed('votes'):
+            wc(self.modules.votes.Vote, master_key='votable')
 
 
 # the following line should not be active in a checked-in version
