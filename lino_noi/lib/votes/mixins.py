@@ -15,14 +15,6 @@ from lino.utils.instantiator import create_row
 from lino.modlib.notify.mixins import ChangeObservable
 from .roles import SimpleVotesUser
 
-def get_favourite(obj, user):
-    if user.authenticated:
-        qs = rt.models.votes.Vote.objects.filter(votable=obj, user=user)
-        if qs.count() == 0:
-            return None
-        return qs[0]
-
-
 
 class CreateVote(dd.Action):
     """Define your vote about this object.
@@ -41,7 +33,7 @@ class CreateVote(dd.Action):
     def get_action_permission(self, ar, obj, state):
         if not super(CreateVote, self).get_action_permission(ar, obj, state):
             return False
-        vote = get_favourite(obj, ar.get_user())
+        vote = obj.get_favourite(ar.get_user())
         return vote is None
 
     def run_from_ui(self, ar, **kw):
@@ -65,12 +57,12 @@ class EditVote(dd.Action):
     def get_action_permission(self, ar, obj, state):
         if not super(EditVote, self).get_action_permission(ar, obj, state):
             return False
-        vote = get_favourite(obj, ar.get_user())
+        vote = obj.get_favourite(ar.get_user())
         return vote is not None
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
-        vote = get_favourite(obj, ar.get_user())
+        vote = obj.get_favourite(ar.get_user())
         ar.goto_instance(vote)
 
 
@@ -86,33 +78,44 @@ class Votable(ChangeObservable):
     create_vote = CreateVote()
     edit_vote = EditVote()
 
-    def get_vote_rater(self):
-        """Return the user who is allowed to rate votes on this votable.
+    def get_vote_raters(self):
+        """Yield or return a list of the users who are allowed to rate the
+votes on this votable.
 
-        If this returns something, then a vote will automatically be
-        created.
+        As a side effect, Lino will automatically (in
+        :meth:`after_ui_save`) create a vote for each of them.
 
         """
-        return None
+        return []
 
-    # def get_votable_author(self):
-    #     """Return the user who is the author of this votable.
+    def get_favourite(self, user):
+        """Return the vote of the given user about this votable, or None if no
+vote exists.
 
-    #     """
-    #     return None
+        There should be either 0 or 1 vote per user and votable.
+
+        """
+        if user.authenticated:
+            qs = rt.models.votes.Vote.objects.filter(
+                votable=self, user=user)
+            if qs.count() == 0:
+                return None
+            return qs[0]
 
     def get_change_observers(self):
+        for x in super(Votable, self).get_change_observers():
+            yield x
         for vote in rt.models.votes.Vote.objects.filter(votable=self):
             yield (vote.user, vote.mail_mode or vote.user.mail_mode)
 
     def after_ui_save(self, ar, cw):
-        super(Votable, self).after_ui_save(ar, cw)
+        """Verifies that every vote rater has a vote."""
         if cw is None:
-            user = self.get_vote_rater()
-            if user:
-                # vote = get_favourite(self, user)
-                # if vote is None:
-                create_row(rt.models.votes.Vote,
-                           user=user, votable=self,
-                           state=rt.actors.votes.VoteStates.watching)
+            for user in self.get_vote_raters():
+                vote = self.get_favourite(user)
+                if vote is None:
+                    create_row(rt.models.votes.Vote,
+                               user=user, votable=self,
+                               state=rt.actors.votes.VoteStates.watching)
 
+        super(Votable, self).after_ui_save(ar, cw)

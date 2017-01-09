@@ -82,7 +82,7 @@ class TestCase(TestCase):
 
         robin = create(User, username='robin', profile=UserTypes.admin)
         aline = create(User, username='aline', email="aline@example.com")
-        obj = create(Ticket, summary="Save the world", reporter=robin)
+        obj = create(Ticket, summary="Save the world", user=robin)
         create(Vote, votable=obj, user=aline)
         
         self.assertEqual(Message.objects.count(), 0)

@@ -14,7 +14,7 @@ from lino.api import dd
 TICKET_STATES = Cycler(TicketStates.objects())
 
 
-def user(username, user_type, **kw):
+def user(username, user_type=None, **kw):
     kw.update(username=username, profile=user_type)
     return rt.modules.users.User(**kw)
 
@@ -35,11 +35,11 @@ def Topic(name, **kw):
     return rt.modules.topics.Topic(**kw)
 
 
-def ticket(reporter, summary, en, **kw):
-    u = rt.models.users.User.objects.get(username=reporter)
+def ticket(user, summary, en, **kw):
+    u = rt.models.users.User.objects.get(username=user)
     if en and u.language != 'de':
         summary = en
-    kw.update(summary=summary, reporter=u, user=u)
+    kw.update(summary=summary, user=u)
     # if no manual state is specified, take a random one:
     if not 'state' in kw:
         kw.update(state=TICKET_STATES.pop())
@@ -66,21 +66,22 @@ def objects():
     yield user("alex", UserTypes.user)
     yield user("berta", UserTypes.user)
     yield user("christa", UserTypes.user)
-    yield user("dora", UserTypes.user)
+    dora = user("dora")
+    yield dora
     yield user("eric", UserTypes.connector)
 
     yield S(_("At home"))  # "Bei mir zu Hause"
     yield S("AZ Ephata")
     yield S("Eupen")
 
-    TopicGroup = rt.modules.topics.TopicGroup
-    lng = TopicGroup(**str2kw('name', _("Languages")))
-    yield lng
-    fr = Topic(_("French"), topic_group=lng)
-    yield fr
-    de = Topic(_("German"), topic_group=lng)
-    yield de
-    yield Topic(_("English"), topic_group=lng)
+    # TopicGroup = rt.modules.topics.TopicGroup
+    # lng = TopicGroup(**str2kw('name', _("Languages")))
+    # yield lng
+    # fr = Topic(_("French"), topic_group=lng)
+    # yield fr
+    # de = Topic(_("German"), topic_group=lng)
+    # yield de
+    # yield Topic(_("English"), topic_group=lng)
 
     # music = TopicGroup(**str2kw('name', _("Music")))
     # yield music
@@ -144,7 +145,7 @@ def objects():
         "Hunde spazierenführen", "Chiens", "Go out with dogs")
     traduire = faculty(
         "Übersetzungsarbeiten",
-        "Traductions", "Translations", topic_group=lng)
+        "Traductions", "Translations")
     yield traduire
     yield faculty("Briefe schreiben", "Écrire des lettres",
                   "Write letters")
@@ -161,10 +162,10 @@ def objects():
         "My lawn needs mowing. On Thursday or Saturday."
         "", faculty=garden)
     yield ticket(  #3
-        "dora",
+        "eric",
         "Wer kann meinem Sohn Klavierunterricht geben?",
         "Who can give piano lessons to my son?",
-        faculty=piano)
+        faculty=piano, end_user=dora)
     yield ticket(  #4
         "alex",
         "Wer kann meiner Tochter Gitarreunterricht geben?",
@@ -185,9 +186,10 @@ def objects():
         deadline=dd.demo_date().replace(month=5, day=21),
         faculty=math)
     yield ticket(
-        "dora",
+        "eric",
         "Wer kann meine Abschlussarbeit korrekturlesen?",
         "Who can review my final work?",
+        end_user=dora, 
         deadline=dd.demo_date().replace(month=3, day=12),
         description="Für 5. Jahr RSI zum Thema \"Das "
         "Liebesleben der Kängurus\"  "
@@ -199,9 +201,9 @@ def objects():
         description="Ich darf selber nicht über die Grenze.",
         faculty=commissions)
 
-    yield competence('alex', traduire, topic=fr)
-    yield competence('berta', traduire, topic=fr)
-    yield competence('berta', traduire, topic=de)
+    yield competence('alex', traduire)
+    yield competence('berta', traduire)
+    # yield competence('berta', traduire, topic=de)
     yield competence('alex', garden)
     yield competence('alex', repair)
     yield competence('christa', piano)

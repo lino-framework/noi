@@ -140,7 +140,7 @@ In der Demo-Datenbank gibt es folgende Benutzer:
  alex           Benutzer
  berta          Benutzer
  christa        Benutzer
- dora           Benutzer
+ dora
  eric           Vermittler
  robin          Verwalter     Robin     Rood
  rolf           Verwalter     Rolf      Rompen
@@ -155,31 +155,31 @@ Fähigkeiten
 
 >>> rt.show(faculties.AllFaculties)
 ... #doctest: -REPORT_UDIFF
-============================= ============================ ========================== =========== ==================== =========================
- Bezeichnung                   Bezeichnung (fr)             Bezeichnung (en)           Affinität   Optionen-Kategorie   Übergeordnete Fähigkeit
------------------------------ ---------------------------- -------------------------- ----------- -------------------- -------------------------
+============================= ============================ ========================== =========== =========================
+ Bezeichnung                   Bezeichnung (fr)             Bezeichnung (en)           Affinität   Übergeordnete Fähigkeit
+----------------------------- ---------------------------- -------------------------- ----------- -------------------------
  Babysitting                   Garde enfant                 Babysitting                100
  Botengänge                    Commissions                  Shopping                   100
  Briefe schreiben              Écrire des lettres           Write letters              100
- Deutschunterricht             Cours d'allemand             German lessons             100                              Unterricht
+ Deutschunterricht             Cours d'allemand             German lessons             100         Unterricht
  Fahrdienst                    Voiture                      Car driving                100
- Französischunterricht         Cours de francais            French lessons             100                              Unterricht
+ Französischunterricht         Cours de francais            French lessons             100         Unterricht
  Friseur                       Coiffure                     Hair cutting               100
- Gartenarbeiten                Travaux de jardin            Garden works               100                              Haus und Garten
+ Gartenarbeiten                Travaux de jardin            Garden works               100         Haus und Garten
  Gesellschafter für Senioren   Rencontres personnes agées   Mentoring elderly people   100
- Gitarrenunterricht            Cours de guitare             Guitar lessons             100                              Musik
+ Gitarrenunterricht            Cours de guitare             Guitar lessons             100         Musik
  Haus und Garten               Maison et jardin             Home & Garden              100
  Hunde spazierenführen         Chiens                       Go out with dogs           100
- Klavierunterricht             Cours de piano               Piano lessons              100                              Musik
- Kleider reparieren            Réparer des vètements        Repairing clothes          100                              Haus und Garten
- Matheunterricht               Cours de maths               Maths lessons              100                              Unterricht
+ Klavierunterricht             Cours de piano               Piano lessons              100         Musik
+ Kleider reparieren            Réparer des vètements        Repairing clothes          100         Haus und Garten
+ Matheunterricht               Cours de maths               Maths lessons              100         Unterricht
  Musik                         Musique                      Music                      100
- Renovierung                   Rénovation                   Renovation                 100                              Haus und Garten
- Reparaturarbeiten             Travaux de réparation        Repair works               100                              Haus und Garten
+ Renovierung                   Rénovation                   Renovation                 100         Haus und Garten
+ Reparaturarbeiten             Travaux de réparation        Repair works               100         Haus und Garten
  Unterricht                    Cours                        Teaching                   100
- Übersetzungsarbeiten          Traductions                  Translations               100         Sprachen
+ Übersetzungsarbeiten          Traductions                  Translations               100
  **Total (20 Zeilen)**                                                                 **2000**
-============================= ============================ ========================== =========== ==================== =========================
+============================= ============================ ========================== =========== =========================
 <BLANKLINE>
 
 
@@ -204,45 +204,34 @@ Fähigkeiten
 
 
 >>> rt.show('faculties.Competences')
-==== ========== ====================== =========== =============
- ID   Benutzer   Fähigkeit              Affinität   Option
----- ---------- ---------------------- ----------- -------------
- 1    alex       Übersetzungsarbeiten   100         Französisch
- 2    berta      Übersetzungsarbeiten   100         Französisch
- 3    berta      Übersetzungsarbeiten   100         Deutsch
- 4    alex       Gartenarbeiten         100
- 5    alex       Reparaturarbeiten      100
- 6    christa    Klavierunterricht      100
- 7    dora       Reparaturarbeiten      100
- 8    eric       Gitarrenunterricht     100
- 9    dora       Botengänge             100
-                                        **900**
-==== ========== ====================== =========== =============
-<BLANKLINE>
-
->>> rt.show('topics.Topics')
-========== ============= ================== ================== ==============
- Referenz   Bezeichnung   Bezeichnung (fr)   Bezeichnung (en)   Themengruppe
----------- ------------- ------------------ ------------------ --------------
-            Französisch   Français           French             Sprachen
-            Deutsch       Allemand           German             Sprachen
-            Englisch      Anglais            English            Sprachen
-========== ============= ================== ================== ==============
+==== ========== ====================== ===========
+ ID   Benutzer   Fähigkeit              Affinität
+---- ---------- ---------------------- -----------
+ 1    alex       Übersetzungsarbeiten   100
+ 2    berta      Übersetzungsarbeiten   100
+ 3    alex       Gartenarbeiten         100
+ 4    alex       Reparaturarbeiten      100
+ 5    christa    Klavierunterricht      100
+ 6    dora       Reparaturarbeiten      100
+ 7    eric       Gitarrenunterricht     100
+ 8    dora       Botengänge             100
+                                        **800**
+==== ========== ====================== ===========
 <BLANKLINE>
 
 >>> rt.show('tickets.Tickets')
-==== =========================================================================================== ========== ======= ==================== ================= =========
- ID   Zusammenfassung                                                                             Anfrager   Thema   Fähigkeit            Aktionen          Projekt
----- ------------------------------------------------------------------------------------------- ---------- ------- -------------------- ----------------- ---------
- 8    Wer fährt für mich nach Aachen Windeln kaufen?                                              alex               Botengänge           **Geschlossen**
- 7    Wer kann meine Abschlussarbeit korrekturlesen?                                              dora                                    **Bereit**
- 6    Wer hilft meinem Sohn sich auf die Mathearbeit am 21.05. vorzubereiten? 5. Schuljahr PDS.   berta              Matheunterricht      **Schläft**
- 5    Wer macht Musik auf meinem Geburtstag?                                                      alex               Musik                **Gestartet**
- 4    Wer kann meiner Tochter Gitarreunterricht geben?                                            alex               Gitarrenunterricht   **Offen**
- 3    Wer kann meinem Sohn Klavierunterricht geben?                                               dora               Klavierunterricht    **Besprechen**
- 2    Mein Rasen muss gemäht werden. Donnerstags oder Samstags                                    christa            Gartenarbeiten       **Neu**
- 1    Mein Wasserhahn tropft, wer kann mir helfen?                                                berta              Reparaturarbeiten    **Geschlossen**
-==== =========================================================================================== ========== ======= ==================== ================= =========
+==== =========================================================================================== ========= ==================== ================= =========
+ ID   Zusammenfassung                                                                             Autor     Fähigkeit            Aktionen          Projekt
+---- ------------------------------------------------------------------------------------------- --------- -------------------- ----------------- ---------
+ 8    Wer fährt für mich nach Aachen Windeln kaufen?                                              alex      Botengänge           **Geschlossen**
+ 7    Wer kann meine Abschlussarbeit korrekturlesen?                                              eric                           **Bereit**
+ 6    Wer hilft meinem Sohn sich auf die Mathearbeit am 21.05. vorzubereiten? 5. Schuljahr PDS.   berta     Matheunterricht      **Schläft**
+ 5    Wer macht Musik auf meinem Geburtstag?                                                      alex      Musik                **Gestartet**
+ 4    Wer kann meiner Tochter Gitarreunterricht geben?                                            alex      Gitarrenunterricht   **Offen**
+ 3    Wer kann meinem Sohn Klavierunterricht geben?                                               eric      Klavierunterricht    **Besprechen**
+ 2    Mein Rasen muss gemäht werden. Donnerstags oder Samstags                                    christa   Gartenarbeiten       **Neu**
+ 1    Mein Wasserhahn tropft, wer kann mir helfen?                                                berta     Reparaturarbeiten    **Geschlossen**
+==== =========================================================================================== ========= ==================== ================= =========
 <BLANKLINE>
 
 
@@ -252,19 +241,17 @@ Das Hauptmenü
 >>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Büro : Meine Angebote, Meine Aufgaben, Meine Auszüge, Meine Kommentare, Meine Benachrichtigungen
-- Bitten : Meine Bitten, Wo ich helfen kann, Zu tun, Aktive Bitten, Alle Bitten, Nicht zugewiesene Bitten, Aktive Projekte
+- Bitten : Meine Bitten, Wo ich helfen kann, Aktive Bitten, Alle Bitten, Nicht zugewiesene Bitten, Aktive Projekte
 - Berichte :
   - System : Broken GFKs
 - Konfigurierung :
   - System : Site-Parameter, Hilfetexte, Benutzer
   - Orte : Länder, Orte
-  - Themen : Themen, Themengruppen
   - Büro : Auszugsarten
   - Bitten : Projekte, Projekte (Hierarchie), Project Types, Ticket types, Umfelder
   - Fähigkeiten : Fähigkeiten (Hierarchie), Fähigkeiten (alle)
 - Explorer :
   - System : Datenbankmodelle, Vollmachten, Benutzerarten, Änderungen, Benachrichtigungen
-  - Themen : Interessen
   - Bitten : Alle Stellungnahmen, Stellungnahmezustände, Verknüpfungen, Ticketzustände
   - Büro : Auszüge, Kommentare
   - Fähigkeiten : Kompetenzen
@@ -276,7 +263,7 @@ Das Hauptmenü
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Büro : Meine Angebote, Meine Aufgaben, Meine Kommentare, Meine Benachrichtigungen
-- Bitten : Meine Bitten, Wo ich helfen kann, Zu tun
+- Bitten : Meine Bitten, Wo ich helfen kann
 - Site : Info
 
 Bittenlisten
@@ -347,17 +334,22 @@ Meine Hilfsangebote
 
 
 
-My to-do list
--------------
+Meine Aufgaben
+--------------
 
->>> rt.login('dora').show(votes.MyTasks)
+>>> rt.login('alex').show(votes.MyTasks)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-======================================================================================= =========== =========================================
- Beschreibung                                                                            Priorität   Aktionen
---------------------------------------------------------------------------------------- ----------- -----------------------------------------
- `#8 (Wer fährt für mich nach Aachen Windeln kaufen?) <Detail>`__ by `alex <Detail>`__   0           **Zugewiesen** → [Interesse] [Erledigt]
-======================================================================================= =========== =========================================
+====================================================================================== =========== ==============
+ Beschreibung                                                                           Priorität   Aktionen
+-------------------------------------------------------------------------------------- ----------- --------------
+ `#1 (Mein Wasserhahn tropft, wer kann mir helfen?) <Detail>`__ by `berta <Detail>`__   0           **Erledigt**
+====================================================================================== =========== ==============
 <BLANKLINE>
+
+Solange eine Aufgabe nur "erledigt" und noch nicht "abgeschlossen"
+ist, steht sie in der Aufgabenliste des Arbeiters, damit dieser den
+Anfrager ggf. daran erinnern kann, dass die Aufgabe bewertet und
+abgeschlossen werden muss.
 
 
 Rating a help offer
@@ -389,7 +381,7 @@ the detail window of a ticket.
   - (general_1):
     - (general1):
       - (general1_1): **Zusammenfassung** (summary), **ID** (id), **Deadline** (deadline)
-      - (general1_2): **Anfrager** (reporter), **Fähigkeit** (faculty), **Thema** (topic)
+      - (general1_2): **Autor** (user), **End user** (end_user), **Fähigkeit** (faculty)
       - (general1_3): **Umfeld** (site), **Aktionen** (workflow_buttons)
     - **Zuweisbare Arbeiter** (faculties.AssignableWorkersByTicket) [visible for connector admin]
   - (general_2): **Beschreibung** (description), **Kommentare** (CommentsByRFC) [visible for user connector admin]
@@ -402,21 +394,6 @@ the detail window of a ticket.
   - (more_2) [visible for all]: **Lösung** (upgrade_notes), **Verknüpfungen** (LinksByTicket) [visible for connector admin]
 <BLANKLINE>
 
-
-Topic groups
-============
-
-
->>> show_menu_path(topics.TopicGroups, language='en')
-Configure --> Topics --> Topic groups
-
->>> rt.show(topics.TopicGroups)
-==== ============= ================== ================== ==============
- ID   Bezeichnung   Bezeichnung (fr)   Bezeichnung (en)   Beschreibung
----- ------------- ------------------ ------------------ --------------
- 1    Sprachen      Langues            Languages
-==== ============= ================== ================== ==============
-<BLANKLINE>
 
 Configuring your preferences
 ============================

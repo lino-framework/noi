@@ -68,23 +68,22 @@ responsible for triaging tickets"""),
     'lino_noi.lib.tickets.choicelists.TicketStates.new' : _("""Somebody reported this ticket, but there was no response so
 far.
 The ticket needs to be triaged."""),
-    'lino_noi.lib.tickets.choicelists.TicketStates.talk' : _("""The ticket needs discussion with the reporter.
-We don't yet know exactly
-what to do with it."""),
+    'lino_noi.lib.tickets.choicelists.TicketStates.talk' : _("""Some worker needs discussion with the author.  We don't yet
+know exactly what to do with it."""),
     'lino_noi.lib.tickets.choicelists.TicketStates.todo' : _("""The ticket is confirmed and we are working on it.
 It appears in the todo list of somebody (either the assigned
 worker, or our general todo list)"""),
     'lino_noi.lib.tickets.choicelists.TicketStates.testing' : _("""The ticket is theoretically done, but we want to confirm this
-somehow, and it is not clear who (reporter, assignee or even
-some third user) should do the next step. If it is clear that
-the reporter should do the testing, then you should rather set
-the ticket to talk. If it is clear that you (the
-assignee) must test it, then leave the ticket at todo."""),
+somehow, and it is not clear who should do the next step. If
+it is clear that the author should do the testing, then you
+should rather set the ticket to talk. If it is clear
+that you (the assignee) must test it, then leave the ticket at
+todo."""),
     'lino_noi.lib.tickets.choicelists.TicketStates.sleeping' : _("""Waiting for some external event. We didn't decide what to do
 with it."""),
     'lino_noi.lib.tickets.choicelists.TicketStates.sticky' : _("""Special state for permanent tickets which have no lifecycle."""),
     'lino_noi.lib.tickets.choicelists.TicketStates.ready' : _("""The ticket is basically done, but some detail still
-needs to be done by the reporter (e.g. testing,
+needs to be done by the user (e.g. testing,
 confirmation, documentation,..)"""),
     'lino_noi.lib.tickets.choicelists.TicketStates.done' : _("""The ticket has been done."""),
     'lino_noi.lib.tickets.choicelists.TicketStates.cancelled' : _("""It has been decided that we won't fix this ticket."""),
@@ -105,10 +104,10 @@ publicly visible anywhere."""),
     'lino_noi.lib.tickets.models.Project.assign_to' : _("""The user to whom new tickets will be assigned.
 See Ticket.assigned_to."""),
     'lino_noi.lib.tickets.models.Ticket' : _("""A Ticket is a concrete question or problem formulated by a
-reporter (a user)."""),
+user."""),
     'lino_noi.lib.tickets.models.Ticket.user' : _("""The user who entered this ticket and is responsible for
 managing it."""),
-    'lino_noi.lib.tickets.models.Ticket.reporter' : _("""The user who is asking for help."""),
+    'lino_noi.lib.tickets.models.Ticket.end_user' : _("""The end user who is asking for help."""),
     'lino_noi.lib.tickets.models.Ticket.assigned_to' : _("""No longer used. The user who is working on this ticket."""),
     'lino_noi.lib.tickets.models.Ticket.state' : _("""The state of this ticket. See TicketStates"""),
     'lino_noi.lib.tickets.models.Ticket.waiting_for' : _("""What to do next. An unformatted one-line text which describes
@@ -124,7 +123,7 @@ version."""),
     'lino_noi.lib.tickets.models.Ticket.deadline' : _("""Specify that the ticket must be done for a given date."""),
     'lino_noi.lib.tickets.models.Ticket.priority' : _("""How urgent this ticket is. This should be a value between 0
 and 100."""),
-    'lino_noi.lib.tickets.models.Ticket.rating' : _("""How the reporter rates this ticket."""),
+    'lino_noi.lib.tickets.models.Ticket.rating' : _("""How the author rates this ticket."""),
     'lino_noi.lib.tickets.roles.Triager' : _("""A user who is responsible for triaging new tickets."""),
     'lino_noi.lib.tickets.ui.ActiveProjects' : _("""Show a list of active projects."""),
     'lino_noi.lib.tickets.ui.ActiveProjects.model' : _("""alias of Project"""),
@@ -143,12 +142,12 @@ or ToDo)."""),
 (i.e. whose duplicate_of field points to this ticket."""),
     'lino_noi.lib.tickets.ui.DuplicatesByTicket.master' : _("""alias of Ticket"""),
     'lino_noi.lib.tickets.ui.DuplicatesByTicket.model' : _("""alias of Ticket"""),
+    'lino_noi.lib.tickets.ui.SuggestedTickets' : _("""Shows the tickets of other users which need help on a faculty for
+which I am competent."""),
+    'lino_noi.lib.tickets.ui.SuggestedTickets.model' : _("""alias of Ticket"""),
     'lino_noi.lib.tickets.ui.TicketsToTriage' : _("""List of tickets that need to be triaged.  Currently this is
 equivalent to those having their state set to new."""),
     'lino_noi.lib.tickets.ui.TicketsToTriage.model' : _("""alias of Ticket"""),
-    'lino_noi.lib.tickets.ui.TicketsToDo' : _("""Shows a list of tickets "to do". This means attributed to me and
-in an active state."""),
-    'lino_noi.lib.tickets.ui.TicketsToDo.model' : _("""alias of Ticket"""),
     'lino_noi.lib.tickets.ui.ActiveTickets' : _("""Show all tickets that are in an active state."""),
     'lino_noi.lib.tickets.ui.ActiveTickets.model' : _("""alias of Ticket"""),
     'lino_noi.lib.tickets.ui.MyTickets' : _("""Show all active tickets reported by me."""),
@@ -167,6 +166,7 @@ checks certain things before accepting the new user."""),
     'lino_noi.lib.users.models.User.callme_mode' : _("""Whether other users can see my contact data."""),
     'lino_noi.lib.users.models.User.verification_code' : _("""A random string set for every new user. Used for
 online_registration."""),
+    'lino_noi.lib.users.models.User.user_state' : _("""The registration state of this user."""),
     'lino_noi.lib.votes.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_noi.lib.votes.Plugin.votable_model' : _("""The things we are voting about. A string referring to the model
 which represents a votable in your application.  Default value is
@@ -188,7 +188,7 @@ ticket (or any other votable)."""),
     'lino_noi.lib.votes.models.Vote.user' : _("""The user who is voting."""),
     'lino_noi.lib.votes.models.Vote.state' : _("""The state of this vote.  Pointer to VoteStates."""),
     'lino_noi.lib.votes.models.Vote.priority' : _("""My personal priority for this ticket."""),
-    'lino_noi.lib.votes.models.Vote.rating' : _("""How the ticket reporter rates my help on this ticket."""),
+    'lino_noi.lib.votes.models.Vote.rating' : _("""How the ticket author rates my help on this ticket."""),
     'lino_noi.lib.votes.models.Vote.remark' : _("""Why I am interested in this ticket."""),
     'lino_noi.lib.votes.models.Vote.nickname' : _("""My nickname for this ticket. Optional."""),
     'lino_noi.lib.votes.models.MyOffers' : _("""Show your votes in states watching and candidate"""),

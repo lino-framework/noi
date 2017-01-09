@@ -19,7 +19,12 @@ def vote(user, ticket, state, **kw):
     u = rt.models.users.User.objects.get(username=user)
     t = rt.models.tickets.Ticket.objects.get(pk=ticket)
     s = rt.models.votes.VoteStates.get_by_name(state)
-    return rt.models.votes.Vote(user=u, votable=t, state=s, **kw)
+    vote = t.get_favourite(u)
+    if vote is None:
+        vote = rt.models.votes.Vote(user=u, votable=t, state=s, **kw)
+    else:
+        vote.state = s
+    return vote
 
 def objects():
     yield tickets_objects()
@@ -47,12 +52,15 @@ def tickets_objects():
 
     cons = rt.models.users.UserTypes.consultant
     dev = rt.models.users.UserTypes.developer
+    yield User(username="marc")
     yield User(username="mathieu", profile=cons)
-    yield User(username="marc", profile=cons)
     yield User(username="luc", profile=dev)
     yield User(username="jean", profile=rt.models.users.UserTypes.senior)
 
     USERS = Cycler(User.objects.all())
+    WORKERS = Cycler(User.objects.filter(
+        username__in='mathieu luc jean'.split()))
+    END_USERS = Cycler(User.objects.filter(profile=''))
 
     yield TT(**dd.str2kw('name', _("Bugfix")))
     yield TT(**dd.str2kw('name', _("Enhancement")))
@@ -115,21 +123,23 @@ def tickets_objects():
     
     def ticket(summary, **kwargs):
         num[0] += 1
-        u = USERS.pop()
+        u = WORKERS.pop()
         kwargs.update(
             ticket_type=TYPES.pop(), summary=summary,
-            reporter=u,
             user=u,
             state=TSTATES.pop(),
             topic=TOPICS.pop())
         if num[0] % 2:
             kwargs.update(site=SITES.pop())
+        if num[0] % 5:
+            kwargs.update(end_user=END_USERS.pop())
         if False:
             kwargs.update(project=PROJECTS.pop())
         obj = Ticket(**kwargs)
         yield obj
         if obj.state.active:
-            yield Vote(votable=obj, user=USERS.pop(), state=VSTATES.pop())
+            yield Vote(
+                votable=obj, user=WORKERS.pop(), state=VSTATES.pop())
 
     yield ticket(
         "Föö fails to bar when baz", project=PROJECTS.pop())
@@ -207,9 +217,9 @@ def clockings_objects():
             if p.has_required_roles([Worker])
             and not p.has_required_roles([SiteAdmin])]
     workers = User.objects.filter(profile__in=devs)
-    WORKERS = Cycler(workers)
+    # WORKERS = Cycler(workers)
     TYPES = Cycler(SessionType.objects.all())
-    TICKETS = Cycler(Ticket.objects.all())
+    # TICKETS = Cycler(Ticket.objects.all())
     DURATIONS = Cycler([12, 138, 90, 10, 122, 209, 37, 62, 179, 233, 5])
 
     # every fourth ticket is unassigned and thus listed in

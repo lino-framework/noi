@@ -9,7 +9,7 @@ fn = Path(__file__).parent.child('tractickets.tsv')
 
 
 COLUMNS = """id summary status owner type priority milestone
-component severity resolution time changetime reporter""".split()
+component severity resolution time changetime user""".split()
 
 
 def makeuser(username):
@@ -48,10 +48,10 @@ def objects():
         kw = dict()
         kw.update(id=d.id)
         kw.update(summary=d.summary)
-        if d.reporter:
-            kw.update(reporter=makeuser(d.reporter))
+        if d.user:
+            kw.update(user=makeuser(d.user))
         else:
-            kw.update(reporter=makeuser('luc'))
+            kw.update(user=makeuser('luc'))
         if d.owner:
             kw.update(
                 assigned_to=makeuser(d.owner))

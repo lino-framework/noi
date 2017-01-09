@@ -155,12 +155,12 @@ assigned to a project:
 >>> pv = dict(has_project=dd.YesNo.no)
 >>> rt.show(tickets.Tickets, param_values=pv)
 ... #doctest: +REPORT_UDIFF
-==== =================== ================= =========== ========= ============= =========
- ID   Summary             Reporter          Topic       Faculty   Actions       Project
----- ------------------- ----------------- ----------- --------- ------------- ---------
- 5    Cannot create Foo   luc               Lino Cosi             **Started**
- 3    Baz sucks           Romain Raffault   Lino Core             **Opened**
-==== =================== ================= =========== ========= ============= =========
+==== =================== ========= =========== ========= ============= =========
+ ID   Summary             Author    Topic       Faculty   Actions       Project
+---- ------------------- --------- ----------- --------- ------------- ---------
+ 5    Cannot create Foo   mathieu   Lino Cosi             **Started**
+ 3    Baz sucks           luc       Lino Core             **Opened**
+==== =================== ========= =========== ========= ============= =========
 <BLANKLINE>
 
 
@@ -342,44 +342,37 @@ My tickets
 
 >>> rt.login('jean').show(tickets.MyTickets)
 ... #doctest: +REPORT_UDIFF
-================================================================== =============== ======================================
- Description                                                        Faculty         Actions
------------------------------------------------------------------- --------------- --------------------------------------
- `#110 (Ticket 93) <Detail>`__ by `jean <Detail>`__                                 [▶] [☆] **Talk** → [⚒] [☐] [☑]
- `#97 (Ticket 80) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **Ready** → [☎] [☑]
- `#93 (Ticket 76) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]
- `#76 (Ticket 59) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **Sticky** → [⛶]
- `#64 (Ticket 47) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **New** → [♾] [☎] [☉] [☐]
- `#59 (Ticket 42) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **Started** → [☎] [☐] [☑]
- `#47 (Ticket 30) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **Talk** → [⚒] [☐] [☑]
- `#34 (Ticket 17) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **Ready** → [☎] [☑]
- `#30 (Ticket 13) <Detail>`__ by `jean <Detail>`__                                  [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]
- `#13 (Bar cannot foo) <Detail>`__ by `jean <Detail>`__             Documentation   [▶] [☆] **Sticky** → [⛶]
- `#1 (Föö fails to bar when baz) <Detail>`__ by `jean <Detail>`__                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]
-================================================================== =============== ======================================
+=================================================================================== =============== ===================================
+ Description                                                                         Faculty         Actions
+----------------------------------------------------------------------------------- --------------- -----------------------------------
+ `#112 (Ticket 95) <Detail>`__ by `marc <Detail>`__                                                  [▶] [☆] **Sticky** → [⛶]
+ `#109 (Ticket 92) <Detail>`__ by `marc <Detail>`__                                                  [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+ `#103 (Ticket 86) <Detail>`__ by `marc <Detail>`__                                                  [▶] [☆] **Sticky** → [⛶]
+ `#100 (Ticket 83) <Detail>`__ by `jean <Detail>`__                                                  [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+ `#94 (Ticket 77) <Detail>`__ by `marc <Detail>`__                                                   [▶] [☆] **Sticky** → [⛶]
+ `#91 (Ticket 74) <Detail>`__ by `marc <Detail>`__                                                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+ `#85 (Ticket 68) <Detail>`__ by `jean <Detail>`__                                                   [▶] [☆] **Sticky** → [⛶]
+ `#82 (Ticket 65) <Detail>`__ by `marc <Detail>`__                                                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+ `#76 (Ticket 59) <Detail>`__ by `marc <Detail>`__                                                   [▶] [☆] **Sticky** → [⛶]
+ `#73 (Ticket 56) <Detail>`__ by `marc <Detail>`__                                                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+ `#67 (Ticket 50) <Detail>`__ by `marc <Detail>`__                                                   [▶] [☆] **Sticky** → [⛶]
+ `#64 (Ticket 47) <Detail>`__ by `marc <Detail>`__                                                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+ `#58 (Ticket 41) <Detail>`__ by `marc <Detail>`__                                                   [▶] [☆] **Sticky** → [⛶]
+ `#55 (Ticket 38) <Detail>`__ by `jean <Detail>`__                                                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+ `#49 (Ticket 32) <Detail>`__ by `marc <Detail>`__                                                   [▶] [☆] **Sticky** → [⛶]
+ `#46 (Ticket 29) <Detail>`__ by `marc <Detail>`__                                                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+ `#40 (Ticket 23) <Detail>`__ by `jean <Detail>`__                                                   [▶] [☆] **Sticky** → [⛶]
+ `#37 (Ticket 20) <Detail>`__ by `marc <Detail>`__                                                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+ `#31 (Ticket 14) <Detail>`__ by `marc <Detail>`__                                                   [▶] [☆] **Sticky** → [⛶]
+ `#28 (Ticket 11) <Detail>`__ by `marc <Detail>`__                                                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+ `#22 (Ticket 5) <Detail>`__ by `marc <Detail>`__                                                    [▶] [☆] **Sticky** → [⛶]
+ `#19 (Ticket 2) <Detail>`__ by `marc <Detail>`__                                                    [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+ `#13 (Bar cannot foo) <Detail>`__ by `marc <Detail>`__                              Documentation   [▶] [☆] **Sticky** → [⛶]
+ `#10 (Where can I find a Foo when bazing Bazes?) <Detail>`__ by `jean <Detail>`__                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+ `#4 (Foo and bar don't baz) <Detail>`__ by `marc <Detail>`__                                        [▶] [☆] **Sticky** → [⛶]
+ `#1 (Föö fails to bar when baz) <Detail>`__ by `marc <Detail>`__                                    [▶] [☆] **New** → [♾] [☎] [☉] [☐]
+=================================================================================== =============== ===================================
 <BLANKLINE>
-
-
-My tasks ("To-Do list")
-=======================
-
-Shows your votes having states `assigned` and `done`.
-
->>> rt.login('luc').user.profile
-users.UserTypes.developer:400
-
->>> rt.login('luc').show(votes.MyTasks)
-... #doctest: +REPORT_UDIFF
-======================================================== ========== ===========================================
- Description                                              Priority   Actions
--------------------------------------------------------- ---------- -------------------------------------------
- `#93 (Ticket 76) <Detail>`__ by `jean <Detail>`__        0          **Assigned** → [Watching] [Done] [Cancel]
- `#76 (Ticket 59) <Detail>`__ by `jean <Detail>`__        0          **Done**
- `#30 (Ticket 13) <Detail>`__ by `jean <Detail>`__        0          **Assigned** → [Watching] [Done] [Cancel]
- `#13 (Bar cannot foo) <Detail>`__ by `jean <Detail>`__   0          **Done**
-======================================================== ========== ===========================================
-<BLANKLINE>
-
 
 
 Sites
@@ -404,30 +397,30 @@ can see all local tickets for a given site object:
 >>> welket = tickets.Site.objects.get(name="welket")
 >>> rt.show(tickets.TicketsBySite, welket)
 ... #doctest: +REPORT_UDIFF -SKIP
-===== =========================== ================= =========== =============== ============ ==========
- ID    Summary                     Reporter          Topic       Faculty         Actions      Project
------ --------------------------- ----------------- ----------- --------------- ------------ ----------
- 115   Ticket 98                   marc              Lino Core                   **Ready**    docs
- 109   Ticket 92                   Rolf Rompen       Lino Cosi                   **New**      téam
- 103   Ticket 86                   mathieu           Lino Core                   **Sticky**   linö
- 97    Ticket 80                   jean              Lino Cosi                   **Ready**    shop
- 91    Ticket 74                   mathieu           Lino Core                   **New**      research
- 85    Ticket 68                   luc               Lino Cosi                   **Sticky**   docs
- 79    Ticket 62                   Rolf Rompen       Lino Core                   **Ready**    téam
- 73    Ticket 56                   luc               Lino Cosi                   **New**      linö
- 67    Ticket 50                   Robin Rood        Lino Core                   **Sticky**   shop
- 61    Ticket 44                   mathieu           Lino Cosi                   **Ready**    research
- 55    Ticket 38                   Robin Rood        Lino Core                   **New**      docs
- 49    Ticket 32                   Romain Raffault   Lino Cosi                   **Sticky**   téam
- 43    Ticket 26                   luc               Lino Core                   **Ready**    linö
- 37    Ticket 20                   Romain Raffault   Lino Cosi                   **New**      shop
- 31    Ticket 14                   marc              Lino Core                   **Sticky**   research
- 25    Ticket 8                    Robin Rood        Lino Cosi                   **Ready**    docs
- 19    Ticket 2                    marc              Lino Core                   **New**      téam
- 13    Bar cannot foo              jean              Lino Cosi   Documentation   **Sticky**   linö
- 7     No Foo after deleting Bar   Romain Raffault   Lino Core                   **Ready**    shop
- 1     Föö fails to bar when baz   jean              Lino Cosi                   **New**      linö
-===== =========================== ================= =========== =============== ============ ==========
+===== =========================== ========= =========== =============== ============ ==========
+ ID    Summary                     Author    Topic       Faculty         Actions      Project
+----- --------------------------- --------- ----------- --------------- ------------ ----------
+ 115   Ticket 98                   mathieu   Lino Core                   **Ready**    docs
+ 109   Ticket 92                   jean      Lino Cosi                   **New**      téam
+ 103   Ticket 86                   jean      Lino Core                   **Sticky**   linö
+ 97    Ticket 80                   mathieu   Lino Cosi                   **Ready**    shop
+ 91    Ticket 74                   jean      Lino Core                   **New**      research
+ 85    Ticket 68                   jean      Lino Cosi                   **Sticky**   docs
+ 79    Ticket 62                   mathieu   Lino Core                   **Ready**    téam
+ 73    Ticket 56                   jean      Lino Cosi                   **New**      linö
+ 67    Ticket 50                   jean      Lino Core                   **Sticky**   shop
+ 61    Ticket 44                   mathieu   Lino Cosi                   **Ready**    research
+ 55    Ticket 38                   jean      Lino Core                   **New**      docs
+ 49    Ticket 32                   jean      Lino Cosi                   **Sticky**   téam
+ 43    Ticket 26                   mathieu   Lino Core                   **Ready**    linö
+ 37    Ticket 20                   jean      Lino Cosi                   **New**      shop
+ 31    Ticket 14                   jean      Lino Core                   **Sticky**   research
+ 25    Ticket 8                    mathieu   Lino Cosi                   **Ready**    docs
+ 19    Ticket 2                    jean      Lino Core                   **New**      téam
+ 13    Bar cannot foo              jean      Lino Cosi   Documentation   **Sticky**   linö
+ 7     No Foo after deleting Bar   mathieu   Lino Core                   **Ready**    shop
+ 1     Föö fails to bar when baz   jean      Lino Cosi                   **New**      linö
+===== =========================== ========= =========== =============== ============ ==========
 <BLANKLINE>
 
 
@@ -437,30 +430,30 @@ authenticated developer it looks like this:
 
 >>> rt.login('luc').show(tickets.TicketsBySite, welket)
 ... #doctest: +REPORT_UDIFF -SKIP
-===== =========================== ================= =========== =============== =================================== ==========
- ID    Summary                     Reporter          Topic       Faculty         Actions                             Project
------ --------------------------- ----------------- ----------- --------------- ----------------------------------- ----------
- 115   Ticket 98                   marc              Lino Core                   [▶] [☆] **Ready**                   docs
- 109   Ticket 92                   Rolf Rompen       Lino Cosi                   [▶] [☆] **New**                     téam
- 103   Ticket 86                   mathieu           Lino Core                   [▶] [☆] **Sticky**                  linö
- 97    Ticket 80                   jean              Lino Cosi                   [▶] [★] **Ready**                   shop
- 91    Ticket 74                   mathieu           Lino Core                   [▶] [☆] **New**                     research
- 85    Ticket 68                   luc               Lino Cosi                   [▶] [☆] **Sticky** → [⛶]            docs
- 79    Ticket 62                   Rolf Rompen       Lino Core                   [▶] [☆] **Ready**                   téam
- 73    Ticket 56                   luc               Lino Cosi                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]   linö
- 67    Ticket 50                   Robin Rood        Lino Core                   [▶] [☆] **Sticky**                  shop
- 61    Ticket 44                   mathieu           Lino Cosi                   [▶] [☆] **Ready**                   research
- 55    Ticket 38                   Robin Rood        Lino Core                   [▶] [☆] **New**                     docs
- 49    Ticket 32                   Romain Raffault   Lino Cosi                   [▶] [☆] **Sticky**                  téam
- 43    Ticket 26                   luc               Lino Core                   [▶] [☆] **Ready** → [☎] [☑]         linö
- 37    Ticket 20                   Romain Raffault   Lino Cosi                   [▶] [☆] **New**                     shop
- 31    Ticket 14                   marc              Lino Core                   [▶] [☆] **Sticky**                  research
- 25    Ticket 8                    Robin Rood        Lino Cosi                   [▶] [☆] **Ready**                   docs
- 19    Ticket 2                    marc              Lino Core                   [▶] [☆] **New**                     téam
- 13    Bar cannot foo              jean              Lino Cosi   Documentation   [▶] [★] **Sticky**                  linö
- 7     No Foo after deleting Bar   Romain Raffault   Lino Core                   [▶] [☆] **Ready**                   shop
- 1     Föö fails to bar when baz   jean              Lino Cosi                   [★] **New**                         linö
-===== =========================== ================= =========== =============== =================================== ==========
+===== =========================== ========= =========== =============== ==================== ==========
+ ID    Summary                     Author    Topic       Faculty         Actions              Project
+----- --------------------------- --------- ----------- --------------- -------------------- ----------
+ 115   Ticket 98                   mathieu   Lino Core                   [▶] [☆] **Ready**    docs
+ 109   Ticket 92                   jean      Lino Cosi                   [▶] [★] **New**      téam
+ 103   Ticket 86                   jean      Lino Core                   [▶] [★] **Sticky**   linö
+ 97    Ticket 80                   mathieu   Lino Cosi                   [▶] [☆] **Ready**    shop
+ 91    Ticket 74                   jean      Lino Core                   [▶] [★] **New**      research
+ 85    Ticket 68                   jean      Lino Cosi                   [▶] [★] **Sticky**   docs
+ 79    Ticket 62                   mathieu   Lino Core                   [▶] [☆] **Ready**    téam
+ 73    Ticket 56                   jean      Lino Cosi                   [▶] [★] **New**      linö
+ 67    Ticket 50                   jean      Lino Core                   [▶] [★] **Sticky**   shop
+ 61    Ticket 44                   mathieu   Lino Cosi                   [▶] [☆] **Ready**    research
+ 55    Ticket 38                   jean      Lino Core                   [▶] [★] **New**      docs
+ 49    Ticket 32                   jean      Lino Cosi                   [▶] [★] **Sticky**   téam
+ 43    Ticket 26                   mathieu   Lino Core                   [▶] [☆] **Ready**    linö
+ 37    Ticket 20                   jean      Lino Cosi                   [▶] [★] **New**      shop
+ 31    Ticket 14                   jean      Lino Core                   [▶] [★] **Sticky**   research
+ 25    Ticket 8                    mathieu   Lino Cosi                   [▶] [☆] **Ready**    docs
+ 19    Ticket 2                    jean      Lino Core                   [▶] [★] **New**      téam
+ 13    Bar cannot foo              jean      Lino Cosi   Documentation   [▶] [★] **Sticky**   linö
+ 7     No Foo after deleting Bar   mathieu   Lino Core                   [▶] [☆] **Ready**    shop
+ 1     Föö fails to bar when baz   jean      Lino Cosi                   [★] **New**          linö
+===== =========================== ========= =========== =============== ==================== ==========
 <BLANKLINE>
 
 
@@ -577,7 +570,7 @@ Filtering tickets
 +=================+=================+===============================================================+
 | user            | Author          |                                                               |
 +-----------------+-----------------+---------------------------------------------------------------+
-| reporter        | Reporter        | Only rows reported by this user.                              |
+| end_user        | End user        | Only rows concerning this end user.                           |
 +-----------------+-----------------+---------------------------------------------------------------+
 | assigned_to     | Voted by        | Only tickets having a vote by this user.                      |
 +-----------------+-----------------+---------------------------------------------------------------+
@@ -614,129 +607,6 @@ Filtering tickets
 +-----------------+-----------------+---------------------------------------------------------------+
 
 
->>> rt.login('robin').show(rt.actors.tickets.Tickets)
-... #doctest: +REPORT_UDIFF +ELLIPSIS
-===== =========================================== ================= ============== =============== ====================================== ==========
- ID    Summary                                     Reporter          Topic          Faculty         Actions                                Project
------ ------------------------------------------- ----------------- -------------- --------------- -------------------------------------- ----------
- 116   Ticket 99                                   Romain Raffault   Lino Welfare                   [▶] [☆] **Closed** → [☉]               research
- 115   Ticket 98                                   marc              Lino Core                      [▶] [☆] **Ready** → [☎] [☑]            docs
- 114   Ticket 97                                   luc               Lino Voga                      [▶] [☆] **Sleeping** → [☎]             téam
- 113   Ticket 96                                   Robin Rood        Lino Cosi                      [▶] [☆] **Started** → [☎] [☐] [☑]      linö
- 112   Ticket 95                                   Romain Raffault   Lino Welfare                   [▶] [☆] **Sticky** → [⛶]               shop
- 111   Ticket 94                                   marc              Lino Core                      [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]   research
- 110   Ticket 93                                   jean              Lino Voga                      [▶] [☆] **Talk** → [⚒] [☐] [☑]         docs
- 109   Ticket 92                                   Rolf Rompen       Lino Cosi                      [▶] [★] **New** → [♾] [☎] [☉] [☐]      téam
- 108   Ticket 91                                   Romain Raffault   Lino Welfare                   [▶] [☆] **Cancelled**                  linö
- 107   Ticket 90                                   mathieu           Lino Core                      [▶] [☆] **Closed** → [☉]               shop
- 106   Ticket 89                                   luc               Lino Voga                      [▶] [☆] **Ready** → [☎] [☑]            research
- 105   Ticket 88                                   jean              Lino Cosi                      [▶] [☆] **Sleeping** → [☎]             docs
- 104   Ticket 87                                   Rolf Rompen       Lino Welfare                   [▶] [★] **Started** → [☎] [☐] [☑]      téam
- 103   Ticket 86                                   mathieu           Lino Core                      [▶] [☆] **Sticky** → [⛶]               linö
- 102   Ticket 85                                   luc               Lino Voga                      [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]   shop
- 101   Ticket 84                                   Robin Rood        Lino Cosi                      [▶] [☆] **Talk** → [⚒] [☐] [☑]         research
- 100   Ticket 83                                   Romain Raffault   Lino Welfare                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]      docs
- 99    Ticket 82                                   mathieu           Lino Core                      [▶] [☆] **Cancelled**                  téam
- 98    Ticket 81                                   marc              Lino Voga                      [▶] [☆] **Closed** → [☉]               linö
- 97    Ticket 80                                   jean              Lino Cosi                      [▶] [☆] **Ready** → [☎] [☑]            shop
- 96    Ticket 79                                   Robin Rood        Lino Welfare                   [▶] [☆] **Sleeping** → [☎]             research
- 95    Ticket 78                                   Romain Raffault   Lino Core                      [▶] [☆] **Started** → [☎] [☐] [☑]      docs
- 94    Ticket 77                                   marc              Lino Voga                      [▶] [☆] **Sticky** → [⛶]               téam
- 93    Ticket 76                                   jean              Lino Cosi                      [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]   linö
- 92    Ticket 75                                   Rolf Rompen       Lino Welfare                   [▶] [★] **Talk** → [⚒] [☐] [☑]         shop
- 91    Ticket 74                                   mathieu           Lino Core                      [▶] [☆] **New** → [♾] [☎] [☉] [☐]      research
- 90    Ticket 73                                   marc              Lino Voga                      [▶] [☆] **Cancelled**                  docs
- 89    Ticket 72                                   luc               Lino Cosi                      [▶] [☆] **Closed** → [☉]               téam
- 88    Ticket 71                                   Robin Rood        Lino Welfare                   [▶] [☆] **Ready** → [☎] [☑]            linö
- 87    Ticket 70                                   Rolf Rompen       Lino Core                      [▶] [☆] **Sleeping** → [☎]             shop
- 86    Ticket 69                                   mathieu           Lino Voga                      [▶] [☆] **Started** → [☎] [☐] [☑]      research
- 85    Ticket 68                                   luc               Lino Cosi                      [▶] [☆] **Sticky** → [⛶]               docs
- 84    Ticket 67                                   Robin Rood        Lino Welfare                   [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]   téam
- 83    Ticket 66                                   Romain Raffault   Lino Core                      [▶] [☆] **Talk** → [⚒] [☐] [☑]         linö
- 82    Ticket 65                                   marc              Lino Voga                      [▶] [☆] **New** → [♾] [☎] [☉] [☐]      shop
- 81    Ticket 64                                   luc               Lino Cosi                      [▶] [☆] **Cancelled**                  research
- 80    Ticket 63                                   jean              Lino Welfare                   [▶] [☆] **Closed** → [☉]               docs
- 79    Ticket 62                                   Rolf Rompen       Lino Core                      [▶] [★] **Ready** → [☎] [☑]            téam
- 78    Ticket 61                                   Romain Raffault   Lino Voga                      [▶] [☆] **Sleeping** → [☎]             linö
- 77    Ticket 60                                   marc              Lino Cosi                      [▶] [☆] **Started** → [☎] [☐] [☑]      shop
- 76    Ticket 59                                   jean              Lino Welfare                   [▶] [☆] **Sticky** → [⛶]               research
- 75    Ticket 58                                   Rolf Rompen       Lino Core                      [▶] [★] **Opened** → [☎] [⚒] [☐] [☑]   docs
- 74    Ticket 57                                   mathieu           Lino Voga                      [▶] [☆] **Talk** → [⚒] [☐] [☑]         téam
- 73    Ticket 56                                   luc               Lino Cosi                      [▶] [☆] **New** → [♾] [☎] [☉] [☐]      linö
- 72    Ticket 55                                   jean              Lino Welfare                   [▶] [☆] **Cancelled**                  shop
- 71    Ticket 54                                   Robin Rood        Lino Core                      [▶] [☆] **Closed** → [☉]               research
- 70    Ticket 53                                   Romain Raffault   Lino Voga                      [▶] [☆] **Ready** → [☎] [☑]            docs
- 69    Ticket 52                                   mathieu           Lino Cosi                      [▶] [☆] **Sleeping** → [☎]             téam
- 68    Ticket 51                                   luc               Lino Welfare                   [▶] [☆] **Started** → [☎] [☐] [☑]      linö
- 67    Ticket 50                                   Robin Rood        Lino Core                      [▶] [☆] **Sticky** → [⛶]               shop
- 66    Ticket 49                                   Romain Raffault   Lino Voga                      [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]   research
- 65    Ticket 48                                   marc              Lino Cosi                      [▶] [☆] **Talk** → [⚒] [☐] [☑]         docs
- 64    Ticket 47                                   jean              Lino Welfare                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]      téam
- 63    Ticket 46                                   Robin Rood        Lino Core                      [▶] [☆] **Cancelled**                  linö
- 62    Ticket 45                                   Rolf Rompen       Lino Voga                      [▶] [☆] **Closed** → [☉]               shop
- 61    Ticket 44                                   mathieu           Lino Cosi                      [▶] [☆] **Ready** → [☎] [☑]            research
- 60    Ticket 43                                   marc              Lino Welfare                   [▶] [☆] **Sleeping** → [☎]             docs
- 59    Ticket 42                                   jean              Lino Core                      [▶] [☆] **Started** → [☎] [☐] [☑]      téam
- 58    Ticket 41                                   Rolf Rompen       Lino Voga                      [▶] [★] **Sticky** → [⛶]               linö
- 57    Ticket 40                                   mathieu           Lino Cosi                      [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]   shop
- 56    Ticket 39                                   luc               Lino Welfare                   [▶] [☆] **Talk** → [⚒] [☐] [☑]         research
- 55    Ticket 38                                   Robin Rood        Lino Core                      [▶] [☆] **New** → [♾] [☎] [☉] [☐]      docs
- 54    Ticket 37                                   Rolf Rompen       Lino Voga                      [▶] [☆] **Cancelled**                  téam
- 53    Ticket 36                                   Romain Raffault   Lino Cosi                      [▶] [☆] **Closed** → [☉]               linö
- 52    Ticket 35                                   marc              Lino Welfare                   [▶] [☆] **Ready** → [☎] [☑]            shop
- 51    Ticket 34                                   luc               Lino Core                      [▶] [☆] **Sleeping** → [☎]             research
- 50    Ticket 33                                   Robin Rood        Lino Voga                      [▶] [☆] **Started** → [☎] [☐] [☑]      docs
- 49    Ticket 32                                   Romain Raffault   Lino Cosi                      [▶] [☆] **Sticky** → [⛶]               téam
- 48    Ticket 31                                   marc              Lino Welfare                   [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]   linö
- 47    Ticket 30                                   jean              Lino Core                      [▶] [☆] **Talk** → [⚒] [☐] [☑]         shop
- 46    Ticket 29                                   Rolf Rompen       Lino Voga                      [▶] [★] **New** → [♾] [☎] [☉] [☐]      research
- 45    Ticket 28                                   Romain Raffault   Lino Cosi                      [▶] [☆] **Cancelled**                  docs
- 44    Ticket 27                                   mathieu           Lino Welfare                   [▶] [☆] **Closed** → [☉]               téam
- 43    Ticket 26                                   luc               Lino Core                      [▶] [☆] **Ready** → [☎] [☑]            linö
- 42    Ticket 25                                   jean              Lino Voga                      [▶] [☆] **Sleeping** → [☎]             shop
- 41    Ticket 24                                   Rolf Rompen       Lino Cosi                      [▶] [★] **Started** → [☎] [☐] [☑]      research
- 40    Ticket 23                                   mathieu           Lino Welfare                   [▶] [☆] **Sticky** → [⛶]               docs
- 39    Ticket 22                                   luc               Lino Core                      [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]   téam
- 38    Ticket 21                                   Robin Rood        Lino Voga                      [▶] [☆] **Talk** → [⚒] [☐] [☑]         linö
- 37    Ticket 20                                   Romain Raffault   Lino Cosi                      [▶] [☆] **New** → [♾] [☎] [☉] [☐]      shop
- 36    Ticket 19                                   mathieu           Lino Welfare                   [▶] [☆] **Cancelled**                  research
- 35    Ticket 18                                   marc              Lino Core                      [▶] [☆] **Closed** → [☉]               docs
- 34    Ticket 17                                   jean              Lino Voga                      [▶] [☆] **Ready** → [☎] [☑]            téam
- 33    Ticket 16                                   Robin Rood        Lino Cosi                      [▶] [☆] **Sleeping** → [☎]             linö
- 32    Ticket 15                                   Romain Raffault   Lino Welfare                   [▶] [☆] **Started** → [☎] [☐] [☑]      shop
- 31    Ticket 14                                   marc              Lino Core                      [▶] [☆] **Sticky** → [⛶]               research
- 30    Ticket 13                                   jean              Lino Voga                      [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]   docs
- 29    Ticket 12                                   Rolf Rompen       Lino Cosi                      [▶] [★] **Talk** → [⚒] [☐] [☑]         téam
- 28    Ticket 11                                   mathieu           Lino Welfare                   [▶] [☆] **New** → [♾] [☎] [☉] [☐]      linö
- 27    Ticket 10                                   marc              Lino Core                      [▶] [☆] **Cancelled**                  shop
- 26    Ticket 9                                    luc               Lino Voga                      [▶] [☆] **Closed** → [☉]               research
- 25    Ticket 8                                    Robin Rood        Lino Cosi                      [▶] [☆] **Ready** → [☎] [☑]            docs
- 24    Ticket 7                                    Rolf Rompen       Lino Welfare                   [▶] [☆] **Sleeping** → [☎]             téam
- 23    Ticket 6                                    mathieu           Lino Core                      [▶] [☆] **Started** → [☎] [☐] [☑]      linö
- 22    Ticket 5                                    luc               Lino Voga                      [▶] [☆] **Sticky** → [⛶]               shop
- 21    Ticket 4                                    Robin Rood        Lino Cosi                      [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]   research
- 20    Ticket 3                                    Romain Raffault   Lino Welfare                   [▶] [☆] **Talk** → [⚒] [☐] [☑]         docs
- 19    Ticket 2                                    marc              Lino Core                      [▶] [☆] **New** → [♾] [☎] [☉] [☐]      téam
- 18    Ticket 1                                    luc               Lino Voga                      [▶] [☆] **Cancelled**                  linö
- 17    Ticket 0                                    jean              Lino Cosi                      [▶] [☆] **Closed** → [☉]               shop
- 16    How to get bar from foo                     Rolf Rompen       Lino Welfare                   [▶] [★] **Ready** → [☎] [☑]            research
- 15    Bars have no foo                            Romain Raffault   Lino Core                      [▶] [☆] **Sleeping** → [☎]             docs
- 14    Bar cannot baz                              marc              Lino Voga                      [▶] [☆] **Started** → [☎] [☐] [☑]      téam
- 13    Bar cannot foo                              jean              Lino Cosi      Documentation   [▶] [☆] **Sticky** → [⛶]               linö
- 12    Foo cannot bar                              Rolf Rompen       Lino Welfare   Code changes    [▶] [★] **Opened** → [☎] [⚒] [☐] [☑]   shop
- 11    Class-based Foos and Bars?                  mathieu           Lino Core                      [▶] [☆] **Talk** → [⚒] [☐] [☑]         research
- 10    Where can I find a Foo when bazing Bazes?   luc               Lino Voga                      [▶] [☆] **New** → [♾] [☎] [☉] [☐]      docs
- 9     Foo never matches Bar                       jean              Lino Cosi      Testing         [▶] [☆] **Cancelled**                  téam
- 8     Is there any Bar in Foo?                    Robin Rood        Lino Welfare                   [▶] [☆] **Closed** → [☉]               linö
- 7     No Foo after deleting Bar                   Romain Raffault   Lino Core                      [▶] [☆] **Ready** → [☎] [☑]            shop
- 6     Sell bar in baz                             mathieu           Lino Voga      Analysis        [▶] [☆] **Sleeping** → [☎]             research
- 5     Cannot create Foo                           luc               Lino Cosi                      [▶] [☆] **Started** → [☎] [☐] [☑]
- 4     Foo and bar don't baz                       Robin Rood        Lino Welfare                   [▶] [☆] **Sticky** → [⛶]               docs
- 3     Baz sucks                                   Romain Raffault   Lino Core                      [▶] [☆] **Opened** → [☎] [⚒] [☐] [☑]
- 2     Bar is not always baz                       marc              Lino Voga                      [▶] [☆] **Talk** → [⚒] [☐] [☑]         téam
- 1     Föö fails to bar when baz                   jean              Lino Cosi                      [▶] [☆] **New** → [♾] [☎] [☉] [☐]      linö
-===== =========================================== ================= ============== =============== ====================================== ==========
-<BLANKLINE>
 
 
 The detail layout of a ticket
@@ -752,7 +622,7 @@ the detail window of a ticket.
 - **General** (general):
   - (general_1):
     - (general1):
-      - (general1_1): **Summary** (summary), **ID** (id), **Reporter** (reporter)
+      - (general1_1): **Summary** (summary), **ID** (id), **Author** (user), **End user** (end_user)
       - (general1_2): **Site** (site), **Topic** (topic), **Project** (project), **Private** (private)
       - (general1_3): **Actions** (workflow_buttons), **Faculty** (faculty)
     - **Deployments** (deploy.DeploymentsByTicket) [visible for user consultant hoster developer senior admin]

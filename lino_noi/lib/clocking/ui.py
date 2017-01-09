@@ -256,9 +256,9 @@ class InvestedTime(dd.Table):
         if obj.site is not None:  # and obj.site != mi.interesting_for:
             lst.append(tpl.format(
                 ensureUtf(_("Site")), ensureUtf(obj.site)))
-        if obj.reporter is not None:
+        if obj.user is not None:
             lst.append(tpl.format(
-                ensureUtf(_("Reporter")), ensureUtf(obj.reporter)))
+                ensureUtf(_("Author")), ensureUtf(obj.user)))
         if obj.project is not None:
             lst.append(tpl.format(
                 ensureUtf(_("Project")), ensureUtf(obj.project)))

@@ -29,7 +29,7 @@ This document describes the database structure.
  blogs.Tagging               blogs.Taggings               3         3
  changes.Change              changes.Changes              9         0
  clocking.ServiceReport      clocking.ServiceReports      7         1
- clocking.Session            clocking.Sessions            12        17
+ clocking.Session            clocking.Sessions            12        13
  clocking.SessionType        clocking.SessionTypes        4         1
  comments.Comment            comments.Comments            8         3
  contacts.Company            contacts.Companies           22        0
@@ -46,8 +46,8 @@ This document describes the database structure.
  deploy.Milestone            deploy.Milestones            9         8
  excerpts.Excerpt            excerpts.Excerpts            12        2
  excerpts.ExcerptType        excerpts.ExcerptTypes        17        2
- faculties.Competence        faculties.Competences        6         18
- faculties.Faculty           faculties.Faculties          8         8
+ faculties.Competence        faculties.Competences        5         18
+ faculties.Faculty           faculties.Faculties          7         8
  gfks.HelpText               gfks.HelpTexts               4         1
  lists.List                  lists.Lists                  7         8
  lists.ListType              lists.ListTypes              4         3
@@ -61,7 +61,7 @@ This document describes the database structure.
  tickets.Project             tickets.Projects             17        5
  tickets.ProjectType         tickets.ProjectTypes         4         0
  tickets.Site                tickets.Sites                4         3
- tickets.Ticket              tickets.Tickets              26        116
+ tickets.Ticket              tickets.Tickets              27        116
  tickets.TicketType          tickets.TicketTypes          4         3
  tinymce.TextFieldTemplate   tinymce.TextFieldTemplates   5         2
  topics.Interest             topics.Interests             3         6
@@ -71,7 +71,7 @@ This document describes the database structure.
  uploads.UploadType          uploads.UploadTypes          8         0
  users.Authority             users.Authorities            3         0
  users.User                  users.Users                  36        7
- votes.Vote                  votes.Votes                  9         81
+ votes.Vote                  votes.Votes                  9         79
 =========================== ============================ ========= =======
 <BLANKLINE>
 

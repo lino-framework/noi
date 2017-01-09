@@ -21,7 +21,7 @@ User = rt.models.users.User
 class TicketSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Ticket
-        fields = ('id', 'reporter' ) # , 'state')
+        fields = ('id', 'author', 'end_user' ) # , 'state')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
