@@ -17,6 +17,7 @@ The default variant ("team")
   
    general
    tickets
+   votes
    clocking
    faculties
    topics

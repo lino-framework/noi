@@ -16,7 +16,7 @@ UnassignedTickets._label = _("Unassigned pleas")
 PublicTickets._label = _("Public pleas")
 TicketsToTriage._label = _("Pleas to triage")
 TicketsToTalk._label = _("Pleas to talk")
-TicketsToDo._label = _("Pleas to to")
+# TicketsToDo._label = _("Pleas to to")
 TicketsFixed._label = _("Fixed pleas")
 TicketsReported._label = _("Introduced pleas")
 TicketsByReporter._label = _("Introduced pleas")
@@ -38,7 +38,7 @@ class TicketDetail(TicketDetail):
 
     general1 = """
     summary:40 id:6 deadline
-    reporter:12 faculty topic #assigned_to
+    user:12 end_user:12 faculty #topic
     site workflow_buttons
     """
 

@@ -7,6 +7,7 @@ from django.db import models
 
 from lino.api import dd, rt, _
 from lino.modlib.users.mixins import My
+from lino.modlib.users.desktop import Users
 from lino_noi.lib.tickets.roles import Triager
 
 class Faculties(dd.Table):
@@ -14,11 +15,10 @@ class Faculties(dd.Table):
     # order_by = ["ref", "name"]
     detail_layout = """
     id name
-    parent topic_group affinity
+    parent affinity
     FacultiesByParent CompetencesByFaculty
     """
     insert_layout = """
-    # ref affinity topic_group
     name
     parent
     """
@@ -27,7 +27,7 @@ class Faculties(dd.Table):
 class AllFaculties(Faculties):
     label = _("Faculties (all)")
     required_roles = dd.required(dd.SiteStaff)
-    column_names = 'name affinity topic_group parent *'
+    column_names = 'name affinity parent *'
     order_by = ["name"]
 
 
@@ -43,7 +43,7 @@ class TopLevelFaculties(Faculties):
 class FacultiesByParent(Faculties):
     label = _("Child faculties")
     master_key = 'parent'
-    column_names = 'seqno name affinity topic_group *'
+    column_names = 'seqno name affinity *'
     order_by = ["seqno"]
     # order_by = ["parent", "seqno"]
     # order_by = ["name"]
@@ -53,20 +53,20 @@ class Competences(dd.Table):
     required_roles = dd.required(dd.SiteStaff)
     # required_roles = dd.required(SocialStaff)
     model = 'faculties.Competence'
-    column_names = 'id user faculty affinity topic *'
+    column_names = 'id user faculty affinity *'
     order_by = ["id"]
 
 
 class CompetencesByUser(Competences):
     required_roles = dd.required()
     master_key = 'user'
-    column_names = 'seqno faculty affinity topic *'
+    column_names = 'seqno faculty affinity *'
     order_by = ["seqno"]
 
 
 class CompetencesByFaculty(Competences):
     master_key = 'faculty'
-    column_names = 'user affinity topic *'
+    column_names = 'user affinity *'
     order_by = ["user"]
 
 
@@ -74,9 +74,8 @@ class MyCompetences(My, CompetencesByUser):
     pass
 
 if dd.is_installed('tickets'):
-
-    class AssignableWorkersByTicket(dd.Table):
-        model = 'users.User'
+    class AssignableWorkersByTicket(Users):
+        # model = 'users.User'
         use_as_default_table = False
         # model = 'faculties.Competence'
         master = 'tickets.Ticket'

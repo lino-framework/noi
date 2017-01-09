@@ -11,17 +11,16 @@ from __future__ import unicode_literals
 from __future__ import print_function
 import six
 
-from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
-from django.db.models import Q
 from django.db import models
 from django.conf import settings
 
-from lino.api import dd, rt
+from lino.api import dd, rt, _
 from lino.core.utils import lazy_format
+from lino.utils.xmlgen.html import E
+from lino.utils import join_elems
+from lino.mixins import Created, ObservedPeriod
 from lino.modlib.users.mixins import UserAuthored, My
 from lino.modlib.notify.choicelists import MailModes
-from lino.mixins import Created, ObservedPeriod
 from lino_xl.lib.cal.mixins import daterange_text
 from .roles import VotesUser, VotesStaff
 from .choicelists import VoteStates, VoteEvents  # , VoteViews
@@ -52,7 +51,7 @@ class Vote(UserAuthored, Created):
 
     .. attribute:: rating
 
-        How the ticket reporter rates my help on this ticket.
+        How the ticket author rates my help on this ticket.
 
     .. attribute:: remark
 
@@ -70,6 +69,7 @@ class Vote(UserAuthored, Created):
         verbose_name = _("Vote")
         verbose_name_plural = _("Votes")
         abstract = dd.is_abstract_model(__name__, 'Vote')
+        unique_together = ('user', 'votable')
 
     state = VoteStates.field(default=VoteStates.as_callable('watching'))
     votable = dd.ForeignKey(dd.plugins.votes.votable_model)
@@ -98,16 +98,16 @@ class Vote(UserAuthored, Created):
         if self.votable_id:
             me = ar.get_user()
             if not me.profile.has_required_roles([VotesStaff]):
-                if me != self.votable.get_vote_rater():
+                if not me in self.votable.get_vote_raters():
                     df.add('rating')
         return df
 
     @classmethod
     def get_parameter_fields(cls, **fields):
         fields.update(
-            reporter=dd.ForeignKey(
+            ticket_user=dd.ForeignKey(
                 settings.SITE.user_model,
-                verbose_name=_("Reporter"),
+                verbose_name=_("Author"),
                 blank=True, null=True,
                 help_text=_(
                     "Only rows on votables reported by this user.")),
@@ -148,7 +148,7 @@ class Votes(dd.Table):
         observed_event=VoteEvents.field(blank=True))
 
     params_layout = """
-    user mail_mode state votable_state reporter 
+    user mail_mode state votable_state ticket_user
     start_date end_date observed_event"""
 
     detail_layout = dd.FormLayout("""
@@ -271,8 +271,6 @@ class VotesByVotable(Votes):
 #     order_by = ['-id']
     
 
-from lino.utils.xmlgen.html import E
-from lino.utils import join_elems
 
 
 def welcome_messages(ar):

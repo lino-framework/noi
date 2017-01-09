@@ -119,7 +119,6 @@ Users
 ---------- ------------------ ----------
  jean       Senior developer   en
  luc        Developer          en
- marc       Consultant         en
  mathieu    Consultant         en
  robin      Administrator      en
  rolf       Administrator      de

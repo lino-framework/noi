@@ -62,6 +62,9 @@ class SpecsTests(BaseTestCase):
     def test_tickets(self):
         self.run_simple_doctests('docs/specs/tickets.rst')
 
+    def test_votes(self):
+        self.run_simple_doctests('docs/specs/votes.rst')
+
     def test_topics(self):
         self.run_simple_doctests('docs/specs/topics.rst')
 

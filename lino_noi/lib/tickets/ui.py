@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2016 Luc Saffre
+# Copyright 2011-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """Database models for this plugin.
@@ -9,10 +9,9 @@ time, energy and money.  The partner can be either external or the
 runner of the site.  Projects form a tree: each Project can have a
 `parent` (another Project for which it is a sub-project).
 
-A **Ticket** is a concrete question or problem formulated by a
-`reporter` (a user).  A Ticket is always related to one and only one
-Project.  It may be related to other tickets which may belong to other
-projects.
+A **Ticket** is a concrete question or problem formulated by a a user.
+A Ticket is always related to one and only one Project.  It may be
+related to other tickets which may belong to other projects.
 
 Projects are handled by their *name* while Tickets are handled by
 their *number*.
@@ -283,7 +282,7 @@ class TicketDetail(dd.DetailLayout):
     """, label=_("History"), required_roles=dd.login_required(Triager))
 
     general1 = """
-    summary:40 id:6 reporter:12
+    summary:40 id:6 user:12 end_user:12
     site topic project private
     workflow_buttons #assigned_to waiting_for
     """
@@ -337,12 +336,12 @@ class Tickets(dd.Table):
     required_roles = set()  # also for anonymous
     model = 'tickets.Ticket'
     order_by = ["-id"]
-    column_names = 'id summary:50 reporter:10 topic faculty ' \
+    column_names = 'id summary:50 user:10 topic faculty ' \
                    'workflow_buttons:30 project:10 *'
     detail_layout = TicketDetail()
     insert_layout = """
     summary
-    reporter
+    end_user
     """
     # insert_layout = dd.InsertLayout("""
     # # reporter #product
@@ -356,11 +355,11 @@ class Tickets(dd.Table):
         observed_event=TicketEvents.field(blank=True),
         topic=dd.ForeignKey('topics.Topic', blank=True, ),
         site=dd.ForeignKey('tickets.Site', blank=True, ),
-        reporter=dd.ForeignKey(
+        end_user=dd.ForeignKey(
             settings.SITE.user_model,
-            verbose_name=_("Reporter"),
+            verbose_name=_("End user"),
             blank=True, null=True,
-            help_text=_("Only rows reported by this user.")),
+            help_text=_("Only rows concerning this end user.")),
         assigned_to=dd.ForeignKey(
             settings.SITE.user_model,
             verbose_name=_("Voted by"),
@@ -396,7 +395,7 @@ class Tickets(dd.Table):
         show_private=dd.YesNo.field(_("Private"), blank=True))
 
     params_layout = """
-    user reporter assigned_to not_assigned_to interesting_for site project state has_project
+    user end_user assigned_to not_assigned_to interesting_for site project state has_project
     show_assigned show_active show_todo #show_standby show_private \
     start_date end_date observed_event topic feasable_by"""
 
@@ -405,7 +404,7 @@ class Tickets(dd.Table):
     @classmethod
     def get_simple_parameters(cls):
         s = super(Tickets, cls).get_simple_parameters()
-        s |= set(('reporter',  # 'assigned_to',
+        s |= set(('end_user',  # 'assigned_to',
                   'state', 'project', 'topic', 'site'))
         return s
 
@@ -523,7 +522,7 @@ class SuggestedTickets(Tickets):
                    'workflow_buttons:30 *'
     params_panel_hidden = True
     params_layout = """
-    reporter feasable_by site project state
+    end_user feasable_by site project state
     show_assigned show_active topic"""
 
     @classmethod
@@ -538,7 +537,7 @@ class SuggestedTickets(Tickets):
 
 
 class UnassignedTickets(Tickets):
-    column_names = "summary project reporter *"
+    column_names = "summary project user *"
     label = _("Unassigned Tickets")
     required_roles = dd.login_required(Triager)
 
@@ -557,7 +556,7 @@ class UnassignedTickets(Tickets):
 class TicketsByProject(Tickets):
     master_key = 'project'
     required_roles = dd.login_required(Triager)
-    column_names = ("overview:50 topic:10 reporter:10 state "
+    column_names = ("overview:50 topic:10 user:10 state "
                     "planned_time *")
 
 
@@ -598,7 +597,7 @@ class TicketsToTriage(Tickets):
     label = _("Tickets to triage")
     button_label = _("Triage")
     order_by = ["-id"]
-    column_names = 'overview:50 topic:10 reporter:10 project:10 ' \
+    column_names = 'overview:50 topic:10 user:10 project:10 ' \
                    '#assigned_to:10 ticket_type:10 workflow_buttons:40 *'
 
     @classmethod
@@ -625,27 +624,27 @@ class TicketsToTalk(Tickets):
         return kw
 
 
-class TicketsToDo(Tickets):
-    """Shows a list of tickets "to do". This means attributed to me and
-    in an active state.
+# class TicketsToDo(Tickets):
+#     """Shows a list of tickets "to do". This means attributed to me and
+#     in an active state.
 
-    """
-    label = _("Tickets to do")
-    required_roles = dd.login_required()
-    order_by = ["-priority", "-deadline", "-id"]
-    column_names = 'overview:50 priority deadline reporter ' \
-                   'workflow_buttons:40 *'
-    params_layout = """
-    reporter assigned_to site project state 
-    start_date end_date observed_event topic feasable_by"""
+#     """
+#     label = _("Tickets to do")
+#     required_roles = dd.login_required()
+#     order_by = ["-priority", "-deadline", "-id"]
+#     column_names = 'overview:50 priority deadline user end_user ' \
+#                    'workflow_buttons:40 *'
+#     params_layout = """
+#     user end_user assigned_to site project state 
+#     start_date end_date observed_event topic feasable_by"""
 
-    @classmethod
-    def param_defaults(self, ar, **kw):
-        kw = super(TicketsToDo, self).param_defaults(ar, **kw)
-        # kw.update(state=TicketStates.todo)
-        kw.update(show_todo=dd.YesNo.yes)
-        kw.update(assigned_to=ar.get_user())
-        return kw
+#     @classmethod
+#     def param_defaults(self, ar, **kw):
+#         kw = super(TicketsToDo, self).param_defaults(ar, **kw)
+#         # kw.update(state=TicketStates.todo)
+#         kw.update(show_todo=dd.YesNo.yes)
+#         kw.update(assigned_to=ar.get_user())
+#         return kw
 
 
 class ActiveTickets(Tickets):
@@ -656,7 +655,7 @@ class ActiveTickets(Tickets):
     required_roles = dd.login_required(Triager)
     order_by = ["-id"]
     # order_by = ["-modified", "id"]
-    column_names = 'overview:50 topic:10 reporter:10 project:10 ' \
+    column_names = 'overview:50 topic:10 user:10 end_user:10 project:10 ' \
                    '#assigned_to:10 ticket_type:10 workflow_buttons:40 *'
 
     @classmethod
@@ -675,7 +674,7 @@ class MyTickets(My, Tickets):
     column_names = 'overview:50 faculty #topic ' \
                    'workflow_buttons:40 *'
     params_layout = """
-    user reporter site project state
+    user end_user site project state
     start_date end_date observed_event topic feasable_by show_active"""
 
     @classmethod
@@ -705,20 +704,20 @@ class MyTickets(My, Tickets):
 class TicketsFixed(Tickets):
     label = _("Fixed tickets")
     master_key = 'fixed_for'
-    column_names = "id summary reporter *"
+    column_names = "id summary user *"
     editable = False
 
 
 class TicketsReported(Tickets):
     label = _("Reported tickets")
     master_key = 'reported_for'
-    column_names = "id summary reporter *"
+    column_names = "id summary user *"
     editable = False
 
 
 class TicketsByReporter(Tickets):
     label = _("Reported tickets ")
-    master_key = 'reporter'
+    master_key = 'user'
     column_names = "id summary:60 workflow_buttons:20 *"
 
 

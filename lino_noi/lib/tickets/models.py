@@ -11,14 +11,6 @@ runner of the site.  Projects form a tree: each Project can have a
 Projects are handled by their *name* while Tickets are handled by
 their *number*.
 
-.. rubric:: Change notifications
-
-The ticket :attr:`reporter <Ticket.reporter>` and the
-:attr:`assigned_to <Ticket.assigned_to>` worker get automatically
-notified about any change.  This is similar to what happens in
-:mod:`lino_xl.lib.stars.models`, except that the reporter and the
-assignee don't need to star a ticket in order to get notified.
-
 """
 
 from __future__ import unicode_literals
@@ -324,7 +316,7 @@ class SpawnTicket(dd.Action):
     def run_from_ui(self, ar, **kw):
         p = ar.selected_rows[0]
         c = rt.modules.tickets.Ticket(
-            reporter=ar.get_user(),
+            user=ar.get_user(),
             summary=_("New ticket {0} #{1}".format(
                 self.link_type.as_child(), p.id)))
         for k in ('project', 'private'):
@@ -346,7 +338,7 @@ class SpawnTicket(dd.Action):
 class Ticket(UserAuthored, mixins.CreatedModified,
              TimeInvestment, RFC, Votable, Workable):
     """A **Ticket** is a concrete question or problem formulated by a
-    :attr:`reporter` (a user).
+    :attr:`user`.
     
     A Ticket is always related to one and only one Project.  It may be
     related to other tickets which may belong to other projects.
@@ -357,9 +349,9 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         The user who entered this ticket and is responsible for
         managing it.
 
-    .. attribute:: reporter
+    .. attribute:: end_user
 
-        The user who is asking for help.
+        The end user who is asking for help.
 
     .. attribute:: assigned_to
 
@@ -435,14 +427,13 @@ class Ticket(UserAuthored, mixins.CreatedModified,
 
     .. attribute:: rating
 
-        How the reporter rates this ticket.
+        How the author rates this ticket.
 
     """
 
     quick_search_fields = "summary description"
 
     workflow_state_field = 'state'
-    # author_field_name = 'reporter'
 
     class Meta:
         app_label = 'tickets'
@@ -487,7 +478,12 @@ class Ticket(UserAuthored, mixins.CreatedModified,
 
     reporter = dd.ForeignKey(
         settings.SITE.user_model,
-        verbose_name=_("Reporter"),
+        blank=True, null=True,
+        verbose_name=_("Reporter"))
+    end_user = dd.ForeignKey(
+        settings.SITE.user_model,
+        verbose_name=_("End user"),
+        blank=True, null=True,
         related_name="reported_tickets")
     state = TicketStates.field(default=TicketStates.as_callable('new'))
     # rating = Ratings.field(blank=True)
@@ -514,34 +510,11 @@ class Ticket(UserAuthored, mixins.CreatedModified,
     # def get_rfc_description(self, ar):
     #     return ar.parse_memo(self.description)
 
-    def on_create(self, ar):
-        # print "20150523a on_create", self.reporter_id
-        # print "20150523a on_create", self.reporter_id
-        me = ar.get_user()
-        if me is not None:
-            if self.reporter_id is None:
-                self.reporter = me
-            # if self.assigned_to_id is None:
-            #     if me.profile.has_required_roles([Triager]):
-            #         self.assigned_to = me
-        if self.reporter_id and self.reporter.user_site:
-            self.site = self.reporter.user_site
-        super(Ticket, self).on_create(ar)
-
     def full_clean(self):
-        """If :attr:`project` is not set and if the ticket has a
-        :attr:`reporter`, use that reporter's :attr:`current_project`
-        as default value.
-
-        """
         if self.id and self.duplicate_of_id == self.id:
             self.duplicate_of = None
         # print "20150523b on_create", self.reporter
         super(Ticket, self).full_clean()
-        me = self.reporter
-        if False:
-            if me and not self.project and me.current_project:
-                self.project = me.current_project
         if self.project:
             # if not self.assigned_to and self.project.assign_to:
             #     self.assigned_to = self.project.assign_to
@@ -553,8 +526,8 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         if self.project and not self.project.private:
             rv.add('private')
         if not ar.get_user().profile.has_required_roles([Triager]):
-            rv.add('assigned_to')
-            rv.add('reporter')            
+            rv.add('user')
+            rv.add('end_user')
         return rv
 
     # def get_choices_text(self, request, actor, field):
@@ -581,7 +554,7 @@ class Ticket(UserAuthored, mixins.CreatedModified,
     def get_overview(self, ar):
         return E.span(
             ar.obj2html(self), _(" by "),
-            ar.obj2html(self.reporter))
+            ar.obj2html(self.end_user or self.user))
 
     @dd.displayfield(_("Description"))
     def overview(self, ar):
@@ -598,8 +571,16 @@ class Ticket(UserAuthored, mixins.CreatedModified,
     #         _("{user} worked on [ticket {t}]").format(
     #             user=ar.get_user(), t=self.id)))
 
-    def get_vote_rater(self):
-        return self.reporter
+    def get_vote_raters(self):
+        """"Yield the
+        :meth:`lino_noi.lib.votes.mixins.Votable.get_vote_raters` for
+        this ticket.  This is the author and (if set) the
+        :attr:`end_user`.
+
+        """
+        yield self.user
+        if self.end_user:
+            yield self.end_user
        
     def is_workable_for(self, user):
         if self.standby or self.closed:
@@ -622,7 +603,9 @@ dd.inject_field(
 
 @dd.receiver(dd.post_ui_build)
 def setup_memo_commands(sender=None, **kwargs):
+
     """See :doc:`/specs/memo`."""
+    
     def ticket2html(parser, s):
         ar = parser.context['ar']
         # dd.logger.info("20161019 %s", ar.renderer)

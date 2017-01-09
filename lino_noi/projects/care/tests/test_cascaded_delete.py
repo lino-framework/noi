@@ -66,11 +66,11 @@ class Tests(RemoteAuthTestCase):
         
         ticket1 = create(
             Ticket, summary="Need general help",
-            reporter=berta, faculty=general)
+            user=berta, faculty=general)
 
         ticket2 = create(
             Ticket, summary="Need special help",
-            reporter=berta, faculty=special)
+            user=berta, faculty=special)
 
         self.assertEqual(ticket1.state, TicketStates.new)
 
@@ -135,8 +135,8 @@ class Tests(RemoteAuthTestCase):
         # self.assertEqual(s, '')
         
         # Deleting a user who reported a ticket is not refused because
-        # Ticket.reporter is nullable. The tickets won't be deleted,
-        # but their `reporter` field will be set to NULL:
+        # Ticket.user is nullable. The tickets won't be deleted,
+        # but their `user` field will be set to NULL:
 
         if False:
         
@@ -147,8 +147,8 @@ class Tests(RemoteAuthTestCase):
             # ticket1 = Ticket.objects.get(pk=1)
             # ticket2 = Ticket.objects.get(pk=2)
 
-            self.assertEqual(ticket1.reporter, None)
-            self.assertEqual(ticket2.reporter, None)
+            self.assertEqual(ticket1.user, None)
+            self.assertEqual(ticket2.user, None)
 
         # make sure that database state is as expected:
 

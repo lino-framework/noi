@@ -47,9 +47,9 @@ has does more usage of them.
 
 >>> rt.show('faculties.Competences')
 ... #doctest: +REPORT_UDIFF
-==== ================= =============== ========== ========
- ID   User              Faculty         Affinity   Option
----- ----------------- --------------- ---------- --------
+==== ================= =============== ==========
+ ID   User              Faculty         Affinity
+---- ----------------- --------------- ----------
  1    Rolf Rompen       Analysis        100
  2    Rolf Rompen       Code changes    70
  3    Rolf Rompen       Documentation   71
@@ -69,7 +69,7 @@ has does more usage of them.
  17   luc               Configuration   46
  18   mathieu           Configuration   92
                                         **1338**
-==== ================= =============== ========== ========
+==== ================= =============== ==========
 <BLANKLINE>
 
 

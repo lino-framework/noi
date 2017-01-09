@@ -10,7 +10,7 @@
 {% if obj.closed %} (closed){% endif %}
 {% if obj.standby %} (standby){% endif %}
 (last update {{obj.modified}})
-<br/><b>Reported by:</b> {{obj.reporter}} {{obj.created}}
+<br/><b>Created</b> {{obj.created}} by {{obj.user}}
 {% if obj.topic %}
 <br/><b>Topic:</b> {{E.tostring(ar.obj2html(obj.topic))}}
 {% endif %}

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2016 Luc Saffre
+# Copyright 2011-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """Database models for :mod:`lino_noi.lib.faculties`.
@@ -43,11 +43,11 @@ class Faculty(BabelNamed, Hierarchical, Sequenced):
             "in this faculty."
             "A number between -{0} and +{0}.").format(MAX_WEIGHT))
 
-    topic_group = dd.ForeignKey(
-        'topics.TopicGroup', blank=True, null=True,
-        verbose_name=_("Options category"),
-        help_text=_("The topic group to use for "
-                    "specifying additional options."))
+    # topic_group = dd.ForeignKey(
+    #     'topics.TopicGroup', blank=True, null=True,
+    #     verbose_name=_("Options category"),
+    #     help_text=_("The topic group to use for "
+    #                 "specifying additional options."))
 
 
 dd.update_field(Faculty, 'parent', verbose_name=_("Parent faculty"))
@@ -69,7 +69,8 @@ class Competence(UserAuthored, Sequenced):
     class Meta:
         verbose_name = _("Competence")
         verbose_name_plural = _("Competences")
-        unique_together = ['user', 'faculty', 'topic']
+        # unique_together = ['user', 'faculty', 'topic']
+        unique_together = ['user', 'faculty']
 
     faculty = dd.ForeignKey('faculties.Faculty')
     affinity = models.IntegerField(
@@ -78,18 +79,18 @@ class Competence(UserAuthored, Sequenced):
             "How much this user likes to get a new ticket "
             "in this faculty."
             "A number between -{0} and +{0}.").format(MAX_WEIGHT))
-    topic = dd.ForeignKey(
-        'topics.Topic', blank=True, null=True,
-        verbose_name=_("Option"),
-        help_text=_("Some faculties can require additional "
-                    "options for a competence."))
+    # topic = dd.ForeignKey(
+    #     'topics.Topic', blank=True, null=True,
+    #     verbose_name=_("Option"),
+    #     help_text=_("Some faculties can require additional "
+    #                 "options for a competence."))
 
-    @dd.chooser()
-    def topic_choices(cls, faculty):
-        Topic = rt.modules.topics.Topic
-        if not faculty or not faculty.topic_group:
-            return Topic.objects.none()
-        return Topic.objects.filter(topic_group=faculty.topic_group)
+    # @dd.chooser()
+    # def topic_choices(cls, faculty):
+    #     Topic = rt.modules.topics.Topic
+    #     if not faculty or not faculty.topic_group:
+    #         return Topic.objects.none()
+    #     return Topic.objects.filter(topic_group=faculty.topic_group)
 
     def full_clean(self, *args, **kw):
         if self.affinity is None:

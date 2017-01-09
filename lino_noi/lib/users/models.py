@@ -120,6 +120,8 @@ class User(User, Contactable, AddressLocation, Addressable):
 
     .. attribute:: user_state
 
+        The registration state of this user.
+
     """
 
     workflow_state_field = 'user_state'

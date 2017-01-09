@@ -48,7 +48,7 @@ class DDHTests(RemoteAuthTestCase):
                        language="en")
 
         def createit():
-            return create(Ticket, summary="Test", reporter=robin)
+            return create(Ticket, summary="Test", user=robin)
 
         #
         # If there are no vetos, user can ask to delete it

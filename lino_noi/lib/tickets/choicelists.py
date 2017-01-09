@@ -85,9 +85,8 @@ class TicketStates(dd.Workflow):
 
     .. attribute:: talk
 
-        The ticket needs discussion with the reporter.
-        We don't yet know exactly
-        what to do with it.
+        Some worker needs discussion with the author.  We don't yet
+        know exactly what to do with it.
 
     .. attribute:: todo
 
@@ -98,11 +97,11 @@ class TicketStates(dd.Workflow):
     .. attribute:: testing
 
         The ticket is theoretically done, but we want to confirm this
-        somehow, and it is not clear who (reporter, assignee or even
-        some third user) should do the next step. If it is clear that
-        the reporter should do the testing, then you should rather set
-        the ticket to :attr:`talk`. If it is clear that you (the
-        assignee) must test it, then leave the ticket at :attr:`todo`.
+        somehow, and it is not clear who should do the next step. If
+        it is clear that the author should do the testing, then you
+        should rather set the ticket to :attr:`talk`. If it is clear
+        that you (the assignee) must test it, then leave the ticket at
+        :attr:`todo`.
 
     .. attribute:: sleeping
 
@@ -116,7 +115,7 @@ class TicketStates(dd.Workflow):
     .. attribute:: ready
 
         The ticket is basically :attr:`done`, but some detail still
-        needs to be done by the :attr:`reporter` (e.g. testing,
+        needs to be done by the :attr:`user` (e.g. testing,
         confirmation, documentation,..)
 
     .. attribute:: done
