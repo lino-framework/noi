@@ -1,7 +1,10 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2016-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
-"""Adds customized urlpatters when use_restful is True.
+"""Adds customized urlpatters for a public restful interface.
+
+This is currently just a proof of concept and will be active only when
+:attr:`use_restful <lino.core.site.Site.use_restful>` is set to True.
 
 """
 
@@ -21,7 +24,7 @@ User = rt.models.users.User
 class TicketSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Ticket
-        fields = ('id', 'author', 'end_user' ) # , 'state')
+        fields = ('id', 'user', 'end_user' ) # , 'state')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
