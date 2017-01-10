@@ -17,11 +17,18 @@ Memo commands
     >>> from lino.api.doctest import *
 
 The :attr:`description
-<lino_noi.lib.tickets.models.Ticket.description>` of a ticket is a
-formatted HTML text which can contain links, tables, headers, enumerations...
+<lino_noi.lib.tickets.models.Ticket.description>` of a ticket and the
+text of a comment (:mod:`short_text
+<lino.modlib.comments.models.Comment.short_text>`) are rich HTML text
+fields which can contain simple HTML formatting like links, tables,
+headers, enumerations.
 
-... and it can additionally contain :mod:`memo <lino.utils.memo>`
-markup. Examples:
+And additionally they can contain :mod:`memo <lino.utils.memo>` markup
+commands, i.e. text of the form ``[foo bar baz]``. These memo commands
+are going to be "rendered" when this text is being displayed at
+certain places.
+
+Examples:
 
 .. _memo.url:
 
