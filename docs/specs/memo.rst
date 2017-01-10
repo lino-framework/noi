@@ -123,8 +123,12 @@ Usage examples:
     >>> print(ses.parse_memo("[py lino_noi.lib.tickets.models.Project]."))
     <a href="https://github.com/lsaffre/noi/blob/master/lino_noi/lib/tickets/models.py" target="_blank">lino_noi.lib.tickets.models.Project</a>.
     >>> print(ses.parse_memo("[py lino_noi.lib.tickets.models.Project.foo]."))
-    <a href="https://github.com/lsaffre/noi/blob/master/lino_noi/lib/tickets/models.py" target="_blank">lino_noi.lib.tickets.models.Project.foo</a>.
-
-
+    <a href="Oops: type object 'Project' has no attribute 'foo'" target="_blank">lino_noi.lib.tickets.models.Project.foo</a>.
+    
     >>> print(ses.parse_memo("[py lino_noi.lib.tickets.models.Project Project]."))
     <a href="https://github.com/lsaffre/noi/blob/master/lino_noi/lib/tickets/models.py" target="_blank">Project</a>.
+
+    Non-breaking spaces are removed from command text:
+    
+    >>> print(ses.parse_memo(u"[py lino]."))
+    <a href="https://github.com/lsaffre/lino/blob/master/lino/__init__.py" target="_blank">lino</a>.
