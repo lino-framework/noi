@@ -629,14 +629,14 @@ def setup_memo_commands(sender=None, **kwargs):
             s = args[0]
             txt = args[1]
         parts = s.split('.')
-        obj = import_module(parts[0])
-        for p in parts[1:]:
-            try:
+        try:
+            obj = import_module(parts[0])
+            for p in parts[1:]:
                 obj = getattr(obj, p)
-            except AttributeError:
-                break
-        mod = inspect.getmodule(obj)
-        url = srcref(mod)
+            mod = inspect.getmodule(obj)
+            url = srcref(mod)
+        except Exception as e:
+            url = "Oops: {}".format(e)
         # fn = inspect.getsourcefile(obj)
         if url:
             # lines = inspect.getsourcelines(s)
