@@ -136,7 +136,7 @@ class Vote(UserAuthored, Created):
         elems = self.votable.get_overview_elems(ar)
         elems += [E.br(), _("{} state:").format(
             self._meta.verbose_name), ' ']
-        elems += self.get_workflow_buttons(ar)
+        elems += self.get_workflow_buttons(ar, self.state)
         return E.div(*elems)
 
 

@@ -561,7 +561,7 @@ class Ticket(UserAuthored, mixins.CreatedModified,
             elems += [' ', _("for"), ' ', ar.obj2html(self.end_user)]
         elems += [E.br(), _("{} state:").format(
             self._meta.verbose_name), ' ']
-        elems += self.get_workflow_buttons(ar)            
+        elems += self.get_workflow_buttons(ar, self.state)
         return elems
 
     # def get_notify_message(self, ar, cw):
