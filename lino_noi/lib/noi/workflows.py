@@ -103,7 +103,7 @@ class MarkTicketOpened(TicketAction):
     """Mark this ticket as open.
     """
     label = pgettext("verb", "Open")
-    required_states = 'new closed'
+    required_states = 'talk new closed'
     show_in_bbar = True
 
     # def get_notify_subject(self, ar, obj):
@@ -151,6 +151,8 @@ TicketStates.sticky.add_transition(
     required_states="new")
 TicketStates.new.add_transition(
     required_states="sticky")
+TicketStates.sleeping.add_transition(
+    required_states="new talk opened started")
 TicketStates.talk.add_transition(MarkTicketTalk)
 TicketStates.opened.add_transition(MarkTicketOpened)
 TicketStates.started.add_transition(MarkTicketStarted)
