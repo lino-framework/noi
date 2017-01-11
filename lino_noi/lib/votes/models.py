@@ -133,7 +133,11 @@ class Vote(UserAuthored, Created):
     def votable_overview(self, ar):
         if ar is None or self.votable_id is None:
             return ''
-        return self.votable.get_overview(ar)
+        elems = self.votable.get_overview_elems(ar)
+        elems += [E.br(), _("{} state:").format(
+            self._meta.verbose_name), ' ']
+        elems += self.get_workflow_buttons(ar)
+        return E.div(*elems)
 
 
 dd.update_field(Vote, 'user', verbose_name=_("Voter"))
@@ -151,13 +155,18 @@ class Votes(dd.Table):
     user mail_mode state votable_state ticket_user
     start_date end_date observed_event"""
 
+    params_panel_hidden = True
+    
     detail_layout = dd.FormLayout("""
     state mail_mode
     priority nickname
     rating 
     """, window_size=(40, 'auto'))
 
+    show_detail_navigator = False
+    
     filter_vote_states = set([])
+    filter_ticket_states = set([])
 
     # @classmethod
     # def on_analyze(self, site):
@@ -165,12 +174,19 @@ class Votes(dd.Table):
         
     @classmethod
     def do_setup(self):
+        # print("Votes.to_setup")
         self.detail_action.hide_top_toolbar = True
         if isinstance(self.filter_vote_states, six.string_types):
             v = set()
             for k in self.filter_vote_states.split():
                 v.add(VoteStates.get_by_name(k))
             self.filter_vote_states  = v
+        if isinstance(self.filter_ticket_states, six.string_types):
+            v = set()
+            fld = dd.plugins.votes.votable_model.workflow_state_field
+            for k in self.filter_ticket_states.split():
+                v.add(fld.choicelist.get_by_name(k))
+            self.filter_ticket_states  = v
 
     @classmethod
     def get_detail_title(self, ar, obj):
@@ -197,6 +213,8 @@ class Votes(dd.Table):
 
         if len(self.filter_vote_states):
             qs = qs.filter(state__in=self.filter_vote_states)
+        if len(self.filter_ticket_states):
+            qs = qs.filter(votable__state__in=self.filter_ticket_states)
             
         # if pv.show_todo == dd.YesNo.no:
         #     qs = qs.exclude(state__in=VoteStates.todo_states)
@@ -225,22 +243,40 @@ class AllVotes(Votes):
     label = _("All votes")
     required_roles = dd.required(VotesStaff)
     column_names = "id votable user priority nickname rating mail_mode workflow_buttons *"
+
+
+class MyVotes(My, Votes):
+    """Show your votes in all states"""
+    label = _("My votes")
+    column_names = "votable_overview *"
+    order_by = ['-id']
+    
     
     
 class MyOffers(My, Votes):
     """Show your votes in states watching and candidate"""
     label = _("My offers")
-    column_names = "votable_overview workflow_buttons *"
+    column_names = "votable_overview *"
     order_by = ['-id']
     filter_vote_states = "candidate"
+    filter_ticket_states = "opened talk"
     
 
 class MyTasks(My, Votes):    
     """Show your votes in states assigned and done"""
     label = _("My tasks")
-    column_names = "votable_overview priority workflow_buttons *"
+    column_names = "votable_overview priority *"
     order_by = ['priority', '-id']
     filter_vote_states = "assigned done"
+    filter_ticket_states = "opened talk"
+    
+class MyWatched(My, Votes):    
+    """Show your votes in states watching"""
+    label = _("My watched")
+    column_names = "votable_overview *"
+    order_by = ['-id']
+    filter_vote_states = "watching"
+    # filter_ticket_states = "open talk"
     
 
 class VotesByVotable(Votes):

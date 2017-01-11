@@ -78,6 +78,23 @@ class Votable(ChangeObservable):
     create_vote = CreateVote()
     edit_vote = EditVote()
 
+    # @dd.displayfield(_("Description"))
+    # def overview(self, ar):
+    #     if ar is None:
+    #         return ''
+    #     return self.get_overview(ar)
+        
+    #     # return ar.obj2html(self, "#{0}".self.id)
+    #     # return ar.obj2html(self)
+    #     # return E.span(ar.obj2html(self), ' ', self.summary)
+
+    # def get_overview(self, ar):
+    #     """Return a user-friendly HTML description of this votable.
+
+    #     Subclasses should extend the default implementation.
+    #     """
+    #     return ar.obj2html(self)
+
     def get_vote_raters(self):
         """Yield or return a list of the users who are allowed to rate the
 votes on this votable.

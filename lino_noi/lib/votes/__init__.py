@@ -31,21 +31,26 @@ class Plugin(ad.Plugin):
     """
 
     def on_site_startup(self, site):
+        # print("votes.on_site_startup")
         self.votable_model = resolve_model(self.votable_model)
         super(Plugin, self).on_site_startup(site)
         
-    def setup_main_menu(config, site, profile, m):
-        mg = site.plugins.office
+    def setup_main_menu(self, site, profile, m):
+        mg = self.get_menu_group()
+        # mg = site.plugins[self.votable_model._meta.app_label]
+        # mg = site.plugins.office
         m = m.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('votes.MyOffers')
         m.add_action('votes.MyTasks')
+        m.add_action('votes.MyWatched')
+        m.add_action('votes.MyVotes')
 
-    def setup_explorer_menu(config, site, profile, m):
-        p = site.plugins.tickets
-        m = m.add_menu(p.app_label, p.verbose_name)
+    def setup_explorer_menu(self, site, profile, m):
+        mg = self.get_menu_group()
+        # p = site.plugins.tickets
+        m = m.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('votes.AllVotes')
         m.add_action('votes.VoteStates')
-
 
     def get_dashboard_items(self, user):
         if user.authenticated:
