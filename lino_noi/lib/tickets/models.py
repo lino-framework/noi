@@ -551,20 +551,18 @@ class Ticket(UserAuthored, mixins.CreatedModified,
             return []
         return site.milestones_by_site.all()
 
-    def get_overview(self, ar):
-        return E.span(
-            ar.obj2html(self), _(" by "),
-            ar.obj2html(self.end_user or self.user))
-
-    @dd.displayfield(_("Description"))
-    def overview(self, ar):
-        if ar is None:
-            return ''
-        return self.get_overview(ar)
-        
-        # return ar.obj2html(self, "#{0}".self.id)
-        # return ar.obj2html(self)
-        # return E.span(ar.obj2html(self), ' ', self.summary)
+    def get_overview_elems(self, ar):
+        """Overrides :meth:`lino.core.model.Model.get_overview_elems`.
+        """
+        elems = [ ar.obj2html(self)]
+        if self.user != ar.get_user():
+            elems += [ _(" by "), ar.obj2html(self.user)]
+        if self.end_user_id:
+            elems += [' ', _("for"), ' ', ar.obj2html(self.end_user)]
+        elems += [E.br(), _("{} state:").format(
+            self._meta.verbose_name), ' ']
+        elems += self.get_workflow_buttons(ar, self.state)
+        return elems
 
     # def get_notify_message(self, ar, cw):
     #     return E.tostring(E.p(
@@ -572,6 +570,7 @@ class Ticket(UserAuthored, mixins.CreatedModified,
     #             user=ar.get_user(), t=self.id)))
 
     def get_vote_raters(self):
+
         """"Yield the
         :meth:`lino_noi.lib.votes.mixins.Votable.get_vote_raters` for
         this ticket.  This is the author and (if set) the

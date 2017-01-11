@@ -240,7 +240,8 @@ Das Hauptmenü
 
 >>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Büro : Meine Angebote, Meine Aufgaben, Meine Auszüge, Meine Kommentare, Meine Benachrichtigungen
+- Stellungnahmen : Meine Angebote, Meine Aufgaben, My votes
+- Büro : Meine Auszüge, Meine Kommentare, Meine Benachrichtigungen
 - Bitten : Meine Bitten, Wo ich helfen kann, Aktive Bitten, Alle Bitten, Nicht zugewiesene Bitten, Aktive Projekte
 - Berichte :
   - System : Broken GFKs
@@ -252,8 +253,9 @@ Das Hauptmenü
   - Fähigkeiten : Fähigkeiten (Hierarchie), Fähigkeiten (alle)
 - Explorer :
   - System : Datenbankmodelle, Vollmachten, Benutzerarten, Änderungen, Benachrichtigungen
-  - Bitten : Alle Stellungnahmen, Stellungnahmezustände, Verknüpfungen, Ticketzustände
+  - Stellungnahmen : Alle Stellungnahmen, Stellungnahmezustände
   - Büro : Auszüge, Kommentare
+  - Bitten : Verknüpfungen, Ticketzustände
   - Fähigkeiten : Kompetenzen
 - Site : Info
 
@@ -262,7 +264,8 @@ Das Hauptmenü
 
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Büro : Meine Angebote, Meine Aufgaben, Meine Kommentare, Meine Benachrichtigungen
+- Stellungnahmen : Meine Angebote, Meine Aufgaben, My votes
+- Büro : Meine Kommentare, Meine Benachrichtigungen
 - Bitten : Meine Bitten, Wo ich helfen kann
 - Site : Info
 
@@ -275,11 +278,12 @@ Meine Bitten
   
 >>> rt.login('christa').show(tickets.MyTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-==================================================================================================== ================ ===========================
- Beschreibung                                                                                         Fähigkeit        Aktionen
----------------------------------------------------------------------------------------------------- ---------------- ---------------------------
- `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__ by `christa <Detail>`__   Gartenarbeiten   [☆] **Neu** → [☎] [☉] [☐]
-==================================================================================================== ================ ===========================
++----------------------------------------------------------------------------------+
+| overview                                                                         |
++==================================================================================+
+| `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__ |br|  |
+| Bitte state: **Neu** → [☎] [☉] [☐]                                               |
++----------------------------------------------------------------------------------+
 <BLANKLINE>
 
 
@@ -288,11 +292,12 @@ Where I can help
 
 >>> rt.login('alex').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-==================================================================================================== ================ =============
- Beschreibung                                                                                         Fähigkeit        Aktionen
----------------------------------------------------------------------------------------------------- ---------------- -------------
- `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__ by `christa <Detail>`__   Gartenarbeiten   [☆] **Neu**
-==================================================================================================== ================ =============
++----------------------------------------------------------------------------------------------------------+----------------+-------------+
+| overview                                                                                                 | Fähigkeit      | Aktionen    |
++==========================================================================================================+================+=============+
+| `#2 (Mein Rasen muss gemäht werden. Donnerstags oder Samstags) <Detail>`__ by `christa <Detail>`__ |br|  | Gartenarbeiten | [☆] **Neu** |
+| Bitte state: **Neu**                                                                                     |                |             |
++----------------------------------------------------------------------------------------------------------+----------------+-------------+
 <BLANKLINE>
 
 >>> rt.login('berta').show(tickets.SuggestedTickets)
@@ -301,11 +306,12 @@ Keine Daten anzuzeigen
 
 >>> rt.login('eric').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-========================================================================================= ==================== ===============
- Beschreibung                                                                              Fähigkeit            Aktionen
------------------------------------------------------------------------------------------ -------------------- ---------------
- `#4 (Wer kann meiner Tochter Gitarreunterricht geben?) <Detail>`__ by `alex <Detail>`__   Gitarrenunterricht   [☆] **Offen**
-========================================================================================= ==================== ===============
++-----------------------------------------------------------------------------------------------+--------------------+---------------+
+| overview                                                                                      | Fähigkeit          | Aktionen      |
++===============================================================================================+====================+===============+
+| `#4 (Wer kann meiner Tochter Gitarreunterricht geben?) <Detail>`__ by `alex <Detail>`__ |br|  | Gitarrenunterricht | [☆] **Offen** |
+| Bitte state: **Offen**                                                                        |                    |               |
++-----------------------------------------------------------------------------------------------+--------------------+---------------+
 <BLANKLINE>
 
 
@@ -314,23 +320,19 @@ Meine Hilfsangebote
 
 >>> rt.login('christa').show(votes.MyOffers)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-====================================================================================== ============================
- Beschreibung                                                                           Aktionen
--------------------------------------------------------------------------------------- ----------------------------
- `#5 (Wer macht Musik auf meinem Geburtstag?) <Detail>`__ by `alex <Detail>`__          **Kandidat** → [Interesse]
- `#3 (Wer kann meinem Sohn Klavierunterricht geben?) <Detail>`__ by `dora <Detail>`__   **Kandidat** → [Interesse]
-====================================================================================== ============================
++------------------------------------------------------------------------------------------------------------------+
+| Beschreibung                                                                                                     |
++==================================================================================================================+
+| `#3 (Wer kann meinem Sohn Klavierunterricht geben?) <Detail>`__ by `eric <Detail>`__ for `dora <Detail>`__ |br|  |
+| Bitte state: **Besprechen** |br|                                                                                 |
+| Stellungnahme state: **Kandidat** → [Interesse]                                                                  |
++------------------------------------------------------------------------------------------------------------------+
 <BLANKLINE>
 
 
 >>> rt.login('eric').show(votes.MyOffers)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-=============================================================================== ================================================
- Beschreibung                                                                    Aktionen
-------------------------------------------------------------------------------- ------------------------------------------------
- `#5 (Wer macht Musik auf meinem Geburtstag?) <Detail>`__ by `alex <Detail>`__   **Kandidat** → [Interesse] [Zuweisen] [Cancel]
-=============================================================================== ================================================
-<BLANKLINE>
+Keine Daten anzuzeigen
 
 
 
@@ -339,17 +341,19 @@ Meine Aufgaben
 
 >>> rt.login('alex').show(votes.MyTasks)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-====================================================================================== =========== ==============
- Beschreibung                                                                           Priorität   Aktionen
--------------------------------------------------------------------------------------- ----------- --------------
- `#1 (Mein Wasserhahn tropft, wer kann mir helfen?) <Detail>`__ by `berta <Detail>`__   0           **Erledigt**
-====================================================================================== =========== ==============
+Keine Daten anzuzeigen
+
+>>> rt.login('alex').show(votes.MyVotes)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
++--------------------------------------------------------------------------------------------+
+| Beschreibung                                                                               |
++============================================================================================+
+| `#1 (Mein Wasserhahn tropft, wer kann mir helfen?) <Detail>`__ by `berta <Detail>`__ |br|  |
+| Bitte state: **Geschlossen** |br|                                                          |
+| Stellungnahme state: **Erledigt**                                                          |
++--------------------------------------------------------------------------------------------+
 <BLANKLINE>
 
-Solange eine Aufgabe nur "erledigt" und noch nicht "abgeschlossen"
-ist, steht sie in der Aufgabenliste des Arbeiters, damit dieser den
-Anfrager ggf. daran erinnern kann, dass die Aufgabe bewertet und
-abgeschlossen werden muss.
 
 
 Rating a help offer
