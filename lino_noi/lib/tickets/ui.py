@@ -598,7 +598,7 @@ class TicketsToTriage(Tickets):
     button_label = _("Triage")
     order_by = ["-id"]
     column_names = 'overview:50 topic:10 #user:10 project:10 ' \
-                   '#assigned_to:10 ticket_type:10 #workflow_buttons:40 *'
+                   '#assigned_to:10 ticket_type:10 workflow_buttons:40 *'
     params_panel_hidden = True
 
     @classmethod
@@ -616,7 +616,7 @@ class TicketsToTalk(Tickets):
     order_by = ["-priority", "-deadline", "-id"]
     # order_by = ["-id"]
     column_names = "overview:50 priority #deadline waiting_for " \
-                   "#workflow_buttons:40 *"
+                   "workflow_buttons:40 *"
 
     @classmethod
     def param_defaults(self, ar, **kw):
@@ -672,7 +672,7 @@ class MyTickets(My, Tickets):
     """Show all active tickets reported by me."""
     required_roles = dd.login_required()
     order_by = ["-id"]
-    column_names = 'overview:50 *'
+    column_names = 'overview:50 workflow_buttons:30 *'
     params_layout = """
     user end_user site project state
     start_date end_date observed_event topic feasable_by show_active"""
