@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016 Luc Saffre
+# Copyright 2016-2017 Luc Saffre
 #
 # License: BSD (see file COPYING for details)
 """The default :attr:`workflows_module
@@ -21,6 +21,7 @@ block, otherwise we use the more widely supported symbols from
 
 """
 from __future__ import unicode_literals
+import six
 
 from lino.api import dd, _, pgettext
 from django.conf import settings
@@ -165,7 +166,7 @@ add('10', _("Watching"), _("Interest"), 'watching')
 add('20', _("Candidate"), _("Offer"), 'candidate', show_in_todo=True)
 add('30', _("Assigned"), _("Job to do"), 'assigned', show_in_todo=True)
 add('40', _("Done"), _("Job done"), 'done')
-add('50', _("Rated"), _("Job rated"), 'rated')
+# add('50', _("Rated"), _("Job rated"), 'rated')
 add('60', _("Cancelled"), _("Cancelled offer"), 'cancelled')  # Absage
 
 
@@ -181,10 +182,20 @@ add('60', _("Cancelled"), _("Cancelled offer"), 'cancelled')  # Absage
 # VoteStates.tasks_states = 
 
 
-class VoteAction(dd.ChangeStateAction, NotifyingAction):
+# class VoteAction(dd.ChangeStateAction, NotifyingAction):
+class VoteAction(dd.ChangeStateAction):
     
     managed_by_votable_author = False
     msg_template = _("{user} marked {vote} as {state}.")
+    required_votable_states = set([])
+
+    def attach_to_actor(self, *args):
+        if isinstance(self.required_votable_states, six.string_types):
+            fld = dd.plugins.votes.votable_model.workflow_state_field
+            self.required_votable_states = set(
+                [fld.choicelist.get_by_name(x) for x in
+                 self.required_votable_states.split()])
+        return super(VoteAction, self).attach_to_actor(*args)
     
     def get_notify_subject(self, ar, obj):
         subject = _(self.msg_template).format(
@@ -202,6 +213,8 @@ class VoteAction(dd.ChangeStateAction, NotifyingAction):
         yield obj.votable.get_notify_recipients(ar)
 
     def get_action_permission(self, ar, obj, state):
+        if not obj.votable_id:
+            return False
         me = ar.get_user()
         if self.managed_by_votable_author:
             mgr = obj.votable.user
@@ -210,6 +223,8 @@ class VoteAction(dd.ChangeStateAction, NotifyingAction):
         if mgr != me:
             if not me.profile.has_required_roles([Triager]):
                 return False
+        if not obj.votable.state in self.required_votable_states:
+            return False
         return super(VoteAction,
                      self).get_action_permission(ar, obj, state)
 
@@ -218,6 +233,7 @@ class MarkVoteAssigned(VoteAction):
     label = pgettext("verb", "Assign")
     managed_by_votable_author = True
     required_states = 'candidate'
+    required_votable_states = 'new talk opened started ready'
     msg_template = _("{user} assigned {voter} for {ticket}.")
 
 
@@ -226,14 +242,15 @@ class MarkVoteCancelled(VoteAction):
     label = pgettext("verb", "Cancel")
     managed_by_votable_author = True
     required_states = 'candidate assigned'
+    required_votable_states = 'new talk opened started ready'
     msg_template = _("{user} cancelled {vote} for {ticket}.")
 
 
 class MarkVoteDone(VoteAction):
-    
     label = _("Done")
     managed_by_votable_author = False
-    required_states = 'assigned'
+    required_states = 'candidate assigned'
+    required_votable_states = 'new talk opened started ready'
     msg_template = _("{user} confirmed {ticket} {state} by {voter}.")
 
     
@@ -242,28 +259,21 @@ class MarkVoteCandidate(VoteAction):
     label = _("Candidate")
     managed_by_votable_author = False
     msg_template = _("{user} candidates for {ticket}.")
-    required_states = "watching open"
-    
-
-class MarkVoteCandidate(VoteAction):
-    
-    label = _("Candidate")
-    managed_by_votable_author = False
-    msg_template = _("{user} candidates for {ticket}.")
     required_states = "watching"
+    required_votable_states = 'new talk opened'
     
 
-class MarkVoteRated(VoteAction):
-    """Mark this vote as rated."""
-    label = _("Rated")
-    managed_by_votable_author = True
-    required_states = 'assigned done'
+# class MarkVoteRated(VoteAction):
+#     """Mark this vote as rated."""
+#     label = _("Rated")
+#     managed_by_votable_author = True
+#     required_states = 'assigned done'
     
-    def get_action_permission(self, ar, obj, state):
-        if not obj.rating:
-            return False
-        return super(MarkVoteRated,
-                     self).get_action_permission(ar, obj, state)
+#     def get_action_permission(self, ar, obj, state):
+#         if not obj.rating:
+#             return False
+#         return super(MarkVoteRated,
+#                      self).get_action_permission(ar, obj, state)
 
 
 
@@ -272,7 +282,7 @@ VoteStates.watching.add_transition(
 VoteStates.candidate.add_transition(MarkVoteCandidate)
 VoteStates.assigned.add_transition(MarkVoteAssigned)
 VoteStates.done.add_transition(MarkVoteDone)
-VoteStates.rated.add_transition(MarkVoteRated)
+# VoteStates.rated.add_transition(MarkVoteRated)
 VoteStates.cancelled.add_transition(MarkVoteCancelled)
 
 

@@ -301,7 +301,7 @@ class VotesByVotable(Votes):
     """
     label = _("Votes")
     master_key = 'votable'
-    column_names = 'user state priority rating *'
+    column_names = 'user workflow_buttons priority rating *'
 
 # class MyOfferedVotes(MyVotes):
 #     """List of my help offers to other users' requests.
