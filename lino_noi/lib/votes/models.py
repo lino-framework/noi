@@ -144,6 +144,22 @@ dd.update_field(Vote, 'user', verbose_name=_("Voter"))
 
 
 class Votes(dd.Table):
+    """Table parameters:
+
+    .. attribute:: observed_event
+
+    There are two class attributes for defining a filter conditions
+    which canot be removed by the user:
+
+    .. attribute:: filter_vote_states
+
+        A set (or a space-separated string) of VoteStates.
+
+    .. attribute:: filter_ticket_states
+
+        A set (or a space-separated string) of TicketStates.
+
+    """
     model = 'votes.Vote'
     # stay_in_grid = True
     required_roles = dd.required(VotesUser)
@@ -156,6 +172,7 @@ class Votes(dd.Table):
     start_date end_date observed_event"""
 
     params_panel_hidden = True
+    show_detail_navigator = False
     
     detail_layout = dd.FormLayout("""
     state mail_mode
@@ -163,8 +180,6 @@ class Votes(dd.Table):
     rating 
     """, window_size=(40, 'auto'))
 
-    show_detail_navigator = False
-    
     filter_vote_states = set([])
     filter_ticket_states = set([])
 
@@ -270,13 +285,13 @@ class MyTasks(My, Votes):
     filter_vote_states = "assigned done"
     filter_ticket_states = "opened talk"
     
-class MyWatched(My, Votes):    
-    """Show your votes in states watching"""
-    label = _("My watched")
-    column_names = "votable_overview *"
-    order_by = ['-id']
-    filter_vote_states = "watching"
-    # filter_ticket_states = "open talk"
+# class MyWatched(My, Votes):    
+#     """Show your votes in states watching"""
+#     label = _("My watched")
+#     column_names = "votable_overview *"
+#     order_by = ['-id']
+#     filter_vote_states = "watching"
+#     # filter_ticket_states = "open talk"
     
 
 class VotesByVotable(Votes):

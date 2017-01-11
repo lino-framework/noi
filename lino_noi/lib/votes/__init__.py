@@ -42,7 +42,7 @@ class Plugin(ad.Plugin):
         m = m.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('votes.MyOffers')
         m.add_action('votes.MyTasks')
-        m.add_action('votes.MyWatched')
+        # m.add_action('votes.MyWatched')
         m.add_action('votes.MyVotes')
 
     def setup_explorer_menu(self, site, profile, m):

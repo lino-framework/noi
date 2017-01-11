@@ -354,7 +354,8 @@ The main menu
 
 >>> rt.login('robin').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Office : My offers, My tasks, My Excerpts, My Comments, My Notification messages
+- Votes : My offers, My tasks, My votes
+- Office : My Excerpts, My Comments, My Notification messages
 - Pleas : My Pleas, Where I can help, Active pleas, All pleas, Unassigned pleas, Active projects
 - Reports :
   - System : Broken GFKs
@@ -366,8 +367,9 @@ The main menu
   - Faculties : Faculties (tree), Faculties (all)
 - Explorer :
   - System : content types, Authorities, User types, Changes, Notification messages
-  - Pleas : All votes, Vote states, Dependencies, Ticket states
+  - Votes : All votes, Vote states
   - Office : Excerpts, Comments
+  - Pleas : Dependencies, Ticket states
   - Faculties : Competences
 - Site : About
 
@@ -376,7 +378,8 @@ The main menu
 
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Office : My offers, My tasks, My Comments, My Notification messages
+- Votes : My offers, My tasks, My votes
+- Office : My Comments, My Notification messages
 - Pleas : My Pleas, Where I can help
 - Site : About
 
@@ -390,11 +393,12 @@ My pleas
   
 >>> rt.login('christa').show(tickets.MyTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-========================================================================================== ============== ===========================
- Description                                                                                Faculty        Actions
------------------------------------------------------------------------------------------- -------------- ---------------------------
- `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__ by `christa <Detail>`__   Garden works   [☆] **New** → [☎] [☉] [☐]
-========================================================================================== ============== ===========================
++------------------------------------------------------------------------+
+| overview                                                               |
++========================================================================+
+| `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__ |br|  |
+| Plea state: **New** → [☎] [☉] [☐]                                      |
++------------------------------------------------------------------------+
 <BLANKLINE>
 
 
@@ -403,11 +407,12 @@ Where I can help
 
 >>> rt.login('eric').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-==================================================================================== ================ ================
- Description                                                                          Faculty          Actions
------------------------------------------------------------------------------------- ---------------- ----------------
- `#4 (Who can give guitar lessons to my daughter?) <Detail>`__ by `alex <Detail>`__   Guitar lessons   [☆] **Opened**
-==================================================================================== ================ ================
++------------------------------------------------------------------------------------------+----------------+----------------+
+| overview                                                                                 | Faculty        | Actions        |
++==========================================================================================+================+================+
+| `#4 (Who can give guitar lessons to my daughter?) <Detail>`__ by `alex <Detail>`__ |br|  | Guitar lessons | [☆] **Opened** |
+| Plea state: **Opened**                                                                   |                |                |
++------------------------------------------------------------------------------------------+----------------+----------------+
 <BLANKLINE>
 
 
