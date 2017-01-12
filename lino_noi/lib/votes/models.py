@@ -134,9 +134,10 @@ class Vote(UserAuthored, Created):
         if ar is None or self.votable_id is None:
             return ''
         elems = self.votable.get_overview_elems(ar)
-        elems += [E.br(), _("{} state:").format(
-            self._meta.verbose_name), ' ']
-        elems += self.get_workflow_buttons(ar, self.state)
+        # elems += [E.br()]
+        # # elems += [E.br(), _("{} state:").format(
+        # #     self._meta.verbose_name), ' ']
+        # elems += self.get_workflow_buttons(ar)
         return E.div(*elems)
 
 
@@ -263,27 +264,27 @@ class AllVotes(Votes):
 class MyVotes(My, Votes):
     """Show your votes in all states"""
     label = _("My votes")
-    column_names = "votable_overview *"
+    column_names = "votable_overview workflow_buttons *"
     order_by = ['-id']
     
     
     
 class MyOffers(My, Votes):
-    """Show your votes in states watching and candidate"""
+    """Show the tickets for which you are candidate"""
     label = _("My offers")
-    column_names = "votable_overview *"
+    column_names = "votable_overview workflow_buttons *"
     order_by = ['-id']
     filter_vote_states = "candidate"
-    filter_ticket_states = "opened talk"
+    filter_ticket_states = "new talk opened started"
     
 
 class MyTasks(My, Votes):    
     """Show your votes in states assigned and done"""
     label = _("My tasks")
-    column_names = "votable_overview priority *"
-    order_by = ['priority', '-id']
+    column_names = "votable_overview workflow_buttons priority *"
+    order_by = ['-priority', '-id']
     filter_vote_states = "assigned done"
-    filter_ticket_states = "opened talk"
+    filter_ticket_states = "opened started talk"
     
 # class MyWatched(My, Votes):    
 #     """Show your votes in states watching"""
@@ -300,7 +301,7 @@ class VotesByVotable(Votes):
     """
     label = _("Votes")
     master_key = 'votable'
-    column_names = 'user state priority rating *'
+    column_names = 'user workflow_buttons priority rating *'
 
 # class MyOfferedVotes(MyVotes):
 #     """List of my help offers to other users' requests.

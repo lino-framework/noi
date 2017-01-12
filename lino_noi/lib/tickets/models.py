@@ -534,9 +534,14 @@ class Ticket(UserAuthored, mixins.CreatedModified,
     #     return "{0} ({1})".format(self, self.summary)
 
     def __str__(self):
-        if self.nickname:
-            return "#{0} ({1})".format(self.id, self.nickname)
+        # if self.nickname:
+        #     return "#{0} ({1})".format(self.id, self.nickname)
+        if False and self.state.button_text:
+            return "#{0} ({1} {2})".format(
+                self.id, self.state.button_text, self.summary)
+        
         return "#{0} ({1})".format(self.id, self.summary)
+    
 
     @dd.chooser()
     def reported_for_choices(cls, site):
@@ -559,9 +564,12 @@ class Ticket(UserAuthored, mixins.CreatedModified,
             elems += [ _(" by "), ar.obj2html(self.user)]
         if self.end_user_id:
             elems += [' ', _("for"), ' ', ar.obj2html(self.end_user)]
-        elems += [E.br(), _("{} state:").format(
-            self._meta.verbose_name), ' ']
-        elems += self.get_workflow_buttons(ar, self.state)
+        # if ar.actor.model is self.__class__:
+        #     elems += [E.br(), _("{} state:").format(
+        #         self._meta.verbose_name), ' ']
+        #     elems += self.get_workflow_buttons(ar)
+        # else:
+        #     elems += [' (', str(self.state.button_text), ')']
         return elems
 
     # def get_notify_message(self, ar, cw):
