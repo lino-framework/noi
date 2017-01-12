@@ -310,12 +310,12 @@ his job. Dora's vote has been cancelled.
 
 >>> show_votes(1)
 #1 (My faucet is dripping, who can help?)
-======= ============ ========== ========
- Voter   Vote state   Priority   Rating
-------- ------------ ---------- --------
- alex    Done         0
- dora    Cancelled    0
-======= ============ ========== ========
+======= =============== ========== ========
+ Voter   Actions         Priority   Rating
+------- --------------- ---------- --------
+ alex    **Done**        0
+ dora    **Cancelled**   0
+======= =============== ========== ========
 <BLANKLINE>
 
 
@@ -327,11 +327,11 @@ No data to display
 
 >>> show_votes(3)
 #3 (Who can give piano lessons to my son?)
-========= ============ ========== ========
- Voter     Vote state   Priority   Rating
---------- ------------ ---------- --------
- christa   Candidate    0
-========= ============ ========== ========
+========= =============== ========== ========
+ Voter     Actions         Priority   Rating
+--------- --------------- ---------- --------
+ christa   **Candidate**   0
+========= =============== ========== ========
 <BLANKLINE>
 
 >>> show_votes(4)
@@ -340,13 +340,14 @@ No data to display
 
 >>> show_votes(5)
 #5 (Who would play music on my birthday party?)
-========= ============ ========== ========
- Voter     Vote state   Priority   Rating
---------- ------------ ---------- --------
- christa   Candidate    0
- eric      Candidate    0
-========= ============ ========== ========
+========= =============== ========== ========
+ Voter     Actions         Priority   Rating
+--------- --------------- ---------- --------
+ christa   **Candidate**   0
+ eric      **Candidate**   0
+========= =============== ========== ========
 <BLANKLINE>
+
 
 
 The main menu
@@ -393,12 +394,11 @@ My pleas
   
 >>> rt.login('christa').show(tickets.MyTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-+------------------------------------------------------------------------+
-| overview                                                               |
-+========================================================================+
-| `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__ |br|  |
-| Plea state: **New** → [☎] [☉] [☐]                                      |
-+------------------------------------------------------------------------+
+================================================================== ===============================
+ overview                                                           Actions
+------------------------------------------------------------------ -------------------------------
+ `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__   [☆] **New** → [☾] [☎] [☉] [☐]
+================================================================== ===============================
 <BLANKLINE>
 
 
@@ -407,12 +407,11 @@ Where I can help
 
 >>> rt.login('eric').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-+------------------------------------------------------------------------------------------+----------------+----------------+
-| overview                                                                                 | Faculty        | Actions        |
-+==========================================================================================+================+================+
-| `#4 (Who can give guitar lessons to my daughter?) <Detail>`__ by `alex <Detail>`__ |br|  | Guitar lessons | [☆] **Opened** |
-| Plea state: **Opened**                                                                   |                |                |
-+------------------------------------------------------------------------------------------+----------------+----------------+
+==================================================================================== ================ ================
+ overview                                                                             Faculty          Actions
+------------------------------------------------------------------------------------ ---------------- ----------------
+ `#4 (Who can give guitar lessons to my daughter?) <Detail>`__ by `alex <Detail>`__   Guitar lessons   [☆] **Opened**
+==================================================================================== ================ ================
 <BLANKLINE>
 
 

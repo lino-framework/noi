@@ -36,41 +36,21 @@ The demo database contains the following data:
 
 >>> rt.show(tickets.PublicTickets)
 ... #doctest: +REPORT_UDIFF
-+-------------------------------------------------------------+-------------+--------------+----------+
-| overview                                                    | Ticket type | Topic        | Priority |
-+=============================================================+=============+==============+==========+
-| `#111 (Ticket 94) <Detail>`__ by *luc* for *marc* |br|      | Upgrade     | Lino Core    | 100      |
-| Ticket state: **Opened**                                    |             |              |          |
-+-------------------------------------------------------------+-------------+--------------+----------+
-| `#102 (Ticket 85) <Detail>`__ by *luc* for *marc* |br|      | Upgrade     | Lino Voga    | 100      |
-| Ticket state: **Opened**                                    |             |              |          |
-+-------------------------------------------------------------+-------------+--------------+----------+
-| `#93 (Ticket 76) <Detail>`__ by *luc* for *marc* |br|       | Upgrade     | Lino Cosi    | 100      |
-| Ticket state: **Opened**                                    |             |              |          |
-+-------------------------------------------------------------+-------------+--------------+----------+
-| `#75 (Ticket 58) <Detail>`__ by *luc* |br|                  | Upgrade     | Lino Core    | 100      |
-| Ticket state: **Opened**                                    |             |              |          |
-+-------------------------------------------------------------+-------------+--------------+----------+
-| `#66 (Ticket 49) <Detail>`__ by *luc* for *marc* |br|       | Upgrade     | Lino Voga    | 100      |
-| Ticket state: **Opened**                                    |             |              |          |
-+-------------------------------------------------------------+-------------+--------------+----------+
-| `#57 (Ticket 40) <Detail>`__ by *luc* for *marc* |br|       | Upgrade     | Lino Cosi    | 100      |
-| Ticket state: **Opened**                                    |             |              |          |
-+-------------------------------------------------------------+-------------+--------------+----------+
-| `#48 (Ticket 31) <Detail>`__ by *luc* for *marc* |br|       | Upgrade     | Lino Welfare | 100      |
-| Ticket state: **Opened**                                    |             |              |          |
-+-------------------------------------------------------------+-------------+--------------+----------+
-| `#30 (Ticket 13) <Detail>`__ by *luc* |br|                  | Upgrade     | Lino Voga    | 100      |
-| Ticket state: **Opened**                                    |             |              |          |
-+-------------------------------------------------------------+-------------+--------------+----------+
-| `#21 (Ticket 4) <Detail>`__ by *luc* for *marc* |br|        | Upgrade     | Lino Cosi    | 100      |
-| Ticket state: **Opened**                                    |             |              |          |
-+-------------------------------------------------------------+-------------+--------------+----------+
-| `#12 (Foo cannot bar) <Detail>`__ by *luc* for *marc* |br|  | Upgrade     | Lino Welfare | 100      |
-| Ticket state: **Opened**                                    |             |              |          |
-+-------------------------------------------------------------+-------------+--------------+----------+
-| **Total (10 rows)**                                         |             |              | **1000** |
-+-------------------------------------------------------------+-------------+--------------+----------+
+======================================================= ============= ============== ==========
+ overview                                                Ticket type   Topic          Priority
+------------------------------------------------------- ------------- -------------- ----------
+ `#111 (Ticket 94) <Detail>`__ by *luc* for *marc*       Upgrade       Lino Core      100
+ `#102 (Ticket 85) <Detail>`__ by *luc* for *marc*       Upgrade       Lino Voga      100
+ `#93 (Ticket 76) <Detail>`__ by *luc* for *marc*        Upgrade       Lino Cosi      100
+ `#75 (Ticket 58) <Detail>`__ by *luc*                   Upgrade       Lino Core      100
+ `#66 (Ticket 49) <Detail>`__ by *luc* for *marc*        Upgrade       Lino Voga      100
+ `#57 (Ticket 40) <Detail>`__ by *luc* for *marc*        Upgrade       Lino Cosi      100
+ `#48 (Ticket 31) <Detail>`__ by *luc* for *marc*        Upgrade       Lino Welfare   100
+ `#30 (Ticket 13) <Detail>`__ by *luc*                   Upgrade       Lino Voga      100
+ `#21 (Ticket 4) <Detail>`__ by *luc* for *marc*         Upgrade       Lino Cosi      100
+ `#12 (Foo cannot bar) <Detail>`__ by *luc* for *marc*   Upgrade       Lino Welfare   100
+ **Total (10 rows)**                                                                  **1000**
+======================================================= ============= ============== ==========
 <BLANKLINE>
 
 The home page:
