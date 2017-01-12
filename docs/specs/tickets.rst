@@ -342,87 +342,36 @@ My tickets
 
 >>> rt.login('jean').show(tickets.MyTickets)
 ... #doctest: +REPORT_UDIFF
-+-------------------------------------------------------------------------+
-| overview                                                                |
-+=========================================================================+
-| `#112 (Ticket 95) <Detail>`__ for `marc <Detail>`__ |br|                |
-| Ticket state: **Sticky** → [⛶]                                          |
-+-------------------------------------------------------------------------+
-| `#109 (Ticket 92) <Detail>`__ for `marc <Detail>`__ |br|                |
-| Ticket state: **New** → [♾] [☎] [☉] [☐]                                 |
-+-------------------------------------------------------------------------+
-| `#103 (Ticket 86) <Detail>`__ for `marc <Detail>`__ |br|                |
-| Ticket state: **Sticky** → [⛶]                                          |
-+-------------------------------------------------------------------------+
-| `#100 (Ticket 83) <Detail>`__ |br|                                      |
-| Ticket state: **New** → [♾] [☎] [☉] [☐]                                 |
-+-------------------------------------------------------------------------+
-| `#94 (Ticket 77) <Detail>`__ for `marc <Detail>`__ |br|                 |
-| Ticket state: **Sticky** → [⛶]                                          |
-+-------------------------------------------------------------------------+
-| `#91 (Ticket 74) <Detail>`__ for `marc <Detail>`__ |br|                 |
-| Ticket state: **New** → [♾] [☎] [☉] [☐]                                 |
-+-------------------------------------------------------------------------+
-| `#85 (Ticket 68) <Detail>`__ |br|                                       |
-| Ticket state: **Sticky** → [⛶]                                          |
-+-------------------------------------------------------------------------+
-| `#82 (Ticket 65) <Detail>`__ for `marc <Detail>`__ |br|                 |
-| Ticket state: **New** → [♾] [☎] [☉] [☐]                                 |
-+-------------------------------------------------------------------------+
-| `#76 (Ticket 59) <Detail>`__ for `marc <Detail>`__ |br|                 |
-| Ticket state: **Sticky** → [⛶]                                          |
-+-------------------------------------------------------------------------+
-| `#73 (Ticket 56) <Detail>`__ for `marc <Detail>`__ |br|                 |
-| Ticket state: **New** → [♾] [☎] [☉] [☐]                                 |
-+-------------------------------------------------------------------------+
-| `#67 (Ticket 50) <Detail>`__ for `marc <Detail>`__ |br|                 |
-| Ticket state: **Sticky** → [⛶]                                          |
-+-------------------------------------------------------------------------+
-| `#64 (Ticket 47) <Detail>`__ for `marc <Detail>`__ |br|                 |
-| Ticket state: **New** → [♾] [☎] [☉] [☐]                                 |
-+-------------------------------------------------------------------------+
-| `#58 (Ticket 41) <Detail>`__ for `marc <Detail>`__ |br|                 |
-| Ticket state: **Sticky** → [⛶]                                          |
-+-------------------------------------------------------------------------+
-| `#55 (Ticket 38) <Detail>`__ |br|                                       |
-| Ticket state: **New** → [♾] [☎] [☉] [☐]                                 |
-+-------------------------------------------------------------------------+
-| `#49 (Ticket 32) <Detail>`__ for `marc <Detail>`__ |br|                 |
-| Ticket state: **Sticky** → [⛶]                                          |
-+-------------------------------------------------------------------------+
-| `#46 (Ticket 29) <Detail>`__ for `marc <Detail>`__ |br|                 |
-| Ticket state: **New** → [♾] [☎] [☉] [☐]                                 |
-+-------------------------------------------------------------------------+
-| `#40 (Ticket 23) <Detail>`__ |br|                                       |
-| Ticket state: **Sticky** → [⛶]                                          |
-+-------------------------------------------------------------------------+
-| `#37 (Ticket 20) <Detail>`__ for `marc <Detail>`__ |br|                 |
-| Ticket state: **New** → [♾] [☎] [☉] [☐]                                 |
-+-------------------------------------------------------------------------+
-| `#31 (Ticket 14) <Detail>`__ for `marc <Detail>`__ |br|                 |
-| Ticket state: **Sticky** → [⛶]                                          |
-+-------------------------------------------------------------------------+
-| `#28 (Ticket 11) <Detail>`__ for `marc <Detail>`__ |br|                 |
-| Ticket state: **New** → [♾] [☎] [☉] [☐]                                 |
-+-------------------------------------------------------------------------+
-| `#22 (Ticket 5) <Detail>`__ for `marc <Detail>`__ |br|                  |
-| Ticket state: **Sticky** → [⛶]                                          |
-+-------------------------------------------------------------------------+
-| `#19 (Ticket 2) <Detail>`__ for `marc <Detail>`__ |br|                  |
-| Ticket state: **New** → [♾] [☎] [☉] [☐]                                 |
-+-------------------------------------------------------------------------+
-| `#13 (Bar cannot foo) <Detail>`__ for `marc <Detail>`__ |br|            |
-| Ticket state: **Sticky** → [⛶]                                          |
-+-------------------------------------------------------------------------+
-| `#10 (Where can I find a Foo when bazing Bazes?) <Detail>`__ |br|       |
-| Ticket state: **New** → [♾] [☎] [☉] [☐]                                 |
-+-------------------------------------------------------------------------+
-| `#4 (Foo and bar don't baz) <Detail>`__ for `marc <Detail>`__ |br|      |
-| Ticket state: **Sticky** → [⛶]                                          |
-+-------------------------------------------------------------------------+
-| `#1 (Föö fails to bar when baz) <Detail>`__ for `marc <Detail>`__ |br|  |
-| Ticket state: **New** → [♾] [☎] [☉] [☐]                                 |
-+-------------------------------------------------------------------------+
+=================================================================== =======================================
+ overview                                                            Actions
+------------------------------------------------------------------- ---------------------------------------
+ `#112 (Ticket 95) <Detail>`__ for `marc <Detail>`__                 [▶] [☆] **Sticky** → [⛶]
+ `#109 (Ticket 92) <Detail>`__ for `marc <Detail>`__                 [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#103 (Ticket 86) <Detail>`__ for `marc <Detail>`__                 [▶] [☆] **Sticky** → [⛶]
+ `#100 (Ticket 83) <Detail>`__                                       [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#94 (Ticket 77) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **Sticky** → [⛶]
+ `#91 (Ticket 74) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#85 (Ticket 68) <Detail>`__                                        [▶] [☆] **Sticky** → [⛶]
+ `#82 (Ticket 65) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#76 (Ticket 59) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **Sticky** → [⛶]
+ `#73 (Ticket 56) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#67 (Ticket 50) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **Sticky** → [⛶]
+ `#64 (Ticket 47) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#58 (Ticket 41) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **Sticky** → [⛶]
+ `#55 (Ticket 38) <Detail>`__                                        [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#49 (Ticket 32) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **Sticky** → [⛶]
+ `#46 (Ticket 29) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#40 (Ticket 23) <Detail>`__                                        [▶] [☆] **Sticky** → [⛶]
+ `#37 (Ticket 20) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#31 (Ticket 14) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **Sticky** → [⛶]
+ `#28 (Ticket 11) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#22 (Ticket 5) <Detail>`__ for `marc <Detail>`__                   [▶] [☆] **Sticky** → [⛶]
+ `#19 (Ticket 2) <Detail>`__ for `marc <Detail>`__                   [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#13 (Bar cannot foo) <Detail>`__ for `marc <Detail>`__             [▶] [☆] **Sticky** → [⛶]
+ `#10 (Where can I find a Foo when bazing Bazes?) <Detail>`__        [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#4 (Foo and bar don't baz) <Detail>`__ for `marc <Detail>`__       [▶] [☆] **Sticky** → [⛶]
+ `#1 (Föö fails to bar when baz) <Detail>`__ for `marc <Detail>`__   [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
+=================================================================== =======================================
 <BLANKLINE>
 
 

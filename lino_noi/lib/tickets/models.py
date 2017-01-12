@@ -612,20 +612,37 @@ dd.inject_field(
 def setup_memo_commands(sender=None, **kwargs):
 
     """See :doc:`/specs/memo`."""
+
+    Ticket = sender.site.models.tickets.Ticket
     
     def ticket2html(parser, s):
+        args = s.split(None, 1)
+        if len(args) == 1:
+            pk = s
+            txt = None
+        else:
+            pk = args[0]
+            txt = args[1]
+            
         ar = parser.context['ar']
+        kw = dict()
         # dd.logger.info("20161019 %s", ar.renderer)
-        pk = int(s)
-        obj = sender.site.models.tickets.Ticket.objects.get(pk=pk)
-        text = "#{0}".format(obj.id)
-        e = ar.obj2html(obj, text, title=obj.summary)
+        pk = int(pk)
+        obj = Ticket.objects.get(pk=pk)
+        if txt is None:
+            txt = "#{0}".format(obj.id)
+            kw.update(title=obj.summary)
+        e = ar.obj2html(obj, txt, **kw)
         return E.tostring(e)
         # url = rnd.get_detail_url(obj)
         # title = obj.summary
         # return '<a href="{0}" title="{2}">{1}</a>'.format(url, text, title)
 
     sender.memo_parser.register_command('ticket', ticket2html)
+
+    def ticket2memo(obj):
+        return "[ticket {} {}]".format(obj.id, obj)
+    sender.memo_parser.register_renderer(Ticket, ticket2memo)
 
 
     def py2html(parser, s):
