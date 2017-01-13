@@ -8,7 +8,7 @@ from lino_noi.lib.tickets.models import Ticket
 
 class Renderer(Renderer):
     
-    def instance_handler(self, ar, obj, **kw):
+    def obj2url(self, ar, obj, **kw):
         return self.get_detail_url(obj, **kw)
             
     def get_detail_url(self, obj, *args, **kw):
