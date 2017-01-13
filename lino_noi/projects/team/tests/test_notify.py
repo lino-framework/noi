@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Luc Saffre
+# Copyright 2016-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """Runs some tests about the notification framework.
@@ -24,20 +24,16 @@ import datetime
 from mock import patch
 
 from django.conf import settings
-from django.core.exceptions import ValidationError
 from django.utils.timezone import make_aware
 
-from lino import AFTER18
 from lino.api import rt
 from lino.utils.djangotest import TestCase
-from lino.utils import i2d
 from lino.core import constants
 
 from lino.modlib.users.choicelists import UserTypes
 
 from lino.utils.instantiator import create
 
-from lino.modlib.notify.models import send_pending_emails_daily
 from lino.modlib.notify.models import send_pending_emails_often
 from lino.modlib.notify.choicelists import MailModes
 
@@ -67,7 +63,6 @@ class TestCase(TestCase):
         self.assertEqual(settings.SERVER_EMAIL, 'root@localhost')
         
     @patch('lino.api.dd.logger')
-    # @patch('settings.SITE')
     def test_comment(self, logger):
         """Test what happens when a comment is posted on a ticket with
         watchers.
@@ -111,7 +106,7 @@ class TestCase(TestCase):
         self.assertEqual(msg.seen, None)
         self.assertEqual(msg.user, aline)
         self.assertEqual(msg.body, """\
-robin commented on #1 (Save the world): I don't agree.""")
+robin commented on [ticket 1] (Save the world): I don't agree.""")
         
         # manually set created timestamp so we can test on it later.
         now = datetime.datetime(2016, 12, 22, 19, 45, 55)
@@ -138,7 +133,7 @@ You have 1 unseen notifications
 
 <div>
 <H3>22/12/2016 19:45</H3>
-robin commented on #1 (Save the world): I don't agree.
+robin commented on <a href="Detail" title="Save the world">#1</a> (Save the world): I don't agree.
 </div>
 
 <body>

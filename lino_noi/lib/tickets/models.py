@@ -641,7 +641,7 @@ def setup_memo_commands(sender=None, **kwargs):
     sender.memo_parser.register_command('ticket', ticket2html)
 
     def ticket2memo(obj):
-        return "[ticket {} {}]".format(obj.id, obj)
+        return "[ticket {}] ({})".format(obj.id, obj.summary)
     sender.memo_parser.register_renderer(Ticket, ticket2memo)
 
 
