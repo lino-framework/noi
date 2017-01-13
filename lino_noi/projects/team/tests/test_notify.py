@@ -128,12 +128,12 @@ To: aline@example.com
 Subject: [Django] 1 notifications
 
 <body>
-Dear aline,
+Hi aline,
 You have 1 unseen notifications
 
 <div>
 <H3>22/12/2016 19:45</H3>
-robin commented on <a href="Detail" title="Save the world">#1</a> (Save the world): I don't agree.
+robin commented on <a href="http://127.0.0.1:8000/api/tickets/Tickets/1" title="Save the world">#1</a> (Save the world): I don't agree.
 </div>
 
 <body>

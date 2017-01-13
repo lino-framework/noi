@@ -27,7 +27,6 @@ class Site(Site):
     version = SETUP_INFO['version']
 
     url = "http://noi.lino-framework.org/"
-    server_url = "http://team.lino-framework.org/"
 
     demo_fixtures = ['std', 'demo', 'demo2']
                      # 'linotickets',

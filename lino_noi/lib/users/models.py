@@ -152,7 +152,9 @@ class User(User, Contactable, AddressLocation, Addressable):
         if a is not None:
             return a
         if self.callme_mode:
-            return rt.actors.users.OtherUsers.detail_action
+            a = rt.actors.users.OtherUsers.detail_action
+        if a.get_view_permission(ar.get_user().profile):
+            return a
         
     @dd.htmlbox(_("About me"))
     def about_me(self, ar):

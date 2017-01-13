@@ -93,7 +93,7 @@ like this:
 
 >>> ses = rt.login(renderer=dd.plugins.bootstrap3.renderer)
 >>> print(ses.parse_memo("See [ticket 1]."))
-See <a href="/bs3/tickets/Ticket/1" title="F&#246;&#246; fails to bar when baz">#1</a>.
+See <a href="/bs3/tickets/Tickets/1" title="F&#246;&#246; fails to bar when baz">#1</a>.
 
 Or the plain text renderer will render:
 
