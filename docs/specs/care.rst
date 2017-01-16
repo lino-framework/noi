@@ -149,11 +149,11 @@ them:
 ========== =============== ============ ===========
  Username   User type       First name   Last name
 ---------- --------------- ------------ -----------
- alex       User
- berta      User
- christa    User
- dora
- eric       Connector
+ alex       User            Alex
+ berta      User            Berta
+ christa    User            Christa
+ dora                       Dora
+ eric       Connector       Eric
  robin      Administrator   Robin        Rood
  rolf       Administrator   Rolf         Rompen
  romain     Administrator   Romain       Raffault
@@ -234,14 +234,14 @@ will not bother you with requests for which you aren't competent.
 ==== ========= ================ ==========
  ID   User      Faculty          Affinity
 ---- --------- ---------------- ----------
- 1    alex      Translations     100
- 2    berta     Translations     100
- 3    alex      Garden works     100
- 4    alex      Repair works     100
- 5    christa   Piano lessons    100
- 6    dora      Repair works     100
- 7    eric      Guitar lessons   100
- 8    dora      Shopping         100
+ 1    Alex      Translations     100
+ 2    Berta     Translations     100
+ 3    Alex      Garden works     100
+ 4    Alex      Repair works     100
+ 5    Christa   Piano lessons    100
+ 6    Dora      Repair works     100
+ 7    Eric      Guitar lessons   100
+ 8    Dora      Shopping         100
                                  **800**
 ==== ========= ================ ==========
 <BLANKLINE>
@@ -285,14 +285,14 @@ False
 ==== ========================================================================= ========= ================ ============== =========
  ID   Summary                                                                   Author    Faculty          Actions        Project
 ---- ------------------------------------------------------------------------- --------- ---------------- -------------- ---------
- 8    Who would buy diapers for me in Aachen?                                   alex      Shopping         **Closed**
- 7    Who can review my final work?                                             eric                       **Ready**
- 6    Who helps my sont to prepare for a maths test on May 21? (5. grade PDS)   berta     Maths lessons    **Sleeping**
- 5    Who would play music on my birthday party?                                alex      Music            **Started**
- 4    Who can give guitar lessons to my daughter?                               alex      Guitar lessons   **Opened**
- 3    Who can give piano lessons to my son?                                     eric      Piano lessons    **Talk**
- 2    My lawn needs mowing. On Thursday or Saturday.                            christa   Garden works     **New**
- 1    My faucet is dripping, who can help?                                      berta     Repair works     **Closed**
+ 8    Who would buy diapers for me in Aachen?                                   Alex      Shopping         **Ready**
+ 7    Who can review my final work?                                             Eric                       **Sleeping**
+ 6    Who helps my sont to prepare for a maths test on May 21? (5. grade PDS)   Berta     Maths lessons    **Started**
+ 5    Who would play music on my birthday party?                                Alex      Music            **Opened**
+ 4    Who can give guitar lessons to my daughter?                               Alex      Guitar lessons   **Opened**
+ 3    Who can give piano lessons to my son?                                     Eric      Piano lessons    **Talk**
+ 2    My lawn needs mowing. On Thursday or Saturday.                            Christa   Garden works     **New**
+ 1    My faucet is dripping, who can help?                                      Berta     Repair works     **Closed**
 ==== ========================================================================= ========= ================ ============== =========
 <BLANKLINE>
 
@@ -310,42 +310,56 @@ his job. Dora's vote has been cancelled.
 
 >>> show_votes(1)
 #1 (My faucet is dripping, who can help?)
-======= =============== ========== ========
- Voter   Actions         Priority   Rating
-------- --------------- ---------- --------
- alex    **Done**        0
- dora    **Cancelled**   0
-======= =============== ========== ========
+======= ===============
+ Voter   Actions
+------- ---------------
+ Berta   **Author**
+ Alex    **Done**
+ Dora    **Cancelled**
+======= ===============
 <BLANKLINE>
 
 
-Ticket #2 has not yet any vote:
+Ticket #2 has not yet any vote except that of the author:
 
 >>> show_votes(2)
 #2 (My lawn needs mowing. On Thursday or Saturday.)
-No data to display
+========= ============
+ Voter     Actions
+--------- ------------
+ Christa   **Author**
+========= ============
+<BLANKLINE>
 
 >>> show_votes(3)
 #3 (Who can give piano lessons to my son?)
-========= =============== ========== ========
- Voter     Actions         Priority   Rating
---------- --------------- ---------- --------
- christa   **Candidate**   0
-========= =============== ========== ========
+========= ===============
+ Voter     Actions
+--------- ---------------
+ Eric      **Author**
+ Dora      **Author**
+ Christa   **Candidate**
+========= ===============
 <BLANKLINE>
 
 >>> show_votes(4)
 #4 (Who can give guitar lessons to my daughter?)
-No data to display
+======= ============
+ Voter   Actions
+------- ------------
+ Alex    **Author**
+======= ============
+<BLANKLINE>
 
 >>> show_votes(5)
 #5 (Who would play music on my birthday party?)
-========= =============== ========== ========
- Voter     Actions         Priority   Rating
---------- --------------- ---------- --------
- christa   **Candidate**   0
- eric      **Candidate**   0
-========= =============== ========== ========
+========= ===============
+ Voter     Actions
+--------- ---------------
+ Alex      **Author**
+ Christa   **Candidate**
+ Eric      **Candidate**
+========= ===============
 <BLANKLINE>
 
 
@@ -355,7 +369,7 @@ The main menu
 
 >>> rt.login('robin').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Votes : My offers, My tasks, My votes
+- Votes : My candidatures, My tasks, My watchlist, My votes
 - Office : My Excerpts, My Comments, My Notification messages
 - Pleas : My Pleas, Where I can help, Active pleas, All pleas, Unassigned pleas, Active projects
 - Reports :
@@ -379,7 +393,7 @@ The main menu
 
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Votes : My offers, My tasks, My votes
+- Votes : My candidatures, My tasks, My watchlist, My votes
 - Office : My Comments, My Notification messages
 - Pleas : My Pleas, Where I can help
 - Site : About
@@ -395,11 +409,12 @@ My pleas
 >>> rt.login('christa').show(tickets.MyTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ================================================================== ===============================
- overview                                                           Actions
+ Description                                                        Actions
 ------------------------------------------------------------------ -------------------------------
- `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__   [☆] **New** → [☾] [☎] [☉] [☐]
+ `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__   [★] **New** → [☾] [☎] [☉] [☐]
 ================================================================== ===============================
 <BLANKLINE>
+
 
 
 Where I can help
@@ -408,9 +423,9 @@ Where I can help
 >>> rt.login('eric').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ==================================================================================== ================ ================
- overview                                                                             Faculty          Actions
+ Description                                                                          Faculty          Actions
 ------------------------------------------------------------------------------------ ---------------- ----------------
- `#4 (Who can give guitar lessons to my daughter?) <Detail>`__ by `alex <Detail>`__   Guitar lessons   [☆] **Opened**
+ `#4 (Who can give guitar lessons to my daughter?) <Detail>`__ by `Alex <Detail>`__   Guitar lessons   [☆] **Opened**
 ==================================================================================== ================ ================
 <BLANKLINE>
 
@@ -447,14 +462,15 @@ the detail window of a ticket.
       - (general1_1): **Summary** (summary), **ID** (id), **Deadline** (deadline)
       - (general1_2): **Author** (user), **End user** (end_user), **Faculty** (faculty)
       - (general1_3): **Site** (site), **Actions** (workflow_buttons)
-    - **Assignable workers** (faculties.AssignableWorkersByTicket) [visible for connector admin]
+    - **Votes** (votes.VotesByVotable) [visible for user connector admin]
   - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user connector admin]
 - **History** (changes.ChangesByMaster) [visible for connector admin]
-- **Votes** (votes.VotesByVotable) [visible for user connector admin]
 - **More** (more) [visible for connector admin]:
-  - (more1) [visible for all]:
-    - (more1_1): **Created** (created), **Modified** (modified), **Ticket type** (ticket_type)
-    - (more1_2): **State** (state), **Priority** (priority), **Project** (project)
+  - (more_1) [visible for all]:
+    - (more1):
+      - (more1_1): **Created** (created), **Modified** (modified), **Ticket type** (ticket_type)
+      - (more1_2): **State** (state), **Priority** (priority), **Project** (project)
+    - **Assignable workers** (faculties.AssignableWorkersByTicket) [visible for connector admin]
   - (more_2) [visible for all]: **Solution** (upgrade_notes), **Dependencies** (LinksByTicket) [visible for connector admin]
 <BLANKLINE>
 

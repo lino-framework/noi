@@ -25,9 +25,9 @@ class VoteState(dd.State):
         Translatable text. How a vote is called when in this state.
 
     """
-    def __init__(self, value, text, vote_name, name=None, **kwargs):
-        super(VoteState, self).__init__(value, text, name)
-        self.vote_name = vote_name
+    # def __init__(self, value, text, vote_name, name=None, **kwargs):
+    #     super(VoteState, self).__init__(value, text, name)
+    #     self.vote_name = vote_name
 
 
 class VoteStates(dd.Workflow):
@@ -39,7 +39,7 @@ class VoteStates(dd.Workflow):
 
     """
     required_roles = dd.required(VotesStaff)
-    verbose_name = _("Vote state")
+    # verbose_name = _("Vote state")
     verbose_name_plural = _("Vote states")
     item_class = VoteState
     # max_length = 3

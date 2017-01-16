@@ -1,71 +1,16 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016 Luc Saffre
+# Copyright 2016-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """Model mixins for this plugin.
 """
 
-from django.db import models
-from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
-
-from lino.api import dd, rt
-from lino.utils.xmlgen.html import E, lines2p
+from lino.api import dd, rt, _
 from lino.utils.instantiator import create_row
 from lino.modlib.notify.mixins import ChangeObservable
+from .choicelists import VoteStates
 from .roles import SimpleVotesUser
-
-
-class CreateVote(dd.Action):
-    """Define your vote about this object.
-
-    visible only when you don't yet have a vote on this
-    object. Clicking it will create a default vote object and show
-    that object in a detail window.
-
-    """
-    sort_index = 100
-    button_text  = u"☆"  # 2606
-    show_in_workflow = True
-    show_in_bbar = False
-    required_roles = dd.required(SimpleVotesUser)
-
-    def get_action_permission(self, ar, obj, state):
-        if not super(CreateVote, self).get_action_permission(ar, obj, state):
-            return False
-        vote = obj.get_favourite(ar.get_user())
-        return vote is None
-
-    def run_from_ui(self, ar, **kw):
-        obj = ar.selected_rows[0]
-        Vote = rt.models.votes.Vote
-        vote = Vote(votable=obj, user=ar.get_user())
-        vote.full_clean()
-        vote.save()
-        ar.goto_instance(vote)
-
-
-class EditVote(dd.Action):
-    """Edit your vote about this object.
-    """
-    sort_index = 100
-    button_text = u"★"  # 2605
-
-    show_in_workflow = True
-    show_in_bbar = False
-
-    def get_action_permission(self, ar, obj, state):
-        if not super(EditVote, self).get_action_permission(ar, obj, state):
-            return False
-        vote = obj.get_favourite(ar.get_user())
-        return vote is not None
-
-    def run_from_ui(self, ar, **kw):
-        obj = ar.selected_rows[0]
-        vote = obj.get_favourite(ar.get_user())
-        ar.goto_instance(vote)
-
-
+from .actions import CreateVote, EditVote, VotableEditVote
 
 class Votable(ChangeObservable):
     """Base class for models that can be used as
@@ -76,24 +21,7 @@ class Votable(ChangeObservable):
         abstract = True
 
     create_vote = CreateVote()
-    edit_vote = EditVote()
-
-    # @dd.displayfield(_("Description"))
-    # def overview(self, ar):
-    #     if ar is None:
-    #         return ''
-    #     return self.get_overview(ar)
-        
-    #     # return ar.obj2html(self, "#{0}".self.id)
-    #     # return ar.obj2html(self)
-    #     # return E.span(ar.obj2html(self), ' ', self.summary)
-
-    # def get_overview(self, ar):
-    #     """Return a user-friendly HTML description of this votable.
-
-    #     Subclasses should extend the default implementation.
-    #     """
-    #     return ar.obj2html(self)
+    edit_vote = VotableEditVote()
 
     def get_vote_raters(self):
         """Yield or return a list of the users who are allowed to rate the
@@ -131,8 +59,8 @@ vote exists.
             for user in self.get_vote_raters():
                 vote = self.get_favourite(user)
                 if vote is None:
-                    create_row(rt.models.votes.Vote,
-                               user=user, votable=self,
-                               state=rt.actors.votes.VoteStates.watching)
+                    create_row(
+                        rt.models.votes.Vote, user=user, votable=self,
+                        state=VoteStates.author)
 
         super(Votable, self).after_ui_save(ar, cw)

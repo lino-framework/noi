@@ -1,21 +1,24 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016 Luc Saffre
+# Copyright 2016-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 from __future__ import unicode_literals
 
 from lino.api import rt, _
 from lino.utils.cycler import Cycler
+from lino.utils.instantiator import create_row
 from lino_noi.lib.tickets.choicelists import TicketStates
 
 from lino.api.dd import str2kw
 from lino.api import dd
+from lino.utils import camelize
 
 TICKET_STATES = Cycler(TicketStates.objects())
 
 
 def user(username, user_type=None, **kw):
     kw.update(username=username, profile=user_type)
+    kw.update(first_name=camelize(username.upper()))
     return rt.modules.users.User(**kw)
 
 
@@ -35,15 +38,18 @@ def Topic(name, **kw):
     return rt.modules.topics.Topic(**kw)
 
 
-def ticket(user, summary, en, **kw):
-    u = rt.models.users.User.objects.get(username=user)
+def ticket(username, summary, en, **kw):
+    ar = rt.login(username)
+    u = ar.get_user() # rt.models.users.User.objects.get(username=user)
     if en and u.language != 'de':
         summary = en
     kw.update(summary=summary, user=u)
     # if no manual state is specified, take a random one:
     if not 'state' in kw:
         kw.update(state=TICKET_STATES.pop())
-    return rt.models.tickets.Ticket(**kw)
+    t = create_row(rt.models.tickets.Ticket, **kw)
+    t.after_ui_save(ar, None)  # create author's vote
+    return t
 
 
 def competence(user, faculty, **kw):
@@ -149,6 +155,18 @@ def objects():
     yield traduire
     yield faculty("Briefe schreiben", "Écrire des lettres",
                   "Write letters")
+    
+
+    yield competence('alex', traduire)
+    yield competence('berta', traduire)
+    # yield competence('berta', traduire, topic=de)
+    yield competence('alex', garden)
+    yield competence('alex', repair)
+    yield competence('christa', piano)
+    yield competence('dora', repair)
+    yield competence('eric', guitar)
+    yield competence('dora', commissions)
+
 
     yield ticket(  #1
         "berta",
@@ -156,6 +174,9 @@ def objects():
         "My faucet is dripping, who can help?",
         state=TicketStates.closed,
         faculty=repair)
+    yield vote('alex', 1, 'done')
+    yield vote('dora', 1, 'cancelled')
+    
     yield ticket(  #2
         "christa",
         "Mein Rasen muss gemäht werden. Donnerstags oder Samstags",
@@ -166,17 +187,25 @@ def objects():
         "Wer kann meinem Sohn Klavierunterricht geben?",
         "Who can give piano lessons to my son?",
         faculty=piano, end_user=dora)
+    
+    yield vote('christa', 3, 'candidate')
+    
     yield ticket(  #4
         "alex",
         "Wer kann meiner Tochter Gitarreunterricht geben?",
         "Who can give guitar lessons to my daughter?",
         faculty=guitar)
+    
     yield ticket(  #5
         "alex",
         "Wer macht Musik auf meinem Geburtstag?",
         "Who would play music on my birthday party?",
         deadline=dd.demo_date(-20),
+        state=TicketStates.opened,
         faculty=music)
+    yield vote('christa', 5, 'candidate')
+    yield vote('eric', 5, 'candidate')
+    
     yield ticket(
         "berta",
         "Wer hilft meinem Sohn sich auf die Mathearbeit am "
@@ -201,20 +230,4 @@ def objects():
         description="Ich darf selber nicht über die Grenze.",
         faculty=commissions)
 
-    yield competence('alex', traduire)
-    yield competence('berta', traduire)
-    # yield competence('berta', traduire, topic=de)
-    yield competence('alex', garden)
-    yield competence('alex', repair)
-    yield competence('christa', piano)
-    yield competence('dora', repair)
-    yield competence('eric', guitar)
-    yield competence('dora', commissions)
-
-    yield vote('alex', 1, 'done')
-    yield vote('dora', 1, 'cancelled')
-    yield vote('christa', 3, 'candidate')
-    
-    yield vote('christa', 5, 'candidate')
-    yield vote('eric', 5, 'candidate')
     yield vote('dora', 8, 'assigned')

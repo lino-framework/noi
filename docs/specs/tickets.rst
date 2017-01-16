@@ -343,7 +343,7 @@ My tickets
 >>> rt.login('jean').show(tickets.MyTickets)
 ... #doctest: +REPORT_UDIFF
 =================================================================== =======================================
- overview                                                            Actions
+ Description                                                         Actions
 ------------------------------------------------------------------- ---------------------------------------
  `#112 (Ticket 95) <Detail>`__ for `marc <Detail>`__                 [▶] [☆] **Sticky** → [⛶]
  `#109 (Ticket 92) <Detail>`__ for `marc <Detail>`__                 [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]

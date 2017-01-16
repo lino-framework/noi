@@ -44,7 +44,7 @@ The demo database contains the following "public" tickets:
 >>> rt.show(tickets.PublicTickets)
 ... #doctest: -REPORT_UDIFF
 ======================================================= ============= ============== ==========
- overview                                                Ticket type   Topic          Priority
+ Description                                             Ticket type   Topic          Priority
 ------------------------------------------------------- ------------- -------------- ----------
  `#111 (Ticket 94) <Detail>`__ by *luc* for *marc*       Upgrade       Lino Core      100
  `#102 (Ticket 85) <Detail>`__ by *luc* for *marc*       Upgrade       Lino Voga      100

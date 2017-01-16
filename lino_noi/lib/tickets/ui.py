@@ -56,7 +56,7 @@ class TicketTypes(dd.Table):
     """
 
 
-class ProjectDetail(dd.FormLayout):
+class ProjectDetail(dd.DetailLayout):
     main = "general #tickets history"
 
     general = dd.Panel("""
@@ -164,7 +164,7 @@ class Links(dd.Table):
     model = 'tickets.Link'
     required_roles = dd.required(dd.SiteStaff)
     stay_in_grid = True
-    detail_layout = dd.FormLayout("""
+    detail_layout = dd.DetailLayout("""
     parent
     type
     child
