@@ -266,7 +266,7 @@ class MarkVoteCandidate(VoteAction):
 class MarkVoteAssigned(VoteAction):
     label = pgettext("verb", "Assign")
     managed_by_votable_author = True
-    required_states = 'candidate'
+    required_states = 'watching candidate'
     required_votable_states = 'new talk opened started ready'
     #msg_template = _("{user} assigned {voter} for {ticket}.")
     confirmation_msg_template = _("Assign {voter} for {ticket}.")
