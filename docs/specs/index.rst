@@ -42,5 +42,4 @@ The Lino Care variant
    :glob:
   
    care
-   care_de
    

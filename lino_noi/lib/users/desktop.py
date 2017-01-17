@@ -110,7 +110,7 @@ class RegisterUserLayout(dd.InsertLayout):
     """
 
 
-class RegisterUser(actions.InsertRow):
+class RegisterUser(actions.ShowInsert):
     """Fill a form in order to register as a new system user.
 
     """

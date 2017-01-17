@@ -1,4 +1,4 @@
-# Copyright 2016 Luc Saffre
+# Copyright 2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """Adds voting functionality.
@@ -8,6 +8,7 @@
 
     choicelists
     models
+    actions
     mixins
     fixtures.demo2
 
@@ -42,7 +43,7 @@ class Plugin(ad.Plugin):
         m = m.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('votes.MyOffers')
         m.add_action('votes.MyTasks')
-        # m.add_action('votes.MyWatched')
+        m.add_action('votes.MyWatched')
         m.add_action('votes.MyVotes')
 
     def setup_explorer_menu(self, site, profile, m):
@@ -56,3 +57,4 @@ class Plugin(ad.Plugin):
         if user.authenticated:
             yield self.site.actors.votes.MyOffers
             yield self.site.actors.votes.MyTasks
+            yield self.site.actors.votes.MyWatched

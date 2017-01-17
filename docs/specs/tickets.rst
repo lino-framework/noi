@@ -196,26 +196,26 @@ without project:
 ===== ======================= =========
  ID    Summary                 Project
 ----- ----------------------- ---------
- 114   Ticket 97               téam
- 109   Ticket 92               téam
- 104   Ticket 87               téam
- 99    Ticket 82               téam
- 94    Ticket 77               téam
- 89    Ticket 72               téam
- 84    Ticket 67               téam
- 79    Ticket 62               téam
- 74    Ticket 57               téam
- 69    Ticket 52               téam
- 64    Ticket 47               téam
- 59    Ticket 42               téam
- 54    Ticket 37               téam
- 49    Ticket 32               téam
- 44    Ticket 27               téam
- 39    Ticket 22               téam
- 34    Ticket 17               téam
- 29    Ticket 12               téam
- 24    Ticket 7                téam
- 19    Ticket 2                téam
+ 114   Ticket 114              téam
+ 109   Ticket 109              téam
+ 104   Ticket 104              téam
+ 99    Ticket 99               téam
+ 94    Ticket 94               téam
+ 89    Ticket 89               téam
+ 84    Ticket 84               téam
+ 79    Ticket 79               téam
+ 74    Ticket 74               téam
+ 69    Ticket 69               téam
+ 64    Ticket 64               téam
+ 59    Ticket 59               téam
+ 54    Ticket 54               téam
+ 49    Ticket 49               téam
+ 44    Ticket 44               téam
+ 39    Ticket 39               téam
+ 34    Ticket 34               téam
+ 29    Ticket 29               téam
+ 24    Ticket 24               téam
+ 19    Ticket 19               téam
  14    Bar cannot baz          téam
  9     Foo never matches Bar   téam
  5     Cannot create Foo
@@ -234,86 +234,86 @@ And these are the public tickets:
 ===== =========================================== ==========
  ID    Summary                                     Project
 ----- ------------------------------------------- ----------
- 116   Ticket 99                                   research
- 115   Ticket 98                                   docs
- 113   Ticket 96                                   linö
- 112   Ticket 95                                   shop
- 111   Ticket 94                                   research
- 110   Ticket 93                                   docs
- 108   Ticket 91                                   linö
- 107   Ticket 90                                   shop
- 106   Ticket 89                                   research
- 105   Ticket 88                                   docs
- 103   Ticket 86                                   linö
- 102   Ticket 85                                   shop
- 101   Ticket 84                                   research
- 100   Ticket 83                                   docs
- 98    Ticket 81                                   linö
- 97    Ticket 80                                   shop
- 96    Ticket 79                                   research
- 95    Ticket 78                                   docs
- 93    Ticket 76                                   linö
- 92    Ticket 75                                   shop
- 91    Ticket 74                                   research
- 90    Ticket 73                                   docs
- 88    Ticket 71                                   linö
- 87    Ticket 70                                   shop
- 86    Ticket 69                                   research
- 85    Ticket 68                                   docs
- 83    Ticket 66                                   linö
- 82    Ticket 65                                   shop
- 81    Ticket 64                                   research
- 80    Ticket 63                                   docs
- 78    Ticket 61                                   linö
- 77    Ticket 60                                   shop
- 76    Ticket 59                                   research
- 75    Ticket 58                                   docs
- 73    Ticket 56                                   linö
- 72    Ticket 55                                   shop
- 71    Ticket 54                                   research
- 70    Ticket 53                                   docs
- 68    Ticket 51                                   linö
- 67    Ticket 50                                   shop
- 66    Ticket 49                                   research
- 65    Ticket 48                                   docs
- 63    Ticket 46                                   linö
- 62    Ticket 45                                   shop
- 61    Ticket 44                                   research
- 60    Ticket 43                                   docs
- 58    Ticket 41                                   linö
- 57    Ticket 40                                   shop
- 56    Ticket 39                                   research
- 55    Ticket 38                                   docs
- 53    Ticket 36                                   linö
- 52    Ticket 35                                   shop
- 51    Ticket 34                                   research
- 50    Ticket 33                                   docs
- 48    Ticket 31                                   linö
- 47    Ticket 30                                   shop
- 46    Ticket 29                                   research
- 45    Ticket 28                                   docs
- 43    Ticket 26                                   linö
- 42    Ticket 25                                   shop
- 41    Ticket 24                                   research
- 40    Ticket 23                                   docs
- 38    Ticket 21                                   linö
- 37    Ticket 20                                   shop
- 36    Ticket 19                                   research
- 35    Ticket 18                                   docs
- 33    Ticket 16                                   linö
- 32    Ticket 15                                   shop
- 31    Ticket 14                                   research
- 30    Ticket 13                                   docs
- 28    Ticket 11                                   linö
- 27    Ticket 10                                   shop
- 26    Ticket 9                                    research
- 25    Ticket 8                                    docs
- 23    Ticket 6                                    linö
- 22    Ticket 5                                    shop
- 21    Ticket 4                                    research
- 20    Ticket 3                                    docs
- 18    Ticket 1                                    linö
- 17    Ticket 0                                    shop
+ 116   Ticket 116                                  research
+ 115   Ticket 115                                  docs
+ 113   Ticket 113                                  linö
+ 112   Ticket 112                                  shop
+ 111   Ticket 111                                  research
+ 110   Ticket 110                                  docs
+ 108   Ticket 108                                  linö
+ 107   Ticket 107                                  shop
+ 106   Ticket 106                                  research
+ 105   Ticket 105                                  docs
+ 103   Ticket 103                                  linö
+ 102   Ticket 102                                  shop
+ 101   Ticket 101                                  research
+ 100   Ticket 100                                  docs
+ 98    Ticket 98                                   linö
+ 97    Ticket 97                                   shop
+ 96    Ticket 96                                   research
+ 95    Ticket 95                                   docs
+ 93    Ticket 93                                   linö
+ 92    Ticket 92                                   shop
+ 91    Ticket 91                                   research
+ 90    Ticket 90                                   docs
+ 88    Ticket 88                                   linö
+ 87    Ticket 87                                   shop
+ 86    Ticket 86                                   research
+ 85    Ticket 85                                   docs
+ 83    Ticket 83                                   linö
+ 82    Ticket 82                                   shop
+ 81    Ticket 81                                   research
+ 80    Ticket 80                                   docs
+ 78    Ticket 78                                   linö
+ 77    Ticket 77                                   shop
+ 76    Ticket 76                                   research
+ 75    Ticket 75                                   docs
+ 73    Ticket 73                                   linö
+ 72    Ticket 72                                   shop
+ 71    Ticket 71                                   research
+ 70    Ticket 70                                   docs
+ 68    Ticket 68                                   linö
+ 67    Ticket 67                                   shop
+ 66    Ticket 66                                   research
+ 65    Ticket 65                                   docs
+ 63    Ticket 63                                   linö
+ 62    Ticket 62                                   shop
+ 61    Ticket 61                                   research
+ 60    Ticket 60                                   docs
+ 58    Ticket 58                                   linö
+ 57    Ticket 57                                   shop
+ 56    Ticket 56                                   research
+ 55    Ticket 55                                   docs
+ 53    Ticket 53                                   linö
+ 52    Ticket 52                                   shop
+ 51    Ticket 51                                   research
+ 50    Ticket 50                                   docs
+ 48    Ticket 48                                   linö
+ 47    Ticket 47                                   shop
+ 46    Ticket 46                                   research
+ 45    Ticket 45                                   docs
+ 43    Ticket 43                                   linö
+ 42    Ticket 42                                   shop
+ 41    Ticket 41                                   research
+ 40    Ticket 40                                   docs
+ 38    Ticket 38                                   linö
+ 37    Ticket 37                                   shop
+ 36    Ticket 36                                   research
+ 35    Ticket 35                                   docs
+ 33    Ticket 33                                   linö
+ 32    Ticket 32                                   shop
+ 31    Ticket 31                                   research
+ 30    Ticket 30                                   docs
+ 28    Ticket 28                                   linö
+ 27    Ticket 27                                   shop
+ 26    Ticket 26                                   research
+ 25    Ticket 25                                   docs
+ 23    Ticket 23                                   linö
+ 22    Ticket 22                                   shop
+ 21    Ticket 21                                   research
+ 20    Ticket 20                                   docs
+ 18    Ticket 18                                   linö
+ 17    Ticket 17                                   shop
  16    How to get bar from foo                     research
  15    Bars have no foo                            docs
  13    Bar cannot foo                              linö
@@ -343,34 +343,34 @@ My tickets
 >>> rt.login('jean').show(tickets.MyTickets)
 ... #doctest: +REPORT_UDIFF
 =================================================================== =======================================
- overview                                                            Actions
+ Description                                                         Actions
 ------------------------------------------------------------------- ---------------------------------------
- `#112 (Ticket 95) <Detail>`__ for `marc <Detail>`__                 [▶] [☆] **Sticky** → [⛶]
- `#109 (Ticket 92) <Detail>`__ for `marc <Detail>`__                 [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
- `#103 (Ticket 86) <Detail>`__ for `marc <Detail>`__                 [▶] [☆] **Sticky** → [⛶]
- `#100 (Ticket 83) <Detail>`__                                       [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
- `#94 (Ticket 77) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **Sticky** → [⛶]
- `#91 (Ticket 74) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
- `#85 (Ticket 68) <Detail>`__                                        [▶] [☆] **Sticky** → [⛶]
- `#82 (Ticket 65) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
- `#76 (Ticket 59) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **Sticky** → [⛶]
- `#73 (Ticket 56) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
- `#67 (Ticket 50) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **Sticky** → [⛶]
- `#64 (Ticket 47) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
- `#58 (Ticket 41) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **Sticky** → [⛶]
- `#55 (Ticket 38) <Detail>`__                                        [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
- `#49 (Ticket 32) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **Sticky** → [⛶]
- `#46 (Ticket 29) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
- `#40 (Ticket 23) <Detail>`__                                        [▶] [☆] **Sticky** → [⛶]
- `#37 (Ticket 20) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
- `#31 (Ticket 14) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **Sticky** → [⛶]
- `#28 (Ticket 11) <Detail>`__ for `marc <Detail>`__                  [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
- `#22 (Ticket 5) <Detail>`__ for `marc <Detail>`__                   [▶] [☆] **Sticky** → [⛶]
- `#19 (Ticket 2) <Detail>`__ for `marc <Detail>`__                   [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
- `#13 (Bar cannot foo) <Detail>`__ for `marc <Detail>`__             [▶] [☆] **Sticky** → [⛶]
- `#10 (Where can I find a Foo when bazing Bazes?) <Detail>`__        [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
- `#4 (Foo and bar don't baz) <Detail>`__ for `marc <Detail>`__       [▶] [☆] **Sticky** → [⛶]
- `#1 (Föö fails to bar when baz) <Detail>`__ for `marc <Detail>`__   [▶] [☆] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#112 (Ticket 112) <Detail>`__ for `marc <Detail>`__                [▶] [★] **Sticky** → [⛶]
+ `#109 (Ticket 109) <Detail>`__ for `marc <Detail>`__                [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#103 (Ticket 103) <Detail>`__ for `marc <Detail>`__                [▶] [★] **Sticky** → [⛶]
+ `#100 (Ticket 100) <Detail>`__                                      [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#94 (Ticket 94) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **Sticky** → [⛶]
+ `#91 (Ticket 91) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#85 (Ticket 85) <Detail>`__                                        [▶] [★] **Sticky** → [⛶]
+ `#82 (Ticket 82) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#76 (Ticket 76) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **Sticky** → [⛶]
+ `#73 (Ticket 73) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#67 (Ticket 67) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **Sticky** → [⛶]
+ `#64 (Ticket 64) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#58 (Ticket 58) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **Sticky** → [⛶]
+ `#55 (Ticket 55) <Detail>`__                                        [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#49 (Ticket 49) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **Sticky** → [⛶]
+ `#46 (Ticket 46) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#40 (Ticket 40) <Detail>`__                                        [▶] [★] **Sticky** → [⛶]
+ `#37 (Ticket 37) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#31 (Ticket 31) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **Sticky** → [⛶]
+ `#28 (Ticket 28) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#22 (Ticket 22) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **Sticky** → [⛶]
+ `#19 (Ticket 19) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#13 (Bar cannot foo) <Detail>`__ for `marc <Detail>`__             [▶] [★] **Sticky** → [⛶]
+ `#10 (Where can I find a Foo when bazing Bazes?) <Detail>`__        [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
+ `#4 (Foo and bar don't baz) <Detail>`__ for `marc <Detail>`__       [▶] [★] **Sticky** → [⛶]
+ `#1 (Föö fails to bar when baz) <Detail>`__ for `marc <Detail>`__   [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
 =================================================================== =======================================
 <BLANKLINE>
 
@@ -400,23 +400,23 @@ can see all local tickets for a given site object:
 ===== =========================== ========= =========== =============== ============ ==========
  ID    Summary                     Author    Topic       Faculty         Actions      Project
 ----- --------------------------- --------- ----------- --------------- ------------ ----------
- 115   Ticket 98                   mathieu   Lino Core                   **Ready**    docs
- 109   Ticket 92                   jean      Lino Cosi                   **New**      téam
- 103   Ticket 86                   jean      Lino Core                   **Sticky**   linö
- 97    Ticket 80                   mathieu   Lino Cosi                   **Ready**    shop
- 91    Ticket 74                   jean      Lino Core                   **New**      research
- 85    Ticket 68                   jean      Lino Cosi                   **Sticky**   docs
- 79    Ticket 62                   mathieu   Lino Core                   **Ready**    téam
- 73    Ticket 56                   jean      Lino Cosi                   **New**      linö
- 67    Ticket 50                   jean      Lino Core                   **Sticky**   shop
- 61    Ticket 44                   mathieu   Lino Cosi                   **Ready**    research
- 55    Ticket 38                   jean      Lino Core                   **New**      docs
- 49    Ticket 32                   jean      Lino Cosi                   **Sticky**   téam
- 43    Ticket 26                   mathieu   Lino Core                   **Ready**    linö
- 37    Ticket 20                   jean      Lino Cosi                   **New**      shop
- 31    Ticket 14                   jean      Lino Core                   **Sticky**   research
- 25    Ticket 8                    mathieu   Lino Cosi                   **Ready**    docs
- 19    Ticket 2                    jean      Lino Core                   **New**      téam
+ 115   Ticket 115                  mathieu   Lino Core                   **Ready**    docs
+ 109   Ticket 109                  jean      Lino Cosi                   **New**      téam
+ 103   Ticket 103                  jean      Lino Core                   **Sticky**   linö
+ 97    Ticket 97                   mathieu   Lino Cosi                   **Ready**    shop
+ 91    Ticket 91                   jean      Lino Core                   **New**      research
+ 85    Ticket 85                   jean      Lino Cosi                   **Sticky**   docs
+ 79    Ticket 79                   mathieu   Lino Core                   **Ready**    téam
+ 73    Ticket 73                   jean      Lino Cosi                   **New**      linö
+ 67    Ticket 67                   jean      Lino Core                   **Sticky**   shop
+ 61    Ticket 61                   mathieu   Lino Cosi                   **Ready**    research
+ 55    Ticket 55                   jean      Lino Core                   **New**      docs
+ 49    Ticket 49                   jean      Lino Cosi                   **Sticky**   téam
+ 43    Ticket 43                   mathieu   Lino Core                   **Ready**    linö
+ 37    Ticket 37                   jean      Lino Cosi                   **New**      shop
+ 31    Ticket 31                   jean      Lino Core                   **Sticky**   research
+ 25    Ticket 25                   mathieu   Lino Cosi                   **Ready**    docs
+ 19    Ticket 19                   jean      Lino Core                   **New**      téam
  13    Bar cannot foo              jean      Lino Cosi   Documentation   **Sticky**   linö
  7     No Foo after deleting Bar   mathieu   Lino Core                   **Ready**    shop
  1     Föö fails to bar when baz   jean      Lino Cosi                   **New**      linö
@@ -433,23 +433,23 @@ authenticated developer it looks like this:
 ===== =========================== ========= =========== =============== ==================== ==========
  ID    Summary                     Author    Topic       Faculty         Actions              Project
 ----- --------------------------- --------- ----------- --------------- -------------------- ----------
- 115   Ticket 98                   mathieu   Lino Core                   [▶] [☆] **Ready**    docs
- 109   Ticket 92                   jean      Lino Cosi                   [▶] [★] **New**      téam
- 103   Ticket 86                   jean      Lino Core                   [▶] [★] **Sticky**   linö
- 97    Ticket 80                   mathieu   Lino Cosi                   [▶] [☆] **Ready**    shop
- 91    Ticket 74                   jean      Lino Core                   [▶] [★] **New**      research
- 85    Ticket 68                   jean      Lino Cosi                   [▶] [★] **Sticky**   docs
- 79    Ticket 62                   mathieu   Lino Core                   [▶] [☆] **Ready**    téam
- 73    Ticket 56                   jean      Lino Cosi                   [▶] [★] **New**      linö
- 67    Ticket 50                   jean      Lino Core                   [▶] [★] **Sticky**   shop
- 61    Ticket 44                   mathieu   Lino Cosi                   [▶] [☆] **Ready**    research
- 55    Ticket 38                   jean      Lino Core                   [▶] [★] **New**      docs
- 49    Ticket 32                   jean      Lino Cosi                   [▶] [★] **Sticky**   téam
- 43    Ticket 26                   mathieu   Lino Core                   [▶] [☆] **Ready**    linö
- 37    Ticket 20                   jean      Lino Cosi                   [▶] [★] **New**      shop
- 31    Ticket 14                   jean      Lino Core                   [▶] [★] **Sticky**   research
- 25    Ticket 8                    mathieu   Lino Cosi                   [▶] [☆] **Ready**    docs
- 19    Ticket 2                    jean      Lino Core                   [▶] [★] **New**      téam
+ 115   Ticket 115                  mathieu   Lino Core                   [▶] [☆] **Ready**    docs
+ 109   Ticket 109                  jean      Lino Cosi                   [▶] [★] **New**      téam
+ 103   Ticket 103                  jean      Lino Core                   [▶] [★] **Sticky**   linö
+ 97    Ticket 97                   mathieu   Lino Cosi                   [▶] [☆] **Ready**    shop
+ 91    Ticket 91                   jean      Lino Core                   [▶] [★] **New**      research
+ 85    Ticket 85                   jean      Lino Cosi                   [▶] [★] **Sticky**   docs
+ 79    Ticket 79                   mathieu   Lino Core                   [▶] [☆] **Ready**    téam
+ 73    Ticket 73                   jean      Lino Cosi                   [▶] [★] **New**      linö
+ 67    Ticket 67                   jean      Lino Core                   [▶] [★] **Sticky**   shop
+ 61    Ticket 61                   mathieu   Lino Cosi                   [▶] [☆] **Ready**    research
+ 55    Ticket 55                   jean      Lino Core                   [▶] [★] **New**      docs
+ 49    Ticket 49                   jean      Lino Cosi                   [▶] [★] **Sticky**   téam
+ 43    Ticket 43                   mathieu   Lino Core                   [▶] [☆] **Ready**    linö
+ 37    Ticket 37                   jean      Lino Cosi                   [▶] [★] **New**      shop
+ 31    Ticket 31                   jean      Lino Core                   [▶] [★] **Sticky**   research
+ 25    Ticket 25                   mathieu   Lino Cosi                   [▶] [☆] **Ready**    docs
+ 19    Ticket 19                   jean      Lino Core                   [▶] [★] **New**      téam
  13    Bar cannot foo              jean      Lino Cosi   Documentation   [▶] [★] **Sticky**   linö
  7     No Foo after deleting Bar   mathieu   Lino Core                   [▶] [☆] **Ready**    shop
  1     Föö fails to bar when baz   jean      Lino Cosi                   [★] **New**          linö
@@ -625,7 +625,7 @@ the detail window of a ticket.
       - (general1_1): **Summary** (summary), **ID** (id), **Author** (user), **End user** (end_user)
       - (general1_2): **Site** (site), **Topic** (topic), **Project** (project), **Private** (private)
       - (general1_3): **Actions** (workflow_buttons), **Faculty** (faculty)
-    - **Deployments** (deploy.DeploymentsByTicket) [visible for user consultant hoster developer senior admin]
+    - **Votes** (votes.VotesByVotable) [visible for user consultant hoster developer senior admin]
   - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user consultant hoster developer senior admin], **Sessions** (SessionsByTicket) [visible for consultant hoster developer senior admin]
 - **More** (more):
   - (more_1):
@@ -635,7 +635,7 @@ the detail window of a ticket.
     - **Duplicates** (DuplicatesByTicket)
   - (more_2): **Upgrade notes** (upgrade_notes), **Dependencies** (LinksByTicket) [visible for developer senior admin]
 - **History** (changes.ChangesByMaster) [visible for developer senior admin]
-- **Votes** (votes.VotesByVotable) [visible for user consultant hoster developer senior admin]
+- **Deployments** (deploy.DeploymentsByTicket) [visible for user consultant hoster developer senior admin]
 <BLANKLINE>
 
 

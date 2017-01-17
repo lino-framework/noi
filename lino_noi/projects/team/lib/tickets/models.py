@@ -17,10 +17,10 @@ class TicketDetail(TicketDetail):
     `faculties`
 
     """
-    main = "general more history_tab votes.VotesByVotable"
+    main = "general more history_tab deploy.DeploymentsByTicket"
     
     general = dd.Panel("""
-    general1:60 deploy.DeploymentsByTicket:20
+    general1:60 votes.VotesByVotable:20
     description:30 comments.CommentsByRFC:30 clocking.SessionsByTicket:20
     """, label=_("General"))
 

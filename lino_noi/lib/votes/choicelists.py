@@ -25,9 +25,9 @@ class VoteState(dd.State):
         Translatable text. How a vote is called when in this state.
 
     """
-    def __init__(self, value, text, vote_name, name=None, **kwargs):
-        super(VoteState, self).__init__(value, text, name)
-        self.vote_name = vote_name
+    # def __init__(self, value, text, vote_name, name=None, **kwargs):
+    #     super(VoteState, self).__init__(value, text, name)
+    #     self.vote_name = vote_name
 
 
 class VoteStates(dd.Workflow):
@@ -35,15 +35,47 @@ class VoteStates(dd.Workflow):
     for the :attr:`state <lino_noi.lib.votes.models.Vote.state>`
     field of a vote.
 
-    This list is populated in :mod:`lino_noi.lib.noi.workflows`.
+    The default implementation defines the following choices:
+
+    .. attribute:: author
+
+        Reserved for the author's vote.  Lino automatically creates an
+        **author vote** for every author of a ticket (see
+        :meth:`get_vote_raters
+        <lino_noi.lib.votes.choicelists.Votable.get_vote_raters>`).
+
+
+    .. attribute:: watching
+    .. attribute:: candidate
+    .. attribute:: assigned
+    .. attribute:: done
+    .. attribute:: rated
+    .. attribute:: cancelled
+
 
     """
     required_roles = dd.required(VotesStaff)
-    verbose_name = _("Vote state")
+    # verbose_name = _("Vote state")
     verbose_name_plural = _("Vote states")
     item_class = VoteState
     # max_length = 3
     # todo_states = []
+
+add = VoteStates.add_item
+# add('10', _("Watching"), _("Interest"), 'watching')
+# add('20', _("Candidate"), _("Offer"), 'candidate', show_in_todo=True)
+# add('30', _("Assigned"), _("Job to do"), 'assigned', show_in_todo=True)
+# add('40', _("Done"), _("Job done"), 'done')
+# add('50', _("Rated"), _("Job rated"), 'rated')
+# add('60', _("Cancelled"), _("Cancelled offer"), 'cancelled')  # Absage
+add('00', _("Author"), 'author')
+add('10', _("Watching"), 'watching')
+add('20', _("Candidate"), 'candidate', show_in_todo=True)
+add('30', _("Assigned"), 'assigned', show_in_todo=True)
+add('40', _("Done"), 'done')
+add('50', _("Rated"), 'rated')
+add('60', _("Cancelled"), 'cancelled')  # Absage
+    
 
 
 class Ratings(dd.ChoiceList):

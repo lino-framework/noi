@@ -62,7 +62,9 @@ responsible for triaging tickets"""),
     'lino_noi.lib.noi.workflows.MarkTicketReady' : _("""Mark this ticket as ready."""),
     'lino_noi.lib.noi.workflows.MarkTicketClosed' : _("""Mark this ticket as closed."""),
     'lino_noi.lib.noi.workflows.MarkTicketTalk' : _("""Mark this ticket as talk."""),
-    'lino_noi.lib.noi.workflows.MarkVoteRated' : _("""Mark this vote as rated."""),
+    'lino_noi.lib.noi.workflows.MarkVoteRated' : _("""Rate this vote and mark it as rated."""),
+    'lino_noi.lib.noi.workflows.MarkVoteRated.rating' : _("""How you rate this job."""),
+    'lino_noi.lib.noi.workflows.MarkVoteRated.comment' : _("""Your comment related to your rating."""),
     'lino_noi.lib.tickets.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_noi.lib.tickets.choicelists.TicketStates' : _("""The state of a ticket (new, open, closed, ...)"""),
     'lino_noi.lib.tickets.choicelists.TicketStates.new' : _("""Somebody reported this ticket, but there was no response so
@@ -172,14 +174,17 @@ online_registration."""),
 which represents a votable in your application.  Default value is
 'tickets.Ticket' (referring to
 lino_noi.lib.tickets.models.Ticket)."""),
+    'lino_noi.lib.votes.actions.CreateVote' : _("""Define your vote about this object."""),
+    'lino_noi.lib.votes.actions.VotableEditVote' : _("""Edit your vote about this object."""),
     'lino_noi.lib.votes.choicelists.VoteState' : _("""The state of a vote."""),
     'lino_noi.lib.votes.choicelists.VoteState.vote_name' : _("""Translatable text. How a vote is called when in this state."""),
     'lino_noi.lib.votes.choicelists.VoteStates' : _("""The list of possible states of a vote.  This is used as choicelist
 for the state
 field of a vote."""),
+    'lino_noi.lib.votes.choicelists.VoteStates.author' : _("""Reserved for the author's vote.  Lino automatically creates an
+author vote for every author of a ticket (see
+get_vote_raters)."""),
     'lino_noi.lib.votes.choicelists.VoteStates.item_class' : _("""alias of VoteState"""),
-    'lino_noi.lib.votes.mixins.CreateVote' : _("""Define your vote about this object."""),
-    'lino_noi.lib.votes.mixins.EditVote' : _("""Edit your vote about this object."""),
     'lino_noi.lib.votes.mixins.Votable' : _("""Base class for models that can be used as
 lino_noi.lib.votes.Plugin.votable_model."""),
     'lino_noi.lib.votes.models.Vote' : _("""A vote is when a user has an opinion or interest about a given
@@ -191,11 +196,25 @@ ticket (or any other votable)."""),
     'lino_noi.lib.votes.models.Vote.rating' : _("""How the ticket author rates my help on this ticket."""),
     'lino_noi.lib.votes.models.Vote.remark' : _("""Why I am interested in this ticket."""),
     'lino_noi.lib.votes.models.Vote.nickname' : _("""My nickname for this ticket. Optional."""),
-    'lino_noi.lib.votes.models.MyOffers' : _("""Show your votes in states watching and candidate"""),
+    'lino_noi.lib.votes.models.Votes' : _("""Table parameters:"""),
+    'lino_noi.lib.votes.models.Votes.observed_event' : _("""There are two class attributes for defining a filter conditions
+which canot be removed by the user:"""),
+    'lino_noi.lib.votes.models.Votes.filter_vote_states' : _("""A set of vote states to require (i.e. to filter upon).  This
+must resolve using resolve_states."""),
+    'lino_noi.lib.votes.models.Votes.exclude_vote_states' : _("""A set of vote states to exclude.  This must
+resolve using resolve_states."""),
+    'lino_noi.lib.votes.models.Votes.filter_ticket_states' : _("""A set of ticket states to require (i.e. to filter upon). This
+must resolve using resolve_states."""),
+    'lino_noi.lib.votes.models.Votes.model' : _("""alias of Vote"""),
+    'lino_noi.lib.votes.models.MyVotes' : _("""Show your votes in all states"""),
+    'lino_noi.lib.votes.models.MyVotes.model' : _("""alias of Vote"""),
+    'lino_noi.lib.votes.models.MyOffers' : _("""Show the tickets for which you are candidate"""),
     'lino_noi.lib.votes.models.MyOffers.model' : _("""alias of Vote"""),
     'lino_noi.lib.votes.models.MyTasks' : _("""Show your votes in states assigned and done"""),
     'lino_noi.lib.votes.models.MyTasks.model' : _("""alias of Vote"""),
-    'lino_noi.lib.votes.models.VotesByVotable' : _("""Show all votes on this object."""),
+    'lino_noi.lib.votes.models.MyWatched' : _("""Show your votes in states watching"""),
+    'lino_noi.lib.votes.models.MyWatched.model' : _("""alias of Vote"""),
+    'lino_noi.lib.votes.models.VotesByVotable' : _("""Show the votes about this object."""),
     'lino_noi.lib.votes.models.VotesByVotable.master' : _("""alias of Ticket"""),
     'lino_noi.lib.votes.models.VotesByVotable.model' : _("""alias of Vote"""),
     'lino_noi.projects.bs3.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Noi."""),

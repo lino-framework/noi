@@ -124,31 +124,31 @@ Filtering tickets by topic
 ===== =========================== ========= =========== =============== =============== ==========
  ID    Summary                     Author    Topic       Faculty         Actions         Project
 ----- --------------------------- --------- ----------- --------------- --------------- ----------
- 113   Ticket 96                   mathieu   Lino Cosi                   **Started**     linö
- 109   Ticket 92                   jean      Lino Cosi                   **New**         téam
- 105   Ticket 88                   luc       Lino Cosi                   **Sleeping**    docs
- 101   Ticket 84                   mathieu   Lino Cosi                   **Talk**        research
- 97    Ticket 80                   mathieu   Lino Cosi                   **Ready**       shop
- 93    Ticket 76                   luc       Lino Cosi                   **Opened**      linö
- 89    Ticket 72                   luc       Lino Cosi                   **Closed**      téam
- 85    Ticket 68                   jean      Lino Cosi                   **Sticky**      docs
- 81    Ticket 64                   mathieu   Lino Cosi                   **Cancelled**   research
- 77    Ticket 60                   mathieu   Lino Cosi                   **Started**     shop
- 73    Ticket 56                   jean      Lino Cosi                   **New**         linö
- 69    Ticket 52                   luc       Lino Cosi                   **Sleeping**    téam
- 65    Ticket 48                   mathieu   Lino Cosi                   **Talk**        docs
- 61    Ticket 44                   mathieu   Lino Cosi                   **Ready**       research
- 57    Ticket 40                   luc       Lino Cosi                   **Opened**      shop
- 53    Ticket 36                   luc       Lino Cosi                   **Closed**      linö
- 49    Ticket 32                   jean      Lino Cosi                   **Sticky**      téam
- 45    Ticket 28                   mathieu   Lino Cosi                   **Cancelled**   docs
- 41    Ticket 24                   mathieu   Lino Cosi                   **Started**     research
- 37    Ticket 20                   jean      Lino Cosi                   **New**         shop
- 33    Ticket 16                   luc       Lino Cosi                   **Sleeping**    linö
- 29    Ticket 12                   mathieu   Lino Cosi                   **Talk**        téam
- 25    Ticket 8                    mathieu   Lino Cosi                   **Ready**       docs
- 21    Ticket 4                    luc       Lino Cosi                   **Opened**      research
- 17    Ticket 0                    luc       Lino Cosi                   **Closed**      shop
+ 113   Ticket 113                  mathieu   Lino Cosi                   **Started**     linö
+ 109   Ticket 109                  jean      Lino Cosi                   **New**         téam
+ 105   Ticket 105                  luc       Lino Cosi                   **Sleeping**    docs
+ 101   Ticket 101                  mathieu   Lino Cosi                   **Talk**        research
+ 97    Ticket 97                   mathieu   Lino Cosi                   **Ready**       shop
+ 93    Ticket 93                   luc       Lino Cosi                   **Opened**      linö
+ 89    Ticket 89                   luc       Lino Cosi                   **Closed**      téam
+ 85    Ticket 85                   jean      Lino Cosi                   **Sticky**      docs
+ 81    Ticket 81                   mathieu   Lino Cosi                   **Cancelled**   research
+ 77    Ticket 77                   mathieu   Lino Cosi                   **Started**     shop
+ 73    Ticket 73                   jean      Lino Cosi                   **New**         linö
+ 69    Ticket 69                   luc       Lino Cosi                   **Sleeping**    téam
+ 65    Ticket 65                   mathieu   Lino Cosi                   **Talk**        docs
+ 61    Ticket 61                   mathieu   Lino Cosi                   **Ready**       research
+ 57    Ticket 57                   luc       Lino Cosi                   **Opened**      shop
+ 53    Ticket 53                   luc       Lino Cosi                   **Closed**      linö
+ 49    Ticket 49                   jean      Lino Cosi                   **Sticky**      téam
+ 45    Ticket 45                   mathieu   Lino Cosi                   **Cancelled**   docs
+ 41    Ticket 41                   mathieu   Lino Cosi                   **Started**     research
+ 37    Ticket 37                   jean      Lino Cosi                   **New**         shop
+ 33    Ticket 33                   luc       Lino Cosi                   **Sleeping**    linö
+ 29    Ticket 29                   mathieu   Lino Cosi                   **Talk**        téam
+ 25    Ticket 25                   mathieu   Lino Cosi                   **Ready**       docs
+ 21    Ticket 21                   luc       Lino Cosi                   **Opened**      research
+ 17    Ticket 17                   luc       Lino Cosi                   **Closed**      shop
  13    Bar cannot foo              jean      Lino Cosi   Documentation   **Sticky**      linö
  9     Foo never matches Bar       mathieu   Lino Cosi   Testing         **Cancelled**   téam
  5     Cannot create Foo           mathieu   Lino Cosi                   **Started**
