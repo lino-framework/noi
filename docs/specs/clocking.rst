@@ -43,13 +43,13 @@ When end_time is empty, it means that he is still working.
  #5 (Cannot create Foo)                            jean      22/05/2015   09:00:00     22/05/2015   11:18:00                          2:18
  #4 (Foo and bar don't baz)                        luc       22/05/2015   09:00:00     22/05/2015   12:29:00                          3:29
  #12 (Foo cannot bar)                              mathieu   22/05/2015   09:00:00     22/05/2015   12:53:00                          3:53
- #30 (Ticket 13)                                   mathieu   20/05/2015   09:05:00     20/05/2015   09:17:00                          0:12
+ #30 (Ticket 30)                                   mathieu   20/05/2015   09:05:00     20/05/2015   09:17:00                          0:12
  #7 (No Foo after deleting Bar)                    jean      20/05/2015   09:00:00     20/05/2015   10:30:00                          1:30
  #10 (Where can I find a Foo when bazing Bazes?)   luc       20/05/2015   09:00:00     20/05/2015   09:37:00                          0:37
- #21 (Ticket 4)                                    mathieu   20/05/2015   09:00:00     20/05/2015   09:05:00                          0:05
+ #21 (Ticket 21)                                   mathieu   20/05/2015   09:00:00     20/05/2015   09:05:00                          0:05
  #11 (Class-based Foos and Bars?)                  jean      19/05/2015   09:00:00     19/05/2015   09:10:00                          0:10
  #13 (Bar cannot foo)                              luc       19/05/2015   09:00:00     19/05/2015   10:02:00                          1:02
- #39 (Ticket 22)                                   mathieu   19/05/2015   09:00:00     19/05/2015   11:18:00                          2:18
+ #39 (Ticket 39)                                   mathieu   19/05/2015   09:00:00     19/05/2015   11:18:00                          2:18
  **Total (13 rows)**                                                                                                                  **15:34**
 ================================================= ========= ============ ============ ============ ========== ============ ========= ===========
 <BLANKLINE>
@@ -66,7 +66,7 @@ Some sessions are on private tickets:
  #2 (Bar is not always baz)   jean                 téam
  #3 (Baz sucks)               mathieu
  #5 (Cannot create Foo)       jean      2:18
- #39 (Ticket 22)              mathieu   2:18       téam
+ #39 (Ticket 39)              mathieu   2:18       téam
  **Total (4 rows)**                     **4:36**
 ============================ ========= ========== =========
 <BLANKLINE>
@@ -174,7 +174,7 @@ Partner #100 ('welket')
  11   Class-based Foos and Bars?. Site: pypi. Author: mathieu. Project: research. Topic: Lino Core   Talk     0:10
  12   Foo cannot bar. Author: luc. Project: shop. Topic: Lino Welfare                                Opened   3:53
  13   Bar cannot foo. Site: welket. Author: jean. Project: linö. Topic: Lino Cosi                    Sticky   1:02
- 21   Ticket 4. Site: welsch. Author: luc. Project: research. Topic: Lino Cosi                       Opened   0:05
+ 21   Ticket 21. Site: welsch. Author: luc. Project: research. Topic: Lino Cosi                      Opened   0:05
                                                                                                               **10:09**
 ==== ============================================================================================== ======== ===========
 <BLANKLINE>

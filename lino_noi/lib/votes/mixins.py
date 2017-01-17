@@ -53,14 +53,19 @@ vote exists.
         for vote in rt.models.votes.Vote.objects.filter(votable=self):
             yield (vote.user, vote.mail_mode or vote.user.mail_mode)
 
-    def after_ui_save(self, ar, cw):
+    def set_author_votes(self):
         """Verifies that every vote rater has a vote."""
-        if cw is None:
-            for user in self.get_vote_raters():
-                vote = self.get_favourite(user)
-                if vote is None:
-                    create_row(
-                        rt.models.votes.Vote, user=user, votable=self,
-                        state=VoteStates.author)
-
+        for user in self.get_vote_raters():
+            vote = self.get_favourite(user)
+            if vote is None:
+                create_row(
+                    rt.models.votes.Vote, user=user, votable=self,
+                    state=VoteStates.author)
+            # elif vote.state != VoteStates.author:
+            #     vote.state = VoteStates.author
+            #     vote.full_clean()
+            #     vote.save()
+                
+    def after_ui_save(self, ar, cw):
+        self.set_author_votes()
         super(Votable, self).after_ui_save(ar, cw)

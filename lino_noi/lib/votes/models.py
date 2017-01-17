@@ -225,24 +225,14 @@ class Votes(dd.Table):
     @classmethod
     def do_setup(self):
         # print("Votes.to_setup")
-        # self.detail_action.hide_top_toolbar = True
         self.filter_vote_states  = self.model.resolve_states(
             self.filter_vote_states)
         self.exclude_vote_states  = self.model.resolve_states(
             self.exclude_vote_states)
         self.filter_ticket_states = config.votable_model.resolve_states(
             self.filter_ticket_states)
-        # if isinstance(self.filter_vote_states, six.string_types):
-        #     v = set()
-        #     for k in self.filter_vote_states.split():
-        #         v.add(VoteStates.get_by_name(k))
-        #     self.filter_vote_states  = v
-        # if isinstance(self.filter_ticket_states, six.string_types):
-        #     v = set()
-        #     fld = dd.plugins.votes.votable_model.workflow_state_field
-        #     for k in self.filter_ticket_states.split():
-        #         v.add(fld.choicelist.get_by_name(k))
-        #     self.filter_ticket_states  = v
+        super(Votes, self).do_setup()
+        self.detail_action.action.hide_top_toolbar = True
 
     @classmethod
     def get_detail_title(self, ar, obj):
@@ -314,7 +304,7 @@ class MyVotes(My, Votes):
     label = _("My votes")
     column_names = "votable_overview workflow_buttons *"
     order_by = ['-id']
-    hide_top_toolbar = True
+    # hide_top_toolbar = True
     
     detail_layout = dd.DetailLayout("""
     workflow_buttons 
@@ -364,7 +354,7 @@ class VotesByVotable(Votes):
     master_key = 'votable'
     column_names = 'user workflow_buttons *'
     # show_detail_navigator = False
-    hide_top_toolbar = True
+    # hide_top_toolbar = True
     # slave_grid_format = 'html'
     exclude_vote_states = 'author'
 

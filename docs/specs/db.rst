@@ -71,7 +71,7 @@ This document describes the database structure.
  uploads.UploadType          uploads.UploadTypes          8         0
  users.Authority             users.Authorities            3         0
  users.User                  users.Users                  36        7
- votes.Vote                  votes.Votes                  9         79
+ votes.Vote                  votes.Votes                  9         288
 =========================== ============================ ========= =======
 <BLANKLINE>
 
