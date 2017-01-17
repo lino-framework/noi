@@ -181,6 +181,9 @@ lino_noi.lib.tickets.models.Ticket)."""),
     'lino_noi.lib.votes.choicelists.VoteStates' : _("""The list of possible states of a vote.  This is used as choicelist
 for the state
 field of a vote."""),
+    'lino_noi.lib.votes.choicelists.VoteStates.author' : _("""Reserved for the author's vote.  Lino automatically creates an
+author vote for every author of a ticket (see
+get_vote_raters)."""),
     'lino_noi.lib.votes.choicelists.VoteStates.item_class' : _("""alias of VoteState"""),
     'lino_noi.lib.votes.mixins.Votable' : _("""Base class for models that can be used as
 lino_noi.lib.votes.Plugin.votable_model."""),
@@ -194,8 +197,14 @@ ticket (or any other votable)."""),
     'lino_noi.lib.votes.models.Vote.remark' : _("""Why I am interested in this ticket."""),
     'lino_noi.lib.votes.models.Vote.nickname' : _("""My nickname for this ticket. Optional."""),
     'lino_noi.lib.votes.models.Votes' : _("""Table parameters:"""),
-    'lino_noi.lib.votes.models.Votes.filter_vote_states' : _("""A set (or a space-separated string) of VoteStates."""),
-    'lino_noi.lib.votes.models.Votes.filter_ticket_states' : _("""A set (or a space-separated string) of TicketStates."""),
+    'lino_noi.lib.votes.models.Votes.observed_event' : _("""There are two class attributes for defining a filter conditions
+which canot be removed by the user:"""),
+    'lino_noi.lib.votes.models.Votes.filter_vote_states' : _("""A set of vote states to require (i.e. to filter upon).  This
+must resolve using resolve_states."""),
+    'lino_noi.lib.votes.models.Votes.exclude_vote_states' : _("""A set of vote states to exclude.  This must
+resolve using resolve_states."""),
+    'lino_noi.lib.votes.models.Votes.filter_ticket_states' : _("""A set of ticket states to require (i.e. to filter upon). This
+must resolve using resolve_states."""),
     'lino_noi.lib.votes.models.Votes.model' : _("""alias of Vote"""),
     'lino_noi.lib.votes.models.MyVotes' : _("""Show your votes in all states"""),
     'lino_noi.lib.votes.models.MyVotes.model' : _("""alias of Vote"""),
