@@ -269,7 +269,7 @@ class MarkVoteAssigned(VoteAction):
     required_states = 'watching candidate'
     required_votable_states = 'new talk opened started ready'
     #msg_template = _("{user} assigned {voter} for {ticket}.")
-    confirmation_msg_template = _("Assign {voter} for {ticket}.")
+    # confirmation_msg_template = _("Assign {voter} for {ticket}.")
 
     def unused_before_execute(self, ar, obj):
         for v in obj.__class__.objects.filter(votable_id=obj.votable_id):
