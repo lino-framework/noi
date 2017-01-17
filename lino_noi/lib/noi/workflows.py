@@ -189,34 +189,6 @@ TicketStates.ready.add_transition(MarkTicketReady)
 TicketStates.closed.add_transition(MarkTicketClosed)
 
 
-add = VoteStates.add_item
-# add('10', _("Watching"), _("Interest"), 'watching')
-# add('20', _("Candidate"), _("Offer"), 'candidate', show_in_todo=True)
-# add('30', _("Assigned"), _("Job to do"), 'assigned', show_in_todo=True)
-# add('40', _("Done"), _("Job done"), 'done')
-# add('50', _("Rated"), _("Job rated"), 'rated')
-# add('60', _("Cancelled"), _("Cancelled offer"), 'cancelled')  # Absage
-add('00', _("Author"), 'author')
-add('10', _("Watching"), 'watching')
-add('20', _("Candidate"), 'candidate', show_in_todo=True)
-add('30', _("Assigned"), 'assigned', show_in_todo=True)
-add('40', _("Done"), 'done')
-add('50', _("Rated"), 'rated')
-add('60', _("Cancelled"), 'cancelled')  # Absage
-
-
-# add = VoteViews.add_item
-# add('10', _("Offers"), 'offers', show_states=set([
-#     VoteStates.candidate]))
-# add('20', _("Tasks"), 'tasks', show_states=set([
-#     VoteStates.assigned, VoteStates.done]))
-
-
-# VoteStates.default_value = 'watching'
-# VoteStates.offers_states = 
-# VoteStates.tasks_states = 
-
-
 # class VoteAction(dd.ChangeStateAction, NotifyingAction):
 class VoteAction(dd.ChangeStateAction):
     

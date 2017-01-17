@@ -313,50 +313,36 @@ his job. Dora's vote has been cancelled.
 ======= ===============
  Voter   Actions
 ------- ---------------
- Berta   **Author**
  Alex    **Done**
  Dora    **Cancelled**
 ======= ===============
 <BLANKLINE>
 
 
-Ticket #2 has not yet any vote except that of the author:
+Ticket #2 has not yet any vote:
 
 >>> show_votes(2)
 #2 (My lawn needs mowing. On Thursday or Saturday.)
-========= ============
- Voter     Actions
---------- ------------
- Christa   **Author**
-========= ============
-<BLANKLINE>
+No data to display
 
 >>> show_votes(3)
 #3 (Who can give piano lessons to my son?)
 ========= ===============
  Voter     Actions
 --------- ---------------
- Eric      **Author**
- Dora      **Author**
  Christa   **Candidate**
 ========= ===============
 <BLANKLINE>
 
 >>> show_votes(4)
 #4 (Who can give guitar lessons to my daughter?)
-======= ============
- Voter   Actions
-------- ------------
- Alex    **Author**
-======= ============
-<BLANKLINE>
+No data to display
 
 >>> show_votes(5)
 #5 (Who would play music on my birthday party?)
 ========= ===============
  Voter     Actions
 --------- ---------------
- Alex      **Author**
  Christa   **Candidate**
  Eric      **Candidate**
 ========= ===============
@@ -366,6 +352,8 @@ Ticket #2 has not yet any vote except that of the author:
 
 The main menu
 =============
+
+**Site administrators** have the following menu:
 
 >>> rt.login('robin').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
@@ -427,6 +415,52 @@ Where I can help
 ------------------------------------------------------------------------------------ ---------------- ----------------
  `#4 (Who can give guitar lessons to my daughter?) <Detail>`__ by `Alex <Detail>`__   Guitar lessons   [☆] **Opened**
 ==================================================================================== ================ ================
+<BLANKLINE>
+
+
+
+My offers
+-------------------
+
+>>> rt.login('christa').show(votes.MyOffers)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+==================================================================================================== ================================
+ Description                                                                                          Actions
+---------------------------------------------------------------------------------------------------- --------------------------------
+ `#5 (Who would play music on my birthday party?) <Detail>`__ by `Alex <Detail>`__                    [★] **Candidate** → [Watching]
+ `#3 (Who can give piano lessons to my son?) <Detail>`__ by `Eric <Detail>`__ for `Dora <Detail>`__   [★] **Candidate** → [Watching]
+==================================================================================================== ================================
+<BLANKLINE>
+
+
+>>> rt.login('eric').show(votes.MyOffers)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+=================================================================================== ==================================================
+ Description                                                                         Actions
+----------------------------------------------------------------------------------- --------------------------------------------------
+ `#5 (Who would play music on my birthday party?) <Detail>`__ by `Alex <Detail>`__   [★] **Candidate** → [Watching] [Assign] [Cancel]
+=================================================================================== ==================================================
+<BLANKLINE>
+
+
+
+My Tasks
+--------
+
+>>> rt.login('alex').show(votes.MyTasks)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+No data to display
+
+>>> rt.login('alex').show(votes.MyVotes)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+============================================================================== ================
+ Description                                                                    Actions
+------------------------------------------------------------------------------ ----------------
+ `#8 (Who would buy diapers for me in Aachen?) <Detail>`__                      [★] **Author**
+ `#5 (Who would play music on my birthday party?) <Detail>`__                   [★] **Author**
+ `#4 (Who can give guitar lessons to my daughter?) <Detail>`__                  [★] **Author**
+ `#1 (My faucet is dripping, who can help?) <Detail>`__ by `Berta <Detail>`__   [★] **Done**
+============================================================================== ================
 <BLANKLINE>
 
 

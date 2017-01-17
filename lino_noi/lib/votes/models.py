@@ -27,6 +27,7 @@ from .choicelists import VoteStates, VoteEvents  # , VoteViews
 from .choicelists import Ratings
 from .actions import EditVote
 
+config = dd.plugins.votes
 
 @dd.python_2_unicode_compatible
 class Vote(UserAuthored, Created):
@@ -130,13 +131,13 @@ class Vote(UserAuthored, Created):
                 blank=True, help_text=_("Only rows having this state.")),
             mail_mode=MailModes.field(
                 blank=True, help_text=_("Only rows having this mail mode.")))
-        model = dd.plugins.votes.votable_model
-        fld = model._meta.get_field('state')
+        fld = config.votable_model._meta.get_field('state')
         hlp = lazy_format(
             _("Only rows whose {model} has this state."),
-            model=model._meta.verbose_name)
+            model=config.votable_model._meta.verbose_name)
         lbl = lazy_format(
-            _("{model} state"), model=model._meta.verbose_name)
+            _("{model} state"),
+            model=config.votable_model._meta.verbose_name)
         fields.update(
             votable_state=fld.choicelist.field(
                 lbl, blank=True, help_text=hlp))
@@ -166,16 +167,27 @@ class Votes(dd.Table):
 
     .. attribute:: observed_event
 
-    There are two class attributes for defining a filter conditions
-    which canot be removed by the user:
+        There are two class attributes for defining a filter conditions
+        which canot be removed by the user:
 
     .. attribute:: filter_vote_states
 
-        A set (or a space-separated string) of VoteStates.
+        A set of vote states to require (i.e. to filter upon).  This
+        must resolve using :meth:`resolve_states
+        <lino.core.model.Model.resolve_states>`.
+
+    .. attribute:: exclude_vote_states
+
+        A set of vote states to exclude.  This must
+        resolve using :meth:`resolve_states
+        <lino.core.model.Model.resolve_states>`.
+
 
     .. attribute:: filter_ticket_states
 
-        A set (or a space-separated string) of TicketStates.
+        A set of ticket states to require (i.e. to filter upon). This
+        must resolve using :meth:`resolve_states
+        <lino.core.model.Model.resolve_states>`.
 
     """
     model = 'votes.Vote'
@@ -201,28 +213,36 @@ class Votes(dd.Table):
     rating 
     """, window_size=(40, 'auto'))
 
-    filter_vote_states = set([])
-    filter_ticket_states = set([])
+    filter_vote_states = None
+    exclude_vote_states = None
+    filter_ticket_states = None
 
     # @classmethod
     # def on_analyze(self, site):
     #     super(Votes, self).on_analyze(site)
         
+    
     @classmethod
     def do_setup(self):
         # print("Votes.to_setup")
         # self.detail_action.hide_top_toolbar = True
-        if isinstance(self.filter_vote_states, six.string_types):
-            v = set()
-            for k in self.filter_vote_states.split():
-                v.add(VoteStates.get_by_name(k))
-            self.filter_vote_states  = v
-        if isinstance(self.filter_ticket_states, six.string_types):
-            v = set()
-            fld = dd.plugins.votes.votable_model.workflow_state_field
-            for k in self.filter_ticket_states.split():
-                v.add(fld.choicelist.get_by_name(k))
-            self.filter_ticket_states  = v
+        self.filter_vote_states  = self.model.resolve_states(
+            self.filter_vote_states)
+        self.exclude_vote_states  = self.model.resolve_states(
+            self.exclude_vote_states)
+        self.filter_ticket_states = config.votable_model.resolve_states(
+            self.filter_ticket_states)
+        # if isinstance(self.filter_vote_states, six.string_types):
+        #     v = set()
+        #     for k in self.filter_vote_states.split():
+        #         v.add(VoteStates.get_by_name(k))
+        #     self.filter_vote_states  = v
+        # if isinstance(self.filter_ticket_states, six.string_types):
+        #     v = set()
+        #     fld = dd.plugins.votes.votable_model.workflow_state_field
+        #     for k in self.filter_ticket_states.split():
+        #         v.add(fld.choicelist.get_by_name(k))
+        #     self.filter_ticket_states  = v
 
     @classmethod
     def get_detail_title(self, ar, obj):
@@ -248,9 +268,11 @@ class Votes(dd.Table):
         qs = super(Votes, self).get_request_queryset(ar)
         pv = ar.param_values
 
-        if len(self.filter_vote_states):
+        if self.filter_vote_states is not None:
             qs = qs.filter(state__in=self.filter_vote_states)
-        if len(self.filter_ticket_states):
+        if self.exclude_vote_states is not None:
+            qs = qs.exclude(state__in=self.exclude_vote_states)
+        if self.filter_ticket_states is not None:
             qs = qs.filter(votable__state__in=self.filter_ticket_states)
 
         if pv.ticket_user:
@@ -311,7 +333,7 @@ class MyOffers(My, Votes):
     filter_ticket_states = "new talk opened started"
     
 
-class MyTasks(My, Votes):    
+class MyTasks(My, Votes):
     """Show your votes in states assigned and done"""
     label = _("My tasks")
     column_names = "votable_overview workflow_buttons priority *"
@@ -319,7 +341,7 @@ class MyTasks(My, Votes):
     filter_vote_states = "assigned done"
     filter_ticket_states = "opened started talk"
     
-class MyWatched(My, Votes):    
+class MyWatched(My, Votes):
     """Show your votes in states watching"""
     label = _("My watchlist")
     column_names = "votable_overview workflow_buttons *"
@@ -344,6 +366,7 @@ class VotesByVotable(Votes):
     # show_detail_navigator = False
     hide_top_toolbar = True
     # slave_grid_format = 'html'
+    exclude_vote_states = 'author'
 
     detail_layout = dd.DetailLayout("""
     mail_mode 
@@ -387,7 +410,7 @@ page.
     qs = qs.order_by('priority')
     if qs.count() > 0:
         chunks = [six.text_type(_("Your favourite {0} are ").format(
-            dd.plugins.votes.votable_model._meta.verbose_name_plural))]
+            config.votable_model._meta.verbose_name_plural))]
         chunks += join_elems([
             ar.obj2html(obj.votable, obj.nickname)
             for obj in qs])

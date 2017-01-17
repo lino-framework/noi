@@ -174,14 +174,14 @@ online_registration."""),
 which represents a votable in your application.  Default value is
 'tickets.Ticket' (referring to
 lino_noi.lib.tickets.models.Ticket)."""),
+    'lino_noi.lib.votes.actions.CreateVote' : _("""Define your vote about this object."""),
+    'lino_noi.lib.votes.actions.VotableEditVote' : _("""Edit your vote about this object."""),
     'lino_noi.lib.votes.choicelists.VoteState' : _("""The state of a vote."""),
     'lino_noi.lib.votes.choicelists.VoteState.vote_name' : _("""Translatable text. How a vote is called when in this state."""),
     'lino_noi.lib.votes.choicelists.VoteStates' : _("""The list of possible states of a vote.  This is used as choicelist
 for the state
 field of a vote."""),
     'lino_noi.lib.votes.choicelists.VoteStates.item_class' : _("""alias of VoteState"""),
-    'lino_noi.lib.votes.mixins.CreateVote' : _("""Define your vote about this object."""),
-    'lino_noi.lib.votes.mixins.EditVote' : _("""Edit your vote about this object."""),
     'lino_noi.lib.votes.mixins.Votable' : _("""Base class for models that can be used as
 lino_noi.lib.votes.Plugin.votable_model."""),
     'lino_noi.lib.votes.models.Vote' : _("""A vote is when a user has an opinion or interest about a given
@@ -203,6 +203,8 @@ ticket (or any other votable)."""),
     'lino_noi.lib.votes.models.MyOffers.model' : _("""alias of Vote"""),
     'lino_noi.lib.votes.models.MyTasks' : _("""Show your votes in states assigned and done"""),
     'lino_noi.lib.votes.models.MyTasks.model' : _("""alias of Vote"""),
+    'lino_noi.lib.votes.models.MyWatched' : _("""Show your votes in states watching"""),
+    'lino_noi.lib.votes.models.MyWatched.model' : _("""alias of Vote"""),
     'lino_noi.lib.votes.models.VotesByVotable' : _("""Show the votes about this object."""),
     'lino_noi.lib.votes.models.VotesByVotable.master' : _("""alias of Ticket"""),
     'lino_noi.lib.votes.models.VotesByVotable.model' : _("""alias of Vote"""),

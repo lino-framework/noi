@@ -25,10 +25,10 @@ class Votable(ChangeObservable):
 
     def get_vote_raters(self):
         """Yield or return a list of the users who are allowed to rate the
-votes on this votable.
+        votes on this votable.
 
-        As a side effect, Lino will automatically (in
-        :meth:`after_ui_save`) create a vote for each of them.
+        Lino automatically (in :meth:`after_ui_save`) creates an
+        **author vote** for each of them.
 
         """
         return []

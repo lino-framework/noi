@@ -22,6 +22,28 @@ A **votable**, in :ref:`noi`, is a ticket. But the module is designed
 to be reusable in other contexts.
 
 
+The state of a vote
+===================
+
+See :class:`lino_noi.lib.votes.choicelists.VoteStates`
+
+>>> rt.login().show(votes.VoteStates)
+... #doctest: +REPORT_UDIFF
+======= =========== ===========
+ value   name        text
+------- ----------- -----------
+ 00      author      Author
+ 10      watching    Watching
+ 20      candidate   Candidate
+ 30      assigned    Assigned
+ 40      done        Done
+ 50      rated       Rated
+ 60      cancelled   Cancelled
+======= =========== ===========
+<BLANKLINE>
+
+
+
 My tasks ("To-Do list")
 =======================
 
