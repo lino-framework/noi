@@ -139,7 +139,7 @@ class MarkTicketStarted(TicketAction):
     label = pgettext("verb", "Start")
     required_states = 'talk opened'
 
-    def before_execute(self, ar, obj):
+    def unused_before_execute(self, ar, obj):
         for v in rt.models.votes.Vote.objects.filter(votable=obj):
             if v.state == rt.actors.votes.VoteStates.assigned:
                 return  # ok
