@@ -356,7 +356,7 @@ class VotesByVotable(Votes):
     # show_detail_navigator = False
     # hide_top_toolbar = True
     # slave_grid_format = 'html'
-    exclude_vote_states = 'author'
+    # exclude_vote_states = 'author'
 
     detail_layout = dd.DetailLayout("""
     mail_mode 
