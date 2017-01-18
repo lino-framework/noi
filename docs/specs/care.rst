@@ -310,43 +310,25 @@ his job. Dora's vote has been cancelled.
 
 >>> show_votes(1)
 #1 (My faucet is dripping, who can help?)
-======= ===============
- Voter   Actions
-------- ---------------
- Alex    **Done**
- Dora    **Cancelled**
-======= ===============
-<BLANKLINE>
-
+*dora*, *alex*, *berta*
 
 Ticket #2 has not yet any vote:
 
 >>> show_votes(2)
 #2 (My lawn needs mowing. On Thursday or Saturday.)
-No data to display
+*christa*
 
 >>> show_votes(3)
 #3 (Who can give piano lessons to my son?)
-========= ===============
- Voter     Actions
---------- ---------------
- Christa   **Candidate**
-========= ===============
-<BLANKLINE>
+*christa*, *dora*, *eric*
 
 >>> show_votes(4)
 #4 (Who can give guitar lessons to my daughter?)
-No data to display
+*alex*
 
 >>> show_votes(5)
 #5 (Who would play music on my birthday party?)
-========= ===============
- Voter     Actions
---------- ---------------
- Christa   **Candidate**
- Eric      **Candidate**
-========= ===============
-<BLANKLINE>
+*eric*, *christa*, *alex*
 
 
 
@@ -496,7 +478,7 @@ the detail window of a ticket.
       - (general1_1): **Summary** (summary), **ID** (id), **Deadline** (deadline)
       - (general1_2): **Author** (user), **End user** (end_user), **Faculty** (faculty)
       - (general1_3): **Site** (site), **Actions** (workflow_buttons)
-    - **Votes** (votes.VotesByVotable) [visible for user connector admin]
+    - **Votes** (VotesByVotable) [visible for user connector admin]
   - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user connector admin]
 - **History** (changes.ChangesByMaster) [visible for connector admin]
 - **More** (more) [visible for connector admin]:

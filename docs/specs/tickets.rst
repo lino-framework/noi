@@ -625,7 +625,7 @@ the detail window of a ticket.
       - (general1_1): **Summary** (summary), **ID** (id), **Author** (user), **End user** (end_user)
       - (general1_2): **Site** (site), **Topic** (topic), **Project** (project), **Private** (private)
       - (general1_3): **Actions** (workflow_buttons), **Faculty** (faculty)
-    - **Votes** (votes.VotesByVotable) [visible for user consultant hoster developer senior admin]
+    - **Votes** (VotesByVotable) [visible for user consultant hoster developer senior admin]
   - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user consultant hoster developer senior admin], **Sessions** (SessionsByTicket) [visible for consultant hoster developer senior admin]
 - **More** (more):
   - (more_1):
