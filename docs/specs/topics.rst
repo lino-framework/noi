@@ -55,8 +55,8 @@ Configure --> Contacts --> Topics
 Choosing a topic
 ================
 
-When choosing a topic, the search text looks in both the reference and
-the designation:
+When choosing a topic, the search text looks in both the
+:guilabel:`Reference` and the :guilabel:`Designation` field:
 
 >>> base = '/choices/tickets/Tickets/topic'
 >>> show_choices("robin", base + '?query=')

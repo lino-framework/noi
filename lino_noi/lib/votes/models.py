@@ -191,6 +191,7 @@ class Votes(dd.Table):
 
     """
     model = 'votes.Vote'
+    order_by = ['-id']
     # stay_in_grid = True
     required_roles = dd.required(VotesUser)
 
@@ -303,7 +304,6 @@ class MyVotes(My, Votes):
     """Show your votes in all states"""
     label = _("My votes")
     column_names = "votable_overview workflow_buttons *"
-    order_by = ['-id']
     # hide_top_toolbar = True
     
     detail_layout = dd.DetailLayout("""
@@ -318,7 +318,6 @@ class MyOffers(My, Votes):
     """Show the tickets for which you are candidate"""
     label = _("My candidatures")
     column_names = "votable_overview workflow_buttons *"
-    order_by = ['-id']
     filter_vote_states = "candidate"
     filter_ticket_states = "new talk opened started"
     
@@ -335,7 +334,6 @@ class MyWatched(My, Votes):
     """Show your votes in states watching"""
     label = _("My watchlist")
     column_names = "votable_overview workflow_buttons *"
-    order_by = ['-id']
     filter_vote_states = "watching"
     # filter_ticket_states = "open talk"
     
@@ -352,11 +350,12 @@ class VotesByVotable(Votes):
     """
     label = _("Votes")
     master_key = 'votable'
-    column_names = 'user workflow_buttons *'
+    column_names = 'user workflow_buttons id mail_mode *'
     # show_detail_navigator = False
     # hide_top_toolbar = True
-    # slave_grid_format = 'html'
+    slave_grid_format = 'summary'
     # exclude_vote_states = 'author'
+    stay_in_grid = True
 
     detail_layout = dd.DetailLayout("""
     mail_mode 
@@ -364,6 +363,49 @@ class VotesByVotable(Votes):
     workflow_buttons 
     rating 
     """, window_size=(40, 'auto'))
+
+    insert_layout = """
+    user
+    mail_mode 
+    workflow_buttons 
+    # rating 
+    """
+
+    @classmethod
+    def get_slave_summary(self, obj, ar):
+        """Customized :meth:`summary view
+        <lino.core.actors.Actor.get_slave_summary>` for this table.
+
+        """
+        sar = self.request_from(ar, master_instance=obj)
+
+        html = []
+
+        items = [
+            ar.obj2html(o, o.user.username or str(o.user))
+            for o in sar]
+
+        # items = [
+        #     ar.obj2html(o, o.user.username or str(o.user))
+        #     for o in rt.models.votes.Vote.objects.filter(
+        #             votable=obj).order_by('-id')]
+
+        sar = self.insert_action.request_from(sar)
+        if sar.get_permission():
+            # btn = sar.ar2button(None, _("Add voter"), icon_name=None)
+            btn = sar.ar2button()
+            # btn = sar.ar2button(None, u"⏍", icon_name=None)  # 23CD SQUARE FOOT
+            # btn = sar.ar2button(None, u"⊞", icon_name=None) # 229e SQUARED PLUS
+            
+            items.append(btn)
+            
+        if len(items) > 0:
+            html += join_elems(items, sep=', ')
+            
+        return E.p(*html)
+
+
+    
 
 # class MyOfferedVotes(MyVotes):
 #     """List of my help offers to other users' requests.
