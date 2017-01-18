@@ -17,7 +17,7 @@ class TicketDetail(TicketDetail):
     `faculties`
 
     """
-    main = "general more history_tab deploy.DeploymentsByTicket"
+    main = "general more history_tab more2"
     
     general = dd.Panel("""
     general1:60 votes.VotesByVotable:20
@@ -34,6 +34,11 @@ class TicketDetail(TicketDetail):
     more1 DuplicatesByTicket:20
     upgrade_notes:20 LinksByTicket:20
     """, label=_("More"))
+
+    more2 = dd.Panel("""
+    deploy.DeploymentsByTicket
+    uploads.UploadsByController
+    """, label=_("Even more"))
 
 Tickets.detail_layout = TicketDetail()
 
