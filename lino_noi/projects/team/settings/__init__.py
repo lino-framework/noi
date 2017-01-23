@@ -93,8 +93,8 @@ class Site(Site):
         # `auth=True`. In Lino Noi everybody can see everything.
         return kw
 
-    def setup_quicklinks(self, ar, tb):
-        super(Site, self).setup_quicklinks(ar, tb)
+    def setup_quicklinks(self, user, tb):
+        super(Site, self).setup_quicklinks(user, tb)
         tb.add_action(self.modules.tickets.MyTickets)
         tb.add_action(self.modules.tickets.TicketsToTriage)
         tb.add_action(self.modules.tickets.TicketsToTalk)
@@ -106,7 +106,7 @@ class Site(Site):
 
         a = self.actors.users.MySettings.default_action
         tb.add_instance_action(
-            ar.get_user(), action=a, label=_("My settings"))
+            user, action=a, label=_("My settings"))
         # handler = self.action_call(None, a, dict(record_id=user.pk))
         # handler = "function(){%s}" % handler
         # mysettings = dict(text=_("My settings"),

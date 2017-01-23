@@ -82,11 +82,11 @@ class Site(Site):
         # self.plugins.lists.partner_model = 'users.User'
         self.plugins.countries.configure(hide_region=True)
 
-    def setup_quicklinks(self, ar, tb):
+    def setup_quicklinks(self, user, tb):
         # super(Site, self).setup_quicklinks(ar, tb)
         a = self.actors.users.MySettings.default_action
         tb.add_instance_action(
-            ar.get_user(), action=a, label=_("My settings"))
+            user, action=a, label=_("My settings"))
         
         # tb.add_action(self.modules.tickets.MyTickets)
         # tb.add_action(self.modules.tickets.TicketsToTriage)

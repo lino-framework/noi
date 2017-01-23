@@ -563,6 +563,29 @@ class TicketsByProject(Tickets):
 class TicketsByEndUser(Tickets):
     master_key = 'end_user'
     column_names = ("overview:50 topic:10 user:10 workflow_buttons * ")
+    slave_grid_format = "summary"
+
+    @classmethod
+    def get_slave_summary(self, obj, ar):
+        """The :meth:`summary view <lino.core.actors.Actor.get_slave_summary>`
+        for this table.
+
+        """
+        sar = self.request_from(ar, master_instance=obj)
+
+        chunks = []
+        items = [ar.obj2html(o) for o in sar]
+        if len(items) > 0:
+            chunks += join_elems(items, ", ")
+            
+        sar = self.insert_action.request_from(sar)
+        if sar.get_permission():
+            chunks.append(sar.ar2button())
+
+        return E.p(*chunks)
+
+
+    
 
 
 class TicketsByType(Tickets):
