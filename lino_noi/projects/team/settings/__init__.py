@@ -25,7 +25,6 @@ class Site(Site):
 
     verbose_name = "Lino Noi"
     version = SETUP_INFO['version']
-
     url = "http://noi.lino-framework.org/"
 
     demo_fixtures = ['std', 'demo', 'demo2']
@@ -71,15 +70,17 @@ class Site(Site):
         yield 'lino_xl.lib.lists'
         yield 'lino_xl.lib.blogs'
 
+        yield 'lino.modlib.changes'
         yield 'lino.modlib.notify'
-        # yield 'lino.modlib.uploads'
+        yield 'lino.modlib.uploads'
+        # yield 'lino_xl.lib.outbox'
         # yield 'lino_xl.lib.excerpts'
         yield 'lino.modlib.export_excel'
         yield 'lino.modlib.tinymce'
         yield 'lino.modlib.smtpd'
         yield 'lino.modlib.weasyprint'
         yield 'lino_xl.lib.appypod'
-        yield 'lino.modlib.wkhtmltopdf'
+        # yield 'lino.modlib.wkhtmltopdf'
         yield 'lino.modlib.dashboard'
 
         # yield 'lino.modlib.awesomeuploader'

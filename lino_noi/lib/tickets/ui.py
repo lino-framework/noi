@@ -356,7 +356,7 @@ class Tickets(dd.Table):
         topic=dd.ForeignKey('topics.Topic', blank=True, ),
         site=dd.ForeignKey('tickets.Site', blank=True, ),
         end_user=dd.ForeignKey(
-            settings.SITE.user_model,
+            dd.plugins.tickets.end_user_model,
             verbose_name=_("End user"),
             blank=True, null=True,
             help_text=_("Only rows concerning this end user.")),
@@ -558,6 +558,11 @@ class TicketsByProject(Tickets):
     required_roles = dd.login_required(Triager)
     column_names = ("overview:50 topic:10 user:10 state "
                     "planned_time *")
+
+
+class TicketsByEndUser(Tickets):
+    master_key = 'end_user'
+    column_names = ("overview:50 topic:10 user:10 workflow_buttons * ")
 
 
 class TicketsByType(Tickets):

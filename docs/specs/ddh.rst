@@ -37,13 +37,13 @@ Lino Noi:
   - PROTECT : contacts.Company.type
 - contacts.Partner :
   - CASCADE : contacts.Company.partner_ptr, contacts.Person.partner_ptr
-  - PROTECT : clocking.ServiceReport.interesting_for, lists.Member.partner, outbox.Recipient.partner, tickets.Site.partner, topics.Interest.partner, users.User.partner
+  - PROTECT : clocking.ServiceReport.interesting_for, lists.Member.partner, tickets.Site.partner, topics.Interest.partner, users.User.partner
 - contacts.Person :
   - PROTECT : contacts.Role.person, excerpts.Excerpt.contact_person, tickets.Project.contact_person
 - contacts.RoleType :
   - PROTECT : contacts.Role.type, excerpts.Excerpt.contact_role, tickets.Project.contact_role
 - contenttypes.ContentType :
-  - PROTECT : blogs.Entry.owner_type, changes.Change.master_type, changes.Change.object_type, comments.Comment.owner_type, excerpts.Excerpt.owner_type, excerpts.ExcerptType.content_type, gfks.HelpText.content_type, notify.Message.owner_type, outbox.Attachment.owner_type, outbox.Mail.owner_type, uploads.Upload.owner_type
+  - PROTECT : blogs.Entry.owner_type, changes.Change.master_type, changes.Change.object_type, comments.Comment.owner_type, excerpts.Excerpt.owner_type, excerpts.ExcerptType.content_type, gfks.HelpText.content_type, notify.Message.owner_type, uploads.Upload.owner_type
 - countries.Country :
   - PROTECT : contacts.Partner.country, countries.Place.country, users.User.country
 - countries.Place :
@@ -60,10 +60,8 @@ Lino Noi:
   - PROTECT : lists.Member.list
 - lists.ListType :
   - PROTECT : lists.List.list_type
-- outbox.Mail :
-  - CASCADE : outbox.Attachment.mail, outbox.Recipient.mail
 - tickets.Project :
-  - PROTECT : excerpts.Excerpt.project, outbox.Mail.project, tickets.Project.parent, tickets.Ticket.project
+  - PROTECT : excerpts.Excerpt.project, tickets.Project.parent, tickets.Ticket.project
 - tickets.ProjectType :
   - PROTECT : tickets.Project.type
 - tickets.Site :
@@ -81,4 +79,4 @@ Lino Noi:
   - PROTECT : uploads.Upload.type
 - users.User :
   - CASCADE : faculties.Competence.user
-  - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, dashboard.Widget.user, excerpts.Excerpt.user, notify.Message.user, outbox.Mail.user, tickets.Project.assign_to, tickets.Ticket.end_user, tickets.Ticket.reporter, tickets.Ticket.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user, votes.Vote.user
+  - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, dashboard.Widget.user, excerpts.Excerpt.user, notify.Message.user, tickets.Project.assign_to, tickets.Ticket.end_user, tickets.Ticket.reporter, tickets.Ticket.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user, votes.Vote.user

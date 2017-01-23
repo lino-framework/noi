@@ -24,6 +24,10 @@ class Plugin(ad.Plugin):
 
     needs_plugins = ['lino_noi.lib.noi']
 
+    # project_model = 'tickets.Project'
+    project_model = 'contacts.Partner'
+    
+    # ticket_model = 'tickets.Ticket'
     ticket_model = 'contacts.Partner'
     """The model that is to be used as the "workable".
 
@@ -33,9 +37,8 @@ class Plugin(ad.Plugin):
     """
 
     def on_site_startup(self, site):
-        from lino.core.utils import resolve_model
         from .mixins import Workable
-        self.ticket_model = resolve_model(self.ticket_model)
+        self.ticket_model = site.models.resolve(self.ticket_model)
         if not issubclass(self.ticket_model, Workable):
             msg = "Your plugins.clocking.ticket_model ({}) is not workable"
             msg = msg.format(self.ticket_model)

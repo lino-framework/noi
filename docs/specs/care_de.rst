@@ -46,7 +46,7 @@ Das Hauptmenü
   - Bitten : Projekte, Projekte (Hierarchie), Project Types, Ticket types, Umfelder
   - Fähigkeiten : Fähigkeiten (Hierarchie), Fähigkeiten (alle)
 - Explorer :
-  - System : Datenbankmodelle, Vollmachten, Benutzerarten, Änderungen, Benachrichtigungen
+  - System : Datenbankmodelle, Vollmachten, Benutzerarten, Änderungen, Benachrichtigungen, All dashboard widgets
   - Stimmabgaben : Alle Stimmabgaben, Stimmabgabezustände
   - Büro : Auszüge, Kommentare
   - Bitten : Verknüpfungen, Ticketzustände

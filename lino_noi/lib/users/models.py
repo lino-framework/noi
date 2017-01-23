@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 """Database models for this plugin.
 
@@ -9,9 +9,8 @@ from __future__ import unicode_literals
 
 from lino.api import dd, rt, _
 
+from lino.mixins import Phonable
 from lino_xl.lib.countries.mixins import AddressLocation
-from lino.utils.addressable import Addressable
-from lino_xl.lib.contacts.mixins import Contactable
 
 from lino.modlib.users.models import *
 
@@ -106,7 +105,7 @@ class VerifyUser(dd.Action):
     
 
 # @python_2_unicode_compatible
-class User(User, Contactable, AddressLocation, Addressable):
+class User(User, Phonable, AddressLocation):
 
     """
     .. attribute:: callme_mode
