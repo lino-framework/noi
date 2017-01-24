@@ -1,21 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2014-2017 Luc Saffre
-#
-# This file is part of Lino Noi.
-#
-# Lino Noi is free software: you can redistribute it and/or modify it
-# under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# Lino Noi is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public
-# License along with Lino Noi.  If not, see
-# <http://www.gnu.org/licenses/>.
+# License: BSD (see file COPYING for details)
 
 SETUP_INFO = dict(
     name='lino-noi',
@@ -44,8 +29,6 @@ SETUP_INFO = dict(
 
 Lino Noi is a customizable ticket management and time tracking
 system to use when time is more than money.
-It is used by the `Lino <http://www.lino-framework.org/>`__ team for
-managing their work on the Lino project.
 
 - For *introductions* and *commercial information* about Lino Noi
   please see `www.saffre-rumma.net
@@ -58,7 +41,7 @@ managing their work on the Lino project.
     author='Luc Saffre',
     author_email='luc@lino-framework.org',
     url="http://noi.lino-framework.org",
-    license='GNU Affero General Public License v3',
+    license='BSD License',
     classifiers="""\
 Programming Language :: Python
 Programming Language :: Python :: 2
@@ -112,7 +95,6 @@ SETUP_INFO.update(packages=[
     'lino_noi.projects.care.tests',
     'lino_noi.projects.care.lib',
     'lino_noi.projects.care.lib.tickets',
-    'lino_noi.projects.care.lib.tickets.fixtures',
     'lino_noi.projects.care_de',
     'lino_noi.projects.public.settings',
     'lino_noi.projects.public.tests',

@@ -356,7 +356,7 @@ class Tickets(dd.Table):
         topic=dd.ForeignKey('topics.Topic', blank=True, ),
         site=dd.ForeignKey('tickets.Site', blank=True, ),
         end_user=dd.ForeignKey(
-            settings.SITE.user_model,
+            dd.plugins.tickets.end_user_model,
             verbose_name=_("End user"),
             blank=True, null=True,
             help_text=_("Only rows concerning this end user.")),
@@ -558,6 +558,34 @@ class TicketsByProject(Tickets):
     required_roles = dd.login_required(Triager)
     column_names = ("overview:50 topic:10 user:10 state "
                     "planned_time *")
+
+
+class TicketsByEndUser(Tickets):
+    master_key = 'end_user'
+    column_names = ("overview:50 topic:10 user:10 workflow_buttons * ")
+    slave_grid_format = "summary"
+
+    @classmethod
+    def get_slave_summary(self, obj, ar):
+        """The :meth:`summary view <lino.core.actors.Actor.get_slave_summary>`
+        for this table.
+
+        """
+        sar = self.request_from(ar, master_instance=obj)
+
+        chunks = []
+        items = [ar.obj2html(o) for o in sar]
+        if len(items) > 0:
+            chunks += join_elems(items, ", ")
+            
+        sar = self.insert_action.request_from(sar)
+        if sar.get_permission():
+            chunks.append(sar.ar2button())
+
+        return E.p(*chunks)
+
+
+    
 
 
 class TicketsByType(Tickets):

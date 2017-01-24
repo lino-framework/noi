@@ -1,3 +1,7 @@
+# -*- coding: UTF-8 -*-
+# Copyright 2016-2017 Luc Saffre
+# License: BSD (see file COPYING for details)
+
 from lino_noi.lib.tickets.models import *
 from lino.api import _
 
@@ -33,7 +37,7 @@ class TicketDetail(TicketDetail):
 
     general = dd.Panel("""
     general1:60 votes.VotesByVotable:20
-    description:30 comments.CommentsByRFC:30 clocking.SessionsByTicket:20
+    description:30 comments.CommentsByRFC:30 #clocking.SessionsByTicket:20
     """, label=_("General"))
 
     general1 = """

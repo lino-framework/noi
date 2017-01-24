@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016 Luc Saffre
+# Copyright 2016-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """User interface for this plugin.
@@ -8,13 +8,16 @@
 """
 import six
 
+from lino_xl.lib.cal.utils import when_text
 from lino_noi.lib.clocking.ui import *
 from lino.api import _
 
 
 from lino_noi.lib.tickets.models import Project
+from lino_noi.lib.tickets.ui import Tickets, Projects
 from lino_noi.lib.tickets.models import Ticket
 from lino_noi.lib.clocking.roles import Worker
+
 
 
 MySessionsByDate.column_names = (

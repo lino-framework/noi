@@ -19,8 +19,8 @@ This document describes the database structure.
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-39 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, office, xl, countries, contacts, users, topics, votes, uploads, outbox, excerpts, comments, changes, noi, tickets, faculties, deploy, clocking, lists, blogs, notify, export_excel, tinymce, smtpd, weasyprint, appypod, wkhtmltopdf, dashboard, rest_framework, restful.
-48 models:
+37 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, office, xl, countries, contacts, users, topics, votes, excerpts, comments, changes, noi, tickets, faculties, deploy, clocking, lists, blogs, notify, uploads, export_excel, tinymce, smtpd, weasyprint, appypod, dashboard, rest_framework, restful.
+45 models:
 =========================== ============================ ========= =======
  Name                        Default table                #fields   #rows
 --------------------------- ---------------------------- --------- -------
@@ -38,7 +38,7 @@ This document describes the database structure.
  contacts.Person             contacts.Persons             26        0
  contacts.Role               contacts.Roles               4         0
  contacts.RoleType           contacts.RoleTypes           4         0
- contenttypes.ContentType    gfks.ContentTypes            3         49
+ contenttypes.ContentType    gfks.ContentTypes            3         46
  countries.Country           countries.Countries          6         8
  countries.Place             countries.Places             8         78
  dashboard.Widget            dashboard.Widgets            5         0
@@ -53,9 +53,6 @@ This document describes the database structure.
  lists.ListType              lists.ListTypes              4         3
  lists.Member                lists.Members                5         0
  notify.Message              notify.Messages              11        7
- outbox.Attachment           outbox.Attachments           4         0
- outbox.Mail                 outbox.Mails                 9         0
- outbox.Recipient            outbox.Recipients            6         0
  system.SiteConfig           system.SiteConfigs           5         1
  tickets.Link                tickets.Links                4         1
  tickets.Project             tickets.Projects             17        5

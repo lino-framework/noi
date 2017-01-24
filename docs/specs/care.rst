@@ -351,7 +351,7 @@ The main menu
   - Pleas : Projects, Projects (tree), Project Types, Ticket types, Sites
   - Faculties : Faculties (tree), Faculties (all)
 - Explorer :
-  - System : content types, Authorities, User types, Changes, Notification messages
+  - System : content types, Authorities, User types, Changes, Notification messages, All dashboard widgets
   - Votes : All votes, Vote states
   - Office : Excerpts, Comments
   - Pleas : Dependencies, Ticket states

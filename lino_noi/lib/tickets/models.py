@@ -440,7 +440,6 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         verbose_name = _("Ticket")
         verbose_name_plural = _('Tickets')
         abstract = dd.is_abstract_model(__name__, 'Ticket')
-
     project = dd.ForeignKey(
         'tickets.Project', blank=True, null=True,
         related_name="tickets_by_project")
@@ -481,7 +480,7 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         blank=True, null=True,
         verbose_name=_("Reporter"))
     end_user = dd.ForeignKey(
-        settings.SITE.user_model,
+        dd.plugins.tickets.end_user_model,
         verbose_name=_("End user"),
         blank=True, null=True,
         related_name="reported_tickets")
@@ -586,8 +585,11 @@ class Ticket(UserAuthored, mixins.CreatedModified,
 
         """
         yield self.user
-        if self.end_user:
-            yield self.end_user
+        if issubclass(
+                dd.plugins.tickets.end_user_model,
+                settings.SITE.user_model):
+            if self.end_user:
+                yield self.end_user
        
     def is_workable_for(self, user):
         if self.standby or self.closed:

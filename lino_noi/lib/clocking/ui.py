@@ -19,13 +19,9 @@ from lino.utils.quantities import Duration
 from lino.modlib.system.choicelists import ObservedEvent
 from lino.mixins.periods import ObservedPeriod
 
+from lino_noi.lib.tickets.choicelists import (
+    TicketEvents, ProjectEvents, ObservedEvent)
 
-from lino_xl.lib.cal.utils import when_text
-
-
-from lino_noi.lib.tickets.choicelists import (TicketEvents,
-                                              ProjectEvents, ObservedEvent)
-from lino_noi.lib.tickets.ui import Tickets, Projects
 from .roles import Worker
 
 MIN_DURATION = Duration('0:01')
@@ -107,8 +103,10 @@ class Sessions(dd.Table):
     # order_by = ['start_date', 'start_time']
     # stay_in_grid = True
     parameters = ObservedPeriod(
-        project=dd.ForeignKey('tickets.Project', null=True, blank=True),
-        ticket=dd.ForeignKey('tickets.Ticket', null=True, blank=True),
+        project=dd.ForeignKey(
+            dd.plugins.clocking.project_model, null=True, blank=True),
+        ticket=dd.ForeignKey(
+            dd.plugins.clocking.ticket_model, null=True, blank=True),
         # user=dd.ForeignKey('users.User', null=True, blank=True),
         session_type=dd.ForeignKey(
             'clocking.SessionType', null=True, blank=True),

@@ -68,9 +68,9 @@ information about every state.
 Above table in German:
 
 >>> rt.show(tickets.TicketStates, language="de")
-====== =========== ============= ======== ========
- Wert   name        Text          Symbol   Aktive
------- ----------- ------------- -------- --------
+====== =========== ============= ======== =======
+ Wert   name        Text          Symbol   Aktiv
+------ ----------- ------------- -------- -------
  10     new         Neu           ⛶        Ja
  15     talk        Besprechen    ☎        Ja
  20     opened      Offen         ☉        Ja
@@ -80,7 +80,7 @@ Above table in German:
  40     ready       Bereit        ☐        Ja
  50     closed      Geschlossen   ☑        Nein
  60     cancelled   Storniert     ☒        Nein
-====== =========== ============= ======== ========
+====== =========== ============= ======== =======
 <BLANKLINE>
 
 And in French (not yet fully translated):
@@ -635,7 +635,9 @@ the detail window of a ticket.
     - **Duplicates** (DuplicatesByTicket)
   - (more_2): **Upgrade notes** (upgrade_notes), **Dependencies** (LinksByTicket) [visible for developer senior admin]
 - **History** (changes.ChangesByMaster) [visible for developer senior admin]
-- **Deployments** (deploy.DeploymentsByTicket) [visible for user consultant hoster developer senior admin]
+- **Even more** (more2) [visible for user consultant hoster developer senior admin]:
+  - **Deployments** (deploy.DeploymentsByTicket)
+  - **Uploads** (UploadsByController)
 <BLANKLINE>
 
 

@@ -7,7 +7,6 @@
    :toctree:
 
    models
-   fixtures.demo
 
 
 """
