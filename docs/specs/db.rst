@@ -27,7 +27,7 @@ This document describes the database structure.
  blogs.Entry                 blogs.Entries                10        3
  blogs.EntryType             blogs.EntryTypes             6         3
  blogs.Tagging               blogs.Taggings               3         3
- changes.Change              changes.Changes              9         0
+ changes.Change              changes.Changes              10        0
  clocking.ServiceReport      clocking.ServiceReports      7         1
  clocking.Session            clocking.Sessions            12        13
  clocking.SessionType        clocking.SessionTypes        4         1
