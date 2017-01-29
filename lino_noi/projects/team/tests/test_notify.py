@@ -89,6 +89,7 @@ class TestCase(TestCase):
         post_data[constants.URL_PARAM_MASTER_PK] = obj.pk
         ct = ContentType.objects.get_for_model(Ticket)
         post_data[constants.URL_PARAM_MASTER_TYPE] = ct.id
+        # post_data[constants.URL_PARAM_REQUESTING_PANEL] = '123'
         response = self.client.post(
             url, post_data,
             REMOTE_USER='robin',

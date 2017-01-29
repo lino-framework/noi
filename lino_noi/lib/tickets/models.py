@@ -571,7 +571,7 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         #     elems += [' (', str(self.state.button_text), ')']
         return elems
 
-    # def get_notify_message(self, ar, cw):
+    # def get_change_body(self, ar, cw):
     #     return E.tostring(E.p(
     #         _("{user} worked on [ticket {t}]").format(
     #             user=ar.get_user(), t=self.id)))
