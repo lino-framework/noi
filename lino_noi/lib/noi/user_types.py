@@ -22,6 +22,7 @@ from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino_noi.lib.tickets.roles import Triager
 from lino_noi.lib.clocking.roles import Worker
 from lino_noi.lib.votes.roles import VotesStaff, VotesUser
+
 from lino.modlib.users.choicelists import UserTypes
 from django.utils.translation import ugettext_lazy as _
 
