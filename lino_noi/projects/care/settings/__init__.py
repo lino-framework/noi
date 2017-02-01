@@ -33,7 +33,7 @@ class Site(Site):
 
     demo_fixtures = ['std', 'demo', 'demo2']
     project_model = 'tickets.Project'
-    user_types_module = 'lino_noi.projects.care.roles'
+    user_types_module = 'lino_noi.projects.care.user_types'
     workflows_module = 'lino_noi.projects.care.workflows'
     obj2text_template = "**{0}**"
     use_websockets = False

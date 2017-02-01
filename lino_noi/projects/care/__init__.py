@@ -8,7 +8,7 @@ introduction.
    :toctree:
 
    lib
-   roles
+   user_types
    settings
    workflows
 

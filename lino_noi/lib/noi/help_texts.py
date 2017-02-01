@@ -47,15 +47,15 @@ have or not."""),
     'lino_noi.lib.faculties.models.Competence' : _("""A competence is when a given user is declared to be competent
 in a given faculty."""),
     'lino_noi.lib.noi.migrate.Migrator' : _("""The standard migrator for noi."""),
-    'lino_noi.lib.noi.roles.EndUser' : _("""An end user is somebody who uses our software and may report
+    'lino_noi.lib.noi.user_types.EndUser' : _("""An end user is somebody who uses our software and may report
 tickets, but won't work on them."""),
-    'lino_noi.lib.noi.roles.Consultant' : _("""A consultant is somebody who may both report tickets and work
+    'lino_noi.lib.noi.user_types.Consultant' : _("""A consultant is somebody who may both report tickets and work
 on them."""),
-    'lino_noi.lib.noi.roles.Developer' : _("""A developer is somebody who may both report tickets and work
+    'lino_noi.lib.noi.user_types.Developer' : _("""A developer is somebody who may both report tickets and work
 on them."""),
-    'lino_noi.lib.noi.roles.Senior' : _("""A senior developer is a developer who is additionally
+    'lino_noi.lib.noi.user_types.Senior' : _("""A senior developer is a developer who is additionally
 responsible for triaging tickets"""),
-    'lino_noi.lib.noi.roles.SiteAdmin' : _("""Can do everything."""),
+    'lino_noi.lib.noi.user_types.SiteAdmin' : _("""Can do everything."""),
     'lino_noi.lib.noi.workflows.TicketAction' : _("""Base class for ticket actions."""),
     'lino_noi.lib.noi.workflows.MarkTicketOpened' : _("""Mark this ticket as open."""),
     'lino_noi.lib.noi.workflows.MarkTicketStarted' : _("""Mark this ticket as started."""),
@@ -218,13 +218,13 @@ must resolve using resolve_states."""),
     'lino_noi.lib.votes.models.VotesByVotable.master' : _("""alias of Ticket"""),
     'lino_noi.lib.votes.models.VotesByVotable.model' : _("""alias of Vote"""),
     'lino_noi.projects.bs3.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Noi."""),
-    'lino_noi.projects.care.roles.SimpleUser' : _("""A simple user is a person who can log into the application in
+    'lino_noi.projects.care.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Care."""),
+    'lino_noi.projects.care.user_types.SimpleUser' : _("""A simple user is a person who can log into the application in
 order to manage their own pleas and competences and potentially
 can respond to other user's pleas."""),
-    'lino_noi.projects.care.roles.Connector' : _("""A connector is a person who knows other persons and who
+    'lino_noi.projects.care.user_types.Connector' : _("""A connector is a person who knows other persons and who
 introduces pleas on their behalf."""),
-    'lino_noi.projects.care.roles.SiteAdmin' : _("""A site administrator can do everything."""),
-    'lino_noi.projects.care.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Care."""),
+    'lino_noi.projects.care.user_types.SiteAdmin' : _("""A site administrator can do everything."""),
     'lino_noi.projects.public.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Noi."""),
     'lino_noi.projects.team.lib.clocking.models.ServiceReport' : _("""A service report is a document used in various discussions with
 a stakeholder."""),

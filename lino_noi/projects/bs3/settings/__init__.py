@@ -1,10 +1,10 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 """The :xfile:`settings.py` modules for this variant.
 
 It has :attr:`default_user<lino.core.site.Site.default_user>` set to
-'anonymous'. Which causes it to deactivate both authentication and
+'anonymous', which causes it to deactivate both authentication and
 sessions.
 
 .. autosummary::

@@ -8,8 +8,7 @@
 from lino.api import dd
 from lino.core.roles import UserRole, SiteAdmin
 from lino.modlib.users.roles import Helper
-# from lino.modlib.office.roles import OfficeStaff
-from lino_xl.lib.contacts.roles import ContactsUser
+from lino_xl.lib.contacts.roles import ContactsUser, ContactsStaff
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino_noi.lib.votes.roles import VotesStaff, VotesUser
@@ -36,7 +35,7 @@ class Connector(SimpleUser, Worker, Triager, ExcerptsUser):
     pass
 
 
-class SiteAdmin(SiteAdmin, OfficeStaff, Helper, ContactsUser,
+class SiteAdmin(SiteAdmin, OfficeStaff, Helper, ContactsStaff,
                 Worker, Triager, VotesStaff, ExcerptsStaff):
     """A **site administrator** can do everything."""
 

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2016 Luc Saffre
+# Copyright 2014-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 """
 
@@ -33,7 +33,7 @@ class Site(Site):
 
     project_model = 'tickets.Project'
     textfield_format = 'html'
-    user_types_module = 'lino_noi.lib.noi.roles'
+    user_types_module = 'lino_noi.lib.noi.user_types'
     workflows_module = 'lino_noi.lib.noi.workflows'
     obj2text_template = "**{0}**"
 
