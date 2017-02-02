@@ -51,7 +51,7 @@ class Developer(Triager, Consultant):
     pass
 
 
-class Senior(Developer, Triager, ExcerptsStaff):
+class Senior(Developer, ExcerptsStaff):
     """A **senior developer** is a *developer* who is additionally
     responsible for triaging tickets
 
