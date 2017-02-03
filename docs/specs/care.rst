@@ -99,15 +99,16 @@ User types
 These user types are defined in :mod:`lino_noi.projects.care.roles`:
 
 >>> rt.show('users.UserTypes')
-======= =========== ===============
- value   name        text
-------- ----------- ---------------
- 000     anonymous   Anonymous
- 100     user        User
- 500     connector   Connector
- 900     admin       Administrator
-======= =========== ===============
+======= =========== =============== ==============================================
+ value   name        text            User role
+------- ----------- --------------- ----------------------------------------------
+ 000     anonymous   Anonymous       lino.core.roles.UserRole
+ 100     user        User            lino_noi.projects.care.user_types.SimpleUser
+ 500     connector   Connector       lino_noi.projects.care.user_types.Connector
+ 900     admin       Administrator   lino_noi.projects.care.user_types.SiteAdmin
+======= =========== =============== ==============================================
 <BLANKLINE>
+
 
 **Anonymous users** can (1) register, (2) log in, (3) see a list of
 public help requests.

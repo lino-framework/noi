@@ -66,17 +66,17 @@ User types
 A default Lino Noi site has the following user profiles:
 
 >>> rt.show(users.UserTypes)
-======= ============ ==================
- value   name         text
-------- ------------ ------------------
- 000     anonymous    Anonymous
- 100     user         User
- 200     consultant   Consultant
- 300     hoster       Hoster
- 400     developer    Developer
- 490     senior       Senior developer
- 900     admin        Administrator
-======= ============ ==================
+======= ============ ================== ========================================
+ value   name         text               User role
+------- ------------ ------------------ ----------------------------------------
+ 000     anonymous    Anonymous          lino.core.roles.UserRole
+ 100     user         User               lino_noi.lib.noi.user_types.EndUser
+ 200     consultant   Consultant         lino_noi.lib.noi.user_types.Consultant
+ 300     hoster       Hoster             lino_noi.lib.noi.user_types.Consultant
+ 400     developer    Developer          lino_noi.lib.noi.user_types.Developer
+ 490     senior       Senior developer   lino_noi.lib.noi.user_types.Senior
+ 900     admin        Administrator      lino_noi.lib.noi.user_types.SiteAdmin
+======= ============ ================== ========================================
 <BLANKLINE>
 
 
