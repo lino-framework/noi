@@ -9,12 +9,18 @@ Installing Lino Noi
 - Go to your :xfile:`repositories` directory and download also a copy
   of the *Lino Noi* repository::
 
-    cd ~/repositories
-    git clone https://github.com/lsaffre/noi 
+    $ cd ~/repositories
+    $ git clone https://github.com/lino-framework/noi
     
-- Use pip to install this as editable package::
+- Activate a Python environment::
 
-    pip install -e noi
+    $ virtualenv env
+    $ . env/bin/activate
+
+- Use pip to install Lino Noi as editable package::
+
+    $ pip install -r noi/requirements.txt
+    $ pip install -e noi
 
 - Create a local Lino project as explained in :ref:`lino.tutorial.hello`.
 
@@ -22,8 +28,4 @@ Installing Lino Noi
   follows:
 
   .. literalinclude:: settings.py
-
-  The first line is Python way to specify encoding (:pep:`263`).
-  That's needed because of the non-ascii **ì** of "Lino Noi" in
-  line 3.
 
