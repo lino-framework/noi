@@ -81,6 +81,14 @@ class Vote(UserAuthored, Created):
     nickname = models.CharField(_("Nickname"), max_length=50, blank=True)
     mail_mode = MailModes.field(blank=True)
 
+    # @dd.action(_("Cancel"))
+    # def cancel_vote(self):
+    #     self.state = VoteStates.cancelled
+        
+    # @dd.action(_("Candidate"))
+    # def mark_me_as_candidate(self):
+    #     self.state = VoteStates.candidate
+        
     quick_search_fields = "nickname votable__summary votable__description"
     workflow_state_field = 'state'
     

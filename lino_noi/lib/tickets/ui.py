@@ -35,7 +35,7 @@ from lino.utils import join_elems
 
 from .choicelists import TicketEvents, ProjectEvents, TicketStates, LinkTypes
 
-from .roles import Triager, TicketsUser, TicketsStaff
+from .roles import TicketsUser, Searcher, Triager, TicketsStaff
 
 
 class ProjectTypes(dd.Table):
@@ -499,7 +499,7 @@ class Tickets(dd.Table):
 
 class AllTickets(Tickets):
     label = _("All tickets")
-    required_roles = dd.required(TicketsUser)
+    required_roles = dd.required(Searcher)
 
 
 class DuplicatesByTicket(Tickets):

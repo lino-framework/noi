@@ -232,13 +232,14 @@ class VoteAction(dd.ChangeStateAction):
         if not obj.votable.state in self.required_votable_states:
             return False
         me = ar.get_user()
-        if self.managed_by_votable_author:
-            mgr = obj.votable.user
-        else:
-            mgr = obj.user
-        if mgr != me:
-            if not me.profile.has_required_roles([Triager]):
-                return False
+        if self.managed_by_votable_author is not None:
+            if self.managed_by_votable_author:
+                mgr = obj.votable.user
+            else:
+                mgr = obj.user
+            if mgr != me:
+                if not me.profile.has_required_roles([Triager]):
+                    return False
         # if self.target_state.name == 'watching':
         #     print("20170115", mgr, self)
         # return True
@@ -281,7 +282,7 @@ class MarkVoteAssigned(VoteAction):
 class MarkVoteCancelled(VoteAction):
     
     label = pgettext("verb", "Cancel")
-    managed_by_votable_author = True
+    managed_by_votable_author = None
     required_states = 'candidate assigned'
     required_votable_states = 'new talk opened started ready'
     # msg_template = _("{user} cancelled {vote} for {ticket}.")
@@ -344,7 +345,8 @@ class MarkVoteRated(VoteAction):
 
 
 # VoteStates.watching.add_transition(
-#     required_states="candidate assigned")
+    # required_states="candidate assigned")
+
 VoteStates.watching.add_transition(MarkVoteWatching)
 VoteStates.candidate.add_transition(MarkVoteCandidate)
 VoteStates.assigned.add_transition(MarkVoteAssigned)

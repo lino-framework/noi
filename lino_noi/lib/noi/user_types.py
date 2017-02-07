@@ -19,7 +19,7 @@ while :mod:`lino_noi.projects.care` does not use this module at all.
 from lino.core.roles import UserRole, SiteAdmin
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
-from lino_noi.lib.tickets.roles import Triager
+from lino_noi.lib.tickets.roles import TicketsUser, Searcher, Triager, TicketsStaff
 from lino_noi.lib.clocking.roles import Worker
 from lino_noi.lib.votes.roles import VotesStaff, VotesUser
 
@@ -27,7 +27,7 @@ from lino.modlib.users.choicelists import UserTypes
 from django.utils.translation import ugettext_lazy as _
 
 
-class EndUser(OfficeUser, VotesUser):
+class EndUser(OfficeUser, VotesUser, TicketsUser):
     """An **end user** is somebody who uses our software and may report
     tickets, but won't work on them.
 
@@ -35,7 +35,7 @@ class EndUser(OfficeUser, VotesUser):
     pass
 
 
-class Consultant(EndUser, Worker, ExcerptsUser):
+class Consultant(EndUser, Searcher, Worker, ExcerptsUser):
     """A **consultant** is somebody who may both report tickets and work
     on them.
 
@@ -43,7 +43,7 @@ class Consultant(EndUser, Worker, ExcerptsUser):
     pass
 
 
-class Developer(Triager, Consultant):
+class Developer(Consultant):
     """A **developer** is somebody who may both report tickets and work
     on them.
 
@@ -51,7 +51,7 @@ class Developer(Triager, Consultant):
     pass
 
 
-class Senior(Developer, ExcerptsStaff):
+class Senior(Developer, Triager, ExcerptsStaff):
     """A **senior developer** is a *developer* who is additionally
     responsible for triaging tickets
 
@@ -59,7 +59,7 @@ class Senior(Developer, ExcerptsStaff):
     pass
 
 
-class SiteAdmin(Senior, SiteAdmin, OfficeStaff, VotesStaff):
+class SiteAdmin(Senior, SiteAdmin, OfficeStaff, VotesStaff, TicketsStaff):
     """Can do everything."""
 
 UserTypes.clear()

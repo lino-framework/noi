@@ -72,13 +72,13 @@ users.UserTypes.developer:400
 
 >>> rt.login('mathieu').show(votes.MyTasks)
 ... #doctest: +REPORT_UDIFF
-========================================================================== ====================================== ==========
- Description                                                                Actions                                Priority
--------------------------------------------------------------------------- -------------------------------------- ----------
- `#111 (Ticket 111) <Detail>`__ by `luc <Detail>`__ for `marc <Detail>`__   [★] **Done**                           0
- `#57 (Ticket 57) <Detail>`__ by `luc <Detail>`__ for `marc <Detail>`__     [★] **Assigned** → [Watching] [Done]   0
- `#48 (Ticket 48) <Detail>`__ by `luc <Detail>`__ for `marc <Detail>`__     [★] **Done**                           0
-========================================================================== ====================================== ==========
+========================================================================== =============================================== ==========
+ Description                                                                Actions                                         Priority
+-------------------------------------------------------------------------- ----------------------------------------------- ----------
+ `#111 (Ticket 111) <Detail>`__ by `luc <Detail>`__ for `marc <Detail>`__   [★] **Done**                                    0
+ `#57 (Ticket 57) <Detail>`__ by `luc <Detail>`__ for `marc <Detail>`__     [★] **Assigned** → [Watching] [Done] [Cancel]   0
+ `#48 (Ticket 48) <Detail>`__ by `luc <Detail>`__ for `marc <Detail>`__     [★] **Done**                                    0
+========================================================================== =============================================== ==========
 <BLANKLINE>
 
 >>> rt.login('luc').show(votes.MyTasks)
@@ -89,18 +89,18 @@ No data to display
 
 >>> rt.login('luc').show(votes.MyOffers)
 ... #doctest: +REPORT_UDIFF
-======================================================================================== ==================================================
+======================================================================================== =========================================
  Description                                                                              Actions
----------------------------------------------------------------------------------------- --------------------------------------------------
- `#109 (Ticket 109) <Detail>`__ by `jean <Detail>`__ for `marc <Detail>`__                [★] **Candidate** → [Watching] [Assign] [Cancel]
- `#46 (Ticket 46) <Detail>`__ by `jean <Detail>`__ for `marc <Detail>`__                  [★] **Candidate** → [Watching] [Assign] [Cancel]
- `#1 (Föö fails to bar when baz) <Detail>`__ by `jean <Detail>`__ for `marc <Detail>`__   [★] **Candidate** → [Watching] [Assign] [Cancel]
-======================================================================================== ==================================================
+---------------------------------------------------------------------------------------- -----------------------------------------
+ `#109 (Ticket 109) <Detail>`__ by `jean <Detail>`__ for `marc <Detail>`__                [★] **Candidate** → [Watching] [Cancel]
+ `#46 (Ticket 46) <Detail>`__ by `jean <Detail>`__ for `marc <Detail>`__                  [★] **Candidate** → [Watching] [Cancel]
+ `#1 (Föö fails to bar when baz) <Detail>`__ by `jean <Detail>`__ for `marc <Detail>`__   [★] **Candidate** → [Watching] [Cancel]
+======================================================================================== =========================================
 <BLANKLINE>
 
-Note that Luc is a triager, that's why he has permission to [Assign].
+Note that Luc is not a triager, that's why he dos not have permission to [Assign].
 
 >>> from lino_noi.lib.tickets.roles import Triager
 >>> rt.login('luc').user.profile.has_required_roles([Triager])
-True
+False
 

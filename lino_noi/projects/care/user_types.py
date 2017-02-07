@@ -12,13 +12,13 @@ from lino_xl.lib.contacts.roles import ContactsUser, ContactsStaff
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino_noi.lib.votes.roles import VotesStaff, VotesUser
-from lino_noi.lib.tickets.roles import Triager
+from lino_noi.lib.tickets.roles import TicketsUser, Triager, TicketsStaff
 from lino_noi.lib.clocking.roles import Worker
 from lino.modlib.users.choicelists import UserTypes
 from django.utils.translation import ugettext_lazy as _
 
 
-class SimpleUser(Helper, ContactsUser, OfficeUser, VotesUser):
+class SimpleUser(Helper, ContactsUser, OfficeUser, TicketsUser, VotesUser):
     """A **simple user** is a person who can log into the application in
     order to manage their own pleas and competences and potentially
     can respond to other user's pleas.
@@ -35,8 +35,8 @@ class Connector(SimpleUser, Worker, Triager, ExcerptsUser):
     pass
 
 
-class SiteAdmin(SiteAdmin, OfficeStaff, Helper, ContactsStaff,
-                Worker, Triager, VotesStaff, ExcerptsStaff):
+class SiteAdmin(SiteAdmin, OfficeStaff, Helper, ContactsStaff, Worker,
+                TicketsStaff, VotesStaff, ExcerptsStaff):
     """A **site administrator** can do everything."""
 
 
