@@ -35,11 +35,11 @@ from lino.utils import join_elems
 
 from .choicelists import TicketEvents, ProjectEvents, TicketStates, LinkTypes
 
-from .roles import Triager, SiteUser
+from .roles import Triager, TicketsUser, TicketsStaff
 
 
 class ProjectTypes(dd.Table):
-    required_roles = dd.required(dd.SiteStaff)
+    required_roles = dd.required(TicketsStaff)
     model = 'tickets.ProjectType'
     column_names = 'name *'
     detail_layout = """id name
@@ -48,7 +48,7 @@ class ProjectTypes(dd.Table):
 
 
 class TicketTypes(dd.Table):
-    required_roles = dd.required(dd.SiteStaff)
+    required_roles = dd.required(TicketsStaff)
     model = 'tickets.TicketType'
     column_names = 'name *'
     detail_layout = """id name
@@ -79,6 +79,7 @@ class ProjectDetail(dd.DetailLayout):
 
 
 class Projects(dd.Table):
+    required_roles = dd.required(TicketsUser)
     model = 'tickets.Project'
     detail_layout = ProjectDetail()
     column_names = "ref name parent type private *"
@@ -113,7 +114,7 @@ class Projects(dd.Table):
 
 
 class AllProjects(Projects):
-    required_roles = dd.required(dd.SiteStaff)
+    required_roles = dd.required(TicketsStaff)
 
 
 class ActiveProjects(Projects):
@@ -124,7 +125,7 @@ class ActiveProjects(Projects):
     """
     label = _("Active projects")
     column_names = 'ref name start_date activity_overview *'
-    required_roles = dd.required(dd.SiteStaff)
+    required_roles = dd.required(Triager)
 
     @classmethod
     def param_defaults(self, ar, **kw):
@@ -143,7 +144,7 @@ class ProjectsByParent(Projects):
 
 class TopLevelProjects(Projects):
     label = _("Projects (tree)")
-    required_roles = dd.required(dd.SiteStaff)
+    required_roles = dd.required(TicketsStaff)
     order_by = ["ref"]
     column_names = 'ref name parent children_summary *'
     filter = models.Q(parent__isnull=True)
@@ -162,7 +163,7 @@ class ProjectsByCompany(Projects):
 
 class Links(dd.Table):
     model = 'tickets.Link'
-    required_roles = dd.required(dd.SiteStaff)
+    required_roles = dd.required(TicketsStaff)
     stay_in_grid = True
     detail_layout = dd.DetailLayout("""
     parent
@@ -498,7 +499,7 @@ class Tickets(dd.Table):
 
 class AllTickets(Tickets):
     label = _("All tickets")
-    required_roles = dd.login_required(Triager)
+    required_roles = dd.required(TicketsUser)
 
 
 class DuplicatesByTicket(Tickets):
@@ -517,7 +518,7 @@ class SuggestedTickets(Tickets):
 
     """
     label = _("Where I can help")
-    required_roles = dd.login_required()
+    required_roles = dd.required(TicketsUser)
     column_names = 'overview:50 #topic faculty ' \
                    'workflow_buttons:30 *'
     params_panel_hidden = True
@@ -698,7 +699,7 @@ class ActiveTickets(Tickets):
 
 class MyTickets(My, Tickets):
     """Show all active tickets reported by me."""
-    required_roles = dd.login_required()
+    required_roles = dd.login_required(TicketsUser)
     order_by = ["-id"]
     column_names = 'overview:50 workflow_buttons:30 *'
     params_layout = """
@@ -752,6 +753,7 @@ class TicketsByReporter(Tickets):
 
 class Sites(dd.Table):
     # required_roles = set()  # also for anonymous
+    required_roles = dd.login_required(TicketsUser)
     model = 'tickets.Site'
     column_names = "name partner remark id *"
     order_by = ['name']
@@ -770,7 +772,7 @@ class Sites(dd.Table):
 
 
 class AllSites(Sites):
-    required_roles = dd.required(dd.SiteStaff)
+    required_roles = dd.required(TicketsStaff)
 
 
 class SitesByPartner(Sites):
