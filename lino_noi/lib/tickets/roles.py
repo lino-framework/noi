@@ -11,8 +11,13 @@ class TicketsUser(SiteUser):
 
     """
 
+class Searcher(TicketsUser):    
+    """A user who can see all tickets.
 
-class Triager(TicketsUser):
+    """
+
+
+class Triager(Searcher):
     """A user who is responsible for triaging new tickets.
 
     """
