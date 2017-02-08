@@ -88,6 +88,10 @@ class Site(Site):
         yield 'lino_noi.lib.noi'
         yield 'lino.modlib.restful'
 
+    # def setup_plugins(self):
+    #     super(Site, self).setup_plugins()
+    #     self.plugins.ticket.configure(project_model='tickets.Project')
+
     def get_default_required(self, **kw):
         # overrides the default behaviour which would add
         # `auth=True`. In Lino Noi everybody can see everything.

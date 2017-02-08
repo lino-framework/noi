@@ -104,7 +104,7 @@ class Sessions(dd.Table):
     # stay_in_grid = True
     parameters = ObservedPeriod(
         project=dd.ForeignKey(
-            dd.plugins.clocking.project_model, null=True, blank=True),
+            'tickets.Project', null=True, blank=True),
         ticket=dd.ForeignKey(
             dd.plugins.clocking.ticket_model, null=True, blank=True),
         # user=dd.ForeignKey('users.User', null=True, blank=True),
