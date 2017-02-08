@@ -9,6 +9,7 @@ for software developer teams.
 
    settings
    lib
+   tests
   
 
 .. module:: lino_noi.projects.team.urls

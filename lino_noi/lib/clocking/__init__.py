@@ -25,7 +25,7 @@ class Plugin(ad.Plugin):
     needs_plugins = ['lino_noi.lib.noi']
 
     # project_model = 'tickets.Project'
-    project_model = 'contacts.Partner'
+    # project_model = 'contacts.Partner'
     
     # ticket_model = 'tickets.Ticket'
     ticket_model = 'contacts.Partner'
