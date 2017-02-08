@@ -35,7 +35,7 @@ from lino.utils.xmlgen.html import E
 from lino_xl.lib.cal.mixins import daterange_text
 from lino_xl.lib.contacts.mixins import ContactRelated
 from lino.modlib.users.mixins import UserAuthored, Assignable
-from lino.modlib.comments.mixins import RFC
+from lino.modlib.comments.mixins import Commentable
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino_noi.lib.votes.mixins import Votable
 from lino_noi.lib.clocking.mixins import Workable
@@ -45,7 +45,7 @@ from .choicelists import TicketEvents, TicketStates, LinkTypes
 from .roles import Triager
 
 
-class TimeInvestment(dd.Model):
+class TimeInvestment(Commentable):
     """Model mixin for things which represent a time investment.  This
     currently just defines a group of three fields:
 
@@ -72,7 +72,7 @@ class TimeInvestment(dd.Model):
         abstract = True
 
     closed = models.BooleanField(_("Closed"), default=False)
-    private = models.BooleanField(_("Private"), default=True)
+    # private = models.BooleanField(_("Private"), default=True)
 
     planned_time = models.TimeField(
         _("Planned time"),
@@ -336,7 +336,7 @@ class SpawnTicket(dd.Action):
 
 @dd.python_2_unicode_compatible
 class Ticket(UserAuthored, mixins.CreatedModified,
-             TimeInvestment, RFC, Votable, Workable):
+             TimeInvestment, Votable, Workable):
     """A **Ticket** is a concrete question or problem formulated by a
     :attr:`user`.
     
