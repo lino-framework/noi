@@ -3,7 +3,9 @@
 {% block title %}{{title}}{% endblock %}
 {% block content %}
 <p>Welcome to the public user interface of the 
-{{settings.SITE.title}} site.</p>
+<b>{{settings.SITE.title or settings.SITE.verbose_name}}</b> site.</p>
+
+20170208 {{escape(str(ar.renderer))}}
 
 {{ar.show('tickets.PublicTickets', header_level=2)}}
 

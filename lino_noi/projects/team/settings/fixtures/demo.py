@@ -131,6 +131,8 @@ def tickets_objects():
             topic=TOPICS.pop())
         if num[0] % 2:
             kwargs.update(site=SITES.pop())
+        if num[0] % 4:
+            kwargs.update(private=True)
         if num[0] % 5:
             kwargs.update(end_user=END_USERS.pop())
         if False:
