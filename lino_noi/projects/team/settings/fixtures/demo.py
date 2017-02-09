@@ -97,7 +97,8 @@ def tickets_objects():
         start_date=i2d(20090101))
     yield prj1
     yield Project(
-        name="Téam", ref="téam", start_date=i2d(20100101), parent=prj1)
+        name="Téam", ref="téam", start_date=i2d(20100101),
+        parent=prj1, private=True)
     prj2 = Project(
         name="Documentatión", ref="docs", private=False,
         start_date=i2d(20090101), parent=prj1)

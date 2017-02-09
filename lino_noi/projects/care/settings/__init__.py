@@ -81,6 +81,8 @@ class Site(Site):
         #     partner_model='users.User', menu_group=None)
         # self.plugins.lists.partner_model = 'users.User'
         self.plugins.countries.configure(hide_region=True)
+        self.plugins.comments.configure(
+            commentable_model='tickets.Ticket')
 
     def setup_quicklinks(self, user, tb):
         # super(Site, self).setup_quicklinks(ar, tb)

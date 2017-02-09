@@ -330,12 +330,12 @@ And these are the public tickets:
 
 
 
-There are 5 private and 11 public tickets in the demo database.
+There are 20 private and 96 public tickets in the demo database.
 
 >>> tickets.Ticket.objects.filter(private=True).count()
-25
+20
 >>> tickets.Ticket.objects.filter(private=False).count()
-91
+96
 
 My tickets
 ==========
@@ -542,22 +542,53 @@ Dependencies between tickets
 Comments
 ========
 
-Currently the demo database contains just some comments...
+Comments on private tickets are not shown by to anonymous users:
 
 >>> rt.show(comments.Comments, column_names="id user short_text")
 ==== ================= ===================
  ID   Author            Short text
 ---- ----------------- -------------------
- 1    Romain Raffault   Hackerish comment
- 2    Rolf Rompen       Hackerish comment
- 3    Robin Rood        Hackerish comment
+ 1    jean              Hackerish comment
+ 4    mathieu           Hackerish comment
+ 6    Rolf Rompen       Hackerish comment
+ 7    Robin Rood        Hackerish comment
+ 8    jean              Hackerish comment
+ 10   marc              Hackerish comment
+ 11   mathieu           Hackerish comment
+ 12   Romain Raffault   Hackerish comment
+ 13   Rolf Rompen       Hackerish comment
 ==== ================= ===================
+<BLANKLINE>
+
+The same list seen by marc
+
+>>> rt.login('luc').show('comments.Comments', column_names="id user short_text")
+==== ================= ===========================
+ ID   Author            Short text
+---- ----------------- ---------------------------
+ 1    jean              Hackerish comment
+ 2    luc               Very confidential comment
+ 3    marc              Very confidential comment
+ 4    mathieu           Hackerish comment
+ 5    Romain Raffault   Very confidential comment
+ 6    Rolf Rompen       Hackerish comment
+ 7    Robin Rood        Hackerish comment
+ 8    jean              Hackerish comment
+ 9    luc               Very confidential comment
+ 10   marc              Hackerish comment
+ 11   mathieu           Hackerish comment
+ 12   Romain Raffault   Hackerish comment
+ 13   Rolf Rompen       Hackerish comment
+ 14   Robin Rood        Very confidential comment
+==== ================= ===========================
 <BLANKLINE>
 
 
 >>> obj = tickets.Ticket.objects.get(pk=7)
 >>> rt.show(comments.CommentsByRFC, obj)
-<BLANKLINE>
+... #doctest: +ELLIPSIS
+<ul><li>Hackerish comment (<em>... by Robin Rood</em>) (...)</li></ul>
+
 
 
 Filtering tickets
