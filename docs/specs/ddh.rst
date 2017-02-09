@@ -43,7 +43,7 @@ Lino Noi:
 - contacts.RoleType :
   - PROTECT : contacts.Role.type, excerpts.Excerpt.contact_role, tickets.Project.contact_role
 - contenttypes.ContentType :
-  - PROTECT : blogs.Entry.owner_type, changes.Change.master_type, changes.Change.object_type, comments.Comment.owner_type, excerpts.Excerpt.owner_type, excerpts.ExcerptType.content_type, gfks.HelpText.content_type, notify.Message.owner_type, uploads.Upload.owner_type
+  - PROTECT : blogs.Entry.owner_type, changes.Change.master_type, changes.Change.object_type, excerpts.Excerpt.owner_type, excerpts.ExcerptType.content_type, gfks.HelpText.content_type, notify.Message.owner_type, uploads.Upload.owner_type
 - countries.Country :
   - PROTECT : contacts.Partner.country, countries.Place.country, users.User.country
 - countries.Place :
@@ -67,7 +67,7 @@ Lino Noi:
 - tickets.Site :
   - PROTECT : deploy.Milestone.site, tickets.Ticket.site, users.User.user_site
 - tickets.Ticket :
-  - PROTECT : clocking.Session.ticket, deploy.Deployment.ticket, tickets.Link.child, tickets.Link.parent, tickets.Ticket.duplicate_of, votes.Vote.votable
+  - PROTECT : clocking.Session.ticket, comments.Comment.owner, deploy.Deployment.ticket, tickets.Link.child, tickets.Link.parent, tickets.Ticket.duplicate_of, votes.Vote.votable
 - tickets.TicketType :
   - PROTECT : tickets.Ticket.ticket_type
 - topics.Topic :

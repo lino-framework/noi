@@ -4,7 +4,7 @@
 A read-only interface to Team using generic Bootstrap
 =====================================================
 
-.. How to test only this document:
+.. How to test just this document:
 
     $ python setup.py test -s tests.SpecsTests.test_bs3
     
@@ -69,7 +69,7 @@ This data is being rendered using plain bootstrap HTML:
 >>> soup = BeautifulSoup(res.content, "lxml")
 >>> links = soup.find_all('a')
 >>> len(links)
-39
+49
 >>> print(links[0].get('href'))
 /?ul=de
 >>> print(links[1].get('href'))
@@ -94,4 +94,4 @@ This data is being rendered using plain bootstrap HTML:
 Tickets Home en de fr Site About #13 (Bar cannot foo) << < > >> State: Sticky
 <BLANKLINE>
 <BLANKLINE>
-(last update ...) Created ... by jean Topic: Lino Cosi Site: welket Linking to #1 and to blog . This is Lino Noi ... using ...
+(last update ...) Created ... by jean Topic: Lino Cosi Site: welket Linking to #1 and to blog . Hackerish comment ... This is Lino Noi ... using ...

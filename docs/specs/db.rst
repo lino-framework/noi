@@ -31,7 +31,7 @@ This document describes the database structure.
  clocking.ServiceReport      clocking.ServiceReports      7         1
  clocking.Session            clocking.Sessions            12        13
  clocking.SessionType        clocking.SessionTypes        4         1
- comments.Comment            comments.Comments            8         3
+ comments.Comment            comments.Comments            7         14
  contacts.Company            contacts.Companies           22        0
  contacts.CompanyType        contacts.CompanyTypes        7         0
  contacts.Partner            contacts.Partners            19        3
