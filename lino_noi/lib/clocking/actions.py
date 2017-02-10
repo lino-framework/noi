@@ -29,7 +29,7 @@ class EndSession(dd.Action):
     show_in_workflow = True
     show_in_bbar = False
     readonly = False
-    required_roles = dd.required(Worker)
+    required_roles = dd.login_required(Worker)
 
 class EndThisSession(EndSession):
     """Close this session, i.e. stop working on that ticket for this time.
@@ -107,7 +107,7 @@ class StartTicketSession(dd.Action):
     show_in_workflow = True
     show_in_bbar = False
     readonly = True
-    required_roles = dd.required(Worker)
+    required_roles = dd.login_required(Worker)
 
     def get_action_permission(self, ar, obj, state):
         user = ar.get_user()

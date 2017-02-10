@@ -30,7 +30,7 @@ class CreateVote(VoteAction):
     button_text  = u"☆"  # 2606
     show_in_workflow = True
     show_in_bbar = False
-    required_roles = dd.required(SimpleVotesUser)
+    required_roles = dd.login_required(SimpleVotesUser)
 
     # parameters = dict(
     #     state=VoteStates.field(),

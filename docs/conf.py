@@ -11,7 +11,7 @@
 extensions = []
 extlinks = {}
 
-from atelier.sphinxconf import configure
+from lino.sphinxcontrib import configure
 configure(globals(), 'lino_noi.projects.team.settings.doctests')
 # configure(globals(), 'lino_book.projects.min1.settings.doctests')
 
