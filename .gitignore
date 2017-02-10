@@ -19,5 +19,6 @@ docs/api
 
 .idea
 .coverage
+.coverage.*
 .eggs
 .cache
