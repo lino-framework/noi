@@ -84,8 +84,9 @@ class EndTicketSession(EndSession):
 
     def run_from_ui(self, ar, **kw):
         Session = rt.modules.clocking.Session
+        ticket = kw.get('workable',False) or ar.selected_rows[0]
         ses = Session.objects.get(
-            user=ar.get_user(), ticket=ar.selected_rows[0],
+            user=ar.get_user(), ticket=ticket,
             end_time__isnull=True)
         ses.set_datetime('end', timezone.now())
         ses.full_clean()
@@ -125,15 +126,27 @@ class StartTicketSession(dd.Action):
 
     def run_from_ui(self, ar, **kw):
         me = ar.get_user()
-        obj = ar.selected_rows[0]
+        obj = kw.get("workable",False) or ar.selected_rows[0]
 
         ses = rt.modules.clocking.Session(ticket=obj, user=me)
         ses.full_clean()
         ses.save()
         ar.set_response(refresh=True)
 
-        
-
+# class TmpAction(dd.Action):
+#     label = "lel"
+#     show_in_workflow = True
+#     show_in_bbar = False
+#     readonly = True
+#     required_roles = dd.login_required(Worker)
+#     def run_from_ui(self, ar, **kw):
+#         me = ar.get_user()
+#         obj = ar.selected_rows[0]
+#
+#         ses = rt.modules.clocking.Session(ticket=obj, user=me)
+#         ses.full_clean()
+#         ses.save()
+#         ar.set_response(refresh=True)
 
 if dd.is_installed('clocking'):  # Sphinx autodoc
     dd.inject_action(
