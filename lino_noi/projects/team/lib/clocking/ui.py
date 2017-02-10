@@ -28,7 +28,7 @@ MySessionsByDate.column_names = (
 class WorkedHours(dd.VentilatingTable):
     """A table showing one row per day with a summary view of the sesions
     on that day."""
-    required_roles = dd.required(Worker)
+    required_roles = dd.login_required(Worker)
     label = _("Worked hours")
     hide_zero_rows = True
     parameters = ObservedPeriod(
@@ -281,7 +281,7 @@ class ProjectsByReport(Projects, InvestedTime):
 
 class ServiceReports(dd.Table):
     """List of service reports."""
-    required_roles = dd.required(Worker)
+    required_roles = dd.login_required(Worker)
 
     model = "clocking.ServiceReport"
     # detail_layout = """

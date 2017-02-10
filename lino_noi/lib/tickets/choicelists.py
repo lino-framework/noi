@@ -133,7 +133,7 @@ class TicketStates(dd.Workflow):
     column_names = "value name text button_text active"
     active = models.BooleanField(_("Active"), default=False)
     show_in_todo = models.BooleanField(_("To do"), default=False)
-    required_roles = dd.required(dd.SiteStaff)
+    required_roles = dd.login_required(dd.SiteStaff)
     # max_length = 3
     
 
@@ -174,7 +174,7 @@ class LinkTypes(dd.ChoiceList):
         lists the deployed tickets.
 
     """
-    required_roles = dd.required(dd.SiteStaff)
+    required_roles = dd.login_required(dd.SiteStaff)
     verbose_name = _("Dependency type")
     verbose_name_plural = _("Dependency types")
     item_class = LinkType

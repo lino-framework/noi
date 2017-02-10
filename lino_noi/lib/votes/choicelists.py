@@ -54,7 +54,7 @@ class VoteStates(dd.Workflow):
 
 
     """
-    required_roles = dd.required(VotesStaff)
+    required_roles = dd.login_required(VotesStaff)
     # verbose_name = _("Vote state")
     verbose_name_plural = _("Vote states")
     item_class = VoteState

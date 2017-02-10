@@ -26,14 +26,14 @@ class Faculties(dd.Table):
 
 class AllFaculties(Faculties):
     label = _("Faculties (all)")
-    required_roles = dd.required(dd.SiteStaff)
+    required_roles = dd.login_required(dd.SiteStaff)
     column_names = 'name affinity parent *'
     order_by = ["name"]
 
 
 class TopLevelFaculties(Faculties):
     label = _("Faculties (tree)")
-    required_roles = dd.required(dd.SiteStaff)
+    required_roles = dd.login_required(dd.SiteStaff)
     order_by = ["name"]
     column_names = 'name id children_summary parent *'
     filter = models.Q(parent__isnull=True)
@@ -50,15 +50,15 @@ class FacultiesByParent(Faculties):
     
 
 class Competences(dd.Table):
-    required_roles = dd.required(dd.SiteStaff)
-    # required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(dd.SiteStaff)
+    # required_roles = dd.login_required(SocialStaff)
     model = 'faculties.Competence'
     column_names = 'id user faculty affinity *'
     order_by = ["id"]
 
 
 class CompetencesByUser(Competences):
-    required_roles = dd.required()
+    required_roles = dd.login_required()
     master_key = 'user'
     column_names = 'seqno faculty affinity *'
     order_by = ["seqno"]

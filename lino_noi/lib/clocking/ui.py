@@ -76,13 +76,13 @@ ProjectEvents.add_item_instance(ProjectHasSessions("clocking"))
 
 
 class SessionTypes(dd.Table):
-    required_roles = dd.required(dd.SiteStaff)
+    required_roles = dd.login_required(dd.SiteStaff)
     model = 'clocking.SessionType'
     column_names = 'name *'
 
 
 class Sessions(dd.Table):
-    required_roles = dd.required(Worker)
+    required_roles = dd.login_required(Worker)
     model = 'clocking.Session'
     column_names = 'ticket user start_date start_time end_date end_time '\
                    'break_time summary duration  *'

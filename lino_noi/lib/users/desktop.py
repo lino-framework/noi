@@ -32,7 +32,7 @@ class UserDetail(UserDetail):
         clocking = dd.Panel("""
         open_session_on_new_ticket
         timezone
-        """, label=_("Clocking"), required_roles=dd.required(Worker))
+        """, label=_("Clocking"), required_roles=dd.login_required(Worker))
     else:
         clocking = dd.DummyPanel()
 
@@ -85,7 +85,7 @@ class OtherUsers(Users):
     hide_top_toolbar = True
     use_as_default_table = False
     editable = False
-    required_roles = dd.required()
+    required_roles = dd.login_required()
     detail_layout = dd.DetailLayout("""
     first_name last_name city user_site
     phone gsm
@@ -139,7 +139,7 @@ class NewUsers(Users):
     """
     label = _("New user applications")
     welcome_message_when_count = 0
-    required_roles = dd.required(SiteAdmin)
+    required_roles = dd.login_required(SiteAdmin)
     use_as_default_table = False
     column_names = 'created first_name last_name username profile workflow_buttons *'
     order_by = ['created']

@@ -201,7 +201,7 @@ class Votes(dd.Table):
     model = 'votes.Vote'
     order_by = ['-id']
     # stay_in_grid = True
-    required_roles = dd.required(VotesUser)
+    required_roles = dd.login_required(VotesUser)
 
     parameters = ObservedPeriod(
         observed_event=VoteEvents.field(blank=True))
@@ -304,7 +304,7 @@ class Votes(dd.Table):
 
 class AllVotes(Votes):
     label = _("All votes")
-    required_roles = dd.required(VotesStaff)
+    required_roles = dd.login_required(VotesStaff)
     column_names = "id votable user priority nickname rating mail_mode workflow_buttons *"
 
 

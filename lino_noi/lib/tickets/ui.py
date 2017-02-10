@@ -39,7 +39,7 @@ from .roles import TicketsUser, Searcher, Triager, TicketsStaff
 
 
 class ProjectTypes(dd.Table):
-    required_roles = dd.required(TicketsStaff)
+    required_roles = dd.login_required(TicketsStaff)
     model = 'tickets.ProjectType'
     column_names = 'name *'
     detail_layout = """id name
@@ -48,7 +48,7 @@ class ProjectTypes(dd.Table):
 
 
 class TicketTypes(dd.Table):
-    required_roles = dd.required(TicketsStaff)
+    required_roles = dd.login_required(TicketsStaff)
     model = 'tickets.TicketType'
     column_names = 'name *'
     detail_layout = """id name
@@ -79,7 +79,7 @@ class ProjectDetail(dd.DetailLayout):
 
 
 class Projects(dd.Table):
-    required_roles = dd.required(TicketsUser)
+    required_roles = dd.login_required(TicketsUser)
     model = 'tickets.Project'
     detail_layout = ProjectDetail()
     column_names = "ref name parent type private *"
@@ -114,7 +114,7 @@ class Projects(dd.Table):
 
 
 class AllProjects(Projects):
-    required_roles = dd.required(TicketsStaff)
+    required_roles = dd.login_required(TicketsStaff)
 
 
 class ActiveProjects(Projects):
@@ -125,7 +125,7 @@ class ActiveProjects(Projects):
     """
     label = _("Active projects")
     column_names = 'ref name start_date activity_overview *'
-    required_roles = dd.required(Triager)
+    required_roles = dd.login_required(Triager)
 
     @classmethod
     def param_defaults(self, ar, **kw):
@@ -144,7 +144,7 @@ class ProjectsByParent(Projects):
 
 class TopLevelProjects(Projects):
     label = _("Projects (tree)")
-    required_roles = dd.required(TicketsStaff)
+    required_roles = dd.login_required(TicketsStaff)
     order_by = ["ref"]
     column_names = 'ref name parent children_summary *'
     filter = models.Q(parent__isnull=True)
@@ -163,7 +163,7 @@ class ProjectsByCompany(Projects):
 
 class Links(dd.Table):
     model = 'tickets.Link'
-    required_roles = dd.required(TicketsStaff)
+    required_roles = dd.login_required(TicketsStaff)
     stay_in_grid = True
     detail_layout = dd.DetailLayout("""
     parent
@@ -174,7 +174,7 @@ class Links(dd.Table):
 
 class LinksByTicket(Links):
     label = _("Dependencies")
-    required_roles = dd.required(Triager)
+    required_roles = dd.login_required(Triager)
     master = 'tickets.Ticket'
     column_names = 'parent type_as_parent:10 child'
     slave_grid_format = 'summary'
@@ -499,7 +499,7 @@ class Tickets(dd.Table):
 
 class AllTickets(Tickets):
     label = _("All tickets")
-    required_roles = dd.required(Searcher)
+    required_roles = dd.login_required(Searcher)
 
 
 class DuplicatesByTicket(Tickets):
@@ -518,7 +518,7 @@ class SuggestedTickets(Tickets):
 
     """
     label = _("Where I can help")
-    required_roles = dd.required(TicketsUser)
+    required_roles = dd.login_required(TicketsUser)
     column_names = 'overview:50 #topic faculty ' \
                    'workflow_buttons:30 *'
     params_panel_hidden = True
@@ -772,7 +772,7 @@ class Sites(dd.Table):
 
 
 class AllSites(Sites):
-    required_roles = dd.required(TicketsStaff)
+    required_roles = dd.login_required(TicketsStaff)
 
 
 class SitesByPartner(Sites):

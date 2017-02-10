@@ -60,7 +60,7 @@ class VerifyUser(dd.Action):
     # select_rows = False
     # default_format = 'json'
     required_roles = set([])
-    # required_roles = dd.required(SiteAdmin)
+    # required_roles = dd.login_required(SiteAdmin)
     show_in_bbar = False
     show_in_workflow = True
     parameters = dict(
