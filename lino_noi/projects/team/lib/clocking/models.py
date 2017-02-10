@@ -66,3 +66,4 @@ class ServiceReport(UserAuthored, Certifiable, DatePeriod):
 
 
 from .ui import *
+from .actions import *
