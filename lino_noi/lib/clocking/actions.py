@@ -15,7 +15,16 @@ from lino.core.roles import SiteUser
 from .roles import Worker
 from lino_noi.lib.tickets.roles import Triager
 
-class EndSession(dd.Action):
+class WorkerAction(dd.Action):
+    show_in_workflow = True
+    show_in_bbar = False
+    readonly = False
+    required_roles = dd.login_required(Worker)
+
+    def get_workables(self, ar):
+        return ar.selected_rows
+
+class EndSession(WorkerAction):
     """Close a given session, i.e. stop working on that ticket for this
     time.  Common base for :class:`EndThisSession` and
     :class:`EndTicketSession`.
@@ -26,10 +35,6 @@ class EndSession(dd.Action):
     # label = u"↘"  # u"\u2198"
     # label = _("End session")
     # label = u"\u231a\u2198"
-    show_in_workflow = True
-    show_in_bbar = False
-    readonly = False
-    required_roles = dd.login_required(Worker)
 
 class EndThisSession(EndSession):
     """Close this session, i.e. stop working on that ticket for this time.
@@ -84,17 +89,17 @@ class EndTicketSession(EndSession):
 
     def run_from_ui(self, ar, **kw):
         Session = rt.modules.clocking.Session
-        ticket = kw.get('workable',False) or ar.selected_rows[0]
-        ses = Session.objects.get(
-            user=ar.get_user(), ticket=ticket,
-            end_time__isnull=True)
-        ses.set_datetime('end', timezone.now())
-        ses.full_clean()
-        ses.save()
+        for ticket in self.get_workables(ar):
+            ses = Session.objects.get(
+                user=ar.get_user(), ticket=ticket,
+                end_time__isnull=True)
+            ses.set_datetime('end', timezone.now())
+            ses.full_clean()
+            ses.save()
         ar.set_response(refresh=True)
 
 
-class StartTicketSession(dd.Action):
+class StartTicketSession(WorkerAction):
     """Start a session on this ticket."""
     # label = _("Start session")
     # label = u"\u262d"
@@ -105,10 +110,10 @@ class StartTicketSession(dd.Action):
     # label = u"↗"  # \u2197
     label = u"▶"  # BLACK RIGHT-POINTING TRIANGLE (U+25B6)
     # icon_name = 'emoticon_smile'
-    show_in_workflow = True
-    show_in_bbar = False
+    # show_in_workflow = True
+    # show_in_bbar = False
     readonly = True
-    required_roles = dd.login_required(Worker)
+    # required_roles = dd.login_required(Worker)
 
     def get_action_permission(self, ar, obj, state):
         user = ar.get_user()
@@ -126,27 +131,12 @@ class StartTicketSession(dd.Action):
 
     def run_from_ui(self, ar, **kw):
         me = ar.get_user()
-        obj = kw.get("workable",False) or ar.selected_rows[0]
-
-        ses = rt.modules.clocking.Session(ticket=obj, user=me)
-        ses.full_clean()
-        ses.save()
+        for obj in self.get_workables(ar):
+            ses = rt.modules.clocking.Session(ticket=obj, user=me)
+            ses.full_clean()
+            ses.save()
         ar.set_response(refresh=True)
 
-# class TmpAction(dd.Action):
-#     label = "lel"
-#     show_in_workflow = True
-#     show_in_bbar = False
-#     readonly = True
-#     required_roles = dd.login_required(Worker)
-#     def run_from_ui(self, ar, **kw):
-#         me = ar.get_user()
-#         obj = ar.selected_rows[0]
-#
-#         ses = rt.modules.clocking.Session(ticket=obj, user=me)
-#         ses.full_clean()
-#         ses.save()
-#         ar.set_response(refresh=True)
 
 if dd.is_installed('clocking'):  # Sphinx autodoc
     dd.inject_action(
