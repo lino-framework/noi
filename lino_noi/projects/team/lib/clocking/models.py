@@ -12,11 +12,19 @@ from lino.api import _
 from lino.mixins.periods import DatePeriod
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino_noi.lib.tickets.choicelists import TicketStates
+from .actions import StartTicketSessionViaVote, EndTicketSessionViaVote
 
 
 dd.inject_field(
     "users.User", 'open_session_on_new_ticket',
     models.BooleanField(_("Open session on new ticket"), default=False))
+
+dd.inject_action(
+    "votes.Vote",
+    start_session=StartTicketSessionViaVote())
+dd.inject_action(
+    "votes.Vote",
+    end_session=EndTicketSessionViaVote())
 
 
 class ServiceReport(UserAuthored, Certifiable, DatePeriod):
@@ -64,5 +72,6 @@ class ServiceReport(UserAuthored, Certifiable, DatePeriod):
         return pv
         
 
-
 from .ui import *
+
+    
