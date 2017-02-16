@@ -137,7 +137,7 @@ class MarkTicketStarted(TicketAction):
     """Mark this ticket as started.
     """
     label = pgettext("verb", "Start")
-    required_states = 'talk opened'
+    required_states = 'new talk opened'
 
     def unused_before_execute(self, ar, obj):
         for v in rt.models.votes.Vote.objects.filter(votable=obj):
