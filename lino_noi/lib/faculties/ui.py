@@ -11,7 +11,9 @@ from lino.modlib.users.desktop import Users
 from lino_noi.lib.tickets.roles import Triager
 
 class FacultyTypes(dd.Table):
+    required_roles = dd.login_required(dd.SiteStaff)
     model = 'faculties.FacultyType'
+    stay_in_grid = True
     detail_layout = """
     id name
     FacultiesByType
@@ -39,7 +41,7 @@ class Faculties(dd.Table):
 class AllFaculties(Faculties):
     label = _("Faculties (all)")
     required_roles = dd.login_required(dd.SiteStaff)
-    column_names = 'name affinity parent *'
+    column_names = 'name parent faculty_type remarks *'
     order_by = ["name"]
 
 

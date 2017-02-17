@@ -24,29 +24,29 @@ MAX_WEIGHT = 100
 
 class FacultyType(BabelNamed):
     class Meta:
-        verbose_name = _("Faculty type")
-        verbose_name_plural = _("Faculty types")
+        verbose_name = _("Skill type")
+        verbose_name_plural = _("Skill types")
         ordering = ['name']
 
 
 # class Faculty(BabelNamed, Hierarchical, Sequenced, Referrable):
 class Faculty(BabelNamed, Hierarchical, Sequenced):
-    """A **faculty** is a knowledge or ability which can be required in
-    order to work e.g. on some ticket, and which individual users can
-    have or not.
+    """A **faculty** is a skill, knowledge or ability which can be
+    required in order to work e.g. on some ticket, and which
+    individual users can have (offer) or not.
 
     """
 
     class Meta:
-        verbose_name = _("Faculty")
-        verbose_name_plural = _("Faculties")
+        verbose_name = _("Skill")
+        verbose_name_plural = _("Skills")
         ordering = ['name']
 
     affinity = models.IntegerField(
         _("Affinity"), blank=True, default=MAX_WEIGHT,
         help_text=_(
             "How much workers enjoy to get a new ticket "
-            "in this faculty."
+            "requiring this skill."
             "A number between -{0} and +{0}.").format(MAX_WEIGHT))
 
     faculty_type = dd.ForeignKey(
