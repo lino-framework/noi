@@ -27,6 +27,7 @@ class Faculties(dd.Table):
     detail_layout = """
     id name
     faculty_type parent affinity
+    remarks
     FacultiesByParent CompetencesByFaculty
     """
     insert_layout = """
@@ -67,14 +68,14 @@ class Competences(dd.Table):
     required_roles = dd.login_required(dd.SiteStaff)
     # required_roles = dd.login_required(SocialStaff)
     model = 'faculties.Competence'
-    column_names = 'id user faculty affinity *'
+    column_names = 'id user faculty description affinity *'
     order_by = ["id"]
 
 
 class CompetencesByUser(Competences):
     required_roles = dd.login_required()
     master_key = 'user'
-    column_names = 'seqno faculty affinity *'
+    column_names = 'seqno faculty description affinity *'
     order_by = ["seqno"]
 
 
