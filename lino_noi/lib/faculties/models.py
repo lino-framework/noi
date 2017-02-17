@@ -22,6 +22,12 @@ from lino.modlib.users.mixins import UserAuthored
 
 MAX_WEIGHT = 100
 
+class FacultyType(BabelNamed):
+    class Meta:
+        verbose_name = _("Faculty type")
+        verbose_name_plural = _("Faculty types")
+        ordering = ['name']
+
 
 # class Faculty(BabelNamed, Hierarchical, Sequenced, Referrable):
 class Faculty(BabelNamed, Hierarchical, Sequenced):
@@ -43,6 +49,11 @@ class Faculty(BabelNamed, Hierarchical, Sequenced):
             "in this faculty."
             "A number between -{0} and +{0}.").format(MAX_WEIGHT))
 
+    faculty_type = dd.ForeignKey(
+        'faculties.FacultyType', null=True, blank=True)
+
+    remarks = dd.RichTextField(_("Remarks"), blank=True)
+    
     # topic_group = dd.ForeignKey(
     #     'topics.TopicGroup', blank=True, null=True,
     #     verbose_name=_("Options category"),
@@ -67,8 +78,8 @@ class Competence(UserAuthored, Sequenced):
     allow_cascaded_delete = "user"
 
     class Meta:
-        verbose_name = _("Competence")
-        verbose_name_plural = _("Competences")
+        verbose_name = _("Competence offer")
+        verbose_name_plural = _("Competence offers")
         # unique_together = ['user', 'faculty', 'topic']
         unique_together = ['user', 'faculty']
 
@@ -79,6 +90,8 @@ class Competence(UserAuthored, Sequenced):
             "How much this user likes to get a new ticket "
             "in this faculty."
             "A number between -{0} and +{0}.").format(MAX_WEIGHT))
+    description = dd.RichTextField(_("Description"), blank=True)
+    
     # topic = dd.ForeignKey(
     #     'topics.Topic', blank=True, null=True,
     #     verbose_name=_("Option"),

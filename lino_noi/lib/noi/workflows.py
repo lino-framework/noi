@@ -45,7 +45,7 @@ add = TicketStates.add_item
 add('10', _("New"), 'new', active=True, show_in_todo=True)
 add('15', _("Talk"), 'talk', active=True)
 add('20', _("Opened"), 'opened', active=True, show_in_todo=True)
-add('21', _("Sticky"), 'sticky', active=True)
+# add('21', _("Sticky"), 'sticky', active=True)
 add('22', _("Started"), 'started', active=True, show_in_todo=True)
 add('30', _("Sleeping"), 'sleeping')
 add('40', _("Ready"), 'ready', active=True)
@@ -60,7 +60,7 @@ if settings.SITE.use_new_unicode_symbols:
     TicketStates.opened.button_text = u"☉"  # SUN (U+2609)	
     TicketStates.started.button_text=u"🐜"  # ANT (U+1F41C)
     TicketStates.cancelled.button_text=u"🗑"  # WASTEBASKET (U+1F5D1)
-    TicketStates.sticky.button_text=u"📌"  # PUSHPIN (U+1F4CC)
+    # TicketStates.sticky.button_text=u"📌"  # PUSHPIN (U+1F4CC)
     TicketStates.sleeping.button_text = u"🕸"  # SPIDER WEB (U+1F578)	
     TicketStates.ready.button_text = "\u2610"  # BALLOT BOX
     TicketStates.closed.button_text = "\u2611"  # BALLOT BOX WITH CHECK
@@ -73,7 +73,7 @@ else:
     # TicketStates.started.button_text="☭"  # HAMMER AND SICKLE (U+262D)
     TicketStates.started.button_text = "⚒"  # HAMMER AND PICK (U+2692
     # TicketStates.sticky.button_text="♥"  # BLACK HEART SUIT (U+2665)
-    TicketStates.sticky.button_text="♾"  # (U+267E)
+    # TicketStates.sticky.button_text="♾"  # (U+267E)
     TicketStates.sleeping.button_text = "☾"  # LAST QUARTER MOON (U+263E)
     TicketStates.ready.button_text = "☐"  # BALLOT BOX \u2610
     TicketStates.closed.button_text = "☑"  # BALLOT BOX WITH CHECK \u2611
@@ -176,10 +176,10 @@ class MarkTicketTalk(TicketAction):
     #     return subject
 
 
-TicketStates.sticky.add_transition(
-    required_states="new")
-TicketStates.new.add_transition(
-    required_states="sticky")
+# TicketStates.sticky.add_transition(
+#     required_states="new")
+# TicketStates.new.add_transition(
+#     required_states="sticky")
 TicketStates.sleeping.add_transition(
     required_states="new talk opened started")
 TicketStates.talk.add_transition(MarkTicketTalk)

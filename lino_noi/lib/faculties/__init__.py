@@ -34,6 +34,7 @@ class Plugin(ad.Plugin):
         m = m.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('faculties.TopLevelFaculties')
         m.add_action('faculties.AllFaculties')
+        m.add_action('faculties.FacultyTypes')
 
     def setup_explorer_menu(self, site, profile, m):
         p = self.get_menu_group()

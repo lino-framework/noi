@@ -10,12 +10,23 @@ from lino.modlib.users.mixins import My
 from lino.modlib.users.desktop import Users
 from lino_noi.lib.tickets.roles import Triager
 
+class FacultyTypes(dd.Table):
+    model = 'faculties.FacultyType'
+    detail_layout = """
+    id name
+    FacultiesByType
+    """
+    insert_layout = """
+    id
+    name
+    """
+
 class Faculties(dd.Table):
     model = 'faculties.Faculty'
     # order_by = ["ref", "name"]
     detail_layout = """
     id name
-    parent affinity
+    faculty_type parent affinity
     FacultiesByParent CompetencesByFaculty
     """
     insert_layout = """
@@ -48,6 +59,9 @@ class FacultiesByParent(Faculties):
     # order_by = ["parent", "seqno"]
     # order_by = ["name"]
     
+
+class FacultiesByType(Faculties):
+    master_key = 'faculty_type' 
 
 class Competences(dd.Table):
     required_roles = dd.login_required(dd.SiteStaff)
