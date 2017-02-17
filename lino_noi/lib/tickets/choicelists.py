@@ -108,10 +108,6 @@ class TicketStates(dd.Workflow):
         Waiting for some external event. We didn't decide what to do
         with it.
 
-    .. attribute:: sticky
-
-        Special state for permanent tickets which have no lifecycle.
-
     .. attribute:: ready
 
         The ticket is basically :attr:`done`, but some detail still

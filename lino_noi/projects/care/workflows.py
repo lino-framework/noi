@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 """Defines the workflows for :mod:`lino_noi.projects.care`. These are
 the same as for :mod:`lino_noi.projects.team`, except that we remove
@@ -11,4 +11,4 @@ This module is the first usage of
 """
 from lino_noi.lib.noi.workflows import *
 
-TicketStates.sticky.remove()
+# TicketStates.sticky.remove()

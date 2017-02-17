@@ -10,12 +10,26 @@ from lino.modlib.users.mixins import My
 from lino.modlib.users.desktop import Users
 from lino_noi.lib.tickets.roles import Triager
 
+class FacultyTypes(dd.Table):
+    required_roles = dd.login_required(dd.SiteStaff)
+    model = 'faculties.FacultyType'
+    stay_in_grid = True
+    detail_layout = """
+    id name
+    FacultiesByType
+    """
+    insert_layout = """
+    id
+    name
+    """
+
 class Faculties(dd.Table):
     model = 'faculties.Faculty'
     # order_by = ["ref", "name"]
     detail_layout = """
     id name
-    parent affinity
+    faculty_type parent affinity
+    remarks
     FacultiesByParent CompetencesByFaculty
     """
     insert_layout = """
@@ -27,7 +41,7 @@ class Faculties(dd.Table):
 class AllFaculties(Faculties):
     label = _("Faculties (all)")
     required_roles = dd.login_required(dd.SiteStaff)
-    column_names = 'name affinity parent *'
+    column_names = 'name parent faculty_type remarks *'
     order_by = ["name"]
 
 
@@ -49,18 +63,21 @@ class FacultiesByParent(Faculties):
     # order_by = ["name"]
     
 
+class FacultiesByType(Faculties):
+    master_key = 'faculty_type' 
+
 class Competences(dd.Table):
     required_roles = dd.login_required(dd.SiteStaff)
     # required_roles = dd.login_required(SocialStaff)
     model = 'faculties.Competence'
-    column_names = 'id user faculty affinity *'
+    column_names = 'id user faculty description affinity *'
     order_by = ["id"]
 
 
 class CompetencesByUser(Competences):
     required_roles = dd.login_required()
     master_key = 'user'
-    column_names = 'seqno faculty affinity *'
+    column_names = 'seqno faculty description affinity *'
     order_by = ["seqno"]
 
 
