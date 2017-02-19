@@ -559,7 +559,7 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         """Overrides :meth:`lino.core.model.Model.get_overview_elems`.
         """
         elems = [ ar.obj2html(self)]
-        if self.user != ar.get_user():
+        if self.user and self.user != ar.get_user():
             elems += [ _(" by "), ar.obj2html(self.user)]
         if self.end_user_id:
             elems += [' ', _("for"), ' ', ar.obj2html(self.end_user)]
@@ -584,7 +584,8 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         :attr:`end_user`.
 
         """
-        yield self.user
+        if self.user:
+            yield self.user
         if issubclass(
                 dd.plugins.tickets.end_user_model,
                 settings.SITE.user_model):
