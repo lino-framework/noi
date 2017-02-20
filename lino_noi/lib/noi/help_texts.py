@@ -41,9 +41,9 @@ named by a version number."""),
 installed or activated) by a given milestone (to a given site)."""),
     'lino_noi.lib.deploy.models.Deployment.milestone' : _("""The milestone (and site) of this deployment."""),
     'lino_noi.lib.faculties.Plugin' : _("""See lino.core.plugin.Plugin."""),
-    'lino_noi.lib.faculties.models.Faculty' : _("""A faculty is a knowledge or ability which can be required in
-order to work e.g. on some ticket, and which individual users can
-have or not."""),
+    'lino_noi.lib.faculties.models.Faculty' : _("""A faculty is a skill, knowledge or ability which can be
+required in order to work e.g. on some ticket, and which
+individual users can have (offer) or not."""),
     'lino_noi.lib.faculties.models.Competence' : _("""A competence is when a given user is declared to be competent
 in a given faculty."""),
     'lino_noi.lib.noi.migrate.Migrator' : _("""The standard migrator for noi."""),
@@ -83,7 +83,6 @@ that you (the assignee) must test it, then leave the ticket at
 todo."""),
     'lino_noi.lib.tickets.choicelists.TicketStates.sleeping' : _("""Waiting for some external event. We didn't decide what to do
 with it."""),
-    'lino_noi.lib.tickets.choicelists.TicketStates.sticky' : _("""Special state for permanent tickets which have no lifecycle."""),
     'lino_noi.lib.tickets.choicelists.TicketStates.ready' : _("""The ticket is basically done, but some detail still
 needs to be done by the user (e.g. testing,
 confirmation, documentation,..)"""),
