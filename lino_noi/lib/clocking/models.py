@@ -123,8 +123,8 @@ class Session(UserAuthored, Started, Ended):
                 # self.start_time = value.time()
             if self.start_date is None:
                 self.start_date = dd.today()
-            if self.ticket_id is not None and self.faculty_id is None:
-                self.faculty = self.ticket.faculty
+            # if self.ticket_id is not None and self.faculty_id is None:
+            #     self.faculty = self.ticket.faculty
         super(Session, self).full_clean(*args, **kwargs)
 
     def unused_save(self, *args, **kwargs):

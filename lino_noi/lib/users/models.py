@@ -11,6 +11,7 @@ from lino.api import dd, rt, _
 
 from lino.mixins import Phonable
 from lino_xl.lib.countries.mixins import AddressLocation
+from lino_xl.lib.contacts.models import Person
 
 from lino.modlib.users.models import *
 
@@ -105,7 +106,8 @@ class VerifyUser(dd.Action):
     
 
 # @python_2_unicode_compatible
-class User(User, Phonable, AddressLocation):
+#class User(User, Phonable, AddressLocation):
+class User(User, Person):
 
     """
     .. attribute:: callme_mode
@@ -139,6 +141,11 @@ class User(User, Phonable, AddressLocation):
     submit_insert = CheckedSubmitInsert()
     verify = VerifyUser()
 
+    # partner = dd.DummyField()
+    
+    def get_person(self):
+        return self
+    
     def on_create(self, ar):
         self.verification_code = id_generator(12)
         return super(User, self).on_create(ar)
@@ -178,4 +185,17 @@ class User(User, Phonable, AddressLocation):
 
 
 dd.update_field('users.User', 'remarks', verbose_name=_("About me"))
+
+from lino.utils import camelize
+
+def create_user(username, user_type=None, **kw):
+    first_name = camelize(username.upper())
+    if user_type:
+        kw.update(username=username, profile=user_type)
+        kw.update(first_name=first_name)
+        # kw.update(partner=person)
+        return rt.models.users.User(**kw)
+    else:
+        return dd.plugins.faculties.supplier_model(first_name=first_name)
+
 

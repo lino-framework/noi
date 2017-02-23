@@ -19,12 +19,13 @@ dd.inject_field(
     "users.User", 'open_session_on_new_ticket',
     models.BooleanField(_("Open session on new ticket"), default=False))
 
-dd.inject_action(
-    "votes.Vote",
-    start_session=StartTicketSessionViaVote())
-dd.inject_action(
-    "votes.Vote",
-    end_session=EndTicketSessionViaVote())
+if dd.is_installed('votes'):
+    dd.inject_action(
+        "votes.Vote",
+        start_session=StartTicketSessionViaVote())
+    dd.inject_action(
+        "votes.Vote",
+        end_session=EndTicketSessionViaVote())
 
 
 class ServiceReport(UserAuthored, Certifiable, DatePeriod):

@@ -11,16 +11,10 @@ from lino_noi.lib.tickets.choicelists import TicketStates
 
 from lino.api.dd import str2kw
 from lino.api import dd
-from lino.utils import camelize
 
 TICKET_STATES = Cycler(TicketStates.objects())
 
-
-def user(username, user_type=None, **kw):
-    kw.update(username=username, profile=user_type)
-    kw.update(first_name=camelize(username.upper()))
-    return rt.modules.users.User(**kw)
-
+from lino_noi.lib.users.models import create_user
 
 def faculty(name, fr, en, **kw):
     kw.update(**dd.babelkw('name', de=name, fr=fr, en=en))
@@ -38,7 +32,7 @@ def Topic(name, **kw):
     return rt.modules.topics.Topic(**kw)
 
 
-def ticket(username, summary, en, **kw):
+def ticket(username, summary, en, faculty=None, **kw):
     ar = rt.login(username)
     u = ar.get_user() # rt.models.users.User.objects.get(username=user)
     if en and u.language != 'de':
@@ -49,14 +43,18 @@ def ticket(username, summary, en, **kw):
         kw.update(state=TICKET_STATES.pop())
     t = create_row(rt.models.tickets.Ticket, **kw)
     t.after_ui_save(ar, None)  # create author's vote
-    return t
+    yield t
+    if faculty is not None:
+        yield rt.models.faculties.Demand(demander=t, skill=faculty)
 
 
-def competence(user, faculty, **kw):
+def competence(username, first_name, faculty, **kw):
     kw.update(
-        user=rt.modules.users.User.objects.get(username=user))
+        supplier=dd.plugins.faculties.supplier_model.objects.get(
+            name=first_name))
     kw.update(faculty=faculty)
-    return rt.modules.faculties.Competence(**kw)
+    kw.update(user=rt.models.users.User.objects.get(username=username))
+    return rt.models.faculties.Competence(**kw)
 
 
 def vote(user, ticket, state, **kw):
@@ -69,12 +67,11 @@ def vote(user, ticket, state, **kw):
 
 def objects():
     UserTypes = rt.actors.users.UserTypes
-    yield user("alex", UserTypes.user)
-    yield user("berta", UserTypes.user)
-    yield user("christa", UserTypes.user)
-    dora = user("dora")
-    yield dora
-    yield user("eric", UserTypes.connector)
+    yield create_user("alex", UserTypes.user)
+    yield create_user("berta", UserTypes.user)
+    yield create_user("christa", UserTypes.user)
+    yield create_user("dora")
+    yield create_user("eric", UserTypes.connector)
 
     yield S(_("At home"))  # "Bei mir zu Hause"
     yield S("AZ Ephata")
@@ -157,15 +154,15 @@ def objects():
                   "Write letters")
     
 
-    yield competence('alex', traduire)
-    yield competence('berta', traduire)
+    yield competence('alex', 'Alex', traduire)
+    yield competence('berta', 'Berta', traduire)
     # yield competence('berta', traduire, topic=de)
-    yield competence('alex', garden)
-    yield competence('alex', repair)
-    yield competence('christa', piano)
-    yield competence('dora', repair)
-    yield competence('eric', guitar)
-    yield competence('dora', commissions)
+    yield competence('alex', 'Alex', garden)
+    yield competence('alex', 'Alex', repair)
+    yield competence('christa', 'Christa', piano)
+    yield competence('eric', 'Dora', repair)
+    yield competence('eric', 'Eric', guitar)
+    yield competence('eric', 'Dora', commissions)
 
 
     yield ticket(  #1
@@ -175,13 +172,15 @@ def objects():
         state=TicketStates.closed,
         faculty=repair)
     yield vote('alex', 1, 'done')
-    yield vote('dora', 1, 'cancelled')
+    yield vote('eric', 1, 'cancelled')
     
     yield ticket(  #2
         "christa",
         "Mein Rasen muss gemäht werden. Donnerstags oder Samstags",
         "My lawn needs mowing. On Thursday or Saturday."
         "", faculty=garden)
+    dora = dd.plugins.tickets.end_user_model.objects.get(
+        first_name="Dora")
     yield ticket(  #3
         "eric",
         "Wer kann meinem Sohn Klavierunterricht geben?",
@@ -230,4 +229,4 @@ def objects():
         description="Ich darf selber nicht über die Grenze.",
         faculty=commissions)
 
-    yield vote('dora', 8, 'assigned')
+    yield vote('eric', 8, 'assigned')

@@ -28,7 +28,7 @@ has does more usage of them.
   :local:
 
 
->>> rt.show(faculties.TopLevelFaculties)
+>>> rt.show(faculties.TopLevelSkills)
 ... #doctest: +REPORT_UDIFF
 =============== ================== ================== ==== ========== ================
  Designation     Designation (de)   Designation (fr)   ID   Children   Parent faculty
@@ -45,35 +45,35 @@ has does more usage of them.
 <BLANKLINE>
 
 
->>> rt.show('faculties.Competences')
+>>> rt.show('faculties.Offers')
 ... #doctest: +REPORT_UDIFF
-==== ================= =============== ==========
- ID   User              Faculty         Affinity
----- ----------------- --------------- ----------
- 1    Rolf Rompen       Analysis        100
- 2    Rolf Rompen       Code changes    70
- 3    Rolf Rompen       Documentation   71
- 4    Rolf Rompen       Testing         42
- 5    Rolf Rompen       Configuration   62
- 6    Romain Raffault   Code changes    76
- 7    Romain Raffault   Documentation   92
- 8    Romain Raffault   Testing         98
- 9    Romain Raffault   Configuration   68
- 10   Robin Rood        Analysis        23
- 11   luc               Analysis        120
- 12   luc               Code changes    150
- 13   luc               Documentation   75
- 14   mathieu           Documentation   46
- 15   Robin Rood        Testing         65
- 16   mathieu           Testing         42
- 17   luc               Configuration   46
- 18   mathieu           Configuration   92
-                                        **1338**
-==== ================= =============== ==========
+==== ================= =============== ============= ==========
+ ID   User              Skill           Description   Affinity
+---- ----------------- --------------- ------------- ----------
+ 1    Rolf Rompen       Analysis                      100
+ 2    Rolf Rompen       Code changes                  70
+ 3    Rolf Rompen       Documentation                 71
+ 4    Rolf Rompen       Testing                       42
+ 5    Rolf Rompen       Configuration                 62
+ 6    Romain Raffault   Code changes                  76
+ 7    Romain Raffault   Documentation                 92
+ 8    Romain Raffault   Testing                       98
+ 9    Romain Raffault   Configuration                 68
+ 10   Robin Rood        Analysis                      23
+ 11   Luc               Analysis                      120
+ 12   Luc               Code changes                  150
+ 13   Luc               Documentation                 75
+ 14   Mathieu           Documentation                 46
+ 15   Robin Rood        Testing                       65
+ 16   Mathieu           Testing                       42
+ 17   Luc               Configuration                 46
+ 18   Mathieu           Configuration                 92
+                                                      **1338**
+==== ================= =============== ============= ==========
 <BLANKLINE>
 
 
->>> show_choices('axel', '/choices/faculties/CompetencesByUser/faculty')
+>>> show_choices('axel', '/choices/faculties/OffersBySupplier/faculty')
 Analysis
 Code changes
 Configuration

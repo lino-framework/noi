@@ -153,7 +153,6 @@ them:
  alex       User            Alex
  berta      User            Berta
  christa    User            Christa
- dora                       Dora
  eric       Connector       Eric
  robin      Administrator   Robin        Rood
  rolf       Administrator   Rolf         Rompen
@@ -181,37 +180,36 @@ competences and the required faculties of open requests, i.e. Lino
 will not bother you with requests for which you aren't competent.
 
 
->>> rt.show(faculties.AllFaculties)
+>>> rt.show(faculties.AllSkills)
 ... #doctest: +REPORT_UDIFF
-========================== ============================= ============================ ========== ================
- Designation                Designation (de)              Designation (fr)             Affinity   Parent faculty
--------------------------- ----------------------------- ---------------------------- ---------- ----------------
- Babysitting                Babysitting                   Garde enfant                 100
- Car driving                Fahrdienst                    Voiture                      100
- French lessons             Französischunterricht         Cours de francais            100        Teaching
- Garden works               Gartenarbeiten                Travaux de jardin            100        Home & Garden
- German lessons             Deutschunterricht             Cours d'allemand             100        Teaching
- Go out with dogs           Hunde spazierenführen         Chiens                       100
- Guitar lessons             Gitarrenunterricht            Cours de guitare             100        Music
- Hair cutting               Friseur                       Coiffure                     100
- Home & Garden              Haus und Garten               Maison et jardin             100
- Maths lessons              Matheunterricht               Cours de maths               100        Teaching
- Mentoring elderly people   Gesellschafter für Senioren   Rencontres personnes agées   100
- Music                      Musik                         Musique                      100
- Piano lessons              Klavierunterricht             Cours de piano               100        Music
- Renovation                 Renovierung                   Rénovation                   100        Home & Garden
- Repair works               Reparaturarbeiten             Travaux de réparation        100        Home & Garden
- Repairing clothes          Kleider reparieren            Réparer des vètements        100        Home & Garden
- Shopping                   Botengänge                    Commissions                  100
- Teaching                   Unterricht                    Cours                        100
- Translations               Übersetzungsarbeiten          Traductions                  100
- Write letters              Briefe schreiben              Écrire des lettres           100
- **Total (20 rows)**                                                                   **2000**
-========================== ============================= ============================ ========== ================
+========================== ============================= ============================ ================ ============ =========
+ Designation                Designation (de)              Designation (fr)             Parent faculty   Skill type   Remarks
+-------------------------- ----------------------------- ---------------------------- ---------------- ------------ ---------
+ Babysitting                Babysitting                   Garde enfant
+ Car driving                Fahrdienst                    Voiture
+ French lessons             Französischunterricht         Cours de francais            Teaching
+ Garden works               Gartenarbeiten                Travaux de jardin            Home & Garden
+ German lessons             Deutschunterricht             Cours d'allemand             Teaching
+ Go out with dogs           Hunde spazierenführen         Chiens
+ Guitar lessons             Gitarrenunterricht            Cours de guitare             Music
+ Hair cutting               Friseur                       Coiffure
+ Home & Garden              Haus und Garten               Maison et jardin
+ Maths lessons              Matheunterricht               Cours de maths               Teaching
+ Mentoring elderly people   Gesellschafter für Senioren   Rencontres personnes agées
+ Music                      Musik                         Musique
+ Piano lessons              Klavierunterricht             Cours de piano               Music
+ Renovation                 Renovierung                   Rénovation                   Home & Garden
+ Repair works               Reparaturarbeiten             Travaux de réparation        Home & Garden
+ Repairing clothes          Kleider reparieren            Réparer des vètements        Home & Garden
+ Shopping                   Botengänge                    Commissions
+ Teaching                   Unterricht                    Cours
+ Translations               Übersetzungsarbeiten          Traductions
+ Write letters              Briefe schreiben              Écrire des lettres
+========================== ============================= ============================ ================ ============ =========
 <BLANKLINE>
 
 
->>> rt.show(faculties.TopLevelFaculties)
+>>> rt.show(faculties.TopLevelSkills)
 ... #doctest: +REPORT_UDIFF
 ========================== ============================= ============================ ==== =================================================================== ================
  Designation                Designation (de)              Designation (fr)             ID   Children                                                            Parent faculty
@@ -231,27 +229,27 @@ will not bother you with requests for which you aren't competent.
 <BLANKLINE>
 
 
->>> rt.show('faculties.Competences')
-==== ========= ================ ==========
- ID   User      Faculty          Affinity
----- --------- ---------------- ----------
- 1    Alex      Translations     100
- 2    Berta     Translations     100
- 3    Alex      Garden works     100
- 4    Alex      Repair works     100
- 5    Christa   Piano lessons    100
- 6    Dora      Repair works     100
- 7    Eric      Guitar lessons   100
- 8    Dora      Shopping         100
-                                 **800**
-==== ========= ================ ==========
+>>> rt.show('faculties.Offers')
+==== ========= ================ ============= ==========
+ ID   User      Skill            Description   Affinity
+---- --------- ---------------- ------------- ----------
+ 1    Alex      Translations                   100
+ 2    Berta     Translations                   100
+ 3    Alex      Garden works                   100
+ 4    Alex      Repair works                   100
+ 5    Christa   Piano lessons                  100
+ 6    Eric      Repair works                   100
+ 7    Eric      Guitar lessons                 100
+ 8    Eric      Shopping                       100
+                                               **800**
+==== ========= ================ ============= ==========
 <BLANKLINE>
 
 
 Configuring your preferences
 ============================
 
->>> show_choices('alex', '/choices/faculties/CompetencesByUser/faculty')
+>>> show_choices('alex', '/choices/faculties/OffersBySupplier/faculty')
 Babysitting
 Car driving
 French lessons
@@ -277,24 +275,24 @@ Write letters
 Topics
 ======
 
->>> dd.is_installed('topics')
-False
+>>> rt.show('topics.Topics')
+No data to display
 
 
 
 >>> rt.show('tickets.AllTickets')
-==== ========================================================================= ========= ================ ============== =========
- ID   Summary                                                                   Author    Faculty          Actions        Project
----- ------------------------------------------------------------------------- --------- ---------------- -------------- ---------
- 8    Who would buy diapers for me in Aachen?                                   Alex      Shopping         **Ready**
- 7    Who can review my final work?                                             Eric                       **Sleeping**
- 6    Who helps my sont to prepare for a maths test on May 21? (5. grade PDS)   Berta     Maths lessons    **Started**
- 5    Who would play music on my birthday party?                                Alex      Music            **Opened**
- 4    Who can give guitar lessons to my daughter?                               Alex      Guitar lessons   **Opened**
- 3    Who can give piano lessons to my son?                                     Eric      Piano lessons    **Talk**
- 2    My lawn needs mowing. On Thursday or Saturday.                            Christa   Garden works     **New**
- 1    My faucet is dripping, who can help?                                      Berta     Repair works     **Closed**
-==== ========================================================================= ========= ================ ============== =========
+==== ========================================================================= ========= ======= ============== =========
+ ID   Summary                                                                   Author    Topic   Actions        Project
+---- ------------------------------------------------------------------------- --------- ------- -------------- ---------
+ 8    Who would buy diapers for me in Aachen?                                   Alex              **Ready**
+ 7    Who can review my final work?                                             Eric              **Sleeping**
+ 6    Who helps my sont to prepare for a maths test on May 21? (5. grade PDS)   Berta             **Started**
+ 5    Who would play music on my birthday party?                                Alex              **Opened**
+ 4    Who can give guitar lessons to my daughter?                               Alex              **Opened**
+ 3    Who can give piano lessons to my son?                                     Eric              **Talk**
+ 2    My lawn needs mowing. On Thursday or Saturday.                            Christa           **New**
+ 1    My faucet is dripping, who can help?                                      Berta             **Closed**
+==== ========================================================================= ========= ======= ============== =========
 <BLANKLINE>
 
 
@@ -311,7 +309,7 @@ his job. Dora's vote has been cancelled.
 
 >>> show_votes(1)
 #1 (My faucet is dripping, who can help?)
-*dora*, *alex*, *berta*
+*eric*, *alex*, *berta*
 
 Ticket #2 has not yet any vote:
 
@@ -321,7 +319,7 @@ Ticket #2 has not yet any vote:
 
 >>> show_votes(3)
 #3 (Who can give piano lessons to my son?)
-*christa*, *dora*, *eric*
+*christa*, *eric*
 
 >>> show_votes(4)
 #4 (Who can give guitar lessons to my daughter?)
@@ -340,6 +338,7 @@ The main menu
 
 >>> rt.login('robin').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+- Contacts : Persons, Organizations, Partners
 - Votes : My candidatures, My tasks, My watchlist, My votes
 - Office : My Excerpts, My Comments, My Notification messages
 - Pleas : My Pleas, Where I can help, Active pleas, All pleas, Unassigned pleas, Active projects
@@ -348,15 +347,17 @@ The main menu
 - Configure :
   - System : Site Parameters, Help Texts, Users
   - Places : Countries, Places
+  - Contacts : Topics, Topic groups, Organization types, Functions
   - Office : Excerpt Types
   - Pleas : Projects, Projects (tree), Project Types, Ticket types, Sites
-  - Faculties : Faculties (tree), Faculties (all)
+  - Skills : Skills (tree), Skills (all), Skill types
 - Explorer :
   - System : content types, Authorities, User types, Changes, Notification messages, All dashboard widgets
+  - Contacts : Interests, Contact Persons
   - Votes : All votes, Vote states
   - Office : Excerpts, Comments
   - Pleas : Dependencies, Ticket states
-  - Faculties : Competences
+  - Skills : Skill offers, Skill demands
 - Site : About
 
 
@@ -379,11 +380,11 @@ My pleas
   
 >>> rt.login('christa').show(tickets.MyTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-================================================================== ===============================
+================================================================== ===================================
  Description                                                        Actions
------------------------------------------------------------------- -------------------------------
- `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__   [★] **New** → [☾] [☎] [☉] [☐]
-================================================================== ===============================
+------------------------------------------------------------------ -----------------------------------
+ `#2 (My lawn needs mowing. On Thursday or Saturday.) <Detail>`__   [★] **New** → [☾] [☎] [☉] [⚒] [☐]
+================================================================== ===================================
 <BLANKLINE>
 
 
@@ -393,26 +394,26 @@ Where I can help
 
 >>> rt.login('eric').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-==================================================================================== ================ ================
- Description                                                                          Faculty          Actions
------------------------------------------------------------------------------------- ---------------- ----------------
- `#4 (Who can give guitar lessons to my daughter?) <Detail>`__ by `Alex <Detail>`__   Guitar lessons   [☆] **Opened**
-==================================================================================== ================ ================
+==================================================================================== ============================= ================
+ Description                                                                          Needed skills                 Actions
+------------------------------------------------------------------------------------ ----------------------------- ----------------
+ `#4 (Who can give guitar lessons to my daughter?) <Detail>`__ by `Alex <Detail>`__   `Guitar lessons <Detail>`__   [☆] **Opened**
+==================================================================================== ============================= ================
 <BLANKLINE>
 
 
 
 My offers
--------------------
+---------
 
 >>> rt.login('christa').show(votes.MyOffers)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-==================================================================================================== =========================================
- Description                                                                                          Actions
----------------------------------------------------------------------------------------------------- -----------------------------------------
- `#5 (Who would play music on my birthday party?) <Detail>`__ by `Alex <Detail>`__                    [★] **Candidate** → [Watching] [Cancel]
- `#3 (Who can give piano lessons to my son?) <Detail>`__ by `Eric <Detail>`__ for `Dora <Detail>`__   [★] **Candidate** → [Watching] [Cancel]
-==================================================================================================== =========================================
+========================================================================================= =========================================
+ Description                                                                               Actions
+----------------------------------------------------------------------------------------- -----------------------------------------
+ `#5 (Who would play music on my birthday party?) <Detail>`__ by `Alex <Detail>`__         [★] **Candidate** → [Watching] [Cancel]
+ `#3 (Who can give piano lessons to my son?) <Detail>`__ by `Eric <Detail>`__ for *Dora*   [★] **Candidate** → [Watching] [Cancel]
+========================================================================================= =========================================
 <BLANKLINE>
 
 
@@ -427,7 +428,7 @@ My offers
 
 
 
-My Tasks
+My tasks
 --------
 
 >>> rt.login('alex').show(votes.MyTasks)
@@ -477,10 +478,10 @@ the detail window of a ticket.
   - (general_1):
     - (general1):
       - (general1_1): **Summary** (summary), **ID** (id), **Deadline** (deadline)
-      - (general1_2): **Author** (user), **End user** (end_user), **Faculty** (faculty)
+      - (general1_2): **Author** (user), **End user** (end_user)
       - (general1_3): **Site** (site), **Actions** (workflow_buttons)
     - **Votes** (VotesByVotable) [visible for user connector admin]
-  - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user connector admin]
+  - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user connector admin], **Skill demands** (DemandsByDemander) [visible for user connector admin]
 - **History** (changes.ChangesByMaster) [visible for connector admin]
 - **More** (more) [visible for connector admin]:
   - (more_1) [visible for all]:

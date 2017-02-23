@@ -18,6 +18,7 @@ while :mod:`lino_noi.projects.care` does not use this module at all.
 
 from lino.core.roles import UserRole, SiteAdmin
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
+from lino_xl.lib.contacts.roles import ContactsUser, ContactsStaff
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino_noi.lib.tickets.roles import TicketsUser, Searcher, Triager, TicketsStaff
 from lino_noi.lib.clocking.roles import Worker
@@ -35,7 +36,7 @@ class EndUser(OfficeUser, VotesUser, TicketsUser):
     pass
 
 
-class Consultant(EndUser, Searcher, Worker, ExcerptsUser):
+class Consultant(EndUser, Searcher, Worker, ExcerptsUser, ContactsUser):
     """A **consultant** is somebody who may both report tickets and work
     on them.
 
@@ -59,7 +60,7 @@ class Senior(Developer, Triager, ExcerptsStaff):
     pass
 
 
-class SiteAdmin(Senior, SiteAdmin, OfficeStaff, VotesStaff, TicketsStaff):
+class SiteAdmin(Senior, SiteAdmin, OfficeStaff, VotesStaff, TicketsStaff, ContactsStaff):
     """Can do everything."""
 
 UserTypes.clear()

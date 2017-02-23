@@ -37,12 +37,12 @@ class TicketDetail(TicketDetail):
 
     general = dd.Panel("""
     general1:60 votes.VotesByVotable:20
-    description:30 comments.CommentsByRFC:30 #clocking.SessionsByTicket:20
+    description:30 comments.CommentsByRFC:30 faculties.DemandsByDemander #clocking.SessionsByTicket:20
     """, label=_("General"))
 
     general1 = """
     summary:40 id:6 deadline
-    user:12 end_user:12 faculty #topic
+    user:12 end_user:12 #faculty #topic
     site workflow_buttons
     """
 

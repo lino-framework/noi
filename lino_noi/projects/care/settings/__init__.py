@@ -56,7 +56,8 @@ class Site(Site):
         yield 'lino.modlib.gfks'
         yield 'lino_noi.lib.users'
 
-        # yield 'lino_noi.lib.topics'
+        yield 'lino_noi.lib.topics'
+        yield 'lino_noi.lib.contacts'
         yield 'lino_noi.lib.votes'
         yield 'lino_noi.projects.care.lib.tickets'
         yield 'lino_noi.lib.faculties'
@@ -83,6 +84,8 @@ class Site(Site):
         self.plugins.countries.configure(hide_region=True)
         self.plugins.comments.configure(
             commentable_model='tickets.Ticket')
+        self.plugins.tickets.configure(
+            end_user_model='contacts.Person')
 
     def setup_quicklinks(self, user, tb):
         # super(Site, self).setup_quicklinks(ar, tb)

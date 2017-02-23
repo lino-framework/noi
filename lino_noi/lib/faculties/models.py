@@ -22,7 +22,7 @@ from lino.modlib.users.mixins import UserAuthored
 
 MAX_WEIGHT = 100
 
-class FacultyType(BabelNamed):
+class SkillType(BabelNamed):
     class Meta:
         verbose_name = _("Skill type")
         verbose_name_plural = _("Skill types")
@@ -49,8 +49,8 @@ class Faculty(BabelNamed, Hierarchical, Sequenced):
             "requiring this skill."
             "A number between -{0} and +{0}.").format(MAX_WEIGHT))
 
-    faculty_type = dd.ForeignKey(
-        'faculties.FacultyType', null=True, blank=True)
+    skill_type = dd.ForeignKey(
+        'faculties.SkillType', null=True, blank=True)
 
     remarks = dd.RichTextField(_("Remarks"), blank=True)
     
@@ -69,21 +69,24 @@ class Competence(UserAuthored, Sequenced):
     in a given *faculty*.
 
     .. attribute:: user
+    .. attribute:: supplier
     .. attribute:: faculty
     .. attribute:: affinity
-    .. attribute:: product
 
     """
     
-    allow_cascaded_delete = "user"
+    allow_cascaded_delete = "supplier user"
 
     class Meta:
-        verbose_name = _("Competence offer")
-        verbose_name_plural = _("Competence offers")
-        # unique_together = ['user', 'faculty', 'topic']
-        unique_together = ['user', 'faculty']
+        verbose_name = _("Skill offer")
+        verbose_name_plural = _("Skill offers")
+        unique_together = ['supplier', 'faculty']
 
     faculty = dd.ForeignKey('faculties.Faculty')
+    supplier = dd.ForeignKey(
+        dd.plugins.faculties.supplier_model,
+        verbose_name=_("Supplier"),
+        blank=True, null=True)
     affinity = models.IntegerField(
         _("Affinity"), blank=True, default=MAX_WEIGHT,
         help_text=_(
@@ -120,9 +123,43 @@ class Competence(UserAuthored, Sequenced):
 
 dd.update_field(Competence, 'user', verbose_name=_("User"))
 
-if dd.is_installed('tickets'):
-    dd.inject_field(
-        'tickets.Ticket', 'faculty',
-        dd.ForeignKey("faculties.Faculty", blank=True, null=True))
+
+class Demand(UserAuthored):
+    """A **Skill demand** is when a given *end user* declares to need a
+    given skill.
+
+    .. attribute:: user
+    .. attribute:: demander
+    .. attribute:: faculty
+    .. attribute:: affinity
+
+    """
+    
+    allow_cascaded_delete = "demander user"
+
+    class Meta:
+        verbose_name = _("Skill demand")
+        verbose_name_plural = _("Skill demands")
+        # unique_together = ['user', 'faculty', 'topic']
+        unique_together = ['demander', 'skill']
+
+    skill = dd.ForeignKey('faculties.Faculty')
+    demander = dd.ForeignKey(
+        dd.plugins.faculties.demander_model,
+        verbose_name=_("Demander"),
+        blank=True, null=True)
+    affinity = models.IntegerField(
+        _("Affinity"), blank=True, default=MAX_WEIGHT,
+        help_text=_(
+            "How much this user likes to get a new ticket "
+            "in this skill."
+            "A number between -{0} and +{0}.").format(MAX_WEIGHT))
+    description = dd.RichTextField(_("Description"), blank=True)
+    
+
+# if dd.is_installed('tickets'):
+#     dd.inject_field(
+#         'tickets.Ticket', 'faculty',
+#         dd.ForeignKey("faculties.Faculty", blank=True, null=True))
 
 from .ui import *

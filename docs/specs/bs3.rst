@@ -43,21 +43,22 @@ The demo database contains the following "public" tickets:
 
 >>> rt.show(tickets.PublicTickets)
 ... #doctest: -REPORT_UDIFF
-======================================================= ============= ============== ==========
- Description                                             Ticket type   Topic          Priority
-------------------------------------------------------- ------------- -------------- ----------
- `#111 (Ticket 111) <Detail>`__ by *luc* for *marc*      Upgrade       Lino Core      100
- `#102 (Ticket 102) <Detail>`__ by *luc* for *marc*      Upgrade       Lino Voga      100
- `#93 (Ticket 93) <Detail>`__ by *luc* for *marc*        Upgrade       Lino Cosi      100
- `#75 (Ticket 75) <Detail>`__ by *luc*                   Upgrade       Lino Core      100
- `#66 (Ticket 66) <Detail>`__ by *luc* for *marc*        Upgrade       Lino Voga      100
- `#57 (Ticket 57) <Detail>`__ by *luc* for *marc*        Upgrade       Lino Cosi      100
- `#48 (Ticket 48) <Detail>`__ by *luc* for *marc*        Upgrade       Lino Welfare   100
- `#30 (Ticket 30) <Detail>`__ by *luc*                   Upgrade       Lino Voga      100
- `#21 (Ticket 21) <Detail>`__ by *luc* for *marc*        Upgrade       Lino Cosi      100
- `#12 (Foo cannot bar) <Detail>`__ by *luc* for *marc*   Upgrade       Lino Welfare   100
- **Total (10 rows)**                                                                  **1000**
-======================================================= ============= ============== ==========
+============================================================ ============= ============== ==========
+ Description                                                  Ticket type   Topic          Priority
+------------------------------------------------------------ ------------- -------------- ----------
+ `#115 (Ticket 115) <Detail>`__ by *Jean*                     Bugfix        Lino Welfare   100
+ `#107 (Ticket 107) <Detail>`__ by *Mathieu*                  Enhancement   Lino Welfare   100
+ `#91 (Ticket 91) <Detail>`__ by *Jean*                       Bugfix        Lino Welfare   100
+ `#83 (Ticket 83) <Detail>`__ by *Mathieu*                    Enhancement   Lino Welfare   100
+ `#75 (Ticket 75) <Detail>`__ by *Luc*                        Upgrade       Lino Welfare   100
+ `#67 (Ticket 67) <Detail>`__ by *Jean*                       Bugfix        Lino Welfare   100
+ `#51 (Ticket 51) <Detail>`__ by *Luc*                        Upgrade       Lino Welfare   100
+ `#43 (Ticket 43) <Detail>`__ by *Jean*                       Bugfix        Lino Welfare   100
+ `#35 (Ticket 35) <Detail>`__ by *Mathieu*                    Enhancement   Lino Welfare   100
+ `#27 (Ticket 27) <Detail>`__ by *Luc*                        Upgrade       Lino Welfare   100
+ `#11 (Class-based Foos and Bars?) <Detail>`__ by *Mathieu*   Enhancement   Lino Welfare   100
+ **Total (11 rows)**                                                                       **1100**
+============================================================ ============= ============== ==========
 <BLANKLINE>
 
 
@@ -69,7 +70,7 @@ This data is being rendered using plain bootstrap HTML:
 >>> soup = BeautifulSoup(res.content, "lxml")
 >>> links = soup.find_all('a')
 >>> len(links)
-58
+57
 >>> print(links[0].get('href'))
 /?ul=de
 >>> print(links[1].get('href'))
@@ -91,7 +92,7 @@ This data is being rendered using plain bootstrap HTML:
 
 >>> print(soup.get_text(' ', strip=True))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF +ELLIPSIS
-Tickets Home en de fr Site About #13 (Bar cannot foo) << < > >> State: Sticky
+Tickets Home en de fr Site About #13 (Bar cannot foo) << < > >> State: Sleeping 
 <BLANKLINE>
 <BLANKLINE>
-(last update ...) Created ... by jean Topic: Lino Cosi Site: welket Linking to #1 and to blog . Hackerish comment ... This is Lino Noi ... using ...
+(last update ...) Created ... by Jean Topic: Lino Voga Site: welket Linking to #1 and to blog . This is Lino Noi ... using ...

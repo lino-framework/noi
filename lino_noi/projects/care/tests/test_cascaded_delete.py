@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Luc Saffre
+# Copyright 2016-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """Runs some tests about the disable-delete handler and cascading deletes.
@@ -13,7 +13,7 @@ You can run only these tests by issuing::
 Or::
 
   $ go noi
-  $ python setup.py test -s tests.DemoTests.test_care
+  $ python setup.py test -s tests.ProjectsTests.test_care
 
 This tests for :ticket:`1177`, :ticket:`1180`, :ticket:`1181`
 
@@ -42,6 +42,7 @@ class Tests(RemoteAuthTestCase):
         from lino.modlib.users.choicelists import UserTypes
         User = rt.modules.users.User
         Faculty = rt.models.faculties.Faculty
+        Demand = rt.models.faculties.Demand
         Competence = rt.models.faculties.Competence
         Ticket = rt.models.tickets.Ticket
         TicketStates = rt.actors.tickets.TicketStates
@@ -50,14 +51,17 @@ class Tests(RemoteAuthTestCase):
         special = create(Faculty, name="Special work", parent=general)
 
         alex = create(User, username='alex',
-                       profile=UserTypes.user,
-                       language="en")
+                      first_name="Alex",
+                      profile=UserTypes.user,
+                      language="en")
         
         bruno = create(User, username='bruno',
+                       first_name="Bruno",
                        profile=UserTypes.user,
                        language="en")
         
         berta = create(User, username='berta',
+                       first_name="Berta",
                        profile=UserTypes.user,
                        language="en")
         
@@ -66,11 +70,13 @@ class Tests(RemoteAuthTestCase):
         
         ticket1 = create(
             Ticket, summary="Need general help",
-            user=berta, faculty=general)
+            user=berta)
+        create(Demand, demander=ticket1, skill=general)
 
         ticket2 = create(
             Ticket, summary="Need special help",
-            user=berta, faculty=special)
+            user=berta)
+        create(Demand, demander=ticket2, skill=special)
 
         self.assertEqual(ticket1.state, TicketStates.new)
 
@@ -106,25 +112,27 @@ class Tests(RemoteAuthTestCase):
             self.fail("Expected veto")
         except Warning as e:
             self.assertEqual(
-                six.text_type(e), "Cannot delete Faculty Special work "
-                "because 1 Competences refer to it.")
+                six.text_type(e), "Cannot delete Skill Special work "
+                "because 1 Skill offers refer to it.")
 
-        # you cannot delete a faculty when it is the parent of other
-        # faculties
+        # you cannot delete a skill when it is the parent of other
+        # skills
         try:
             general.delete()
             self.fail("Expected veto")
         except Warning as e:
             self.assertEqual(
-                six.text_type(e), "Cannot delete Faculty General work "
-                "because 1 Competences refer to it.")
+                six.text_type(e), "Cannot delete Skill General work "
+                "because 1 Skill offers refer to it.")
             
         # deleting a user will automatically delete all their
-        # competences:
+        # offers:
         
         bruno.delete()
         alex.delete()
 
+        self.assertEqual(Competence.objects.count(), 0)
+        
         self.assertEqual(Ticket.objects.count(), 2)
 
         # from lino.core.merge import MergePlan
