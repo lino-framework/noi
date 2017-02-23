@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 from __future__ import unicode_literals
@@ -14,6 +14,8 @@ from lino.core.roles import SiteAdmin
 from lino_xl.lib.cal.choicelists import DurationUnits
 from lino_noi.lib.clocking.roles import Worker
 from lino.utils.quantities import Duration
+
+from lino_noi.lib.users.models import create_user
 
 def vote(user, ticket, state, **kw):
     u = rt.models.users.User.objects.get(username=user)
@@ -52,10 +54,10 @@ def tickets_objects():
 
     cons = rt.models.users.UserTypes.consultant
     dev = rt.models.users.UserTypes.developer
-    yield User(username="marc")
-    yield User(username="mathieu", profile=cons)
-    yield User(username="luc", profile=dev)
-    yield User(username="jean", profile=rt.models.users.UserTypes.senior)
+    yield create_user("marc")
+    yield create_user("mathieu", cons)
+    yield create_user("luc", dev)
+    yield create_user("jean", rt.models.users.UserTypes.senior)
 
     USERS = Cycler(User.objects.all())
     WORKERS = Cycler(User.objects.filter(

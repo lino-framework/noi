@@ -31,6 +31,8 @@ Lino Noi:
   - PROTECT : blogs.Entry.entry_type
 - clocking.SessionType :
   - PROTECT : clocking.Session.session_type
+- comments.Comment :
+  - PROTECT : comments.Comment.reply_to
 - contacts.Company :
   - PROTECT : contacts.Role.company, excerpts.Excerpt.company, system.SiteConfig.site_company, tickets.Project.company
 - contacts.CompanyType :
@@ -39,15 +41,16 @@ Lino Noi:
   - CASCADE : contacts.Company.partner_ptr, contacts.Person.partner_ptr
   - PROTECT : clocking.ServiceReport.interesting_for, lists.Member.partner, tickets.Site.partner, topics.Interest.partner, users.User.partner
 - contacts.Person :
+  - CASCADE : faculties.Competence.supplier, users.User.person_ptr
   - PROTECT : contacts.Role.person, excerpts.Excerpt.contact_person, tickets.Project.contact_person
 - contacts.RoleType :
   - PROTECT : contacts.Role.type, excerpts.Excerpt.contact_role, tickets.Project.contact_role
 - contenttypes.ContentType :
   - PROTECT : blogs.Entry.owner_type, changes.Change.master_type, changes.Change.object_type, excerpts.Excerpt.owner_type, excerpts.ExcerptType.content_type, gfks.HelpText.content_type, notify.Message.owner_type, uploads.Upload.owner_type
 - countries.Country :
-  - PROTECT : contacts.Partner.country, countries.Place.country, users.User.country
+  - PROTECT : contacts.Partner.country, countries.Place.country
 - countries.Place :
-  - PROTECT : contacts.Partner.city, contacts.Partner.region, countries.Place.parent, users.User.city, users.User.region
+  - PROTECT : contacts.Partner.city, contacts.Partner.region, countries.Place.parent
 - deploy.Milestone :
   - PROTECT : deploy.Deployment.milestone, tickets.Ticket.fixed_for, tickets.Ticket.reported_for
 - excerpts.Excerpt :
@@ -55,7 +58,9 @@ Lino Noi:
 - excerpts.ExcerptType :
   - PROTECT : excerpts.Excerpt.excerpt_type
 - faculties.Faculty :
-  - PROTECT : clocking.Session.faculty, faculties.Competence.faculty, faculties.Faculty.parent, tickets.Ticket.faculty
+  - PROTECT : clocking.Session.faculty, faculties.Competence.faculty, faculties.Demand.skill, faculties.Faculty.parent
+- faculties.SkillType :
+  - PROTECT : faculties.Faculty.skill_type
 - lists.List :
   - PROTECT : lists.Member.list
 - lists.ListType :
@@ -65,8 +70,9 @@ Lino Noi:
 - tickets.ProjectType :
   - PROTECT : tickets.Project.type
 - tickets.Site :
-  - PROTECT : deploy.Milestone.site, tickets.Ticket.site, users.User.user_site
+  - PROTECT : deploy.Milestone.site, tickets.Ticket.site
 - tickets.Ticket :
+  - CASCADE : faculties.Demand.demander
   - PROTECT : clocking.Session.ticket, comments.Comment.owner, deploy.Deployment.ticket, tickets.Link.child, tickets.Link.parent, tickets.Ticket.duplicate_of, votes.Vote.votable
 - tickets.TicketType :
   - PROTECT : tickets.Ticket.ticket_type
@@ -78,5 +84,6 @@ Lino Noi:
 - uploads.UploadType :
   - PROTECT : uploads.Upload.type
 - users.User :
-  - CASCADE : faculties.Competence.user
+  - CASCADE : faculties.Competence.user, faculties.Demand.user
   - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, dashboard.Widget.user, excerpts.Excerpt.user, notify.Message.user, tickets.Project.assign_to, tickets.Ticket.end_user, tickets.Ticket.reporter, tickets.Ticket.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user, votes.Vote.user
+<BLANKLINE>

@@ -162,7 +162,6 @@ class Project(mixins.DatePeriod, TimeInvestment,
                     sar.ar2button(label=str(num))]
         return E.p(*elems)
 
-
     # def save(self, *args, **kwargs):
     #     root = self.parent
     #     while root is not None:
@@ -600,15 +599,58 @@ class Ticket(UserAuthored, mixins.CreatedModified,
             return False
         return True
         
+    @dd.displayfield(_("Suppliers"))
+    def suppliers(self, ar):
+        """Displays a list of candidate suppliers.
+
+        This means: all suppliers who have at least one of the
+        skills required by this ticket.
+
+        """
+        if ar is None:
+            return ''
+
+        Supply = rt.models.faculties.Competence
+        Demand = rt.models.faculties.Demand
+        faculties = set()
+        for dem in Demand.objects.filter(demander=self):
+            faculties.add(dem.skill)
+            # faculties |= set(dem.skill.get_parental_line())
+
+        elems = []
+        for spl in Supply.objects.filter(faculty__in=faculties):
+            elems.append(ar.obj2html(spl.supplier))
+        elems = join_elems(elems, ', ')
+        return E.p(*elems)
+
+
+    @dd.displayfield(_("Needed skills"))
+    def needed_skills(self, ar):
+        """Displays a list of needed skills.
+
+        This means: all skill demands for this ticket.
+
+        """
+        if ar is None:
+            return ''
+
+        Demand = rt.models.faculties.Demand
+        elems = []
+        for dem in Demand.objects.filter(demander=self):
+            elems.append(ar.obj2html(dem.skill))
+        elems = join_elems(elems, ', ')
+        return E.p(*elems)
+
+
 # dd.update_field(Ticket, 'user', verbose_name=_("Reporter"))
 
 
-dd.inject_field(
-    'users.User', 'user_site',
-    dd.ForeignKey(
-        'tickets.Site', # verbose_name=_("Site"),
-        blank=True, null=True, related_name="users_by_site",
-        help_text=_("")))
+# dd.inject_field(
+#     'users.User', 'user_site',
+#     dd.ForeignKey(
+#         'tickets.Site', # verbose_name=_("Site"),
+#         blank=True, null=True, related_name="users_by_site",
+#         help_text=_("")))
 
 
 @dd.receiver(dd.post_startup)

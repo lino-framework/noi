@@ -44,6 +44,7 @@ class DDHTests(RemoteAuthTestCase):
         # ct_Ticket = ContentType.objects.get_for_model(Ticket)
 
         robin = create(User, username='robin',
+                       first_name="Robin",
                        profile=UserTypes.admin,
                        language="en")
 
@@ -64,7 +65,7 @@ class DDHTests(RemoteAuthTestCase):
                 self.fail("Expected veto")
             except Warning as e:
                 self.assertEqual(
-                    str(e), "Cannot delete User robin "
+                    str(e), "Cannot delete User Robin "
                     "because 1 Tickets refer to it.")
 
         
@@ -75,7 +76,7 @@ class DDHTests(RemoteAuthTestCase):
             self.fail("Expected veto")
         except Warning as e:
             self.assertEqual(
-                str(e), "Cannot delete User robin "
+                str(e), "Cannot delete User Robin "
                 "because 1 Tickets refer to it.")
 
         self.assertEqual(Star.objects.count(), 1)

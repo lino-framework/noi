@@ -44,7 +44,6 @@ ticket has one of the following values:
  10      new         New         ⛶        Yes
  15      talk        Talk        ☎        Yes
  20      opened      Opened      ☉        Yes
- 21      sticky      Sticky      ♾        Yes
  22      started     Started     ⚒        Yes
  30      sleeping    Sleeping    ☾        No
  40      ready       Ready       ☐        Yes
@@ -74,7 +73,6 @@ Above table in German:
  10     new         Neu           ⛶        Ja
  15     talk        Besprechen    ☎        Ja
  20     opened      Offen         ☉        Ja
- 21     sticky      Sticky        ♾        Ja
  22     started     Gestartet     ⚒        Ja
  30     sleeping    Schläft       ☾        Nein
  40     ready       Bereit        ☐        Ja
@@ -92,7 +90,6 @@ And in French (not yet fully translated):
  10      new         Nouveau    ⛶        Oui
  15      talk        Talk       ☎        Oui
  20      opened      Opened     ☉        Oui
- 21      sticky      Sticky     ♾        Oui
  22      started     Started    ⚒        Oui
  30      sleeping    Sleeping   ☾        Non
  40      ready       Ready      ☐        Oui
@@ -155,12 +152,12 @@ assigned to a project:
 >>> pv = dict(has_project=dd.YesNo.no)
 >>> rt.show(tickets.Tickets, param_values=pv)
 ... #doctest: +REPORT_UDIFF
-==== =================== ========= =========== ========= ============= =========
- ID   Summary             Author    Topic       Faculty   Actions       Project
----- ------------------- --------- ----------- --------- ------------- ---------
- 5    Cannot create Foo   mathieu   Lino Cosi             **Started**
- 3    Baz sucks           luc       Lino Core             **Opened**
-==== =================== ========= =========== ========= ============= =========
+==== =================== ========= ============== ============== =========
+ ID   Summary             Author    Topic          Actions        Project
+---- ------------------- --------- -------------- -------------- ---------
+ 5    Cannot create Foo   Mathieu   Lino Voga      **Sleeping**
+ 3    Baz sucks           Luc       Lino Welfare   **Opened**
+==== =================== ========= ============== ============== =========
 <BLANKLINE>
 
 
@@ -342,36 +339,35 @@ My tickets
 
 >>> rt.login('jean').show(tickets.MyTickets)
 ... #doctest: +REPORT_UDIFF
-=================================================================== =======================================
- Description                                                         Actions
-------------------------------------------------------------------- ---------------------------------------
- `#112 (Ticket 112) <Detail>`__ for `marc <Detail>`__                [▶] [★] **Sticky** → [⛶]
- `#109 (Ticket 109) <Detail>`__ for `marc <Detail>`__                [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
- `#103 (Ticket 103) <Detail>`__ for `marc <Detail>`__                [▶] [★] **Sticky** → [⛶]
- `#100 (Ticket 100) <Detail>`__                                      [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
- `#94 (Ticket 94) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **Sticky** → [⛶]
- `#91 (Ticket 91) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
- `#85 (Ticket 85) <Detail>`__                                        [▶] [★] **Sticky** → [⛶]
- `#82 (Ticket 82) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
- `#76 (Ticket 76) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **Sticky** → [⛶]
- `#73 (Ticket 73) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
- `#67 (Ticket 67) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **Sticky** → [⛶]
- `#64 (Ticket 64) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
- `#58 (Ticket 58) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **Sticky** → [⛶]
- `#55 (Ticket 55) <Detail>`__                                        [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
- `#49 (Ticket 49) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **Sticky** → [⛶]
- `#46 (Ticket 46) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
- `#40 (Ticket 40) <Detail>`__                                        [▶] [★] **Sticky** → [⛶]
- `#37 (Ticket 37) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
- `#31 (Ticket 31) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **Sticky** → [⛶]
- `#28 (Ticket 28) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
- `#22 (Ticket 22) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **Sticky** → [⛶]
- `#19 (Ticket 19) <Detail>`__ for `marc <Detail>`__                  [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
- `#13 (Bar cannot foo) <Detail>`__ for `marc <Detail>`__             [▶] [★] **Sticky** → [⛶]
- `#10 (Where can I find a Foo when bazing Bazes?) <Detail>`__        [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
- `#4 (Foo and bar don't baz) <Detail>`__ for `marc <Detail>`__       [▶] [★] **Sticky** → [⛶]
- `#1 (Föö fails to bar when baz) <Detail>`__ for `marc <Detail>`__   [▶] [★] **New** → [♾] [☾] [☎] [☉] [☐]
-=================================================================== =======================================
+============================================================== ==========================================
+ Description                                                    Actions
+-------------------------------------------------------------- ------------------------------------------
+ `#115 (Ticket 115) <Detail>`__                                 [▶] [★] **Opened** → [☾] [☎] [⚒] [☐] [☑]
+ `#106 (Ticket 106) <Detail>`__                                 [▶] [★] **Talk** → [☾] [☉] [⚒] [☐] [☑]
+ `#102 (Ticket 102) <Detail>`__                                 [▶] [★] **Ready** → [☎] [☑]
+ `#100 (Ticket 100) <Detail>`__                                 [▶] [★] **Started** → [☾] [☎] [☐] [☑]
+ `#97 (Ticket 97) <Detail>`__                                   [▶] [★] **New** → [☾] [☎] [☉] [⚒] [☐]
+ `#91 (Ticket 91) <Detail>`__                                   [▶] [★] **Opened** → [☾] [☎] [⚒] [☐] [☑]
+ `#82 (Ticket 82) <Detail>`__                                   [▶] [★] **Talk** → [☾] [☉] [⚒] [☐] [☑]
+ `#78 (Ticket 78) <Detail>`__                                   [▶] [★] **Ready** → [☎] [☑]
+ `#76 (Ticket 76) <Detail>`__                                   [▶] [★] **Started** → [☾] [☎] [☐] [☑]
+ `#73 (Ticket 73) <Detail>`__                                   [▶] [★] **New** → [☾] [☎] [☉] [⚒] [☐]
+ `#67 (Ticket 67) <Detail>`__                                   [▶] [★] **Opened** → [☾] [☎] [⚒] [☐] [☑]
+ `#58 (Ticket 58) <Detail>`__                                   [▶] [★] **Talk** → [☾] [☉] [⚒] [☐] [☑]
+ `#54 (Ticket 54) <Detail>`__                                   [▶] [★] **Ready** → [☎] [☑]
+ `#52 (Ticket 52) <Detail>`__                                   [▶] [★] **Started** → [☾] [☎] [☐] [☑]
+ `#49 (Ticket 49) <Detail>`__                                   [▶] [★] **New** → [☾] [☎] [☉] [⚒] [☐]
+ `#43 (Ticket 43) <Detail>`__                                   [▶] [★] **Opened** → [☾] [☎] [⚒] [☐] [☑]
+ `#34 (Ticket 34) <Detail>`__                                   [▶] [★] **Talk** → [☾] [☉] [⚒] [☐] [☑]
+ `#30 (Ticket 30) <Detail>`__                                   [▶] [★] **Ready** → [☎] [☑]
+ `#28 (Ticket 28) <Detail>`__                                   [▶] [★] **Started** → [☾] [☎] [☐] [☑]
+ `#25 (Ticket 25) <Detail>`__                                   [▶] [★] **New** → [☾] [☎] [☉] [⚒] [☐]
+ `#19 (Ticket 19) <Detail>`__                                   [▶] [★] **Opened** → [☾] [☎] [⚒] [☐] [☑]
+ `#10 (Where can I find a Foo when bazing Bazes?) <Detail>`__   [▶] [★] **Talk** → [☾] [☉] [⚒] [☐] [☑]
+ `#6 (Sell bar in baz) <Detail>`__                              [▶] [★] **Ready** → [☎] [☑]
+ `#4 (Foo and bar don't baz) <Detail>`__                        [▶] [★] **Started** → [☾] [☎] [☐] [☑]
+ `#1 (Föö fails to bar when baz) <Detail>`__                    [▶] [★] **New** → [☾] [☎] [☉] [⚒] [☐]
+============================================================== ==========================================
 <BLANKLINE>
 
 
@@ -397,30 +393,30 @@ can see all local tickets for a given site object:
 >>> welket = tickets.Site.objects.get(name="welket")
 >>> rt.show(tickets.TicketsBySite, welket)
 ... #doctest: +REPORT_UDIFF -SKIP
-===== =========================== ========= =========== =============== ============ ==========
- ID    Summary                     Author    Topic       Faculty         Actions      Project
------ --------------------------- --------- ----------- --------------- ------------ ----------
- 115   Ticket 115                  mathieu   Lino Core                   **Ready**    docs
- 109   Ticket 109                  jean      Lino Cosi                   **New**      téam
- 103   Ticket 103                  jean      Lino Core                   **Sticky**   linö
- 97    Ticket 97                   mathieu   Lino Cosi                   **Ready**    shop
- 91    Ticket 91                   jean      Lino Core                   **New**      research
- 85    Ticket 85                   jean      Lino Cosi                   **Sticky**   docs
- 79    Ticket 79                   mathieu   Lino Core                   **Ready**    téam
- 73    Ticket 73                   jean      Lino Cosi                   **New**      linö
- 67    Ticket 67                   jean      Lino Core                   **Sticky**   shop
- 61    Ticket 61                   mathieu   Lino Cosi                   **Ready**    research
- 55    Ticket 55                   jean      Lino Core                   **New**      docs
- 49    Ticket 49                   jean      Lino Cosi                   **Sticky**   téam
- 43    Ticket 43                   mathieu   Lino Core                   **Ready**    linö
- 37    Ticket 37                   jean      Lino Cosi                   **New**      shop
- 31    Ticket 31                   jean      Lino Core                   **Sticky**   research
- 25    Ticket 25                   mathieu   Lino Cosi                   **Ready**    docs
- 19    Ticket 19                   jean      Lino Core                   **New**      téam
- 13    Bar cannot foo              jean      Lino Cosi   Documentation   **Sticky**   linö
- 7     No Foo after deleting Bar   mathieu   Lino Core                   **Ready**    shop
- 1     Föö fails to bar when baz   jean      Lino Cosi                   **New**      linö
-===== =========================== ========= =========== =============== ============ ==========
+===== =========================== ========= ============== ============== ==========
+ ID    Summary                     Author    Topic          Actions        Project
+----- --------------------------- --------- -------------- -------------- ----------
+ 115   Ticket 115                  Jean      Lino Welfare   **Opened**     docs
+ 109   Ticket 109                  Jean      Lino Voga      **Sleeping**   téam
+ 103   Ticket 103                  Mathieu   Lino Welfare   **Closed**     linö
+ 97    Ticket 97                   Jean      Lino Voga      **New**        shop
+ 91    Ticket 91                   Jean      Lino Welfare   **Opened**     research
+ 85    Ticket 85                   Jean      Lino Voga      **Sleeping**   docs
+ 79    Ticket 79                   Mathieu   Lino Welfare   **Closed**     téam
+ 73    Ticket 73                   Jean      Lino Voga      **New**        linö
+ 67    Ticket 67                   Jean      Lino Welfare   **Opened**     shop
+ 61    Ticket 61                   Jean      Lino Voga      **Sleeping**   research
+ 55    Ticket 55                   Mathieu   Lino Welfare   **Closed**     docs
+ 49    Ticket 49                   Jean      Lino Voga      **New**        téam
+ 43    Ticket 43                   Jean      Lino Welfare   **Opened**     linö
+ 37    Ticket 37                   Jean      Lino Voga      **Sleeping**   shop
+ 31    Ticket 31                   Mathieu   Lino Welfare   **Closed**     research
+ 25    Ticket 25                   Jean      Lino Voga      **New**        docs
+ 19    Ticket 19                   Jean      Lino Welfare   **Opened**     téam
+ 13    Bar cannot foo              Jean      Lino Voga      **Sleeping**   linö
+ 7     No Foo after deleting Bar   Mathieu   Lino Welfare   **Closed**     shop
+ 1     Föö fails to bar when baz   Jean      Lino Voga      **New**        linö
+===== =========================== ========= ============== ============== ==========
 <BLANKLINE>
 
 
@@ -430,31 +426,32 @@ authenticated developer it looks like this:
 
 >>> rt.login('luc').show(tickets.TicketsBySite, welket)
 ... #doctest: +REPORT_UDIFF -SKIP
-===== =========================== ========= =========== =============== ==================== ==========
- ID    Summary                     Author    Topic       Faculty         Actions              Project
------ --------------------------- --------- ----------- --------------- -------------------- ----------
- 115   Ticket 115                  mathieu   Lino Core                   [▶] [☆] **Ready**    docs
- 109   Ticket 109                  jean      Lino Cosi                   [▶] [★] **New**      téam
- 103   Ticket 103                  jean      Lino Core                   [▶] [★] **Sticky**   linö
- 97    Ticket 97                   mathieu   Lino Cosi                   [▶] [☆] **Ready**    shop
- 91    Ticket 91                   jean      Lino Core                   [▶] [★] **New**      research
- 85    Ticket 85                   jean      Lino Cosi                   [▶] [★] **Sticky**   docs
- 79    Ticket 79                   mathieu   Lino Core                   [▶] [☆] **Ready**    téam
- 73    Ticket 73                   jean      Lino Cosi                   [▶] [★] **New**      linö
- 67    Ticket 67                   jean      Lino Core                   [▶] [★] **Sticky**   shop
- 61    Ticket 61                   mathieu   Lino Cosi                   [▶] [☆] **Ready**    research
- 55    Ticket 55                   jean      Lino Core                   [▶] [★] **New**      docs
- 49    Ticket 49                   jean      Lino Cosi                   [▶] [★] **Sticky**   téam
- 43    Ticket 43                   mathieu   Lino Core                   [▶] [☆] **Ready**    linö
- 37    Ticket 37                   jean      Lino Cosi                   [▶] [★] **New**      shop
- 31    Ticket 31                   jean      Lino Core                   [▶] [★] **Sticky**   research
- 25    Ticket 25                   mathieu   Lino Cosi                   [▶] [☆] **Ready**    docs
- 19    Ticket 19                   jean      Lino Core                   [▶] [★] **New**      téam
- 13    Bar cannot foo              jean      Lino Cosi   Documentation   [▶] [★] **Sticky**   linö
- 7     No Foo after deleting Bar   mathieu   Lino Core                   [▶] [☆] **Ready**    shop
- 1     Föö fails to bar when baz   jean      Lino Cosi                   [★] **New**          linö
-===== =========================== ========= =========== =============== ==================== ==========
+===== =========================== ========= ============== ==================== ==========
+ ID    Summary                     Author    Topic          Actions              Project
+----- --------------------------- --------- -------------- -------------------- ----------
+ 115   Ticket 115                  Jean      Lino Welfare   [▶] [★] **Opened**   docs
+ 109   Ticket 109                  Jean      Lino Voga      [☆] **Sleeping**     téam
+ 103   Ticket 103                  Mathieu   Lino Welfare   [☆] **Closed**       linö
+ 97    Ticket 97                   Jean      Lino Voga      [▶] [★] **New**      shop
+ 91    Ticket 91                   Jean      Lino Welfare   [▶] [★] **Opened**   research
+ 85    Ticket 85                   Jean      Lino Voga      [☆] **Sleeping**     docs
+ 79    Ticket 79                   Mathieu   Lino Welfare   [☆] **Closed**       téam
+ 73    Ticket 73                   Jean      Lino Voga      [▶] [★] **New**      linö
+ 67    Ticket 67                   Jean      Lino Welfare   [▶] [★] **Opened**   shop
+ 61    Ticket 61                   Jean      Lino Voga      [☆] **Sleeping**     research
+ 55    Ticket 55                   Mathieu   Lino Welfare   [☆] **Closed**       docs
+ 49    Ticket 49                   Jean      Lino Voga      [▶] [★] **New**      téam
+ 43    Ticket 43                   Jean      Lino Welfare   [▶] [★] **Opened**   linö
+ 37    Ticket 37                   Jean      Lino Voga      [☆] **Sleeping**     shop
+ 31    Ticket 31                   Mathieu   Lino Welfare   [☆] **Closed**       research
+ 25    Ticket 25                   Jean      Lino Voga      [▶] [★] **New**      docs
+ 19    Ticket 19                   Jean      Lino Welfare   [▶] [★] **Opened**   téam
+ 13    Bar cannot foo              Jean      Lino Voga      [☆] **Sleeping**     linö
+ 7     No Foo after deleting Bar   Mathieu   Lino Welfare   [☆] **Closed**       shop
+ 1     Föö fails to bar when baz   Jean      Lino Voga      [★] **New**          linö
+===== =========================== ========= ============== ==================== ==========
 <BLANKLINE>
+
 
 
 
@@ -548,15 +545,14 @@ Comments on private tickets are not shown by to anonymous users:
 ==== ================= ===================
  ID   Author            Short text
 ---- ----------------- -------------------
- 1    jean              Hackerish comment
- 4    mathieu           Hackerish comment
- 6    Rolf Rompen       Hackerish comment
- 7    Robin Rood        Hackerish comment
- 8    jean              Hackerish comment
- 10   marc              Hackerish comment
- 11   mathieu           Hackerish comment
- 12   Romain Raffault   Hackerish comment
- 13   Rolf Rompen       Hackerish comment
+ 1    Jean              Hackerish comment
+ 4    Romain Raffault   Hackerish comment
+ 6    Robin Rood        Hackerish comment
+ 7    Jean              Hackerish comment
+ 8    Luc               Hackerish comment
+ 10   Romain Raffault   Hackerish comment
+ 11   Rolf Rompen       Hackerish comment
+ 12   Robin Rood        Hackerish comment
 ==== ================= ===================
 <BLANKLINE>
 
@@ -566,20 +562,18 @@ The same list seen by marc
 ==== ================= ===========================
  ID   Author            Short text
 ---- ----------------- ---------------------------
- 1    jean              Hackerish comment
- 2    luc               Very confidential comment
- 3    marc              Very confidential comment
- 4    mathieu           Hackerish comment
- 5    Romain Raffault   Very confidential comment
- 6    Rolf Rompen       Hackerish comment
- 7    Robin Rood        Hackerish comment
- 8    jean              Hackerish comment
- 9    luc               Very confidential comment
- 10   marc              Hackerish comment
- 11   mathieu           Hackerish comment
- 12   Romain Raffault   Hackerish comment
- 13   Rolf Rompen       Hackerish comment
- 14   Robin Rood        Very confidential comment
+ 1    Jean              Hackerish comment
+ 2    Luc               Very confidential comment
+ 3    Mathieu           Very confidential comment
+ 4    Romain Raffault   Hackerish comment
+ 5    Rolf Rompen       Very confidential comment
+ 6    Robin Rood        Hackerish comment
+ 7    Jean              Hackerish comment
+ 8    Luc               Hackerish comment
+ 9    Mathieu           Very confidential comment
+ 10   Romain Raffault   Hackerish comment
+ 11   Rolf Rompen       Hackerish comment
+ 12   Robin Rood        Hackerish comment
 ==== ================= ===========================
 <BLANKLINE>
 

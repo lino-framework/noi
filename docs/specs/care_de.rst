@@ -34,6 +34,7 @@ Das Hauptmenü
 
 >>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+- Kontakte : Personen, Organisationen, Partner
 - Stimmabgaben : Meine Kandidaturen, Meine Aufgaben, Meine Interessen, Meine Stimmabgaben
 - Büro : Meine Auszüge, Meine Kommentare, Meine Benachrichtigungen
 - Bitten : Meine Bitten, Wo ich helfen kann, Aktive Bitten, Alle Bitten, Nicht zugewiesene Bitten, Aktive Projekte
@@ -42,15 +43,17 @@ Das Hauptmenü
 - Konfigurierung :
   - System : Site-Parameter, Hilfetexte, Benutzer
   - Orte : Länder, Orte
+  - Kontakte : Themen, Themengruppen, Organisationsarten, Funktionen
   - Büro : Auszugsarten
   - Bitten : Projekte, Projekte (Hierarchie), Project Types, Ticket types, Umfelder
-  - Fähigkeiten : Fähigkeiten (Hierarchie), Fähigkeiten (alle)
+  - Fähigkeiten : Fähigkeiten (Hierarchie), Fähigkeiten (Alle), Fähigkeitsarten
 - Explorer :
   - System : Datenbankmodelle, Vollmachten, Benutzerarten, Änderungen, Benachrichtigungen, All dashboard widgets
+  - Kontakte : Interessen, Kontaktpersonen
   - Stimmabgaben : Alle Stimmabgaben, Stimmabgabezustände
   - Büro : Auszüge, Kommentare
   - Bitten : Verknüpfungen, Ticketzustände
-  - Fähigkeiten : Kompetenzen
+  - Fähigkeiten : Fähigkeitsangebote, Anfragen
 - Site : Info
 
 

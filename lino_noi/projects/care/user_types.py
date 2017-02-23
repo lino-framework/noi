@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """Defines user roles for the Care variant of Lino Noi."""
@@ -8,7 +8,7 @@
 from lino.api import dd
 from lino.core.roles import UserRole, SiteAdmin
 from lino.modlib.users.roles import Helper
-from lino_xl.lib.contacts.roles import ContactsUser, ContactsStaff
+from lino_xl.lib.contacts.roles import ContactsStaff
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino_noi.lib.votes.roles import VotesStaff, VotesUser
@@ -18,7 +18,7 @@ from lino.modlib.users.choicelists import UserTypes
 from django.utils.translation import ugettext_lazy as _
 
 
-class SimpleUser(Helper, ContactsUser, OfficeUser, TicketsUser, VotesUser):
+class SimpleUser(Helper, OfficeUser, TicketsUser, VotesUser):
     """A **simple user** is a person who can log into the application in
     order to manage their own pleas and competences and potentially
     can respond to other user's pleas.

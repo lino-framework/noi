@@ -337,7 +337,7 @@ class Tickets(dd.Table):
     required_roles = set()  # also for anonymous
     model = 'tickets.Ticket'
     order_by = ["-id"]
-    column_names = 'id summary:50 user:10 topic faculty ' \
+    column_names = 'id summary:50 user:10 topic #faculty ' \
                    'workflow_buttons:30 project:10 *'
     detail_layout = TicketDetail()
     insert_layout = """
@@ -373,6 +373,7 @@ class Tickets(dd.Table):
             help_text=_("Only tickets having no vote by this user.")),
         feasable_by=dd.ForeignKey(
             settings.SITE.user_model,
+            # dd.plugins.faculties.supplier_model,
             verbose_name=_("Feasable by"), blank=True, null=True),
         interesting_for=dd.ForeignKey(
             'contacts.Partner',
@@ -418,11 +419,14 @@ class Tickets(dd.Table):
             qs = pv.observed_event.add_filter(qs, pv)
 
         if pv.feasable_by:
+            # show only tickets which have at least one demand that
+            # matches a skill supply authored by the specified user.
             faculties = set()
             for fac in rt.models.faculties.Faculty.objects.filter(
                     competence__user=pv.feasable_by):
                 faculties |= set(fac.get_parental_line())
-            qs = qs.filter(Q(faculty__in=faculties))
+            qs = qs.filter(demand__skill__in=faculties)
+            qs = qs.distinct()
 
         if pv.interesting_for:
 
@@ -519,7 +523,7 @@ class SuggestedTickets(Tickets):
     """
     label = _("Where I can help")
     required_roles = dd.login_required(TicketsUser)
-    column_names = 'overview:50 #topic faculty ' \
+    column_names = 'overview:50 needed_skills ' \
                    'workflow_buttons:30 *'
     params_panel_hidden = True
     params_layout = """

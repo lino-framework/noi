@@ -40,12 +40,17 @@ named by a version number."""),
     'lino_noi.lib.deploy.models.Deployment' : _("""A deployment is the fact that a given ticket is being fixed (or
 installed or activated) by a given milestone (to a given site)."""),
     'lino_noi.lib.deploy.models.Deployment.milestone' : _("""The milestone (and site) of this deployment."""),
-    'lino_noi.lib.faculties.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_noi.lib.faculties.Plugin.demander_model' : _("""The model of objects to be used as demander of skill
+demands. The default value is Ticket."""),
+    'lino_noi.lib.faculties.Plugin.supplier_model' : _("""The model of objects to be used as supplier of skill
+supplies. The tefault value is  Person."""),
     'lino_noi.lib.faculties.models.Faculty' : _("""A faculty is a skill, knowledge or ability which can be
 required in order to work e.g. on some ticket, and which
 individual users can have (offer) or not."""),
     'lino_noi.lib.faculties.models.Competence' : _("""A competence is when a given user is declared to be competent
 in a given faculty."""),
+    'lino_noi.lib.faculties.models.Demand' : _("""A Skill demand is when a given end user declares to need a
+given skill."""),
     'lino_noi.lib.noi.migrate.Migrator' : _("""The standard migrator for noi."""),
     'lino_noi.lib.noi.user_types.EndUser' : _("""An end user is somebody who uses our software and may report
 tickets, but won't work on them."""),

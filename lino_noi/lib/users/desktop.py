@@ -25,7 +25,7 @@ class UserDetail(UserDetail):
 
     general = dd.Panel("""
     box1:45 clocking:15
-    faculties.CompetencesByUser
+    faculties.OffersBySupplier
     """, label=_("General"))
 
     if dd.is_installed('clocking'):
@@ -41,7 +41,7 @@ class UserDetail(UserDetail):
     # """, label=_("Tickets"))
 
     box1 = """
-    username profile:20 partner user_site
+    username profile:20 #partner #user_site
     language id created modified
     callme_mode mail_mode notify_myself
     """
@@ -87,7 +87,7 @@ class OtherUsers(Users):
     editable = False
     required_roles = dd.login_required()
     detail_layout = dd.DetailLayout("""
-    first_name last_name city user_site
+    first_name last_name city #user_site
     phone gsm
     about_me
     """, window_size=(60, 15))
