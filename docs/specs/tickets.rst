@@ -542,46 +542,201 @@ Comments
 Comments on private tickets are not shown by to anonymous users:
 
 >>> rt.show(comments.Comments, column_names="id user short_text")
-==== ================= ===================
- ID   Author            Short text
----- ----------------- -------------------
- 1    Jean              Hackerish comment
- 4    Romain Raffault   Hackerish comment
- 6    Robin Rood        Hackerish comment
- 7    Jean              Hackerish comment
- 8    Luc               Hackerish comment
- 10   Romain Raffault   Hackerish comment
- 11   Rolf Rompen       Hackerish comment
- 12   Robin Rood        Hackerish comment
-==== ================= ===================
++----+-----------------+--------------------------------------------------------------------------------+
+| ID | Author          | Short text                                                                     |
++====+=================+================================================================================+
+| 1  | Jean            | Styled comment pasted from word!                                               |
++----+-----------------+--------------------------------------------------------------------------------+
+| 4  | Romain Raffault | Who| What| Done?                                                               |
+|    |                 | ---|---|---                                                                    |
+|    |                 | Him| Bar|                                                                      |
+|    |                 | Her| Foo the Bar| **x**                                                        |
+|    |                 | Them| Floop the pig                                                            |
+|    |                 | | x                                                                            |
++----+-----------------+--------------------------------------------------------------------------------+
+| 6  | Robin Rood      | Lorem ipsum** dolor sit amet**, consectetur adipiscing elit. Nunc cursus felis |
+|    |                 | nisi, eu pellentesque lorem lobortis non. Aenean non sodales neque, vitae      |
+|    |                 | venenatis lectus. In eros dui, gravida et dolor at, pellentesque hendrerit     |
+|    |                 | magna. Quisque vel lectus dictum, rhoncus massa feugiat, condimentum sem.      |
+|    |                 | Donec elit nisl, placerat vitae imperdiet eget, hendrerit nec quam. Ut         |
+|    |                 | elementum ligula vitae odio efficitur rhoncus. Duis in blandit neque. Sed      |
+|    |                 | dictum mollis volutpat. Morbi at est et nisi euismod viverra. Nulla quis lacus |
+|    |                 | vitae ante sollicitudin tincidunt. Donec nec enim in leo vulputate ultrices.   |
+|    |                 | Suspendisse potenti. Ut elit nibh, porta ut enim ac, convallis molestie risus. |
+|    |                 | Praesent consectetur lacus lacus, in faucibus justo fringilla vel.             |
+|    |                 |                                                                                |
+|    |                 | Donec fermentum enim et maximus vestibulum. Sed mollis lacus quis dictum       |
+|    |                 | fermentum. Maecenas libero tellus, hendrerit cursus pretium et, hendrerit quis |
+|    |                 | lectus. Nunc bibendum nunc nunc, ac commodo sem interdum ut. Quisque vitae     |
+|    |                 | turpis lectus. Nullam efficitur scelerisque hendrerit. Fusce feugiat           |
+|    |                 | ullamcorper nulla. Suspendisse quis placerat ligula. Etiam ullamcorper         |
+|    |                 | elementum consectetur. Aenean et diam ullamcorper, posuere turpis eget,        |
+|    |                 | egestas nibh. Quisque condimentum arcu ac metus sodales placerat. Quisque      |
+|    |                 | placerat, quam nec tincidunt pharetra, urna justo scelerisque urna, et         |
+|    |                 | vulputate ipsum lacus at ligula.                                               |
++----+-----------------+--------------------------------------------------------------------------------+
+| 7  | Jean            | Lorem ipsum ** dolor sit amet**, consectetur adipiscing elit. Donec interdum   |
+|    |                 | dictum erat. Fusce condimentum erat a pulvinar ultricies.                      |
+|    |                 |                                                                                |
+|    |                 | Phasellus gravida ullamcorper eros, sit amet blandit sapien laoreet quis.      |
+|    |                 |                                                                                |
+|    |                 | Donec accumsan mauris at risus lobortis, nec pretium tortor aliquam. Nulla vel |
+|    |                 | enim vel eros venenatis congue.                                                |
++----+-----------------+--------------------------------------------------------------------------------+
+| 8  | Luc             | Styled comment pasted from word!                                               |
++----+-----------------+--------------------------------------------------------------------------------+
+| 10 | Romain Raffault | Who| What| Done?                                                               |
+|    |                 | ---|---|---                                                                    |
+|    |                 | Him| Bar|                                                                      |
+|    |                 | Her| Foo the Bar| **x**                                                        |
+|    |                 | Them| Floop the pig                                                            |
+|    |                 | | x                                                                            |
++----+-----------------+--------------------------------------------------------------------------------+
+| 11 | Rolf Rompen     | Lorem ipsum** dolor sit amet**, consectetur adipiscing elit. Nunc cursus felis |
+|    |                 | nisi, eu pellentesque lorem lobortis non. Aenean non sodales neque, vitae      |
+|    |                 | venenatis lectus. In eros dui, gravida et dolor at, pellentesque hendrerit     |
+|    |                 | magna. Quisque vel lectus dictum, rhoncus massa feugiat, condimentum sem.      |
+|    |                 | Donec elit nisl, placerat vitae imperdiet eget, hendrerit nec quam. Ut         |
+|    |                 | elementum ligula vitae odio efficitur rhoncus. Duis in blandit neque. Sed      |
+|    |                 | dictum mollis volutpat. Morbi at est et nisi euismod viverra. Nulla quis lacus |
+|    |                 | vitae ante sollicitudin tincidunt. Donec nec enim in leo vulputate ultrices.   |
+|    |                 | Suspendisse potenti. Ut elit nibh, porta ut enim ac, convallis molestie risus. |
+|    |                 | Praesent consectetur lacus lacus, in faucibus justo fringilla vel.             |
+|    |                 |                                                                                |
+|    |                 | Donec fermentum enim et maximus vestibulum. Sed mollis lacus quis dictum       |
+|    |                 | fermentum. Maecenas libero tellus, hendrerit cursus pretium et, hendrerit quis |
+|    |                 | lectus. Nunc bibendum nunc nunc, ac commodo sem interdum ut. Quisque vitae     |
+|    |                 | turpis lectus. Nullam efficitur scelerisque hendrerit. Fusce feugiat           |
+|    |                 | ullamcorper nulla. Suspendisse quis placerat ligula. Etiam ullamcorper         |
+|    |                 | elementum consectetur. Aenean et diam ullamcorper, posuere turpis eget,        |
+|    |                 | egestas nibh. Quisque condimentum arcu ac metus sodales placerat. Quisque      |
+|    |                 | placerat, quam nec tincidunt pharetra, urna justo scelerisque urna, et         |
+|    |                 | vulputate ipsum lacus at ligula.                                               |
++----+-----------------+--------------------------------------------------------------------------------+
+| 12 | Robin Rood      | Lorem ipsum ** dolor sit amet**, consectetur adipiscing elit. Donec interdum   |
+|    |                 | dictum erat. Fusce condimentum erat a pulvinar ultricies.                      |
+|    |                 |                                                                                |
+|    |                 | Phasellus gravida ullamcorper eros, sit amet blandit sapien laoreet quis.      |
+|    |                 |                                                                                |
+|    |                 | Donec accumsan mauris at risus lobortis, nec pretium tortor aliquam. Nulla vel |
+|    |                 | enim vel eros venenatis congue.                                                |
++----+-----------------+--------------------------------------------------------------------------------+
 <BLANKLINE>
 
 The same list seen by marc
 
 >>> rt.login('luc').show('comments.Comments', column_names="id user short_text")
-==== ================= ===========================
- ID   Author            Short text
----- ----------------- ---------------------------
- 1    Jean              Hackerish comment
- 2    Luc               Very confidential comment
- 3    Mathieu           Very confidential comment
- 4    Romain Raffault   Hackerish comment
- 5    Rolf Rompen       Very confidential comment
- 6    Robin Rood        Hackerish comment
- 7    Jean              Hackerish comment
- 8    Luc               Hackerish comment
- 9    Mathieu           Very confidential comment
- 10   Romain Raffault   Hackerish comment
- 11   Rolf Rompen       Hackerish comment
- 12   Robin Rood        Hackerish comment
-==== ================= ===========================
++----+-----------------+--------------------------------------------------------------------------------+
+| ID | Author          | Short text                                                                     |
++====+=================+================================================================================+
+| 1  | Jean            | Styled comment pasted from word!                                               |
++----+-----------------+--------------------------------------------------------------------------------+
+| 2  | Luc             | Very confidential comment                                                      |
++----+-----------------+--------------------------------------------------------------------------------+
+| 3  | Mathieu         | Very confidential comment                                                      |
++----+-----------------+--------------------------------------------------------------------------------+
+| 4  | Romain Raffault | Who| What| Done?                                                               |
+|    |                 | ---|---|---                                                                    |
+|    |                 | Him| Bar|                                                                      |
+|    |                 | Her| Foo the Bar| **x**                                                        |
+|    |                 | Them| Floop the pig                                                            |
+|    |                 | | x                                                                            |
++----+-----------------+--------------------------------------------------------------------------------+
+| 5  | Rolf Rompen     | Very confidential comment                                                      |
++----+-----------------+--------------------------------------------------------------------------------+
+| 6  | Robin Rood      | Lorem ipsum** dolor sit amet**, consectetur adipiscing elit. Nunc cursus felis |
+|    |                 | nisi, eu pellentesque lorem lobortis non. Aenean non sodales neque, vitae      |
+|    |                 | venenatis lectus. In eros dui, gravida et dolor at, pellentesque hendrerit     |
+|    |                 | magna. Quisque vel lectus dictum, rhoncus massa feugiat, condimentum sem.      |
+|    |                 | Donec elit nisl, placerat vitae imperdiet eget, hendrerit nec quam. Ut         |
+|    |                 | elementum ligula vitae odio efficitur rhoncus. Duis in blandit neque. Sed      |
+|    |                 | dictum mollis volutpat. Morbi at est et nisi euismod viverra. Nulla quis lacus |
+|    |                 | vitae ante sollicitudin tincidunt. Donec nec enim in leo vulputate ultrices.   |
+|    |                 | Suspendisse potenti. Ut elit nibh, porta ut enim ac, convallis molestie risus. |
+|    |                 | Praesent consectetur lacus lacus, in faucibus justo fringilla vel.             |
+|    |                 |                                                                                |
+|    |                 | Donec fermentum enim et maximus vestibulum. Sed mollis lacus quis dictum       |
+|    |                 | fermentum. Maecenas libero tellus, hendrerit cursus pretium et, hendrerit quis |
+|    |                 | lectus. Nunc bibendum nunc nunc, ac commodo sem interdum ut. Quisque vitae     |
+|    |                 | turpis lectus. Nullam efficitur scelerisque hendrerit. Fusce feugiat           |
+|    |                 | ullamcorper nulla. Suspendisse quis placerat ligula. Etiam ullamcorper         |
+|    |                 | elementum consectetur. Aenean et diam ullamcorper, posuere turpis eget,        |
+|    |                 | egestas nibh. Quisque condimentum arcu ac metus sodales placerat. Quisque      |
+|    |                 | placerat, quam nec tincidunt pharetra, urna justo scelerisque urna, et         |
+|    |                 | vulputate ipsum lacus at ligula.                                               |
++----+-----------------+--------------------------------------------------------------------------------+
+| 7  | Jean            | Lorem ipsum ** dolor sit amet**, consectetur adipiscing elit. Donec interdum   |
+|    |                 | dictum erat. Fusce condimentum erat a pulvinar ultricies.                      |
+|    |                 |                                                                                |
+|    |                 | Phasellus gravida ullamcorper eros, sit amet blandit sapien laoreet quis.      |
+|    |                 |                                                                                |
+|    |                 | Donec accumsan mauris at risus lobortis, nec pretium tortor aliquam. Nulla vel |
+|    |                 | enim vel eros venenatis congue.                                                |
++----+-----------------+--------------------------------------------------------------------------------+
+| 8  | Luc             | Styled comment pasted from word!                                               |
++----+-----------------+--------------------------------------------------------------------------------+
+| 9  | Mathieu         | Very confidential comment                                                      |
++----+-----------------+--------------------------------------------------------------------------------+
+| 10 | Romain Raffault | Who| What| Done?                                                               |
+|    |                 | ---|---|---                                                                    |
+|    |                 | Him| Bar|                                                                      |
+|    |                 | Her| Foo the Bar| **x**                                                        |
+|    |                 | Them| Floop the pig                                                            |
+|    |                 | | x                                                                            |
++----+-----------------+--------------------------------------------------------------------------------+
+| 11 | Rolf Rompen     | Lorem ipsum** dolor sit amet**, consectetur adipiscing elit. Nunc cursus felis |
+|    |                 | nisi, eu pellentesque lorem lobortis non. Aenean non sodales neque, vitae      |
+|    |                 | venenatis lectus. In eros dui, gravida et dolor at, pellentesque hendrerit     |
+|    |                 | magna. Quisque vel lectus dictum, rhoncus massa feugiat, condimentum sem.      |
+|    |                 | Donec elit nisl, placerat vitae imperdiet eget, hendrerit nec quam. Ut         |
+|    |                 | elementum ligula vitae odio efficitur rhoncus. Duis in blandit neque. Sed      |
+|    |                 | dictum mollis volutpat. Morbi at est et nisi euismod viverra. Nulla quis lacus |
+|    |                 | vitae ante sollicitudin tincidunt. Donec nec enim in leo vulputate ultrices.   |
+|    |                 | Suspendisse potenti. Ut elit nibh, porta ut enim ac, convallis molestie risus. |
+|    |                 | Praesent consectetur lacus lacus, in faucibus justo fringilla vel.             |
+|    |                 |                                                                                |
+|    |                 | Donec fermentum enim et maximus vestibulum. Sed mollis lacus quis dictum       |
+|    |                 | fermentum. Maecenas libero tellus, hendrerit cursus pretium et, hendrerit quis |
+|    |                 | lectus. Nunc bibendum nunc nunc, ac commodo sem interdum ut. Quisque vitae     |
+|    |                 | turpis lectus. Nullam efficitur scelerisque hendrerit. Fusce feugiat           |
+|    |                 | ullamcorper nulla. Suspendisse quis placerat ligula. Etiam ullamcorper         |
+|    |                 | elementum consectetur. Aenean et diam ullamcorper, posuere turpis eget,        |
+|    |                 | egestas nibh. Quisque condimentum arcu ac metus sodales placerat. Quisque      |
+|    |                 | placerat, quam nec tincidunt pharetra, urna justo scelerisque urna, et         |
+|    |                 | vulputate ipsum lacus at ligula.                                               |
++----+-----------------+--------------------------------------------------------------------------------+
+| 12 | Robin Rood      | Lorem ipsum ** dolor sit amet**, consectetur adipiscing elit. Donec interdum   |
+|    |                 | dictum erat. Fusce condimentum erat a pulvinar ultricies.                      |
+|    |                 |                                                                                |
+|    |                 | Phasellus gravida ullamcorper eros, sit amet blandit sapien laoreet quis.      |
+|    |                 |                                                                                |
+|    |                 | Donec accumsan mauris at risus lobortis, nec pretium tortor aliquam. Nulla vel |
+|    |                 | enim vel eros venenatis congue.                                                |
++----+-----------------+--------------------------------------------------------------------------------+
 <BLANKLINE>
 
 
 >>> obj = tickets.Ticket.objects.get(pk=7)
 >>> rt.show(comments.CommentsByRFC, obj)
-... #doctest: +ELLIPSIS
-<ul><li>Hackerish comment (<em>... by Robin Rood</em>) (...)</li></ul>
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+<script type="text/javascript">
+        <!--
+            function toggle_visibility(id) {
+               var e = document.getElementById(id);
+               if(e.style.display == 'block'|| (e.style.display != 'block' && e.style.display != 'none'))
+                  e.style.display = 'none';
+               else
+                  e.style.display = 'block';
+            }
+        //-->
+        </script>
+        <style>
+ul.flat li {
+    display: inline;
+}
+</style><ul><li><ul class="flat"><li><em>Jean</em></li><li><em> wrote ...:</em></li><a href="#" onclick="toggle_visibility('comment-7');" title="Hide">&#8284;</a></ul><div id=comment-7><p>Lorem ipsum <strong> dolor sit amet</strong>, consectetur adipiscing elit. Donec interdum dictum erat. Fusce condimentum erat a pulvinar ultricies.</p>
+<p>Phasellus gravida ullamcorper eros, sit amet blandit sapien laoreet quis.</p>
+<p>Donec accumsan mauris at risus lobortis, nec pretium tortor aliquam. Nulla vel enim vel eros venenatis congue.</p></div></li></ul>
 
 
 
@@ -649,7 +804,7 @@ the detail window of a ticket.
     - (general1):
       - (general1_1): **Summary** (summary), **ID** (id), **Author** (user), **End user** (end_user)
       - (general1_2): **Site** (site), **Topic** (topic), **Project** (project), **Private** (private)
-      - (general1_3): **Actions** (workflow_buttons), **Faculty** (faculty)
+      - **Actions** (workflow_buttons)
     - **Votes** (VotesByVotable) [visible for user consultant hoster developer senior admin]
   - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user consultant hoster developer senior admin], **Sessions** (SessionsByTicket) [visible for consultant hoster developer senior admin]
 - **More** (more):

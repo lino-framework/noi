@@ -116,28 +116,28 @@ class Demands(dd.Table):
     required_roles = dd.login_required(dd.SiteStaff)
     # required_roles = dd.login_required(SocialStaff)
     column_names = 'id demander skill description affinity user *'
+    column_names = 'id demander skill description affinity user *'
     order_by = ["id"]
     
 
 class DemandsByDemander(Demands):
     required_roles = dd.login_required()
     master_key = 'demander'
-    column_names = 'skill description affinity user *'
+    # column_names = 'skill description affinity user *'
+    column_names = 'skill importance *'
 
     slave_grid_format = 'summary'
     # exclude_vote_states = 'author'
     stay_in_grid = True
 
     detail_layout = dd.DetailLayout("""
-    skill affinity 
-    user
-    description
+    skill 
+    importance
     """, window_size=(40, 'auto'))
 
     insert_layout = """
     skill
-    affinity 
-    user
+    importance
     """
 
     @classmethod

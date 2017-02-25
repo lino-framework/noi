@@ -124,18 +124,17 @@ class Competence(UserAuthored, Sequenced):
 dd.update_field(Competence, 'user', verbose_name=_("User"))
 
 
-class Demand(UserAuthored):
+#class Demand(UserAuthored):
+class Demand(dd.Model):
     """A **Skill demand** is when a given *end user* declares to need a
     given skill.
 
-    .. attribute:: user
     .. attribute:: demander
-    .. attribute:: faculty
-    .. attribute:: affinity
+    .. attribute:: skill
 
     """
     
-    allow_cascaded_delete = "demander user"
+    allow_cascaded_delete = "demander"
 
     class Meta:
         verbose_name = _("Skill demand")
@@ -148,13 +147,12 @@ class Demand(UserAuthored):
         dd.plugins.faculties.demander_model,
         verbose_name=_("Demander"),
         blank=True, null=True)
-    affinity = models.IntegerField(
-        _("Affinity"), blank=True, default=MAX_WEIGHT,
+    importance = models.IntegerField(
+        _("Importance"), blank=True, default=MAX_WEIGHT,
         help_text=_(
-            "How much this user likes to get a new ticket "
-            "in this skill."
+            "How important this skill is for this demand. "
             "A number between -{0} and +{0}.").format(MAX_WEIGHT))
-    description = dd.RichTextField(_("Description"), blank=True)
+    # description = dd.RichTextField(_("Description"), blank=True)
     
 
 # if dd.is_installed('tickets'):

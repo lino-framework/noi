@@ -47,7 +47,7 @@ This document describes the database structure.
  excerpts.Excerpt            excerpts.Excerpts            12        2
  excerpts.ExcerptType        excerpts.ExcerptTypes        17        2
  faculties.Competence        faculties.Offers             7         18
- faculties.Demand            faculties.Demands            6         0
+ faculties.Demand            faculties.Demands            4         0
  faculties.Faculty           faculties.Skills             9         8
  faculties.SkillType         faculties.SkillTypes         4         0
  gfks.HelpText               gfks.HelpTexts               4         1
@@ -60,7 +60,7 @@ This document describes the database structure.
  tickets.Project             tickets.Projects             17        5
  tickets.ProjectType         tickets.ProjectTypes         4         0
  tickets.Site                tickets.Sites                4         3
- tickets.Ticket              tickets.Tickets              26        116
+ tickets.Ticket              tickets.Tickets              25        116
  tickets.TicketType          tickets.TicketTypes          4         3
  tinymce.TextFieldTemplate   tinymce.TextFieldTemplates   5         2
  topics.Interest             topics.Interests             3         27
