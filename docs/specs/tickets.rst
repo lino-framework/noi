@@ -545,7 +545,7 @@ Comments on private tickets are not shown by to anonymous users:
 +----+-----------------+--------------------------------------------------------------------------------+
 | ID | Author          | Short text                                                                     |
 +====+=================+================================================================================+
-| 1  | Jean            | Styled comment pasted from word!                                               |
+| 1  | Jean            | # Styled comment pasted from word!                                             |
 +----+-----------------+--------------------------------------------------------------------------------+
 | 4  | Romain Raffault | Who| What| Done?                                                               |
 |    |                 | ---|---|---                                                                    |
@@ -583,7 +583,7 @@ Comments on private tickets are not shown by to anonymous users:
 |    |                 | Donec accumsan mauris at risus lobortis, nec pretium tortor aliquam. Nulla vel |
 |    |                 | enim vel eros venenatis congue.                                                |
 +----+-----------------+--------------------------------------------------------------------------------+
-| 8  | Luc             | Styled comment pasted from word!                                               |
+| 8  | Luc             | # Styled comment pasted from word!                                             |
 +----+-----------------+--------------------------------------------------------------------------------+
 | 10 | Romain Raffault | Who| What| Done?                                                               |
 |    |                 | ---|---|---                                                                    |
@@ -629,7 +629,7 @@ The same list seen by marc
 +----+-----------------+--------------------------------------------------------------------------------+
 | ID | Author          | Short text                                                                     |
 +====+=================+================================================================================+
-| 1  | Jean            | Styled comment pasted from word!                                               |
+| 1  | Jean            | # Styled comment pasted from word!                                             |
 +----+-----------------+--------------------------------------------------------------------------------+
 | 2  | Luc             | Very confidential comment                                                      |
 +----+-----------------+--------------------------------------------------------------------------------+
@@ -673,7 +673,7 @@ The same list seen by marc
 |    |                 | Donec accumsan mauris at risus lobortis, nec pretium tortor aliquam. Nulla vel |
 |    |                 | enim vel eros venenatis congue.                                                |
 +----+-----------------+--------------------------------------------------------------------------------+
-| 8  | Luc             | Styled comment pasted from word!                                               |
+| 8  | Luc             | # Styled comment pasted from word!                                             |
 +----+-----------------+--------------------------------------------------------------------------------+
 | 9  | Mathieu         | Very confidential comment                                                      |
 +----+-----------------+--------------------------------------------------------------------------------+

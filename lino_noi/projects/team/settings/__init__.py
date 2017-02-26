@@ -92,6 +92,8 @@ class Site(Site):
         super(Site, self).setup_plugins()
         self.plugins.comments.configure(
             commentable_model='tickets.Ticket')
+        self.plugins.faculties.configure(
+            demander_model='tickets.Ticket')
 
     def get_default_required(self, **kw):
         # overrides the default behaviour which would add
