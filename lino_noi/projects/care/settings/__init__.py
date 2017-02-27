@@ -86,6 +86,8 @@ class Site(Site):
             commentable_model='tickets.Ticket')
         self.plugins.tickets.configure(
             end_user_model='contacts.Person')
+        self.plugins.faculties.configure(
+            demander_model='tickets.Ticket')
 
     def setup_quicklinks(self, user, tb):
         # super(Site, self).setup_quicklinks(ar, tb)

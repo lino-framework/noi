@@ -1,8 +1,7 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2011-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
-"""Adds the notions of "competences" and "faculties" to your ticket
-management.
+"""Adds the notions of "skills", including offers and demands thereof.
 
 .. autosummary::
    :toctree:
@@ -21,7 +20,9 @@ class Plugin(ad.Plugin):
 
         The model of objects to be used as :attr:`demander
         <lino_noi.lib.faculties.models.Demand.demander>` of skill
-        demands. The default value is :class:`Ticket
+        demands. 
+
+        In :ref:`noi` this points to :class:`Ticket
         <lino_noi.lib.tickets.models.Ticket>`.
 
     .. attribute:: supplier_model
@@ -29,17 +30,19 @@ class Plugin(ad.Plugin):
         The model of objects to be used as :attr:`supplier
         <lino_noi.lib.faculties.models.Competence.supplier>` of skill
         offers. The tefault value is  :class:`Person
-        <lino_noi.lib.tickets.models.Ticket>`.
+        <lino_xl.lib.contacts.models.Person>`.
 
     """
 
     verbose_name = _("Skills")
 
     needs_plugins = [
-        'lino_noi.lib.noi', 'lino_noi.lib.tickets',
+        'lino_noi.lib.noi',
+        # 'lino_noi.lib.tickets',
         'lino_noi.lib.contacts']
 
-    demander_model = 'tickets.Ticket'
+    # demander_model = 'tickets.Ticket'
+    demander_model = 'contacts.Person'
     supplier_model = 'contacts.Person'
 
     def on_site_startup(self, site):
@@ -47,9 +50,14 @@ class Plugin(ad.Plugin):
         self.supplier_model = site.models.resolve(self.supplier_model)
         super(Plugin, self).on_site_startup(site)
         
+    def get_menu_group(self):
+        return self
+        # return self.site.plugins.get(
+        #     self.demander_model._meta.app_label)
+    
     def setup_main_menu(self, site, profile, m):
-        # mg = self.get_menu_group()
-        mg = site.plugins.tickets
+        mg = self.get_menu_group()
+        # mg = site.plugins.tickets
         m = m.add_menu(mg.app_label, mg.verbose_name)
         # m.add_action('faculties.Faculties')
         # m.add_action('faculties.Competences')

@@ -10,7 +10,6 @@ from django.db import models
 from lino.api import dd, rt, _
 from lino.modlib.users.mixins import My
 from lino.modlib.users.desktop import Users
-from lino_noi.lib.tickets.roles import Triager
 from lino.utils.xmlgen.html import E
 from lino.utils import join_elems
 from .roles import SkillsStaff
@@ -115,29 +114,28 @@ class Demands(dd.Table):
     model = 'faculties.Demand'
     required_roles = dd.login_required(dd.SiteStaff)
     # required_roles = dd.login_required(SocialStaff)
-    column_names = 'id demander skill description affinity user *'
+    column_names = 'id demander skill importance *'
     order_by = ["id"]
     
 
 class DemandsByDemander(Demands):
     required_roles = dd.login_required()
     master_key = 'demander'
-    column_names = 'skill description affinity user *'
+    # column_names = 'skill importance user *'
+    column_names = 'skill importance *'
 
     slave_grid_format = 'summary'
     # exclude_vote_states = 'author'
     stay_in_grid = True
 
     detail_layout = dd.DetailLayout("""
-    skill affinity 
-    user
-    description
+    skill 
+    importance
     """, window_size=(40, 'auto'))
 
     insert_layout = """
     skill
-    affinity 
-    user
+    importance
     """
 
     @classmethod
@@ -165,6 +163,9 @@ class DemandsByDemander(Demands):
 
 
 if dd.is_installed('tickets'):
+    
+    from lino_noi.lib.tickets.roles import Triager
+    
     class AssignableWorkersByTicket(Users):
         # model = 'users.User'
         use_as_default_table = False

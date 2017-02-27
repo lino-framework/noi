@@ -96,21 +96,26 @@ ticket.
 ==============
  Topic
 --------------
- Lino Core
  Lino Welfare
  Lino Cosi
+ Lino Voga
 ==============
 <BLANKLINE>
 
 >>> obj = topics.Topic.objects.get(ref="welfäre")
 >>> rt.show(topics.InterestsByTopic, obj)
 ... #doctest: +REPORT_UDIFF
-=========
+=============
  Partner
----------
+-------------
+ Rood Robin
+ Rompen Rolf
+ Marc
+ Mathieu
+ Luc
  welket
  welsch
-=========
+=============
 <BLANKLINE>
 
 
@@ -121,39 +126,39 @@ Filtering tickets by topic
 >>> pv = dict(topic=rt.models.topics.Topic.get_by_ref("così"))
 >>> rt.show(tickets.Tickets, param_values=pv)
 ... #doctest: +REPORT_UDIFF
-===== =========================== ========= =========== =============== =============== ==========
- ID    Summary                     Author    Topic       Faculty         Actions         Project
------ --------------------------- --------- ----------- --------------- --------------- ----------
- 113   Ticket 113                  mathieu   Lino Cosi                   **Started**     linö
- 109   Ticket 109                  jean      Lino Cosi                   **New**         téam
- 105   Ticket 105                  luc       Lino Cosi                   **Sleeping**    docs
- 101   Ticket 101                  mathieu   Lino Cosi                   **Talk**        research
- 97    Ticket 97                   mathieu   Lino Cosi                   **Ready**       shop
- 93    Ticket 93                   luc       Lino Cosi                   **Opened**      linö
- 89    Ticket 89                   luc       Lino Cosi                   **Closed**      téam
- 85    Ticket 85                   jean      Lino Cosi                   **Sticky**      docs
- 81    Ticket 81                   mathieu   Lino Cosi                   **Cancelled**   research
- 77    Ticket 77                   mathieu   Lino Cosi                   **Started**     shop
- 73    Ticket 73                   jean      Lino Cosi                   **New**         linö
- 69    Ticket 69                   luc       Lino Cosi                   **Sleeping**    téam
- 65    Ticket 65                   mathieu   Lino Cosi                   **Talk**        docs
- 61    Ticket 61                   mathieu   Lino Cosi                   **Ready**       research
- 57    Ticket 57                   luc       Lino Cosi                   **Opened**      shop
- 53    Ticket 53                   luc       Lino Cosi                   **Closed**      linö
- 49    Ticket 49                   jean      Lino Cosi                   **Sticky**      téam
- 45    Ticket 45                   mathieu   Lino Cosi                   **Cancelled**   docs
- 41    Ticket 41                   mathieu   Lino Cosi                   **Started**     research
- 37    Ticket 37                   jean      Lino Cosi                   **New**         shop
- 33    Ticket 33                   luc       Lino Cosi                   **Sleeping**    linö
- 29    Ticket 29                   mathieu   Lino Cosi                   **Talk**        téam
- 25    Ticket 25                   mathieu   Lino Cosi                   **Ready**       docs
- 21    Ticket 21                   luc       Lino Cosi                   **Opened**      research
- 17    Ticket 17                   luc       Lino Cosi                   **Closed**      shop
- 13    Bar cannot foo              jean      Lino Cosi   Documentation   **Sticky**      linö
- 9     Foo never matches Bar       mathieu   Lino Cosi   Testing         **Cancelled**   téam
- 5     Cannot create Foo           mathieu   Lino Cosi                   **Started**
- 1     Föö fails to bar when baz   jean      Lino Cosi                   **New**         linö
-===== =========================== ========= =========== =============== =============== ==========
+===== ========================== ========= =========== =============== ==========
+ ID    Summary                    Author    Topic       Actions         Project
+----- -------------------------- --------- ----------- --------------- ----------
+ 116   Ticket 116                 Mathieu   Lino Cosi   **Started**     research
+ 112   Ticket 112                 Luc       Lino Cosi   **Cancelled**   shop
+ 108   Ticket 108                 Luc       Lino Cosi   **Started**     linö
+ 104   Ticket 104                 Jean      Lino Cosi   **Cancelled**   téam
+ 100   Ticket 100                 Jean      Lino Cosi   **Started**     docs
+ 96    Ticket 96                  Mathieu   Lino Cosi   **Cancelled**   research
+ 92    Ticket 92                  Mathieu   Lino Cosi   **Started**     shop
+ 88    Ticket 88                  Luc       Lino Cosi   **Cancelled**   linö
+ 84    Ticket 84                  Luc       Lino Cosi   **Started**     téam
+ 80    Ticket 80                  Jean      Lino Cosi   **Cancelled**   docs
+ 76    Ticket 76                  Jean      Lino Cosi   **Started**     research
+ 72    Ticket 72                  Mathieu   Lino Cosi   **Cancelled**   shop
+ 68    Ticket 68                  Mathieu   Lino Cosi   **Started**     linö
+ 64    Ticket 64                  Luc       Lino Cosi   **Cancelled**   téam
+ 60    Ticket 60                  Luc       Lino Cosi   **Started**     docs
+ 56    Ticket 56                  Jean      Lino Cosi   **Cancelled**   research
+ 52    Ticket 52                  Jean      Lino Cosi   **Started**     shop
+ 48    Ticket 48                  Mathieu   Lino Cosi   **Cancelled**   linö
+ 44    Ticket 44                  Mathieu   Lino Cosi   **Started**     téam
+ 40    Ticket 40                  Luc       Lino Cosi   **Cancelled**   docs
+ 36    Ticket 36                  Luc       Lino Cosi   **Started**     research
+ 32    Ticket 32                  Jean      Lino Cosi   **Cancelled**   shop
+ 28    Ticket 28                  Jean      Lino Cosi   **Started**     linö
+ 24    Ticket 24                  Mathieu   Lino Cosi   **Cancelled**   téam
+ 20    Ticket 20                  Mathieu   Lino Cosi   **Started**     docs
+ 16    How to get bar from foo    Luc       Lino Cosi   **Cancelled**   research
+ 12    Foo cannot bar             Luc       Lino Cosi   **Started**     shop
+ 8     Is there any Bar in Foo?   Jean      Lino Cosi   **Cancelled**   linö
+ 4     Foo and bar don't baz      Jean      Lino Cosi   **Started**     docs
+===== ========================== ========= =========== =============== ==========
 <BLANKLINE>
 
  

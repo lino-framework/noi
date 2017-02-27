@@ -444,7 +444,7 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         related_name="tickets_by_project")
     site = dd.ForeignKey('tickets.Site', blank=True, null=True)
     topic = dd.ForeignKey('topics.Topic', blank=True, null=True)
-    nickname = models.CharField(_("Nickname"), max_length=50, blank=True)
+    # nickname = models.CharField(_("Nickname"), max_length=50, blank=True)
     summary = models.CharField(
         pgettext("Ticket", "Summary"), max_length=200,
         blank=True,
