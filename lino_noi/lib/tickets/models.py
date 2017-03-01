@@ -619,7 +619,8 @@ class Ticket(UserAuthored, mixins.CreatedModified,
 
         elems = []
         for spl in Supply.objects.filter(faculty__in=faculties):
-            elems.append(ar.obj2html(spl.supplier))
+            if spl.supplier is not None:
+                elems.append(ar.obj2html(spl.supplier))
         elems = join_elems(elems, ', ')
         return E.p(*elems)
 
