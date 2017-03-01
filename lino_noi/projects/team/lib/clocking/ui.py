@@ -167,12 +167,34 @@ class OtherTicketsByMilestone(Tickets, InvestedTime):
         return title
 
 
+class SessionsByReport(Sessions):
+    master = 'clocking.ServiceReport'
+    column_names = "start_date start_time end_time break_time duration ticket__id summary"
+    
+    @classmethod
+    def get_request_queryset(self, ar):
+        mi = ar.master_instance
+        if mi is None:
+            return
+        spv = dict(start_date=mi.start_date, end_date=mi.end_date)
+        # spv = mi.get_tickets_parameters()
+        spv.update(company=mi.interesting_for)
+        ar.param_values.update(spv)
+
+        return super(SessionsByReport, self).get_request_queryset(ar)
+        # qs = super(SessionsByReport, self).get_request_queryset(ar)
+        # for obj in qs:
+        #     # obj._invested_time = compute_invested_time(
+        #     #     obj, start_date=mi.start_date, end_date=mi.end_date,
+        #     #     user=mi.user)
+        #     yield obj
+
 class TicketsByReport(Tickets, InvestedTime):
     """The list of tickets mentioned in a service report."""
     master = 'clocking.ServiceReport'
     # column_names = "summary id reporter project product site state
     # invested_time"
-    column_names = "id my_description state invested_time"
+    column_names = "id overview state invested_time"
     order_by = ['id']
 
     @classmethod
@@ -183,7 +205,7 @@ class TicketsByReport(Tickets, InvestedTime):
         spv = mi.get_tickets_parameters()
         # spv = dict(start_date=mi.start_date, end_date=mi.end_date)
         spv.update(observed_event=TicketEvents.clocking)
-        # spv.update(interesting_for=mi.interesting_for)
+        spv.update(interesting_for=mi.interesting_for)
         # if mi.ticket_state:
         #     spv.update(state=mi.ticket_state)
         ar.param_values.update(spv)

@@ -103,6 +103,8 @@ class Sessions(dd.Table):
     # order_by = ['start_date', 'start_time']
     # stay_in_grid = True
     parameters = ObservedPeriod(
+        company=dd.ForeignKey(
+            'contacts.Company', null=True, blank=True),
         project=dd.ForeignKey(
             'tickets.Project', null=True, blank=True),
         ticket=dd.ForeignKey(
@@ -120,7 +122,7 @@ class Sessions(dd.Table):
         s |= set(['session_type', 'ticket'])
         return s
 
-    params_layout = "start_date end_date observed_event project "\
+    params_layout = "start_date end_date observed_event company project "\
                     "user session_type ticket"
     auto_fit_column_widths = True
 
@@ -134,6 +136,9 @@ class Sessions(dd.Table):
 
         if pv.project:
             qs = qs.filter(ticket__project__in=pv.project.whole_clan())
+
+        if pv.company:
+            qs = qs.filter(ticket__project__company=pv.company)
 
         return qs
 
