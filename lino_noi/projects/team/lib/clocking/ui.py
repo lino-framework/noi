@@ -169,7 +169,7 @@ class OtherTicketsByMilestone(Tickets, InvestedTime):
 
 class SessionsByReport(Sessions):
     master = 'clocking.ServiceReport'
-    column_names = "start_date start_time end_time break_time duration ticket_id summary"
+    column_names = "start_date start_time end_time break_time duration ticket__id summary"
     
     @classmethod
     def get_request_queryset(self, ar):
