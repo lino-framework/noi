@@ -32,7 +32,7 @@ class TicketDetail(TicketDetail):
 
     more = dd.Panel("""
     more1 DuplicatesByTicket:20
-    upgrade_notes:20 LinksByTicket:20
+    upgrade_notes:20 LinksByTicket:20 faculties.DemandsByDemander:20
     """, label=_("More"))
 
     more2 = dd.Panel("""
