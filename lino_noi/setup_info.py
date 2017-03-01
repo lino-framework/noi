@@ -4,7 +4,7 @@
 
 SETUP_INFO = dict(
     name='lino-noi',
-    version='17.2.0',
+    version='2017.2.0',
     install_requires=['lino-xl'],
     # install_requires=['lino-xl', 'channels', 'djangorestframework'],
     tests_require=['pytest', 'mock'],
