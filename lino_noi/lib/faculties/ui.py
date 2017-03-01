@@ -79,7 +79,6 @@ class Offers(dd.Table):
 
 
 class OffersBySupplier(Offers):
-    label = _("My skills")
     required_roles = dd.login_required()
     master_key = 'supplier'
     column_names = 'faculty description affinity *'
@@ -98,7 +97,7 @@ class OffersBySupplier(Offers):
 
 class OffersBySkill(Offers):
     master_key = 'faculty'
-    column_names = 'user affinity *'
+    column_names = 'user supplier affinity *'
     order_by = ["user"]
 
 
