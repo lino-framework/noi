@@ -375,16 +375,16 @@ class Migrator(Migrator):
             kw.update(changeset_url_template=changeset_url_template)
             return tickets_Project(**kw)
 
-        @override(globals_dict)
-        def create_tickets_site(id, partner_id, name, remark):
-            kw = dict()
-            kw.update(id=id)
-            if partner_id:
-                partner_id = str(int(partner_id) + PARTNER_OFFSET)
-            kw.update(partner_id=partner_id)
-            kw.update(name=name)
-            kw.update(remark=remark)
-            return tickets_Site(**kw)
+        # @override(globals_dict)
+        # def create_tickets_site(id, partner_id, name, remark):
+        #     kw = dict()
+        #     kw.update(id=id)
+        #     if partner_id:
+        #         partner_id = str(int(partner_id) + PARTNER_OFFSET)
+        #     kw.update(partner_id=partner_id)
+        #     kw.update(name=name)
+        #     kw.update(remark=remark)
+        #     return tickets_Site(**kw)
 
         @override(globals_dict)
         def create_contacts_role(id, type_id, person_id, company_id):
