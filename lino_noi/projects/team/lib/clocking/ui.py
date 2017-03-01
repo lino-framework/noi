@@ -183,7 +183,7 @@ class TicketsByReport(Tickets, InvestedTime):
         spv = mi.get_tickets_parameters()
         # spv = dict(start_date=mi.start_date, end_date=mi.end_date)
         spv.update(observed_event=TicketEvents.clocking)
-        # spv.update(interesting_for=mi.interesting_for)
+        spv.update(interesting_for=mi.interesting_for)
         # if mi.ticket_state:
         #     spv.update(state=mi.ticket_state)
         ar.param_values.update(spv)
