@@ -39,7 +39,7 @@ Lino Noi:
   - PROTECT : contacts.Company.type
 - contacts.Partner :
   - CASCADE : contacts.Company.partner_ptr, contacts.Person.partner_ptr
-  - PROTECT : clocking.ServiceReport.interesting_for, lists.Member.partner, tickets.Site.partner, topics.Interest.partner, users.User.partner
+  - PROTECT : clocking.ServiceReport.interesting_for, lists.Member.partner, tickets.Site.partner, topics.Interest.partner
 - contacts.Person :
   - CASCADE : faculties.Competence.supplier, users.User.person_ptr
   - PROTECT : contacts.Role.person, excerpts.Excerpt.contact_person, tickets.Project.contact_person
