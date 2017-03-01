@@ -32,9 +32,9 @@
 (Private content)
 {% else %}
 {{memo(obj.description)}}
-{% for comm in rt.modules.comments.comments_by_owner(obj) %}
+{% for comm in rt.models.comments.comments_by_owner(obj) %}
 <ul>
-{{comm.as_li(ar)}}
+{{rt.actors.comments.Comments.as_li(comm, ar)}}
 </ul>
 {% endfor %}
 {% endif %}
