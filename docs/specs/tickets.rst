@@ -813,7 +813,7 @@ the detail window of a ticket.
       - (more1_1): **Created** (created), **Modified** (modified), **Reported for** (reported_for), **Ticket type** (ticket_type)
       - (more1_2): **State** (state), **Duplicate of** (duplicate_of), **Planned time** (planned_time), **Priority** (priority)
     - **Duplicates** (DuplicatesByTicket)
-  - (more_2): **Upgrade notes** (upgrade_notes), **Dependencies** (LinksByTicket) [visible for senior admin]
+  - (more_2): **Upgrade notes** (upgrade_notes), **Dependencies** (LinksByTicket) [visible for senior admin], **Skill demands** (DemandsByDemander) [visible for user consultant hoster developer senior admin]
 - **History** (changes.ChangesByMaster) [visible for senior admin]
 - **Even more** (more2) [visible for user consultant hoster developer senior admin]:
   - **Deployments** (deploy.DeploymentsByTicket)
