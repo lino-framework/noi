@@ -451,7 +451,7 @@ class Migrator(Migrator):
             kw.update(first_name=first_name)
             kw.update(last_name=last_name)
             kw.update(remarks=remarks)
-            kw.update(partner_id=partner_id)
+            # kw.update(partner_id=partner_id)
             kw.update(callme_mode=callme_mode)
             kw.update(verification_code=verification_code)
             kw.update(user_state=user_state)
