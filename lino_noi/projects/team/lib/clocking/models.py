@@ -6,6 +6,7 @@
 
 
 """
+from __future__ import unicode_literals
 
 from lino_noi.lib.clocking.models import *
 from lino.api import _
@@ -28,6 +29,7 @@ if dd.is_installed('votes'):
         end_session=EndTicketSessionViaVote())
 
 
+@dd.python_2_unicode_compatible
 class ServiceReport(UserAuthored, Certifiable, DatePeriod):
     """A **service report** is a document used in various discussions with
     a stakeholder.
@@ -60,6 +62,9 @@ class ServiceReport(UserAuthored, Certifiable, DatePeriod):
     ticket_state = TicketStates.field(
         null=True, blank=True,
         help_text=_("Only tickets in this state."))
+
+    def __str__(self):
+        return "{} {}".format(self._meta.verbose_name, self.pk)
 
     def get_tickets_parameters(self, **pv):
         """Return a dict with parameter values for `tickets.Tickets` based on
