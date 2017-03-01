@@ -102,7 +102,7 @@ class Projects(dd.Table):
 
         if pv.interesting_for:
             qs = qs.filter(
-                Q(project__company=pv.interesting_for))
+                Q(company=pv.interesting_for))
             
         if False:  # pv.interesting_for:
             qs = qs.filter(
@@ -433,6 +433,10 @@ class Tickets(dd.Table):
             qs = qs.distinct()
 
         if pv.interesting_for:
+            qs = qs.filter(
+                Q(project__company=pv.interesting_for))
+            
+        if False:  # pv.interesting_for:
 
             interests = pv.interesting_for.interests_by_partner.values(
                 'topic')
