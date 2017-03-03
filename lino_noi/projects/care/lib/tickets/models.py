@@ -51,8 +51,8 @@ class TicketDetail(TicketDetail):
     """, label=_("History"), required_roles=dd.login_required(Triager))
 
     more = dd.Panel("""
-    more1:60 faculties.AssignableWorkersByTicket:20
-    upgrade_notes:20 LinksByTicket:20
+    more1:60 #faculties.AssignableWorkersByTicket:20
+    upgrade_notes LinksByTicket faculties.OffersByDemander
     """, label=_("More"), required_roles=dd.login_required(Triager))
 
     more1 = """

@@ -30,6 +30,7 @@ class SkillTypes(dd.Table):
 class Skills(dd.Table):
     model = 'faculties.Faculty'
     # order_by = ["ref", "name"]
+    stay_in_grid = True
     detail_layout = """
     id name
     skill_type parent affinity
@@ -53,7 +54,7 @@ class TopLevelSkills(Skills):
     label = _("Skills (tree)")
     required_roles = dd.login_required(dd.SiteStaff)
     order_by = ["name"]
-    column_names = 'name id children_summary parent *'
+    column_names = 'name remarks children_summary parent *'
     filter = models.Q(parent__isnull=True)
     variable_row_height = True
 
@@ -76,6 +77,12 @@ class Offers(dd.Table):
     # required_roles = dd.login_required(SocialStaff)
     column_names = 'id user faculty description affinity *'
     order_by = ["id"]
+
+    detail_layout = dd.DetailLayout("""
+    user supplier
+    faculty affinity
+    description
+    """, window_size=(60, 15))
 
 
 class OffersBySupplier(Offers):
@@ -115,7 +122,13 @@ class Demands(dd.Table):
     # required_roles = dd.login_required(SocialStaff)
     column_names = 'id demander skill importance *'
     order_by = ["id"]
-    
+    stay_in_grid = True
+
+    detail_layout = dd.DetailLayout("""
+    demander
+    skill 
+    importance id
+    """, window_size=(40, 'auto'))
 
 class DemandsByDemander(Demands):
     required_roles = dd.login_required()
@@ -123,9 +136,7 @@ class DemandsByDemander(Demands):
     # column_names = 'skill importance user *'
     column_names = 'skill importance *'
 
-    slave_grid_format = 'summary'
     # exclude_vote_states = 'author'
-    stay_in_grid = True
 
     detail_layout = dd.DetailLayout("""
     skill 
@@ -137,6 +148,8 @@ class DemandsByDemander(Demands):
     importance
     """
 
+    slave_grid_format = 'summary'
+    
     @classmethod
     def get_slave_summary(self, obj, ar):
         """Customized :meth:`summary view
@@ -159,6 +172,47 @@ class DemandsByDemander(Demands):
             html += join_elems(items, sep=', ')
             
         return E.p(*html)
+    
+
+class OffersByDemander(Offers):
+    required_roles = dd.login_required()
+    master = dd.plugins.faculties.demander_model
+    column_names = '*'
+    order_by = ["affinity"]
+    slave_grid_format = 'summary'
+    
+
+    @classmethod
+    def get_request_queryset(self, ar):
+        Offer = rt.models.faculties.Competence
+        Demand = rt.models.faculties.Demand
+        ticket = ar.master_instance
+        if ticket is None:
+            return Offer.objects.none()
+        needed = set()
+        for dem in Demand.objects.filter(demander=ticket):
+            for sk in dem.skill.get_parental_line():
+                needed.add(sk)
+        return Offer.objects.filter(faculty__in=needed)
+
+    @classmethod
+    def get_slave_summary(self, obj, ar):
+        """Customized :meth:`summary view
+        <lino.core.actors.Actor.get_slave_summary>` for this table.
+
+        """
+        sar = self.request_from(ar, master_instance=obj)
+
+        html = []
+
+        items = [
+            ar.obj2html(o, str(o.supplier)) for o in sar]
+
+        if len(items) > 0:
+            html += join_elems(items, sep=', ')
+            
+        return E.p(*html)
+    
 
 
 if dd.is_installed('tickets'):
