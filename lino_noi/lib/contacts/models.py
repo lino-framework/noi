@@ -10,6 +10,25 @@ from lino.api import dd, _
 from lino_xl.lib.contacts.models import *
 
 
+class PersonDetail(PersonDetail):
+    
+    main = "general skills"
+
+    general = dd.Panel("""
+    address_box:60 contact_box:30 overview
+    bottom_box
+    """, label=_("General"))
+
+    skills = dd.Panel("""
+    faculties.OffersBySupplier topics.InterestsByPartner
+    """, label=_("Skills"))
+
+
+    name_box = "last_name first_name:15 gender title:10"
+    info_box = "id:5 language:10"
+    bottom_box = "remarks contacts.RolesByPerson"
+
+    
 class CompanyDetail(CompanyDetail):
     main = "general tickets"
 
@@ -29,3 +48,4 @@ class CompanyDetail(CompanyDetail):
 #     contacts.Companies.set_detail_layout(contacts.CompanyDetail())
 
 Companies.set_detail_layout(CompanyDetail())
+Persons.set_detail_layout(PersonDetail())
