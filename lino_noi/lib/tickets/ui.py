@@ -82,7 +82,7 @@ class Projects(dd.Table):
     required_roles = dd.login_required(TicketsUser)
     model = 'tickets.Project'
     detail_layout = ProjectDetail()
-    column_names = "ref name parent type private *"
+    column_names = "ref name parent company private *"
     parameters = mixins.ObservedPeriod(
         observed_event=ProjectEvents.field(blank=True),
         interesting_for=dd.ForeignKey(

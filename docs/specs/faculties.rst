@@ -30,18 +30,18 @@ has does more usage of them.
 
 >>> rt.show(faculties.TopLevelSkills)
 ... #doctest: +REPORT_UDIFF
-=============== ================== ================== ==== ========== ================
- Designation     Designation (de)   Designation (fr)   ID   Children   Parent faculty
---------------- ------------------ ------------------ ---- ---------- ----------------
- Analysis        Analysis           Analysis           1
- Code changes    Code changes       Code changes       2
- Configuration   Configuration      Configuration      5
- Documentation   Documentation      Documentation      3
- Enhancement     Enhancement        Enhancement        6
- Offer           Offer              Offer              8
- Optimization    Optimization       Optimization       7
- Testing         Testing            Testing            4
-=============== ================== ================== ==== ========== ================
+=============== ================== ================== ========= ========== ================
+ Designation     Designation (de)   Designation (fr)   Remarks   Children   Parent faculty
+--------------- ------------------ ------------------ --------- ---------- ----------------
+ Analysis        Analysis           Analysis
+ Code changes    Code changes       Code changes
+ Configuration   Configuration      Configuration
+ Documentation   Documentation      Documentation
+ Enhancement     Enhancement        Enhancement
+ Offer           Offer              Offer
+ Optimization    Optimization       Optimization
+ Testing         Testing            Testing
+=============== ================== ================== ========= ========== ================
 <BLANKLINE>
 
 

@@ -165,17 +165,15 @@ Partner #107 ('welket')
 
 >>> rt.show(clocking.TicketsByReport, obj)
 ... #doctest: -REPORT_UDIFF
-==== ================================================================================================= ========= ==========
- ID   Description                                                                                       State     Time
----- ------------------------------------------------------------------------------------------------- --------- ----------
- 1    Föö fails to bar when baz. Site: welket. Author: Jean. Project: linö. Topic: Lino Voga            New       0:00
- 4    Foo and bar don't baz. Author: Jean. Project: docs. Topic: Lino Cosi                              Started   3:29
- 11   Class-based Foos and Bars?. Site: pypi. Author: Mathieu. Project: research. Topic: Lino Welfare   Opened    2:18
- 12   Foo cannot bar. Author: Luc. Project: shop. Topic: Lino Cosi                                      Started   0:05
- 17   Ticket 17. Site: pypi. Author: Mathieu. Project: shop. Topic: Lino Voga                           New       1:30
- 20   Ticket 20. Author: Mathieu. Project: docs. Topic: Lino Cosi                                       Started   0:10
-                                                                                                                  **7:32**
-==== ================================================================================================= ========= ==========
+==== ============================================================ ======== ==========
+ ID   Description                                                  State    Time
+---- ------------------------------------------------------------ -------- ----------
+ 1    `#1 (Föö fails to bar when baz) <Detail>`__ by *Jean*        New      0:00
+ 6    `#6 (Sell bar in baz) <Detail>`__ by *Jean*                  Ready    0:37
+ 11   `#11 (Class-based Foos and Bars?) <Detail>`__ by *Mathieu*   Opened   2:18
+ 18   `#18 (Ticket 18) <Detail>`__ by *Luc*                        Talk     2:18
+                                                                            **5:13**
+==== ============================================================ ======== ==========
 <BLANKLINE>
 
 
@@ -184,15 +182,14 @@ The :class:`ProjectsByReport
 table lists all projects and the time invested.
 
 >>> rt.show(clocking.ProjectsByReport, obj)
-==================== =============== ======== ==================================== ========== ============
- Reference            Name            Parent   Tickets                              Time       Total time
--------------------- --------------- -------- ------------------------------------ ---------- ------------
- docs                 Documentatión   linö     `#20 <Detail>`__, `#4 <Detail>`__    3:39       5:57
- linö                 Framewörk                                                     0:00       5:57
- research             Research        docs     `#11 <Detail>`__                     2:18       2:18
- shop                 Shop                     `#17 <Detail>`__, `#12 <Detail>`__   1:35       1:35
- **Total (4 rows)**                                                                 **7:32**
-==================== =============== ======== ==================================== ========== ============
+==================== =============== ======== =================================== ========== ============
+ Reference            Name            Parent   Tickets                             Time       Total time
+-------------------- --------------- -------- ----------------------------------- ---------- ------------
+ docs                 Documentatión   linö                                         0:00       2:55
+ linö                 Framewörk                `#18 <Detail>`__                    2:18       5:13
+ research             Research        docs     `#11 <Detail>`__, `#6 <Detail>`__   2:55       2:55
+ **Total (3 rows)**                                                                **5:13**
+==================== =============== ======== =================================== ========== ============
 <BLANKLINE>
 
 

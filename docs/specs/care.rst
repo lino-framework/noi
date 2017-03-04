@@ -211,22 +211,23 @@ will not bother you with requests for which you aren't competent.
 
 >>> rt.show(faculties.TopLevelSkills)
 ... #doctest: +REPORT_UDIFF
-========================== ============================= ============================ ==== =================================================================== ================
- Designation                Designation (de)              Designation (fr)             ID   Children                                                            Parent faculty
--------------------------- ----------------------------- ---------------------------- ---- ------------------------------------------------------------------- ----------------
- Babysitting                Babysitting                   Garde enfant                 16
- Car driving                Fahrdienst                    Voiture                      13
- Go out with dogs           Hunde spazierenführen         Chiens                       18
- Hair cutting               Friseur                       Coiffure                     15
- Home & Garden              Haus und Garten               Maison et jardin             8    *Garden works*, *Renovation*, *Repair works*, *Repairing clothes*
- Mentoring elderly people   Gesellschafter für Senioren   Rencontres personnes agées   17
- Music                      Musik                         Musique                      5    *Guitar lessons*, *Piano lessons*
- Shopping                   Botengänge                    Commissions                  14
- Teaching                   Unterricht                    Cours                        1    *French lessons*, *German lessons*, *Maths lessons*
- Translations               Übersetzungsarbeiten          Traductions                  19
- Write letters              Briefe schreiben              Écrire des lettres           20
-========================== ============================= ============================ ==== =================================================================== ================
+========================== ============================= ============================ ========= =================================================================== ================
+ Designation                Designation (de)              Designation (fr)             Remarks   Children                                                            Parent faculty
+-------------------------- ----------------------------- ---------------------------- --------- ------------------------------------------------------------------- ----------------
+ Babysitting                Babysitting                   Garde enfant
+ Car driving                Fahrdienst                    Voiture
+ Go out with dogs           Hunde spazierenführen         Chiens
+ Hair cutting               Friseur                       Coiffure
+ Home & Garden              Haus und Garten               Maison et jardin                       *Garden works*, *Renovation*, *Repair works*, *Repairing clothes*
+ Mentoring elderly people   Gesellschafter für Senioren   Rencontres personnes agées
+ Music                      Musik                         Musique                                *Guitar lessons*, *Piano lessons*
+ Shopping                   Botengänge                    Commissions
+ Teaching                   Unterricht                    Cours                                  *French lessons*, *German lessons*, *Maths lessons*
+ Translations               Übersetzungsarbeiten          Traductions
+ Write letters              Briefe schreiben              Écrire des lettres
+========================== ============================= ============================ ========= =================================================================== ================
 <BLANKLINE>
+
 
 
 >>> rt.show('faculties.Offers')
@@ -484,12 +485,10 @@ the detail window of a ticket.
   - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user connector admin], **Skill demands** (DemandsByDemander) [visible for user connector admin]
 - **History** (changes.ChangesByMaster) [visible for connector admin]
 - **More** (more) [visible for connector admin]:
-  - (more_1) [visible for all]:
-    - (more1):
-      - (more1_1): **Created** (created), **Modified** (modified), **Ticket type** (ticket_type)
-      - (more1_2): **State** (state), **Priority** (priority), **Project** (project)
-    - **Assignable workers** (faculties.AssignableWorkersByTicket) [visible for connector admin]
-  - (more_2) [visible for all]: **Solution** (upgrade_notes), **Dependencies** (LinksByTicket) [visible for connector admin]
+  - (more1) [visible for all]:
+    - (more1_1): **Created** (created), **Modified** (modified), **Ticket type** (ticket_type)
+    - (more1_2): **State** (state), **Priority** (priority), **Project** (project)
+  - (more_2) [visible for all]: **Solution** (upgrade_notes), **Dependencies** (LinksByTicket) [visible for connector admin], **Skill offers** (OffersByDemander) [visible for user connector admin]
 <BLANKLINE>
 
 
