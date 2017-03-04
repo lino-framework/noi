@@ -696,7 +696,7 @@ The same list seen by marc
 >>> obj = tickets.Ticket.objects.get(pk=7)
 >>> rt.show(comments.CommentsByRFC, obj)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-<ul><li><span><a href="Detail" title="Created ...">...</a> by <em>Jean</em> <a href="#" onclick="toggle_visibility('comment-7');" title="Hide">&#8284;</a></span><div id=comment-7><p>Lorem ipsum <strong> dolor sit amet</strong>, consectetur adipiscing elit. Donec interdum dictum erat. Fusce condimentum erat a pulvinar ultricies.</p>
+<ul><li><a href="Detail" title="Created ...">...</a> by <em>Jean</em> <a href="#" onclick="toggle_visibility('comment-7');" title="Hide">&#8284;</a><div id=comment-7><p>Lorem ipsum <strong> dolor sit amet</strong>, consectetur adipiscing elit. Donec interdum dictum erat. Fusce condimentum erat a pulvinar ultricies.</p>
 <p>Phasellus gravida ullamcorper eros, sit amet blandit sapien laoreet quis.</p>
 <p>Donec accumsan mauris at risus lobortis, nec pretium tortor aliquam. Nulla vel enim vel eros venenatis congue.</p></div></li></ul>
 
