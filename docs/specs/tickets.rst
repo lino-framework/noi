@@ -120,15 +120,15 @@ So a **project** is something for which somebody is possibly willing
 to pay money.
 
 >>> rt.show(tickets.Projects)
-=========== =============== ======== ============== =========
- Reference   Name            Parent   Project Type   Private
------------ --------------- -------- -------------- ---------
- linö        Framewörk                               No
- téam        Téam            linö                    Yes
- docs        Documentatión   linö                    No
- research    Research        docs                    No
- shop        Shop                                    No
-=========== =============== ======== ============== =========
+=========== =============== ======== ========= =========
+ Reference   Name            Parent   Company   Private
+----------- --------------- -------- --------- ---------
+ linö        Framewörk                welket    No
+ téam        Téam            linö     welsch    Yes
+ docs        Documentatión   linö     pypi      No
+ research    Research        docs     welket    No
+ shop        Shop                     welsch    No
+=========== =============== ======== ========= =========
 <BLANKLINE>
 
 
@@ -155,8 +155,8 @@ assigned to a project:
 ==== =================== ========= ============== ============== =========
  ID   Summary             Author    Topic          Actions        Project
 ---- ------------------- --------- -------------- -------------- ---------
- 5    Cannot create Foo   Mathieu   Lino Voga      **Sleeping**
- 3    Baz sucks           Luc       Lino Welfare   **Opened**
+ 5    Cannot create Foo   Mathieu   Lino Welfare   **Sleeping**
+ 3    Baz sucks           Luc       Lino Voga      **Opened**
 ==== =================== ========= ============== ============== =========
 <BLANKLINE>
 
@@ -396,26 +396,14 @@ can see all local tickets for a given site object:
 ===== =========================== ========= ============== ============== ==========
  ID    Summary                     Author    Topic          Actions        Project
 ----- --------------------------- --------- -------------- -------------- ----------
- 115   Ticket 115                  Jean      Lino Welfare   **Opened**     docs
- 109   Ticket 109                  Jean      Lino Voga      **Sleeping**   téam
- 103   Ticket 103                  Mathieu   Lino Welfare   **Closed**     linö
- 97    Ticket 97                   Jean      Lino Voga      **New**        shop
- 91    Ticket 91                   Jean      Lino Welfare   **Opened**     research
- 85    Ticket 85                   Jean      Lino Voga      **Sleeping**   docs
- 79    Ticket 79                   Mathieu   Lino Welfare   **Closed**     téam
- 73    Ticket 73                   Jean      Lino Voga      **New**        linö
- 67    Ticket 67                   Jean      Lino Welfare   **Opened**     shop
- 61    Ticket 61                   Jean      Lino Voga      **Sleeping**   research
- 55    Ticket 55                   Mathieu   Lino Welfare   **Closed**     docs
- 49    Ticket 49                   Jean      Lino Voga      **New**        téam
- 43    Ticket 43                   Jean      Lino Welfare   **Opened**     linö
- 37    Ticket 37                   Jean      Lino Voga      **Sleeping**   shop
- 31    Ticket 31                   Mathieu   Lino Welfare   **Closed**     research
- 25    Ticket 25                   Jean      Lino Voga      **New**        docs
- 19    Ticket 19                   Jean      Lino Welfare   **Opened**     téam
- 13    Bar cannot foo              Jean      Lino Voga      **Sleeping**   linö
- 7     No Foo after deleting Bar   Mathieu   Lino Welfare   **Closed**     shop
- 1     Föö fails to bar when baz   Jean      Lino Voga      **New**        linö
+ 103   Ticket 103                  Mathieu   Lino Voga      **Closed**     linö
+ 91    Ticket 91                   Jean      Lino Voga      **Opened**     research
+ 73    Ticket 73                   Jean      Lino Welfare   **New**        linö
+ 61    Ticket 61                   Jean      Lino Welfare   **Sleeping**   research
+ 43    Ticket 43                   Jean      Lino Voga      **Opened**     linö
+ 31    Ticket 31                   Mathieu   Lino Voga      **Closed**     research
+ 13    Bar cannot foo              Jean      Lino Welfare   **Sleeping**   linö
+ 1     Föö fails to bar when baz   Jean      Lino Welfare   **New**        linö
 ===== =========================== ========= ============== ============== ==========
 <BLANKLINE>
 
@@ -429,28 +417,17 @@ authenticated developer it looks like this:
 ===== =========================== ========= ============== ==================== ==========
  ID    Summary                     Author    Topic          Actions              Project
 ----- --------------------------- --------- -------------- -------------------- ----------
- 115   Ticket 115                  Jean      Lino Welfare   [▶] [★] **Opened**   docs
- 109   Ticket 109                  Jean      Lino Voga      [☆] **Sleeping**     téam
- 103   Ticket 103                  Mathieu   Lino Welfare   [☆] **Closed**       linö
- 97    Ticket 97                   Jean      Lino Voga      [▶] [★] **New**      shop
- 91    Ticket 91                   Jean      Lino Welfare   [▶] [★] **Opened**   research
- 85    Ticket 85                   Jean      Lino Voga      [☆] **Sleeping**     docs
- 79    Ticket 79                   Mathieu   Lino Welfare   [☆] **Closed**       téam
- 73    Ticket 73                   Jean      Lino Voga      [▶] [★] **New**      linö
- 67    Ticket 67                   Jean      Lino Welfare   [▶] [★] **Opened**   shop
- 61    Ticket 61                   Jean      Lino Voga      [☆] **Sleeping**     research
- 55    Ticket 55                   Mathieu   Lino Welfare   [☆] **Closed**       docs
- 49    Ticket 49                   Jean      Lino Voga      [▶] [★] **New**      téam
- 43    Ticket 43                   Jean      Lino Welfare   [▶] [★] **Opened**   linö
- 37    Ticket 37                   Jean      Lino Voga      [☆] **Sleeping**     shop
- 31    Ticket 31                   Mathieu   Lino Welfare   [☆] **Closed**       research
- 25    Ticket 25                   Jean      Lino Voga      [▶] [★] **New**      docs
- 19    Ticket 19                   Jean      Lino Welfare   [▶] [★] **Opened**   téam
- 13    Bar cannot foo              Jean      Lino Voga      [☆] **Sleeping**     linö
- 7     No Foo after deleting Bar   Mathieu   Lino Welfare   [☆] **Closed**       shop
- 1     Föö fails to bar when baz   Jean      Lino Voga      [★] **New**          linö
+ 103   Ticket 103                  Mathieu   Lino Voga      [☆] **Closed**       linö
+ 91    Ticket 91                   Jean      Lino Voga      [▶] [★] **Opened**   research
+ 73    Ticket 73                   Jean      Lino Welfare   [▶] [★] **New**      linö
+ 61    Ticket 61                   Jean      Lino Welfare   [☆] **Sleeping**     research
+ 43    Ticket 43                   Jean      Lino Voga      [▶] [★] **Opened**   linö
+ 31    Ticket 31                   Mathieu   Lino Voga      [☆] **Closed**       research
+ 13    Bar cannot foo              Jean      Lino Welfare   [☆] **Sleeping**     linö
+ 1     Föö fails to bar when baz   Jean      Lino Welfare   [★] **New**          linö
 ===== =========================== ========= ============== ==================== ==========
 <BLANKLINE>
+
 
 
 
@@ -539,7 +516,7 @@ Dependencies between tickets
 Comments
 ========
 
-Comments on private tickets are not shown by to anonymous users:
+Comments on private tickets are not shown to anonymous users:
 
 >>> rt.show(comments.Comments, column_names="id user short_text")
 +----+-----------------+--------------------------------------------------------------------------------+
@@ -719,22 +696,7 @@ The same list seen by marc
 >>> obj = tickets.Ticket.objects.get(pk=7)
 >>> rt.show(comments.CommentsByRFC, obj)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-<script type="text/javascript">
-        <!--
-            function toggle_visibility(id) {
-               var e = document.getElementById(id);
-               if(e.style.display == 'block'|| (e.style.display != 'block' && e.style.display != 'none'))
-                  e.style.display = 'none';
-               else
-                  e.style.display = 'block';
-            }
-        //-->
-        </script>
-        <style>
-ul.flat li {
-    display: inline;
-}
-</style><ul><li><ul class="flat"><li><em>Jean</em></li><li><em> wrote ...:</em></li><a href="#" onclick="toggle_visibility('comment-7');" title="Hide">&#8284;</a></ul><div id=comment-7><p>Lorem ipsum <strong> dolor sit amet</strong>, consectetur adipiscing elit. Donec interdum dictum erat. Fusce condimentum erat a pulvinar ultricies.</p>
+<ul><li><a href="Detail" title="Created ...">...</a> by <em>Jean</em> <a href="#" onclick="toggle_visibility('comment-7');" title="Hide">&#8284;</a><div id=comment-7><p>Lorem ipsum <strong> dolor sit amet</strong>, consectetur adipiscing elit. Donec interdum dictum erat. Fusce condimentum erat a pulvinar ultricies.</p>
 <p>Phasellus gravida ullamcorper eros, sit amet blandit sapien laoreet quis.</p>
 <p>Donec accumsan mauris at risus lobortis, nec pretium tortor aliquam. Nulla vel enim vel eros venenatis congue.</p></div></li></ul>
 
@@ -806,7 +768,7 @@ the detail window of a ticket.
       - (general1_2): **Site** (site), **Topic** (topic), **Project** (project), **Private** (private)
       - **Actions** (workflow_buttons)
     - **Votes** (VotesByVotable) [visible for user consultant hoster developer senior admin]
-  - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user consultant hoster developer senior admin], **Sessions** (SessionsByTicket) [visible for consultant hoster developer senior admin]
+  - (general_2): **Description** (description), **Comments** (CommentsByRFC), **Sessions** (SessionsByTicket) [visible for consultant hoster developer senior admin]
 - **More** (more):
   - (more_1):
     - (more1):

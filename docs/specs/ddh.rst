@@ -33,6 +33,8 @@ Lino Noi:
   - PROTECT : clocking.Session.session_type
 - comments.Comment :
   - PROTECT : comments.Comment.reply_to
+- comments.CommentType :
+  - PROTECT : comments.Comment.comment_type
 - contacts.Company :
   - PROTECT : contacts.Role.company, excerpts.Excerpt.company, system.SiteConfig.site_company, tickets.Project.company
 - contacts.CompanyType :

@@ -38,7 +38,7 @@ def objects():
 def tickets_objects():
     # was previously in tickets
     User = rt.models.users.User
-    Partner = rt.models.contacts.Partner
+    Company = rt.models.contacts.Company
     Topic = rt.models.topics.Topic
     TT = rt.models.tickets.TicketType
     Ticket = rt.models.tickets.Ticket
@@ -80,11 +80,15 @@ def tickets_objects():
 
     for name in "welket welsch pypi".split():
 
-        obj = Partner(name=name)
+        obj = Company(name=name)
         yield obj
         yield Site(name=name, partner=obj)
 
-    for u in Partner.objects.exclude(name="pypi"):
+    COMPANIES = Cycler(Company.objects.all())
+    
+    yield Company(name="Saffre-Rumma")
+    
+    for u in Company.objects.exclude(name="pypi"):
         for i in range(3):
             yield Interest(partner=u, topic=TOPICS.pop())
 
@@ -96,20 +100,25 @@ def tickets_objects():
 
     prj1 = Project(
         name="Framewörk", ref="linö", private=False,
+        company=COMPANIES.pop(),
         start_date=i2d(20090101))
     yield prj1
     yield Project(
         name="Téam", ref="téam", start_date=i2d(20100101),
+        company=COMPANIES.pop(),
         parent=prj1, private=True)
     prj2 = Project(
         name="Documentatión", ref="docs", private=False,
+        company=COMPANIES.pop(),
         start_date=i2d(20090101), parent=prj1)
     yield prj2
     yield Project(
         name="Research", ref="research", private=False,
+        company=COMPANIES.pop(),
         start_date=i2d(19980101), parent=prj2)
     yield Project(
         name="Shop", ref="shop", private=False,
+        company=COMPANIES.pop(),
         start_date=i2d(20120201), end_date=i2d(20120630))
 
     PROJECTS = Cycler(Project.objects.all())
@@ -216,6 +225,7 @@ def tickets_objects():
 
 def clockings_objects():
     # was previously in clockings
+    Company = rt.models.contacts.Company
     Vote = rt.models.votes.Vote
     SessionType = rt.models.clocking.SessionType
     Session = rt.models.clocking.Session
@@ -267,8 +277,7 @@ def clockings_objects():
                     break
 
     ServiceReport = rt.models.clocking.ServiceReport
-    Site = rt.models.contacts.Partner
-    welket = Site.objects.get(name="welket")
+    welket = Company.objects.get(name="welket")
     yield ServiceReport(
         start_date=dd.today(-90), interesting_for=welket)
 

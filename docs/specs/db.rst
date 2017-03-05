@@ -20,7 +20,7 @@ This document describes the database structure.
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 37 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, office, xl, countries, contacts, users, topics, votes, excerpts, comments, changes, noi, tickets, faculties, deploy, clocking, lists, blogs, notify, uploads, export_excel, tinymce, smtpd, weasyprint, appypod, dashboard, rest_framework, restful.
-47 models:
+48 models:
 =========================== ============================ ========= =======
  Name                        Default table                #fields   #rows
 --------------------------- ---------------------------- --------- -------
@@ -31,14 +31,15 @@ This document describes the database structure.
  clocking.ServiceReport      clocking.ServiceReports      7         1
  clocking.Session            clocking.Sessions            12        13
  clocking.SessionType        clocking.SessionTypes        4         1
- comments.Comment            comments.Comments            8         12
- contacts.Company            contacts.Companies           22        0
+ comments.Comment            comments.Comments            9         12
+ comments.CommentType        comments.CommentTypes        4         0
+ contacts.Company            contacts.Companies           22        4
  contacts.CompanyType        contacts.CompanyTypes        7         0
- contacts.Partner            contacts.Partners            19        10
+ contacts.Partner            contacts.Partners            19        11
  contacts.Person             contacts.Persons             26        7
  contacts.Role               contacts.Roles               4         0
  contacts.RoleType           contacts.RoleTypes           4         0
- contenttypes.ContentType    gfks.ContentTypes            3         48
+ contenttypes.ContentType    gfks.ContentTypes            3         49
  countries.Country           countries.Countries          6         8
  countries.Place             countries.Places             8         78
  dashboard.Widget            dashboard.Widgets            5         0
@@ -63,7 +64,7 @@ This document describes the database structure.
  tickets.Ticket              tickets.Tickets              25        116
  tickets.TicketType          tickets.TicketTypes          4         3
  tinymce.TextFieldTemplate   tinymce.TextFieldTemplates   5         2
- topics.Interest             topics.Interests             3         27
+ topics.Interest             topics.Interests             3         9
  topics.Topic                topics.Topics                9         4
  topics.TopicGroup           topics.TopicGroups           5         0
  uploads.Upload              uploads.Uploads              9         0
