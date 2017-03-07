@@ -19,6 +19,25 @@ Project management
 This document specifies the project management functions of Lino Noi,
 implemented in :mod:`lino_noi.lib.tickets`.
 
+The difference between "ticket" and "project" might not be clear for a
+beginner.  For example something that started as a seemingly
+meaningless "ticket" can grow into a whole "project". But if this
+happens in reality, then you simply do it
+
+The most visible difference is that projects have a *name* while
+tickets just have a *number*.  Another rule of thumb is that tickets
+are atomic tasks while projects are a way for grouping tickets into a
+common goal. Tickets are short term while projects are medium or long
+term. Tickets are individual and have a single author while projects
+are group work. The only goal of a ticket is to get resolved while a
+project has a more complex definition of goals and requirements.
+
+A project in Noi is called a *product backlog item* (PBI) or a
+*Sprint* in Scrum. (At least for the moment we don't see why Lino
+should introduce a new database model for differentiating them. We
+have the ProjectType
+
+
 
 .. contents::
   :local:
