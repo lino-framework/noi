@@ -142,7 +142,9 @@ class Session(UserAuthored, Started, Ended):
         if self.reporting_type:
             return self.reporting_type
         if self.ticket and self.ticket.project:
-            return self.ticket.project.reporting_type
+            if self.ticket.project.reporting_type:
+                return self.ticket.project.reporting_type
+        return dd.plugins.clocking.default_reporting_type
         
     def get_root_project(self):
         """Return the root project for this session (or None if session has no

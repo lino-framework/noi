@@ -166,7 +166,7 @@ class WorkedHours(dd.VentilatingTable):
             
         for rpttype in ReportingTypes.objects():
             yield w(rpttype, six.text_type(rpttype))
-        yield w(None, _("N/A"))
+        # yield w(None, _("N/A"))
         yield w(TOTAL_KEY, _("Total"))
 
 
@@ -209,7 +209,7 @@ class DurationReport(VentilatedColumns):
             
         for rpttype in ReportingTypes.objects():
             yield w(rpttype, six.text_type(rpttype))
-        yield w(None, _("N/A"))
+        # yield w(None, _("N/A"))
 
 class SessionsByReport(Sessions, DurationReport):
     master = 'clocking.ServiceReport'

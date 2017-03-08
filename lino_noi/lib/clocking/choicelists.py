@@ -12,6 +12,9 @@ class ReportingTypes(dd.ChoiceList):
 
 add = ReportingTypes.add_item
 
-add('10', _("Worker"), 'worker')
-add('20', _("Employer"), 'employer')
-add('30', _("Customer"), 'customer')
+add('10', _("Regular"), 'regular')
+add('20', _("Extra"), 'extra')
+add('30', _("Free"), 'free')
+# add('10', _("Worker"), 'worker')
+# add('20', _("Employer"), 'employer')
+# add('30', _("Customer"), 'customer')

@@ -1,4 +1,4 @@
-# Copyright 2008-2016 Luc Saffre
+# Copyright 2008-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 """
 Adds functionality for managing worktime clocking.
@@ -13,6 +13,8 @@ Adds functionality for managing worktime clocking.
     mixins
 
 """
+
+import six
 
 from lino.api import ad, _
 
@@ -36,6 +38,8 @@ class Plugin(ad.Plugin):
 
     """
 
+    default_reporting_type = 'regular'
+
     def on_site_startup(self, site):
         from .mixins import Workable
         self.ticket_model = site.models.resolve(self.ticket_model)
@@ -43,6 +47,11 @@ class Plugin(ad.Plugin):
             msg = "Your plugins.clocking.ticket_model ({}) is not workable"
             msg = msg.format(self.ticket_model)
             raise Exception(msg)
+
+        if isinstance(self.default_reporting_type, six.string_types):
+            x = site.models.clocking.ReportingTypes.get_by_name(
+                self.default_reporting_type)
+            self.default_reporting_type = x
 
     def setup_main_menu(self, site, profile, m):
         p = self.get_menu_group()
