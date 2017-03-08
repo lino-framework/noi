@@ -45,6 +45,8 @@ class Site(Site):
     # TODO: move migrator to lino_noi.projects.team
     migration_class = 'lino_noi.lib.noi.migrate.Migrator'
 
+    auto_configure_logger_names = "atelier django lino lino_xl lino_noi"
+
     def get_installed_apps(self):
         """Implements :meth:`lino.core.site.Site.get_installed_apps` for Lino
         Noi.

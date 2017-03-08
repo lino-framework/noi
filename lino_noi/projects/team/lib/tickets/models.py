@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016 Luc Saffre
+# Copyright 2016-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """Database models specific for the Team variant of Lino Noi.
@@ -27,7 +27,7 @@ class TicketDetail(TicketDetail):
     general1 = """
     summary:40 id:6 user:12 end_user:12
     site topic project private
-    workflow_buttons:30 #assigned_to:20 #faculty:20
+    workflow_buttons:30
     """
 
     more = dd.Panel("""

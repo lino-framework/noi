@@ -70,66 +70,6 @@ responsible for triaging tickets"""),
     'lino_noi.lib.noi.workflows.MarkVoteRated' : _("""Rate this vote and mark it as rated."""),
     'lino_noi.lib.noi.workflows.MarkVoteRated.rating' : _("""How you rate this job."""),
     'lino_noi.lib.noi.workflows.MarkVoteRated.comment' : _("""Your comment related to your rating."""),
-    'lino_noi.lib.tickets.Plugin' : _("""See lino.core.plugin.Plugin."""),
-    'lino_noi.lib.tickets.choicelists.TicketStates' : _("""The state of a ticket (new, open, closed, ...)"""),
-    'lino_noi.lib.tickets.choicelists.TicketStates.new' : _("""Somebody reported this ticket, but there was no response so
-far.
-The ticket needs to be triaged."""),
-    'lino_noi.lib.tickets.choicelists.TicketStates.talk' : _("""Some worker needs discussion with the author.  We don't yet
-know exactly what to do with it."""),
-    'lino_noi.lib.tickets.choicelists.TicketStates.todo' : _("""The ticket is confirmed and we are working on it.
-It appears in the todo list of somebody (either the assigned
-worker, or our general todo list)"""),
-    'lino_noi.lib.tickets.choicelists.TicketStates.testing' : _("""The ticket is theoretically done, but we want to confirm this
-somehow, and it is not clear who should do the next step. If
-it is clear that the author should do the testing, then you
-should rather set the ticket to talk. If it is clear
-that you (the assignee) must test it, then leave the ticket at
-todo."""),
-    'lino_noi.lib.tickets.choicelists.TicketStates.sleeping' : _("""Waiting for some external event. We didn't decide what to do
-with it."""),
-    'lino_noi.lib.tickets.choicelists.TicketStates.ready' : _("""The ticket is basically done, but some detail still
-needs to be done by the user (e.g. testing,
-confirmation, documentation,..)"""),
-    'lino_noi.lib.tickets.choicelists.TicketStates.done' : _("""The ticket has been done."""),
-    'lino_noi.lib.tickets.choicelists.TicketStates.cancelled' : _("""It has been decided that we won't fix this ticket."""),
-    'lino_noi.lib.tickets.choicelists.LinkTypes' : _("""The possible values of a lino_noi.lib.tickets.models.Link."""),
-    'lino_noi.lib.tickets.choicelists.LinkTypes.requires' : _("""The parent ticket requires the child ticket."""),
-    'lino_noi.lib.tickets.choicelists.LinkTypes.triggers' : _("""The parent ticket triggers the child ticket."""),
-    'lino_noi.lib.tickets.choicelists.LinkTypes.deploys' : _("""The parent ticket is a deployment which deploys the child ticket."""),
-    'lino_noi.lib.tickets.models.TimeInvestment' : _("""Model mixin for things which represent a time investment.  This
-currently just defines a group of three fields:"""),
-    'lino_noi.lib.tickets.models.TimeInvestment.closed' : _("""Whether this investment is closed, i.e. certain things should
-not change anymore."""),
-    'lino_noi.lib.tickets.models.TimeInvestment.private' : _("""Whether this investment is private, i.e. should not be
-publicly visible anywhere."""),
-    'lino_noi.lib.tickets.models.TimeInvestment.planned_time' : _("""The time (in hours) we plan to work on this project or ticket."""),
-    'lino_noi.lib.tickets.models.ProjectType' : _("""The type of a Project."""),
-    'lino_noi.lib.tickets.models.TicketType' : _("""The type of a Ticket."""),
-    'lino_noi.lib.tickets.models.Project' : _("""A project is something on which several users work together."""),
-    'lino_noi.lib.tickets.models.Project.assign_to' : _("""The user to whom new tickets will be assigned.
-See Ticket.assigned_to."""),
-    'lino_noi.lib.tickets.models.Ticket' : _("""A Ticket is a concrete question or problem formulated by a
-user."""),
-    'lino_noi.lib.tickets.models.Ticket.user' : _("""The user who entered this ticket and is responsible for
-managing it."""),
-    'lino_noi.lib.tickets.models.Ticket.end_user' : _("""The end user who is asking for help."""),
-    'lino_noi.lib.tickets.models.Ticket.assigned_to' : _("""No longer used. The user who is working on this ticket."""),
-    'lino_noi.lib.tickets.models.Ticket.state' : _("""The state of this ticket. See TicketStates"""),
-    'lino_noi.lib.tickets.models.Ticket.waiting_for' : _("""What to do next. An unformatted one-line text which describes
-what this ticket is waiting for."""),
-    'lino_noi.lib.tickets.models.Ticket.upgrade_notes' : _("""A formatted text field meant for writing instructions for the
-hoster's site administrator when doing an upgrade where this
-ticket is being deployed."""),
-    'lino_noi.lib.tickets.models.Ticket.description' : _("""A complete and concise description of the ticket. This should
-describe in more detail what this ticket is about. If the
-ticket has evolved during time, it should reflect the latest
-version."""),
-    'lino_noi.lib.tickets.models.Ticket.duplicate_of' : _("""A pointer to the ticket which is the cause of this ticket."""),
-    'lino_noi.lib.tickets.models.Ticket.deadline' : _("""Specify that the ticket must be done for a given date."""),
-    'lino_noi.lib.tickets.models.Ticket.priority' : _("""How urgent this ticket is. This should be a value between 0
-and 100."""),
-    'lino_noi.lib.tickets.models.Ticket.rating' : _("""How the author rates this ticket."""),
     'lino_noi.lib.tickets.roles.TicketsUser' : _("""A user who can create new tickets."""),
     'lino_noi.lib.tickets.roles.Searcher' : _("""A user who can see all tickets."""),
     'lino_noi.lib.tickets.roles.Triager' : _("""A user who is responsible for triaging new tickets."""),
@@ -241,4 +181,43 @@ users."""),
     'lino_noi.projects.team.lib.tickets.models.TicketDetail' : _("""Customized detail_lyout for Tickets.  Replaces waiting_for by
 faculties"""),
     'lino_noi.projects.team.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Noi."""),
+    'lino_noi.lib.tickets.models.Project' : _("""A project is something on which several users work together."""),
+    'lino_noi.lib.tickets.models.Project.assign_to' : _("""The user to whom new tickets will be assigned.
+See Ticket.assigned_to."""),
+    'lino_noi.lib.tickets.models.ProjectType' : _("""The type of a Project."""),
+    'lino_noi.lib.tickets.models.TimeInvestment' : _("""Model mixin for things which represent a time investment.  This
+currently just defines a group of three fields:"""),
+    'lino_noi.lib.tickets.models.TimeInvestment.closed' : _("""Whether this investment is closed, i.e. certain things should
+not change anymore."""),
+    'lino_noi.lib.tickets.models.TimeInvestment.private' : _("""Whether this investment is private, i.e. should not be
+publicly visible anywhere."""),
+    'lino_noi.lib.tickets.models.TimeInvestment.planned_time' : _("""The time (in hours) we plan to work on this project or ticket."""),
+    'lino_noi.lib.tickets.Ticket' : _("""A Ticket is a concrete question or problem formulated by a
+user."""),
+    'lino_noi.lib.tickets.Ticket.user' : _("""The user who entered this ticket and is responsible for
+managing it."""),
+    'lino_noi.lib.tickets.Ticket.end_user' : _("""The end user who is asking for help."""),
+    'lino_noi.lib.tickets.Ticket.assigned_to' : _("""No longer used. The user who is working on this ticket."""),
+    'lino_noi.lib.tickets.Ticket.state' : _("""The state of this ticket. See TicketStates"""),
+    'lino_noi.lib.tickets.Ticket.waiting_for' : _("""What to do next. An unformatted one-line text which describes
+what this ticket is waiting for."""),
+    'lino_noi.lib.tickets.Ticket.upgrade_notes' : _("""A formatted text field meant for writing instructions for the
+hoster's site administrator when doing an upgrade where this
+ticket is being deployed."""),
+    'lino_noi.lib.tickets.Ticket.description' : _("""A complete and concise description of the ticket. This should
+describe in more detail what this ticket is about. If the
+ticket has evolved during time, it should reflect the latest
+version."""),
+    'lino_noi.lib.tickets.Ticket.duplicate_of' : _("""A pointer to the ticket which is the cause of this ticket."""),
+    'lino_noi.lib.tickets.Ticket.deadline' : _("""Specify that the ticket must be done for a given date."""),
+    'lino_noi.lib.tickets.Ticket.priority' : _("""How urgent this ticket is. This should be a value between 0
+and 100."""),
+    'lino_noi.lib.tickets.Ticket.rating' : _("""How the author rates this ticket."""),
+    'lino_noi.lib.tickets.Ticket.reporting_type' : _("""An indication about who is going to pay for work on this
+project.  See ReportingTypes."""),
+    'lino_noi.lib.tickets.LinkTypes' : _("""The possible values of a lino_noi.lib.tickets.Link."""),
+    'lino_noi.lib.tickets.LinkTypes.requires' : _("""The parent ticket requires the child ticket."""),
+    'lino_noi.lib.tickets.LinkTypes.triggers' : _("""The parent ticket triggers the child ticket."""),
+    'lino_noi.lib.tickets.LinkTypes.deploys' : _("""The parent ticket is a deployment which deploys the child ticket."""),
+    'lino_noi.lib.tickets.Plugin' : _("""See also lino.core.plugin.Plugin"""),
 }

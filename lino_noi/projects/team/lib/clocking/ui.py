@@ -12,18 +12,87 @@ from lino_xl.lib.cal.utils import when_text
 from lino_noi.lib.clocking.ui import *
 from lino.api import _
 
+from django.db.models import Q
+
 
 from lino_noi.lib.tickets.models import Project
 from lino_noi.lib.tickets.ui import Tickets, Projects
 from lino_noi.lib.tickets.models import Ticket
 from lino_noi.lib.clocking.roles import Worker
+from lino_noi.lib.clocking.choicelists import ReportingTypes
+
+class TOTAL_KEY(object):
+    pass
+
+def load_sessions(self, sar):
+    self._root2tot = {}
+    self._tickets = set()
+    grand_tot = Duration()
+    for ses in sar:
+        self._tickets.add(ses.ticket)
+        d = ses.get_duration() or MIN_DURATION
+        grand_tot += d
+        # root = ses.get_root_project()
+        root = ses.get_reporting_type()
+        # if ses.ticket:
+        #     root = ses.ticket.reporting_type
+        # else:
+        #     root = None
+        tot = self._root2tot.get(root, Duration()) + d
+        self._root2tot[root] = tot
+
+    self._root2tot[TOTAL_KEY] = grand_tot
 
 
+def compute_invested_time(obj, **spv):
+    # spv = dict(start_date=pv.start_date, end_date=pv.end_date)
+    spv.update(observed_event=dd.PeriodEvents.started)
+    sar = SessionsByTicket.request(master_instance=obj, param_values=spv)
+    tot = Duration()
+    for obj in sar:
+        d = obj.get_duration()
+        if d is not None:
+            tot += d
+    return tot
+
+
+class InvestedTime(dd.Table):
+    @dd.virtualfield(dd.DurationField(_("Time")))
+    def invested_time(cls, obj, ar):
+        return obj._invested_time
+
+    @dd.displayfield(_("Description"))
+    def my_description(cls, obj, ar):
+        mi = ar.master_instance
+        if mi is None:
+            return
+        lst = [obj.summary]
+        tpl = u"{0}: {1}"
+        # if obj.site is not None and obj.site == mi.interesting_for:
+        #     lst.append(_("site-specific"))
+        if obj.site is not None:  # and obj.site != mi.interesting_for:
+            lst.append(tpl.format(
+                ensureUtf(_("Site")), ensureUtf(obj.site)))
+        if obj.user is not None:
+            lst.append(tpl.format(
+                ensureUtf(_("Author")), ensureUtf(obj.user)))
+        if obj.project is not None:
+            lst.append(tpl.format(
+                ensureUtf(_("Project")), ensureUtf(obj.project)))
+        if obj.topic is not None:
+            lst.append(tpl.format(
+                ensureUtf(_("Topic")), ensureUtf(obj.topic)))
+        return E.p(*join_elems(lst, '. '))
+
+
+def rpttype2vf(func, rpttype, verbose_name):
+    return dd.VirtualField(dd.DurationField(verbose_name), func)
 
 MySessionsByDate.column_names = (
     'start_time end_time break_time duration summary ticket '
     'ticket__project workflow_buttons *')
 
+from lino.core.tables import VentilatedColumns
 
 class WorkedHours(dd.VentilatingTable):
     """A table showing one row per day with a summary view of the sesions
@@ -40,24 +109,12 @@ class WorkedHours(dd.VentilatingTable):
     class Row(object):
         def __init__(self, ar, day):
             self.day = day
-            self._root2tot = {}
-            self._tickets = set()
-            grand_tot = Duration()
             pv = dict(start_date=day, end_date=day)
             pv.update(observed_event=dd.PeriodEvents.started)
             pv.update(user=ar.param_values.user)
             self.sar = ar.spawn(MySessionsByDate, param_values=pv)
-            for ses in self.sar:
-                self._tickets.add(ses.ticket)
-                d = ses.get_duration() or MIN_DURATION
-                grand_tot += d
-                root = ses.get_root_project()
-                if root is not None:
-                    tot = self._root2tot.get(root, Duration()) + d
-                    self._root2tot[root] = tot
-    
-            self._root2tot[None] = grand_tot
-
+            load_sessions(self, self.sar)
+            
         def __unicode__(self):
             return when_text(self.day)
 
@@ -101,7 +158,21 @@ class WorkedHours(dd.VentilatingTable):
 
     @classmethod
     def get_ventilated_columns(cls):
-        Project = rt.modules.tickets.Project
+
+        def w(rpttype, verbose_name):
+            def func(fld, obj, ar):
+                return obj._root2tot.get(rpttype, None)
+            return dd.VirtualField(dd.DurationField(verbose_name), func)
+            
+        for rpttype in ReportingTypes.objects():
+            yield w(rpttype, six.text_type(rpttype))
+        yield w(None, _("N/A"))
+        yield w(TOTAL_KEY, _("Total"))
+
+
+    @classmethod
+    def unused_get_ventilated_columns(cls):
+        Project = rt.models.tickets.Project
 
         def w(prj, verbose_name):
             # return a getter function for a RequestField on the given
@@ -117,60 +188,41 @@ class WorkedHours(dd.VentilatingTable):
         yield w(None, _("Total"))
 
 
-class OtherTicketsByMilestone(Tickets, InvestedTime):
-    """Print a table with tickets that are not explicitly deployed but
-    which have been worked on and which are interesting for this site.
 
-    """
-    column_names = "id my_description state invested_time"
-    master = 'deploy.Milestone'
-    label = _("Other tickets")
+class DurationReport(VentilatedColumns):
+    
+    abstract = True
     
     @classmethod
-    def get_request_queryset(self, ar):
-        mi = ar.master_instance
-        if mi is None:
-            return
+    def get_ventilated_columns(cls):
+        def w(rpttype, verbose_name):
+            def func(fld, obj, ar):
+                return obj._root2tot.get(rpttype, None)
+            return dd.VirtualField(dd.DurationField(verbose_name), func)
+        
+        # def w(rpttype, verbose_name):
+        #     def func(fld, obj, ar):
+        #         if obj.get_reporting_type() == rpttype:
+        #             return obj.get_duration()
+        #         return None
+        #     return dd.VirtualField(dd.DurationField(verbose_name), func)
+            
+        for rpttype in ReportingTypes.objects():
+            yield w(rpttype, six.text_type(rpttype))
+        yield w(None, _("N/A"))
 
-        if not mi.changes_since:
-            return
-
-        spv = dict()
-        end_date = mi.reached or mi.expected or dd.today()
-        spv.update(start_date=mi.changes_since, end_date=end_date)
-        spv.update(interesting_for=mi.site.partner)
-        spv.update(observed_event=TicketEvents.clocking)
-        ar.param_values.update(spv)
-
-        qs = super(OtherTicketsByMilestone, self).get_request_queryset(ar)
-
-        explicit = rt.models.deploy.Deployment.objects.filter(
-            milestone=mi).values_list('ticket_id', flat=True)
-        qs = qs.exclude(id__in=explicit)
-        for obj in qs:
-            obj._invested_time = compute_invested_time(
-                obj, start_date=mi.changes_since, end_date=end_date)
-            yield obj
-
-    @classmethod
-    def get_title_base(self, ar):
-        """
-        """
-        title = self.title or self.label
-        mi = ar.master_instance
-        if mi is None:
-            return title
-        if mi.changes_since:
-            return _("Changes since {0}").format(dd.fds(mi.changes_since))
-        # end_date = mi.reached or mi.expected or dd.today()
-        # return _("Changes before {0}").format(dd.fds(end_date))
-        return title
-
-
-class SessionsByReport(Sessions):
+class SessionsByReport(Sessions, DurationReport):
     master = 'clocking.ServiceReport'
-    column_names = "start_date start_time end_time break_time duration ticket__id summary"
     
+    column_names_template = "start_date start_time end_time break_time " \
+                            "my_description:50 #session_type {vcolumns}"
+
+    # @classmethod
+    # def get_data_rows(cls, ar):
+    #     for ses in cls.get_request_queryset(ar):
+    #         load_sessions(ses, [ses])
+    #         yield ses
+
     @classmethod
     def get_request_queryset(self, ar):
         mi = ar.master_instance
@@ -181,20 +233,29 @@ class SessionsByReport(Sessions):
         spv.update(company=mi.interesting_for)
         ar.param_values.update(spv)
 
-        return super(SessionsByReport, self).get_request_queryset(ar)
-        # qs = super(SessionsByReport, self).get_request_queryset(ar)
-        # for obj in qs:
-        #     # obj._invested_time = compute_invested_time(
-        #     #     obj, start_date=mi.start_date, end_date=mi.end_date,
-        #     #     user=mi.user)
-        #     yield obj
+        qs = super(SessionsByReport, self).get_request_queryset(ar)
+        for obj in qs:
+            load_sessions(obj, [obj])
+            # obj._invested_time = compute_invested_time(
+            #     obj, start_date=mi.start_date, end_date=mi.end_date,
+            #     user=mi.user)
+            if obj._root2tot.get(TOTAL_KEY):
+                yield obj
 
-class TicketsByReport(Tickets, InvestedTime):
+    @dd.displayfield(_("Description"))
+    def my_description(self, obj, ar):
+        elems = [obj.summary]
+        t = obj.ticket
+        elems += [" ", 
+            ar.obj2html(t, "#{0}".format(t.id), title=t.summary)]
+        return E.p(*elems)
+
+class TicketsByReport(Tickets, DurationReport):
     """The list of tickets mentioned in a service report."""
     master = 'clocking.ServiceReport'
     # column_names = "summary id reporter project product site state
     # invested_time"
-    column_names = "id overview state invested_time"
+    column_names_template = "id overview project state {vcolumns}"
     order_by = ['id']
 
     @classmethod
@@ -202,37 +263,68 @@ class TicketsByReport(Tickets, InvestedTime):
         mi = ar.master_instance
         if mi is None:
             return
-        spv = mi.get_tickets_parameters()
-        # spv = dict(start_date=mi.start_date, end_date=mi.end_date)
-        spv.update(observed_event=TicketEvents.clocking)
-        spv.update(interesting_for=mi.interesting_for)
-        # if mi.ticket_state:
-        #     spv.update(state=mi.ticket_state)
-        ar.param_values.update(spv)
+        pv = ar.param_values
 
+        pv.update(start_date=mi.start_date, end_date=mi.end_date)
+        pv.update(interesting_for=mi.interesting_for)
+        pv.update(observed_event=TicketEvents.clocking)
+
+        spv = dict(start_date=mi.start_date, end_date=mi.end_date)
+        spv.update(observed_event=dd.PeriodEvents.started)
+        spv.update(user=mi.user)
         qs = super(TicketsByReport, self).get_request_queryset(ar)
         for obj in qs:
-            obj._invested_time = compute_invested_time(
-                obj, start_date=mi.start_date, end_date=mi.end_date,
-                user=mi.user)
-            yield obj
+            sar = SessionsByTicket.request(
+                master_instance=obj, param_values=spv)
+            load_sessions(obj, sar)
+            # obj._invested_time = compute_invested_time(
+            #     obj, start_date=mi.start_date, end_date=mi.end_date,
+            #     user=mi.user)
+            if obj._root2tot.get(TOTAL_KEY):
+                yield obj
 
 
-class ProjectsByReport(Projects, InvestedTime):
+class ProjectsByReport(Projects, DurationReport):
     """The list of projects mentioned in a service report.
     
     """
     master = 'clocking.ServiceReport'
-    column_names = "ref name parent active_tickets invested_time total_time"
+    column_names_template = "ref name active_tickets {vcolumns}"
     order_by = ['ref']
 
     @classmethod
     def get_request_queryset(self, ar):
+
+        mi = ar.master_instance
+        if mi is None:
+            return
+        
+        pv = ar.param_values
+        pv.update(start_date=mi.start_date, end_date=mi.end_date)
+        pv.update(interesting_for=mi.interesting_for)
+       
+        spv = dict(start_date=mi.start_date, end_date=mi.end_date)
+        spv.update(observed_event=dd.PeriodEvents.started)
+        spv.update(user=mi.user)
+        
+        qs = super(ProjectsByReport, self).get_request_queryset(ar)
+        for obj in qs:
+            # spv.update(project=obj)
+            sar = Sessions.request(
+                param_values=spv,
+                filter=Q(ticket__project=obj))
+            load_sessions(obj, sar)
+            if obj._root2tot.get(TOTAL_KEY):
+                yield obj
+            
+    @classmethod
+    def old_get_request_queryset(self, ar):
         Tickets = rt.modules.tickets.Tickets
         mi = ar.master_instance
         if mi is None:
             return
 
+            
         def worked_time(**spv):
             tot = Duration()
             tickets = []
@@ -295,22 +387,18 @@ class ProjectsByReport(Projects, InvestedTime):
                 ticket, text="#%d" % ticket.id, title=six.text_type(ticket)))
         return E.p(*join_elems(lst, ', '))
 
-    @dd.displayfield(_("Total time"))
-    def total_time(cls, obj, ar):
-        tt = obj._invested_time + obj._children_time
-        return E.p(str(tt))
-
 
 class ServiceReports(dd.Table):
     """List of service reports."""
     required_roles = dd.login_required(Worker)
 
     model = "clocking.ServiceReport"
-    # detail_layout = """
-    # start_date end_date user interesting_for ticket_state printed
+    detail_layout = """
+    start_date end_date user interesting_for ticket_state printed
+    SessionsByReport
     # TicketsByReport
     # ProjectsByReport
-    # """
+    """
     column_names = "start_date end_date user interesting_for "\
                    "ticket_state printed *"
 
@@ -323,10 +411,10 @@ class ReportsByPartner(ServiceReports):
     master_key = 'interesting_for'
 
 
-@dd.receiver(dd.post_save, sender=Project)
-def my_setup_columns(sender, **kw):
-    WorkedHours.setup_columns()
-    settings.SITE.kernel.must_build_site_cache()
+# @dd.receiver(dd.post_save, sender=Project)
+# def my_setup_columns(sender, **kw):
+#     WorkedHours.setup_columns()
+#     settings.SITE.kernel.must_build_site_cache()
 
 
 @dd.receiver(dd.post_save, sender=Ticket)

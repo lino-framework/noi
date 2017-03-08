@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2016 Luc Saffre
+# Copyright 2011-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """Database models for this plugin.
@@ -22,6 +22,7 @@ from lino_xl.lib.cal.mixins import Started, Ended
 from lino.modlib.users.mixins import UserAuthored
 
 from .actions import EndThisSession, PrintActivityReport, EndTicketSession
+from .choicelists import ReportingTypes
 
 
 class SessionType(mixins.BabelNamed):
@@ -101,6 +102,8 @@ class Session(UserAuthored, Started, Ended):
         'faculties.Faculty', related_name="sessions_by_faculty",
         blank=True, null=True)
 
+    reporting_type = ReportingTypes.field(blank=True)
+    
     end_session = EndThisSession()
     # print_activity_report = PrintActivityReport()
 
@@ -135,6 +138,12 @@ class Session(UserAuthored, Started, Ended):
                 self.start_time = timezone.now().time()
         super(Session, self).save(*args, **kwargs)
 
+    def get_reporting_type(self):
+        if self.reporting_type:
+            return self.reporting_type
+        if self.ticket and self.ticket.project:
+            return self.ticket.project.reporting_type
+        
     def get_root_project(self):
         """Return the root project for this session (or None if session has no
         ticket).
@@ -244,5 +253,8 @@ if False:  # works, but is not useful
     from lino.utils.weekly import add_reporter
     add_reporter(weekly_reporter)
 
+# dd.inject_field(
+#     'tickets.Project',
+#     'reporting_type', ReportingTypes.field(blank=True))
 
 from .ui import *

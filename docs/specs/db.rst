@@ -29,7 +29,7 @@ This document describes the database structure.
  blogs.Tagging               blogs.Taggings               3         3
  changes.Change              changes.Changes              10        0
  clocking.ServiceReport      clocking.ServiceReports      7         1
- clocking.Session            clocking.Sessions            12        13
+ clocking.Session            clocking.Sessions            13        13
  clocking.SessionType        clocking.SessionTypes        4         1
  comments.Comment            comments.Comments            9         12
  comments.CommentType        comments.CommentTypes        4         0
@@ -58,7 +58,7 @@ This document describes the database structure.
  notify.Message              notify.Messages              11        6
  system.SiteConfig           system.SiteConfigs           5         1
  tickets.Link                tickets.Links                4         1
- tickets.Project             tickets.Projects             17        5
+ tickets.Project             tickets.Projects             18        5
  tickets.ProjectType         tickets.ProjectTypes         4         0
  tickets.Site                tickets.Sites                4         3
  tickets.Ticket              tickets.Tickets              25        116
