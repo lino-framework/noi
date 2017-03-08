@@ -38,6 +38,10 @@ SITE = Site(globals())
 # SITE.plugins.extjs6.configure(theme_name='theme-triton')
 # SITE.plugins.extjs6.configure(theme_name='ext-theme-neptune-lino')
 
+#in etc/aliases
+# comments: /home/tonis/mbox
+#SITE.plugins.inbox.configure(mbox_path='/home/tonis/mbox')
+#SITE.plugins.inbox.configure(comment_reply_addr='comments@localhost')
 DEBUG = True
 
 # the following line should not be active in a checked-in version
