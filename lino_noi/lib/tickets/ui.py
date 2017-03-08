@@ -57,25 +57,21 @@ class TicketTypes(dd.Table):
 
 
 class ProjectDetail(dd.DetailLayout):
-    main = "general #tickets history"
+    main = "general more"
 
     general = dd.Panel("""
-    ref name parent type
-    company assign_to #contact_person #contact_role private closed
-    description ProjectsByParent
-    # cal.EventsByProject
+    ref name 
+    description 
+    TicketsByProject
     """, label=_("General"))
 
-    # tickets = dd.Panel("""
-    # #SponsorshipsByProject
-    # TicketsByProject #SessionsByProject
-    # """, label=_("Tickets"))
-
-    history = dd.Panel("""
+    more = dd.Panel("""
+    parent type reporting_type
+    company assign_to #contact_person #contact_role private closed
     start_date end_date srcref_url_template changeset_url_template
-    #MilestonesByProject
-    TicketsByProject
-    """, label=_("Timeline"))
+    ProjectsByParent
+    # cal.EventsByProject
+    """, label=_("More"))
 
 
 class Projects(dd.Table):
@@ -151,7 +147,7 @@ class TopLevelProjects(Projects):
     required_roles = dd.login_required(TicketsStaff)
     order_by = ["ref"]
     column_names = 'ref name parent children_summary *'
-    filter = models.Q(parent__isnull=True)
+    filter = Q(parent__isnull=True)
     variable_row_height = True
 
 
@@ -615,7 +611,7 @@ class PublicTickets(Tickets):
     label = _("Public tickets")
     order_by = ["-priority", "-id"]
     column_names = 'overview:50 ticket_type:10 topic:10 priority:3 *'
-    # filter = models.Q(assigned_to=None)
+    # filter = Q(assigned_to=None)
 
     @classmethod
     def param_defaults(self, ar, **kw):

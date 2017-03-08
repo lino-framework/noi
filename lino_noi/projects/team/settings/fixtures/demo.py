@@ -17,6 +17,8 @@ from lino.utils.quantities import Duration
 
 from lino_noi.lib.users.models import create_user
 
+from lino_noi.lib.clocking.choicelists import ReportingTypes
+
 def vote(user, ticket, state, **kw):
     u = rt.models.users.User.objects.get(username=user)
     t = rt.models.tickets.Ticket.objects.get(pk=ticket)
@@ -98,17 +100,22 @@ def tickets_objects():
         yield Milestone(site=SITES.pop(), expected=d, reached=d)
     yield Milestone(site=SITES.pop(), expected=dd.today())
 
+    RTYPES = Cycler(ReportingTypes.objects())
+    
     prj1 = Project(
         name="Framewörk", ref="linö", private=False,
         company=COMPANIES.pop(),
+        reporting_type=RTYPES.pop(),
         start_date=i2d(20090101))
     yield prj1
     yield Project(
         name="Téam", ref="téam", start_date=i2d(20100101),
+        reporting_type=RTYPES.pop(),
         company=COMPANIES.pop(),
         parent=prj1, private=True)
     prj2 = Project(
         name="Documentatión", ref="docs", private=False,
+        reporting_type=RTYPES.pop(),
         company=COMPANIES.pop(),
         start_date=i2d(20090101), parent=prj1)
     yield prj2
@@ -118,6 +125,7 @@ def tickets_objects():
         start_date=i2d(19980101), parent=prj2)
     yield Project(
         name="Shop", ref="shop", private=False,
+        reporting_type=RTYPES.pop(),
         company=COMPANIES.pop(),
         start_date=i2d(20120201), end_date=i2d(20120630))
 

@@ -1,10 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2014-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
-"""
-Choicelists for this plugin.
-
-"""
 
 
 from __future__ import unicode_literals
@@ -197,24 +193,6 @@ class LinkType(dd.Choice):
 
 
 class LinkTypes(dd.ChoiceList):
-    """The possible values of a :class:`lino_noi.lib.tickets.models.Link`.
-
-    .. attribute:: requires
-
-        The parent ticket requires the child ticket.
-    
-    .. attribute:: triggers
-
-        The parent ticket triggers the child ticket.
-    
-    .. attribute:: deploys
-
-        The parent ticket is a deployment which deploys the child ticket.
-
-        Release notes are a printout of a deployment ticket which
-        lists the deployed tickets.
-
-    """
     required_roles = dd.login_required(dd.SiteStaff)
     verbose_name = _("Dependency type")
     verbose_name_plural = _("Dependency types")

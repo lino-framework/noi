@@ -45,6 +45,8 @@ class Site(Site):
     # TODO: move migrator to lino_noi.projects.team
     migration_class = 'lino_noi.lib.noi.migrate.Migrator'
 
+    auto_configure_logger_names = "atelier django lino lino_xl lino_noi"
+
     def get_installed_apps(self):
         """Implements :meth:`lino.core.site.Site.get_installed_apps` for Lino
         Noi.
@@ -87,7 +89,7 @@ class Site(Site):
 
         yield 'lino_noi.lib.noi'
         yield 'lino.modlib.restful'
-        #yield 'lino_xl.lib.inbox'
+        yield 'lino_xl.lib.inbox'
 
     def setup_plugins(self):
         super(Site, self).setup_plugins()

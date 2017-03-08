@@ -19,7 +19,7 @@ This document describes the database structure.
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-37 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, office, xl, countries, contacts, users, topics, votes, excerpts, comments, changes, noi, tickets, faculties, deploy, clocking, lists, blogs, notify, uploads, export_excel, tinymce, smtpd, weasyprint, appypod, dashboard, rest_framework, restful.
+38 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, office, xl, countries, contacts, users, topics, votes, excerpts, comments, changes, noi, tickets, faculties, deploy, clocking, lists, blogs, notify, uploads, export_excel, tinymce, smtpd, weasyprint, appypod, dashboard, rest_framework, restful, inbox.
 48 models:
 =========================== ============================ ========= =======
  Name                        Default table                #fields   #rows
@@ -29,7 +29,7 @@ This document describes the database structure.
  blogs.Tagging               blogs.Taggings               3         3
  changes.Change              changes.Changes              10        0
  clocking.ServiceReport      clocking.ServiceReports      7         1
- clocking.Session            clocking.Sessions            12        13
+ clocking.Session            clocking.Sessions            13        13
  clocking.SessionType        clocking.SessionTypes        4         1
  comments.Comment            comments.Comments            9         12
  comments.CommentType        comments.CommentTypes        4         0
@@ -58,7 +58,7 @@ This document describes the database structure.
  notify.Message              notify.Messages              11        6
  system.SiteConfig           system.SiteConfigs           5         1
  tickets.Link                tickets.Links                4         1
- tickets.Project             tickets.Projects             17        5
+ tickets.Project             tickets.Projects             18        5
  tickets.ProjectType         tickets.ProjectTypes         4         0
  tickets.Site                tickets.Sites                4         3
  tickets.Ticket              tickets.Tickets              25        116

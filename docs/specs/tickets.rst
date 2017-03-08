@@ -18,17 +18,118 @@ Ticket management in Lino Noi
 This document specifies the ticket management functions of Lino Noi,
 implemented in :mod:`lino_noi.lib.tickets`.
 
-
 .. contents::
   :local:
 
 
-Tickets
-=======
+What is a ticket?
+=================
 
-A :class:`Ticket <lino_noi.lib.tickets.models.Ticket>` represents a
-concrete problem introduced by a :attr:`reporter
-<lino_noi.lib.tickets.models.Ticket.reporter>` (a system user).
+
+.. currentmodule:: lino_noi.lib.tickets
+
+.. class:: Ticket
+
+    A **Ticket** is a concrete question or problem formulated by a
+    user.
+
+    The user may be a system user or an end user represented by a
+    system user.
+
+    A Ticket is always related to one and only one Project.  It may be
+    related to other tickets which may belong to other projects.
+
+
+    .. attribute:: user
+
+        The user who entered this ticket and is responsible for
+        managing it.
+
+    .. attribute:: end_user
+
+        The end user who is asking for help.
+
+    .. attribute:: assigned_to
+
+        No longer used. The user who is working on this ticket.
+
+        If this field is empty and :attr:`project` is not empty, then
+        default value is taken from :attr:`Project.assign_to`.
+
+    .. attribute:: state
+
+        The state of this ticket. See :class:`TicketStates
+        <lino_noi.lib.tickets.choicelists.TicketStates>`
+
+    .. attribute:: waiting_for
+
+        What to do next. An unformatted one-line text which describes
+        what this ticket is waiting for.
+
+    .. attribute:: upgrade_notes
+
+        A formatted text field meant for writing instructions for the
+        hoster's site administrator when doing an upgrade where this
+        ticket is being deployed.
+
+    .. attribute:: description
+
+        A complete and concise description of the ticket. This should
+        describe in more detail what this ticket is about. If the
+        ticket has evolved during time, it should reflect the latest
+        version.
+
+        The description can contain memo commands (see :doc:`/specs/memo`).
+
+    .. attribute:: duplicate_of
+
+        A pointer to the ticket which is the cause of this ticket.
+
+        A ticket with a non-empty :attr:`duplicate_of` field can be
+        called a "duplicate".  The number of a duplicate is
+        theoretically higher than the number of the ticket it
+        duplicates.
+
+        The :attr:`state` of a duplicate does not automatically become
+        that of the duplicated ticket.  Each ticket continues to have
+        its own state. Example: Some long time ago, with Mathieu, we
+        agreed that ticket #100 can go to *Sleeping*. Now Aurélie
+        reported the same problem again as #904. This means that we
+        should talk about it. And even before talking with her, I'd
+        like to have a look at the code in order to estimate whether
+        it is difficult or not, so I set the state of #904 to ToDo.
+
+        Wouldn't it be preferrable to replace the :attr:`duplicate_of
+        field by a :class:`LinkType
+        <lino_noi.lib.tickets.choicelists.LinkTypes>` called
+        "Duplicated/Duplicated by"?  No. We had this before and
+        preferred the field, because a field is at least one click
+        less, and because we *want* users to define a clear hiearchy
+        with a clear root ticket. You can have a group of tickets
+        which are all direct or indirect duplicates of this "root of
+        all other problems".
+
+    .. attribute:: deadline
+
+        Specify that the ticket must be done for a given date.
+
+        TODO: Triagers should have a table of tickets having this
+        field non-empty and are still in an active state.
+
+    .. attribute:: priority
+
+        How urgent this ticket is. This should be a value between 0
+        and 100.
+
+    .. attribute:: rating
+
+        How the author rates this ticket.
+
+    .. attribute:: reporting_type
+
+        An indication about who is going to pay for work on this
+        project.  See :class:`ReportingTypes`.
+
 
 
 Lifecycle of a ticket
@@ -104,7 +205,9 @@ Note that a ticket also has a checkbox for marking it as :attr:`closed
 can be marked as "closed" in any of above states.  We don't use this for the moment and are not sure
 whether this is a cool feature (:ticket:`372`).
 
-- :attr:`standby <lino_noi.lib.tickets.models.Ticket.standby>` 
+- :attr:`standby <lino_noi.lib.tickets.models.Ticket.standby>`
+
+
 
 Projects
 ========
@@ -473,20 +576,41 @@ No data to display
 Release notes
 =============
 
-Lino Noi has an excerpt type for printing a milestone.  This is used
+Lino Noi has an excerpt type for printing a milestone.  This was used
 to produce *release notes*.
 
 >>> obj = deploy.Milestone.objects.get(pk=7)
 >>> rt.show(rt.actors.deploy.DeploymentsByMilestone, obj)
 No data to display
 
->>> rt.show(clocking.OtherTicketsByMilestone, obj)
+>>> rt.show(clocking.OtherTicketsByMilestone, obj) #doctest: +SKIP
 No data to display
 
 
 
 Dependencies between tickets
 ============================
+
+
+.. class:: LinkTypes
+
+    The possible values of a :class:`lino_noi.lib.tickets.Link`.
+
+    .. attribute:: requires
+
+        The parent ticket requires the child ticket.
+    
+    .. attribute:: triggers
+
+        The parent ticket triggers the child ticket.
+    
+    .. attribute:: deploys
+
+        The parent ticket is a deployment which deploys the child ticket.
+
+        Release notes are a printout of a deployment ticket which
+        lists the deployed tickets.
+
 
 >>> rt.show(tickets.LinkTypes)
 ... #doctest: +REPORT_UDIFF
@@ -782,5 +906,16 @@ the detail window of a ticket.
   - **Uploads** (UploadsByController)
 <BLANKLINE>
 
+
+
+Plugin configuration
+====================
+
+    
+.. class:: Plugin
+           
+    See also :class:`lino.core.plugin.Plugin`
+
+    .. attribute:: end_user_model
 
 

@@ -80,18 +80,18 @@ working hours.
 
 >>> rt.login('jean').show(clocking.WorkedHours)
 ... #doctest: -REPORT_UDIFF
-======================================= ========== ========== ==========
- Description                             linö       shop       Total
---------------------------------------- ---------- ---------- ----------
- **Sat 23/05/2015** (`#2 <Detail>`__)    0:01                  0:01
- **Fri 22/05/2015** (`#11 <Detail>`__)   2:18                  2:18
- **Thu 21/05/2015**                                            0:00
- **Wed 20/05/2015** (`#17 <Detail>`__)              1:30       1:30
- **Tue 19/05/2015** (`#20 <Detail>`__)   0:10                  0:10
- **Mon 18/05/2015**                                            0:00
- **Sun 17/05/2015**                                            0:00
- **Total (7 rows)**                      **2:29**   **1:30**   **3:59**
-======================================= ========== ========== ==========
+======================================= ========== ========== ========== ==========
+ Description                             Regular    Extra      Free       Total
+--------------------------------------- ---------- ---------- ---------- ----------
+ **Sat 23/05/2015** (`#2 <Detail>`__)               0:01                  0:01
+ **Fri 22/05/2015** (`#11 <Detail>`__)   2:18                             2:18
+ **Thu 21/05/2015**                                                       0:00
+ **Wed 20/05/2015** (`#17 <Detail>`__)   1:30                             1:30
+ **Tue 19/05/2015** (`#20 <Detail>`__)                         0:10       0:10
+ **Mon 18/05/2015**                                                       0:00
+ **Sun 17/05/2015**                                                       0:00
+ **Total (7 rows)**                      **3:48**   **0:01**   **0:10**   **3:59**
+======================================= ========== ========== ========== ==========
 <BLANKLINE>
 
 
@@ -163,17 +163,32 @@ base for writing invoices.
 >>> obj.interesting_for
 Partner #107 ('welket')
 
+>>> rt.show(clocking.SessionsByReport, obj)
+... #doctest: -REPORT_UDIFF
+==================== ============ ========== ============ ================== ========== ======= ======
+ Start date           Start time   End Time   Break Time   Description        Regular    Extra   Free
+-------------------- ------------ ---------- ------------ ------------------ ---------- ------- ------
+ 23/05/2015           09:00:00                             `#1 <Detail>`__    0:01
+ 22/05/2015           09:00:00     11:18:00                `#11 <Detail>`__   2:18
+ 20/05/2015           09:00:00     09:37:00                `#6 <Detail>`__    0:37
+ 19/05/2015           09:00:00     11:18:00                `#18 <Detail>`__   2:18
+ **Total (4 rows)**                                                           **5:14**
+==================== ============ ========== ============ ================== ========== ======= ======
+<BLANKLINE>
+
+Note that there are sessions without a duration. Thats because
+
 >>> rt.show(clocking.TicketsByReport, obj)
 ... #doctest: -REPORT_UDIFF
-==== ============================================================ ======== ==========
- ID   Description                                                  State    Time
----- ------------------------------------------------------------ -------- ----------
- 1    `#1 (Föö fails to bar when baz) <Detail>`__ by *Jean*        New      0:00
- 6    `#6 (Sell bar in baz) <Detail>`__ by *Jean*                  Ready    0:37
- 11   `#11 (Class-based Foos and Bars?) <Detail>`__ by *Mathieu*   Opened   2:18
- 18   `#18 (Ticket 18) <Detail>`__ by *Luc*                        Talk     2:18
-                                                                            **5:13**
-==== ============================================================ ======== ==========
+==== ============================================================ ========== ======== ========== ======= ======
+ ID   Description                                                  Project    State    Regular    Extra   Free
+---- ------------------------------------------------------------ ---------- -------- ---------- ------- ------
+ 1    `#1 (Föö fails to bar when baz) <Detail>`__ by *Jean*        linö       New      0:01
+ 6    `#6 (Sell bar in baz) <Detail>`__ by *Jean*                  research   Ready    0:37
+ 11   `#11 (Class-based Foos and Bars?) <Detail>`__ by *Mathieu*   research   Opened   2:18
+ 18   `#18 (Ticket 18) <Detail>`__ by *Luc*                        linö       Talk     2:18
+                                                                                       **5:14**
+==== ============================================================ ========== ======== ========== ======= ======
 <BLANKLINE>
 
 
@@ -182,29 +197,44 @@ The :class:`ProjectsByReport
 table lists all projects and the time invested.
 
 >>> rt.show(clocking.ProjectsByReport, obj)
-==================== =============== ======== =================================== ========== ============
- Reference            Name            Parent   Tickets                             Time       Total time
--------------------- --------------- -------- ----------------------------------- ---------- ------------
- docs                 Documentatión   linö                                         0:00       2:55
- linö                 Framewörk                `#18 <Detail>`__                    2:18       5:13
- research             Research        docs     `#11 <Detail>`__, `#6 <Detail>`__   2:55       2:55
- **Total (3 rows)**                                                                **5:13**
-==================== =============== ======== =================================== ========== ============
+==================== =========== =================================== ========== ======= ======
+ Reference            Name        Tickets                             Regular    Extra   Free
+-------------------- ----------- ----------------------------------- ---------- ------- ------
+ linö                 Framewörk   `#1 <Detail>`__, `#18 <Detail>`__   2:19
+ research             Research    `#11 <Detail>`__, `#6 <Detail>`__   2:55
+ **Total (2 rows)**                                                   **5:14**
+==================== =========== =================================== ========== ======= ======
 <BLANKLINE>
 
 
-Note our tree structure (which is currently not very visible)::
+Reporting type
+==============
 
-  - linö
-    - docs
-      - research
-    - téam
-  - shop
+The :attr:`reporting_type` of a session indicates how the client is
+going to pay for the work done.
+
+The default implementation offers three choices "Worker", "Employer"
+and "Customer". "Worker" is for volunteer work and "private fun" where
+the worker does not get paid by anybody.  "Employer" is when working
+time should be reported to the employer (but no customer is going to
+pay for it directly).  "Customer" is when working time should be
+reported to the customer.
+
+>>> rt.show(clocking.ReportingTypes)
+======= ========= =========
+ value   name      text
+------- --------- ---------
+ 10      regular   Regular
+ 20      extra     Extra
+ 30      free      Free
+======= ========= =========
+<BLANKLINE>
 
 
-The `Total time` column in this table is the `Time` invested for this
-project and the sum of times invested in all of its children.
+The local site admin can adapt above list to the site's needs. He also
+defines a default reporting type:
 
-The `Total time` for "linö" in above table is **12:09**, which is the
-sum of **3:29** (direct time of linö) + **6:28** (time of docs) +
-**2:12** (time of research).
+>>> dd.plugins.clocking.default_reporting_type
+<ReportingTypes.regular:10>
+
+

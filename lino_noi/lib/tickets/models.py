@@ -1,17 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2011-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
-"""This module adds models for Projects, Tickets & Co.
-
-A **Project** is something into which somebody (the `partner`) invests
-time, energy and money.  The partner can be either external or the
-runner of the site.  Projects form a tree: each Project can have a
-`parent` (another Project for which it is a sub-project).
-
-Projects are handled by their *name* while Tickets are handled by
-their *number*.
-
-"""
 
 from __future__ import unicode_literals
 
@@ -39,35 +28,13 @@ from lino.modlib.comments.mixins import Commentable
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino_noi.lib.votes.mixins import Votable
 from lino_noi.lib.clocking.mixins import Workable
+from lino_noi.lib.clocking.choicelists import ReportingTypes
 from lino.utils import join_elems
 
 from .choicelists import TicketEvents, TicketStates, LinkTypes
 from .roles import Triager
 
-
 class TimeInvestment(Commentable):
-    """Model mixin for things which represent a time investment.  This
-    currently just defines a group of three fields:
-
-    .. attribute:: closed
-
-        Whether this investment is closed, i.e. certain things should
-        not change anymore.
-
-    .. attribute:: private
-
-        Whether this investment is private, i.e. should not be
-        publicly visible anywhere.
-        
-        The default value is True.  Tickets on public projects cannot
-        be private, but tickets on private projects may be manually
-        set to public.
-
-    .. attribute:: planned_time
-
-        The time (in hours) we plan to work on this project or ticket.
-
-    """
     class Meta:
         abstract = True
 
@@ -83,7 +50,6 @@ class TimeInvestment(Commentable):
 
 
 class ProjectType(mixins.BabelNamed):
-    """The type of a :class:`Project`."""
 
     class Meta:
         app_label = 'tickets'
@@ -110,18 +76,6 @@ class TicketType(mixins.BabelNamed):
 class Project(mixins.DatePeriod, TimeInvestment,
               mixins.Hierarchical, mixins.Referrable,
               ContactRelated):
-    """A **project** is something on which several users work together.
-
-    .. attribute:: name
-
-    .. attribute:: parent
-
-    .. attribute:: assign_to
-
-        The user to whom new tickets will be assigned.
-        See :attr:`Ticket.assigned_to`.
-
-    """
     class Meta:
         app_label = 'tickets'
         verbose_name = _("Project")
@@ -141,6 +95,10 @@ class Project(mixins.DatePeriod, TimeInvestment,
     changeset_url_template = models.CharField(blank=True, max_length=200)
     # root = models.ForeignKey(
     #     'self', blank=True, null=True, verbose_name=_("Root"))
+    if dd.is_installed('clocking'):
+        reporting_type = ReportingTypes.field(blank=True)
+    else:
+        reporting_type = dd.DummyField()
 
     def __str__(self):
         return self.ref or self.name
@@ -336,100 +294,7 @@ class SpawnTicket(dd.Action):
 @dd.python_2_unicode_compatible
 class Ticket(UserAuthored, mixins.CreatedModified,
              TimeInvestment, Votable, Workable):
-    """A **Ticket** is a concrete question or problem formulated by a
-    :attr:`user`.
     
-    A Ticket is always related to one and only one Project.  It may be
-    related to other tickets which may belong to other projects.
-
-
-    .. attribute:: user
-
-        The user who entered this ticket and is responsible for
-        managing it.
-
-    .. attribute:: end_user
-
-        The end user who is asking for help.
-
-    .. attribute:: assigned_to
-
-        No longer used. The user who is working on this ticket.
-
-        If this field is empty and :attr:`project` is not empty, then
-        default value is taken from :attr:`Project.assign_to`.
-
-    .. attribute:: state
-
-        The state of this ticket. See :class:`TicketStates
-        <lino_noi.lib.tickets.choicelists.TicketStates>`
-
-    .. attribute:: waiting_for
-
-        What to do next. An unformatted one-line text which describes
-        what this ticket is waiting for.
-
-    .. attribute:: upgrade_notes
-
-        A formatted text field meant for writing instructions for the
-        hoster's site administrator when doing an upgrade where this
-        ticket is being deployed.
-
-    .. attribute:: description
-
-        A complete and concise description of the ticket. This should
-        describe in more detail what this ticket is about. If the
-        ticket has evolved during time, it should reflect the latest
-        version.
-
-        The description can contain memo commands (see :doc:`/specs/memo`).
-
-    .. attribute:: duplicate_of
-
-        A pointer to the ticket which is the cause of this ticket.
-
-        A ticket with a non-empty :attr:`duplicate_of` field can be
-        called a "duplicate".  The number of a duplicate is
-        theoretically higher than the number of the ticket it
-        duplicates.
-
-        The :attr:`state` of a duplicate does not automatically become
-        that of the duplicated ticket.  Each ticket continues to have
-        its own state. Example: Some long time ago, with Mathieu, we
-        agreed that ticket #100 can go to *Sleeping*. Now Aurélie
-        reported the same problem again as #904. This means that we
-        should talk about it. And even before talking with her, I'd
-        like to have a look at the code in order to estimate whether
-        it is difficult or not, so I set the state of #904 to ToDo.
-
-        Wouldn't it be preferrable to replace the :attr:`duplicate_of
-        field by a :class:`LinkType
-        <lino_noi.lib.tickets.choicelists.LinkTypes>` called
-        "Duplicated/Duplicated by"?  No. We had this before and
-        preferred the field, because a field is at least one click
-        less, and because we *want* users to define a clear hiearchy
-        with a clear root ticket. You can have a group of tickets
-        which are all direct or indirect duplicates of this "root of
-        all other problems".
-
-    .. attribute:: deadline
-
-        Specify that the ticket must be done for a given date.
-
-        TODO: Triagers should have a table of tickets having this
-        field non-empty and are still in an active state.
-
-    .. attribute:: priority
-
-        How urgent this ticket is. This should be a value between 0
-        and 100.
-
-    .. attribute:: rating
-
-        How the author rates this ticket.
-
-    """
-
     quick_search_fields = "summary description"
 
     workflow_state_field = 'state'
@@ -485,9 +350,6 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         related_name="reported_tickets")
     state = TicketStates.field(default=TicketStates.as_callable('new'))
     # rating = Ratings.field(blank=True)
-    waiting_for = models.CharField(
-        _("Waiting for"), max_length=200, blank=True)
-
     deadline = models.DateField(
         verbose_name=_("Deadline"),
         blank=True, null=True)
@@ -495,6 +357,8 @@ class Ticket(UserAuthored, mixins.CreatedModified,
     priority = models.SmallIntegerField(_("Priority"), default=100)
 
     # deprecated fields:
+    waiting_for = models.CharField(
+        _("Waiting for"), max_length=200, blank=True)
     feedback = models.BooleanField(
         _("Feedback"), default=False)
     standby = models.BooleanField(_("Standby"), default=False)
