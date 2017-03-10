@@ -115,8 +115,8 @@ class TestCase(TestCase):
         # self.assertEqual(msg.message_type)
         self.assertEqual(msg.seen, None)
         self.assertEqual(msg.user, aline)
-        expected = """Robin a commenté [ticket 1] (Save the world, après moi le déluge) """\
-                   """<a href="mailto:comments@site.com?subject=1:robin">Reply</a>: I don't agree."""
+        expected = """Robin a commenté [ticket 1] (Save the world, """\
+                   """après moi le déluge): I don't agree."""
         self.assertEqual(expected, msg.body)
         
         # manually set created timestamp so we can test on it later.
@@ -140,7 +140,7 @@ To: aline@example.com
 Subject: [Django] Robin a comment? #1 (Save the world, apr?s moi le d?luge)
 <body>
 (22/12/2016 19:45)
-Robin a comment? <a href="http://127.0.0.1:8000/api/tickets/Ticket/1" title="Save the world, apr&#232;s moi le d&#233;luge">#1</a> (Save the world, apr?s moi le d?luge) <a href="mailto:comments@site.com?subject=1:robin">Reply</a>: I don't agree.
+Robin a comment? <a href="http://127.0.0.1:8000/api/tickets/Ticket/1" title="Save the world, apr&#232;s moi le d&#233;luge">#1</a> (Save the world, apr?s moi le d?luge): I don't agree.
 </body>
 """        
         self.assertEquivalent(expected, out)
