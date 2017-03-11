@@ -9,8 +9,9 @@ class Site(Site):
     the_demo_date = datetime.date(2015, 5, 23)
 
     languages = "en de fr"
-    use_websockets = False
-
+    
+    # use_ipdict = True
+    # use_websockets = True
     # default_ui = 'lino_extjs6.extjs6'
 
     def setup_plugins(self):
