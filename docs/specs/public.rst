@@ -62,7 +62,7 @@ The home page:
 >>> soup = BeautifulSoup(res.content, 'lxml')
 >>> links = soup.find_all('a')
 >>> len(links)
-29
+25
 >>> print(links[0].get('href'))
 /?ul=de
 >>> print(links[1].get('href'))

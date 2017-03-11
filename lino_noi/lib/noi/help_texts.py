@@ -16,6 +16,12 @@ EndTicketSession."""),
     'lino_noi.lib.clocking.models.SessionType' : _("""The type of a Session."""),
     'lino_noi.lib.clocking.models.Session' : _("""A Session is when a user works during a given lapse of time on
 a given Ticket."""),
+    'lino_noi.lib.clocking.models.Session.start_date' : _("""The date when you started to work."""),
+    'lino_noi.lib.clocking.models.Session.start_time' : _("""The time (in hh:mm) when you started working on this
+session."""),
+    'lino_noi.lib.clocking.models.Session.end_date' : _("""Leave this field blank if it is the same date as start_date."""),
+    'lino_noi.lib.clocking.models.Session.end_time' : _("""The time (in hh:mm) when you stopped to work. This is empty
+as long as you are busy with this session."""),
     'lino_noi.lib.clocking.models.Session.break_time' : _("""The time (in hh:mm) to remove from the duration resulting
 from the difference between start_time and
 end_time."""),
