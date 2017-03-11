@@ -62,8 +62,26 @@ class Session(UserAuthored, Started, Ended):
         #3     10:23 10:28             0:05
 
 
+    .. attribute:: start_date
+
+        The date when you started to work.
+
     .. attribute:: start_time
+
+        The time (in `hh:mm`) when you started working on this
+        session.
+
+        This is your local time according to the time zone specified
+        in your preferences.
+
+    .. attribute:: end_date
+
+        Leave this field blank if it is the same date as start_date.
+
     .. attribute:: end_time
+
+        The time (in `hh:mm`) when you stopped to work. This is empty
+        as long as you are busy with this session.
 
     .. attribute:: break_time
     
