@@ -31,3 +31,18 @@ class StartTicketSessionViaVote(WorkerActionViaVote, StartTicketSession):
         return super(StartTicketSessionViaVote, self).get_action_permission(
             ar, obj.votable, state)
 
+class WorkerActionViaSession(WorkerAction):
+
+    def get_workables(self, ar):
+        for obj in ar.selected_rows:
+            yield obj.ticket
+
+
+class StartTicketSessionViaSession(WorkerActionViaSession, StartTicketSession):
+    """Start a session on the ticket this session is attached to"""
+
+
+    def get_action_permission(self, ar, obj, state):
+        return super(StartTicketSessionViaSession, self).get_action_permission(
+            ar, obj.ticket, state)
+
