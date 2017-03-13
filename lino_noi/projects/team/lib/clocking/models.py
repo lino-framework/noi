@@ -13,7 +13,7 @@ from lino.api import _
 from lino.mixins.periods import DatePeriod
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino_noi.lib.tickets.choicelists import TicketStates
-from .actions import StartTicketSessionViaVote, EndTicketSessionViaVote
+from .actions import StartTicketSessionViaVote, EndTicketSessionViaVote, StartTicketSessionViaSession
 
 
 dd.inject_field(
@@ -27,6 +27,11 @@ if dd.is_installed('votes'):
     dd.inject_action(
         "votes.Vote",
         end_session=EndTicketSessionViaVote())
+
+dd.inject_action(
+        "clocking.Session",
+        start_session=StartTicketSessionViaSession()
+        )
 
 
 @dd.python_2_unicode_compatible
