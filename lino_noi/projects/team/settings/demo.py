@@ -48,3 +48,4 @@ DEBUG = True
 # the following line should not be active in a checked-in version
 #~ DATABASES['default']['NAME'] = ':memory:'
 
+SITE.update_settings(ALLOWED_HOSTS=["192.168.0.26","127.0.0.1"])
