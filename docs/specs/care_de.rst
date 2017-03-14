@@ -44,7 +44,7 @@ Das Hauptmenü
   - System : Site-Parameter, Hilfetexte, Benutzer
   - Orte : Länder, Orte
   - Kontakte : Themen, Themengruppen, Organisationsarten, Funktionen
-  - Büro : Auszugsarten
+  - Büro : Auszugsarten, Kommentar-Arten
   - Bitten : Projekte, Projekte (Hierarchie), Project Types, Ticket types, Umfelder
   - Fähigkeiten : Fähigkeiten (Hierarchie), Fähigkeiten (Alle), Fähigkeitsarten
 - Explorer :
