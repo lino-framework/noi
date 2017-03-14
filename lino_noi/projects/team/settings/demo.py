@@ -25,9 +25,14 @@ class Site(Site):
         """
         super(Site, self).setup_plugins()
         self.plugins.excerpts.configure(responsible_user='jean')
+        if False:
+            self.plugins.mailbox.add_mailbox(
+                'mbox', "Luc's aaa mailbox", 
+                '/home/luc/.thunderbird/luc/Mail/Local Folders/aaa')
 
 
 SITE = Site(globals())
+
 # SITE.plugins.extjs6.configure(theme_name='theme-classic')
 # SITE.plugins.extjs6.configure(theme_name='theme-classic-sandbox')
 # SITE.plugins.extjs6.configure(theme_name='theme-aria')
@@ -48,4 +53,4 @@ DEBUG = True
 # the following line should not be active in a checked-in version
 #~ DATABASES['default']['NAME'] = ':memory:'
 
-SITE.update_settings(ALLOWED_HOSTS=["192.168.0.26","127.0.0.1"])
+# SITE.update_settings(ALLOWED_HOSTS=["192.168.0.26","127.0.0.1"])

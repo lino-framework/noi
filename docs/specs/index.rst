@@ -32,6 +32,7 @@ The default variant ("team")
    public
    bs3
    export_excel
+   mailbox
    
 
 The Lino Care variant
