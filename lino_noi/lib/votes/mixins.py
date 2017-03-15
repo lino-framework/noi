@@ -23,6 +23,9 @@ class Votable(ChangeObservable):
     create_vote = CreateVote()
     edit_vote = VotableEditVote()
 
+    def get_project_for_vote(self, vote):
+        return None
+    
     def get_vote_raters(self):
         """Yield or return a list of the users who are allowed to rate the
         votes on this votable.

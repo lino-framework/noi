@@ -107,6 +107,7 @@ class Site(Site):
 
     def setup_quicklinks(self, user, tb):
         super(Site, self).setup_quicklinks(user, tb)
+        tb.add_action(self.modules.tickets.MyCompetences)
         tb.add_action(self.modules.tickets.MyTickets)
         tb.add_action(self.modules.tickets.TicketsToTriage)
         tb.add_action(self.modules.tickets.TicketsToTalk)

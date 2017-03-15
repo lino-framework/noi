@@ -73,6 +73,11 @@ def objects():
     yield create_user("dora")
     yield create_user("eric", UserTypes.connector)
 
+    prj = rt.models.tickets.Project(name=_("General"))
+    yield prj
+    for u in rt.models.users.User.objects.all():
+        yield rt.models.tickets.Competence(project=prj, user=u)
+
     yield S(_("At home"))  # "Bei mir zu Hause"
     yield S("AZ Ephata")
     yield S("Eupen")

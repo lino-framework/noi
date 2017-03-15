@@ -92,6 +92,7 @@ class OtherUsers(Users):
     about_me
     """, window_size=(60, 15))
 
+    
 # def site_setup(site):
 #     site.modules.users.Users.set_detail_layout(UserDetail())
 

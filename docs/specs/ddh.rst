@@ -55,6 +55,10 @@ Lino Noi:
   - PROTECT : contacts.Partner.city, contacts.Partner.region, countries.Place.parent
 - deploy.Milestone :
   - PROTECT : deploy.Deployment.milestone, tickets.Ticket.fixed_for, tickets.Ticket.reported_for
+- django_mailbox.Mailbox :
+  - PROTECT : django_mailbox.Message.mailbox
+- django_mailbox.Message :
+  - PROTECT : django_mailbox.Message.in_reply_to, django_mailbox.MessageAttachment.message, mailbox.MessagePointer.message
 - excerpts.Excerpt :
   - SET_NULL : clocking.ServiceReport.printed_by, deploy.Milestone.printed_by
 - excerpts.ExcerptType :
@@ -68,14 +72,14 @@ Lino Noi:
 - lists.ListType :
   - PROTECT : lists.List.list_type
 - tickets.Project :
-  - PROTECT : excerpts.Excerpt.project, tickets.Project.parent, tickets.Ticket.project
+  - PROTECT : excerpts.Excerpt.project, tickets.Competence.project, tickets.Project.parent, tickets.Ticket.project, votes.Vote.project
 - tickets.ProjectType :
   - PROTECT : tickets.Project.type
 - tickets.Site :
   - PROTECT : deploy.Milestone.site, tickets.Ticket.site
 - tickets.Ticket :
   - CASCADE : faculties.Demand.demander
-  - PROTECT : clocking.Session.ticket, comments.Comment.owner, deploy.Deployment.ticket, tickets.Link.child, tickets.Link.parent, tickets.Ticket.duplicate_of, votes.Vote.votable
+  - PROTECT : clocking.Session.ticket, comments.Comment.owner, deploy.Deployment.ticket, mailbox.MessagePointer.ticket, tickets.Link.child, tickets.Link.parent, tickets.Ticket.duplicate_of, votes.Vote.votable
 - tickets.TicketType :
   - PROTECT : tickets.Ticket.ticket_type
 - topics.Topic :
@@ -87,5 +91,6 @@ Lino Noi:
   - PROTECT : uploads.Upload.type
 - users.User :
   - CASCADE : faculties.Competence.user
-  - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, dashboard.Widget.user, excerpts.Excerpt.user, notify.Message.user, tickets.Project.assign_to, tickets.Ticket.end_user, tickets.Ticket.reporter, tickets.Ticket.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user, votes.Vote.user
+  - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, dashboard.Widget.user, excerpts.Excerpt.user, notify.Message.user, tickets.Competence.user, tickets.Project.assign_to, tickets.Ticket.end_user, tickets.Ticket.reporter, tickets.Ticket.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user, votes.Vote.user
 <BLANKLINE>
+

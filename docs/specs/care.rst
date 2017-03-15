@@ -342,7 +342,7 @@ The main menu
 - Contacts : Persons, Organizations, Partners
 - Votes : My candidatures, My tasks, My watchlist, My votes
 - Office : My Excerpts, My Comments, My Notification messages
-- Pleas : My Pleas, Where I can help, Active pleas, All pleas, Unassigned pleas, Active projects
+- Pleas : My Pleas, Where I can help, Active pleas, All pleas, Unassigned pleas, My Competences
 - Reports :
   - System : Broken GFKs
 - Configure :
@@ -357,7 +357,7 @@ The main menu
   - Contacts : Interests, Contact Persons
   - Votes : All votes, Vote states
   - Office : Excerpts, Comments
-  - Pleas : Dependencies, Ticket states
+  - Pleas : Dependencies, Ticket states, Competences
   - Skills : Skill offers, Skill demands
 - Site : About
 
@@ -368,7 +368,7 @@ The main menu
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Votes : My candidatures, My tasks, My watchlist, My votes
 - Office : My Comments, My Notification messages
-- Pleas : My Pleas, Where I can help
+- Pleas : My Pleas, Where I can help, My Competences
 - Site : About
 
 Lists of pleas

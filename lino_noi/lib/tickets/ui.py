@@ -57,12 +57,12 @@ class TicketTypes(dd.Table):
 
 
 class ProjectDetail(dd.DetailLayout):
-    main = "general more"
+    main = "general votes.VotesByProject more"
 
     general = dd.Panel("""
     ref name 
     description 
-    TicketsByProject
+    TicketsByProject CompetencesByProject
     """, label=_("General"))
 
     more = dd.Panel("""
@@ -117,23 +117,23 @@ class AllProjects(Projects):
     required_roles = dd.login_required(TicketsStaff)
 
 
-class ActiveProjects(Projects):
-    """Show a list of active projects.
+# class ActiveProjects(Projects):
+#     """Show a list of active projects.
 
-    For an example, see :ref:`noi.specs.projects`.
+#     For an example, see :ref:`noi.specs.projects`.
 
-    """
-    label = _("Active projects")
-    column_names = 'ref name start_date activity_overview *'
-    required_roles = dd.login_required(Triager)
+#     """
+#     label = _("Active projects")
+#     column_names = 'ref name start_date activity_overview *'
+#     required_roles = dd.login_required(Triager)
 
-    @classmethod
-    def param_defaults(self, ar, **kw):
-        kw = super(ActiveProjects, self).param_defaults(ar, **kw)
-        kw.update(start_date=dd.demo_date())
-        kw.update(end_date=dd.demo_date())
-        kw.update(observed_event=ProjectEvents.active)
-        return kw
+#     @classmethod
+#     def param_defaults(self, ar, **kw):
+#         kw = super(ActiveProjects, self).param_defaults(ar, **kw)
+#         kw.update(start_date=dd.demo_date())
+#         kw.update(end_date=dd.demo_date())
+#         kw.update(observed_event=ProjectEvents.active)
+#         return kw
 
 
 class ProjectsByParent(Projects):
@@ -159,6 +159,67 @@ class ProjectsByType(Projects):
 class ProjectsByCompany(Projects):
     master_key = 'company'
     column_names = "ref name *"
+
+
+class Competences(dd.Table):
+    required_roles = dd.login_required(TicketsUser)
+    model = 'tickets.Competence'
+    order_by = ['priority', 'project__ref']
+
+    detail_layout = dd.DetailLayout("""
+    project
+    user priority 
+    """, window_size=(40, 'auto'))
+
+class AllCompetences(Competences):
+    required_roles = dd.login_required(TicketsStaff)
+    
+class MyCompetences(My, Competences):
+    order_by = ["priority"]
+    column_names = 'priority project tickets_overview *'
+
+class CompetencesByProject(Competences):
+    master_key = 'project'
+    order_by = ["user"]
+    column_names = 'user workflow_buttons:30 *'
+
+    
+# class Wishes(dd.Table):
+#     model = 'tickets.Wish'
+#     required_roles = dd.login_required(TicketsUser)
+
+#     detail_layout = dd.DetailLayout("""
+#     user 
+#     ticket 
+#     project
+#     priority 
+#     """, window_size=(40, 'auto'))
+
+# class AllWishes(Wishes):
+#     required_roles = dd.login_required(TicketsStaff)
+    
+
+# class MyWishes(My, Wishes):
+#     order_by = ["priority"]
+#     column_names = 'priority ticket project workflow_buttons:30 *'
+#     # @classmethod
+#     # def setup_request(self, ar):
+#     #     u = ar.get_user()
+#     #     if u.person:
+#     #         qs = rt.models.contacts.Role.objects.filter(person=u.person)
+#     #         if qs.count() == 1:
+#     #             ar.master_instance = qs[0].company
+#     #     super(MyWishes, self).setup_request(ar)
+    
+
+    
+
+# class WishesByProject(Wishes):
+#     master_key = 'project'
+#     order_by = ["priority"]
+#     column_names = 'priority ticket workflow_buttons:30 *'
+
+    
 
 
 class Links(dd.Table):
@@ -225,8 +286,8 @@ class LinksByTicket(Links):
         tbt = dict()  # tickets by lnktype
         for lnktype, other in links:
             lst = tbt.setdefault(lnktype, [])
-            txt = "#%d" % other.id
-            lst.append(ar.obj2html(other, txt, title=other.summary))
+            # txt = "#%d" % other.id
+            lst.append(other.obj2href(ar))
 
         items = []
         for lnktype, lst in tbt.items():
@@ -447,10 +508,12 @@ class Tickets(dd.Table):
         #     qs = qs.filter(closed=True)
 
         if pv.assigned_to:
-            qs = qs.filter(vote__user=pv.assigned_to).distinct()
+            qs = qs.filter(
+                votes_by_ticket__user=pv.assigned_to).distinct()
             
         if pv.not_assigned_to:
-            qs = qs.exclude(vote__user=pv.not_assigned_to).distinct()
+            qs = qs.exclude(
+                votes_by_ticket__user=pv.not_assigned_to).distinct()
             
         if pv.show_assigned == dd.YesNo.no:
             qs = qs.filter(vote__isnull=False).distinct()
@@ -565,8 +628,7 @@ class UnassignedTickets(Tickets):
 class TicketsByProject(Tickets):
     master_key = 'project'
     required_roles = dd.login_required(Triager)
-    column_names = ("overview:50 topic:10 user:10 state "
-                    "planned_time *")
+    column_names = ("overview:50 workflow_buttons *")
 
 
 class TicketsByEndUser(Tickets):
@@ -583,7 +645,7 @@ class TicketsByEndUser(Tickets):
         sar = self.request_from(ar, master_instance=obj)
 
         chunks = []
-        items = [ar.obj2html(o) for o in sar]
+        items = [o.obj2href(ar) for o in sar]
         if len(items) > 0:
             chunks += join_elems(items, ", ")
             
@@ -704,7 +766,6 @@ class ActiveTickets(Tickets):
         # kw.update(show_standby=dd.YesNo.no)
         return kw
 
-
 class MyTickets(My, Tickets):
     """Show all active tickets reported by me."""
     required_roles = dd.login_required(TicketsUser)
@@ -758,7 +819,7 @@ class TicketsByReporter(Tickets):
     master_key = 'user'
     column_names = "id summary:60 workflow_buttons:20 *"
 
-
+    
 class Sites(dd.Table):
     # required_roles = set()  # also for anonymous
     required_roles = dd.login_required(TicketsUser)

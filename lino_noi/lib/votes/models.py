@@ -74,12 +74,17 @@ class Vote(UserAuthored, Created):
         unique_together = ('user', 'votable')
 
     state = VoteStates.field(default=VoteStates.as_callable('watching'))
-    votable = dd.ForeignKey(dd.plugins.votes.votable_model)
+    votable = dd.ForeignKey(
+        dd.plugins.votes.votable_model,
+        related_name="votes_by_ticket")
     priority = models.SmallIntegerField(_("Priority"), default=0)
     rating = Ratings.field(blank=True)
     # remark = dd.RichTextField(_("Remark"), blank=True)
     nickname = models.CharField(_("Nickname"), max_length=50, blank=True)
     mail_mode = MailModes.field(blank=True)
+    project = dd.ForeignKey(
+        'tickets.Project',
+        related_name="votes_by_project")
 
     # @dd.action(_("Cancel"))
     # def cancel_vote(self):
@@ -93,7 +98,19 @@ class Vote(UserAuthored, Created):
     workflow_state_field = 'state'
     
     edit_vote = EditVote()
-    
+
+    def full_clean(self):
+        if not self.project_id:
+            self.project = self.votable.get_project_for_vote(self)
+            super(Vote, self).full_clean()
+
+    @dd.chooser()
+    def project_choices(cls, user):
+        Project = rt.models.tickets.Project
+        if not user:
+            return Project.objects.none()
+        return Project.objects.filter(duties_by_project__user=user)
+
     def __str__(self):
         # return _("{0.user} {0.state} on {0.votable}").format(self)
         if self.votable_id:
@@ -216,6 +233,7 @@ class Votes(dd.Table):
     
     detail_layout = dd.DetailLayout("""
     user votable 
+    project
     mail_mode 
     priority nickname
     state
@@ -308,6 +326,19 @@ class AllVotes(Votes):
     column_names = "id votable user priority nickname rating mail_mode workflow_buttons *"
 
 
+class VotesByProject(Votes):
+    """Show the votes about this project.
+
+    """
+    label = _("Votes")
+    master_key = 'project'
+    column_names = 'votable user workflow_buttons *'
+    slave_grid_format = 'summary'
+    stay_in_grid = True
+
+    
+
+
 class MyVotes(My, Votes):
     """Show your votes in all states"""
     label = _("My votes")
@@ -315,10 +346,11 @@ class MyVotes(My, Votes):
     # hide_top_toolbar = True
     
     detail_layout = dd.DetailLayout("""
+    user project
     workflow_buttons 
     mail_mode
     priority nickname
-    """, window_size=(40, 'auto'))
+    """, window_size=(40, 'auto'), hidden_elements='user')
     
     
     
@@ -366,6 +398,7 @@ class VotesByVotable(Votes):
     stay_in_grid = True
 
     detail_layout = dd.DetailLayout("""
+    project
     mail_mode 
     # priority nickname
     workflow_buttons 

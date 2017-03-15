@@ -72,10 +72,11 @@ class TestCase(TestCase):
         ContentType = rt.modules.contenttypes.ContentType
         Comment = rt.models.comments.Comment
         Ticket = rt.modules.tickets.Ticket
+        Project = rt.modules.tickets.Project
         Vote = rt.modules.votes.Vote
         Message = rt.modules.notify.Message
         User = settings.SITE.user_model
-
+        create(Project, name="Project")
         robin = create(
             User, username='robin',
             first_name="Robin",
