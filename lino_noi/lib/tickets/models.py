@@ -412,6 +412,8 @@ class Ticket(UserAuthored, mixins.CreatedModified,
                 self.private = False
 
     def get_project_for_vote(self, vote):
+        if self.project:
+            return self.project
         qs = rt.models.tickets.Competence.objects.filter(user=vote.user)
         qs = qs.order_by('priority')
         if qs.count() > 0:

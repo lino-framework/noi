@@ -102,7 +102,7 @@ class Vote(UserAuthored, Created):
     def full_clean(self):
         if not self.project_id:
             self.project = self.votable.get_project_for_vote(self)
-            super(Vote, self).full_clean()
+        super(Vote, self).full_clean()
 
     @dd.chooser()
     def project_choices(cls, user):
