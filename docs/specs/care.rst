@@ -349,7 +349,7 @@ The main menu
   - System : Site Parameters, Help Texts, Users
   - Places : Countries, Places
   - Contacts : Topics, Topic groups, Organization types, Functions
-  - Office : Excerpt Types
+  - Office : Excerpt Types, Comment Types
   - Pleas : Projects, Projects (tree), Project Types, Ticket types, Sites
   - Skills : Skills (tree), Skills (all), Skill types
 - Explorer :

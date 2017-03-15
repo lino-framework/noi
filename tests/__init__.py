@@ -86,6 +86,9 @@ class SpecsTests(BaseTestCase):
     def test_general(self):
         self.run_simple_doctests('docs/specs/general.rst')
 
+    def test_mailbox(self):
+        self.run_simple_doctests('docs/specs/mailbox.rst')
+
     def test_as_pdf(self):
         self.run_simple_doctests('docs/specs/as_pdf.rst')
 
