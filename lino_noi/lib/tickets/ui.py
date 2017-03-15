@@ -166,10 +166,10 @@ class Competences(dd.Table):
     model = 'tickets.Competence'
     order_by = ['priority', 'project__ref']
 
-    detail_layout = dd.DetailLayout("""
-    project
-    user priority 
-    """, window_size=(40, 'auto'))
+    # detail_layout = dd.DetailLayout("""
+    # project
+    # user priority 
+    # """, window_size=(40, 'auto'))
 
 class AllCompetences(Competences):
     required_roles = dd.login_required(TicketsStaff)
