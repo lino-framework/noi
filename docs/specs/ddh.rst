@@ -72,7 +72,7 @@ Lino Noi:
 - lists.ListType :
   - PROTECT : lists.List.list_type
 - tickets.Project :
-  - PROTECT : excerpts.Excerpt.project, tickets.Competence.project, tickets.Project.parent, tickets.Ticket.project, votes.Vote.project
+  - PROTECT : excerpts.Excerpt.project, tickets.Competence.project, tickets.Project.parent, tickets.Ticket.project
 - tickets.ProjectType :
   - PROTECT : tickets.Project.type
 - tickets.Site :

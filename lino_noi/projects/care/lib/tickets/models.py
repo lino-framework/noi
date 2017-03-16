@@ -8,23 +8,23 @@ from lino.api import _
 Ticket.hide_elements('closed')
 
 
-class Ticket(Ticket):
-    class Meta(Ticket.Meta):
-        app_label = 'tickets'
-        verbose_name = _("Plea")
-        verbose_name_plural = _("Pleas")
-        abstract = dd.is_abstract_model(__name__, 'Ticket')
+# class Ticket(Ticket):
+#     class Meta(Ticket.Meta):
+#         app_label = 'tickets'
+#         verbose_name = _("Plea")
+#         verbose_name_plural = _("Pleas")
+#         abstract = dd.is_abstract_model(__name__, 'Ticket')
 
-ActiveTickets._label = _("Active pleas")
-UnassignedTickets._label = _("Unassigned pleas")
-PublicTickets._label = _("Public pleas")
-TicketsToTriage._label = _("Pleas to triage")
-TicketsToTalk._label = _("Pleas to talk")
-# TicketsToDo._label = _("Pleas to to")
-TicketsFixed._label = _("Fixed pleas")
-TicketsReported._label = _("Introduced pleas")
-TicketsByReporter._label = _("Introduced pleas")
-AllTickets._label = _("All pleas")
+# ActiveTickets._label = _("Active pleas")
+# UnassignedTickets._label = _("Unassigned pleas")
+# PublicTickets._label = _("Public pleas")
+# TicketsToTriage._label = _("Pleas to triage")
+# TicketsToTalk._label = _("Pleas to talk")
+# # TicketsToDo._label = _("Pleas to to")
+# TicketsFixed._label = _("Fixed pleas")
+# TicketsReported._label = _("Introduced pleas")
+# TicketsByReporter._label = _("Introduced pleas")
+# AllTickets._label = _("All pleas")
 
 dd.update_field(
     'tickets.Ticket', 'upgrade_notes', verbose_name=_("Solution"))
@@ -36,7 +36,7 @@ class TicketDetail(TicketDetail):
     main = "general history_tab more"
 
     general = dd.Panel("""
-    general1:60 votes.VotesByVotable:20
+    general1:60 votes.VotesByVotable:20 uploads.UploadsByController
     description:30 comments.CommentsByRFC:30 faculties.DemandsByDemander #clocking.SessionsByTicket:20
     """, label=_("General"))
 
