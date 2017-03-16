@@ -163,7 +163,7 @@ class ProjectsByCompany(Projects):
 class Competences(dd.Table):
     required_roles = dd.login_required(TicketsUser)
     model = 'tickets.Competence'
-    order_by = ['priority', 'project__ref']
+    order_by = ['-priority', 'project__ref']
 
     detail_layout = """
     project user priority 
@@ -180,7 +180,6 @@ class AllCompetences(Competences):
     required_roles = dd.login_required(TicketsStaff)
     
 class MyCompetences(My, Competences):
-    order_by = ["priority"]
     column_names = 'priority project remark *'
     # column_names = 'priority project tickets_overview *'
     params_panel_hidden = True
@@ -193,7 +192,7 @@ class MyCompetences(My, Competences):
 
 class CompetencesByProject(Competences):
     master_key = 'project'
-    order_by = ["user"]
+    order_by = ["user__username"]
     column_names = 'user workflow_buttons:30 *'
     
     insert_layout = """
