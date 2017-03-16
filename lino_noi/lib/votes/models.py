@@ -71,7 +71,7 @@ class Vote(UserAuthored, Created):
         verbose_name = _("Vote")
         verbose_name_plural = _("Votes")
         abstract = dd.is_abstract_model(__name__, 'Vote')
-        unique_together = ('user', 'votable')
+        unique_together = ('user', 'votable')  # , 'project')
 
     state = VoteStates.field(default=VoteStates.as_callable('watching'))
     votable = dd.ForeignKey(
@@ -82,9 +82,9 @@ class Vote(UserAuthored, Created):
     # remark = dd.RichTextField(_("Remark"), blank=True)
     nickname = models.CharField(_("Nickname"), max_length=50, blank=True)
     mail_mode = MailModes.field(blank=True)
-    project = dd.ForeignKey(
-        'tickets.Project',
-        related_name="votes_by_project")
+    # project = dd.ForeignKey(
+    #     'tickets.Project',
+    #     related_name="votes_by_project")
 
     # @dd.action(_("Cancel"))
     # def cancel_vote(self):
@@ -99,17 +99,17 @@ class Vote(UserAuthored, Created):
     
     edit_vote = EditVote()
 
-    def full_clean(self):
-        if not self.project_id:
-            self.project = self.votable.get_project_for_vote(self)
-        super(Vote, self).full_clean()
+    # def full_clean(self):
+    #     if not self.project_id:
+    #         self.project = self.votable.get_project_for_vote(self)
+    #     super(Vote, self).full_clean()
 
-    @dd.chooser()
-    def project_choices(cls, user):
-        Project = rt.models.tickets.Project
-        if not user:
-            return Project.objects.none()
-        return Project.objects.filter(duties_by_project__user=user)
+    # @dd.chooser()
+    # def project_choices(cls, user):
+    #     Project = rt.models.tickets.Project
+    #     if not user:
+    #         return Project.objects.none()
+    #     return Project.objects.filter(duties_by_project__user=user)
 
     def __str__(self):
         # return _("{0.user} {0.state} on {0.votable}").format(self)
@@ -233,7 +233,7 @@ class Votes(dd.Table):
     
     detail_layout = dd.DetailLayout("""
     user votable 
-    project
+    #project
     mail_mode 
     priority nickname
     state
@@ -326,15 +326,15 @@ class AllVotes(Votes):
     column_names = "id votable user priority nickname rating mail_mode workflow_buttons *"
 
 
-class VotesByProject(Votes):
-    """Show the votes about this project.
+# class VotesByProject(Votes):
+#     """Show the votes about this project.
 
-    """
-    label = _("Votes")
-    master_key = 'project'
-    column_names = 'votable user workflow_buttons *'
-    slave_grid_format = 'summary'
-    stay_in_grid = True
+#     """
+#     label = _("Votes")
+#     master_key = 'project'
+#     column_names = 'votable user workflow_buttons *'
+#     slave_grid_format = 'summary'
+#     stay_in_grid = True
 
     
 
@@ -346,7 +346,7 @@ class MyVotes(My, Votes):
     # hide_top_toolbar = True
     
     detail_layout = dd.DetailLayout("""
-    user project
+    user #project
     workflow_buttons 
     mail_mode
     priority nickname
@@ -398,7 +398,7 @@ class VotesByVotable(Votes):
     stay_in_grid = True
 
     detail_layout = dd.DetailLayout("""
-    project
+    #project
     mail_mode 
     # priority nickname
     workflow_buttons 

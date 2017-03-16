@@ -155,7 +155,7 @@ class Site(dd.Model):
     def __str__(self):
         return self.name
     
-#@dd.python_2_unicode_compatible
+@dd.python_2_unicode_compatible
 class Competence(UserAuthored, Prioritized):
 
     class Meta:
@@ -168,25 +168,27 @@ class Competence(UserAuthored, Prioritized):
         'tickets.Project', blank=True, null=True,
         related_name="duties_by_project")
     remark = models.CharField(_("Remark"), max_length=200, blank=True)
-    description = dd.RichTextField(_("Description"), blank=True)
+    description = dd.DummyField()
+    # description = dd.RichTextField(_("Description"), blank=True)
 
-    # def __str__(self):
-    #     return pgettext("{}/{}").format(self.user, self.project)
+    def __str__(self):
+        return "{}/{}".format(
+            self.user.username, self.project.ref)
 
     @dd.displayfield(_("Tickets overview"))
     def tickets_overview(self, ar):
         if ar is None:
             return ''
         me = ar.get_user()
-        # Ticket = rt.models.tickets.Ticket
+        Ticket = rt.models.tickets.Ticket
         Vote = rt.models.votes.Vote
         elems = []
 
         tickets_by_state = OrderedDict()
         for st in TicketStates.objects():
             tickets_by_state[st] = set()
-        for vote in Vote.objects.filter(project=self.project):
-            t = vote.votable
+        for t in Ticket.objects.filter(project=self.project):
+            # t = vote.votable
             tickets_by_state[t.state].add(t)
             
         items = []
@@ -200,28 +202,39 @@ class Competence(UserAuthored, Prioritized):
         elems.append(E.ul(*items))
         return E.p(*elems)
 
-    
-#@dd.python_2_unicode_compatible
-# class Wish(UserAuthored, Prioritized):
 
-#     class Meta:
-#         app_label = 'tickets'
-#         verbose_name = pgettext("Ticketing", "Wish")
-#         verbose_name_plural = pgettext("Ticketing", "Wishes")
+if False:
+    # @dd.python_2_unicode_compatible
+    class Wish(Prioritized):
 
-#     ticket = dd.ForeignKey(
-#         'tickets.Ticket',
-#         related_name='wishes_by_ticket')
-#     project = dd.ForeignKey(
-#         'tickets.Project',
-#         related_name="wishes_by_project")
-#     remark = models.CharField(_("Remark"), max_length=200, blank=True)
-#     description = dd.RichTextField(_("Description"), blank=True)
+        class Meta:
+            app_label = 'tickets'
+            verbose_name = pgettext("Ticketing", "Wish")
+            verbose_name_plural = pgettext("Ticketing", "Wishes")
 
-    # def __str__(self):
-    #     return pgettext("{} for {}").format(self.project, self.ticket)
+        ticket = dd.ForeignKey(
+            'tickets.Ticket', related_name='wishes_by_ticket')
+        project = dd.ForeignKey(
+            'tickets.Project', related_name="wishes_by_project")
+        remark = models.CharField(_("Remark"), max_length=200, blank=True)
+        description = dd.RichTextField(_("Description"), blank=True)
 
-    
+        # def __str__(self):
+        #     return pgettext("{} for {}").format(self.project, self.ticket)
+
+
+        # def full_clean(self):
+        #     if not self.project_id:
+        #         self.project = self.votable.get_project_for_vote(self)
+        #     super(Vote, self).full_clean()
+
+        # @dd.chooser()
+        # def project_choices(cls, user):
+        #     Project = rt.models.tickets.Project
+        #     if not user:
+        #         return Project.objects.none()
+        #     return Project.objects.filter(duties_by_project__user=user)
+
     
 # class CloseTicket(dd.Action):
 #     #label = _("Close ticket")
@@ -345,7 +358,8 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         blank=True,
         help_text=_("Short summary of the problem."))
     description = dd.RichTextField(_("Description"), blank=True)
-    upgrade_notes = dd.RichTextField(_("Upgrade notes"), blank=True)
+    upgrade_notes = dd.RichTextField(
+        _("Upgrade notes"), blank=True, format='plain')
     ticket_type = dd.ForeignKey('tickets.TicketType', blank=True, null=True)
     duplicate_of = models.ForeignKey(
         'self', blank=True, null=True, verbose_name=_("Duplicate of"))
@@ -411,14 +425,14 @@ class Ticket(UserAuthored, mixins.CreatedModified,
             if not self.project.private:
                 self.private = False
 
-    def get_project_for_vote(self, vote):
-        if self.project:
-            return self.project
-        qs = rt.models.tickets.Competence.objects.filter(user=vote.user)
-        qs = qs.order_by('priority')
-        if qs.count() > 0:
-            return qs[0].project
-        return rt.models.tickets.Project.objects.all()[0]
+    # def get_project_for_vote(self, vote):
+    #     if self.project:
+    #         return self.project
+    #     qs = rt.models.tickets.Competence.objects.filter(user=vote.user)
+    #     qs = qs.order_by('priority')
+    #     if qs.count() > 0:
+    #         return qs[0].project
+    #     return rt.models.tickets.Project.objects.all()[0]
             
     def obj2href(self, ar, **kwargs):
         """Return a tuple (text, attributes) to use when rendering an `<a

@@ -64,6 +64,7 @@ class Site(Site):
 
         yield 'lino.modlib.changes'
         yield 'lino.modlib.notify'
+        yield 'lino.modlib.uploads'
         yield 'lino.modlib.export_excel'
         yield 'lino.modlib.smtpd'
         yield 'lino.modlib.weasyprint'

@@ -57,12 +57,11 @@ class TicketTypes(dd.Table):
 
 
 class ProjectDetail(dd.DetailLayout):
-    main = "general votes.VotesByProject more"
+    main = "general TicketsByProject more"
 
     general = dd.Panel("""
     ref name 
-    description 
-    TicketsByProject CompetencesByProject
+    description CompetencesByProject
     """, label=_("General"))
 
     more = dd.Panel("""
@@ -166,9 +165,15 @@ class Competences(dd.Table):
     model = 'tickets.Competence'
     order_by = ['priority', 'project__ref']
 
+    detail_layout = """
+    project user priority 
+    remark
+    TicketsByCompetence
+    """
+
     # detail_layout = dd.DetailLayout("""
-    # project
-    # user priority 
+    # project user priority 
+    # TicketsByCompetence
     # """, window_size=(40, 'auto'))
 
 class AllCompetences(Competences):
@@ -176,28 +181,80 @@ class AllCompetences(Competences):
     
 class MyCompetences(My, Competences):
     order_by = ["priority"]
-    column_names = 'priority project tickets_overview *'
+    column_names = 'priority project remark *'
+    # column_names = 'priority project tickets_overview *'
+    params_panel_hidden = True
+    
+    insert_layout = """
+    project 
+    priority 
+    remark
+    """
 
 class CompetencesByProject(Competences):
     master_key = 'project'
     order_by = ["user"]
     column_names = 'user workflow_buttons:30 *'
-
     
-# class Wishes(dd.Table):
-#     model = 'tickets.Wish'
-#     required_roles = dd.login_required(TicketsUser)
+    insert_layout = """
+    user
+    priority 
+    remark
+    """
 
-#     detail_layout = dd.DetailLayout("""
-#     user 
-#     ticket 
-#     project
-#     priority 
-#     """, window_size=(40, 'auto'))
-
-# class AllWishes(Wishes):
-#     required_roles = dd.login_required(TicketsStaff)
+if False:
     
+    class Wishes(dd.Table):
+        model = 'tickets.Wish'
+        required_roles = dd.login_required(TicketsUser)
+
+        insert_layout = """
+        ticket 
+        project
+        priority 
+        """
+
+    class AllWishes(Wishes):
+        required_roles = dd.login_required(TicketsStaff)
+
+
+    class WishesByProject(Wishes):
+        master_key = 'project'
+        order_by = ["priority"]
+        column_names = 'priority ticket remark *'
+        insert_layout = None
+
+
+
+    class WishesByTicket(Wishes):
+        master_key = 'ticket'
+        order_by = ["project__ref"]
+        column_names = 'project *'
+        insert_layout = """
+        project
+        remark
+        """
+
+        slave_grid_format = "summary"
+
+        @classmethod
+        def get_slave_summary(self, obj, ar):
+            """The summary view for this table.
+
+            Implements :meth:`lino.core.actors.Actor.get_slave_summary`.
+
+            """
+            sar = self.request_from(ar, master_instance=obj)
+            chunks = []
+            items = [o.obj2href(ar) for o in sar]
+            if len(items) > 0:
+                chunks += join_elems(items, ", ")
+            sar = self.insert_action.request_from(sar)
+            if sar.get_permission():
+                chunks.append(sar.ar2button())
+            return E.p(*chunks)
+
+
 
 # class MyWishes(My, Wishes):
 #     order_by = ["priority"]
@@ -211,13 +268,6 @@ class CompetencesByProject(Competences):
 #     #             ar.master_instance = qs[0].company
 #     #     super(MyWishes, self).setup_request(ar)
     
-
-    
-
-# class WishesByProject(Wishes):
-#     master_key = 'project'
-#     order_by = ["priority"]
-#     column_names = 'priority ticket workflow_buttons:30 *'
 
     
 
@@ -307,27 +357,28 @@ class LinksByTicket(Links):
             btn = sar.ar2button(obj)
             elems += [E.br(), btn]
 
-        sar = self.insert_action.request_from(ar)
-        if ar.renderer.is_interactive and sar.get_permission():
-            actions = []
-            for lt in LinkTypes.objects():
-                actions.append(E.br())
-                sar.known_values.update(type=lt, parent=obj)
-                sar.known_values.pop('child', None)
-                btn = sar.ar2button(None, lt.as_parent(), icon_name=None)
-                if not lt.symmetric:
-                    # actions.append('/')
-                    sar.known_values.update(type=lt, child=obj)
-                    sar.known_values.pop('parent', None)
-                    btn2 = sar.ar2button(None, lt.as_child(), icon_name=None)
-                    # actions.append(btn)
-                    btn = E.span(btn, '/', btn2)
-                actions.append(btn)
-                # actions.append(' ')
-            # actions = join_elems(actions, E.br)
+        if self.insert_action is not None and ar.renderer.is_interactive:
+            sar = self.insert_action.request_from(ar)
+            if sar.get_permission():
+                actions = []
+                for lt in LinkTypes.objects():
+                    actions.append(E.br())
+                    sar.known_values.update(type=lt, parent=obj)
+                    sar.known_values.pop('child', None)
+                    btn = sar.ar2button(None, lt.as_parent(), icon_name=None)
+                    if not lt.symmetric:
+                        # actions.append('/')
+                        sar.known_values.update(type=lt, child=obj)
+                        sar.known_values.pop('parent', None)
+                        btn2 = sar.ar2button(None, lt.as_child(), icon_name=None)
+                        # actions.append(btn)
+                        btn = E.span(btn, '/', btn2)
+                    actions.append(btn)
+                    # actions.append(' ')
+                # actions = join_elems(actions, E.br)
 
-            if len(actions) > 0:
-                elems += [E.br(), _("Create dependency as ")] + actions
+                if len(actions) > 0:
+                    elems += [E.br(), _("Create dependency as ")] + actions
         return E.div(*elems)
 
 
@@ -335,7 +386,7 @@ class TicketDetail(dd.DetailLayout):
     main = "general more history_tab"
 
     general = dd.Panel("""
-    general1
+    general1 #WishesByTicket
     comments.CommentsByRFC:60 clocking.SessionsByTicket:20
     """, label=_("General"))
 
@@ -468,7 +519,9 @@ class Tickets(dd.Table):
     def get_simple_parameters(cls):
         s = super(Tickets, cls).get_simple_parameters()
         s |= set(('end_user',  # 'assigned_to',
-                  'state', 'project', 'topic', 'site'))
+                  'state',
+                  'project',
+                  'topic', 'site'))
         return s
 
     @classmethod
@@ -492,6 +545,11 @@ class Tickets(dd.Table):
         if pv.interesting_for:
             qs = qs.filter(
                 Q(project__company=pv.interesting_for))
+                # Q(votes_by_ticket__project__company=pv.interesting_for))
+            
+        # if pv.project:
+        #     qs = qs.filter(
+        #         Q(votes_by_ticket__project=pv.project))
             
         if False:  # pv.interesting_for:
 
@@ -533,8 +591,10 @@ class Tickets(dd.Table):
             qs = qs.filter(state__in=todo_states)
 
         if pv.has_project == dd.YesNo.no:
+            # qs = qs.filter(votes_by_ticket__project__isnull=True)
             qs = qs.filter(project__isnull=True)
         elif pv.has_project == dd.YesNo.yes:
+            # qs = qs.filter(votes_by_ticket__project__isnull=False)
             qs = qs.filter(project__isnull=False)
 
         # if pv.show_standby == dd.YesNo.no:
@@ -543,9 +603,12 @@ class Tickets(dd.Table):
         #     qs = qs.filter(standby=True)
 
         if pv.show_private == dd.YesNo.no:
-            qs = qs.filter(private=False, project__private=False)
+            qs = qs.filter(
+                private=False, project__private=False)
         elif pv.show_private == dd.YesNo.yes:
-            qs = qs.filter(Q(private=True) | Q(project__private=True))
+            qs = qs.filter(
+                Q(private=True) |
+                Q(project__private=True))
         # print 20150512, qs.query
         # 1253
         
@@ -609,7 +672,7 @@ class SuggestedTickets(Tickets):
 
 
 class UnassignedTickets(Tickets):
-    column_names = "summary project user *"
+    column_names = "summary project user votes_by_ticket *"
     label = _("Unassigned Tickets")
     required_roles = dd.login_required(Triager)
 
@@ -861,6 +924,19 @@ class TicketsBySite(Tickets):
         kw.update(end_date=dd.today())
         kw.update(observed_event=TicketEvents.todo)
         return kw
+
+class TicketsByCompetence(Tickets):
+    master = 'tickets.Competence'
+    required_roles = dd.login_required(Triager)
+    column_names = ("overview:50 workflow_buttons upgrade_notes *")
+
+    @classmethod
+    def get_filter_kw(self, ar, **kw):
+        # print("20170316 {}".format(ar.master_instance))
+        # kw.update(votes_by_ticket__project=ar.master_instance.project)
+        kw.update(project=ar.master_instance.project)
+        return kw
+    
 
 # class MyKnownProblems(Tickets):
 #     """For users whose `user_site` is set, show the known problems on
