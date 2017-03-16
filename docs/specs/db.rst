@@ -61,7 +61,7 @@ This document describes the database structure.
  mailbox.MessagePointer             mailbox.MessagePointers                 3         0
  notify.Message                     notify.Messages                         11        6
  system.SiteConfig                  system.SiteConfigs                      5         1
- tickets.Competence                 tickets.Competences                     6         12
+ tickets.Competence                 tickets.Competences                     5         12
  tickets.Link                       tickets.Links                           4         1
  tickets.Project                    tickets.Projects                        18        5
  tickets.ProjectType                tickets.ProjectTypes                    4         0
@@ -76,7 +76,7 @@ This document describes the database structure.
  uploads.UploadType                 uploads.UploadTypes                     8         0
  users.Authority                    users.Authorities                       3         0
  users.User                         users.Users                             41        6
- votes.Vote                         votes.Votes                             10        191
+ votes.Vote                         votes.Votes                             9         191
 ================================== ======================================= ========= =======
 <BLANKLINE>
 

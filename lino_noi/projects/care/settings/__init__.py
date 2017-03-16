@@ -103,7 +103,7 @@ class Site(Site):
         tb.add_action(self.modules.tickets.AllTickets)
         tb.add_action(
             self.modules.tickets.MyTickets.insert_action,
-            label=_("Submit a plea"))
+            label=_("Submit a ticket"))
 
     def do_site_startup(self):
         super(Site, self).do_site_startup()

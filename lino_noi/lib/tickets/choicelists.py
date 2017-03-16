@@ -13,7 +13,7 @@ from django.conf import settings
 from lino.modlib.system.choicelists import (
     ObservedEvent, PeriodStarted, PeriodActive, PeriodEnded)
 
-from lino.api import dd, _
+from lino.api import dd, pgettext, _
 from .roles import Triager
 
 from datetime import datetime, time
@@ -138,7 +138,7 @@ add = TicketStates.add_item
 #     help_text=_("Ticket has been assigned to somebody who is assigned on it."))
 add('10', _("New"), 'new', active=True, show_in_todo=True)
 add('15', _("Talk"), 'talk', active=True)
-add('20', _("Opened"), 'opened', active=True, show_in_todo=True)
+add('20', pgettext("ticket state", "Open"), 'opened', active=True, show_in_todo=True)
 # add('21', _("Sticky"), 'sticky', active=True)
 add('22', _("Started"), 'started', active=True, show_in_todo=True)
 add('30', _("Sleeping"), 'sleeping')

@@ -36,7 +36,7 @@ Das Hauptmenü
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen, Organisationen, Partner
 - Stimmabgaben : Meine Kandidaturen, Meine Aufgaben, Meine Interessen, Meine Stimmabgaben
-- Büro : Meine Auszüge, Meine Kommentare, Meine Benachrichtigungen
+- Büro : Meine Auszüge, Meine Kommentare, Meine Benachrichtigungen, Meine Uploads
 - Bitten : Meine Bitten, Wo ich helfen kann, Aktive Bitten, Alle Bitten, Nicht zugewiesene Bitten, Meine Zuständigkeiten
 - Berichte :
   - System : Broken GFKs
@@ -44,14 +44,14 @@ Das Hauptmenü
   - System : Site-Parameter, Hilfetexte, Benutzer
   - Orte : Länder, Orte
   - Kontakte : Themen, Themengruppen, Organisationsarten, Funktionen
-  - Büro : Auszugsarten, Kommentar-Arten
+  - Büro : Auszugsarten, Kommentar-Arten, Upload-Arten
   - Bitten : Projekte, Projekte (Hierarchie), Project Types, Ticket types, Umfelder
   - Fähigkeiten : Fähigkeiten (Hierarchie), Fähigkeiten (Alle), Fähigkeitsarten
 - Explorer :
   - System : Datenbankmodelle, Vollmachten, Benutzerarten, Änderungen, Benachrichtigungen, All dashboard widgets
   - Kontakte : Interessen, Kontaktpersonen
   - Stimmabgaben : Alle Stimmabgaben, Stimmabgabezustände
-  - Büro : Auszüge, Kommentare
+  - Büro : Auszüge, Kommentare, Uploads, Upload-Bereiche
   - Bitten : Verknüpfungen, Ticketzustände, Zuständigkeiten
   - Fähigkeiten : Fähigkeitsangebote, Anfragen
 - Site : Info
@@ -62,7 +62,7 @@ Das Hauptmenü
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Stimmabgaben : Meine Kandidaturen, Meine Aufgaben, Meine Interessen, Meine Stimmabgaben
-- Büro : Meine Kommentare, Meine Benachrichtigungen
+- Büro : Meine Kommentare, Meine Benachrichtigungen, Meine Uploads
 - Bitten : Meine Bitten, Wo ich helfen kann, Meine Zuständigkeiten
 - Site : Info
 

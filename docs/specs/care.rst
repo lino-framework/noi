@@ -341,7 +341,7 @@ The main menu
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Persons, Organizations, Partners
 - Votes : My candidatures, My tasks, My watchlist, My votes
-- Office : My Excerpts, My Comments, My Notification messages
+- Office : My Excerpts, My Comments, My Notification messages, My Uploads
 - Pleas : My Pleas, Where I can help, Active pleas, All pleas, Unassigned pleas, My Competences
 - Reports :
   - System : Broken GFKs
@@ -349,14 +349,14 @@ The main menu
   - System : Site Parameters, Help Texts, Users
   - Places : Countries, Places
   - Contacts : Topics, Topic groups, Organization types, Functions
-  - Office : Excerpt Types, Comment Types
+  - Office : Excerpt Types, Comment Types, Upload Types
   - Pleas : Projects, Projects (tree), Project Types, Ticket types, Sites
   - Skills : Skills (tree), Skills (all), Skill types
 - Explorer :
   - System : content types, Authorities, User types, Changes, Notification messages, All dashboard widgets
   - Contacts : Interests, Contact Persons
   - Votes : All votes, Vote states
-  - Office : Excerpts, Comments
+  - Office : Excerpts, Comments, Uploads, Upload Areas
   - Pleas : Dependencies, Ticket states, Competences
   - Skills : Skill offers, Skill demands
 - Site : About
@@ -367,7 +367,7 @@ The main menu
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Votes : My candidatures, My tasks, My watchlist, My votes
-- Office : My Comments, My Notification messages
+- Office : My Comments, My Notification messages, My Uploads
 - Pleas : My Pleas, Where I can help, My Competences
 - Site : About
 

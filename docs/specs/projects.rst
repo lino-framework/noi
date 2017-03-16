@@ -76,9 +76,9 @@ Competences
 ===========
 
 >>> rt.show('tickets.Competences')
-==== ================= ========== ========== ======== =============
- ID   Author            Priority   Project    Remark   Description
----- ----------------- ---------- ---------- -------- -------------
+==== ================= ========== ========== ========
+ ID   Author            Priority   Project    Remark
+---- ----------------- ---------- ---------- --------
  3    Luc               100        docs
  8    Romain Raffault   100        docs
  1    Jean              100        linö
@@ -92,7 +92,7 @@ Competences
  7    Romain Raffault   100        téam
  12   Robin Rood        100        téam
                         **1200**
-==== ================= ========== ========== ======== =============
+==== ================= ========== ========== ========
 <BLANKLINE>
 
 >>> rt.login("mathieu").show('tickets.MyCompetences')
