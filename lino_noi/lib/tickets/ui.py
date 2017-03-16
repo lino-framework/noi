@@ -933,7 +933,8 @@ class TicketsByCompetence(Tickets):
     def get_filter_kw(self, ar, **kw):
         # print("20170316 {}".format(ar.master_instance))
         # kw.update(votes_by_ticket__project=ar.master_instance.project)
-        kw.update(project=ar.master_instance.project)
+        if ar.master_instance is not None:
+            kw.update(project=ar.master_instance.project)
         return kw
     
 
