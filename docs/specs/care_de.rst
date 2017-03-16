@@ -37,7 +37,7 @@ Das Hauptmenü
 - Kontakte : Personen, Organisationen, Partner
 - Stimmabgaben : Meine Kandidaturen, Meine Aufgaben, Meine Interessen, Meine Stimmabgaben
 - Büro : Meine Auszüge, Meine Kommentare, Meine Benachrichtigungen
-- Bitten : Meine Bitten, Wo ich helfen kann, Aktive Bitten, Alle Bitten, Nicht zugewiesene Bitten, Aktive Projekte
+- Bitten : Meine Bitten, Wo ich helfen kann, Aktive Bitten, Alle Bitten, Nicht zugewiesene Bitten, Meine Zuständigkeiten
 - Berichte :
   - System : Broken GFKs
 - Konfigurierung :
@@ -52,7 +52,7 @@ Das Hauptmenü
   - Kontakte : Interessen, Kontaktpersonen
   - Stimmabgaben : Alle Stimmabgaben, Stimmabgabezustände
   - Büro : Auszüge, Kommentare
-  - Bitten : Verknüpfungen, Ticketzustände
+  - Bitten : Verknüpfungen, Ticketzustände, Zuständigkeiten
   - Fähigkeiten : Fähigkeitsangebote, Anfragen
 - Site : Info
 
@@ -63,7 +63,7 @@ Das Hauptmenü
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Stimmabgaben : Meine Kandidaturen, Meine Aufgaben, Meine Interessen, Meine Stimmabgaben
 - Büro : Meine Kommentare, Meine Benachrichtigungen
-- Bitten : Meine Bitten, Wo ich helfen kann
+- Bitten : Meine Bitten, Wo ich helfen kann, Meine Zuständigkeiten
 - Site : Info
 
 Bewertungen

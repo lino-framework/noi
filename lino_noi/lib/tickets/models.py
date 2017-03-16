@@ -9,6 +9,7 @@ from builtins import str
 
 from importlib import import_module
 import inspect
+from collections import OrderedDict
     
 from django.conf import settings
 from django.db import models
@@ -34,6 +35,12 @@ from lino.utils import join_elems
 from .choicelists import TicketEvents, TicketStates, LinkTypes
 from .roles import Triager
 
+class Prioritized(dd.Model):
+    class Meta:
+        abstract = True
+    priority = models.SmallIntegerField(_("Priority"), default=100)
+
+    
 class TimeInvestment(Commentable):
     class Meta:
         abstract = True
@@ -147,51 +154,88 @@ class Site(dd.Model):
 
     def __str__(self):
         return self.name
-
-
+    
 @dd.python_2_unicode_compatible
-class Link(dd.Model):
+class Competence(UserAuthored, Prioritized):
 
     class Meta:
         app_label = 'tickets'
-        verbose_name = _("Dependency")
-        verbose_name_plural = _("Dependencies")
+        verbose_name = pgettext("Ticketing", "Competence")
+        verbose_name_plural = pgettext("Ticketing", "Competences")
+        unique_together = ['user', 'project']
 
-    type = LinkTypes.field(
-        default=LinkTypes.requires.as_callable)
-    parent = dd.ForeignKey(
-        'tickets.Ticket',
-        verbose_name=_("Parent"),
-        related_name='tickets_children')
-    child = dd.ForeignKey(
-        'tickets.Ticket',
-        blank=True, null=True,
-        verbose_name=_("Child"),
-        related_name='tickets_parents')
-
-    @dd.displayfield(_("Type"))
-    def type_as_parent(self, ar):
-        # print('20140204 type_as_parent', self.type)
-        return self.type.as_parent()
-
-    @dd.displayfield(_("Type"))
-    def type_as_child(self, ar):
-        # print('20140204 type_as_child', self.type)
-        return self.type.as_child()
+    project = dd.ForeignKey(
+        'tickets.Project', blank=True, null=True,
+        related_name="duties_by_project")
+    remark = models.CharField(_("Remark"), max_length=200, blank=True)
+    description = dd.DummyField()
+    # description = dd.RichTextField(_("Description"), blank=True)
 
     def __str__(self):
-        if self.type is None:
-            return "Link object"  # super(Link, self).__unicode__()
-        return _("%(child)s is %(what)s") % dict(
-            child=str(self.child),
-            what=self.type_of_parent_text())
+        return "{}/{}".format(
+            self.user.username, self.project.ref)
 
-    def type_of_parent_text(self):
-        return _("%(type)s of %(parent)s") % dict(
-            parent=self.parent,
-            type=self.type.as_child())
+    @dd.displayfield(_("Tickets overview"))
+    def tickets_overview(self, ar):
+        if ar is None:
+            return ''
+        me = ar.get_user()
+        Ticket = rt.models.tickets.Ticket
+        Vote = rt.models.votes.Vote
+        elems = []
+
+        tickets_by_state = OrderedDict()
+        for st in TicketStates.objects():
+            tickets_by_state[st] = set()
+        for t in Ticket.objects.filter(project=self.project):
+            # t = vote.votable
+            tickets_by_state[t.state].add(t)
+            
+        items = []
+        for st, tickets in tickets_by_state.items():
+            if len(tickets) > 0:
+                tickets = reversed(sorted(tickets))
+                items.append(E.li(
+                    E.span("{} : ".format(st.button_text), title=str(st)),
+                    *join_elems([x.obj2href(ar) for x in tickets], ', ')
+                ))
+        elems.append(E.ul(*items))
+        return E.p(*elems)
 
 
+if False:
+    # @dd.python_2_unicode_compatible
+    class Wish(Prioritized):
+
+        class Meta:
+            app_label = 'tickets'
+            verbose_name = pgettext("Ticketing", "Wish")
+            verbose_name_plural = pgettext("Ticketing", "Wishes")
+
+        ticket = dd.ForeignKey(
+            'tickets.Ticket', related_name='wishes_by_ticket')
+        project = dd.ForeignKey(
+            'tickets.Project', related_name="wishes_by_project")
+        remark = models.CharField(_("Remark"), max_length=200, blank=True)
+        description = dd.RichTextField(_("Description"), blank=True)
+
+        # def __str__(self):
+        #     return pgettext("{} for {}").format(self.project, self.ticket)
+
+
+        # def full_clean(self):
+        #     if not self.project_id:
+        #         self.project = self.votable.get_project_for_vote(self)
+        #     super(Vote, self).full_clean()
+
+        # @dd.chooser()
+        # def project_choices(cls, user):
+        #     Project = rt.models.tickets.Project
+        #     if not user:
+        #         return Project.objects.none()
+        #     return Project.objects.filter(duties_by_project__user=user)
+
+    
 # class CloseTicket(dd.Action):
 #     #label = _("Close ticket")
 #     label = "\u2611"
@@ -290,10 +334,9 @@ class SpawnTicket(dd.Action):
                 c, p))
         ar.goto_instance(c)
 
-
 @dd.python_2_unicode_compatible
 class Ticket(UserAuthored, mixins.CreatedModified,
-             TimeInvestment, Votable, Workable):
+             TimeInvestment, Votable, Workable, Prioritized):
     
     quick_search_fields = "summary description"
 
@@ -315,7 +358,8 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         blank=True,
         help_text=_("Short summary of the problem."))
     description = dd.RichTextField(_("Description"), blank=True)
-    upgrade_notes = dd.RichTextField(_("Upgrade notes"), blank=True)
+    upgrade_notes = dd.RichTextField(
+        _("Upgrade notes"), blank=True, format='plain')
     ticket_type = dd.ForeignKey('tickets.TicketType', blank=True, null=True)
     duplicate_of = models.ForeignKey(
         'self', blank=True, null=True, verbose_name=_("Duplicate of"))
@@ -354,8 +398,6 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         verbose_name=_("Deadline"),
         blank=True, null=True)
 
-    priority = models.SmallIntegerField(_("Priority"), default=100)
-
     # deprecated fields:
     waiting_for = models.CharField(
         _("Waiting for"), max_length=200, blank=True)
@@ -382,6 +424,23 @@ class Ticket(UserAuthored, mixins.CreatedModified,
             #     self.assigned_to = self.project.assign_to
             if not self.project.private:
                 self.private = False
+
+    # def get_project_for_vote(self, vote):
+    #     if self.project:
+    #         return self.project
+    #     qs = rt.models.tickets.Competence.objects.filter(user=vote.user)
+    #     qs = qs.order_by('priority')
+    #     if qs.count() > 0:
+    #         return qs[0].project
+    #     return rt.models.tickets.Project.objects.all()[0]
+            
+    def obj2href(self, ar, **kwargs):
+        """Return a tuple (text, attributes) to use when rendering an `<a
+        href>` that points to this object.
+
+        """
+        kwargs.update(title=self.summary)
+        return ar.obj2html(self, "#{}".format(self.id), **kwargs)
 
     def disabled_fields(self, ar):
         rv = super(Ticket, self).disabled_fields(ar)
@@ -421,11 +480,11 @@ class Ticket(UserAuthored, mixins.CreatedModified,
     def get_overview_elems(self, ar):
         """Overrides :meth:`lino.core.model.Model.get_overview_elems`.
         """
-        elems = [ ar.obj2html(self)]
+        elems = [ ar.obj2html(self) ]  # show full summary
         if self.user and self.user != ar.get_user():
-            elems += [ _(" by "), ar.obj2html(self.user)]
+            elems += [ _(" by "), self.user.obj2href(ar)]
         if self.end_user_id:
-            elems += [' ', _("for"), ' ', ar.obj2html(self.end_user)]
+            elems += [' ', _("for"), ' ', self.end_user.obj2href(ar)]
         # if ar.actor.model is self.__class__:
         #     elems += [E.br(), _("{} state:").format(
         #         self._meta.verbose_name), ' ']
@@ -484,7 +543,7 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         elems = []
         for spl in Supply.objects.filter(faculty__in=faculties):
             if spl.supplier is not None:
-                elems.append(ar.obj2html(spl.supplier))
+                elems.append(spl.supplier.obj2href(ar))
         elems = join_elems(elems, ', ')
         return E.p(*elems)
 
@@ -502,7 +561,7 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         Demand = rt.models.faculties.Demand
         elems = []
         for dem in Demand.objects.filter(demander=self):
-            elems.append(ar.obj2html(dem.skill))
+            elems.append(dem.skill.obj2href(ar))
         elems = join_elems(elems, ', ')
         return E.p(*elems)
 
@@ -510,12 +569,55 @@ class Ticket(UserAuthored, mixins.CreatedModified,
 # dd.update_field(Ticket, 'user', verbose_name=_("Reporter"))
 
 
+@dd.python_2_unicode_compatible
+class Link(dd.Model):
+
+    class Meta:
+        app_label = 'tickets'
+        verbose_name = _("Dependency")
+        verbose_name_plural = _("Dependencies")
+
+    type = LinkTypes.field(
+        default=LinkTypes.requires.as_callable)
+    parent = dd.ForeignKey(
+        'tickets.Ticket',
+        verbose_name=_("Parent"),
+        related_name='tickets_children')
+    child = dd.ForeignKey(
+        'tickets.Ticket',
+        blank=True, null=True,
+        verbose_name=_("Child"),
+        related_name='tickets_parents')
+
+    @dd.displayfield(_("Type"))
+    def type_as_parent(self, ar):
+        # print('20140204 type_as_parent', self.type)
+        return self.type.as_parent()
+
+    @dd.displayfield(_("Type"))
+    def type_as_child(self, ar):
+        # print('20140204 type_as_child', self.type)
+        return self.type.as_child()
+
+    def __str__(self):
+        if self.type is None:
+            return "Link object"  # super(Link, self).__unicode__()
+        return _("%(child)s is %(what)s") % dict(
+            child=str(self.child),
+            what=self.type_of_parent_text())
+
+    def type_of_parent_text(self):
+        return _("%(type)s of %(parent)s") % dict(
+            parent=self.parent,
+            type=self.type.as_child())
+
+
 # dd.inject_field(
-#     'users.User', 'user_site',
+#     'users.User', 'project',
 #     dd.ForeignKey(
-#         'tickets.Site', # verbose_name=_("Site"),
-#         blank=True, null=True, related_name="users_by_site",
-#         help_text=_("")))
+#         'tickets.Project',
+#         blank=True, null=True, related_name="users_by_project",
+#         help_text=_("The project you are currently working on")))
 
 
 @dd.receiver(dd.post_startup)

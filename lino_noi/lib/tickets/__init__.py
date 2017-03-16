@@ -46,7 +46,9 @@ class Plugin(ad.Plugin):
         m.add_action('tickets.AllTickets')
         # m.add_action('tickets.MyKnownProblems')
         m.add_action('tickets.UnassignedTickets')
-        m.add_action('tickets.ActiveProjects')
+        # m.add_action('tickets.ActiveProjects')
+        # m.add_action('tickets.MyWishes')
+        m.add_action('tickets.MyCompetences')
 
     def setup_config_menu(self, site, profile, m):
         p = self.get_menu_group()
@@ -63,6 +65,8 @@ class Plugin(ad.Plugin):
         # m.add_action('tickets.Projects')
         m.add_action('tickets.Links')
         m.add_action('tickets.TicketStates')
+        m.add_action('tickets.AllCompetences')
+        # m.add_action('tickets.AllWishes')
         
     def get_dashboard_items(self, user):
         if user.authenticated:

@@ -87,7 +87,7 @@ class VotableEditVote(EditVote):
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
         vote = obj.get_favourite(ar.get_user())
-        print(20170116, vote)
+        # print(20170116, vote)
         self.goto_vote(vote, ar)
         
         # da = rt.actors.votes.VotesByVotable.detail_action

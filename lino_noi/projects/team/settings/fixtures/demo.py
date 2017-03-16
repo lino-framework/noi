@@ -44,6 +44,7 @@ def tickets_objects():
     Topic = rt.models.topics.Topic
     TT = rt.models.tickets.TicketType
     Ticket = rt.models.tickets.Ticket
+    Competence = rt.models.tickets.Competence
     Interest = rt.models.topics.Interest
     Milestone = rt.models.deploy.Milestone
     Project = rt.models.tickets.Project
@@ -130,6 +131,11 @@ def tickets_objects():
         start_date=i2d(20120201), end_date=i2d(20120630))
 
     PROJECTS = Cycler(Project.objects.all())
+
+    for u in User.objects.all():
+        yield Competence(user=u, project=PROJECTS.pop())
+        yield Competence(user=u, project=PROJECTS.pop())
+    
     SITES = Cycler(Site.objects.all())
     
     TicketStates = rt.models.tickets.TicketStates
