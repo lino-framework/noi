@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 """A collection of concrete example projects which can be used eithter
 out of the box or as a base for derivated work.
@@ -21,5 +21,6 @@ run :manage:`runserver` in these demo projects.
    public
    care
    care_de
+   vilma
 
 """

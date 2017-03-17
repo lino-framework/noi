@@ -10,7 +10,8 @@ ns.setup_from_tasks(
     demo_projects=[
         'lino_noi.projects.team.settings.demo',
         'lino_noi.projects.care.settings.demo',
-        'lino_noi.projects.care_de.settings'])
+        'lino_noi.projects.care_de.settings',
+        'lino_noi.projects.vilma.settings.demo'])
 
 # The following demo databases use the database file of team, so there is no
 # need initialize them:

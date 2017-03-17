@@ -109,4 +109,6 @@ class ProjectsTests(BaseTestCase):
     def test_care(self):
         self.run_django_manage_test('lino_noi/projects/care')
 
+    def test_vilma(self):
+        self.run_django_manage_test('lino_noi/projects/vilma')
 
