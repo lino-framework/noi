@@ -73,6 +73,8 @@ class Vote(UserAuthored, Created):
         abstract = dd.is_abstract_model(__name__, 'Vote')
         unique_together = ('user', 'votable')  # , 'project')
 
+    allow_cascaded_delete = 'votable'
+
     state = VoteStates.field(default=VoteStates.as_callable('watching'))
     votable = dd.ForeignKey(
         dd.plugins.votes.votable_model,
@@ -390,7 +392,7 @@ class VotesByVotable(Votes):
     """
     label = _("Votes")
     master_key = 'votable'
-    column_names = 'user workflow_buttons id mail_mode *'
+    column_names = 'user workflow_buttons mail_mode *'
     # show_detail_navigator = False
     # hide_top_toolbar = True
     slave_grid_format = 'summary'
