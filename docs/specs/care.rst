@@ -30,9 +30,7 @@ without any handicap.
 While :ref:`noi` was originally used as a ticketing system for the
 :ref:`Lino team <lino.team>` and other open source software teams, we
 realized that we can use almost the same concepts for managing "social
-tickets".  A different context, but a similar database structure.  In
-:ref:`care` we just don't call them "tickets" but "pleas" (German
-"Bitten").
+tickets".  A different context, but a similar database structure.
 
 
 Design choices
@@ -288,8 +286,8 @@ No data to display
  8    Who would buy diapers for me in Aachen?                                   Alex              **Ready**
  7    Who can review my final work?                                             Eric              **Sleeping**
  6    Who helps my sont to prepare for a maths test on May 21? (5. grade PDS)   Berta             **Started**
- 5    Who would play music on my birthday party?                                Alex              **Opened**
- 4    Who can give guitar lessons to my daughter?                               Alex              **Opened**
+ 5    Who would play music on my birthday party?                                Alex              **Open**
+ 4    Who can give guitar lessons to my daughter?                               Alex              **Open**
  3    Who can give piano lessons to my son?                                     Eric              **Talk**
  2    My lawn needs mowing. On Thursday or Saturday.                            Christa           **New**
  1    My faucet is dripping, who can help?                                      Berta             **Closed**
@@ -342,7 +340,7 @@ The main menu
 - Contacts : Persons, Organizations, Partners
 - Votes : My candidatures, My tasks, My watchlist, My votes
 - Office : My Excerpts, My Comments, My Notification messages, My Uploads
-- Pleas : My Pleas, Where I can help, Active pleas, All pleas, Unassigned pleas, My Competences
+- Projects : My Competences, My Tickets, Where I can help, Active tickets, All tickets, Unassigned Tickets
 - Reports :
   - System : Broken GFKs
 - Configure :
@@ -350,14 +348,14 @@ The main menu
   - Places : Countries, Places
   - Contacts : Topics, Topic groups, Organization types, Functions
   - Office : Excerpt Types, Comment Types, Upload Types
-  - Pleas : Projects, Projects (tree), Project Types, Ticket types, Sites
+  - Projects : Projects, Projects (tree), Project Types, Ticket types, Sites
   - Skills : Skills (tree), Skills (all), Skill types
 - Explorer :
   - System : content types, Authorities, User types, Changes, Notification messages, All dashboard widgets
   - Contacts : Interests, Contact Persons
   - Votes : All votes, Vote states
   - Office : Excerpts, Comments, Uploads, Upload Areas
-  - Pleas : Dependencies, Ticket states, Competences
+  - Projects : Dependencies, Ticket states, Competences
   - Skills : Skill offers, Skill demands
 - Site : About
 
@@ -368,7 +366,7 @@ The main menu
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Votes : My candidatures, My tasks, My watchlist, My votes
 - Office : My Comments, My Notification messages, My Uploads
-- Pleas : My Pleas, Where I can help, My Competences
+- Projects : My Competences, My Tickets, Where I can help
 - Site : About
 
 Lists of pleas
@@ -395,11 +393,11 @@ Where I can help
 
 >>> rt.login('eric').show(tickets.SuggestedTickets)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-==================================================================================== ============================= ================
+==================================================================================== ============================= ==============
  Description                                                                          Needed skills                 Actions
------------------------------------------------------------------------------------- ----------------------------- ----------------
- `#4 (Who can give guitar lessons to my daughter?) <Detail>`__ by `Alex <Detail>`__   `Guitar lessons <Detail>`__   [☆] **Opened**
-==================================================================================== ============================= ================
+------------------------------------------------------------------------------------ ----------------------------- --------------
+ `#4 (Who can give guitar lessons to my daughter?) <Detail>`__ by `Alex <Detail>`__   `Guitar lessons <Detail>`__   [☆] **Open**
+==================================================================================== ============================= ==============
 <BLANKLINE>
 
 
@@ -482,6 +480,7 @@ the detail window of a ticket.
       - (general1_2): **Author** (user), **End user** (end_user)
       - (general1_3): **Site** (site), **Actions** (workflow_buttons)
     - **Votes** (VotesByVotable) [visible for user connector admin]
+    - **Uploads** (UploadsByController) [visible for user connector admin]
   - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user connector admin], **Skill demands** (DemandsByDemander) [visible for user connector admin]
 - **History** (changes.ChangesByMaster) [visible for connector admin]
 - **More** (more) [visible for connector admin]:

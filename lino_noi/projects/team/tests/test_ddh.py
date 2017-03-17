@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Luc Saffre
+# Copyright 2016-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """Runs some tests about the disable-delete handler and cascading deletes.
@@ -13,7 +13,7 @@ You can run only these tests by issuing::
 Or::
 
   $ go noi
-  $ python setup.py test -s tests.DemoTests.test_std
+  $ python setup.py test -s tests.ProjectsTests.test_team
 
 """
 
@@ -84,10 +84,6 @@ class DDHTests(RemoteAuthTestCase):
         self.assertEqual(Star.objects.count(), 1)
         self.assertEqual(Ticket.objects.count(), 1)
 
-        try:
-            obj.delete()
-            self.fail("Expected veto")
-        except Warning as e:
-            self.assertEqual(
-                str(e), "Cannot delete Ticket #2 (Test) because "
-                "1 Votes refer to it.")
+        obj.delete()
+        self.assertEqual(Star.objects.count(), 0)
+        self.assertEqual(Ticket.objects.count(), 0)

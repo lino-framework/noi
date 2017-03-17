@@ -40,10 +40,10 @@ Lino Noi:
 - contacts.CompanyType :
   - PROTECT : contacts.Company.type
 - contacts.Partner :
-  - CASCADE : contacts.Company.partner_ptr, contacts.Person.partner_ptr
+  - CASCADE : contacts.Company.partner_ptr, contacts.Person.partner_ptr, faculties.Competence.supplier
   - PROTECT : clocking.ServiceReport.interesting_for, lists.Member.partner, tickets.Site.partner, topics.Interest.partner
 - contacts.Person :
-  - CASCADE : faculties.Competence.supplier, users.User.person_ptr
+  - CASCADE : users.User.person_ptr
   - PROTECT : contacts.Role.person, excerpts.Excerpt.contact_person, tickets.Project.contact_person
 - contacts.RoleType :
   - PROTECT : contacts.Role.type, excerpts.Excerpt.contact_role, tickets.Project.contact_role
@@ -78,8 +78,8 @@ Lino Noi:
 - tickets.Site :
   - PROTECT : deploy.Milestone.site, tickets.Ticket.site
 - tickets.Ticket :
-  - CASCADE : faculties.Demand.demander
-  - PROTECT : clocking.Session.ticket, comments.Comment.owner, deploy.Deployment.ticket, mailbox.MessagePointer.ticket, tickets.Link.child, tickets.Link.parent, tickets.Ticket.duplicate_of, votes.Vote.votable
+  - CASCADE : faculties.Demand.demander, votes.Vote.votable
+  - PROTECT : clocking.Session.ticket, comments.Comment.owner, deploy.Deployment.ticket, mailbox.MessagePointer.ticket, tickets.Link.child, tickets.Link.parent, tickets.Ticket.duplicate_of
 - tickets.TicketType :
   - PROTECT : tickets.Ticket.ticket_type
 - topics.Topic :
@@ -93,4 +93,3 @@ Lino Noi:
   - CASCADE : faculties.Competence.user
   - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, dashboard.Widget.user, excerpts.Excerpt.user, notify.Message.user, tickets.Competence.user, tickets.Project.assign_to, tickets.Ticket.end_user, tickets.Ticket.reporter, tickets.Ticket.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user, votes.Vote.user
 <BLANKLINE>
-

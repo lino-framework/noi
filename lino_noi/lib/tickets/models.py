@@ -622,8 +622,7 @@ class Link(dd.Model):
 
 @dd.receiver(dd.post_startup)
 def setup_memo_commands(sender=None, **kwargs):
-
-    """See :doc:`/specs/memo`."""
+    # See :doc:`/specs/memo`
 
     Ticket = sender.models.tickets.Ticket
     

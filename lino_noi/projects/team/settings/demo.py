@@ -9,6 +9,7 @@ class Site(Site):
     the_demo_date = datetime.date(2015, 5, 23)
 
     languages = "en de fr"
+    # readonly = True
     
     # use_ipdict = True
     # use_websockets = True

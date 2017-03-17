@@ -179,16 +179,16 @@ Note that there are sessions without a duration. Thats because
 
 >>> rt.show(clocking.TicketsByReport, obj)
 ... #doctest: -REPORT_UDIFF
-==== ============================================================ ========== ======== ========== ======= ======
- ID   Description                                                  Project    State    Regular    Extra   Free
----- ------------------------------------------------------------ ---------- -------- ---------- ------- ------
- 2    `#2 (Bar is not always baz) <Detail>`__ by *Mathieu*         research   Talk     0:01
- 6    `#6 (Sell bar in baz) <Detail>`__ by *Jean*                  linö       Ready    0:37
- 9    `#9 (Foo never matches Bar) <Detail>`__ by *Luc*             research   New      3:53
- 11   `#11 (Class-based Foos and Bars?) <Detail>`__ by *Mathieu*   linö       Opened   2:18
- 14   `#14 (Bar cannot baz) <Detail>`__ by *Luc*                   research   Ready    0:12
-                                                                                       **7:01**
-==== ============================================================ ========== ======== ========== ======= ======
+==== ============================================================ ========== ======= ========== ======= ======
+ ID   Description                                                  Project    State   Regular    Extra   Free
+---- ------------------------------------------------------------ ---------- ------- ---------- ------- ------
+ 2    `#2 (Bar is not always baz) <Detail>`__ by *Mathieu*         research   Talk    0:01
+ 6    `#6 (Sell bar in baz) <Detail>`__ by *Jean*                  linö       Ready   0:37
+ 9    `#9 (Foo never matches Bar) <Detail>`__ by *Luc*             research   New     3:53
+ 11   `#11 (Class-based Foos and Bars?) <Detail>`__ by *Mathieu*   linö       Open    2:18
+ 14   `#14 (Bar cannot baz) <Detail>`__ by *Luc*                   research   Ready   0:12
+                                                                                      **7:01**
+==== ============================================================ ========== ======= ========== ======= ======
 <BLANKLINE>
 
 

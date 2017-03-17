@@ -37,7 +37,7 @@ Das Hauptmenü
 - Kontakte : Personen, Organisationen, Partner
 - Stimmabgaben : Meine Kandidaturen, Meine Aufgaben, Meine Interessen, Meine Stimmabgaben
 - Büro : Meine Auszüge, Meine Kommentare, Meine Benachrichtigungen, Meine Uploads
-- Bitten : Meine Bitten, Wo ich helfen kann, Aktive Bitten, Alle Bitten, Nicht zugewiesene Bitten, Meine Zuständigkeiten
+- Projekte : Meine Zuständigkeiten, Meine Anfragen, Wo ich helfen kann, Aktive Tickets, Alle Tickets, Nicht zugewiesene Tickets
 - Berichte :
   - System : Broken GFKs
 - Konfigurierung :
@@ -45,14 +45,14 @@ Das Hauptmenü
   - Orte : Länder, Orte
   - Kontakte : Themen, Themengruppen, Organisationsarten, Funktionen
   - Büro : Auszugsarten, Kommentar-Arten, Upload-Arten
-  - Bitten : Projekte, Projekte (Hierarchie), Project Types, Ticket types, Umfelder
+  - Projekte : Projekte, Projekte (Hierarchie), Project Types, Ticket types, Umfelder
   - Fähigkeiten : Fähigkeiten (Hierarchie), Fähigkeiten (Alle), Fähigkeitsarten
 - Explorer :
   - System : Datenbankmodelle, Vollmachten, Benutzerarten, Änderungen, Benachrichtigungen, All dashboard widgets
   - Kontakte : Interessen, Kontaktpersonen
   - Stimmabgaben : Alle Stimmabgaben, Stimmabgabezustände
   - Büro : Auszüge, Kommentare, Uploads, Upload-Bereiche
-  - Bitten : Verknüpfungen, Ticketzustände, Zuständigkeiten
+  - Projekte : Verknüpfungen, Ticketzustände, Zuständigkeiten
   - Fähigkeiten : Fähigkeitsangebote, Anfragen
 - Site : Info
 
@@ -63,7 +63,7 @@ Das Hauptmenü
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Stimmabgaben : Meine Kandidaturen, Meine Aufgaben, Meine Interessen, Meine Stimmabgaben
 - Büro : Meine Kommentare, Meine Benachrichtigungen, Meine Uploads
-- Bitten : Meine Bitten, Wo ich helfen kann, Meine Zuständigkeiten
+- Projekte : Meine Zuständigkeiten, Meine Anfragen, Wo ich helfen kann
 - Site : Info
 
 Bewertungen

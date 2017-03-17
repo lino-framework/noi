@@ -90,6 +90,8 @@ SETUP_INFO.update(packages=[
     'lino_noi.projects.team.lib.tickets',
     'lino_noi.projects.team.lib.clocking',
     'lino_noi.projects.team.lib.clocking.fixtures',
+    'lino_noi.projects.vilma',
+    'lino_noi.projects.vilma.settings',
     'lino_noi.projects.public',
     'lino_noi.projects.care',
     'lino_noi.projects.care.settings',

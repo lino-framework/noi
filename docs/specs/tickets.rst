@@ -144,7 +144,7 @@ ticket has one of the following values:
 ------- ----------- ----------- -------- --------
  10      new         New         ⛶        Yes
  15      talk        Talk        ☎        Yes
- 20      opened      Opened      ☉        Yes
+ 20      opened      Open        ☉        Yes
  22      started     Started     ⚒        Yes
  30      sleeping    Sleeping    ☾        No
  40      ready       Ready       ☐        Yes
@@ -190,7 +190,7 @@ And in French (not yet fully translated):
 ------- ----------- ---------- -------- --------
  10      new         Nouveau    ⛶        Oui
  15      talk        Talk       ☎        Oui
- 20      opened      Opened     ☉        Oui
+ 20      opened      Open       ☉        Oui
  22      started     Started    ⚒        Oui
  30      sleeping    Sleeping   ☾        Non
  40      ready       Ready      ☐        Oui
@@ -259,7 +259,7 @@ assigned to a project:
  ID   Summary             Author    Topic          Actions        Project
 ---- ------------------- --------- -------------- -------------- ---------
  5    Cannot create Foo   Mathieu   Lino Welfare   **Sleeping**
- 3    Baz sucks           Luc       Lino Voga      **Opened**
+ 3    Baz sucks           Luc       Lino Voga      **Open**
 ==== =================== ========= ============== ============== =========
 <BLANKLINE>
 
@@ -443,35 +443,35 @@ My tickets
 
 >>> rt.login('jean').show(tickets.MyTickets)
 ... #doctest: +REPORT_UDIFF
-============================================================== ==========================================
+============================================================== ========================================
  Description                                                    Actions
--------------------------------------------------------------- ------------------------------------------
- `#115 (Ticket 115) <Detail>`__                                 [▶] [★] **Opened** → [☾] [☎] [⚒] [☐] [☑]
+-------------------------------------------------------------- ----------------------------------------
+ `#115 (Ticket 115) <Detail>`__                                 [▶] [★] **Open** → [☾] [☎] [⚒] [☐] [☑]
  `#106 (Ticket 106) <Detail>`__                                 [▶] [★] **Talk** → [☾] [☉] [⚒] [☐] [☑]
  `#102 (Ticket 102) <Detail>`__                                 [▶] [★] **Ready** → [☎] [☑]
  `#100 (Ticket 100) <Detail>`__                                 [▶] [★] **Started** → [☾] [☎] [☐] [☑]
  `#97 (Ticket 97) <Detail>`__                                   [▶] [★] **New** → [☾] [☎] [☉] [⚒] [☐]
- `#91 (Ticket 91) <Detail>`__                                   [▶] [★] **Opened** → [☾] [☎] [⚒] [☐] [☑]
+ `#91 (Ticket 91) <Detail>`__                                   [▶] [★] **Open** → [☾] [☎] [⚒] [☐] [☑]
  `#82 (Ticket 82) <Detail>`__                                   [▶] [★] **Talk** → [☾] [☉] [⚒] [☐] [☑]
  `#78 (Ticket 78) <Detail>`__                                   [▶] [★] **Ready** → [☎] [☑]
  `#76 (Ticket 76) <Detail>`__                                   [▶] [★] **Started** → [☾] [☎] [☐] [☑]
  `#73 (Ticket 73) <Detail>`__                                   [▶] [★] **New** → [☾] [☎] [☉] [⚒] [☐]
- `#67 (Ticket 67) <Detail>`__                                   [▶] [★] **Opened** → [☾] [☎] [⚒] [☐] [☑]
+ `#67 (Ticket 67) <Detail>`__                                   [▶] [★] **Open** → [☾] [☎] [⚒] [☐] [☑]
  `#58 (Ticket 58) <Detail>`__                                   [▶] [★] **Talk** → [☾] [☉] [⚒] [☐] [☑]
  `#54 (Ticket 54) <Detail>`__                                   [▶] [★] **Ready** → [☎] [☑]
  `#52 (Ticket 52) <Detail>`__                                   [▶] [★] **Started** → [☾] [☎] [☐] [☑]
  `#49 (Ticket 49) <Detail>`__                                   [▶] [★] **New** → [☾] [☎] [☉] [⚒] [☐]
- `#43 (Ticket 43) <Detail>`__                                   [▶] [★] **Opened** → [☾] [☎] [⚒] [☐] [☑]
+ `#43 (Ticket 43) <Detail>`__                                   [▶] [★] **Open** → [☾] [☎] [⚒] [☐] [☑]
  `#34 (Ticket 34) <Detail>`__                                   [▶] [★] **Talk** → [☾] [☉] [⚒] [☐] [☑]
  `#30 (Ticket 30) <Detail>`__                                   [▶] [★] **Ready** → [☎] [☑]
  `#28 (Ticket 28) <Detail>`__                                   [▶] [★] **Started** → [☾] [☎] [☐] [☑]
  `#25 (Ticket 25) <Detail>`__                                   [▶] [★] **New** → [☾] [☎] [☉] [⚒] [☐]
- `#19 (Ticket 19) <Detail>`__                                   [▶] [★] **Opened** → [☾] [☎] [⚒] [☐] [☑]
+ `#19 (Ticket 19) <Detail>`__                                   [▶] [★] **Open** → [☾] [☎] [⚒] [☐] [☑]
  `#10 (Where can I find a Foo when bazing Bazes?) <Detail>`__   [▶] [★] **Talk** → [☾] [☉] [⚒] [☐] [☑]
  `#6 (Sell bar in baz) <Detail>`__                              [▶] [★] **Ready** → [☎] [☑]
  `#4 (Foo and bar don't baz) <Detail>`__                        [▶] [★] **Started** → [☾] [☎] [☐] [☑]
  `#1 (Föö fails to bar when baz) <Detail>`__                    [▶] [★] **New** → [☾] [☎] [☉] [⚒] [☐]
-============================================================== ==========================================
+============================================================== ========================================
 <BLANKLINE>
 
 
@@ -501,12 +501,12 @@ can see all local tickets for a given site object:
  ID    Summary      Author    Topic          Actions        Project
 ----- ------------ --------- -------------- -------------- ----------
  109   Ticket 109   Jean      Lino Welfare   **Sleeping**   research
- 91    Ticket 91    Jean      Lino Voga      **Opened**     linö
+ 91    Ticket 91    Jean      Lino Voga      **Open**       linö
  79    Ticket 79    Mathieu   Lino Voga      **Closed**     research
  61    Ticket 61    Jean      Lino Welfare   **Sleeping**   linö
  49    Ticket 49    Jean      Lino Welfare   **New**        research
  31    Ticket 31    Mathieu   Lino Voga      **Closed**     linö
- 19    Ticket 19    Jean      Lino Voga      **Opened**     research
+ 19    Ticket 19    Jean      Lino Voga      **Open**       research
 ===== ============ ========= ============== ============== ==========
 <BLANKLINE>
 
@@ -517,17 +517,17 @@ authenticated developer it looks like this:
 
 >>> rt.login('luc').show(tickets.TicketsBySite, welket)
 ... #doctest: -REPORT_UDIFF -SKIP
-===== ============ ========= ============== ==================== ==========
- ID    Summary      Author    Topic          Actions              Project
------ ------------ --------- -------------- -------------------- ----------
- 109   Ticket 109   Jean      Lino Welfare   [☆] **Sleeping**     research
- 91    Ticket 91    Jean      Lino Voga      [▶] [★] **Opened**   linö
- 79    Ticket 79    Mathieu   Lino Voga      [☆] **Closed**       research
- 61    Ticket 61    Jean      Lino Welfare   [☆] **Sleeping**     linö
- 49    Ticket 49    Jean      Lino Welfare   [▶] [★] **New**      research
- 31    Ticket 31    Mathieu   Lino Voga      [☆] **Closed**       linö
- 19    Ticket 19    Jean      Lino Voga      [▶] [★] **Opened**   research
-===== ============ ========= ============== ==================== ==========
+===== ============ ========= ============== ================== ==========
+ ID    Summary      Author    Topic          Actions            Project
+----- ------------ --------- -------------- ------------------ ----------
+ 109   Ticket 109   Jean      Lino Welfare   [☆] **Sleeping**   research
+ 91    Ticket 91    Jean      Lino Voga      [▶] [★] **Open**   linö
+ 79    Ticket 79    Mathieu   Lino Voga      [☆] **Closed**     research
+ 61    Ticket 61    Jean      Lino Welfare   [☆] **Sleeping**   linö
+ 49    Ticket 49    Jean      Lino Welfare   [▶] [★] **New**    research
+ 31    Ticket 31    Mathieu   Lino Voga      [☆] **Closed**     linö
+ 19    Ticket 19    Jean      Lino Voga      [▶] [★] **Open**   research
+===== ============ ========= ============== ================== ==========
 <BLANKLINE>
 
 
