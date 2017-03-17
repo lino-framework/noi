@@ -73,6 +73,8 @@ class Vote(UserAuthored, Created):
         abstract = dd.is_abstract_model(__name__, 'Vote')
         unique_together = ('user', 'votable')  # , 'project')
 
+    allow_cascaded_delete = 'votable'
+
     state = VoteStates.field(default=VoteStates.as_callable('watching'))
     votable = dd.ForeignKey(
         dd.plugins.votes.votable_model,
