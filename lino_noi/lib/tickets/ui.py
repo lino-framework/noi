@@ -160,6 +160,11 @@ class ProjectsByCompany(Projects):
     column_names = "ref name *"
 
 
+class ProjectsByPerson(Projects):
+    master_key = 'contact_person'
+    column_names = "ref name *"
+
+
 class Competences(dd.Table):
     required_roles = dd.login_required(TicketsUser)
     model = 'tickets.Competence'

@@ -10,36 +10,79 @@ from lino.api import dd, _
 from lino_xl.lib.contacts.models import *
 
 
+PartnerDetail.address_box = dd.Panel("""
+    name_box
+    country #region city zip_code:10
+    #addr1
+    #street_prefix street:25 street_no street_box
+    #addr2
+    """, label=_("Address"))
+
+PartnerDetail.contact_box = dd.Panel("""
+    url
+    phone
+    gsm #fax
+    """, label=_("Contact"))
+
+
 class PersonDetail(PersonDetail):
     
-    main = "general skills"
+    main = "general contact skills tickets"
 
     general = dd.Panel("""
-    address_box:60 contact_box:30 overview
-    bottom_box
+    overview info_box
+    contacts.RolesByPerson
     """, label=_("General"))
+
+    info_box = """
+    id:5
+    language:10
+    email:40
+    """
+    
+    contact = dd.Panel("""
+    address_box:60 contact_box:30
+    remarks 
+    """, label=_("Contact"))
 
     skills = dd.Panel("""
     faculties.OffersBySupplier topics.InterestsByPartner
-    """, label=_("Skills"))
+    """, label=dd.plugins.faculties.verbose_name)
+
+    tickets = dd.Panel("""
+    tickets.ProjectsByPerson tickets.TicketsByEndUser
+    """, label=dd.plugins.tickets.verbose_name)
 
 
-    name_box = "last_name first_name:15 gender title:10"
-    info_box = "id:5 language:10"
-    bottom_box = "remarks contacts.RolesByPerson"
+    name_box = "last_name first_name:15 gender #title:10"
 
     
 class CompanyDetail(CompanyDetail):
-    main = "general tickets"
+    main = "general contact skills tickets"
 
     general = dd.Panel("""
-    address_box:60 contact_box:30
-    bottom_box
+    overview info_box
+    contacts.RolesByCompany
     """, label=_("General"))
 
+    info_box = """
+    id:5
+    language:10
+    email:40
+    """
+    
+    contact = dd.Panel("""
+    address_box:60 contact_box:30 
+    remarks
+    """, label=_("Contact"))
+
+    skills = dd.Panel("""
+    faculties.OffersBySupplier topics.InterestsByPartner
+    """, label=dd.plugins.faculties.verbose_name)
+
     tickets = dd.Panel("""
-    tickets.ProjectsByCompany topics.InterestsByPartner
-    """, label=_("Tickets"))
+    tickets.ProjectsByCompany tickets.TicketsByEndUser
+    """, label=dd.plugins.tickets.verbose_name)
 
 
 # @dd.receiver(dd.post_analyze)

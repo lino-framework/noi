@@ -42,8 +42,10 @@ class Plugin(ad.Plugin):
         'lino_noi.lib.contacts']
 
     # demander_model = 'tickets.Ticket'
-    demander_model = 'contacts.Person'
-    supplier_model = 'contacts.Person'
+    # demander_model = 'contacts.Person'
+    # supplier_model = 'contacts.Person'
+    demander_model = 'contacts.Partner'
+    supplier_model = 'contacts.Partner'
 
     def on_site_startup(self, site):
         self.demander_model = site.models.resolve(self.demander_model)

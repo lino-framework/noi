@@ -390,7 +390,7 @@ class VotesByVotable(Votes):
     """
     label = _("Votes")
     master_key = 'votable'
-    column_names = 'user workflow_buttons id mail_mode *'
+    column_names = 'user workflow_buttons mail_mode *'
     # show_detail_navigator = False
     # hide_top_toolbar = True
     slave_grid_format = 'summary'

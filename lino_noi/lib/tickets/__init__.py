@@ -19,7 +19,8 @@ from lino.api import ad, _
 
 class Plugin(ad.Plugin):
 
-    verbose_name = _("Tickets")
+    # verbose_name = _("Tickets")
+    verbose_name = _("Projects")
 
     needs_plugins = [
         # 'lino_xl.lib.stars',
@@ -38,6 +39,7 @@ class Plugin(ad.Plugin):
     def setup_main_menu(self, site, profile, m):
         p = self.get_menu_group()
         m = m.add_menu(p.app_label, p.verbose_name)
+        m.add_action('tickets.MyCompetences')
         m.add_action('tickets.MyTickets')
         m.add_action('tickets.SuggestedTickets')
         # m.add_action('tickets.TicketsToDo')
@@ -48,7 +50,6 @@ class Plugin(ad.Plugin):
         m.add_action('tickets.UnassignedTickets')
         # m.add_action('tickets.ActiveProjects')
         # m.add_action('tickets.MyWishes')
-        m.add_action('tickets.MyCompetences')
 
     def setup_config_menu(self, site, profile, m):
         p = self.get_menu_group()
