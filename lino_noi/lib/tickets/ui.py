@@ -450,7 +450,7 @@ class Tickets(dd.Table):
 
     .. attribute:: feasable_by
 
-        Show only tickets for which I am competent.
+        Show only tickets for which the given supplier is competent.
 
     """
     required_roles = set()  # also for anonymous
@@ -491,8 +491,8 @@ class Tickets(dd.Table):
             blank=True, null=True,
             help_text=_("Only tickets having no vote by this user.")),
         feasable_by=dd.ForeignKey(
-            settings.SITE.user_model,
-            # dd.plugins.faculties.supplier_model,
+            # settings.SITE.user_model,
+            dd.plugins.faculties.supplier_model,
             verbose_name=_("Feasable by"), blank=True, null=True),
         interesting_for=dd.ForeignKey(
             'contacts.Partner',
@@ -544,7 +544,7 @@ class Tickets(dd.Table):
             # matches a skill supply authored by the specified user.
             faculties = set()
             for fac in rt.models.faculties.Faculty.objects.filter(
-                    competence__user=pv.feasable_by):
+                    competence__supplier=pv.feasable_by):
                 faculties |= set(fac.get_parental_line())
             qs = qs.filter(demand__skill__in=faculties)
             qs = qs.distinct()
