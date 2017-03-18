@@ -546,6 +546,10 @@ class Tickets(dd.Table):
             for fac in rt.models.faculties.Faculty.objects.filter(
                     competence__supplier=pv.feasable_by):
                 faculties |= set(fac.get_parental_line())
+            if True:  # TODO: test whether supplier_model inherits from User
+                for fac in rt.models.faculties.Faculty.objects.filter(
+                        competence__user=pv.feasable_by):
+                    faculties |= set(fac.get_parental_line())
             qs = qs.filter(demand__skill__in=faculties)
             qs = qs.distinct()
 
