@@ -30,7 +30,8 @@ class Plugin(ad.Plugin):
         # 'lino.modlib.changes',
         'lino_noi.lib.noi']
 
-    end_user_model = 'users.User'
+    # end_user_model = 'users.User'
+    end_user_model = 'contacts.Partner'
 
     def on_site_startup(self, site):
         self.end_user_model = site.models.resolve(self.end_user_model)
