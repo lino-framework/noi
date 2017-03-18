@@ -695,7 +695,8 @@ class UnassignedTickets(Tickets):
 class TicketsByProject(Tickets):
     master_key = 'project'
     required_roles = dd.login_required(Triager)
-    column_names = ("overview:50 workflow_buttons *")
+    column_names = ("priority overview:50 workflow_buttons *")
+    order_by = ["-priority", "-id"]
 
 
 class TicketsByEndUser(Tickets):
