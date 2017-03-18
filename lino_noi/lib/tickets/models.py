@@ -359,7 +359,7 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         help_text=_("Short summary of the problem."))
     description = dd.RichTextField(_("Description"), blank=True)
     upgrade_notes = dd.RichTextField(
-        _("Upgrade notes"), blank=True, format='plain')
+        _("Resolution"), blank=True, format='plain')
     ticket_type = dd.ForeignKey('tickets.TicketType', blank=True, null=True)
     duplicate_of = models.ForeignKey(
         'self', blank=True, null=True, verbose_name=_("Duplicate of"))
@@ -411,8 +411,19 @@ class Ticket(UserAuthored, mixins.CreatedModified,
     # spawn_triggered = SpawnTicket("⚇", LinkTypes.triggers)  # "\u2687"
     # spawn_ticket = SpawnTicket("", LinkTypes.requires)  # "\u2687"
 
-    # def get_rfc_description(self, ar):
-    #     return ar.parse_memo(self.description)
+    def get_rfc_description(self, ar):
+        html = ''
+        
+        if self.description:
+            # html += E.tostring(E.b(_("Description")))
+            html += ar.parse_memo(self.description)
+        if self.upgrade_notes:
+            html += E.tostring(E.b(_("Resolution")))
+            html += ar.parse_memo(self.upgrade_notes)
+        if self.duplicate_of_id:
+            html += E.tostring(_("Duplicate of")) + " "
+            html += E.tostring(self.duplicate_of.obj2href(ar))
+        return html
 
     def full_clean(self):
         if self.id and self.duplicate_of_id == self.id:

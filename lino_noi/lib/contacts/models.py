@@ -50,7 +50,7 @@ class PersonDetail(PersonDetail):
     """, label=dd.plugins.faculties.verbose_name)
 
     tickets = dd.Panel("""
-    tickets.ProjectsByPerson tickets.TicketsByEndUser
+    tickets.TicketsByEndUser tickets.ProjectsByPerson
     """, label=dd.plugins.tickets.verbose_name)
 
 
@@ -81,7 +81,7 @@ class CompanyDetail(CompanyDetail):
     """, label=dd.plugins.faculties.verbose_name)
 
     tickets = dd.Panel("""
-    tickets.ProjectsByCompany tickets.TicketsByEndUser
+    tickets.TicketsByEndUser tickets.ProjectsByCompany
     """, label=dd.plugins.tickets.verbose_name)
 
 

@@ -131,6 +131,7 @@ class Demands(dd.Table):
     """, window_size=(40, 'auto'))
 
 class DemandsByDemander(Demands):
+    label = _("Wanted skills")
     required_roles = dd.login_required()
     master_key = 'demander'
     # column_names = 'skill importance user *'

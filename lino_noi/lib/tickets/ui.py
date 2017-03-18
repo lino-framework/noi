@@ -185,9 +185,12 @@ class AllCompetences(Competences):
     required_roles = dd.login_required(TicketsStaff)
     
 class MyCompetences(My, Competences):
+    label = _("My projects")
     column_names = 'priority project remark *'
     # column_names = 'priority project tickets_overview *'
     params_panel_hidden = True
+    # editable = False
+    slave_grid_format = "html"  # (doesn't work) TODO #1594 
     
     insert_layout = """
     project 
@@ -692,17 +695,10 @@ class UnassignedTickets(Tickets):
 
 
 
-class TicketsByProject(Tickets):
-    master_key = 'project'
-    required_roles = dd.login_required(Triager)
-    column_names = ("priority overview:50 workflow_buttons *")
-    order_by = ["-priority", "-id"]
-
-
 class TicketsByEndUser(Tickets):
     master_key = 'end_user'
-    column_names = ("overview:50 topic:10 user:10 workflow_buttons * ")
-    slave_grid_format = "summary"
+    column_names = ("overview:50 workflow_buttons * ")
+    # slave_grid_format = "summary"
 
     @classmethod
     def get_slave_summary(self, obj, ar):
@@ -930,10 +926,19 @@ class TicketsBySite(Tickets):
         kw.update(observed_event=TicketEvents.todo)
         return kw
 
-class TicketsByCompetence(Tickets):
-    master = 'tickets.Competence'
+class TicketsByProject(Tickets):
+    master_key = 'project'
     required_roles = dd.login_required(Triager)
-    column_names = ("overview:50 workflow_buttons upgrade_notes *")
+    column_names = ("priority overview:50 workflow_buttons *")
+    order_by = ["-priority", "-id"]
+
+
+class TicketsByCompetence(TicketsByProject):
+    master = 'tickets.Competence'
+    master_key = None
+    # required_roles = dd.login_required(Triager)
+    # column_names = ("overview:50 workflow_buttons upgrade_notes *")
+    slave_grid_format = "html"
 
     @classmethod
     def get_filter_kw(self, ar, **kw):

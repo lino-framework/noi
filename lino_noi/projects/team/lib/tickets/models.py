@@ -20,19 +20,24 @@ class TicketDetail(TicketDetail):
     main = "general more history_tab more2"
     
     general = dd.Panel("""
-    general1:60 votes.VotesByVotable:20
-    description:30 comments.CommentsByRFC:30 clocking.SessionsByTicket:20
+    general1:60 comments.CommentsByRFC:30
     """, label=_("General"))
 
     general1 = """
-    summary:40 id:6 user:12 end_user:12
-    site topic project private
-    workflow_buttons:30
+    summary:40 id:6 
+    user:12 end_user:12 deadline
+    site topic project 
+    workflow_buttons:30 private
+    bottom_box
+    """
+
+    bottom_box = """
+    faculties.DemandsByDemander:20 votes.VotesByVotable:20 clocking.SessionsByTicket:20
     """
 
     more = dd.Panel("""
     more1 DuplicatesByTicket:20 #WishesByTicket
-    upgrade_notes:20 LinksByTicket:20 faculties.DemandsByDemander:20
+    description:30 upgrade_notes:20 LinksByTicket:20  
     """, label=_("More"))
 
     more2 = dd.Panel("""
