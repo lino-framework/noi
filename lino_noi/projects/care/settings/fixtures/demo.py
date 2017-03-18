@@ -50,7 +50,7 @@ def ticket(username, summary, en, faculty=None, **kw):
 
 def competence(username, first_name, faculty, **kw):
     kw.update(
-        supplier=dd.plugins.faculties.supplier_model.objects.get(
+        end_user=dd.plugins.tickets.end_user_model.objects.get(
             name=first_name))
     kw.update(faculty=faculty)
     kw.update(user=rt.models.users.User.objects.get(username=username))

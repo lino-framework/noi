@@ -79,41 +79,30 @@ class Offers(dd.Table):
     order_by = ["id"]
 
     detail_layout = dd.DetailLayout("""
-    user supplier
+    user end_user
     faculty affinity
     description
     """, window_size=(60, 15))
 
 
-class OffersBySupplier(Offers):
+class OffersByEndUser(Offers):
     required_roles = dd.login_required()
-    master_key = 'supplier'
+    master_key = 'end_user'
     column_names = 'faculty description affinity *'
     order_by = ["faculty"]
-
-# class OffersByUser(OffersBySupplier):
-#     required_roles = dd.login_required()
-#     master_key = 'user'
-#     column_names = 'seqno faculty description affinity *'
-#     order_by = ["seqno"]
-
-#     @classmethod
-#     def get_filter_kw(self, ar, **kw):
-#         user = ar.master_instance
-#         return dict(supplier=user.partner)
+    
 
 class OffersBySkill(Offers):
     master_key = 'faculty'
-    column_names = 'user supplier affinity *'
+    column_names = 'user end_user affinity *'
     order_by = ["user"]
 
 
 class MyOffers(My, Offers):
     required_roles = dd.login_required(SkillsStaff)
     label = _("Skills managed by me")
-    column_names = 'faculty supplier description affinity *'
+    column_names = 'faculty end_user description affinity *'
     order_by = ["faculty"]
-
 
 
 class Demands(dd.Table):
@@ -207,7 +196,7 @@ class OffersByDemander(Offers):
         html = []
 
         items = [
-            ar.obj2html(o, str(o.supplier)) for o in sar]
+            ar.obj2html(o, str(o.end_user)) for o in sar]
 
         if len(items) > 0:
             html += join_elems(items, sep=', ')

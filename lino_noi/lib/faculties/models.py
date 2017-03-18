@@ -69,24 +69,28 @@ class Competence(UserAuthored, Sequenced):
     in a given *faculty*.
 
     .. attribute:: user
-    .. attribute:: supplier
+    .. attribute:: end_user
     .. attribute:: faculty
     .. attribute:: affinity
 
     """
     
-    allow_cascaded_delete = "supplier user"
+    allow_cascaded_delete = "end_user user"
 
     class Meta:
         verbose_name = _("Skill offer")
         verbose_name_plural = _("Skill offers")
-        unique_together = ['supplier', 'faculty']
+        unique_together = ['end_user', 'faculty']
 
     faculty = dd.ForeignKey('faculties.Faculty')
-    supplier = dd.ForeignKey(
-        dd.plugins.faculties.supplier_model,
-        verbose_name=_("Supplier"),
+    end_user=dd.ForeignKey(
+        dd.plugins.tickets.end_user_model,
+        verbose_name=_("End user"),
         blank=True, null=True)
+    # supplier = dd.ForeignKey(
+    #     dd.plugins.faculties.supplier_model,
+    #     verbose_name=_("Supplier"),
+    #     blank=True, null=True)
     affinity = models.IntegerField(
         _("Affinity"), blank=True, default=MAX_WEIGHT,
         help_text=_(

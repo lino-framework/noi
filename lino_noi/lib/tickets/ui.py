@@ -481,18 +481,20 @@ class Tickets(dd.Table):
             blank=True, null=True,
             help_text=_("Only rows concerning this end user.")),
         assigned_to=dd.ForeignKey(
-            settings.SITE.user_model,
+            dd.plugins.tickets.end_user_model,
+            # settings.SITE.user_model,
             verbose_name=_("Voted by"),
             blank=True, null=True,
             help_text=_("Only tickets having a vote by this user.")),
         not_assigned_to=dd.ForeignKey(
-            settings.SITE.user_model,
+            dd.plugins.tickets.end_user_model,
+            # settings.SITE.user_model,
             verbose_name=_("Not voted by"),
             blank=True, null=True,
             help_text=_("Only tickets having no vote by this user.")),
         feasable_by=dd.ForeignKey(
             # settings.SITE.user_model,
-            dd.plugins.faculties.supplier_model,
+            dd.plugins.tickets.end_user_model,
             verbose_name=_("Feasable by"), blank=True, null=True),
         interesting_for=dd.ForeignKey(
             'contacts.Partner',
@@ -544,12 +546,12 @@ class Tickets(dd.Table):
             # matches a skill supply authored by the specified user.
             faculties = set()
             for fac in rt.models.faculties.Faculty.objects.filter(
-                    competence__supplier=pv.feasable_by):
+                    competence__end_user=pv.feasable_by):
                 faculties |= set(fac.get_parental_line())
-            if True:  # TODO: test whether supplier_model inherits from User
-                for fac in rt.models.faculties.Faculty.objects.filter(
-                        competence__user=pv.feasable_by):
-                    faculties |= set(fac.get_parental_line())
+            # if True:  # TODO: test whether supplier_model inherits from User
+            #     for fac in rt.models.faculties.Faculty.objects.filter(
+            #             competence__user=pv.feasable_by):
+            #         faculties |= set(fac.get_parental_line())
             qs = qs.filter(demand__skill__in=faculties)
             qs = qs.distinct()
 
@@ -577,12 +579,19 @@ class Tickets(dd.Table):
         #     qs = qs.filter(closed=True)
 
         if pv.assigned_to:
+            # qs = qs.filter(
+            #     Q(votes_by_ticket__user=pv.assigned_to) |
+            #     Q(votes_by_ticket__end_user=pv.assigned_to)).distinct()
             qs = qs.filter(
                 votes_by_ticket__user=pv.assigned_to).distinct()
             
         if pv.not_assigned_to:
+            # print(20170318, self, qs.model, pv.not_assigned_to)
+            # qs = qs.exclude(
+            #     Q(votes_by_ticket__user_id=pv.not_assigned_to.id) |
+            #     Q(votes_by_ticket__end_user_id=pv.not_assigned_to.id))
             qs = qs.exclude(
-                votes_by_ticket__user=pv.not_assigned_to).distinct()
+                votes_by_ticket__user=pv.not_assigned_to)
             
         if pv.show_assigned == dd.YesNo.no:
             qs = qs.filter(vote__isnull=False).distinct()
@@ -657,11 +666,12 @@ class DuplicatesByTicket(Tickets):
     column_names = "id summary *"
 
 
-class SuggestedTickets(Tickets):
+class SuggestedTicketsByEndUser(Tickets):
     """Shows the tickets of other users which need help on a faculty for
     which I am competent.
 
     """
+    master = dd.plugins.tickets.end_user_model
     label = _("Where I can help")
     required_roles = dd.login_required(TicketsUser)
     column_names = 'overview:50 needed_skills ' \
@@ -673,10 +683,13 @@ class SuggestedTickets(Tickets):
 
     @classmethod
     def param_defaults(self, ar, **kw):
-        kw = super(SuggestedTickets, self).param_defaults(ar, **kw)
-        me = ar.get_user()
-        kw.update(not_assigned_to=me)
-        kw.update(feasable_by=me)
+        kw = super(SuggestedTicketsByEndUser, self).param_defaults(ar, **kw)
+        mi = ar.master_instance
+        if mi is None:
+            mi = ar.get_user()
+        # print("20170318 master instance is", mi)
+        # kw.update(not_assigned_to=mi)
+        kw.update(feasable_by=mi)
         # kw.update(show_assigned=dd.YesNo.no)
         kw.update(show_active=dd.YesNo.yes)
         return kw

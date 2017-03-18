@@ -25,12 +25,6 @@ class Plugin(ad.Plugin):
         In :ref:`noi` this points to :class:`Ticket
         <lino_noi.lib.tickets.models.Ticket>`.
 
-    .. attribute:: supplier_model
-
-        The model of objects to be used as :attr:`supplier
-        <lino_noi.lib.faculties.models.Competence.supplier>` of skill
-        offers. The tefault value is  :class:`Person
-        <lino_xl.lib.contacts.models.Person>`.
 
     """
 
@@ -45,11 +39,11 @@ class Plugin(ad.Plugin):
     # demander_model = 'contacts.Person'
     # supplier_model = 'contacts.Person'
     demander_model = 'contacts.Partner'
-    supplier_model = 'contacts.Partner'
+    # supplier_model = 'contacts.Partner'
 
     def on_site_startup(self, site):
         self.demander_model = site.models.resolve(self.demander_model)
-        self.supplier_model = site.models.resolve(self.supplier_model)
+        # self.supplier_model = site.models.resolve(self.supplier_model)
         super(Plugin, self).on_site_startup(site)
         
     def get_menu_group(self):
