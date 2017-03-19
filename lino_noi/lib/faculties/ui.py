@@ -33,9 +33,9 @@ class Skills(dd.Table):
     stay_in_grid = True
     detail_layout = """
     id name
-    skill_type parent affinity
-    remarks
-    SkillsByParent OffersBySkill
+    parent skill_type affinity
+    SkillsByParent:40 remarks:40
+    OffersBySkill DemandsBySkill
     """
     insert_layout = """
     name
@@ -62,7 +62,7 @@ class TopLevelSkills(Skills):
 class SkillsByParent(Skills):
     label = _("Child skills")
     master_key = 'parent'
-    column_names = 'seqno name affinity *'
+    column_names = 'seqno overview affinity *'
     order_by = ["seqno"]
     # order_by = ["parent", "seqno"]
     # order_by = ["name"]
@@ -119,12 +119,20 @@ class Demands(dd.Table):
     importance id
     """, window_size=(40, 'auto'))
 
+class DemandsBySkill(Demands):
+    label = _("Skill demands")
+    required_roles = dd.login_required()
+    master_key = 'skill'
+    column_names = 'demander importance *'
+    order_by = ["-importance", "-demander__id"]
+
 class DemandsByDemander(Demands):
     label = _("Wanted skills")
     required_roles = dd.login_required()
     master_key = 'demander'
     # column_names = 'skill importance user *'
     column_names = 'skill importance *'
+    order_by = ["-importance", "-skill__id"]
 
     # exclude_vote_states = 'author'
 

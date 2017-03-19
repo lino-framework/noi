@@ -42,11 +42,11 @@ class PersonDetail(PersonDetail):
     
     contact = dd.Panel("""
     address_box:60 contact_box:30
-    remarks 
+    remarks topics.InterestsByPartner
     """, label=_("Contact"))
 
     skills = dd.Panel("""
-    faculties.OffersByEndUser topics.InterestsByPartner
+    faculties.OffersByEndUser tickets.SuggestedTicketsByEndUser
     """, label=dd.plugins.faculties.verbose_name)
 
     tickets = dd.Panel("""

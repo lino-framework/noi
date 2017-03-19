@@ -31,7 +31,7 @@ class SkillType(BabelNamed):
 
 # class Faculty(BabelNamed, Hierarchical, Sequenced, Referrable):
 class Faculty(BabelNamed, Hierarchical, Sequenced):
-    """A **faculty** is a skill, knowledge or ability which can be
+    """A **skill** is a knowledge or ability which can be
     required in order to work e.g. on some ticket, and which
     individual users can have (offer) or not.
 
@@ -61,12 +61,12 @@ class Faculty(BabelNamed, Hierarchical, Sequenced):
     #                 "specifying additional options."))
 
 
-dd.update_field(Faculty, 'parent', verbose_name=_("Parent faculty"))
+dd.update_field(Faculty, 'parent', verbose_name=_("Parent skill"))
 
 
 class Competence(UserAuthored, Sequenced):
-    """A **competence** is when a given *user* is declared to be competent
-    in a given *faculty*.
+    """A **skill offer** is when a given *user* is declared to have a
+    given *skill*.
 
     .. attribute:: user
     .. attribute:: end_user
