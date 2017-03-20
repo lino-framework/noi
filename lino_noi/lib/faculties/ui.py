@@ -33,9 +33,9 @@ class Skills(dd.Table):
     stay_in_grid = True
     detail_layout = """
     id name
-    skill_type parent affinity
-    remarks
-    SkillsByParent OffersBySkill
+    parent skill_type affinity
+    SkillsByParent:40 remarks:40
+    OffersBySkill DemandsBySkill
     """
     insert_layout = """
     name
@@ -62,7 +62,7 @@ class TopLevelSkills(Skills):
 class SkillsByParent(Skills):
     label = _("Child skills")
     master_key = 'parent'
-    column_names = 'seqno name affinity *'
+    column_names = 'seqno overview affinity *'
     order_by = ["seqno"]
     # order_by = ["parent", "seqno"]
     # order_by = ["name"]
@@ -79,41 +79,30 @@ class Offers(dd.Table):
     order_by = ["id"]
 
     detail_layout = dd.DetailLayout("""
-    user supplier
+    user end_user
     faculty affinity
     description
     """, window_size=(60, 15))
 
 
-class OffersBySupplier(Offers):
+class OffersByEndUser(Offers):
     required_roles = dd.login_required()
-    master_key = 'supplier'
+    master_key = 'end_user'
     column_names = 'faculty description affinity *'
     order_by = ["faculty"]
-
-# class OffersByUser(OffersBySupplier):
-#     required_roles = dd.login_required()
-#     master_key = 'user'
-#     column_names = 'seqno faculty description affinity *'
-#     order_by = ["seqno"]
-
-#     @classmethod
-#     def get_filter_kw(self, ar, **kw):
-#         user = ar.master_instance
-#         return dict(supplier=user.partner)
+    
 
 class OffersBySkill(Offers):
     master_key = 'faculty'
-    column_names = 'user supplier affinity *'
+    column_names = 'user end_user affinity *'
     order_by = ["user"]
 
 
 class MyOffers(My, Offers):
     required_roles = dd.login_required(SkillsStaff)
     label = _("Skills managed by me")
-    column_names = 'faculty supplier description affinity *'
+    column_names = 'faculty end_user description affinity *'
     order_by = ["faculty"]
-
 
 
 class Demands(dd.Table):
@@ -130,12 +119,20 @@ class Demands(dd.Table):
     importance id
     """, window_size=(40, 'auto'))
 
+class DemandsBySkill(Demands):
+    label = _("Skill demands")
+    required_roles = dd.login_required()
+    master_key = 'skill'
+    column_names = 'demander importance *'
+    order_by = ["-importance", "-demander__id"]
+
 class DemandsByDemander(Demands):
     label = _("Wanted skills")
     required_roles = dd.login_required()
     master_key = 'demander'
     # column_names = 'skill importance user *'
     column_names = 'skill importance *'
+    order_by = ["-importance", "-skill__id"]
 
     # exclude_vote_states = 'author'
 
@@ -207,7 +204,7 @@ class OffersByDemander(Offers):
         html = []
 
         items = [
-            ar.obj2html(o, str(o.supplier)) for o in sar]
+            ar.obj2html(o, str(o.end_user)) for o in sar]
 
         if len(items) > 0:
             html += join_elems(items, sep=', ')

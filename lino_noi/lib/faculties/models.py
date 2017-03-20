@@ -31,7 +31,7 @@ class SkillType(BabelNamed):
 
 # class Faculty(BabelNamed, Hierarchical, Sequenced, Referrable):
 class Faculty(BabelNamed, Hierarchical, Sequenced):
-    """A **faculty** is a skill, knowledge or ability which can be
+    """A **skill** is a knowledge or ability which can be
     required in order to work e.g. on some ticket, and which
     individual users can have (offer) or not.
 
@@ -61,32 +61,36 @@ class Faculty(BabelNamed, Hierarchical, Sequenced):
     #                 "specifying additional options."))
 
 
-dd.update_field(Faculty, 'parent', verbose_name=_("Parent faculty"))
+dd.update_field(Faculty, 'parent', verbose_name=_("Parent skill"))
 
 
 class Competence(UserAuthored, Sequenced):
-    """A **competence** is when a given *user* is declared to be competent
-    in a given *faculty*.
+    """A **skill offer** is when a given *user* is declared to have a
+    given *skill*.
 
     .. attribute:: user
-    .. attribute:: supplier
+    .. attribute:: end_user
     .. attribute:: faculty
     .. attribute:: affinity
 
     """
     
-    allow_cascaded_delete = "supplier user"
+    allow_cascaded_delete = "end_user user"
 
     class Meta:
         verbose_name = _("Skill offer")
         verbose_name_plural = _("Skill offers")
-        unique_together = ['supplier', 'faculty']
+        unique_together = ['end_user', 'faculty']
 
     faculty = dd.ForeignKey('faculties.Faculty')
-    supplier = dd.ForeignKey(
-        dd.plugins.faculties.supplier_model,
-        verbose_name=_("Supplier"),
+    end_user=dd.ForeignKey(
+        dd.plugins.tickets.end_user_model,
+        verbose_name=_("End user"),
         blank=True, null=True)
+    # supplier = dd.ForeignKey(
+    #     dd.plugins.faculties.supplier_model,
+    #     verbose_name=_("Supplier"),
+    #     blank=True, null=True)
     affinity = models.IntegerField(
         _("Affinity"), blank=True, default=MAX_WEIGHT,
         help_text=_(

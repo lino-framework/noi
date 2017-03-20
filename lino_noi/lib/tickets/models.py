@@ -544,7 +544,7 @@ class Ticket(UserAuthored, mixins.CreatedModified,
         if ar is None:
             return ''
 
-        Supply = rt.models.faculties.Competence
+        Offer = rt.models.faculties.Competence
         Demand = rt.models.faculties.Demand
         faculties = set()
         for dem in Demand.objects.filter(demander=self):
@@ -552,9 +552,9 @@ class Ticket(UserAuthored, mixins.CreatedModified,
             # faculties |= set(dem.skill.get_parental_line())
 
         elems = []
-        for spl in Supply.objects.filter(faculty__in=faculties):
-            if spl.supplier is not None:
-                elems.append(spl.supplier.obj2href(ar))
+        for spl in Offer.objects.filter(faculty__in=faculties):
+            if spl.end_user is not None:
+                elems.append(spl.end_user.obj2href(ar))
         elems = join_elems(elems, ', ')
         return E.p(*elems)
 

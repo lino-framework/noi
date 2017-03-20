@@ -67,9 +67,9 @@ def tickets_objects():
         username__in='mathieu luc jean'.split()))
     END_USERS = Cycler(User.objects.filter(profile=''))
 
-    yield TT(**dd.str2kw('name', _("Bugfix")))
-    yield TT(**dd.str2kw('name', _("Enhancement")))
-    yield TT(**dd.str2kw('name', _("Upgrade")))
+    yield named(TT, _("Bugfix"))
+    yield named(TT, _("Enhancement"))
+    yield named(TT, _("Upgrade"))
 
     TYPES = Cycler(TT.objects.all())
 
@@ -295,77 +295,101 @@ def clockings_objects():
     yield ServiceReport(
         start_date=dd.today(-90), interesting_for=welket)
 
+from lino.utils.mldbc import babel_named as named
 
 def faculties_objects():
     "was previously in faculties.fixtures.demo2"
 
     Faculty = rt.models.faculties.Faculty
     Competence = rt.models.faculties.Competence
+    Demand = rt.models.faculties.Demand
+    # Ticket = rt.models.tickets.Ticket
     User = rt.models.users.User
 
-    yield Faculty(**dd.str2kw('name', 'Analysis'))
-    yield Faculty(**dd.str2kw('name', 'Code changes'))
-    yield Faculty(**dd.str2kw('name', 'Documentation'))
-    yield Faculty(**dd.str2kw('name', 'Testing'))
-    yield Faculty(**dd.str2kw('name', 'Configuration'))
-    yield Faculty(**dd.str2kw('name', 'Enhancement'))
-    yield Faculty(**dd.str2kw('name', 'Optimization'))
-    yield Faculty(**dd.str2kw('name', 'Offer'))
+    yield named(Faculty, _('Analysis'))
+    yield named(Faculty, _('Code changes'))
+    yield named(Faculty, _('Documentation'))
+    yield named(Faculty, _('Testing'))
+    yield named(Faculty, _('Configuration'))
+    yield named(Faculty, _('Enhancement'))
+    yield named(Faculty, _('Optimization'))
+    yield named(Faculty, _('Offer'))
 
-    Analysis = Faculty.objects.get(name="Analysis")
-    Code_changes = Faculty.objects.get(name="Code changes")
-    Documentation = Faculty.objects.get(name="Documentation")
-    Testing = Faculty.objects.get(name="Testing")
-    Configuration = Faculty.objects.get(name="Configuration")
+    SKILLS = Cycler(Faculty.objects.all())
+    END_USERS = Cycler(dd.plugins.tickets.end_user_model.objects.all())
 
-    mathieu = User.objects.get(username="mathieu")
-    Robin = User.objects.get(first_name="Robin")
-    luc = User.objects.get(username="luc")
+    i = 0
+    for j in range(2):
+        for u in User.objects.all():
+            i += 1
+            yield Competence(user=u, faculty=SKILLS.pop())
+            if i % 2:
+                yield Competence(user=u, faculty=SKILLS.pop())
+            if i % 3:
+                yield Competence(
+                    user=u, faculty=SKILLS.pop(),
+                    end_user=END_USERS.pop())
+            
+    for i, t in enumerate(
+            dd.plugins.faculties.demander_model.objects.all()):
+        yield Demand(demander=t, skill=SKILLS.pop())
+        if i % 3:
+            yield Demand(demander=t, skill=SKILLS.pop())
 
-    if dd.get_language_info('de'):
-        Rolf = User.objects.get(first_name="Rolf")
-        yield Competence(faculty=Analysis, user=Rolf)
-        yield Competence(faculty=Code_changes, user=Rolf, affinity=70)
-        yield Competence(faculty=Documentation, user=Rolf, affinity=71)
-        yield Competence(faculty=Testing, user=Rolf, affinity=42)
-        yield Competence(faculty=Configuration, user=Rolf, affinity=62)
+    # Analysis = Faculty.objects.get(name="Analysis")
+    # Code_changes = Faculty.objects.get(name="Code changes")
+    # Documentation = Faculty.objects.get(name="Documentation")
+    # Testing = Faculty.objects.get(name="Testing")
+    # Configuration = Faculty.objects.get(name="Configuration")
 
-    if dd.get_language_info('fr'):
-        Romain = User.objects.get(first_name="Romain")
-        yield Competence(faculty=Code_changes, user=Romain, affinity=76)
-        yield Competence(faculty=Documentation, user=Romain, affinity=92)
-        yield Competence(faculty=Testing, user=Romain, affinity=98)
-        yield Competence(faculty=Configuration, user=Romain, affinity=68)
+    # mathieu = User.objects.get(username="mathieu")
+    # Robin = User.objects.get(first_name="Robin")
+    # luc = User.objects.get(username="luc")
 
-    yield Competence(faculty=Analysis, user=Robin, affinity=23)
-    yield Competence(faculty=Analysis, user=luc, affinity=120)
+    # if dd.get_language_info('de'):
+    #     Rolf = User.objects.get(first_name="Rolf")
+    #     yield Competence(faculty=Analysis, user=Rolf)
+    #     yield Competence(faculty=Code_changes, user=Rolf, affinity=70)
+    #     yield Competence(faculty=Documentation, user=Rolf, affinity=71)
+    #     yield Competence(faculty=Testing, user=Rolf, affinity=42)
+    #     yield Competence(faculty=Configuration, user=Rolf, affinity=62)
 
-    yield Competence(faculty=Code_changes, user=luc, affinity=150)
+    # if dd.get_language_info('fr'):
+    #     Romain = User.objects.get(first_name="Romain")
+    #     yield Competence(faculty=Code_changes, user=Romain, affinity=76)
+    #     yield Competence(faculty=Documentation, user=Romain, affinity=92)
+    #     yield Competence(faculty=Testing, user=Romain, affinity=98)
+    #     yield Competence(faculty=Configuration, user=Romain, affinity=68)
 
-    yield Competence(faculty=Documentation, user=luc, affinity=75)
-    yield Competence(faculty=Documentation, user=mathieu, affinity=46)
+    # yield Competence(faculty=Analysis, user=Robin, affinity=23)
+    # yield Competence(faculty=Analysis, user=luc, affinity=120)
 
-    yield Competence(faculty=Testing, user=Robin, affinity=65)
-    yield Competence(faculty=Testing, user=mathieu, affinity=42)
+    # yield Competence(faculty=Code_changes, user=luc, affinity=150)
 
-    yield Competence(faculty=Configuration, user=luc, affinity=46)
-    yield Competence(faculty=Configuration, user=mathieu, affinity=92)
+    # yield Competence(faculty=Documentation, user=luc, affinity=75)
+    # yield Competence(faculty=Documentation, user=mathieu, affinity=46)
 
-    Bar_cannot_foo = rt.models.tickets.Ticket.objects.get(summary='Bar cannot foo')
-    Bar_cannot_foo.faculty = Documentation
-    Bar_cannot_foo.save()
+    # yield Competence(faculty=Testing, user=Robin, affinity=65)
+    # yield Competence(faculty=Testing, user=mathieu, affinity=42)
 
-    Sell_bar_in_baz = rt.models.tickets.Ticket.objects.get(summary='Sell bar in baz')
-    Sell_bar_in_baz.faculty = Analysis
-    Sell_bar_in_baz.save()
+    # yield Competence(faculty=Configuration, user=luc, affinity=46)
+    # yield Competence(faculty=Configuration, user=mathieu, affinity=92)
 
-    Foo_cannot_bar = rt.models.tickets.Ticket.objects.get(summary='Foo cannot bar')
-    Foo_cannot_bar.faculty = Code_changes
-    Foo_cannot_bar.save()
+    # Bar_cannot_foo = rt.models.tickets.Ticket.objects.get(summary='Bar cannot foo')
+    # Bar_cannot_foo.faculty = Documentation
+    # Bar_cannot_foo.save()
 
-    Foo_never_matches_Bar = rt.models.tickets.Ticket.objects.get(summary='Foo never matches Bar')
-    Foo_never_matches_Bar.faculty = Testing
-    Foo_never_matches_Bar.save()
+    # Sell_bar_in_baz = rt.models.tickets.Ticket.objects.get(summary='Sell bar in baz')
+    # Sell_bar_in_baz.faculty = Analysis
+    # Sell_bar_in_baz.save()
+
+    # Foo_cannot_bar = rt.models.tickets.Ticket.objects.get(summary='Foo cannot bar')
+    # Foo_cannot_bar.faculty = Code_changes
+    # Foo_cannot_bar.save()
+
+    # Foo_never_matches_Bar = rt.models.tickets.Ticket.objects.get(summary='Foo never matches Bar')
+    # Foo_never_matches_Bar.faculty = Testing
+    # Foo_never_matches_Bar.save()
 
 def votes_objects():
 
