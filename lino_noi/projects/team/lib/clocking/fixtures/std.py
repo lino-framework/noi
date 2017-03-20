@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2016 Luc Saffre
 # License: BSD (see file COPYING for details)
-from lino_noi.lib.clocking.fixtures.std import objects as parent_objects
+from lino_xl.lib.clocking.fixtures.std import objects as parent_objects
 
 from lino.api import rt, dd
 

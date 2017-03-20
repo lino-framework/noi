@@ -20,8 +20,8 @@ possible to publish **service reports**.
     >>> from lino.api.doctest import *
 
 
-Lino Noi uses both :mod:`lino_noi.lib.tickets` (Ticket management) and
-:mod:`lino_noi.lib.clocking` (Worktime tracking).
+Lino Noi uses both :mod:`lino_xl.lib.tickets` (Ticket management) and
+:mod:`lino_xl.lib.clocking` (Worktime tracking).
 
 
 .. contents::
@@ -31,7 +31,7 @@ Lino Noi uses both :mod:`lino_noi.lib.tickets` (Ticket management) and
 Tickets versus Clocking
 =======================
 
-Note that :mod:`lino_noi.lib.clocking` and :mod:`lino_noi.lib.tickets`
+Note that :mod:`lino_xl.lib.clocking` and :mod:`lino_xl.lib.tickets`
 are independent modules which might be reused by other applicaton.
 Lino Noi uses them both and extends the "library" versions:
 
@@ -47,7 +47,7 @@ lino_noi.projects.team.lib.tickets
 For example, a service report is part of the clocking plugin, but the
 current implementation is defined in
 :class:`lino_noi.projects.team.lib.clocking.models.ServiceReport` (not
-in :mod:`lino_noi.lib.clocking`) because it makes sense only if you
+in :mod:`lino_xl.lib.clocking`) because it makes sense only if you
 have both clocking and tickets.
 
 
@@ -55,7 +55,7 @@ have both clocking and tickets.
 ['lino_noi.projects.team.lib.tickets']
 
 >>> dd.plugins.tickets.needs_plugins
-['lino_xl.lib.excerpts', 'lino_xl.lib.topics', 'lino.modlib.comments', 'lino.modlib.changes', 'lino_noi.lib.votes', 'lino_noi.lib.noi']
+['lino_xl.lib.excerpts', 'lino_xl.lib.topics', 'lino.modlib.comments', 'lino.modlib.changes', 'lino_xl.lib.votes', 'lino_noi.lib.noi']
 
 See also :attr:`needs_plugins <lino.core.plugin.Plugin.needs_plugins>`.
 
@@ -97,7 +97,7 @@ A **senior** is a developer who additionaly can triage tickets.
 
 Here is a list of user profiles of those who can work on tickets:
 
->>> from lino_noi.lib.clocking.roles import Worker
+>>> from lino_xl.lib.clocking.roles import Worker
 >>> UserTypes = rt.modules.users.UserTypes
 >>> [p.name for p in UserTypes.items()
 ...     if p.has_required_roles([Worker])]

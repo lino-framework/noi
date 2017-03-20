@@ -58,9 +58,9 @@ class Site(Site):
 
         yield 'lino_noi.lib.topics'
         yield 'lino_noi.lib.contacts'
-        yield 'lino_noi.lib.votes'
+        yield 'lino_xl.lib.votes'
         yield 'lino_noi.projects.care.lib.tickets'
-        yield 'lino_noi.lib.faculties'
+        yield 'lino_xl.lib.faculties'
 
         yield 'lino.modlib.changes'
         yield 'lino.modlib.notify'

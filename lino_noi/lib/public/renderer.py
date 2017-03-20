@@ -3,7 +3,7 @@
 # License: BSD (see file COPYING for details)
 from lino.modlib.bootstrap3.renderer import Renderer
 
-from lino_noi.lib.tickets.models import Ticket
+from lino_xl.lib.tickets.models import Ticket
 
 
 class Renderer(Renderer):

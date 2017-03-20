@@ -2,7 +2,7 @@
 # Copyright 2016-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-from lino_noi.lib.tickets.models import *
+from lino_xl.lib.tickets.models import *
 from lino.api import _
 
 Ticket.hide_elements('closed')

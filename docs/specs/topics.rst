@@ -17,7 +17,7 @@ Topics in Lino Noi
 
 
 This document specifies the ticket management functions of Lino Noi,
-implemented in :mod:`lino_noi.lib.tickets`.
+implemented in :mod:`lino_xl.lib.tickets`.
 
 
 .. contents::
@@ -28,7 +28,7 @@ implemented in :mod:`lino_noi.lib.tickets`.
 Topics
 ========
 
-The :attr:`topic <lino_noi.lib.tickets.models.Ticket.topic>` of a
+The :attr:`topic <lino_xl.lib.tickets.models.Ticket.topic>` of a
 ticket is what Trac calls "component". Topics are a "customer-side"
 classification of the different components which are being developed
 by the team that uses a given Lino Noi site.

@@ -64,10 +64,10 @@ class Site(Site):
         # yield 'lino_noi.lib.products'
 
         yield 'lino_noi.lib.topics'
-        yield 'lino_noi.lib.votes'
+        yield 'lino_xl.lib.votes'
         yield 'lino_noi.projects.team.lib.tickets'
-        yield 'lino_noi.lib.faculties'
-        yield 'lino_noi.lib.deploy'
+        yield 'lino_xl.lib.faculties'
+        yield 'lino_xl.lib.deploy'
         yield 'lino_noi.projects.team.lib.clocking'
         yield 'lino_xl.lib.lists'
         yield 'lino_xl.lib.blogs'

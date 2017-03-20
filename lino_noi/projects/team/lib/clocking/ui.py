@@ -9,17 +9,17 @@
 import six
 
 from lino_xl.lib.cal.utils import when_text
-from lino_noi.lib.clocking.ui import *
+from lino_xl.lib.clocking.ui import *
 from lino.api import _
 
 from django.db.models import Q
 
 
-from lino_noi.lib.tickets.models import Project
-from lino_noi.lib.tickets.ui import Tickets, Projects
-from lino_noi.lib.tickets.models import Ticket
-from lino_noi.lib.clocking.roles import Worker
-from lino_noi.lib.clocking.choicelists import ReportingTypes
+from lino_xl.lib.tickets.models import Project
+from lino_xl.lib.tickets.ui import Tickets, Projects
+from lino_xl.lib.tickets.models import Ticket
+from lino_xl.lib.clocking.roles import Worker
+from lino_xl.lib.clocking.choicelists import ReportingTypes
 
 class TOTAL_KEY(object):
     pass

@@ -10,14 +10,12 @@ Memo commands
     
     doctest init:
 
-    >>> from __future__ import print_function 
-    >>> from __future__ import unicode_literals
     >>> from lino import startup
     >>> startup('lino_noi.projects.team.settings.demo')
     >>> from lino.api.doctest import *
 
 The :attr:`description
-<lino_noi.lib.tickets.models.Ticket.description>` of a ticket and the
+<lino_xl.lib.tickets.models.Ticket.description>` of a ticket and the
 text of a comment (:mod:`short_text
 <lino.modlib.comments.models.Comment.short_text>`) are rich HTML text
 fields which can contain simple HTML formatting like links, tables,
@@ -113,25 +111,27 @@ Usage examples:
 
 - ``[py lino]``
 - ``[py lino.utils.memo]``
-- ``[py lino_noi.lib.tickets.models.Project]``
-- ``[py lino_noi.lib.tickets.models.Project tickets.Project]``
+- ``[py lino_xl.lib.tickets.models.Project]``
+- ``[py lino_xl.lib.tickets.models.Project tickets.Project]``
   
 ..  
     >>> ses = rt.login()
     >>> print(ses.parse_memo("[py lino]."))
-    <a href="https://github.com/lsaffre/lino/blob/master/lino/__init__.py" target="_blank">lino</a>.
-    >>> print(ses.parse_memo("[py lino_noi.lib.tickets.models.Project]."))
-    <a href="https://github.com/lsaffre/noi/blob/master/lino_noi/lib/tickets/models.py" target="_blank">lino_noi.lib.tickets.models.Project</a>.
-    >>> print(ses.parse_memo("[py lino_noi.lib.tickets.models.Project.foo]."))
-    <a href="Oops: type object 'Project' has no attribute 'foo'" target="_blank">lino_noi.lib.tickets.models.Project.foo</a>.
+    <a href="https://github.com/lino-framework/lino/blob/master/lino/__init__.py" target="_blank">lino</a>.
     
-    >>> print(ses.parse_memo("[py lino_noi.lib.tickets.models.Project Project]."))
-    <a href="https://github.com/lsaffre/noi/blob/master/lino_noi/lib/tickets/models.py" target="_blank">Project</a>.
+    >>> print(ses.parse_memo("[py lino_xl.lib.tickets.models.Project]."))
+    <a href="https://github.com/lino-framework/xl/blob/master/lino_xl/lib/tickets/models.py" target="_blank">lino_xl.lib.tickets.models.Project</a>.
+    
+    >>> print(ses.parse_memo("[py lino_xl.lib.tickets.models.Project.foo]."))
+    <a href="Oops: type object 'Project' has no attribute 'foo'" target="_blank">lino_xl.lib.tickets.models.Project.foo</a>.
+    
+    >>> print(ses.parse_memo("[py lino_xl.lib.tickets.models.Project Project]."))
+    <a href="https://github.com/lino-framework/xl/blob/master/lino_xl/lib/tickets/models.py" target="_blank">Project</a>.
 
     Non-breaking spaces are removed from command text:
     
     >>> print(ses.parse_memo(u"[py lino]."))
-    <a href="https://github.com/lsaffre/lino/blob/master/lino/__init__.py" target="_blank">lino</a>.
+    <a href="https://github.com/lino-framework/lino/blob/master/lino/__init__.py" target="_blank">lino</a>.
 
 
 

@@ -30,9 +30,9 @@ A new :mod:`lino.modlib.hosting` plugin would add the following models.
 
 Dependencies:
 
-- :mod:`lino.modlib.hosting` would need :mod:`lino_noi.lib.tickets`,
+- :mod:`lino.modlib.hosting` would need :mod:`lino_xl.lib.tickets`,
   and it would extend the :mod:`Ticket
-  <lino_noi.lib.tickets.models.Ticket>` model by injecting a field
+  <lino_xl.lib.tickets.models.Ticket>` model by injecting a field
   ``site`` which points to the *site* where the problem was observed.
 
 The **only goal** of all this (in a first stage) is to know the
@@ -51,4 +51,4 @@ the `diag` command output our current timestamp, and to enter these
 timestamps manually.
 
 And it seems that the **Milestone** model (currently in
-:mod:`lino_noi.lib.tickets`) can go away.
+:mod:`lino_xl.lib.tickets`) can go away.

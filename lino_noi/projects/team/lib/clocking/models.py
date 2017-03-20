@@ -8,11 +8,11 @@
 """
 from __future__ import unicode_literals
 
-from lino_noi.lib.clocking.models import *
+from lino_xl.lib.clocking.models import *
 from lino.api import _
 from lino.mixins.periods import DatePeriod
 from lino_xl.lib.excerpts.mixins import Certifiable
-from lino_noi.lib.tickets.choicelists import TicketStates
+from lino_xl.lib.tickets.choicelists import TicketStates
 from .actions import StartTicketSessionViaVote, EndTicketSessionViaVote, StartTicketSessionViaSession
 
 

@@ -12,12 +12,12 @@ from lino.utils import Cycler, i2d
 
 from lino.core.roles import SiteAdmin
 from lino_xl.lib.cal.choicelists import DurationUnits
-from lino_noi.lib.clocking.roles import Worker
+from lino_xl.lib.clocking.roles import Worker
 from lino.utils.quantities import Duration
 
 from lino_noi.lib.users.models import create_user
 
-from lino_noi.lib.clocking.choicelists import ReportingTypes
+from lino_xl.lib.clocking.choicelists import ReportingTypes
 
 def vote(user, ticket, state, **kw):
     u = rt.models.users.User.objects.get(username=user)

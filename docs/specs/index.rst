@@ -16,10 +16,6 @@ The default variant ("team")
    :glob:
   
    general
-   tickets
-   votes
-   clocking
-   faculties
    topics
    smtpd
    hosts
@@ -27,7 +23,6 @@ The default variant ("team")
    ddh
    memo
    db
-   projects
    std
    public
    bs3

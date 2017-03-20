@@ -20,9 +20,9 @@ from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsUser, ContactsStaff
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino.modlib.comments.roles import CommentsReader, CommentsUser, CommentsStaff
-from lino_noi.lib.tickets.roles import TicketsUser, Searcher, Triager, TicketsStaff
-from lino_noi.lib.clocking.roles import Worker
-from lino_noi.lib.votes.roles import VotesStaff, VotesUser
+from lino_xl.lib.tickets.roles import TicketsUser, Searcher, Triager, TicketsStaff
+from lino_xl.lib.clocking.roles import Worker
+from lino_xl.lib.votes.roles import VotesStaff, VotesUser
 
 from lino.modlib.users.choicelists import UserTypes
 from django.utils.translation import ugettext_lazy as _

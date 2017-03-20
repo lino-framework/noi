@@ -40,8 +40,8 @@ Lino Noi:
 - contacts.CompanyType :
   - PROTECT : contacts.Company.type
 - contacts.Partner :
-  - CASCADE : contacts.Company.partner_ptr, contacts.Person.partner_ptr, faculties.Competence.supplier
-  - PROTECT : clocking.ServiceReport.interesting_for, lists.Member.partner, tickets.Site.partner, topics.Interest.partner
+  - CASCADE : contacts.Company.partner_ptr, contacts.Person.partner_ptr, faculties.Competence.end_user
+  - PROTECT : clocking.ServiceReport.interesting_for, lists.Member.partner, tickets.Site.partner, tickets.Ticket.end_user, topics.Interest.partner
 - contacts.Person :
   - CASCADE : users.User.person_ptr
   - PROTECT : contacts.Role.person, excerpts.Excerpt.contact_person, tickets.Project.contact_person
@@ -91,5 +91,5 @@ Lino Noi:
   - PROTECT : uploads.Upload.type
 - users.User :
   - CASCADE : faculties.Competence.user
-  - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, dashboard.Widget.user, excerpts.Excerpt.user, notify.Message.user, tickets.Competence.user, tickets.Project.assign_to, tickets.Ticket.end_user, tickets.Ticket.reporter, tickets.Ticket.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user, votes.Vote.user
+  - PROTECT : blogs.Entry.user, changes.Change.user, clocking.ServiceReport.user, clocking.Session.user, comments.Comment.user, dashboard.Widget.user, excerpts.Excerpt.user, notify.Message.user, tickets.Competence.user, tickets.Project.assign_to, tickets.Ticket.reporter, tickets.Ticket.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user, votes.Vote.user
 <BLANKLINE>

@@ -50,8 +50,8 @@ This document describes the database structure.
  django_mailbox.MessageAttachment   django_mailbox.MessageAttachmentTable   4         0
  excerpts.Excerpt                   excerpts.Excerpts                       12        2
  excerpts.ExcerptType               excerpts.ExcerptTypes                   17        2
- faculties.Competence               faculties.Offers                        7         18
- faculties.Demand                   faculties.Demands                       4         0
+ faculties.Competence               faculties.Offers                        7         26
+ faculties.Demand                   faculties.Demands                       4         193
  faculties.Faculty                  faculties.Skills                        9         8
  faculties.SkillType                faculties.SkillTypes                    4         0
  gfks.HelpText                      gfks.HelpTexts                          4         1

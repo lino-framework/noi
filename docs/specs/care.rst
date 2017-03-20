@@ -119,7 +119,7 @@ As a **simple user** you can
   :class:`tickets.MyTickets`
          
 - answer to help requests of other users ("Where I *can* help")
-  :class:`tickets.SuggestedTickets`.
+  :class:`tickets.SuggestedTicketsByEndUser`.
   Here you can offer your help for a particular request.
   
 - see your own help offer ("Where I *offered* help"). A help offer is
@@ -173,16 +173,16 @@ requester and the provider of help:
 
 - Every help request will require a given faculty.
 
-The *Where can I help* list (SuggestedTickets) is based on your
-competences and the required faculties of open requests, i.e. Lino
-will not bother you with requests for which you aren't competent.
+The *Where can I help* list is based on your competences and the
+required faculties of open requests, i.e. Lino will not bother you
+with requests for which you aren't competent.
 
 
 >>> rt.show(faculties.AllSkills)
 ... #doctest: +REPORT_UDIFF
-========================== ============================= ============================ ================ ============ =========
- Designation                Designation (de)              Designation (fr)             Parent faculty   Skill type   Remarks
--------------------------- ----------------------------- ---------------------------- ---------------- ------------ ---------
+========================== ============================= ============================ =============== ============ =========
+ Designation                Designation (de)              Designation (fr)             Parent skill    Skill type   Remarks
+-------------------------- ----------------------------- ---------------------------- --------------- ------------ ---------
  Babysitting                Babysitting                   Garde enfant
  Car driving                Fahrdienst                    Voiture
  French lessons             Französischunterricht         Cours de francais            Teaching
@@ -203,15 +203,15 @@ will not bother you with requests for which you aren't competent.
  Teaching                   Unterricht                    Cours
  Translations               Übersetzungsarbeiten          Traductions
  Write letters              Briefe schreiben              Écrire des lettres
-========================== ============================= ============================ ================ ============ =========
+========================== ============================= ============================ =============== ============ =========
 <BLANKLINE>
 
 
 >>> rt.show(faculties.TopLevelSkills)
 ... #doctest: +REPORT_UDIFF
-========================== ============================= ============================ ========= =================================================================== ================
- Designation                Designation (de)              Designation (fr)             Remarks   Children                                                            Parent faculty
--------------------------- ----------------------------- ---------------------------- --------- ------------------------------------------------------------------- ----------------
+========================== ============================= ============================ ========= =================================================================== ==============
+ Designation                Designation (de)              Designation (fr)             Remarks   Children                                                            Parent skill
+-------------------------- ----------------------------- ---------------------------- --------- ------------------------------------------------------------------- --------------
  Babysitting                Babysitting                   Garde enfant
  Car driving                Fahrdienst                    Voiture
  Go out with dogs           Hunde spazierenführen         Chiens
@@ -223,7 +223,7 @@ will not bother you with requests for which you aren't competent.
  Teaching                   Unterricht                    Cours                                  *French lessons*, *German lessons*, *Maths lessons*
  Translations               Übersetzungsarbeiten          Traductions
  Write letters              Briefe schreiben              Écrire des lettres
-========================== ============================= ============================ ========= =================================================================== ================
+========================== ============================= ============================ ========= =================================================================== ==============
 <BLANKLINE>
 
 
@@ -248,7 +248,7 @@ will not bother you with requests for which you aren't competent.
 Configuring your preferences
 ============================
 
->>> show_choices('alex', '/choices/faculties/OffersBySupplier/faculty')
+>>> show_choices('alex', '/choices/faculties/OffersByEndUser/faculty')
 Babysitting
 Car driving
 French lessons
@@ -338,9 +338,9 @@ The main menu
 >>> rt.login('robin').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Persons, Organizations, Partners
-- Votes : My candidatures, My tasks, My watchlist, My votes
+- Votes : My tasks, My watchlist, My candidatures, My votes
 - Office : My Excerpts, My Comments, My Notification messages, My Uploads
-- Projects : My Competences, My Tickets, Where I can help, Active tickets, All tickets, Unassigned Tickets
+- Projects : My projects, My Tickets, Where I can help, Active tickets, All tickets, Unassigned Tickets
 - Reports :
   - System : Broken GFKs
 - Configure :
@@ -364,9 +364,9 @@ The main menu
 
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Votes : My candidatures, My tasks, My watchlist, My votes
+- Votes : My tasks, My watchlist, My candidatures, My votes
 - Office : My Comments, My Notification messages, My Uploads
-- Projects : My Competences, My Tickets, Where I can help
+- Projects : My projects, My Tickets, Where I can help
 - Site : About
 
 Lists of pleas
@@ -391,11 +391,12 @@ My pleas
 Where I can help
 ----------------
 
->>> rt.login('eric').show(tickets.SuggestedTickets)
+>>> rt.login('eric').show(tickets.SuggestedTicketsByEndUser)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ==================================================================================== ============================= ==============
  Description                                                                          Needed skills                 Actions
 ------------------------------------------------------------------------------------ ----------------------------- --------------
+ `#5 (Who would play music on my birthday party?) <Detail>`__ by `Alex <Detail>`__    `Music <Detail>`__            [★] **Open**
  `#4 (Who can give guitar lessons to my daughter?) <Detail>`__ by `Alex <Detail>`__   `Guitar lessons <Detail>`__   [☆] **Open**
 ==================================================================================== ============================= ==============
 <BLANKLINE>
@@ -481,7 +482,7 @@ the detail window of a ticket.
       - (general1_3): **Site** (site), **Actions** (workflow_buttons)
     - **Votes** (VotesByVotable) [visible for user connector admin]
     - **Uploads** (UploadsByController) [visible for user connector admin]
-  - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user connector admin], **Skill demands** (DemandsByDemander) [visible for user connector admin]
+  - (general_2): **Description** (description), **Comments** (CommentsByRFC) [visible for user connector admin], **Wanted skills** (DemandsByDemander) [visible for user connector admin]
 - **History** (changes.ChangesByMaster) [visible for connector admin]
 - **More** (more) [visible for connector admin]:
   - (more1) [visible for all]:

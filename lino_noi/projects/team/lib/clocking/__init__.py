@@ -14,7 +14,7 @@ See :ref:`noi.specs.clocking`.
 
 """
 
-from lino_noi.lib.clocking import *
+from lino_xl.lib.clocking import *
 
 
 class Plugin(Plugin):

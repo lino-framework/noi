@@ -35,9 +35,9 @@ Das Hauptmenü
 >>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen, Organisationen, Partner
-- Stimmabgaben : Meine Kandidaturen, Meine Aufgaben, Meine Interessen, Meine Stimmabgaben
+- Stimmabgaben : Meine Aufgaben, Meine Interessen, Meine Kandidaturen, Meine Stimmabgaben
 - Büro : Meine Auszüge, Meine Kommentare, Meine Benachrichtigungen, Meine Uploads
-- Projekte : Meine Zuständigkeiten, Meine Anfragen, Wo ich helfen kann, Aktive Tickets, Alle Tickets, Nicht zugewiesene Tickets
+- Projekte : Meine Projekte, Meine Anfragen, Wo ich helfen kann, Aktive Tickets, Alle Tickets, Nicht zugewiesene Tickets
 - Berichte :
   - System : Broken GFKs
 - Konfigurierung :
@@ -61,9 +61,9 @@ Das Hauptmenü
 
 >>> rt.login('berta').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Stimmabgaben : Meine Kandidaturen, Meine Aufgaben, Meine Interessen, Meine Stimmabgaben
+- Stimmabgaben : Meine Aufgaben, Meine Interessen, Meine Kandidaturen, Meine Stimmabgaben
 - Büro : Meine Kommentare, Meine Benachrichtigungen, Meine Uploads
-- Projekte : Meine Zuständigkeiten, Meine Anfragen, Wo ich helfen kann
+- Projekte : Meine Projekte, Meine Anfragen, Wo ich helfen kann
 - Site : Info
 
 Bewertungen

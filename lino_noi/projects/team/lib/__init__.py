@@ -12,4 +12,4 @@
 
 """
 
-# from lino_noi.lib.tickets import *
+# from lino_xl.lib.tickets import *

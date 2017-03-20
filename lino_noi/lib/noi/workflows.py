@@ -5,8 +5,8 @@
 """The default :attr:`workflows_module
 <lino.core.site.Site.workflows_module>` for :ref:`noi` applications.
 
-This workflow requires that both :mod:`lino_noi.lib.tickets` and
-:mod:`lino_noi.lib.votes` are installed.
+This workflow requires that both :mod:`lino_xl.lib.tickets` and
+:mod:`lino_xl.lib.votes` are installed.
 
 If :attr:`use_new_unicode_symbols
 <lino.core.site.Site.use_new_unicode_symbols>` is True, ticket states
@@ -26,9 +26,9 @@ from lino.api import dd, rt, _, pgettext
 
 from lino.utils.instantiator import create_row
 
-from lino_noi.lib.tickets.choicelists import TicketStates
-from lino_noi.lib.tickets.roles import Triager
-from lino_noi.lib.votes.choicelists import VoteStates, Ratings
+from lino_xl.lib.tickets.choicelists import TicketStates
+from lino_xl.lib.tickets.roles import Triager
+from lino_xl.lib.votes.choicelists import VoteStates, Ratings
 from lino.modlib.notify.actions import NotifyingAction
 
 """
