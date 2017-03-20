@@ -59,29 +59,14 @@ class SpecsTests(BaseTestCase):
     def test_hosts(self):
         self.run_simple_doctests('docs/specs/hosts.rst')
 
-    def test_tickets(self):
-        self.run_simple_doctests('docs/specs/tickets.rst')
-
-    def test_votes(self):
-        self.run_simple_doctests('docs/specs/votes.rst')
-
     def test_topics(self):
         self.run_simple_doctests('docs/specs/topics.rst')
-
-    def test_projects(self):
-        self.run_simple_doctests('docs/specs/projects.rst')
-
-    def test_faculties(self):
-        self.run_simple_doctests('docs/specs/faculties.rst')
-
+        
     def test_public(self):
         self.run_simple_doctests('docs/specs/public.rst')
 
     def test_bs3(self):
         self.run_simple_doctests('docs/specs/bs3.rst')
-
-    def test_clocking(self):
-        self.run_simple_doctests('docs/specs/clocking.rst')
 
     def test_general(self):
         self.run_simple_doctests('docs/specs/general.rst')

@@ -12,7 +12,7 @@ from lino.api import _
 
 from lino.core import actions
 # from lino.modlib.office.roles import OfficeUser
-from lino_noi.lib.clocking.roles import Worker
+from lino_xl.lib.clocking.roles import Worker
 from .choicelists import UserStates
 
 from lino.modlib.users.actions import SendWelcomeMail

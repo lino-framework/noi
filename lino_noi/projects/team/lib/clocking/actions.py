@@ -5,7 +5,7 @@
 
 from lino.api import dd, rt, _
 
-from lino_noi.lib.clocking.actions import WorkerAction, EndTicketSession, StartTicketSession
+from lino_xl.lib.clocking.actions import WorkerAction, EndTicketSession, StartTicketSession
 
 
 class WorkerActionViaVote(WorkerAction):

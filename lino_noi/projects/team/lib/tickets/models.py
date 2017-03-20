@@ -8,7 +8,7 @@ Defines a customized :class:`TicketDetail`.
 
 """
 
-from lino_noi.lib.tickets.models import *
+from lino_xl.lib.tickets.models import *
 from lino.api import _
 
 

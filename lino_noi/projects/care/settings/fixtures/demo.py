@@ -7,7 +7,7 @@ from __future__ import unicode_literals
 from lino.api import rt, _
 from lino.utils.cycler import Cycler
 from lino.utils.instantiator import create_row
-from lino_noi.lib.tickets.choicelists import TicketStates
+from lino_xl.lib.tickets.choicelists import TicketStates
 
 from lino.api.dd import str2kw
 from lino.api import dd
