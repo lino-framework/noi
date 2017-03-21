@@ -73,3 +73,11 @@ add('300', _("Hoster"),           Consultant, 'hoster')
 add('400', _("Developer"),        Developer, 'developer')
 add('490', _("Senior developer"), Senior, 'senior')
 add('900', _("Administrator"),    SiteAdmin, 'admin')
+
+
+from lino.core.merge import MergeAction
+from lino.api import rt
+lib = rt.models
+for m in (lib.contacts.Company, ):
+    m.define_action(merge_row=MergeAction(
+        m, required_roles=set([ContactsStaff])))
