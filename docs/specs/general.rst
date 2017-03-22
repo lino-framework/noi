@@ -4,11 +4,6 @@
 Lino Noi Overview
 =================
 
-The goal of Lino Noi is managing **tickets** (problems reported by
-customers or other users) and registering the **time** needed by
-developers (or other users) to work on these tickets. It is then
-possible to publish **service reports**.
-
 .. How to test just this document:
 
     $ python setup.py test -s tests.SpecsTests.test_general
@@ -20,16 +15,23 @@ possible to publish **service reports**.
     >>> from lino.api.doctest import *
 
 
-Lino Noi uses both :mod:`lino_xl.lib.tickets` (Ticket management) and
-:mod:`lino_xl.lib.clocking` (Worktime tracking).
-
 
 .. contents::
   :local:
 
+     
+The goal of Lino Noi is managing **tickets** (problems reported by
+customers or other users) and registering the **time** needed by
+developers or other users to work on these tickets.
+It is then possible to publish **service reports**.
+It is also used for managing agile development projects.
 
-Tickets versus Clocking
-=======================
+
+Ticket management is not Worktime tracking
+==========================================
+
+Lino Noi uses both :mod:`lino_xl.lib.tickets` (Ticket management) and
+:mod:`lino_xl.lib.clocking` (Worktime tracking).
 
 Note that :mod:`lino_xl.lib.clocking` and :mod:`lino_xl.lib.tickets`
 are independent modules which might be reused by other applicaton.
@@ -158,3 +160,11 @@ Exception: Response status (GET /api/countries/Countries?start=0&fmt=json&limit=
 
 
 
+Lino Noi and Scrum
+==================
+
+- Every sprint is registered as a subproject of a development project
+- Every backlog item is registered as a subproject of a sprint
+- IOW backlog items are projects without children
+- Usually there is at least one ticket per project for planning and
+  discussion.

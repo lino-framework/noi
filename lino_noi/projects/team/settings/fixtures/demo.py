@@ -14,7 +14,7 @@ from lino.core.roles import SiteAdmin
 from lino_xl.lib.cal.choicelists import DurationUnits
 from lino_xl.lib.clocking.roles import Worker
 from lino.utils.quantities import Duration
-
+from lino.utils.mldbc import babel_named as named
 from lino_noi.lib.users.models import create_user
 
 from lino_xl.lib.clocking.choicelists import ReportingTypes
@@ -47,6 +47,7 @@ def tickets_objects():
     Competence = rt.models.tickets.Competence
     Interest = rt.models.topics.Interest
     Milestone = rt.models.deploy.Milestone
+    Deployment = rt.models.deploy.Deployment
     Project = rt.models.tickets.Project
     Site = rt.models.tickets.Site
     Link = rt.models.tickets.Link
@@ -95,12 +96,6 @@ def tickets_objects():
         for i in range(3):
             yield Interest(partner=u, topic=TOPICS.pop())
 
-    SITES = Cycler(Site.objects.exclude(name="pypi"))
-    for i in range(7):
-        d = dd.today(i*2-20)
-        yield Milestone(site=SITES.pop(), expected=d, reached=d)
-    yield Milestone(site=SITES.pop(), expected=dd.today())
-
     RTYPES = Cycler(ReportingTypes.objects())
     
     prj1 = Project(
@@ -135,6 +130,16 @@ def tickets_objects():
     for u in User.objects.all():
         yield Competence(user=u, project=PROJECTS.pop())
         yield Competence(user=u, project=PROJECTS.pop())
+    
+    SITES = Cycler(Site.objects.exclude(name="pypi"))
+    for i in range(7):
+        d = dd.today(i*2-20)
+        # yield Milestone(site=SITES.pop(), expected=d, reached=d)
+        yield Milestone(
+            project=PROJECTS.pop(), expected=d, reached=d,
+            label=d.strftime("%Y%m%d"))
+    # yield Milestone(site=SITES.pop(), expected=dd.today())
+    yield Milestone(project=PROJECTS.pop(), expected=dd.today())
     
     SITES = Cycler(Site.objects.all())
     
@@ -202,8 +207,12 @@ def tickets_objects():
     for i in range(100):
         yield ticket("Ticket {}".format(i+n+1), project=PROJECTS.pop())
 
+    MILESTONES = Cycler(Milestone.objects.all())
     for t in Ticket.objects.all():
         t.set_author_votes()
+        if t.id % 4:
+            yield Deployment(milestone=MILESTONES.pop(), ticket=t)
+
     
     yield Link(
         type=LinkTypes.requires,
@@ -295,7 +304,6 @@ def clockings_objects():
     yield ServiceReport(
         start_date=dd.today(-90), interesting_for=welket)
 
-from lino.utils.mldbc import babel_named as named
 
 def faculties_objects():
     "was previously in faculties.fixtures.demo2"
@@ -336,60 +344,6 @@ def faculties_objects():
         if i % 3:
             yield Demand(demander=t, skill=SKILLS.pop())
 
-    # Analysis = Faculty.objects.get(name="Analysis")
-    # Code_changes = Faculty.objects.get(name="Code changes")
-    # Documentation = Faculty.objects.get(name="Documentation")
-    # Testing = Faculty.objects.get(name="Testing")
-    # Configuration = Faculty.objects.get(name="Configuration")
-
-    # mathieu = User.objects.get(username="mathieu")
-    # Robin = User.objects.get(first_name="Robin")
-    # luc = User.objects.get(username="luc")
-
-    # if dd.get_language_info('de'):
-    #     Rolf = User.objects.get(first_name="Rolf")
-    #     yield Competence(faculty=Analysis, user=Rolf)
-    #     yield Competence(faculty=Code_changes, user=Rolf, affinity=70)
-    #     yield Competence(faculty=Documentation, user=Rolf, affinity=71)
-    #     yield Competence(faculty=Testing, user=Rolf, affinity=42)
-    #     yield Competence(faculty=Configuration, user=Rolf, affinity=62)
-
-    # if dd.get_language_info('fr'):
-    #     Romain = User.objects.get(first_name="Romain")
-    #     yield Competence(faculty=Code_changes, user=Romain, affinity=76)
-    #     yield Competence(faculty=Documentation, user=Romain, affinity=92)
-    #     yield Competence(faculty=Testing, user=Romain, affinity=98)
-    #     yield Competence(faculty=Configuration, user=Romain, affinity=68)
-
-    # yield Competence(faculty=Analysis, user=Robin, affinity=23)
-    # yield Competence(faculty=Analysis, user=luc, affinity=120)
-
-    # yield Competence(faculty=Code_changes, user=luc, affinity=150)
-
-    # yield Competence(faculty=Documentation, user=luc, affinity=75)
-    # yield Competence(faculty=Documentation, user=mathieu, affinity=46)
-
-    # yield Competence(faculty=Testing, user=Robin, affinity=65)
-    # yield Competence(faculty=Testing, user=mathieu, affinity=42)
-
-    # yield Competence(faculty=Configuration, user=luc, affinity=46)
-    # yield Competence(faculty=Configuration, user=mathieu, affinity=92)
-
-    # Bar_cannot_foo = rt.models.tickets.Ticket.objects.get(summary='Bar cannot foo')
-    # Bar_cannot_foo.faculty = Documentation
-    # Bar_cannot_foo.save()
-
-    # Sell_bar_in_baz = rt.models.tickets.Ticket.objects.get(summary='Sell bar in baz')
-    # Sell_bar_in_baz.faculty = Analysis
-    # Sell_bar_in_baz.save()
-
-    # Foo_cannot_bar = rt.models.tickets.Ticket.objects.get(summary='Foo cannot bar')
-    # Foo_cannot_bar.faculty = Code_changes
-    # Foo_cannot_bar.save()
-
-    # Foo_never_matches_Bar = rt.models.tickets.Ticket.objects.get(summary='Foo never matches Bar')
-    # Foo_never_matches_Bar.faculty = Testing
-    # Foo_never_matches_Bar.save()
 
 def votes_objects():
 
