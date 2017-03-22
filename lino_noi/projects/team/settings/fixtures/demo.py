@@ -135,7 +135,9 @@ def tickets_objects():
     for i in range(7):
         d = dd.today(i*2-20)
         # yield Milestone(site=SITES.pop(), expected=d, reached=d)
-        yield Milestone(project=PROJECTS.pop(), expected=d, reached=d)
+        yield Milestone(
+            project=PROJECTS.pop(), expected=d, reached=d,
+            label=d.strftime("%Y%m%d"))
     # yield Milestone(site=SITES.pop(), expected=dd.today())
     yield Milestone(project=PROJECTS.pop(), expected=dd.today())
     
