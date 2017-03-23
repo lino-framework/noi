@@ -324,7 +324,7 @@ def faculties_objects():
     yield named(Faculty, _('Offer'))
 
     SKILLS = Cycler(Faculty.objects.all())
-    END_USERS = Cycler(dd.plugins.tickets.end_user_model.objects.all())
+    END_USERS = Cycler(dd.plugins.faculties.end_user_model.objects.all())
 
     i = 0
     for j in range(2):

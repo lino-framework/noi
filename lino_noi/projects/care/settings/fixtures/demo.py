@@ -50,7 +50,7 @@ def ticket(username, summary, en, faculty=None, **kw):
 
 def competence(username, first_name, faculty, **kw):
     kw.update(
-        end_user=dd.plugins.tickets.end_user_model.objects.get(
+        end_user=dd.plugins.faculties.end_user_model.objects.get(
             name=first_name))
     kw.update(faculty=faculty)
     kw.update(user=rt.models.users.User.objects.get(username=username))
@@ -184,7 +184,7 @@ def objects():
         "Mein Rasen muss gemäht werden. Donnerstags oder Samstags",
         "My lawn needs mowing. On Thursday or Saturday."
         "", faculty=garden)
-    dora = dd.plugins.tickets.end_user_model.objects.get(
+    dora = dd.plugins.faculties.end_user_model.objects.get(
         first_name="Dora")
     yield ticket(  #3
         "eric",

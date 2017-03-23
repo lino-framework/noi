@@ -43,8 +43,8 @@ This document describes the database structure.
  countries.Country                  countries.Countries                     6         8
  countries.Place                    countries.Places                        8         78
  dashboard.Widget                   dashboard.Widgets                       5         0
- deploy.Deployment                  deploy.Deployments                      4         0
- deploy.Milestone                   deploy.Milestones                       9         8
+ deploy.Deployment                  deploy.Deployments                      5         87
+ deploy.Milestone                   deploy.Milestones                       10        8
  django_mailbox.Mailbox             mailbox.Mailboxes                       6         1
  django_mailbox.Message             mailbox.Messages                        13        4
  django_mailbox.MessageAttachment   django_mailbox.MessageAttachmentTable   4         0

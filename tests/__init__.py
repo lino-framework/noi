@@ -41,11 +41,11 @@ class SpecsTests(BaseTestCase):
     def test_memo(self):
         self.run_simple_doctests('docs/specs/memo.rst')
 
-    def test_care(self):
-        self.run_simple_doctests('docs/specs/care.rst')
+    # def test_care(self):
+    #     self.run_simple_doctests('docs/specs/care.rst')
 
-    def test_care_de(self):
-        self.run_simple_doctests('docs/specs/care_de.rst')
+    # def test_care_de(self):
+    #     self.run_simple_doctests('docs/specs/care_de.rst')
 
     def test_std(self):
         self.run_simple_doctests('docs/specs/std.rst')
@@ -91,9 +91,9 @@ class ProjectsTests(BaseTestCase):
     def test_teamadm(self):
         self.run_django_manage_test('lino_noi/projects/bs3')
 
-    def test_care(self):
-        self.run_django_manage_test('lino_noi/projects/care')
+    # def test_care(self):
+    #     self.run_django_manage_test('lino_noi/projects/care')
 
-    def test_vilma(self):
-        self.run_django_manage_test('lino_noi/projects/vilma')
+    # def test_vilma(self):
+    #     self.run_django_manage_test('lino_noi/projects/vilma')
 
