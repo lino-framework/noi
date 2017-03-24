@@ -85,7 +85,7 @@ class Site(Site):
         self.plugins.countries.configure(hide_region=True)
         self.plugins.comments.configure(
             commentable_model='tickets.Ticket')
-        self.plugins.tickets.configure(
+        self.plugins.faculties.configure(
             end_user_model='contacts.Person')
         self.plugins.faculties.configure(
             demander_model='tickets.Ticket')

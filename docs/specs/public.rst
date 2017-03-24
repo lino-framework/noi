@@ -40,15 +40,15 @@ The demo database contains the following data:
  Description                                                  Ticket type   Topic       Priority
 ------------------------------------------------------------ ------------- ----------- ----------
  `#115 (Ticket 115) <Detail>`__ by *Jean*                     Bugfix        Lino Voga   100
- `#99 (Ticket 99) <Detail>`__ by *Luc*                        Upgrade       Lino Voga   100
+ `#107 (Ticket 107) <Detail>`__ by *Mathieu*                  Enhancement   Lino Voga   100
  `#91 (Ticket 91) <Detail>`__ by *Jean*                       Bugfix        Lino Voga   100
  `#83 (Ticket 83) <Detail>`__ by *Mathieu*                    Enhancement   Lino Voga   100
  `#75 (Ticket 75) <Detail>`__ by *Luc*                        Upgrade       Lino Voga   100
- `#59 (Ticket 59) <Detail>`__ by *Mathieu*                    Enhancement   Lino Voga   100
+ `#67 (Ticket 67) <Detail>`__ by *Jean*                       Bugfix        Lino Voga   100
  `#51 (Ticket 51) <Detail>`__ by *Luc*                        Upgrade       Lino Voga   100
  `#43 (Ticket 43) <Detail>`__ by *Jean*                       Bugfix        Lino Voga   100
  `#35 (Ticket 35) <Detail>`__ by *Mathieu*                    Enhancement   Lino Voga   100
- `#19 (Ticket 19) <Detail>`__ by *Jean*                       Bugfix        Lino Voga   100
+ `#27 (Ticket 27) <Detail>`__ by *Luc*                        Upgrade       Lino Voga   100
  `#11 (Class-based Foos and Bars?) <Detail>`__ by *Mathieu*   Enhancement   Lino Voga   100
  **Total (11 rows)**                                                                    **1100**
 ============================================================ ============= =========== ==========
