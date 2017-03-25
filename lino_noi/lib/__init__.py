@@ -6,6 +6,7 @@
 .. autosummary::
    :toctree:
 
+    cal
     contacts
     noi
     users

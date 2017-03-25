@@ -69,6 +69,8 @@ SETUP_INFO.update(packages=[
     'lino_noi.lib.users',
     'lino_noi.lib.topics',
     'lino_noi.lib.users.fixtures',
+    'lino_noi.lib.cal',
+    'lino_noi.lib.cal.fixtures',
     'lino_noi.projects.bs3',
     'lino_noi.projects.bs3.settings',
     'lino_noi.projects.bs3.tests',
