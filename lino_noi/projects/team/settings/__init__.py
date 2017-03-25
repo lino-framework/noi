@@ -32,7 +32,7 @@ class Site(Site):
                      # 'tractickets', 'luc']
 
     # project_model = 'tickets.Project'
-    project_model = 'deploy.Milestone'
+    # project_model = 'deploy.Milestone'
     textfield_format = 'html'
     user_types_module = 'lino_noi.lib.noi.user_types'
     workflows_module = 'lino_noi.lib.noi.workflows'
