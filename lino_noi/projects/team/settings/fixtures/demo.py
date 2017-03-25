@@ -49,7 +49,8 @@ def tickets_objects():
     Milestone = rt.models.deploy.Milestone
     Deployment = rt.models.deploy.Deployment
     Project = rt.models.tickets.Project
-    Site = rt.models.tickets.Site
+    # Site = rt.models.tickets.Site
+    Site = dd.plugins.tickets.site_model
     Link = rt.models.tickets.Link
     LinkTypes = rt.models.tickets.LinkTypes
     EntryType = rt.models.blogs.EntryType

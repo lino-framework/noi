@@ -63,6 +63,7 @@ class Site(Site):
         yield 'lino_noi.lib.users'
         yield 'lino_noi.lib.cal'
         yield 'lino_xl.lib.extensible'
+        yield 'lino_xl.lib.courses'
         # yield 'lino_noi.lib.products'
 
         yield 'lino_noi.lib.topics'

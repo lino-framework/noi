@@ -18,6 +18,7 @@ all.
 from lino.core.roles import UserRole, SiteAdmin
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsUser, ContactsStaff
+from lino_xl.lib.courses.roles import CoursesUser, CoursesTeacher
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino.modlib.comments.roles import CommentsReader, CommentsUser, CommentsStaff
 from lino_xl.lib.tickets.roles import TicketsUser, Searcher, Triager, TicketsStaff
@@ -36,7 +37,8 @@ class EndUser(OfficeUser, VotesUser, TicketsUser, CommentsUser):
     pass
 
 
-class Consultant(EndUser, Searcher, Worker, ExcerptsUser, ContactsUser):
+class Consultant(EndUser, Searcher, Worker, ExcerptsUser,
+                 ContactsUser, CoursesUser):
     """A **consultant** is somebody who may both report tickets and work
     on them.
 
@@ -60,7 +62,8 @@ class Senior(Developer, Triager, ExcerptsStaff, CommentsStaff):
     pass
 
 
-class SiteAdmin(Senior, SiteAdmin, OfficeStaff, VotesStaff, TicketsStaff, ContactsStaff, CommentsStaff):
+class SiteAdmin(Senior, SiteAdmin, OfficeStaff, VotesStaff,
+                TicketsStaff, ContactsStaff, CommentsStaff):
     """Can do everything."""
 
 UserTypes.clear()

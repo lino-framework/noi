@@ -16,6 +16,10 @@ from lino_noi.projects.team.settings import *
 
 class Site(Site):
     languages = 'et'
-    title = u"Külaministeerium"
+    title = u"Külavalitsus"
     
 
+    def setup_plugins(self):
+        super(Site, self).setup_plugins()
+        self.plugins.tickets.configure(
+            site_model='cal.Room')
