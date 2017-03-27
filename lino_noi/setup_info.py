@@ -2,6 +2,8 @@
 # Copyright 2014-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
+# $ python setup.py test -s tests.PackagesTests.test_packages
+
 SETUP_INFO = dict(
     name='lino-noi',
     version='2017.2.0',
@@ -85,6 +87,7 @@ SETUP_INFO.update(packages=[
     'lino_noi.projects.team.lib.clocking.fixtures',
     'lino_noi.projects.vilma',
     'lino_noi.projects.vilma.settings',
+    'lino_noi.projects.vilma.settings.fixtures',
     'lino_noi.projects.public',
     'lino_noi.projects.care',
     'lino_noi.projects.care.settings',

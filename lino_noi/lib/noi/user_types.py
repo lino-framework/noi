@@ -23,6 +23,7 @@ from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino.modlib.comments.roles import CommentsReader, CommentsUser, CommentsStaff
 from lino_xl.lib.tickets.roles import TicketsUser, Searcher, Triager, TicketsStaff
 from lino_xl.lib.clocking.roles import Worker
+from lino_xl.lib.cal.roles import CalendarReader
 from lino_xl.lib.votes.roles import VotesStaff, VotesUser
 
 from lino.modlib.users.choicelists import UserTypes
@@ -66,9 +67,13 @@ class SiteAdmin(Senior, SiteAdmin, OfficeStaff, VotesStaff,
                 TicketsStaff, ContactsStaff, CommentsStaff):
     """Can do everything."""
 
+
+class Anonymous(CommentsReader, CalendarReader):
+    pass
+
 UserTypes.clear()
 add = UserTypes.add_item
-add('000', _("Anonymous"),        CommentsReader, 'anonymous',
+add('000', _("Anonymous"),        Anonymous, 'anonymous',
     readonly=True, authenticated=False)
 add('100', _("User"),             EndUser, 'user')
 add('200', _("Consultant"),       Consultant, 'consultant')
