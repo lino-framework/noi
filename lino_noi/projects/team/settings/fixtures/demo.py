@@ -49,7 +49,8 @@ def tickets_objects():
     Milestone = rt.models.deploy.Milestone
     Deployment = rt.models.deploy.Deployment
     Project = rt.models.tickets.Project
-    Site = rt.models.tickets.Site
+    # Site = rt.models.tickets.Site
+    Site = dd.plugins.tickets.site_model
     Link = rt.models.tickets.Link
     LinkTypes = rt.models.tickets.LinkTypes
     EntryType = rt.models.blogs.EntryType
@@ -136,7 +137,9 @@ def tickets_objects():
         d = dd.today(i*2-20)
         # yield Milestone(site=SITES.pop(), expected=d, reached=d)
         yield Milestone(
-            project=PROJECTS.pop(), expected=d, reached=d,
+            user=WORKERS.pop(),
+            start_date=d,
+            project=PROJECTS.pop(), # expected=d, reached=d,
             label=d.strftime("%Y%m%d"))
     # yield Milestone(site=SITES.pop(), expected=dd.today())
     yield Milestone(project=PROJECTS.pop(), expected=dd.today())

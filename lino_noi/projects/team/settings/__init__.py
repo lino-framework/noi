@@ -31,7 +31,8 @@ class Site(Site):
                      # 'linotickets',
                      # 'tractickets', 'luc']
 
-    project_model = 'tickets.Project'
+    # project_model = 'tickets.Project'
+    # project_model = 'deploy.Milestone'
     textfield_format = 'html'
     user_types_module = 'lino_noi.lib.noi.user_types'
     workflows_module = 'lino_noi.lib.noi.workflows'
@@ -60,7 +61,9 @@ class Site(Site):
         # yield 'lino.modlib.users'
         yield 'lino_noi.lib.contacts'
         yield 'lino_noi.lib.users'
-        # yield 'lino_xl.lib.cal'
+        yield 'lino_noi.lib.cal'
+        yield 'lino_xl.lib.extensible'
+        yield 'lino_xl.lib.courses'
         # yield 'lino_noi.lib.products'
 
         yield 'lino_noi.lib.topics'
@@ -108,6 +111,7 @@ class Site(Site):
     def setup_quicklinks(self, user, tb):
         super(Site, self).setup_quicklinks(user, tb)
         tb.add_action(self.modules.tickets.MyCompetences)
+        # tb.add_action(self.modules.deploy.MyMilestones)
         tb.add_action(self.modules.tickets.MyTickets)
         tb.add_action(self.modules.tickets.TicketsToTriage)
         tb.add_action(self.modules.tickets.TicketsToTalk)

@@ -18,10 +18,12 @@ all.
 from lino.core.roles import UserRole, SiteAdmin
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsUser, ContactsStaff
+from lino_xl.lib.courses.roles import CoursesUser, CoursesTeacher
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino.modlib.comments.roles import CommentsReader, CommentsUser, CommentsStaff
 from lino_xl.lib.tickets.roles import TicketsUser, Searcher, Triager, TicketsStaff
 from lino_xl.lib.clocking.roles import Worker
+from lino_xl.lib.cal.roles import CalendarReader
 from lino_xl.lib.votes.roles import VotesStaff, VotesUser
 
 from lino.modlib.users.choicelists import UserTypes
@@ -36,7 +38,8 @@ class EndUser(OfficeUser, VotesUser, TicketsUser, CommentsUser):
     pass
 
 
-class Consultant(EndUser, Searcher, Worker, ExcerptsUser, ContactsUser):
+class Consultant(EndUser, Searcher, Worker, ExcerptsUser,
+                 ContactsUser, CoursesUser):
     """A **consultant** is somebody who may both report tickets and work
     on them.
 
@@ -60,12 +63,17 @@ class Senior(Developer, Triager, ExcerptsStaff, CommentsStaff):
     pass
 
 
-class SiteAdmin(Senior, SiteAdmin, OfficeStaff, VotesStaff, TicketsStaff, ContactsStaff, CommentsStaff):
+class SiteAdmin(Senior, SiteAdmin, OfficeStaff, VotesStaff,
+                TicketsStaff, ContactsStaff, CommentsStaff):
     """Can do everything."""
+
+
+class Anonymous(CommentsReader, CalendarReader):
+    pass
 
 UserTypes.clear()
 add = UserTypes.add_item
-add('000', _("Anonymous"),        CommentsReader, 'anonymous',
+add('000', _("Anonymous"),        Anonymous, 'anonymous',
     readonly=True, authenticated=False)
 add('100', _("User"),             EndUser, 'user')
 add('200', _("Consultant"),       Consultant, 'consultant')

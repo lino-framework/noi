@@ -7,6 +7,7 @@
    :toctree:
 
    demo
+   fixtures
 
 """
 
@@ -16,6 +17,10 @@ from lino_noi.projects.team.settings import *
 
 class Site(Site):
     languages = 'et'
-    title = u"Külaministeerium"
+    title = "Lino Vilma"
     
 
+    def setup_plugins(self):
+        super(Site, self).setup_plugins()
+        self.plugins.tickets.configure(
+            site_model='cal.Room')

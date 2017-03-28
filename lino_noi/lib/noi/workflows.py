@@ -30,6 +30,8 @@ from lino_xl.lib.tickets.choicelists import TicketStates
 from lino_xl.lib.tickets.roles import Triager
 from lino_xl.lib.votes.choicelists import VoteStates, Ratings
 from lino.modlib.notify.actions import NotifyingAction
+from lino_xl.lib.cal.workflows.voga import *
+from lino_xl.lib.courses.workflows import *
 
 """
 """
