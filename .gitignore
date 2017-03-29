@@ -12,6 +12,7 @@ tmp
 default.db
 media
 docs/api/lino_noi.*
+docs/warnings_html.txt
 
 *.egg-info
 .build
