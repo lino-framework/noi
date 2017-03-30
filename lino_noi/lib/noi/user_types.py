@@ -20,7 +20,8 @@ from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsUser, ContactsStaff
 from lino_xl.lib.courses.roles import CoursesUser, CoursesTeacher
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
-from lino.modlib.comments.roles import CommentsReader, CommentsUser, CommentsStaff
+# from lino.modlib.comments.roles import CommentsReader
+from lino.modlib.comments.roles import CommentsUser, CommentsStaff
 from lino_xl.lib.tickets.roles import TicketsUser, Searcher, Triager, TicketsStaff
 from lino_xl.lib.clocking.roles import Worker
 from lino_xl.lib.cal.roles import CalendarReader
@@ -68,7 +69,8 @@ class SiteAdmin(Senior, SiteAdmin, OfficeStaff, VotesStaff,
     """Can do everything."""
 
 
-class Anonymous(CommentsReader, CalendarReader):
+# class Anonymous(CommentsReader, CalendarReader):
+class Anonymous(CalendarReader):
     pass
 
 UserTypes.clear()

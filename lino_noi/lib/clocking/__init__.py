@@ -21,7 +21,7 @@ class Plugin(Plugin):
 
     ticket_model = 'tickets.Ticket'
 
-    needs_plugins = ['lino_noi.projects.team.lib.tickets']
+    needs_plugins = ['lino_noi.lib.tickets']
 
     def setup_reports_menu(self, site, profile, m):
         p = self.get_menu_group()

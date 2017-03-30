@@ -55,6 +55,7 @@ class ServiceReport(UserAuthored, Certifiable, DatePeriod):
 
     """
     class Meta:
+        app_label = 'clocking'
         verbose_name = _("Service Report")
         verbose_name_plural = _("Service Reports")
 
