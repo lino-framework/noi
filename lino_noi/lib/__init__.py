@@ -11,5 +11,7 @@
     noi
     users
     topics
+    tickets
+    clocking
 
 """

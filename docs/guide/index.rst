@@ -91,8 +91,3 @@ Using this system, you always have an overview of your real hours
 worked.
 
 
-More
-====
-
-Read :doc:`/specs/index` to learn more about Lino Noi.
-

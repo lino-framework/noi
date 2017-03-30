@@ -12,7 +12,8 @@ extensions = []
 extlinks = {}
 
 from lino.sphinxcontrib import configure
-configure(globals(), 'lino_noi.projects.team.settings.doctests')
+configure(globals())
+# configure(globals(), 'lino_noi.projects.team.settings.doctests')
 # configure(globals(), 'lino_book.projects.min1.settings.doctests')
 
 extlinks.update(ticket=('http://bugs.saffre-rumma.net/tickets/Ticket/%s', '#'))
@@ -29,7 +30,7 @@ from django.conf import settings
 
 intersphinx_mapping = {}
 from importlib import import_module
-for n in 'atelier lino lino_xl'.split():
+for n in 'atelier lino lino_xl lino_book'.split():
     m = import_module(n)
     n = n.replace('_', "")
     intersphinx_mapping[n] = (m.intersphinx_urls['docs'], None)

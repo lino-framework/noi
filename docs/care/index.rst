@@ -10,4 +10,3 @@ Lino Care Benutzerhandbuch
 
    intro
    tour
-   /specs/care_de

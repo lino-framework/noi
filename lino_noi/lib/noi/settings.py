@@ -2,15 +2,7 @@
 # Copyright 2014-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 """
-
-.. autosummary::
-   :toctree:
-
-   doctests
-   demo
-   www
-
-
+Base Django settings for Lino Noi applications.
 
 """
 
@@ -41,7 +33,7 @@ class Site(Site):
     default_build_method = 'appyodt'
     
     # experimental use of rest_framework:
-    # root_urlconf = 'lino_noi.projects.team.urls'
+    # root_urlconf = 'lino_book.projects.team.urls'
     
     # TODO: move migrator to lino_noi.projects.team
     migration_class = 'lino_noi.lib.noi.migrate.Migrator'
@@ -68,10 +60,10 @@ class Site(Site):
 
         yield 'lino_noi.lib.topics'
         yield 'lino_xl.lib.votes'
-        yield 'lino_noi.projects.team.lib.tickets'
+        yield 'lino_noi.lib.tickets'
         yield 'lino_xl.lib.faculties'
         yield 'lino_xl.lib.deploy'
-        yield 'lino_noi.projects.team.lib.clocking'
+        yield 'lino_noi.lib.clocking'
         yield 'lino_xl.lib.lists'
         yield 'lino_xl.lib.blogs'
 

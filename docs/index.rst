@@ -21,8 +21,6 @@ Content
    install/index
    guide/index
    care/index
-   specs/index
-   api/index
    todo
    changes
    
