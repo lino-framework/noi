@@ -34,11 +34,14 @@ SETUP_INFO = dict(
 Lino Noi is a customizable ticket management and time tracking
 system to use when time is more than money.
 
+- The central project homepage is http://noi.lino-framework.org
+
+- Technical documentation, including demo projects, API and tested
+  specs see http://www.lino-framework.org/specs/noi
+
 - For *introductions* and *commercial information* about Lino Noi
   please see `www.saffre-rumma.net
   <http://www.saffre-rumma.net/noi/>`__.
-
-- The central project homepage is http://noi.lino-framework.org
 
 
 """,

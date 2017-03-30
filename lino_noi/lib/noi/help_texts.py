@@ -3,6 +3,10 @@
 from __future__ import unicode_literals
 from django.utils.translation import ugettext_lazy as _
 help_texts = {
+    'lino_noi.lib.clocking.models.ServiceReport' : _("""A service report is a document used in various discussions with
+a stakeholder."""),
+    'lino_noi.lib.clocking.models.ServiceReport.user' : _("""This can be empty and will then show the working time of all
+users."""),
     'lino_noi.lib.noi.migrate.Migrator' : _("""The standard migrator for noi."""),
     'lino_noi.lib.noi.user_types.EndUser' : _("""An end user is somebody who uses our software and may report
 tickets, but won't work on them."""),
@@ -13,15 +17,9 @@ on them."""),
     'lino_noi.lib.noi.user_types.Senior' : _("""A senior developer is a developer who is additionally
 responsible for triaging tickets"""),
     'lino_noi.lib.noi.user_types.SiteAdmin' : _("""Can do everything."""),
-    'lino_noi.lib.noi.workflows.TicketAction' : _("""Base class for ticket actions."""),
-    'lino_noi.lib.noi.workflows.MarkTicketOpened' : _("""Mark this ticket as open."""),
-    'lino_noi.lib.noi.workflows.MarkTicketStarted' : _("""Mark this ticket as started."""),
-    'lino_noi.lib.noi.workflows.MarkTicketReady' : _("""Mark this ticket as ready."""),
-    'lino_noi.lib.noi.workflows.MarkTicketClosed' : _("""Mark this ticket as closed."""),
-    'lino_noi.lib.noi.workflows.MarkTicketTalk' : _("""Mark this ticket as talk."""),
-    'lino_noi.lib.noi.workflows.MarkVoteRated' : _("""Rate this vote and mark it as rated."""),
-    'lino_noi.lib.noi.workflows.MarkVoteRated.rating' : _("""How you rate this job."""),
-    'lino_noi.lib.noi.workflows.MarkVoteRated.comment' : _("""Your comment related to your rating."""),
+    'lino_noi.lib.tickets.Plugin' : _("""Adds the lino_xl.lib.votes plugin."""),
+    'lino_noi.lib.tickets.models.TicketDetail' : _("""Customized detail_lyout for Tickets.  Replaces waiting_for by
+faculties"""),
     'lino_noi.lib.users.choicelists.UserStates' : _("""The list of possible choices for the state field
 of a User."""),
     'lino_noi.lib.users.choicelists.MarkUserActive' : _("""Activate this user. This requires that the user has confirmed their
@@ -29,7 +27,6 @@ verifcation code, and that a username and password are set."""),
     'lino_noi.lib.users.desktop.UserDetail' : _("""Layout of User Detail in Lino Noi."""),
     'lino_noi.lib.users.desktop.RegisterUser' : _("""Fill a form in order to register as a new system user."""),
     'lino_noi.lib.users.desktop.NewUsers' : _("""List of new users to be confirmed by the system admin."""),
-    'lino_noi.lib.users.desktop.NewUsers.model' : _("""alias of User"""),
     'lino_noi.lib.users.models.CheckedSubmitInsert' : _("""Like the standard lino.core.actions.SubmitInsert, but
 checks certain things before accepting the new user."""),
     'lino_noi.lib.users.models.VerifyUser' : _("""Enter your verification code."""),
@@ -37,21 +34,4 @@ checks certain things before accepting the new user."""),
     'lino_noi.lib.users.models.User.verification_code' : _("""A random string set for every new user. Used for
 online_registration."""),
     'lino_noi.lib.users.models.User.user_state' : _("""The registration state of this user."""),
-    'lino_noi.projects.bs3.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Noi."""),
-    'lino_noi.projects.care.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Care."""),
-    'lino_noi.projects.care.user_types.SimpleUser' : _("""A simple user is a person who can log into the application in
-order to manage their own pleas and competences and potentially
-can respond to other user's pleas."""),
-    'lino_noi.projects.care.user_types.Connector' : _("""A connector is a person who knows other persons and who
-introduces pleas on their behalf."""),
-    'lino_noi.projects.care.user_types.SiteAdmin' : _("""A site administrator can do everything."""),
-    'lino_noi.projects.public.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Noi."""),
-    'lino_noi.projects.team.lib.clocking.models.ServiceReport' : _("""A service report is a document used in various discussions with
-a stakeholder."""),
-    'lino_noi.projects.team.lib.clocking.models.ServiceReport.user' : _("""This can be empty and will then show the working time of all
-users."""),
-    'lino_noi.projects.team.lib.tickets.Plugin' : _("""Adds the lino_xl.lib.votes plugin."""),
-    'lino_noi.projects.team.lib.tickets.models.TicketDetail' : _("""Customized detail_lyout for Tickets.  Replaces waiting_for by
-faculties"""),
-    'lino_noi.projects.team.settings.demo.Site' : _("""Defines and instantiates a demo version of Lino Noi."""),
 }
