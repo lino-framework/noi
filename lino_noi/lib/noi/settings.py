@@ -55,7 +55,7 @@ class Site(Site):
         yield 'lino_noi.lib.users'
         yield 'lino_noi.lib.cal'
         yield 'lino_xl.lib.extensible'
-        yield 'lino_xl.lib.courses'
+        yield 'lino_noi.lib.courses'
         # yield 'lino_noi.lib.products'
 
         yield 'lino_noi.lib.topics'
@@ -94,6 +94,9 @@ class Site(Site):
             commentable_model='tickets.Ticket')
         self.plugins.faculties.configure(
             demander_model='tickets.Ticket')
+        self.plugins.tickets.configure(
+            site_model='cal.Room',
+            milestone_model='courses.Course')
 
     def get_default_required(self, **kw):
         # overrides the default behaviour which would add
@@ -102,15 +105,15 @@ class Site(Site):
 
     def setup_quicklinks(self, user, tb):
         super(Site, self).setup_quicklinks(user, tb)
-        tb.add_action(self.modules.tickets.MyCompetences)
+        tb.add_action(self.actors.courses.MyActivities)
         # tb.add_action(self.modules.deploy.MyMilestones)
-        tb.add_action(self.modules.tickets.MyTickets)
-        tb.add_action(self.modules.tickets.TicketsToTriage)
-        tb.add_action(self.modules.tickets.TicketsToTalk)
+        tb.add_action(self.actors.tickets.MyTickets)
+        tb.add_action(self.actors.tickets.TicketsToTriage)
+        tb.add_action(self.actors.tickets.TicketsToTalk)
         # tb.add_action(self.modules.tickets.TicketsToDo)
-        tb.add_action(self.modules.tickets.AllTickets)
+        tb.add_action(self.actors.tickets.AllTickets)
         tb.add_action(
-            self.modules.tickets.AllTickets.insert_action,
+            self.actors.tickets.AllTickets.insert_action,
             label=_("Submit a ticket"))
 
         a = self.actors.users.MySettings.default_action
