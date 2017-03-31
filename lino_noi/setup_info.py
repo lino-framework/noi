@@ -76,6 +76,7 @@ lino_noi.lib.users
 lino_noi.lib.users.fixtures
 lino_noi.lib.cal
 lino_noi.lib.cal.fixtures
+lino_noi.lib.courses
 lino_noi.lib.tickets
 lino_noi.lib.clocking
 lino_noi.lib.clocking.fixtures

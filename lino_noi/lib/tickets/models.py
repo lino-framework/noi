@@ -48,18 +48,11 @@ class TicketDetail(TicketDetail):
 
 Tickets.detail_layout = TicketDetail()
 
-Sites.detail_layout = """
-id name partner #responsible_user
-remark
-#InterestsBySite TicketsBySite deploy.MilestonesBySite
-"""
+# Sites.detail_layout = """
+# id name partner #responsible_user
+# remark
+# #InterestsBySite TicketsBySite deploy.MilestonesBySite
+# """
 
 
-
-@dd.receiver(dd.post_analyze)
-def my_details(sender, **kw):
-    sender.modules.system.SiteConfigs.set_detail_layout("""
-    site_company next_partner_id:10
-    default_build_method
-    """)
 
