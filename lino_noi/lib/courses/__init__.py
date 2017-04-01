@@ -17,3 +17,4 @@ class Plugin(Plugin):
     """Adds the :mod:`lino_xl.lib.votes` plugin.
     """
 
+    extends_models = ['Course']
