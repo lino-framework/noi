@@ -107,9 +107,9 @@ class Site(Site):
         super(Site, self).setup_quicklinks(user, tb)
         tb.add_action(self.actors.courses.MyActivities)
         # tb.add_action(self.modules.deploy.MyMilestones)
-        tb.add_action(self.actors.tickets.MyTickets)
-        tb.add_action(self.actors.tickets.TicketsToTriage)
-        tb.add_action(self.actors.tickets.TicketsToTalk)
+        # tb.add_action(self.actors.tickets.MyTickets)
+        # tb.add_action(self.actors.tickets.TicketsToTriage)
+        # tb.add_action(self.actors.tickets.TicketsToTalk)
         # tb.add_action(self.modules.tickets.TicketsToDo)
         tb.add_action(self.actors.tickets.AllTickets)
         tb.add_action(
