@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016 Luc Saffre
+# Copyright 2016-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """Database models for lino_noi.projects.team.lib.clocking.
@@ -12,30 +12,35 @@ from lino_xl.lib.clocking.models import *
 from lino.api import _
 from lino.mixins.periods import DatePeriod
 from lino_xl.lib.excerpts.mixins import Certifiable
+from lino_xl.lib.contacts.mixins import ContactRelated
 from lino_xl.lib.tickets.choicelists import TicketStates
-from .actions import StartTicketSessionViaVote, EndTicketSessionViaVote, StartTicketSessionViaSession
+# from .actions import StartTicketSessionViaVote, EndTicketSessionViaVote, StartTicketSessionViaSession, StartTicketSessionViaWish
 
 
 dd.inject_field(
     "users.User", 'open_session_on_new_ticket',
     models.BooleanField(_("Open session on new ticket"), default=False))
 
-if dd.is_installed('votes'):
-    dd.inject_action(
-        "votes.Vote",
-        start_session=StartTicketSessionViaVote())
-    dd.inject_action(
-        "votes.Vote",
-        end_session=EndTicketSessionViaVote())
+# if dd.is_installed('votes'):
+#     dd.inject_action(
+#         "votes.Vote",
+#         start_session=StartTicketSessionViaVote())
+#     dd.inject_action(
+#         "votes.Vote",
+#         end_session=EndTicketSessionViaVote())
 
-dd.inject_action(
-        "clocking.Session",
-        start_session=StartTicketSessionViaSession()
-        )
+# dd.inject_action(
+#         "clocking.Session",
+#         start_session=StartTicketSessionViaSession()
+#         )
+# dd.inject_action(
+#         "deploy.Deployment",
+#         start_session=StartTicketSessionViaWish()
+#         )
 
 
 @dd.python_2_unicode_compatible
-class ServiceReport(UserAuthored, Certifiable, DatePeriod):
+class ServiceReport(UserAuthored, ContactRelated, Certifiable, DatePeriod):
     """A **service report** is a document used in various discussions with
     a stakeholder.
 

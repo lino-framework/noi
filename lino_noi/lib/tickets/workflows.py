@@ -38,14 +38,13 @@ class TicketAction(dd.ChangeStateAction):
 
     """
     required_vote_states = set([])
+    veto_vote_states = set([])
 
     def attach_to_actor(self, *args):
-        self.required_vote_states = \
-            rt.models.votes.Vote.resolve_states(
-                self.required_vote_states)
+        Vote = rt.models.votes.Vote
+        self.required_vote_states = Vote.resolve_states(self.required_vote_states)
+        self.veto_vote_states = Vote.resolve_states(self.veto_vote_states)
         return super(TicketAction, self).attach_to_actor(*args)
-    
-    
     
     def get_action_permission(self, ar, obj, state):
         me = ar.get_user()
@@ -56,12 +55,21 @@ class TicketAction(dd.ChangeStateAction):
                      self).get_action_permission(ar, obj, state)
 
     def before_execute(self, ar, obj):
-        if len(self.required_vote_states):
+        if len(self.veto_vote_states) or len(self.required_vote_states):
+            has_required = False
             for v in rt.models.votes.Vote.objects.filter(votable=obj):
                 if v.state in self.required_vote_states:
+                    has_required = True
+                if v.state in self.veto_vote_states:
                     msg = _("Cannot {action} because {vote} is {state}.")
                     raise Warning(msg.format(
                         vote=v, user=v.user, action=self.label, state=v.state))
+
+            if not has_required:
+                msg = _("Cannot {action} because there is "
+                        "no vote marked as {states} .")
+                raise Warning(msg.format(
+                    action=self.label, states=self.required_vote_states))
 
 # class NotifyingTicketAction(TicketAction):
     
@@ -113,7 +121,8 @@ class MarkTicketClosed(TicketAction):
     """
     label = pgettext("verb", "Close")
     required_states = 'talk started opened ready'
-    required_vote_states = 'assigned'
+    veto_vote_states = 'assigned'
+    required_vote_states = 'done cancelled'
 
 
 class MarkTicketTalk(TicketAction):
@@ -181,7 +190,7 @@ class VoteAction(dd.ChangeStateAction):
     def get_action_permission(self, ar, obj, state):
         if not obj.votable_id:
             return False
-        if not obj.votable.state in self.required_votable_states:
+        if len(self.required_votable_states) and not obj.votable.state in self.required_votable_states:
             return False
         me = ar.get_user()
         if self.managed_by_votable_author is not None:
@@ -199,25 +208,44 @@ class VoteAction(dd.ChangeStateAction):
                      self).get_action_permission(ar, obj, state)
 
 class MarkVoteWatching(VoteAction):
-    
-    label = _("Watching")
+    """You are watching this ticket but have no opinion."""
+    # label = _("Watching")
     managed_by_votable_author = False
-    required_states = "candidate assigned"
-    required_votable_states = 'new talk opened started'
-    confirmation_msg_template = _("Revoke {voter}'s {vote}.")
+    required_states = "invited pro con candidate assigned"
+    # required_votable_states = 'new talk opened started'
+    # confirmation_msg_template = _("Revoke {voter}'s {vote}.")
+    
+
+class MarkVotePro(VoteAction):
+    """You declare that you support this ticket."""
+    # label = _("Pro")
+    managed_by_votable_author = False
+    required_states = "invited watching candidate assigned"
+    # required_votable_states = 'new talk opened started'
+    confirmation_msg_template = _("{voter} speaks for {ticket}.")
+    
+
+class MarkVoteCon(VoteAction):
+    """You declare that you are against this ticket."""
+    # label = _("Con")
+    managed_by_votable_author = False
+    required_states = "invited watching candidate assigned"
+    # required_votable_states = 'new talk opened started'
+    confirmation_msg_template = _("{voter} speaks against {ticket}.")
     
 
 class MarkVoteCandidate(VoteAction):
     
-    label = _("Candidate")
+    # label = _("Candidate")
     managed_by_votable_author = False
     msg_template = _("{user} candidates for {ticket}.")
-    required_states = "watching"
+    required_states = "watching pro"
     required_votable_states = 'new talk opened'
     
 
 class MarkVoteAssigned(VoteAction):
-    label = pgettext("verb", "Assign")
+    # label = _("Assigned")
+    # label = pgettext("verb", "Assign")
     managed_by_votable_author = True
     required_states = 'watching candidate'
     required_votable_states = 'new talk opened started ready'
@@ -232,17 +260,18 @@ class MarkVoteAssigned(VoteAction):
 
 
 class MarkVoteCancelled(VoteAction):
+    """You declare that you are no longer interested in this ticket."""
     
-    label = pgettext("verb", "Cancel")
+    # label = pgettext("verb", "Cancel")
     managed_by_votable_author = None
-    required_states = 'candidate assigned'
+    required_states = 'invited pro con candidate assigned'
     required_votable_states = 'new talk opened started ready'
     # msg_template = _("{user} cancelled {vote} for {ticket}.")
     confirmation_msg_template = _("Cancel {voter}'s {vote}.")
 
 
 class MarkVoteDone(VoteAction):
-    label = _("Done")
+    # label = _("Done")
     managed_by_votable_author = False
     required_states = 'assigned'
     required_votable_states = 'new talk opened started ready'
@@ -299,12 +328,14 @@ class MarkVoteRated(VoteAction):
 # VoteStates.watching.add_transition(
     # required_states="candidate assigned")
 
+VoteStates.cancelled.add_transition(MarkVoteCancelled)
 VoteStates.watching.add_transition(MarkVoteWatching)
+VoteStates.pro.add_transition(MarkVotePro)
+VoteStates.con.add_transition(MarkVoteCon)
 VoteStates.candidate.add_transition(MarkVoteCandidate)
 VoteStates.assigned.add_transition(MarkVoteAssigned)
 VoteStates.done.add_transition(MarkVoteDone)
 VoteStates.rated.add_transition(MarkVoteRated)
-VoteStates.cancelled.add_transition(MarkVoteCancelled)
 
 
 

@@ -26,7 +26,7 @@ class CourseDetail(CourseDetail):
     start_date end_date start_time end_time
     max_events max_date every_unit every
     monday tuesday wednesday thursday friday saturday sunday
-    cal.EventsByController
+    cal.EntriesByController
     """, label=_("Events"))
 
     more = dd.Panel("""
