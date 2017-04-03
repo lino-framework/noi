@@ -119,10 +119,16 @@ class MarkTicketReady(TicketAction):
 class MarkTicketClosed(TicketAction):
     """Mark this ticket as closed.
     """
-    label = pgettext("verb", "Close")
+    # label = pgettext("verb", "Close")
     required_states = 'talk started opened ready'
     veto_vote_states = 'assigned'
     required_vote_states = 'done cancelled'
+
+class MarkTicketRefused(TicketAction):
+    """Mark this ticket as refused.
+    """
+    required_states = 'talk started opened ready'
+    veto_vote_states = 'assigned'
 
 
 class MarkTicketTalk(TicketAction):
@@ -148,6 +154,7 @@ TicketStates.opened.add_transition(MarkTicketOpened)
 TicketStates.started.add_transition(MarkTicketStarted)
 TicketStates.ready.add_transition(MarkTicketReady)
 TicketStates.closed.add_transition(MarkTicketClosed)
+TicketStates.cancelled.add_transition(MarkTicketRefused)
 
 
 # class VoteAction(dd.ChangeStateAction, NotifyingAction):
