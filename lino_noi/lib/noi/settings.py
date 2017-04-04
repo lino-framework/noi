@@ -83,10 +83,8 @@ class Site(Site):
         # yield 'lino.modlib.awesomeuploader'
 
         yield 'lino_noi.lib.noi'
-        yield 'lino.modlib.restful'
         # yield 'lino_xl.lib.inbox'
         yield 'lino_xl.lib.mailbox'
-        yield 'lino_xl.lib.maildev'
 
 
     def setup_plugins(self):
