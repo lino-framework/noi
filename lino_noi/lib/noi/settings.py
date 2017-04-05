@@ -83,7 +83,6 @@ class Site(Site):
         # yield 'lino.modlib.awesomeuploader'
 
         yield 'lino_noi.lib.noi'
-        yield 'lino.modlib.restful'
         # yield 'lino_xl.lib.inbox'
         yield 'lino_xl.lib.mailbox'
 
