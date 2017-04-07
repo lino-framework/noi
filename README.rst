@@ -8,11 +8,11 @@ The ``lino-noi`` package
     :alt: Documentation Status
     :target: http://lino.readthedocs.io/en/latest/?badge=latest
 
-.. image:: https://coveralls.io/repos/github/khchine5/noi/badge.svg?branch=master
-    :target: https://coveralls.io/github/khchine5/noi?branch=master
+.. image:: https://coveralls.io/repos/github/lino-framework/noi/badge.svg?branch=master
+    :target: https://coveralls.io/github/lino-framework/noi?branch=master
 
-.. image:: https://travis-ci.org/khchine5/noi.svg?branch=master
-    :target: https://travis-ci.org/khchine5/noi?branch=master
+.. image:: https://travis-ci.org/lino-framework/noi.svg?branch=stable
+    :target: https://travis-ci.org/lino-framework/noi?branch=stable
 
 .. image:: https://img.shields.io/pypi/v/lino-noi.svg
     :target: https://pypi.python.org/pypi/lino-noi/
