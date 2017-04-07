@@ -37,7 +37,7 @@ class TicketAction(dd.ChangeStateAction):
     Make sure that only *triagers* can act on tickets of other users.
 
     """
-    required_vote_states = set([])
+    required_vote_states = set([])  # probably deprecated
     veto_vote_states = set([])
 
     def attach_to_actor(self, *args):
@@ -56,17 +56,17 @@ class TicketAction(dd.ChangeStateAction):
 
     def before_execute(self, ar, obj):
         if len(self.veto_vote_states) or len(self.required_vote_states):
-            has_required = False
+            has_required = len(self.required_vote_states) == 0
             for v in rt.models.votes.Vote.objects.filter(votable=obj):
                 if v.state in self.required_vote_states:
                     has_required = True
                 if v.state in self.veto_vote_states:
-                    msg = _("Cannot {action} because {vote} is {state}.")
+                    msg = _("Cannot mark as {action} because {vote} is {state}.")
                     raise Warning(msg.format(
                         vote=v, user=v.user, action=self.label, state=v.state))
 
             if not has_required:
-                msg = _("Cannot {action} because there is "
+                msg = _("Cannot mark as {action} because there is "
                         "no vote marked as {states} .")
                 raise Warning(msg.format(
                     action=self.label, states=self.required_vote_states))
@@ -83,6 +83,7 @@ class TicketAction(dd.ChangeStateAction):
 class MarkTicketOpened(TicketAction):
     """Mark this ticket as open.
     """
+    action_name = 'mark_opened'
     label = pgettext("verb", "Open")
     required_states = 'talk new closed'
     # show_in_bbar = True
@@ -96,39 +97,32 @@ class MarkTicketOpened(TicketAction):
 class MarkTicketStarted(TicketAction):
     """Mark this ticket as started.
     """
+    action_name = 'mark_started'
     label = pgettext("verb", "Start")
     required_states = 'new talk opened'
 
-    def unused_before_execute(self, ar, obj):
-        for v in rt.models.votes.Vote.objects.filter(votable=obj):
-            if v.state == rt.actors.votes.VoteStates.assigned:
-                return  # ok
-        raise Warning(
-            _("Cannot start when nobody is assigned"))
-
-    # def get_notify_subject(self, ar, obj):
-    #     subject = _("{user} activated {ticket}.").format(
-    #         user=ar.get_user(), ticket=obj)
-    #     return subject
     
 class MarkTicketReady(TicketAction):
     """Mark this ticket as ready.
     """
+    action_name = 'mark_ready'
     required_states = "new opened started talk"
     
 class MarkTicketClosed(TicketAction):
     """Mark this ticket as closed.
     """
     # label = pgettext("verb", "Close")
+    action_name = 'mark_closed'
     required_states = 'talk started opened ready'
     veto_vote_states = 'assigned'
-    required_vote_states = 'done cancelled'
+    # required_vote_states = 'done cancelled'
 
 class MarkTicketRefused(TicketAction):
     """Mark this ticket as refused.
     """
     required_states = 'talk started opened ready'
     veto_vote_states = 'assigned'
+    action_name = 'mark_refused'
 
 
 class MarkTicketTalk(TicketAction):
@@ -136,6 +130,7 @@ class MarkTicketTalk(TicketAction):
     """
     label = pgettext("verb", "Talk")
     required_states = "new opened started sleeping ready"
+    action_name = 'mark_talk'
 
     # def get_notify_subject(self, ar, obj):
     #     subject = _("{user} wants to talk about {ticket}.").format(
