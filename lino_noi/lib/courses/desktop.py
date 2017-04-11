@@ -41,6 +41,51 @@ class CourseDetail(CourseDetail):
     """, label=_("More"))
 
 
+class MyEnrolments(Enrolments):
+    """Show the Enrolments where I am the pupil).
+
+    This requires the :attr:`partner` field in my user settings to
+    point to me as a teacher.
+
+    """
+    label = _("My enrolments")
+    # required_roles = dd.login_required(CoursesTeacher)
+    master_key = "pupil"
+    column_names = "course course__name workflow_buttons *"
+    parameters = dict(Enrolments.parameters)
+    parameters.update(active=dd.YesNo.field(
+            _("Active"),
+            help_text=_("Filter courses that are either active/draft or inactive/closed"),
+            default=dd.YesNo.yes.as_callable))
+
+    params_layout = """start_date end_date author state \
+        active #course_state participants_only"""
+
+    @classmethod
+    def setup_request(self, ar):
+        u = ar.get_user()
+        ar.master_instance = u #get_child(u, pupil_model)
+        super(MyEnrolments, self).setup_request(ar)
+
+    @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(MyEnrolments, self).param_defaults(ar, **kw)
+        kw.update(course_state=CourseStates.active)
+        return kw
+
+    @classmethod
+    def get_request_queryset(self, ar):
+        qs = super(MyEnrolments, self).get_request_queryset(ar)
+        pv = ar.param_values
+        if pv.active == dd.YesNo.yes:
+            qs = qs.filter(course__state__in=[CourseStates.active, CourseStates.draft])
+        elif pv.active == dd.YesNo.no:
+            qs = qs.filter(course__state__in=[CourseStates.inactive, CourseStates.closed])
+        return qs
+
+
+
+
 Activities.detail_layout = CourseDetail()
 # MyActivities.detail_layout = CourseDetail()
 
