@@ -14,7 +14,7 @@ Lino Noi extension of :mod:`lino_xl.lib.cal`.
 from lino_xl.lib.cal import Plugin
 
 
-# class Plugin(Plugin):
+class Plugin(Plugin):
     
-#     extends_models = ['Company']
+    extends_models = ['Event']
 
