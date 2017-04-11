@@ -6,6 +6,7 @@
 """
 
 from lino.api import dd, _
+from lino.utils import join_words
 
 from lino_xl.lib.contacts.models import *
 
@@ -23,6 +24,20 @@ PartnerDetail.contact_box = dd.Panel("""
     phone
     gsm #fax
     """, label=_("Contact"))
+
+
+@dd.python_2_unicode_compatible
+class Person(Person):
+    
+    class Meta(Person.Meta):
+        app_label = 'contacts'
+        abstract = dd.is_abstract_model(__name__, 'Person')
+        
+    def __str__(self):
+        words = []
+        words.append(self.first_name)
+        words.append(self.last_name)
+        return join_words(*words)
 
 
 class PersonDetail(PersonDetail):

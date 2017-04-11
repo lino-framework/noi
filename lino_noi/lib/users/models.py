@@ -11,7 +11,8 @@ from lino.api import dd, rt, _
 
 from lino.mixins import Phonable
 from lino_xl.lib.countries.mixins import AddressLocation
-from lino_xl.lib.contacts.models import Person
+# from lino_xl.lib.contacts.models import Person
+from lino_noi.lib.contacts.models import Person
 
 from lino.modlib.users.models import *
 
