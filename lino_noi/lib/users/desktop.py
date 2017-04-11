@@ -16,12 +16,13 @@ from lino_xl.lib.clocking.roles import Worker
 from .choicelists import UserStates
 
 from lino.modlib.users.actions import SendWelcomeMail
+from lino.modlib.office.roles import OfficeUser
 #from .models import VerifyUser
 
 class UserDetail(UserDetail):
     """Layout of User Detail in Lino Noi."""
 
-    main = "general contact dashboard.WidgetsByUser"
+    main = "general contact calendar dashboard.WidgetsByUser"
 
     general = dd.Panel("""
     box1:45 clocking:15
@@ -35,6 +36,13 @@ class UserDetail(UserDetail):
         """, label=_("Clocking"), required_roles=dd.login_required(Worker))
     else:
         clocking = dd.DummyPanel()
+
+    calendar = dd.Panel("""
+    event_type access_class
+    cal.SubscriptionsByUser
+    # cal.MembershipsByUser
+    """, label=dd.plugins.cal.verbose_name, required_roles=dd.login_required(OfficeUser))
+
 
     # tickets = dd.Panel("""
     # tickets.TicketsByReporter 

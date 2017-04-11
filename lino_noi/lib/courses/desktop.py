@@ -29,8 +29,14 @@ class CourseDetail(CourseDetail):
     cal.EntriesByController
     """, label=_("Calendar"))
 
+    more_left = """
+    id:8 
+    user 
+    teacher 
+    """
+
     more = dd.Panel("""
-    teacher id:8 user 
+    more_left:30 blogs.EntriesByController:50
     description
     """, label=_("More"))
 
