@@ -18,3 +18,8 @@ class Plugin(Plugin):
     """
 
     extends_models = ['Course']
+    def get_dashboard_items(self, user):
+        for x in super(Plugin, self).get_dashboard_items(user):
+            yield x
+        if user.authenticated:
+            yield self.site.actors.courses.MyEnrolments
