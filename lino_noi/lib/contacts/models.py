@@ -107,3 +107,4 @@ class CompanyDetail(CompanyDetail):
 
 Companies.set_detail_layout(CompanyDetail())
 Persons.set_detail_layout(PersonDetail())
+Person.column_names = 'last_name first_name gsm email city *'

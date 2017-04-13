@@ -275,7 +275,7 @@ class MarkVoteCancelled(VoteAction):
 class MarkVoteDone(VoteAction):
     # label = _("Done")
     managed_by_votable_author = False
-    required_states = 'assigned'
+    required_states = 'assigned invited'
     required_votable_states = 'new talk opened started ready'
     msg_template = _("{user} confirmed {ticket} {state} by {voter}.")
 
@@ -294,7 +294,7 @@ class MarkVoteRated(VoteAction):
     """
     label = _("Rate")
     managed_by_votable_author = True
-    required_states = 'assigned done'
+    required_states = 'assigned done invited'
     required_votable_states = 'new talk opened started ready'
     parameters = dict(
         rating=Ratings.field(),
