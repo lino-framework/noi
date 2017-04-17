@@ -56,7 +56,8 @@ class MyEnrolments(Enrolments):
     parameters.update(active=dd.YesNo.field(
             _("Active"),
             help_text=_("Filter courses that are either active/draft or inactive/closed"),
-            default=dd.YesNo.yes.as_callable))
+            null=True, blank=True,
+            ))
 
     params_layout = """start_date end_date author state \
         active #course_state participants_only"""
@@ -70,7 +71,7 @@ class MyEnrolments(Enrolments):
     @classmethod
     def param_defaults(self, ar, **kw):
         kw = super(MyEnrolments, self).param_defaults(ar, **kw)
-        kw.update(course_state=CourseStates.active)
+        kw.update(active=dd.YesNo.yes)
         return kw
 
     @classmethod
