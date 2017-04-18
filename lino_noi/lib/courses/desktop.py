@@ -18,7 +18,7 @@ class CourseDetail(CourseDetail):
     main = "general cal_tab enrolments more"
     
     general = dd.Panel("""
-    line room workflow_buttons name
+    line room workflow_buttons name ref
     deploy.DeploymentsByMilestone
     """, label=_("General"))
     
@@ -51,7 +51,7 @@ class MyEnrolments(Enrolments):
     label = _("My enrolments")
     # required_roles = dd.login_required(CoursesTeacher)
     master_key = "pupil"
-    column_names = "course course__name workflow_buttons *"
+    column_names = "course course__ref course__name workflow_buttons *"
     parameters = dict(Enrolments.parameters)
     parameters.update(active=dd.YesNo.field(
             _("Active"),
@@ -88,5 +88,11 @@ class MyEnrolments(Enrolments):
 
 
 Activities.detail_layout = CourseDetail()
+i = Activities.column_names.find("name") + len("name")
+Activities.column_names = Activities.column_names[:i] + " ref" + Activities.column_names[i:]
+
+i = MyActivities.column_names.find("name") + len("name")
+MyActivities.column_names = MyActivities.column_names[:i] + " ref" + MyActivities.column_names[i:]
+
 # MyActivities.detail_layout = CourseDetail()
 
