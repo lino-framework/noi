@@ -110,6 +110,7 @@ class Site(Site):
         # tb.add_action(self.actors.tickets.TicketsToTriage)
         # tb.add_action(self.actors.tickets.TicketsToTalk)
         # tb.add_action(self.modules.tickets.TicketsToDo)
+        tb.add_action(self.modules.tickets.RefTickets)
         tb.add_action(self.actors.tickets.AllTickets)
         tb.add_action(
             self.actors.tickets.AllTickets.insert_action,
