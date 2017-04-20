@@ -453,14 +453,14 @@ class ReportsByPartner(ServiceReports):
 #     WorkedHours.setup_columns()
 #     settings.SITE.kernel.must_build_site_cache()
 
-
-@dd.receiver(dd.post_save, sender=Ticket)
-def on_ticket_create(sender, instance=None, created=False, **kwargs):
-    if settings.SITE.loading_from_dump:
-        return
-    me = instance.user
-    if created and me is not None and me.open_session_on_new_ticket:
-        ses = rt.modules.clocking.Session(ticket=instance, user=me)
-        ses.full_clean()
-        ses.save()
+# # moved to xl.clocking.mixins.py
+# @dd.receiver(dd.post_save, sender=Ticket)
+# def on_ticket_create(sender, instance=None, created=False, **kwargs):
+#     if settings.SITE.loading_from_dump:
+#         return
+#     me = instance.user
+#     if created and me is not None and me.open_session_on_new_ticket:
+#         ses = rt.modules.clocking.Session(ticket=instance, user=me)
+#         ses.full_clean()
+#         ses.save()
 
