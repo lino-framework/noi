@@ -132,11 +132,16 @@ class Site(Site):
 
         wc(self.modules.tickets.Ticket)
         wc(self.modules.comments.Comment, master_key='owner')
-        if self.is_installed('extjs'):
-            self.plugins.extjs.autorefresh_seconds = 0
+        # wc(self.modules.clocking.Session, master_key='owner')
+        
         if self.is_installed('votes'):
             wc(self.modules.votes.Vote, master_key='votable')
 
+        if self.is_installed('deploy'):
+            wc(self.modules.deploy.Deployment, master_key='ticket')
+
+        if self.is_installed('extjs'):
+            self.plugins.extjs.autorefresh_seconds = 0
 
 # the following line should not be active in a checked-in version
 #~ DATABASES['default']['NAME'] = ':memory:'

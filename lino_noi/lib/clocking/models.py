@@ -16,10 +16,10 @@ from lino_xl.lib.contacts.mixins import ContactRelated
 from lino_xl.lib.tickets.choicelists import TicketStates
 # from .actions import StartTicketSessionViaVote, EndTicketSessionViaVote, StartTicketSessionViaSession, StartTicketSessionViaWish
 
-
-dd.inject_field(
-    "users.User", 'open_session_on_new_ticket',
-    models.BooleanField(_("Open session on new ticket"), default=False))
+# #Moved to XL
+# dd.inject_field(
+#     "users.User", 'open_session_on_new_ticket',
+#     models.BooleanField(_("Open session on new ticket"), default=False))
 
 # if dd.is_installed('votes'):
 #     dd.inject_action(
