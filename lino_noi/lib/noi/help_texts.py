@@ -20,18 +20,5 @@ responsible for triaging tickets"""),
     'lino_noi.lib.tickets.Plugin' : _("""Adds the lino_xl.lib.votes plugin."""),
     'lino_noi.lib.tickets.models.TicketDetail' : _("""Customized detail_lyout for Tickets.  Replaces waiting_for by
 faculties"""),
-    'lino_noi.lib.users.choicelists.UserStates' : _("""The list of possible choices for the state field
-of a User."""),
-    'lino_noi.lib.users.choicelists.MarkUserActive' : _("""Activate this user. This requires that the user has confirmed their
-verifcation code, and that a username and password are set."""),
     'lino_noi.lib.users.desktop.UserDetail' : _("""Layout of User Detail in Lino Noi."""),
-    'lino_noi.lib.users.desktop.RegisterUser' : _("""Fill a form in order to register as a new system user."""),
-    'lino_noi.lib.users.desktop.NewUsers' : _("""List of new users to be confirmed by the system admin."""),
-    'lino_noi.lib.users.models.CheckedSubmitInsert' : _("""Like the standard lino.core.actions.SubmitInsert, but
-checks certain things before accepting the new user."""),
-    'lino_noi.lib.users.models.VerifyUser' : _("""Enter your verification code."""),
-    'lino_noi.lib.users.models.User.callme_mode' : _("""Whether other users can see my contact data."""),
-    'lino_noi.lib.users.models.User.verification_code' : _("""A random string set for every new user. Used for
-online_registration."""),
-    'lino_noi.lib.users.models.User.user_state' : _("""The registration state of this user."""),
 }

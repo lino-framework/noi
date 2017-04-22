@@ -18,14 +18,14 @@ class Plugin(Plugin):
     """
 
     extends_models = ['Course']
-    def setup_main_menu(self, site, profile, main):
-        super(Plugin, self).setup_main_menu(site, profile, main)
-        m = main.get_item(self.app_label)
-        m.add_action('courses.MyEnrolments')
+    # def setup_main_menu(self, site, profile, main):
+    #     super(Plugin, self).setup_main_menu(site, profile, main)
+    #     m = main.get_item(self.app_label)
+    #     m.add_action('courses.MyEnrolments')
+    #
 
-
-    def get_dashboard_items(self, user):
-        for x in super(Plugin, self).get_dashboard_items(user):
-            yield x
-        if user.authenticated:
-            yield self.site.actors.courses.MyEnrolments
+    # def get_dashboard_items(self, user):
+    #     for x in super(Plugin, self).get_dashboard_items(user):
+    #         yield x
+    #     if user.authenticated:
+    #         yield self.site.actors.courses.MyEnrolments

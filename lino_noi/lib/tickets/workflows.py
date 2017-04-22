@@ -213,35 +213,35 @@ class MarkVoteWatching(VoteAction):
     """You are watching this ticket but have no opinion."""
     # label = _("Watching")
     managed_by_votable_author = False
-    required_states = "invited pro con candidate assigned"
+    required_states = "invited candidate assigned"
     # required_votable_states = 'new talk opened started'
     # confirmation_msg_template = _("Revoke {voter}'s {vote}.")
     
 
-class MarkVotePro(VoteAction):
-    """You declare that you support this ticket."""
-    # label = _("Pro")
-    managed_by_votable_author = False
-    required_states = "invited watching candidate assigned"
-    # required_votable_states = 'new talk opened started'
-    confirmation_msg_template = _("{voter} speaks for {ticket}.")
-    
-
-class MarkVoteCon(VoteAction):
-    """You declare that you are against this ticket."""
-    # label = _("Con")
-    managed_by_votable_author = False
-    required_states = "invited watching candidate assigned"
-    # required_votable_states = 'new talk opened started'
-    confirmation_msg_template = _("{voter} speaks against {ticket}.")
-    
+# class MarkVotePro(VoteAction):
+#     """You declare that you support this ticket."""
+#     # label = _("Pro")
+#     managed_by_votable_author = False
+#     required_states = "invited watching candidate assigned"
+#     # required_votable_states = 'new talk opened started'
+#     confirmation_msg_template = _("{voter} speaks for {ticket}.")
+#
+#
+# class MarkVoteCon(VoteAction):
+#     """You declare that you are against this ticket."""
+#     # label = _("Con")
+#     managed_by_votable_author = False
+#     required_states = "invited watching candidate assigned"
+#     # required_votable_states = 'new talk opened started'
+#     confirmation_msg_template = _("{voter} speaks against {ticket}.")
+#
 
 class MarkVoteCandidate(VoteAction):
     
     # label = _("Candidate")
     managed_by_votable_author = False
     msg_template = _("{user} candidates for {ticket}.")
-    required_states = "watching pro"
+    required_states = "watching"
     required_votable_states = 'new talk opened'
     
 
@@ -266,7 +266,7 @@ class MarkVoteCancelled(VoteAction):
     
     # label = pgettext("verb", "Cancel")
     managed_by_votable_author = None
-    required_states = 'invited pro con candidate assigned'
+    required_states = 'invited candidate assigned'
     required_votable_states = 'new talk opened started ready'
     # msg_template = _("{user} cancelled {vote} for {ticket}.")
     confirmation_msg_template = _("Cancel {voter}'s {vote}.")
@@ -332,8 +332,8 @@ class MarkVoteRated(VoteAction):
 
 VoteStates.cancelled.add_transition(MarkVoteCancelled)
 VoteStates.watching.add_transition(MarkVoteWatching)
-VoteStates.pro.add_transition(MarkVotePro)
-VoteStates.con.add_transition(MarkVoteCon)
+# VoteStates.pro.add_transition(MarkVotePro)
+# VoteStates.con.add_transition(MarkVoteCon)
 VoteStates.candidate.add_transition(MarkVoteCandidate)
 VoteStates.assigned.add_transition(MarkVoteAssigned)
 VoteStates.done.add_transition(MarkVoteDone)

@@ -11,7 +11,7 @@ from lino_xl.lib.tickets.mixins import Milestone
 from lino_xl.lib.courses.models import *
 from lino import mixins
 
-class Course(Course, Milestone, mixins.Referrable):
+class Course(Course, mixins.Referrable):
 
     quick_search_fields = 'ref name line__name line__topic__name'
 
@@ -23,9 +23,3 @@ class Course(Course, Milestone, mixins.Referrable):
 
     class Meta(Course.Meta):
         abstract = dd.is_abstract_model(__name__, 'Course')
-        
-    def get_milestone_users(self):
-        for obj in self.get_enrolments():
-            u = obj.pupil.get_as_user()
-            if u is not None:
-                yield u

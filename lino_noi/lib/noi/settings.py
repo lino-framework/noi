@@ -85,6 +85,7 @@ class Site(Site):
         yield 'lino_noi.lib.noi'
         # yield 'lino_xl.lib.inbox'
         yield 'lino_xl.lib.mailbox'
+        yield 'lino_xl.lib.meetings'
 
 
     def setup_plugins(self):
@@ -93,9 +94,9 @@ class Site(Site):
             commentable_model='tickets.Ticket')
         self.plugins.faculties.configure(
             demander_model='tickets.Ticket')
-        self.plugins.tickets.configure(
-            site_model='cal.Room',
-            milestone_model='courses.Course')
+        # self.plugins.tickets.configure(
+        #     site_model='cal.Room',
+        #     milestone_model='courses.Course')
 
     def get_default_required(self, **kw):
         # overrides the default behaviour which would add

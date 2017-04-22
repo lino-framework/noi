@@ -17,4 +17,5 @@ from lino_xl.lib.cal import Plugin
 class Plugin(Plugin):
     
     extends_models = ['Event']
+    needs_plugins = ['lino_noi.lib.noi']
 

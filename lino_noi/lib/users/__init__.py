@@ -1,23 +1,17 @@
-# Copyright 2015-2016 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 """
-Lino Noi extension of :mod:`lino.modlib.users`.
+Lino Noi extension of :mod:`lino_xl.lib.online.users`.
 
 .. autosummary::
    :toctree:
 
     models
-    choicelists
     desktop
     fixtures.demo
     fixtures.demo2
 
 """
 
-from lino.modlib.users import Plugin
+from lino_xl.lib.online.users import Plugin
 
-
-class Plugin(Plugin):
-    needs_plugins = ['lino_xl.lib.countries']
-    extends_models = ['User']
-    online_registration = True
