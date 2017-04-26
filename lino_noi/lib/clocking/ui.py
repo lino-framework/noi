@@ -17,7 +17,7 @@ from django.db.models import Q
 
 from lino_xl.lib.tickets.models import Project
 from lino_xl.lib.tickets.ui import Tickets, Projects
-from lino_xl.lib.courses.desktop import Courses
+# from lino_xl.lib.courses.desktop import Courses
 from lino_xl.lib.tickets.models import Ticket
 from lino_xl.lib.clocking.roles import Worker
 from lino_xl.lib.clocking.choicelists import ReportingTypes
@@ -390,37 +390,37 @@ class ProjectsByReport(Projects, DurationReport):
 
 
 
-class CoursesByReport(Courses, DurationReport):
-    """The list of courses mentioned in a service report.
-    
-    """
-    master = 'clocking.ServiceReport'
-    column_names_template = "start_date name * {vcolumns}"
-    order_by = ['start_date']
-
-    @classmethod
-    def get_request_queryset(self, ar):
-
-        mi = ar.master_instance
-        if mi is None:
-            return
-        
-        pv = ar.param_values
-        pv.update(start_date=mi.start_date, end_date=mi.end_date)
-        pv.update(interesting_for=mi.interesting_for)
-       
-        spv = dict(start_date=mi.start_date, end_date=mi.end_date)
-        spv.update(observed_event=dd.PeriodEvents.started)
-        spv.update(user=mi.user)
-        spv.update(company=mi.company)
-        
-        qs = super(CoursesByReport, self).get_request_queryset(ar)
-        for obj in qs:
-            sar = Sessions.request(param_values=spv)
-            load_sessions(obj, sar)
-            if obj._root2tot.get(TOTAL_KEY):
-                yield obj
-            
+# class CoursesByReport(Courses, DurationReport):
+#     """The list of courses mentioned in a service report.
+#
+#     """
+#     master = 'clocking.ServiceReport'
+#     column_names_template = "start_date name * {vcolumns}"
+#     order_by = ['start_date']
+#
+#     @classmethod
+#     def get_request_queryset(self, ar):
+#
+#         mi = ar.master_instance
+#         if mi is None:
+#             return
+#
+#         pv = ar.param_values
+#         pv.update(start_date=mi.start_date, end_date=mi.end_date)
+#         pv.update(interesting_for=mi.interesting_for)
+#
+#         spv = dict(start_date=mi.start_date, end_date=mi.end_date)
+#         spv.update(observed_event=dd.PeriodEvents.started)
+#         spv.update(user=mi.user)
+#         spv.update(company=mi.company)
+#
+#         qs = super(CoursesByReport, self).get_request_queryset(ar)
+#         for obj in qs:
+#             sar = Sessions.request(param_values=spv)
+#             load_sessions(obj, sar)
+#             if obj._root2tot.get(TOTAL_KEY):
+#                 yield obj
+#
     
 
 class ServiceReports(dd.Table):
@@ -434,7 +434,7 @@ class ServiceReports(dd.Table):
     SessionsByReport
     # TicketsByReport
     # ProjectsByReport
-    CoursesByReport
+    # CoursesByReport
     """
     column_names = "start_date end_date user interesting_for "\
                    "ticket_state printed *"
