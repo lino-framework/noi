@@ -55,7 +55,7 @@ class Site(Site):
         yield 'lino_noi.lib.users'
         yield 'lino_noi.lib.cal'
         yield 'lino_xl.lib.extensible'
-        yield 'lino_noi.lib.courses'
+        # yield 'lino_noi.lib.courses'
         # yield 'lino_noi.lib.products'
 
         yield 'lino_noi.lib.topics'
@@ -105,7 +105,8 @@ class Site(Site):
 
     def setup_quicklinks(self, user, tb):
         super(Site, self).setup_quicklinks(user, tb)
-        tb.add_action(self.actors.courses.MyActivities)
+        # tb.add_action(self.actors.courses.MyActivities)
+        tb.add_action(self.actors.meetings.MyMeetings)
         # tb.add_action(self.modules.deploy.MyMilestones)
         # tb.add_action(self.actors.tickets.MyTickets)
         # tb.add_action(self.actors.tickets.TicketsToTriage)
