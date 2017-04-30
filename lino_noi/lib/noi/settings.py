@@ -90,8 +90,8 @@ class Site(Site):
 
     def setup_plugins(self):
         super(Site, self).setup_plugins()
-        self.plugins.comments.configure(
-            commentable_model='tickets.Ticket')
+        # self.plugins.comments.configure(
+        #     commentable_model='tickets.Ticket')
         self.plugins.faculties.configure(
             demander_model='tickets.Ticket')
         # self.plugins.tickets.configure(
