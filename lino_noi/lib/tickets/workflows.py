@@ -138,6 +138,7 @@ class MarkTicketTalk(TicketAction):
     #     return subject
 
 
+TicketStates.clear_transitions()
 # TicketStates.sticky.add_transition(
 #     required_states="new")
 # TicketStates.new.add_transition(

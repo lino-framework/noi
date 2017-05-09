@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-noi 0.0.2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-04-01 11:44+0300\n"
+"POT-Creation-Date: 2017-05-09 08:49+0300\n"
 "PO-Revision-Date: 2017-03-20 07:46+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: de\n"
@@ -18,88 +18,96 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: lino_noi/lib/clocking/models.py:21
-msgid "Open session on new ticket"
-msgstr "Sitzung starten auf neuen Tickets"
-
-#: lino_noi/lib/clocking/models.py:59
-msgid "Service Report"
-msgstr "Dienstleistungsbericht"
-
-#: lino_noi/lib/clocking/models.py:60
-msgid "Service Reports"
-msgstr "Dienstleistungsberichte"
-
-#: lino_noi/lib/clocking/models.py:64
-msgid "Interesting for"
-msgstr ""
-
-#: lino_noi/lib/clocking/models.py:66
-msgid "Only tickets interesting for this partner."
-msgstr ""
-
-#: lino_noi/lib/clocking/models.py:70
-msgid "Only tickets in this state."
-msgstr ""
-
-#: lino_noi/lib/clocking/ui.py:60
-msgid "Time"
-msgstr ""
-
-#: lino_noi/lib/clocking/ui.py:64 lino_noi/lib/clocking/ui.py:121
-#: lino_noi/lib/clocking/ui.py:245
-msgid "Description"
-msgstr ""
-
-#: lino_noi/lib/clocking/ui.py:75
-msgid "Site"
-msgstr ""
-
-#: lino_noi/lib/clocking/ui.py:78
+#: lino_noi/lib/cal/models.py:17 lino_noi/lib/clocking/ui.py:79
 msgid "Author"
 msgstr ""
 
-#: lino_noi/lib/clocking/ui.py:81
-msgid "Project"
-msgstr "Projekt"
-
-#: lino_noi/lib/clocking/ui.py:84
-msgid "Topic"
+#: lino_noi/lib/cal/models.py:18
+msgid "Organizer"
 msgstr ""
 
-#: lino_noi/lib/clocking/ui.py:101
-msgid "Worked hours"
-msgstr "Gearbeitete Stunden"
-
-#: lino_noi/lib/clocking/ui.py:170 lino_noi/lib/clocking/ui.py:188
-msgid "Total"
+#: lino_noi/lib/cal/models.py:19
+msgid "Contact person"
 msgstr ""
 
-#: lino_noi/lib/clocking/ui.py:382
-msgid "Tickets"
-msgstr "Anfragen"
-
-#: lino_noi/lib/contacts/models.py:19
-msgid "Address"
-msgstr ""
-
-#: lino_noi/lib/contacts/models.py:25 lino_noi/lib/contacts/models.py:46
-#: lino_noi/lib/contacts/models.py:77 lino_noi/lib/users/desktop.py:62
-msgid "Contact"
-msgstr "Kontakt"
-
-#: lino_noi/lib/contacts/models.py:35 lino_noi/lib/contacts/models.py:66
-#: lino_noi/lib/courses/desktop.py:23 lino_noi/lib/tickets/models.py:24
+#: lino_noi/lib/cal/models.py:33 lino_noi/lib/contacts/models.py:50
+#: lino_noi/lib/contacts/models.py:81 lino_noi/lib/tickets/models.py:24
 #: lino_noi/lib/users/desktop.py:29
 msgid "General"
 msgstr ""
 
-#: lino_noi/lib/courses/desktop.py:30
-msgid "Events"
+#: lino_noi/lib/clocking/models.py:64
+msgid "Service Report"
+msgstr "Dienstleistungsbericht"
+
+#: lino_noi/lib/clocking/models.py:65
+msgid "Service Reports"
+msgstr "Dienstleistungsberichte"
+
+#: lino_noi/lib/clocking/models.py:69
+msgid "Interesting for"
 msgstr ""
 
-#: lino_noi/lib/courses/desktop.py:35 lino_noi/lib/tickets/models.py:42
-msgid "More"
+#: lino_noi/lib/clocking/models.py:71
+msgid "Only tickets interesting for this partner."
+msgstr ""
+
+#: lino_noi/lib/clocking/models.py:75
+msgid "Only tickets in this state."
+msgstr ""
+
+#: lino_noi/lib/clocking/ui.py:61
+msgid "Time"
+msgstr ""
+
+#: lino_noi/lib/clocking/ui.py:65 lino_noi/lib/clocking/ui.py:122
+#: lino_noi/lib/clocking/ui.py:246
+msgid "Description"
+msgstr ""
+
+#: lino_noi/lib/clocking/ui.py:76
+msgid "Site"
+msgstr ""
+
+#: lino_noi/lib/clocking/ui.py:82
+msgid "Project"
+msgstr "Projekt"
+
+#: lino_noi/lib/clocking/ui.py:85
+msgid "Topic"
+msgstr ""
+
+#: lino_noi/lib/clocking/ui.py:102
+msgid "Worked hours"
+msgstr "Gearbeitete Stunden"
+
+#: lino_noi/lib/clocking/ui.py:171 lino_noi/lib/clocking/ui.py:189
+msgid "Total"
+msgstr ""
+
+#: lino_noi/lib/clocking/ui.py:383
+msgid "Tickets"
+msgstr "Anfragen"
+
+#: lino_noi/lib/contacts/models.py:20
+msgid "Address"
+msgstr ""
+
+#: lino_noi/lib/contacts/models.py:26 lino_noi/lib/contacts/models.py:61
+#: lino_noi/lib/contacts/models.py:92 lino_noi/lib/users/desktop.py:69
+msgid "Contact"
+msgstr "Kontakt"
+
+#: lino_noi/lib/courses/desktop.py:51
+msgid "My enrolments"
+msgstr ""
+
+#: lino_noi/lib/courses/desktop.py:57
+msgid "Active"
+msgstr "Aktive"
+
+#: lino_noi/lib/courses/desktop.py:58
+msgid "Filter courses that are either active/draft or inactive/closed"
 msgstr ""
 
 #: lino_noi/lib/noi/help_texts.py:6
@@ -157,58 +165,14 @@ msgid ""
 msgstr ""
 
 #: lino_noi/lib/noi/help_texts.py:23
-msgid ""
-"The list of possible choices for the state field\n"
-"of a User."
-msgstr ""
-
-#: lino_noi/lib/noi/help_texts.py:25
-msgid ""
-"Activate this user. This requires that the user has confirmed their\n"
-"verifcation code, and that a username and password are set."
-msgstr ""
-
-#: lino_noi/lib/noi/help_texts.py:27
 msgid "Layout of User Detail in Lino Noi."
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:28
-msgid "Fill a form in order to register as a new system user."
-msgstr ""
-
-#: lino_noi/lib/noi/help_texts.py:29
-msgid "List of new users to be confirmed by the system admin."
-msgstr ""
-
-#: lino_noi/lib/noi/help_texts.py:30
-msgid ""
-"Like the standard lino.core.actions.SubmitInsert, but\n"
-"checks certain things before accepting the new user."
-msgstr ""
-
-#: lino_noi/lib/noi/help_texts.py:32
-msgid "Enter your verification code."
-msgstr ""
-
-#: lino_noi/lib/noi/help_texts.py:33
-msgid "Whether other users can see my contact data."
-msgstr ""
-
-#: lino_noi/lib/noi/help_texts.py:34
-msgid ""
-"A random string set for every new user. Used for\n"
-"online_registration."
-msgstr ""
-
-#: lino_noi/lib/noi/help_texts.py:36
-msgid "The registration state of this user."
-msgstr ""
-
-#: lino_noi/lib/noi/settings.py:117
+#: lino_noi/lib/noi/settings.py:119
 msgid "Submit a ticket"
 msgstr "Anfrage einreichen"
 
-#: lino_noi/lib/noi/settings.py:121
+#: lino_noi/lib/noi/settings.py:123
 msgid "My settings"
 msgstr ""
 
@@ -240,162 +204,67 @@ msgstr ""
 msgid "Administrator"
 msgstr ""
 
+#: lino_noi/lib/tickets/models.py:42
+msgid "More"
+msgstr ""
+
 #: lino_noi/lib/tickets/models.py:47
 msgid "Even more"
 msgstr ""
 
 #: lino_noi/lib/tickets/workflows.py:64
-msgid "Cannot {action} because {vote} is {state}."
+#, fuzzy
+msgid "Cannot mark as {action} because {vote} is {state}."
 msgstr "{action} geht nicht, weil {vote} im Zustand {state} ist."
 
 #: lino_noi/lib/tickets/workflows.py:69
 #, fuzzy
-msgid "Cannot {action} because there is no vote marked as {states} ."
+msgid "Cannot mark as {action} because there is no vote marked as {states} ."
 msgstr "{action} geht nicht, weil {vote} im Zustand {state} ist."
 
-#: lino_noi/lib/tickets/workflows.py:86
+#: lino_noi/lib/tickets/workflows.py:87
 msgctxt "verb"
 msgid "Open"
 msgstr "Öffnen"
 
-#: lino_noi/lib/tickets/workflows.py:99
+#: lino_noi/lib/tickets/workflows.py:101
 msgctxt "verb"
 msgid "Start"
 msgstr "Starten"
-
-#: lino_noi/lib/tickets/workflows.py:107
-msgid "Cannot start when nobody is assigned"
-msgstr ""
-
-#: lino_noi/lib/tickets/workflows.py:122
-msgctxt "verb"
-msgid "Close"
-msgstr "Schließen"
 
 #: lino_noi/lib/tickets/workflows.py:131
 msgctxt "verb"
 msgid "Talk"
 msgstr "Besprechen"
 
-#: lino_noi/lib/tickets/workflows.py:225
-#, fuzzy
-msgid "{voter} speaks for {ticket}."
-msgstr "Aktive Tickets"
-
-#: lino_noi/lib/tickets/workflows.py:234
-msgid "{voter} speaks against {ticket}."
-msgstr ""
-
-#: lino_noi/lib/tickets/workflows.py:241
+#: lino_noi/lib/tickets/workflows.py:243
 #, fuzzy
 msgid "{user} candidates for {ticket}."
 msgstr "Aktive Tickets"
 
-#: lino_noi/lib/tickets/workflows.py:259
+#: lino_noi/lib/tickets/workflows.py:261
 msgid "Cannot assign while there are other candidates"
 msgstr ""
 
-#: lino_noi/lib/tickets/workflows.py:270
+#: lino_noi/lib/tickets/workflows.py:272
 msgid "Cancel {voter}'s {vote}."
 msgstr ""
 
-#: lino_noi/lib/tickets/workflows.py:278
+#: lino_noi/lib/tickets/workflows.py:280
 msgid "{user} confirmed {ticket} {state} by {voter}."
 msgstr ""
 
-#: lino_noi/lib/tickets/workflows.py:293
+#: lino_noi/lib/tickets/workflows.py:295
 msgid "Rate"
 msgstr "Bewerten"
 
-#: lino_noi/lib/tickets/workflows.py:299
+#: lino_noi/lib/tickets/workflows.py:301
 msgid "Comment"
-msgstr ""
-
-#: lino_noi/lib/users/choicelists.py:16
-#, fuzzy
-msgid "User state"
-msgstr "Angebotszustand"
-
-#: lino_noi/lib/users/choicelists.py:17
-#, fuzzy
-msgid "User states"
-msgstr "Angebotszustände"
-
-#: lino_noi/lib/users/choicelists.py:20
-msgid "New"
-msgstr "Neu"
-
-#: lino_noi/lib/users/choicelists.py:21
-msgid "Active"
-msgstr "Aktive"
-
-#: lino_noi/lib/users/choicelists.py:22
-#, fuzzy
-msgid "Inactive"
-msgstr "Aktive"
-
-#: lino_noi/lib/users/choicelists.py:31
-msgid "Activate"
-msgstr "Aktivieren"
-
-#: lino_noi/lib/users/choicelists.py:49
-#, fuzzy
-msgid "Deactivate"
-msgstr "Aktivieren"
-
-#: lino_noi/lib/users/choicelists.py:51
-msgid "Reset"
 msgstr ""
 
 #: lino_noi/lib/users/desktop.py:35
 msgid "Clocking"
 msgstr "Arbeitszeit"
-
-#: lino_noi/lib/users/desktop.py:120
-msgid "Register new user"
-msgstr ""
-
-#: lino_noi/lib/users/desktop.py:141
-msgid "New user applications"
-msgstr ""
-
-#: lino_noi/lib/users/models.py:39
-msgid "The username {} is taken. Please choose another one"
-msgstr ""
-
-#: lino_noi/lib/users/models.py:47
-msgid ""
-"Your request has been registered. An email will shortly be sent to "
-"{0}Please check your emails."
-msgstr ""
-
-#: lino_noi/lib/users/models.py:59
-msgid "Verify"
-msgstr ""
-
-#: lino_noi/lib/users/models.py:68
-msgid "e-mail address"
-msgstr ""
-
-#: lino_noi/lib/users/models.py:70
-msgid "Verification code"
-msgstr ""
-
-#: lino_noi/lib/users/models.py:100
-msgid "Invalid verification code"
-msgstr ""
-
-#: lino_noi/lib/users/models.py:104
-msgid "User {} is now verified."
-msgstr ""
-
-#: lino_noi/lib/users/models.py:135
-msgid "Others may contact me"
-msgstr "Andere dürfen mich kontaktieren"
-
-#: lino_noi/lib/users/models.py:165 lino_noi/lib/users/models.py:187
-msgid "About me"
-msgstr "Über mich"
 
 #~ msgid "See lino.core.plugin.Plugin."
 #~ msgstr ""
@@ -404,9 +273,6 @@ msgstr "Über mich"
 #~ msgstr ""
 
 #~ msgid ""
-#~ "Close a given session, i.e. stop working on that ticket for this\n"
-#~ "time.  Common base for EndThisSession and\n"
-#~ "EndTicketSession."
 #~ msgstr ""
 
 #~ msgid "Close this session, i.e. stop working on that ticket for this time."
@@ -427,50 +293,13 @@ msgstr "Über mich"
 #~ msgid "The type of a Session."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "A Session is when a user works during a given lapse of time on\n"
-#~ "a given Ticket."
-#~ msgstr ""
-
 #~ msgid "The date when you started to work."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "The time (in hh:mm) when you started working on this\n"
-#~ "session."
 #~ msgstr ""
 
 #~ msgid "Leave this field blank if it is the same date as start_date."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "The time (in hh:mm) when you stopped to work. This is empty\n"
-#~ "as long as you are busy with this session."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "The time (in hh:mm) to remove from the duration resulting\n"
-#~ "from the difference between start_time and\n"
-#~ "end_time."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "The faculty that has been used during this session. On a new\n"
-#~ "session this defaults to the needed faculty currently specified\n"
-#~ "on the ticket."
-#~ msgstr ""
-
 #~ msgid "A user who is candidate for working on a ticket."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Select only tickets for which there has been at least one session\n"
-#~ "during the given period."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Select only projects for which there has been at least one session\n"
-#~ "during the given period."
 #~ msgstr ""
 
 #~ msgid "The \"Sessions\" panel in the detail of a ticket."
@@ -488,47 +317,10 @@ msgstr "Über mich"
 #~ msgid "alias of Milestone"
 #~ msgstr ""
 
-#~ msgid ""
-#~ "A Milestone is a named step of evolution on a given Site.  For\n"
-#~ "software projects we usually call them a \"release\" and they are\n"
-#~ "named by a version number."
-#~ msgstr ""
-
 #~ msgid "Closed milestones are hidden in most lists."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "A deployment is the fact that a given ticket is being fixed (or\n"
-#~ "installed or activated) by a given milestone (to a given site)."
-#~ msgstr ""
-
 #~ msgid "The milestone (and site) of this deployment."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "The model of objects to be used as demander of skill\n"
-#~ "demands."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "The model of objects to be used as supplier of skill\n"
-#~ "offers. The tefault value is  Person."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A faculty is a skill, knowledge or ability which can be\n"
-#~ "required in order to work e.g. on some ticket, and which\n"
-#~ "individual users can have (offer) or not."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A competence is when a given user is declared to be competent\n"
-#~ "in a given faculty."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A Skill demand is when a given end user declares to need a\n"
-#~ "given skill."
 #~ msgstr ""
 
 #~ msgid "Base class for ticket actions."
@@ -579,16 +371,6 @@ msgstr "Über mich"
 #~ msgid "Show only (or hide) tickets that are marked private."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "Show only (or hide) tickets which are todo (i.e. state is New\n"
-#~ "or ToDo)."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Show only (or hide) tickets which are active (i.e. state is Talk\n"
-#~ "or ToDo)."
-#~ msgstr ""
-
 #~ msgid "Show only (or hide) tickets which are assigned to somebody."
 #~ msgstr ""
 
@@ -598,21 +380,6 @@ msgstr "Über mich"
 #~ msgid "Show only tickets for which I am competent."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "Shows the tickets which are marked as duplicates of this\n"
-#~ "(i.e. whose duplicate_of field points to this ticket."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Shows the tickets of other users which need help on a faculty for\n"
-#~ "which I am competent."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "List of tickets that need to be triaged.  Currently this is\n"
-#~ "equivalent to those having their state set to new."
-#~ msgstr ""
-
 #~ msgid "Show all tickets that are in an active state."
 #~ msgstr ""
 
@@ -620,13 +387,6 @@ msgstr "Über mich"
 #~ msgstr ""
 
 #~ msgid "alias of User"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "The things we are voting about. A string referring to the model\n"
-#~ "which represents a votable in your application.  Default value is\n"
-#~ "'tickets.Ticket' (referring to\n"
-#~ "lino_xl.lib.tickets.models.Ticket)."
 #~ msgstr ""
 
 #~ msgid "Define your vote about this object."
@@ -641,29 +401,7 @@ msgstr "Über mich"
 #~ msgid "Translatable text. How a vote is called when in this state."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "The list of possible states of a vote.  This is used as choicelist\n"
-#~ "for the state\n"
-#~ "field of a vote."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Reserved for the author's vote.  Lino automatically creates an\n"
-#~ "author vote for every author of a ticket (see\n"
-#~ "get_vote_raters)."
-#~ msgstr ""
-
 #~ msgid "alias of VoteState"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Base class for models that can be used as\n"
-#~ "lino_xl.lib.votes.Plugin.votable_model."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A vote is when a user has an opinion or interest about a given\n"
-#~ "ticket (or any other votable)."
 #~ msgstr ""
 
 #~ msgid "The ticket (or other votable) being voted."
@@ -690,26 +428,6 @@ msgstr "Über mich"
 #~ msgid "Table parameters:"
 #~ msgstr ""
 
-#~ msgid ""
-#~ "There are two class attributes for defining a filter conditions\n"
-#~ "which canot be removed by the user:"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A set of vote states to require (i.e. to filter upon).  This\n"
-#~ "must resolve using resolve_states."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A set of vote states to exclude.  This must\n"
-#~ "resolve using resolve_states."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A set of ticket states to require (i.e. to filter upon). This\n"
-#~ "must resolve using resolve_states."
-#~ msgstr ""
-
 #~ msgid "alias of Vote"
 #~ msgstr ""
 
@@ -734,57 +452,16 @@ msgstr "Über mich"
 #~ msgid "Defines and instantiates a demo version of Lino Care."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "A simple user is a person who can log into the application in\n"
-#~ "order to manage their own pleas and competences and potentially\n"
-#~ "can respond to other user's pleas."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A connector is a person who knows other persons and who\n"
-#~ "introduces pleas on their behalf."
-#~ msgstr ""
-
 #~ msgid "A site administrator can do everything."
 #~ msgstr ""
 
 #~ msgid "A project is something on which several users work together."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "The user to whom new tickets will be assigned.\n"
-#~ "See Ticket.assigned_to."
-#~ msgstr ""
-
 #~ msgid "The type of a Project."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "Model mixin for things which represent a time investment.  This\n"
-#~ "currently just defines a group of three fields:"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Whether this investment is closed, i.e. certain things should\n"
-#~ "not change anymore."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Whether this investment is private, i.e. should not be\n"
-#~ "publicly visible anywhere."
-#~ msgstr ""
-
 #~ msgid "The time (in hours) we plan to work on this project or ticket."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A Ticket is a concrete question or problem formulated by a\n"
-#~ "user."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "The user who entered this ticket and is responsible for\n"
-#~ "managing it."
 #~ msgstr ""
 
 #~ msgid "The end user who is asking for help."
@@ -796,42 +473,14 @@ msgstr "Über mich"
 #~ msgid "The state of this ticket. See TicketStates"
 #~ msgstr ""
 
-#~ msgid ""
-#~ "What to do next. An unformatted one-line text which describes\n"
-#~ "what this ticket is waiting for."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A formatted text field meant for writing instructions for the\n"
-#~ "hoster's site administrator when doing an upgrade where this\n"
-#~ "ticket is being deployed."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A complete and concise description of the ticket. This should\n"
-#~ "describe in more detail what this ticket is about. If the\n"
-#~ "ticket has evolved during time, it should reflect the latest\n"
-#~ "version."
-#~ msgstr ""
-
 #~ msgid "A pointer to the ticket which is the cause of this ticket."
 #~ msgstr ""
 
 #~ msgid "Specify that the ticket must be done for a given date."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "How urgent this ticket is. This should be a value between 0\n"
-#~ "and 100."
-#~ msgstr ""
-
 #~ msgid "How the author rates this ticket."
 #~ msgstr "Starte eine Sitzung auf diesem Ticket."
-
-#~ msgid ""
-#~ "An indication about who is going to pay for work on this\n"
-#~ "project.  See ReportingTypes."
-#~ msgstr ""
 
 #~ msgid "The possible values of a lino_xl.lib.tickets.Link."
 #~ msgstr ""
@@ -918,4 +567,115 @@ msgstr "Über mich"
 
 #~ msgid "Offer"
 #~ msgstr "Fähigkeitsangebot"
+
+#~ msgid "Open session on new ticket"
+#~ msgstr "Sitzung starten auf neuen Tickets"
+
+#~ msgid "Events"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The list of possible choices for the state field\n"
+#~ "of a User."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Activate this user. This requires that the user has confirmed their\n"
+#~ "verifcation code, and that a username and password are set."
+#~ msgstr ""
+
+#~ msgid "Fill a form in order to register as a new system user."
+#~ msgstr ""
+
+#~ msgid "List of new users to be confirmed by the system admin."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Like the standard lino.core.actions.SubmitInsert, but\n"
+#~ "checks certain things before accepting the new user."
+#~ msgstr ""
+
+#~ msgid "Enter your verification code."
+#~ msgstr ""
+
+#~ msgid "Whether other users can see my contact data."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "A random string set for every new user. Used for\n"
+#~ "online_registration."
+#~ msgstr ""
+
+#~ msgid "The registration state of this user."
+#~ msgstr ""
+
+#~ msgid "Cannot start when nobody is assigned"
+#~ msgstr ""
+
+#~ msgctxt "verb"
+#~ msgid "Close"
+#~ msgstr "Schließen"
+
+#~ msgid "{voter} speaks for {ticket}."
+#~ msgstr "Aktive Tickets"
+
+#~ msgid "{voter} speaks against {ticket}."
+#~ msgstr ""
+
+#~ msgid "User state"
+#~ msgstr "Angebotszustand"
+
+#~ msgid "User states"
+#~ msgstr "Angebotszustände"
+
+#~ msgid "New"
+#~ msgstr "Neu"
+
+#~ msgid "Inactive"
+#~ msgstr "Aktive"
+
+#~ msgid "Activate"
+#~ msgstr "Aktivieren"
+
+#~ msgid "Deactivate"
+#~ msgstr "Aktivieren"
+
+#~ msgid "Reset"
+#~ msgstr ""
+
+#~ msgid "Register new user"
+#~ msgstr ""
+
+#~ msgid "New user applications"
+#~ msgstr ""
+
+#~ msgid "The username {} is taken. Please choose another one"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Your request has been registered. An "
+#~ "email will shortly be sent to "
+#~ "{0}Please check your emails."
+#~ msgstr ""
+
+#~ msgid "Verify"
+#~ msgstr ""
+
+#~ msgid "e-mail address"
+#~ msgstr ""
+
+#~ msgid "Verification code"
+#~ msgstr ""
+
+#~ msgid "Invalid verification code"
+#~ msgstr ""
+
+#~ msgid "User {} is now verified."
+#~ msgstr ""
+
+#~ msgid "Others may contact me"
+#~ msgstr "Andere dürfen mich kontaktieren"
+
+#~ msgid "About me"
+#~ msgstr "Über mich"
 
