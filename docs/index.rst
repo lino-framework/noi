@@ -20,7 +20,6 @@ Content
 
    install/index
    guide/index
-   care/index
    todo
    changes
    

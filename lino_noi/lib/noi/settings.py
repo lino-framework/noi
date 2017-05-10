@@ -145,6 +145,13 @@ class Site(Site):
         if self.is_installed('extjs'):
             self.plugins.extjs.autorefresh_seconds = 0
 
+        from lino.core.merge import MergeAction
+        from lino_xl.lib.contacts.roles import ContactsStaff
+        lib = self.models
+        for m in (lib.contacts.Company, ):
+            m.define_action(merge_row=MergeAction(
+                m, required_roles=set([ContactsStaff])))
+            
 # the following line should not be active in a checked-in version
 #~ DATABASES['default']['NAME'] = ':memory:'
 
