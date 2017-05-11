@@ -47,7 +47,12 @@ class TicketDetail(TicketDetail):
     """, label=_("Even more"))
 
 Tickets.detail_layout = TicketDetail()
-
+Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site project state deployed_to
+    has_project show_assigned show_active show_deployed show_todo show_private
+    start_date end_date observed_event topic feasable_by has_ref"""
+MyTickets.params_layout = """
+    user end_user site project state
+    start_date end_date observed_event topic feasable_by show_active"""
 # Sites.detail_layout = """
 # id name partner #responsible_user
 # remark
