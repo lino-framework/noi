@@ -61,7 +61,7 @@ class PersonDetail(PersonDetail):
     """, label=_("Contact"))
 
     skills = dd.Panel("""
-    faculties.OffersByEndUser tickets.SuggestedTicketsByEndUser
+    faculties.OffersByEndUser faculties.SuggestedTicketsByEndUser
     """, label=dd.plugins.faculties.verbose_name)
 
     tickets = dd.Panel("""
