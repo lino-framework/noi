@@ -42,7 +42,7 @@ class Person(Person):
 
 class PersonDetail(PersonDetail):
     
-    main = "general contact skills tickets"
+    main = "general contact #skills tickets"
 
     general = dd.Panel("""
     overview info_box
@@ -60,9 +60,9 @@ class PersonDetail(PersonDetail):
     remarks topics.InterestsByPartner
     """, label=_("Contact"))
 
-    skills = dd.Panel("""
-    faculties.OffersByEndUser faculties.SuggestedTicketsByEndUser
-    """, label=dd.plugins.faculties.verbose_name)
+    # skills = dd.Panel("""
+    # faculties.OffersByEndUser faculties.SuggestedTicketsByEndUser
+    # """, label=dd.plugins.faculties.verbose_name)
 
     tickets = dd.Panel("""
     tickets.TicketsByEndUser tickets.ProjectsByPerson
@@ -73,7 +73,7 @@ class PersonDetail(PersonDetail):
 
     
 class CompanyDetail(CompanyDetail):
-    main = "general contact skills tickets"
+    main = "general contact #skills tickets"
 
     general = dd.Panel("""
     overview info_box
@@ -91,9 +91,9 @@ class CompanyDetail(CompanyDetail):
     remarks
     """, label=_("Contact"))
 
-    skills = dd.Panel("""
-    faculties.OffersByEndUser topics.InterestsByPartner
-    """, label=dd.plugins.faculties.verbose_name)
+    # skills = dd.Panel("""
+    # faculties.OffersByEndUser topics.InterestsByPartner
+    # """, label=dd.plugins.faculties.verbose_name)
 
     tickets = dd.Panel("""
     tickets.TicketsByEndUser tickets.ProjectsByCompany
