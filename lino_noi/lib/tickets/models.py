@@ -50,6 +50,7 @@ class TicketDetail(TicketDetail):
 
     more2 = dd.Panel("""
     # deploy.DeploymentsByTicket
+    faculties.DemandsByDemander
     stars.StarsByController
     uploads.UploadsByController 
     """, label=_("Even more"))
