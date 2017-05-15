@@ -26,3 +26,15 @@ class Plugin(Plugin):
         # 'lino_xl.lib.votes',
         'lino_noi.lib.noi']
 
+    def setup_main_menu(self, site, profile, m):
+        p = self.get_menu_group()
+        m = m.add_menu(p.app_label, p.verbose_name)
+        m.add_action('tickets.MyTicketsToWork')
+
+
+    def get_dashboard_items(self, user):
+        if user.authenticated:
+            yield self.site.actors.tickets.MyTicketsToWork
+            # else:
+            #     yield self.site.actors.tickets.   PublicTickets
+
