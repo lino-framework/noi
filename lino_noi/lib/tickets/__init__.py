@@ -27,12 +27,14 @@ class Plugin(Plugin):
         'lino_noi.lib.noi']
 
     def setup_main_menu(self, site, profile, m):
+        super(Plugin, self).setup_main_menu(site, profile, m)
         p = self.get_menu_group()
         m = m.add_menu(p.app_label, p.verbose_name)
         m.add_action('tickets.MyTicketsToWork')
 
 
     def get_dashboard_items(self, user):
+        super(Plugin, self).get_dashboard_items(user)
         if user.authenticated:
             yield self.site.actors.tickets.MyTicketsToWork
             # else:
