@@ -30,3 +30,9 @@ class Plugin(Plugin):
         m = m.add_menu(p.app_label, p.verbose_name)
         m.add_action('clocking.ServiceReports')
         # m.add_action('clocking.MySessions', action='print_activity_report')
+
+
+    def get_dashboard_items(self, user):
+        super(Plugin, self).get_dashboard_items(user)
+        if user.authenticated:
+            yield self.site.actors.clocking.WorkedHours
