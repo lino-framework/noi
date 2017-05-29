@@ -48,7 +48,7 @@ class UserDetail(UserDetail):
     # """, label=_("Tickets"))
 
     box1 = """
-    username profile:20 initials #partner #user_site
+    username profile:20 initials github_username #partner #user_site
     language id created modified
     callme_mode mail_mode notify_myself
     """
