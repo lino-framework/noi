@@ -87,6 +87,7 @@ class Site(Site):
         # yield 'lino_xl.lib.inbox'
         yield 'lino_xl.lib.mailbox'
         yield 'lino_xl.lib.meetings'
+        yield 'lino_xl.lib.github'
 
 
     def setup_plugins(self):
