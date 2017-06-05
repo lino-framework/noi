@@ -24,7 +24,7 @@ class TicketDetail(TicketDetail):
     `faculties`
 
     """
-    main = "general more history_tab more2"
+    main = "general more history_tab more2 #github.CommitsByTicket"
     
     general = dd.Panel("""
     general1:60 comments.CommentsByRFC:30
@@ -41,6 +41,7 @@ class TicketDetail(TicketDetail):
     bottom_box = """
     #faculties.DemandsByDemander:20 #votes.VotesByVotable:20 
     deploy.DeploymentsByTicket:20 clocking.SessionsByTicket:20
+    github.CommitsByTicket
     """
 
     more = dd.Panel("""
