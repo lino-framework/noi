@@ -72,8 +72,8 @@ lino_noi.lib.noi.fixtures
 lino_noi.lib.contacts
 lino_noi.lib.public
 lino_noi.lib.topics
-lino_noi.lib.users
-lino_noi.lib.users.fixtures
+lino_noi.lib.auth
+lino_noi.lib.auth.fixtures
 lino_noi.lib.cal
 lino_noi.lib.cal.fixtures
 lino_noi.lib.courses

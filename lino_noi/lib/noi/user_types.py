@@ -3,7 +3,7 @@
 # License: BSD (see file COPYING for details)
 
 """Defines a set of user roles and fills
-:class:`lino.modlib.users.choicelists.UserTypes`.
+:class:`lino.modlib.auth.choicelists.UserTypes`.
 
 This is used as the :attr:`user_types_module
 <lino.core.site.Site.user_types_module>` for
@@ -27,7 +27,7 @@ from lino_xl.lib.clocking.roles import Worker
 from lino_xl.lib.cal.roles import CalendarReader
 from lino_xl.lib.votes.roles import VotesStaff, VotesUser
 
-from lino.modlib.users.choicelists import UserTypes
+from lino.modlib.auth.choicelists import UserTypes
 from django.utils.translation import ugettext_lazy as _
 
 

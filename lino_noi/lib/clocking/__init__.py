@@ -23,9 +23,9 @@ class Plugin(Plugin):
 
     needs_plugins = ['lino_noi.lib.tickets']
 
-    # def setup_reports_menu(self, site, profile, m):
-    def setup_main_menu(self, site, profile, m):
-        super(Plugin, self).setup_main_menu(site, profile, m)
+    # def setup_reports_menu(self, site, user_type, m):
+    def setup_main_menu(self, site, user_type, m):
+        super(Plugin, self).setup_main_menu(site, user_type, m)
         p = self.get_menu_group()
         m = m.add_menu(p.app_label, p.verbose_name)
         m.add_action('clocking.ServiceReports')

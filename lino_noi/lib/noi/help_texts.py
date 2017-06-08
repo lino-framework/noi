@@ -20,5 +20,5 @@ responsible for triaging tickets"""),
     'lino_noi.lib.tickets.Plugin' : _("""Adds the lino_xl.lib.votes plugin."""),
     'lino_noi.lib.tickets.models.TicketDetail' : _("""Customized detail_lyout for Tickets.  Replaces waiting_for by
 faculties"""),
-    'lino_noi.lib.users.desktop.UserDetail' : _("""Layout of User Detail in Lino Noi."""),
+    'lino_noi.lib.auth.desktop.UserDetail' : _("""Layout of User Detail in Lino Noi."""),
 }

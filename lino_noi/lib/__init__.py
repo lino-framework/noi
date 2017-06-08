@@ -9,7 +9,7 @@
     cal
     contacts
     noi
-    users
+    auth
     topics
     tickets
     clocking
