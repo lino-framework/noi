@@ -133,7 +133,7 @@ class WorkedHours(dd.VentilatingTable):
             elems.append(" (")
             elems += join_elems(tickets, ', ')
             elems.append(")")
-        return E.p(*elems)
+        return E.span(*elems)
 
     @classmethod
     def get_data_rows(cls, ar):
