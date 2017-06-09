@@ -37,7 +37,7 @@ class TicketAction(dd.ChangeStateAction):
     def get_action_permission(self, ar, obj, state):
         me = ar.get_user()
         if obj.user != me:
-            if not me.profile.has_required_roles([Triager]):
+            if not me.user_type.has_required_roles([Triager]):
                 return False
         return super(TicketAction,
                      self).get_action_permission(ar, obj, state)

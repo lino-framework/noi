@@ -1,7 +1,7 @@
 # Copyright 2015-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 """
-Lino Noi extension of :mod:`lino_xl.lib.online.users`.
+Lino Noi extension of :mod:`lino_xl.lib.online.auth`.
 
 .. autosummary::
    :toctree:
@@ -13,5 +13,5 @@ Lino Noi extension of :mod:`lino_xl.lib.online.users`.
 
 """
 
-from lino_xl.lib.online.users import Plugin
+from lino_xl.lib.online.auth import Plugin
 

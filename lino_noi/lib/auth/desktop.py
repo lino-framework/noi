@@ -6,7 +6,7 @@
 
 """
 
-from lino_xl.lib.online.users.desktop import *
+from lino_xl.lib.online.auth.desktop import *
 
 from lino.api import _
 
@@ -14,7 +14,7 @@ from lino.core import actions
 # from lino.modlib.office.roles import OfficeUser
 from lino_xl.lib.clocking.roles import Worker
 
-from lino.modlib.users.actions import SendWelcomeMail
+from lino.modlib.auth.actions import SendWelcomeMail
 from lino.modlib.office.roles import OfficeUser
 #from .models import VerifyUser
 
@@ -48,7 +48,7 @@ class UserDetail(UserDetail):
     # """, label=_("Tickets"))
 
     box1 = """
-    username profile:20 initials github_username #partner #user_site
+    username user_type:20 initials github_username #partner #user_site
     language id created modified
     callme_mode mail_mode notify_myself
     """
@@ -65,7 +65,7 @@ class UserDetail(UserDetail):
 
     contact = dd.Panel("""
     address_box info_box
-    remarks:40 users.AuthoritiesGiven:20
+    remarks:40 auth.AuthoritiesGiven:20
     """, label=_("Contact"))
 
     info_box = """

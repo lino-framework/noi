@@ -9,7 +9,7 @@ Defines a customized :class:`TicketDetail`.
 """
 
 from lino_xl.lib.tickets.models import *
-from lino.modlib.users.mixins import Assignable
+from lino.modlib.auth.mixins import Assignable
 from lino.api import _
 
 

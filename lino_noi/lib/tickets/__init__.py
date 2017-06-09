@@ -26,8 +26,8 @@ class Plugin(Plugin):
         # 'lino_xl.lib.votes',
         'lino_noi.lib.noi']
 
-    def setup_main_menu(self, site, profile, m):
-        super(Plugin, self).setup_main_menu(site, profile, m)
+    def setup_main_menu(self, site, user_type, m):
+        super(Plugin, self).setup_main_menu(site, user_type, m)
         p = self.get_menu_group()
         m = m.add_menu(p.app_label, p.verbose_name)
         m.add_action('tickets.MyTicketsToWork')

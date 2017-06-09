@@ -197,7 +197,7 @@ class Migrator(Migrator):
         # bv2kw = globals_dict['bv2kw']
         new_content_type_id = globals_dict['new_content_type_id']
         # cal_EventType = resolve_model("cal.EventType")
-        # users_User = resolve_model("users.User")
+        # auth.User = resolve_model("auth.User")
         votes_Vote = rt.models.votes.Vote
         tickets_Ticket = rt.models.tickets.Ticket
 
@@ -303,13 +303,13 @@ class Migrator(Migrator):
     def migrate_from_2016_12_1(self, globals_dict):
         """
         - faculties.Faculty.faculty_type -> faculties.Faculty.skill_type
-        - users.User now an MTI child of contacts.Person
+        - auth.User now an MTI child of contacts.Person
         - convert Tickets.faculty to faculty.Demand instance
         
         """
         PARTNER_OFFSET = 200
         bv2kw = globals_dict['bv2kw']
-        users_User = rt.models.users.User
+        auth.User = rt.models.auth.User
         # votes_Vote = rt.models.votes.Vote
         tickets_Ticket = rt.models.tickets.Ticket
         tickets_Site = rt.models.tickets.Site
@@ -414,12 +414,12 @@ class Migrator(Migrator):
 
 
         # @override(globals_dict)
-        # def create_users_user(id, email, language, url, phone, gsm, fax, modified, created, country_id, city_id, zip_code, region_id, addr1, street_prefix, street, street_no, street_box, addr2, password, last_login, timezone, username, profile, initials, first_name, last_name, remarks, partner_id, callme_mode, verification_code, user_state, user_site_id, open_session_on_new_ticket, notify_myself, mail_mode):
-        #     if profile: profile = settings.SITE.modules.users.UserTypes.get_by_value(profile)
-        #     if user_state: user_state = settings.SITE.modules.users.UserStates.get_by_value(user_state)
+        # def create_users_user(id, email, language, url, phone, gsm, fax, modified, created, country_id, city_id, zip_code, region_id, addr1, street_prefix, street, street_no, street_box, addr2, password, last_login, timezone, username, user_type, initials, first_name, last_name, remarks, partner_id, callme_mode, verification_code, user_state, user_site_id, open_session_on_new_ticket, notify_myself, mail_mode):
+        #     if profile: profile = settings.SITE.modules.auth.UserTypes.get_by_value(profile)
+        #     if user_state: user_state = settings.SITE.modules.auth.UserStates.get_by_value(user_state)
         #     if mail_mode: mail_mode = settings.SITE.modules.notify.MailModes.get_by_value(mail_mode)
         #     # if contacts_Partner.objects.exists(id=id):
-        #     # return create_mti_child(contacts_Person, id, users_User,modified=modified,created=created,password=password,last_login=last_login,timezone=timezone,username=username,profile=profile,initials=initials,partner_id=partner_id,callme_mode=callme_mode,verification_code=verification_code,user_state=user_state,open_session_on_new_ticket=open_session_on_new_ticket,notify_myself=notify_myself,mail_mode=mail_mode)
+        #     # return create_mti_child(contacts_Person, id, auth.User,modified=modified,created=created,password=password,last_login=last_login,timezone=timezone,username=username,profile=profile,initials=initials,partner_id=partner_id,callme_mode=callme_mode,verification_code=verification_code,user_state=user_state,open_session_on_new_ticket=open_session_on_new_ticket,notify_myself=notify_myself,mail_mode=mail_mode)
             
         #     kw = dict()
         #     kw.update(id=id)

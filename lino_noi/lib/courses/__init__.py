@@ -18,8 +18,8 @@ class Plugin(Plugin):
     """
 
     extends_models = ['Course']
-    # def setup_main_menu(self, site, profile, main):
-    #     super(Plugin, self).setup_main_menu(site, profile, main)
+    # def setup_main_menu(self, site, user_type, main):
+    #     super(Plugin, self).setup_main_menu(site, user_type, main)
     #     m = main.get_item(self.app_label)
     #     m.add_action('courses.MyEnrolments')
     #

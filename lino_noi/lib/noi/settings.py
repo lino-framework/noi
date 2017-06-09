@@ -50,9 +50,9 @@ class Site(Site):
         # yield 'lino.modlib.bootstrap3'
         yield 'lino.modlib.gfks'
         # yield 'lino.modlib.system'
-        # yield 'lino.modlib.users'
+        # yield 'lino.modlib.auth'
         yield 'lino_noi.lib.contacts'
-        yield 'lino_noi.lib.users'
+        yield 'lino_noi.lib.auth'
         yield 'lino_noi.lib.cal'
         yield 'lino_xl.lib.extensible'
         # yield 'lino_noi.lib.courses'
@@ -120,7 +120,7 @@ class Site(Site):
             self.actors.tickets.AllTickets.insert_action,
             label=_("Submit a ticket"))
 
-        a = self.actors.users.MySettings.default_action
+        a = self.actors.auth.MySettings.default_action
         tb.add_instance_action(
             user, action=a, label=_("My settings"))
         # handler = self.action_call(None, a, dict(record_id=user.pk))
