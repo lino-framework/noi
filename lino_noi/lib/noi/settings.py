@@ -120,7 +120,7 @@ class Site(Site):
             self.actors.tickets.AllTickets.insert_action,
             label=_("Submit a ticket"))
 
-        a = self.actors.auth.MySettings.default_action
+        a = self.actors.users.MySettings.default_action
         tb.add_instance_action(
             user, action=a, label=_("My settings"))
         # handler = self.action_call(None, a, dict(record_id=user.pk))
