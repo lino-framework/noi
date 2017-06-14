@@ -102,7 +102,7 @@ class WorkedHours(dd.VentilatingTable):
     label = _("Worked hours")
     hide_zero_rows = True
     parameters = ObservedPeriod(
-        user=dd.ForeignKey('auth.User', null=True, blank=True))
+        user=dd.ForeignKey('users.User', null=True, blank=True))
     params_layout = "start_date end_date user"
     # editable = False
     auto_fit_column_widths = True

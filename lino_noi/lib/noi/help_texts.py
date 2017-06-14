@@ -3,7 +3,6 @@
 from __future__ import unicode_literals
 from django.utils.translation import ugettext_lazy as _
 help_texts = {
-    'lino_noi.lib.auth.desktop.UserDetail' : _("""Layout of User Detail in Lino Noi."""),
     'lino_noi.lib.clocking.models.ServiceReport' : _("""A service report is a document used in various discussions with
 a stakeholder."""),
     'lino_noi.lib.clocking.models.ServiceReport.user' : _("""This can be empty and will then show the working time of all
@@ -21,4 +20,5 @@ responsible for triaging tickets"""),
     'lino_noi.lib.tickets.Plugin' : _("""Adds the lino_xl.lib.votes plugin."""),
     'lino_noi.lib.tickets.models.TicketDetail' : _("""Customized detail_lyout for Tickets.  Replaces waiting_for by
 faculties"""),
+    'lino_noi.lib.users.desktop.UserDetail' : _("""Layout of User Detail in Lino Noi."""),
 }

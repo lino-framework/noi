@@ -18,7 +18,7 @@ from lino_xl.lib.tickets.choicelists import TicketStates
 
 # #Moved to XL
 # dd.inject_field(
-#     "auth.User", 'open_session_on_new_ticket',
+#     "users.User", 'open_session_on_new_ticket',
 #     models.BooleanField(_("Open session on new ticket"), default=False))
 
 # if dd.is_installed('votes'):

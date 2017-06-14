@@ -5,5 +5,5 @@
 
 """
 
-from lino_xl.lib.online.auth.models import *
+from lino_xl.lib.online.users.models import *
 

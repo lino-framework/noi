@@ -13,5 +13,5 @@ Lino Noi extension of :mod:`lino_xl.lib.online.auth`.
 
 """
 
-from lino_xl.lib.online.auth import Plugin
+from lino_xl.lib.online.users import Plugin
 
