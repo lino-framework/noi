@@ -42,7 +42,7 @@ class Person(Person):
 
 class PersonDetail(PersonDetail):
     
-    main = "general contact #skills tickets"
+    main = "general contact skills tickets"
 
     general = dd.Panel("""
     overview info_box
@@ -73,7 +73,7 @@ class PersonDetail(PersonDetail):
 
     
 class CompanyDetail(CompanyDetail):
-    main = "general contact #skills tickets"
+    main = "general contact skills tickets"
 
     general = dd.Panel("""
     overview info_box

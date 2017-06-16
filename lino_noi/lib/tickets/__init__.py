@@ -17,13 +17,11 @@ class Plugin(Plugin):
     """Adds the :mod:`lino_xl.lib.votes` plugin.
     """
 
-    extends_models = ['Ticket']
-    
     needs_plugins = [
         'lino_xl.lib.excerpts',
         'lino_xl.lib.topics',
         'lino.modlib.comments', 'lino.modlib.changes',
-        # 'lino_xl.lib.votes',
+        'lino_xl.lib.votes',
         'lino_noi.lib.noi']
 
     def setup_main_menu(self, site, user_type, m):

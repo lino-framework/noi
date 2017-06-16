@@ -9,14 +9,7 @@ Defines a customized :class:`TicketDetail`.
 """
 
 from lino_xl.lib.tickets.models import *
-from lino.modlib.users.mixins import Assignable
 from lino.api import _
-
-
-class Ticket(Ticket, Assignable):
-    class Meta(Ticket.Meta):
-        # app_label = 'tickets'
-        abstract = dd.is_abstract_model(__name__, 'Ticket')
 
 
 class TicketDetail(TicketDetail):
@@ -31,15 +24,15 @@ class TicketDetail(TicketDetail):
     """, label=_("General"))
 
     general1 = """
-    summary:40 id:6
-    user end_user assigned_to deadline
+    summary:40 id:6 
+    user:12 end_user:12 deadline
     site topic project 
     workflow_buttons:30 private
     bottom_box
     """
 
     bottom_box = """
-    #faculties.DemandsByDemander:20 #votes.VotesByVotable:20 
+    faculties.DemandsByDemander:20 votes.VotesByVotable:20 
     deploy.DeploymentsByTicket:20 clocking.SessionsByTicket:20
     github.CommitsByTicket
     """
@@ -51,18 +44,16 @@ class TicketDetail(TicketDetail):
 
     more2 = dd.Panel("""
     # deploy.DeploymentsByTicket
-    faculties.DemandsByDemander
-    stars.StarsByController
-    uploads.UploadsByController 
+    uploads.UploadsByController
     """, label=_("Even more"))
 
 Tickets.detail_layout = TicketDetail()
 Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site project state deployed_to
     has_project show_assigned show_active show_deployed show_todo show_private
-    start_date end_date observed_event topic #feasable_by has_ref"""
+    start_date end_date observed_event topic feasable_by has_ref"""
 MyTickets.params_layout = """
     user end_user site project state
-    start_date end_date observed_event topic #feasable_by show_active"""
+    start_date end_date observed_event topic feasable_by show_active"""
 # Sites.detail_layout = """
 # id name partner #responsible_user
 # remark
