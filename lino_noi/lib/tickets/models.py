@@ -18,6 +18,12 @@ class Ticket(Ticket, Assignable):
         # app_label = 'tickets'
         abstract = dd.is_abstract_model(__name__, 'Ticket')
 
+    def assigned_to_changed(self, ar):
+        self.add_change_watcher(self.assigned_to)
+
+    def end_user_changed(self, ar):
+        self.add_change_watcher(self.end_user)
+
 
 class TicketDetail(TicketDetail):
     """Customized detail_lyout for Tickets.  Replaces `waiting_for` by
