@@ -24,6 +24,9 @@ class Ticket(Ticket, Assignable):
     def end_user_changed(self, ar):
         self.add_change_watcher(self.end_user)
 
+    def user_changed(self, ar):
+        self.add_change_watcher(self.user)
+
 
 class TicketDetail(TicketDetail):
     """Customized detail_lyout for Tickets.  Replaces `waiting_for` by
