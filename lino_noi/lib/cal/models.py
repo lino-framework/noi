@@ -17,7 +17,21 @@ class Event(Event, ContactRelated):
 dd.update_field(Event, 'user', verbose_name=_("Author"))
 dd.update_field(Event, 'company', verbose_name=_("Organizer"))
 dd.update_field(Event, 'contact_person', verbose_name=_("Contact person"))
-    
+
+
+class RoomDetail(dd.DetailLayout):
+    bottom = """bottom_left:45 tickets.TicketsBySite"""
+    bottom_left = """
+    description
+    cal.EntriesByRoom
+    """
+    main = """
+    id name
+    company contact_person
+    bottom
+    """
+
+Rooms.set_detail_layout(RoomDetail())
 
 class EventDetail(EventDetail):
     start = "start_date start_time"
