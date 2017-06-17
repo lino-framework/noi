@@ -134,7 +134,7 @@ class Site(Site):
 
         from lino.modlib.changes.models import watch_changes as wc
 
-        wc(self.modules.tickets.Ticket)
+        wc(self.modules.tickets.Ticket, ignore=['_user_cache'])
         wc(self.modules.comments.Comment, master_key='owner')
         # wc(self.modules.clocking.Session, master_key='owner')
         
