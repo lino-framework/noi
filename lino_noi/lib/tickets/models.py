@@ -19,17 +19,31 @@ class Ticket(Ticket, Assignable):
         abstract = dd.is_abstract_model(__name__, 'Ticket')
 
     def assigned_to_changed(self, ar):
+        """Add a star"""
         self.add_change_watcher(self.assigned_to)
 
     def end_user_changed(self, ar):
+        """Add a star"""
         self.add_change_watcher(self.end_user)
 
     def user_changed(self, ar):
+        """Add a star"""
         self.add_change_watcher(self.user)
 
     def site_changed(self, ar):
-        for star in self.site.get_stars():
-            self.add_change_watcher(star.user)
+        """Leaves a sub-star of old site, but that's OK for now"""
+        if self.site is not None:
+            print "Change"
+            self.site.add_child_stars(self.site, self)
+            # self.add_change_watcher(star.user)
+
+    def after_ui_create(self, ar):
+        print "Create"
+        self.site_changed(ar)
+        self.assigned_to_changed(ar)
+        self.end_user_changed(ar)
+        self.user_changed(ar)
+        super(Ticket, self).after_ui_create(ar)
 
 
 class TicketDetail(TicketDetail):
@@ -65,7 +79,7 @@ class TicketDetail(TicketDetail):
     more2 = dd.Panel("""
     # deploy.DeploymentsByTicket
     faculties.DemandsByDemander
-    stars.StarsByController
+    stars.AllStarsByController
     uploads.UploadsByController 
     """, label=_("Even more"))
 
