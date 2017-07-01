@@ -35,4 +35,4 @@ class Plugin(Plugin):
     def get_dashboard_items(self, user):
         super(Plugin, self).get_dashboard_items(user)
         if user.authenticated:
-            yield self.site.actors.clocking.WorkedHours
+            yield self.site.models.clocking.WorkedHours
