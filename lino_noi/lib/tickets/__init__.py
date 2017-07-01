@@ -36,7 +36,7 @@ class Plugin(Plugin):
     def get_dashboard_items(self, user):
         super(Plugin, self).get_dashboard_items(user)
         if user.authenticated:
-            yield self.site.actors.tickets.MyTicketsToWork
+            yield self.site.models.tickets.MyTicketsToWork
             # else:
-            #     yield self.site.actors.tickets.   PublicTickets
+            #     yield self.site.models.tickets.   PublicTickets
 
