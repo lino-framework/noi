@@ -87,6 +87,8 @@ Tickets.detail_layout = TicketDetail()
 Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site project state deployed_to
     has_project show_assigned show_active show_deployed show_todo show_private
     start_date end_date observed_event topic #feasable_by has_ref"""
+Tickets.column_names = 'id summary:50 user:10 topic #faculty ' \
+                       'workflow_buttons:30 site:10 project:10 *'
 MyTickets.params_layout = """
     user end_user site project state
     start_date end_date observed_event topic #feasable_by show_active"""
