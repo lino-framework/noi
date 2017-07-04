@@ -107,20 +107,20 @@ class Site(Site):
 
     def setup_quicklinks(self, user, tb):
         super(Site, self).setup_quicklinks(user, tb)
-        # tb.add_action(self.actors.courses.MyActivities)
-        tb.add_action(self.actors.meetings.MyMeetings)
+        # tb.add_action(self.models.courses.MyActivities)
+        tb.add_action(self.models.meetings.MyMeetings)
         # tb.add_action(self.modules.deploy.MyMilestones)
-        # tb.add_action(self.actors.tickets.MyTickets)
-        # tb.add_action(self.actors.tickets.TicketsToTriage)
-        # tb.add_action(self.actors.tickets.TicketsToTalk)
+        # tb.add_action(self.models.tickets.MyTickets)
+        # tb.add_action(self.models.tickets.TicketsToTriage)
+        # tb.add_action(self.models.tickets.TicketsToTalk)
         # tb.add_action(self.modules.tickets.TicketsToDo)
         tb.add_action(self.modules.tickets.RefTickets)
-        tb.add_action(self.actors.tickets.AllTickets)
+        tb.add_action(self.models.tickets.AllTickets)
         tb.add_action(
-            self.actors.tickets.AllTickets.insert_action,
+            self.models.tickets.AllTickets.insert_action,
             label=_("Submit a ticket"))
 
-        a = self.actors.users.MySettings.default_action
+        a = self.models.users.MySettings.default_action
         tb.add_instance_action(
             user, action=a, label=_("My settings"))
         # handler = self.action_call(None, a, dict(record_id=user.pk))

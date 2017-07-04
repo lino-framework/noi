@@ -28,4 +28,4 @@ class Plugin(Plugin):
     #     for x in super(Plugin, self).get_dashboard_items(user):
     #         yield x
     #     if user.authenticated:
-    #         yield self.site.actors.courses.MyEnrolments
+    #         yield self.site.models.courses.MyEnrolments
