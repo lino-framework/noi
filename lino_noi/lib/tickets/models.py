@@ -45,6 +45,21 @@ class Ticket(Ticket, Assignable):
         self.user_changed(ar)
         super(Ticket, self).after_ui_create(ar)
 
+        if dd.is_installed('notify'):
+            ctx = dict(user=ar.user, what=ar.obj2memo(self))
+            def msg(user, mm):
+                subject = _("{user} submitted ticket {what}").format(**ctx)
+                return (E.tostring(E.span(subject)), E.tostring(E.span(subject)))
+
+            mt = rt.actors.notify.MessageTypes.change # Maybe something else, but unimporant
+            # owner = self.get_change_owner()
+            # rt.models.notify.Message.emit_message(
+            #     ar, owner, mt, msg, self.get_change_observers())
+            rt.models.notify.Message.emit_message(
+                ar, self, mt, msg,
+                [(u, u.mail_mode) for u in rt.models.users.User.objects.all() if u.user_type.has_required_roles((rt.modules.tickets.Triager,)) and u != ar.get_user()]
+            )
+
 
 class TicketDetail(TicketDetail):
     """Customized detail_lyout for Tickets.  Replaces `waiting_for` by
