@@ -57,7 +57,10 @@ class Ticket(Ticket, Assignable):
             #     ar, owner, mt, msg, self.get_change_observers())
             rt.models.notify.Message.emit_message(
                 ar, self, mt, msg,
-                [(u, u.mail_mode) for u in rt.models.users.User.objects.all() if u.user_type is not None and u.user_type.has_required_roles((rt.modules.tickets.Triager,)) and u != ar.get_user()]
+                [(u, u.mail_mode) for u in rt.models.users.User.objects.all()
+                    if u.user_type is not None and u.user_type.has_required_roles((rt.modules.tickets.Triager,))
+                    and u != ar.get_user()
+                 ]
             )
 
 
