@@ -79,7 +79,7 @@ class TicketDetail(TicketDetail):
     summary:40 id:6
     user end_user assigned_to deadline
     site topic project 
-    workflow_buttons:30 private
+    workflow_buttons:30  ticket_type:10 priority:10 private
     bottom_box
     """
 
@@ -94,6 +94,12 @@ class TicketDetail(TicketDetail):
     description:30 upgrade_notes:20 LinksByTicket:20  
     """, label=_("More"))
 
+    more1 = """
+    #nickname:10     created modified reported_for #fixed_for
+    state ref duplicate_of planned_time
+    # standby feedback closed
+    """
+
     more2 = dd.Panel("""
     # deploy.DeploymentsByTicket
     faculties.DemandsByDemander
@@ -101,14 +107,37 @@ class TicketDetail(TicketDetail):
     uploads.UploadsByController 
     """, label=_("Even more"))
 
+class TicketInsertLayout(dd.InsertLayout):
+    main = """
+           summary private:3
+           left right:20
+           """
+
+    right = """
+           end_user
+           assigned_to
+           site
+           """
+
+    left = """
+            ticket_type priority
+            description
+            """
+    window_size = (70, 20)
+
+
+
 Tickets.detail_layout = TicketDetail()
-Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site project state deployed_to
-    has_project show_assigned show_active show_deployed show_todo show_private
+Tickets.insert_layout = TicketInsertLayout()
+Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site project state priority
+    deployed_to has_project show_assigned show_active show_deployed show_todo show_private
     start_date end_date observed_event topic #feasable_by has_ref"""
 Tickets.column_names = 'id summary:50 user:10 topic #faculty ' \
                        'workflow_buttons:30 site:10 project:10 *'
+order_by = ["-id"]
+
 MyTickets.params_layout = """
-    user end_user site project state
+    user end_user site project state priority
     start_date end_date observed_event topic #feasable_by show_active"""
 # Sites.detail_layout = """
 # id name partner #responsible_user
