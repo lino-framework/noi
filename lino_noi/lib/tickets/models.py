@@ -7,7 +7,7 @@
 Defines a customized :class:`TicketDetail`.
 
 """
-
+from __future__ import print_function
 from lino_xl.lib.tickets.models import *
 from lino.modlib.users.mixins import Assignable
 from lino.api import _
@@ -33,12 +33,12 @@ class Ticket(Ticket, Assignable):
     def site_changed(self, ar):
         """Leaves a sub-star of old site, but that's OK for now"""
         if self.site is not None:
-            print "Change"
+            print("Change")
             self.site.add_child_stars(self.site, self)
             # self.add_change_watcher(star.user)
 
     def after_ui_create(self, ar):
-        print "Create"
+        print("Create")
         self.site_changed(ar)
         self.assigned_to_changed(ar)
         self.end_user_changed(ar)
