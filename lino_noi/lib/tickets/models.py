@@ -132,7 +132,7 @@ Tickets.insert_layout = TicketInsertLayout()
 Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site project state priority
     deployed_to has_project show_assigned show_active show_deployed show_todo show_private
     start_date end_date observed_event topic #feasable_by has_ref"""
-Tickets.column_names = 'id summary:50 user:10 topic #faculty ' \
+Tickets.column_names = 'id summary:50 user:10 topic #faculty priority' \
                        'workflow_buttons:30 site:10 project:10 *'
 order_by = ["-id"]
 
