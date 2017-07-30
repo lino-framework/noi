@@ -49,7 +49,7 @@ class Ticket(Ticket, Assignable):
             ctx = dict(user=ar.user, what=ar.obj2memo(self))
             def msg(user, mm):
                 subject = _("{user} submitted ticket {what}").format(**ctx)
-                return (E.tostring(E.span(subject)), E.tostring(E.span(subject)))
+                return (subject , E.tostring(E.span(subject)))
 
             mt = rt.actors.notify.MessageTypes.change # Maybe something else, but unimporant
             # owner = self.get_change_owner()
@@ -132,7 +132,7 @@ Tickets.insert_layout = TicketInsertLayout()
 Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site project state priority
     deployed_to has_project show_assigned show_active show_deployed show_todo show_private
     start_date end_date observed_event topic #feasable_by has_ref"""
-Tickets.column_names = 'id summary:50 user:10 topic #faculty ' \
+Tickets.column_names = 'id summary:50 user:10 topic #faculty priority ' \
                        'workflow_buttons:30 site:10 project:10 *'
 order_by = ["-id"]
 

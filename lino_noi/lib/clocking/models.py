@@ -10,7 +10,7 @@ from __future__ import unicode_literals
 
 from lino_xl.lib.clocking.models import *
 from lino.api import _
-from lino.mixins.periods import DatePeriod
+from lino.mixins.periods import DateRange
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino_xl.lib.contacts.mixins import ContactRelated
 from lino_xl.lib.tickets.choicelists import TicketStates
@@ -40,7 +40,7 @@ from lino_xl.lib.tickets.choicelists import TicketStates
 
 
 @dd.python_2_unicode_compatible
-class ServiceReport(UserAuthored, ContactRelated, Certifiable, DatePeriod):
+class ServiceReport(UserAuthored, ContactRelated, Certifiable, DateRange):
     """A **service report** is a document used in various discussions with
     a stakeholder.
 

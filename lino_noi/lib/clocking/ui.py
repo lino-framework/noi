@@ -101,7 +101,7 @@ class WorkedHours(dd.VentilatingTable):
     required_roles = dd.login_required(Worker)
     label = _("Worked hours")
     hide_zero_rows = True
-    parameters = ObservedPeriod(
+    parameters = ObservedDateRange(
         user=dd.ForeignKey('users.User', null=True, blank=True))
     params_layout = "start_date end_date user"
     # editable = False
