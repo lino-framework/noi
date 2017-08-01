@@ -218,6 +218,8 @@ class SessionsByReport(Sessions, DurationReport):
     column_names_template = "start_date start_time end_time break_time " \
                             "my_description:50 #session_type {vcolumns}"
 
+    order_by = ['start_date', 'start_time', 'id']
+    
     # @classmethod
     # def get_data_rows(cls, ar):
     #     for ses in cls.get_request_queryset(ar):
@@ -232,6 +234,7 @@ class SessionsByReport(Sessions, DurationReport):
         spv = dict(start_date=mi.start_date, end_date=mi.end_date)
         # spv = mi.get_tickets_parameters()
         spv.update(company=mi.interesting_for)
+        spv.update(observed_event=dd.PeriodEvents.started)
         ar.param_values.update(spv)
 
         qs = super(SessionsByReport, self).get_request_queryset(ar)
