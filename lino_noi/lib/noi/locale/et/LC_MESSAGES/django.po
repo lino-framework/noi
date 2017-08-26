@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-noi 0.0.2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-09 08:49+0300\n"
+"POT-Creation-Date: 2017-08-25 20:28+0300\n"
 "PO-Revision-Date: 2017-03-21 15:58+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: et\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
+"Generated-By: Babel 2.4.0\n"
 
 #: lino_noi/lib/cal/models.py:17 lino_noi/lib/clocking/ui.py:79
 msgid "Author"
@@ -30,8 +30,8 @@ msgstr ""
 msgid "Contact person"
 msgstr ""
 
-#: lino_noi/lib/cal/models.py:33 lino_noi/lib/contacts/models.py:50
-#: lino_noi/lib/contacts/models.py:81 lino_noi/lib/tickets/models.py:24
+#: lino_noi/lib/cal/models.py:47 lino_noi/lib/contacts/models.py:50
+#: lino_noi/lib/contacts/models.py:81 lino_noi/lib/tickets/models.py:76
 #: lino_noi/lib/users/desktop.py:29
 msgid "General"
 msgstr ""
@@ -61,7 +61,7 @@ msgid "Time"
 msgstr ""
 
 #: lino_noi/lib/clocking/ui.py:65 lino_noi/lib/clocking/ui.py:122
-#: lino_noi/lib/clocking/ui.py:246
+#: lino_noi/lib/clocking/ui.py:249
 msgid "Description"
 msgstr ""
 
@@ -85,7 +85,7 @@ msgstr "Töötunnid"
 msgid "Total"
 msgstr ""
 
-#: lino_noi/lib/clocking/ui.py:383
+#: lino_noi/lib/clocking/ui.py:386
 msgid "Tickets"
 msgstr "Piletid"
 
@@ -110,69 +110,69 @@ msgstr ""
 msgid "Filter courses that are either active/draft or inactive/closed"
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:6
+#: lino_noi/lib/noi/help_texts.py:7
 msgid ""
 "A service report is a document used in various discussions with\n"
 "a stakeholder."
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:8
+#: lino_noi/lib/noi/help_texts.py:9
 msgid ""
 "This can be empty and will then show the working time of all\n"
 "users."
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:10
+#: lino_noi/lib/noi/help_texts.py:11
 msgid "The standard migrator for noi."
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:11
+#: lino_noi/lib/noi/help_texts.py:12
 msgid ""
 "An end user is somebody who uses our software and may report\n"
 "tickets, but won't work on them."
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:13
+#: lino_noi/lib/noi/help_texts.py:14
 msgid ""
 "A consultant is somebody who may both report tickets and work\n"
 "on them."
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:15
+#: lino_noi/lib/noi/help_texts.py:16
 msgid ""
 "A developer is somebody who may both report tickets and work\n"
 "on them."
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:17
+#: lino_noi/lib/noi/help_texts.py:18
 msgid ""
 "A senior developer is a developer who is additionally\n"
 "responsible for triaging tickets"
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:19
+#: lino_noi/lib/noi/help_texts.py:20
 msgid "Can do everything."
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:20
+#: lino_noi/lib/noi/help_texts.py:21
 msgid "Adds the lino_xl.lib.votes plugin."
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:21
+#: lino_noi/lib/noi/help_texts.py:22
 msgid ""
 "Customized detail_lyout for Tickets.  Replaces waiting_for by\n"
 "faculties"
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:23
+#: lino_noi/lib/noi/help_texts.py:24
 msgid "Layout of User Detail in Lino Noi."
 msgstr ""
 
-#: lino_noi/lib/noi/settings.py:119
+#: lino_noi/lib/noi/settings.py:121
 msgid "Submit a ticket"
 msgstr "Loo uus lipik"
 
-#: lino_noi/lib/noi/settings.py:123
+#: lino_noi/lib/noi/settings.py:125
 msgid "My settings"
 msgstr ""
 
@@ -204,59 +204,31 @@ msgstr ""
 msgid "Administrator"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:42
+#: lino_noi/lib/tickets/models.py:51
+msgid "{user} submitted ticket {what}"
+msgstr ""
+
+#: lino_noi/lib/tickets/models.py:95
 msgid "More"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:47
+#: lino_noi/lib/tickets/models.py:108
 msgid "Even more"
 msgstr ""
 
-#: lino_noi/lib/tickets/workflows.py:64
-msgid "Cannot mark as {action} because {vote} is {state}."
-msgstr ""
-
-#: lino_noi/lib/tickets/workflows.py:69
-msgid "Cannot mark as {action} because there is no vote marked as {states} ."
-msgstr ""
-
-#: lino_noi/lib/tickets/workflows.py:87
+#: lino_noi/lib/tickets/workflows.py:50
 msgctxt "verb"
 msgid "Open"
 msgstr ""
 
-#: lino_noi/lib/tickets/workflows.py:101
+#: lino_noi/lib/tickets/workflows.py:64
 msgctxt "verb"
 msgid "Start"
 msgstr ""
 
-#: lino_noi/lib/tickets/workflows.py:131
+#: lino_noi/lib/tickets/workflows.py:91
 msgctxt "verb"
 msgid "Talk"
-msgstr ""
-
-#: lino_noi/lib/tickets/workflows.py:243
-msgid "{user} candidates for {ticket}."
-msgstr ""
-
-#: lino_noi/lib/tickets/workflows.py:261
-msgid "Cannot assign while there are other candidates"
-msgstr ""
-
-#: lino_noi/lib/tickets/workflows.py:272
-msgid "Cancel {voter}'s {vote}."
-msgstr ""
-
-#: lino_noi/lib/tickets/workflows.py:280
-msgid "{user} confirmed {ticket} {state} by {voter}."
-msgstr ""
-
-#: lino_noi/lib/tickets/workflows.py:295
-msgid "Rate"
-msgstr ""
-
-#: lino_noi/lib/tickets/workflows.py:301
-msgid "Comment"
 msgstr ""
 
 #: lino_noi/lib/users/desktop.py:35
@@ -680,5 +652,29 @@ msgstr "Tööaeg"
 #~ msgstr ""
 
 #~ msgid "About me"
+#~ msgstr ""
+
+#~ msgid "Cannot mark as {action} because {vote} is {state}."
+#~ msgstr ""
+
+#~ msgid "Cannot mark as {action} because there is no vote marked as {states} ."
+#~ msgstr ""
+
+#~ msgid "{user} candidates for {ticket}."
+#~ msgstr ""
+
+#~ msgid "Cannot assign while there are other candidates"
+#~ msgstr ""
+
+#~ msgid "Cancel {voter}'s {vote}."
+#~ msgstr ""
+
+#~ msgid "{user} confirmed {ticket} {state} by {voter}."
+#~ msgstr ""
+
+#~ msgid "Rate"
+#~ msgstr ""
+
+#~ msgid "Comment"
 #~ msgstr ""
 
