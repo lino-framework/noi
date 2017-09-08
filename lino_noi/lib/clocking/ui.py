@@ -91,7 +91,7 @@ def rpttype2vf(func, rpttype, verbose_name):
 
 MySessionsByDate.column_names = (
     'start_time end_time break_time duration summary ticket '
-    'ticket__project workflow_buttons *')
+    'ticket__site workflow_buttons *')
 
 from lino.core.tables import VentilatedColumns
 
