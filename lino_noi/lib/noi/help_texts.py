@@ -4,10 +4,6 @@ from __future__ import unicode_literals
 from django.utils.translation import ugettext_lazy as _
 
 help_texts = {
-    'lino_noi.lib.clocking.ServiceReport' : _("""A service report is a document used in various discussions with
-a stakeholder."""),
-    'lino_noi.lib.clocking.ServiceReport.user' : _("""This can be empty and will then show the working time of all
-users."""),
     'lino_noi.lib.noi.migrate.Migrator' : _("""The standard migrator for noi."""),
     'lino_noi.lib.noi.user_types.EndUser' : _("""An end user is somebody who uses our software and may report
 tickets, but won't work on them."""),
