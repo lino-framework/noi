@@ -2,10 +2,6 @@
 # Copyright 2016-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""Database models for lino_noi.projects.team.lib.clocking.
-
-
-"""
 from __future__ import unicode_literals
 
 from lino_xl.lib.clocking.models import *
@@ -41,24 +37,6 @@ from lino_xl.lib.tickets.choicelists import TicketStates
 
 @dd.python_2_unicode_compatible
 class ServiceReport(UserAuthored, ContactRelated, Certifiable, DateRange):
-    """A **service report** is a document used in various discussions with
-    a stakeholder.
-
-    .. attribute:: user
-
-        This can be empty and will then show the working time of all
-        users.
-
-
-    .. attribute:: start_date
-    .. attribute:: end_date
-    .. attribute:: interesting_for
-    .. attribute:: ticket_state
-
-    .. attribute:: printed
-        See :attr:`lino.modlib.exerpts.mixins.Certifiable.printed`
-
-    """
     class Meta:
         app_label = 'clocking'
         verbose_name = _("Service Report")

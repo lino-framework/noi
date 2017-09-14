@@ -33,12 +33,12 @@ class Ticket(Ticket, Assignable):
     def site_changed(self, ar):
         """Leaves a sub-star of old site, but that's OK for now"""
         if self.site is not None:
-            print("Change")
+            # print("Change")
             self.site.add_child_stars(self.site, self)
             # self.add_change_watcher(star.user)
 
     def after_ui_create(self, ar):
-        print("Create")
+        # print("Create")
         self.site_changed(ar)
         self.assigned_to_changed(ar)
         self.end_user_changed(ar)
@@ -132,8 +132,8 @@ Tickets.insert_layout = TicketInsertLayout()
 Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site project state priority
     deployed_to has_project show_assigned show_active show_deployed show_todo show_private
     start_date end_date observed_event topic #feasable_by has_ref"""
-Tickets.column_names = 'id summary:50 user:10 topic #faculty priority ' \
-                       'workflow_buttons:30 site:10 project:10 *'
+Tickets.column_names = 'id summary:50 #user:10 #topic #faculty #priority ' \
+                       '#workflow_buttons:30 site:10 #project:10'
 order_by = ["-id"]
 
 MyTickets.params_layout = """

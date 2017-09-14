@@ -1,16 +1,9 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016 Luc Saffre
+# Copyright 2016-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
-"""Clocking specific for the Team variant of Lino Noi.
+"""Extends :mod:`lino_xl.lib.clocking` for Lino Noi.
 
-See :ref:`noi.specs.clocking`.
-
-.. autosummary::
-   :toctree:
-
-   models
-   fixtures
-
+See :doc:`/specs/noi/clocking`.
 
 """
 
