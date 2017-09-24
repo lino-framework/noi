@@ -7,11 +7,11 @@
 
 20170208 {{escape(str(ar.renderer))}}
 
-{{ar.show('tickets.PublicTickets', header_level=2)}}
+{{ar.show('tickets.Tickets', header_level=2)}}
 
 {% if False %}
 <ul>
-{% for obj in settings.SITE.modules.tickets.PublicTickets.request() %}
+{% for obj in settings.SITE.modules.tickets.Tickets.request() %}
 <li><a href="ticket/{{obj.id}}">{{obj}}</a></li>
 {% endfor %}
 </ul>
