@@ -132,7 +132,7 @@ class Site(Site):
     def do_site_startup(self):
         super(Site, self).do_site_startup()
 
-        from lino.modlib.changes.models import watch_changes as wc
+        from lino.utils.watch import watch_changes as wc
 
         wc(self.modules.tickets.Ticket, ignore=['_user_cache'])
         wc(self.modules.comments.Comment, master_key='owner')
