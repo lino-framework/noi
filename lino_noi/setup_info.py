@@ -6,7 +6,7 @@
 
 SETUP_INFO = dict(
     name='lino-noi',
-    version='2017.2.0',
+    version='17.10.0',
     install_requires=['lino-xl',
                       'channels',
                       'djangorestframework'],
@@ -52,6 +52,7 @@ system to use when time is more than money.
     classifiers="""\
 Programming Language :: Python
 Programming Language :: Python :: 2
+Programming Language :: Python :: 3
 Development Status :: 4 - Beta
 Environment :: Web Environment
 Framework :: Django
