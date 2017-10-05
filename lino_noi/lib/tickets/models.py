@@ -65,8 +65,7 @@ class Ticket(Ticket, Assignable):
 
 
 class TicketDetail(TicketDetail):
-    """Customized detail_lyout for Tickets.  Replaces `waiting_for` by
-    `faculties`
+    """Customized detail_layout for Tickets in Noi
 
     """
     main = "general more history_tab more2 #github.CommitsByTicket"
@@ -102,7 +101,7 @@ class TicketDetail(TicketDetail):
 
     more2 = dd.Panel("""
     # deploy.DeploymentsByTicket
-    faculties.DemandsByDemander
+    # faculties.DemandsByDemander
     stars.AllStarsByController
     uploads.UploadsByController 
     """, label=_("Even more"))

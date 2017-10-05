@@ -60,9 +60,9 @@ class PersonDetail(PersonDetail):
     remarks topics.InterestsByPartner
     """, label=_("Contact"))
 
-    skills = dd.Panel("""
-    faculties.OffersByEndUser faculties.SuggestedTicketsByEndUser
-    """, label=dd.plugins.faculties.verbose_name)
+    # skills = dd.Panel("""
+    # faculties.OffersByEndUser faculties.SuggestedTicketsByEndUser
+    # """, label=dd.plugins.faculties.verbose_name)
 
     tickets = dd.Panel("""
     tickets.TicketsByEndUser tickets.ProjectsByPerson
@@ -91,9 +91,9 @@ class CompanyDetail(CompanyDetail):
     remarks
     """, label=_("Contact"))
 
-    skills = dd.Panel("""
-    faculties.OffersByEndUser topics.InterestsByPartner
-    """, label=dd.plugins.faculties.verbose_name)
+    # skills = dd.Panel("""
+    # faculties.OffersByEndUser topics.InterestsByPartner
+    # """, label=dd.plugins.faculties.verbose_name)
 
     tickets = dd.Panel("""
     tickets.TicketsByEndUser tickets.ProjectsByCompany
