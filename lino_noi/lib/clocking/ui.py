@@ -196,6 +196,7 @@ class DurationReport(VentilatedColumns):
     
     @classmethod
     def get_ventilated_columns(cls):
+        # yield the fields to be insered at {vcolumns} in template
         def w(rpttype, verbose_name):
             def func(fld, obj, ar):
                 return obj._root2tot.get(rpttype, None)
@@ -207,7 +208,7 @@ class DurationReport(VentilatedColumns):
         #             return obj.get_duration()
         #         return None
         #     return dd.VirtualField(dd.DurationField(verbose_name), func)
-            
+
         for rpttype in ReportingTypes.objects():
             yield w(rpttype, six.text_type(rpttype))
         # yield w(None, _("N/A"))
@@ -216,7 +217,7 @@ class SessionsByReport(Sessions, DurationReport):
     master = 'clocking.ServiceReport'
     
     column_names_template = "start_date start_time end_time break_time " \
-                            "my_description:50 #session_type {vcolumns}"
+                            "my_description:50 user #session_type {vcolumns}"
 
     order_by = ['start_date', 'start_time', 'id']
     
@@ -235,6 +236,7 @@ class SessionsByReport(Sessions, DurationReport):
         # spv = mi.get_tickets_parameters()
         spv.update(company=mi.interesting_for)
         spv.update(observed_event=dd.PeriodEvents.started)
+        spv.update(user=mi.user)
         ar.param_values.update(spv)
 
         qs = super(SessionsByReport, self).get_request_queryset(ar)
@@ -443,7 +445,7 @@ class ServiceReports(dd.Table):
                    "ticket_state printed *"
 
     params_panel_hidden = True
-    
+    order_by = ['-start_date']
 
 
 class ReportsByPartner(ServiceReports):
