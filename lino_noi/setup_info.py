@@ -71,6 +71,7 @@ lino_noi.lib
 lino_noi.lib.noi
 lino_noi.lib.noi.fixtures
 lino_noi.lib.contacts
+lino_noi.lib.contacts.fixtures
 lino_noi.lib.public
 lino_noi.lib.topics
 lino_noi.lib.users
