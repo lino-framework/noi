@@ -116,9 +116,9 @@ class Site(Site):
         # tb.add_action(self.models.tickets.TicketsToTalk)
         # tb.add_action(self.modules.tickets.TicketsToDo)
         tb.add_action(self.modules.tickets.RefTickets)
-        tb.add_action(self.models.tickets.Tickets)
+        tb.add_action(self.models.tickets.AllTickets)
         tb.add_action(
-            self.models.tickets.Tickets.insert_action,
+            self.models.tickets.AllTickets.insert_action,
             label=_("Submit a ticket"))
 
         a = self.models.users.MySettings.default_action
