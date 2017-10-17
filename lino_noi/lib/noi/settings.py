@@ -28,6 +28,7 @@ class Site(Site):
     textfield_format = 'html'
     user_types_module = 'lino_noi.lib.noi.user_types'
     workflows_module = 'lino_noi.lib.noi.workflows'
+    # custom_layouts_module = 'lino_noi.lib.noi.layouts'
     obj2text_template = "**{0}**"
 
     default_build_method = 'appyodt'
@@ -115,9 +116,9 @@ class Site(Site):
         # tb.add_action(self.models.tickets.TicketsToTalk)
         # tb.add_action(self.modules.tickets.TicketsToDo)
         tb.add_action(self.modules.tickets.RefTickets)
-        tb.add_action(self.models.tickets.Tickets)
+        tb.add_action(self.models.tickets.AllTickets)
         tb.add_action(
-            self.models.tickets.Tickets.insert_action,
+            self.models.tickets.AllTickets.insert_action,
             label=_("Submit a ticket"))
 
         a = self.models.users.MySettings.default_action
