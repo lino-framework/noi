@@ -89,6 +89,7 @@ class Site(Site):
         yield 'lino_xl.lib.mailbox'
         yield 'lino_xl.lib.meetings'
         yield 'lino_xl.lib.github'
+        # yield 'lino.modlib.social_auth'
 
 
     # def setup_plugins(self):
