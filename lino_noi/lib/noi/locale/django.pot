@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-noi 17.10.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-10 17:51+0300\n"
+"POT-Creation-Date: 2017-10-29 06:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,11 +153,11 @@ msgstr ""
 msgid "Layout of User Detail in Lino Noi."
 msgstr ""
 
-#: lino_noi/lib/noi/settings.py:121
+#: lino_noi/lib/noi/settings.py:123
 msgid "Submit a ticket"
 msgstr ""
 
-#: lino_noi/lib/noi/settings.py:125
+#: lino_noi/lib/noi/settings.py:127
 msgid "My settings"
 msgstr ""
 
