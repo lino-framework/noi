@@ -25,8 +25,10 @@ class UserDetail(UserDetail):
 
     general = dd.Panel("""
     box1:45 clocking:15
-    # faculties.OffersByEndUser
+    SocialAuthsByUser
     """, label=_("General"))
+    
+    # faculties.OffersByEndUser 
 
     if dd.is_installed('clocking'):
         clocking = dd.Panel("""
