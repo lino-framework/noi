@@ -51,7 +51,7 @@ class UserDetail(UserDetail):
 
     box1 = """
     username user_type:20 initials github_username #partner #user_site
-    language id created modified
+    language:15 id:5 created:12 modified:12
     callme_mode mail_mode notify_myself
     """
 
