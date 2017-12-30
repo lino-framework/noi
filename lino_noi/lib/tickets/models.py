@@ -19,9 +19,23 @@ class Ticket(Ticket, Assignable):
         abstract = dd.is_abstract_model(__name__, 'Ticket')
 
     def assigned_to_changed(self, ar):
-        """Add a star"""
+        """Add a star and send notification of Assignment"""
         self.add_change_watcher(self.assigned_to)
 
+        if (self.assigned_to is not None and
+                self.assigned_to != ar.user and
+                dd.is_installed('notify')):
+            ctx = dict(user=ar.user, what=ar.obj2memo(self))
+            def msg(user, mm):
+                subject = _("{user} has assigned you to ticket: {what}").format(**ctx)
+                return (subject , E.tostring(E.span(subject)))
+
+            mt = rt.actors.notify.MessageTypes.action
+
+            rt.models.notify.Message.emit_message(
+                ar, self, mt, msg,
+                [(self.assigned_to, self.assigned_to.mail_mode)]
+            )
     def end_user_changed(self, ar):
         """Add a star"""
         self.add_change_watcher(self.end_user)
