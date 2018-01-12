@@ -12,7 +12,7 @@ from lino.api import _
 
 from lino.core import actions
 # from lino.modlib.office.roles import OfficeUser
-from lino_xl.lib.clocking.roles import Worker
+from lino_xl.lib.working.roles import Worker
 
 from lino.modlib.users.actions import SendWelcomeMail
 from lino.modlib.office.roles import OfficeUser
@@ -24,19 +24,19 @@ class UserDetail(UserDetail):
     main = "general contact calendar dashboard.WidgetsByUser"
 
     general = dd.Panel("""
-    box1:45 clocking:15
+    box1:45 working:15
     SocialAuthsByUser
     """, label=_("General"))
     
     # faculties.OffersByEndUser 
 
-    if dd.is_installed('clocking'):
-        clocking = dd.Panel("""
+    if dd.is_installed('working'):
+        working = dd.Panel("""
         open_session_on_new_ticket
         timezone
         """, label=_("Clocking"), required_roles=dd.login_required(Worker))
     else:
-        clocking = dd.DummyPanel()
+        working = dd.DummyPanel()
 
     calendar = dd.Panel("""
     event_type access_class

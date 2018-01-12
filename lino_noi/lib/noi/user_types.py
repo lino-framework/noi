@@ -2,16 +2,12 @@
 # Copyright 2015-2017 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""Defines a set of user roles and fills
+"""
+Defines a set of user roles and fills
 :class:`lino.modlib.users.choicelists.UserTypes`.
 
 This is used as the :attr:`user_types_module
-<lino.core.site.Site.user_types_module>` for
-:mod:`lino_noi.projects.team`.
-
-Note that :mod:`lino_noi.projects.care` does not use this module at
-all.
-
+<lino.core.site.Site.user_types_module>` for :ref:`noi`.
 """
 
 
@@ -23,7 +19,7 @@ from lino.modlib.office.roles import OfficeStaff, OfficeUser
 # from lino.modlib.comments.roles import CommentsReader
 from lino.modlib.comments.roles import CommentsUser, CommentsStaff
 from lino_xl.lib.tickets.roles import Reporter, Searcher, Triager, TicketsStaff
-from lino_xl.lib.clocking.roles import Worker
+from lino_xl.lib.working.roles import Worker
 from lino_xl.lib.cal.roles import CalendarReader
 from lino_xl.lib.votes.roles import VotesStaff, VotesUser
 

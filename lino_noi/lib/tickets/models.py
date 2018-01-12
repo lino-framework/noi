@@ -98,7 +98,7 @@ class TicketDetail(TicketDetail):
 
     bottom_box = """
     #faculties.DemandsByDemander:20 #votes.VotesByVotable:20 
-    deploy.DeploymentsByTicket:20 clocking.SessionsByTicket:20
+    deploy.DeploymentsByTicket:20 working.SessionsByTicket:20
     github.CommitsByTicket
     """
 
@@ -108,7 +108,7 @@ class TicketDetail(TicketDetail):
     """, label=_("More"))
 
     more1 = """
-    #nickname:10     created modified reported_for #fixed_for
+    #nickname:10 created modified reported_for fixed_date fixed_time
     state ref duplicate_of planned_time
     # standby feedback closed
     """
@@ -140,7 +140,6 @@ class TicketInsertLayout(dd.InsertLayout):
 
 
 
-Tickets.detail_layout = 'tickets.TicketDetail'
 Tickets.insert_layout = 'tickets.TicketInsertLayout'
 Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site project state priority
     deployed_to has_project show_assigned show_active show_deployed show_todo show_private

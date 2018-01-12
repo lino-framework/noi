@@ -4,7 +4,7 @@
 
 from __future__ import unicode_literals
 
-from lino_xl.lib.clocking.models import *
+from lino_xl.lib.working.models import *
 from lino.api import _
 from lino.mixins.periods import DateRange
 from lino_xl.lib.excerpts.mixins import Certifiable
@@ -26,7 +26,7 @@ from lino_xl.lib.tickets.choicelists import TicketStates
 #         end_session=EndTicketSessionViaVote())
 
 # dd.inject_action(
-#         "clocking.Session",
+#         "working.Session",
 #         start_session=StartTicketSessionViaSession()
 #         )
 # dd.inject_action(
@@ -38,7 +38,7 @@ from lino_xl.lib.tickets.choicelists import TicketStates
 @dd.python_2_unicode_compatible
 class ServiceReport(UserAuthored, ContactRelated, Certifiable, DateRange):
     class Meta:
-        app_label = 'clocking'
+        app_label = 'working'
         verbose_name = _("Service Report")
         verbose_name_plural = _("Service Reports")
 

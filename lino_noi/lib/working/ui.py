@@ -9,7 +9,7 @@
 import six
 
 from lino_xl.lib.cal.utils import when_text
-from lino_xl.lib.clocking.ui import *
+from lino_xl.lib.working.ui import *
 from lino.api import _
 
 from django.db.models import Q
@@ -19,8 +19,8 @@ from lino_xl.lib.tickets.models import Project
 from lino_xl.lib.tickets.ui import Tickets, Projects
 # from lino_xl.lib.courses.desktop import Courses
 from lino_xl.lib.tickets.models import Ticket
-from lino_xl.lib.clocking.roles import Worker
-from lino_xl.lib.clocking.choicelists import ReportingTypes
+from lino_xl.lib.working.roles import Worker
+from lino_xl.lib.working.choicelists import ReportingTypes
 
 class TOTAL_KEY(object):
     pass
@@ -214,7 +214,7 @@ class DurationReport(VentilatedColumns):
         # yield w(None, _("N/A"))
 
 class SessionsByReport(Sessions, DurationReport):
-    master = 'clocking.ServiceReport'
+    master = 'working.ServiceReport'
     
     column_names_template = "start_date start_time end_time break_time " \
                             "my_description:50 user #session_type {vcolumns}"
@@ -258,7 +258,7 @@ class SessionsByReport(Sessions, DurationReport):
 
 class TicketsByReport(Tickets, DurationReport):
     """The list of tickets mentioned in a service report."""
-    master = 'clocking.ServiceReport'
+    master = 'working.ServiceReport'
     # column_names = "summary id reporter project product site state
     # invested_time"
     column_names_template = "id overview project state {vcolumns}"
@@ -273,7 +273,7 @@ class TicketsByReport(Tickets, DurationReport):
 
         pv.update(start_date=mi.start_date, end_date=mi.end_date)
         pv.update(interesting_for=mi.interesting_for)
-        pv.update(observed_event=TicketEvents.clocking)
+        pv.update(observed_event=TicketEvents.working)
 
         spv = dict(start_date=mi.start_date, end_date=mi.end_date)
         spv.update(observed_event=dd.PeriodEvents.started)
@@ -294,7 +294,7 @@ class ProjectsByReport(Projects, DurationReport):
     """The list of projects mentioned in a service report.
     
     """
-    master = 'clocking.ServiceReport'
+    master = 'working.ServiceReport'
     column_names_template = "ref name active_tickets {vcolumns}"
     order_by = ['ref']
 
@@ -335,7 +335,7 @@ class ProjectsByReport(Projects, DurationReport):
             tot = Duration()
             tickets = []
             spv = mi.get_tickets_parameters(**spv)
-            spv.update(observed_event=TicketEvents.clocking)
+            spv.update(observed_event=TicketEvents.working)
             sar = Tickets.request(param_values=spv)
             for ticket in sar:
                 ttot = compute_invested_time(
@@ -399,7 +399,7 @@ class ProjectsByReport(Projects, DurationReport):
 #     """The list of courses mentioned in a service report.
 #
 #     """
-#     master = 'clocking.ServiceReport'
+#     master = 'working.ServiceReport'
 #     column_names_template = "start_date name * {vcolumns}"
 #     order_by = ['start_date']
 #
@@ -432,7 +432,7 @@ class ServiceReports(dd.Table):
     """List of service reports."""
     required_roles = dd.login_required(Worker)
 
-    model = "clocking.ServiceReport"
+    model = "working.ServiceReport"
     detail_layout = """
     start_date end_date user interesting_for ticket_state printed
     company contact_person
@@ -458,14 +458,14 @@ class ReportsByPartner(ServiceReports):
 #     WorkedHours.setup_columns()
 #     settings.SITE.kernel.must_build_site_cache()
 
-# # moved to xl.clocking.mixins.py
+# # moved to xl.working.mixins.py
 # @dd.receiver(dd.post_save, sender=Ticket)
 # def on_ticket_create(sender, instance=None, created=False, **kwargs):
 #     if settings.SITE.loading_from_dump:
 #         return
 #     me = instance.user
 #     if created and me is not None and me.open_session_on_new_ticket:
-#         ses = rt.modules.clocking.Session(ticket=instance, user=me)
+#         ses = rt.modules.working.Session(ticket=instance, user=me)
 #         ses.full_clean()
 #         ses.save()
 

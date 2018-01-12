@@ -65,7 +65,7 @@ class Site(Site):
         yield 'lino_noi.lib.tickets'
         # yield 'lino_xl.lib.faculties'
         yield 'lino_xl.lib.deploy'
-        yield 'lino_noi.lib.clocking'
+        yield 'lino_noi.lib.working'
         yield 'lino_xl.lib.lists'
         yield 'lino_xl.lib.blogs'
 
@@ -139,7 +139,7 @@ class Site(Site):
 
         wc(self.modules.tickets.Ticket, ignore=['_user_cache'])
         wc(self.modules.comments.Comment, master_key='owner')
-        # wc(self.modules.clocking.Session, master_key='owner')
+        # wc(self.modules.working.Session, master_key='owner')
         
         if self.is_installed('votes'):
             wc(self.modules.votes.Vote, master_key='votable')
