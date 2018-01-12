@@ -79,6 +79,7 @@ class Site(Site):
         yield 'lino.modlib.smtpd'
         yield 'lino.modlib.weasyprint'
         yield 'lino_xl.lib.appypod'
+        yield 'lino.modlib.checkdata'
         # yield 'lino.modlib.wkhtmltopdf'
         yield 'lino.modlib.dashboard'
 

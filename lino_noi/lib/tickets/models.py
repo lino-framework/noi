@@ -108,7 +108,7 @@ class TicketDetail(TicketDetail):
     """, label=_("More"))
 
     more1 = """
-    #nickname:10 created modified reported_for fixed_date fixed_time
+    created modified fixed_since reported_for #fixed_date #fixed_time
     state ref duplicate_of planned_time
     # standby feedback closed
     """
