@@ -12,6 +12,6 @@
     users
     topics
     tickets
-    clocking
+    working
 
 """

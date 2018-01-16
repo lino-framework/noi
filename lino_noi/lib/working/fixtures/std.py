@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2016 Luc Saffre
 # License: BSD (see file COPYING for details)
-from lino_xl.lib.clocking.fixtures.std import objects as parent_objects
+from lino_xl.lib.working.fixtures.std import objects as parent_objects
 
 from lino.api import rt, dd
 
@@ -9,7 +9,7 @@ from lino.api import rt, dd
 def objects():
     yield parent_objects()
 
-    ServiceReport = rt.modules.clocking.ServiceReport
+    ServiceReport = rt.modules.working.ServiceReport
     ExcerptType = rt.modules.excerpts.ExcerptType
     kw = dict(
         build_method='weasy2html',

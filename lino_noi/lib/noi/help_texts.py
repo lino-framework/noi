@@ -14,7 +14,6 @@ on them."""),
     'lino_noi.lib.noi.user_types.Senior' : _("""A senior developer is a developer who is additionally
 responsible for triaging tickets"""),
     'lino_noi.lib.noi.user_types.SiteAdmin' : _("""Can do everything."""),
-    'lino_noi.lib.tickets.Plugin' : _("""Adds the lino_xl.lib.votes plugin."""),
     'lino_noi.lib.tickets.TicketDetail' : _("""Customized detail_layout for Tickets in Noi"""),
     'lino_noi.lib.users.UserDetail' : _("""Layout of User Detail in Lino Noi."""),
 }
