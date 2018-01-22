@@ -19,7 +19,7 @@ class Site(Site):
     version = SETUP_INFO['version']
     url = "http://noi.lino-framework.org/"
 
-    demo_fixtures = ['std', 'demo', 'demo2']
+    demo_fixtures = ['std', 'demo', 'demo2', 'checksummaries']
                      # 'linotickets',
                      # 'tractickets', 'luc']
 
@@ -65,7 +65,7 @@ class Site(Site):
         yield 'lino_noi.lib.tickets'
         # yield 'lino_xl.lib.faculties'
         yield 'lino_xl.lib.deploy'
-        yield 'lino_noi.lib.working'
+        yield 'lino_xl.lib.working'
         yield 'lino_xl.lib.lists'
         yield 'lino_xl.lib.blogs'
 
@@ -93,8 +93,8 @@ class Site(Site):
         # yield 'lino.modlib.social_auth'
 
 
-    # def setup_plugins(self):
-    #     super(Site, self).setup_plugins()
+    def setup_plugins(self):
+        super(Site, self).setup_plugins()
         # self.plugins.comments.configure(
         #     commentable_model='tickets.Ticket')
         # self.plugins.faculties.configure(
@@ -102,6 +102,8 @@ class Site(Site):
         # self.plugins.tickets.configure(
         #     site_model='cal.Room',
         #     milestone_model='courses.Course')
+        self.plugins.working.configure(
+            ticket_model='tickets.Ticket')
 
     def get_default_required(self, **kw):
         # overrides the default behaviour which would add

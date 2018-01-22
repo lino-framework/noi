@@ -139,6 +139,15 @@ class TicketInsertLayout(dd.InsertLayout):
     window_size = (70, 20)
 
 
+class SiteDetail(SiteDetail):
+
+    main = """general history"""
+
+    history = dd.Panel("""
+    meetings.MeetingsBySite
+    working.SummariesBySite
+    """, label=_("History"))
+
 
 Tickets.insert_layout = 'tickets.TicketInsertLayout'
 Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site project state priority
