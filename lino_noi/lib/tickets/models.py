@@ -65,14 +65,15 @@ class Ticket(Ticket, Assignable):
                 subject = _("{user} submitted ticket {what}").format(**ctx)
                 return (subject , E.tostring(E.span(subject)))
 
-            mt = rt.actors.notify.MessageTypes.change # Maybe something else, but unimporant
+            mt = rt.models.notify.MessageTypes.change # Maybe something else, but unimporant
             # owner = self.get_change_owner()
             # rt.models.notify.Message.emit_message(
             #     ar, owner, mt, msg, self.get_change_observers())
             rt.models.notify.Message.emit_message(
                 ar, self, mt, msg,
                 [(u, u.mail_mode) for u in rt.models.users.User.objects.all()
-                    if u.user_type and u.user_type.has_required_roles(Triager)
+                    if u.user_type and u.user_type.has_required_roles(
+                            [Triager])
                     and u != ar.get_user()
                  ]
             )
