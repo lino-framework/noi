@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2017 Luc Saffre
+# Copyright 2014-2018 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 # $ python setup.py test -s tests.PackagesTests.test_packages
@@ -7,9 +7,10 @@
 SETUP_INFO = dict(
     name='lino-noi',
     version='17.10.0',
-    install_requires=['lino-xl',
-                      'channels',
-                      'djangorestframework'],
+    install_requires=['lino-xl'
+                      # 'channels<2',
+                      # 'djangorestframework'
+    ],
     # tests_require=['pytest', 'mock'],
     test_suite='tests',
     description=("The Lino application used by the Lino team for "
