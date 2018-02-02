@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016-2017 Luc Saffre
+# Copyright 2016-2018 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """Database models specific for the Team variant of Lino Noi.
@@ -65,79 +65,99 @@ class Ticket(Ticket, Assignable):
                 subject = _("{user} submitted ticket {what}").format(**ctx)
                 return (subject , E.tostring(E.span(subject)))
 
-            mt = rt.actors.notify.MessageTypes.change # Maybe something else, but unimporant
+            mt = rt.models.notify.MessageTypes.change # Maybe something else, but unimporant
             # owner = self.get_change_owner()
             # rt.models.notify.Message.emit_message(
             #     ar, owner, mt, msg, self.get_change_observers())
             rt.models.notify.Message.emit_message(
                 ar, self, mt, msg,
                 [(u, u.mail_mode) for u in rt.models.users.User.objects.all()
-                    if u.user_type is not None and u.user_type.has_required_roles((rt.modules.tickets.Triager,))
+                    if u.user_type and u.user_type.has_required_roles(
+                            [Triager])
                     and u != ar.get_user()
                  ]
             )
 
+    show_commits = dd.ShowSlaveTable('github.CommitsByTicket')
+    show_changes = dd.ShowSlaveTable('changes.ChangesByMaster')
+    show_wishes = dd.ShowSlaveTable('deploy.DeploymentsByTicket')
+    show_stars = dd.ShowSlaveTable('stars.AllStarsByController')
 
 class TicketDetail(TicketDetail):
     """Customized detail_layout for Tickets in Noi
 
     """
-    main = "general more history_tab more2 #github.CommitsByTicket"
+    main = "general more #history_tab #more2 #github.CommitsByTicket"
     
     general = dd.Panel("""
     general1:60 comments.CommentsByRFC:30
     """, label=_("General"))
 
     general1 = """
-    summary:40 id:6
-    user end_user assigned_to deadline
-    site topic project 
-    workflow_buttons:30  ticket_type:10 priority:10 private
+    summary id:6
+    user end_user site ticket_type private:10
+    #topic #project 
+    workflow_buttons:30 priority:10 assigned_to planned_time
     bottom_box
     """
 
     bottom_box = """
     #faculties.DemandsByDemander:20 #votes.VotesByVotable:20 
-    deploy.DeploymentsByTicket:20 working.SessionsByTicket:20
-    github.CommitsByTicket
+    #deploy.DeploymentsByTicket:20 description:30 working.SessionsByTicket:20
     """
 
     more = dd.Panel("""
     more1 DuplicatesByTicket:20 #WishesByTicket
-    description:30 upgrade_notes:20 LinksByTicket:20  
+    upgrade_notes LinksByTicket uploads.UploadsByController 
     """, label=_("More"))
 
+    # history_tab = dd.Panel("""
+    # changes.ChangesByMaster #stars.StarsByController:20
+    # github.CommitsByTicket
+    # """, label=_("History"), required_roles=dd.login_required(Triager))
+
+    
     more1 = """
-    created modified fixed_since reported_for #fixed_date #fixed_time
-    state ref duplicate_of planned_time
+    created modified fixed_since #reported_for #fixed_date #fixed_time
+    state ref duplicate_of deadline
     # standby feedback closed
     """
 
-    more2 = dd.Panel("""
-    # deploy.DeploymentsByTicket
-    # faculties.DemandsByDemander
-    stars.AllStarsByController
-    uploads.UploadsByController 
-    """, label=_("Even more"))
+    # more2 = dd.Panel("""
+    # # deploy.DeploymentsByTicket
+    # # faculties.DemandsByDemander
+    # stars.AllStarsByController
+    # uploads.UploadsByController 
+    # """, label=_("Even more"))
 
 class TicketInsertLayout(dd.InsertLayout):
     main = """
-           summary private:3
-           left right:20
-           """
+    summary #private:20
+    right:30 left:50
+    """
 
     right = """
-           end_user
-           assigned_to
-           site
-           """
+    ticket_type #priority
+    end_user
+    #assigned_to
+    site
+    """
 
     left = """
-            ticket_type priority
-            description
-            """
-    window_size = (70, 20)
+    description
+    """
+    
+    window_size = (80, 20)
 
+
+class SiteDetail(SiteDetail):
+
+    main = """general history"""
+
+    history = dd.Panel("""
+    meetings.MeetingsBySite
+    working.SummariesBySite
+    """, label=_("History"))
 
 
 Tickets.insert_layout = 'tickets.TicketInsertLayout'
