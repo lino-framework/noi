@@ -30,7 +30,7 @@ from django.conf import settings
 
 intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
-interproject.configure(globals(), 'atelier lino xl book')
+interproject.configure(globals(), 'atelier lino lino_xl lino_book')
 
 # print(20180202, intersphinx_mapping)
 
