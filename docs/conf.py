@@ -32,6 +32,8 @@ intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
 interproject.configure(globals(), 'atelier lino lino_xl lino_book')
 
+# print(20180202, intersphinx_mapping)
+
 # from importlib import import_module
 # for n in 'atelier lino lino_xl lino_book'.split():
 #     m = import_module(n)

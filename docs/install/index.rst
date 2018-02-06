@@ -4,7 +4,7 @@ Installing Lino Noi
 ====================
 
 - Install Lino (the framework) as documented in
-  :ref:`lino.dev.install`
+  :ref:`lino.dev.install`.
 
 - Go to your :xfile:`repositories` directory and download also a copy
   of the *Lino Noi* repository::
