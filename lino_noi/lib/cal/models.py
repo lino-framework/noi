@@ -43,7 +43,7 @@ class EventDetail(EventDetail):
     user room company contact_person
     project owner workflow_buttons 
     # owner created:20 modified:20
-    description blogs.EntriesByController #outbox.MailsByController
+    description #blogs.EntriesByController #outbox.MailsByController
     """, label=_("General"))
     
 Events.set_detail_layout(EventDetail())
