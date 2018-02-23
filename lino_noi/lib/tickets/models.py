@@ -30,7 +30,7 @@ class Ticket(Ticket, Assignable):
                 subject = _("{user} has assigned you to ticket: {what}").format(**ctx)
                 return (subject , E.tostring(E.span(subject)))
 
-            mt = rt.actors.notify.MessageTypes.action
+            mt = rt.models.notify.MessageTypes.action
 
             rt.models.notify.Message.emit_message(
                 ar, self, mt, msg,
