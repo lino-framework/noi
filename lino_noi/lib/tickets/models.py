@@ -10,6 +10,7 @@ Defines a customized :class:`TicketDetail`.
 from __future__ import print_function
 from lino_xl.lib.tickets.models import *
 from lino.modlib.users.mixins import Assignable
+
 from lino.api import _
 
 
@@ -30,7 +31,7 @@ class Ticket(Ticket, Assignable):
                 subject = _("{user} has assigned you to ticket: {what}").format(**ctx)
                 return (subject , E.tostring(E.span(subject)))
 
-            mt = rt.models.notify.MessageTypes.action
+            mt = rt.models.notify.MessageTypes.tickets
 
             rt.models.notify.Message.emit_message(
                 ar, self, mt, msg,
@@ -65,7 +66,7 @@ class Ticket(Ticket, Assignable):
                 subject = _("{user} submitted ticket {what}").format(**ctx)
                 return (subject , E.tostring(E.span(subject)))
 
-            mt = rt.models.notify.MessageTypes.change # Maybe something else, but unimporant
+            mt = rt.models.notify.MessageTypes.tickets
             # owner = self.get_change_owner()
             # rt.models.notify.Message.emit_message(
             #     ar, owner, mt, msg, self.get_change_observers())
