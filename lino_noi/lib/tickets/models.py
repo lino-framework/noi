@@ -33,7 +33,7 @@ class Ticket(Ticket, Assignable):
 
             mt = rt.models.notify.MessageTypes.tickets
 
-            rt.models.notify.Message.emit_message(
+            rt.models.notify.Message.emit_notification(
                 ar, self, mt, msg,
                 [(self.assigned_to, self.assigned_to.mail_mode)]
             )
@@ -68,9 +68,9 @@ class Ticket(Ticket, Assignable):
 
             mt = rt.models.notify.MessageTypes.tickets
             # owner = self.get_change_owner()
-            # rt.models.notify.Message.emit_message(
+            # rt.models.notify.Message.emit_notification(
             #     ar, owner, mt, msg, self.get_change_observers())
-            rt.models.notify.Message.emit_message(
+            rt.models.notify.Message.emit_notification(
                 ar, self, mt, msg,
                 [(u, u.mail_mode) for u in rt.models.users.User.objects.all()
                     if u.user_type and u.user_type.has_required_roles(
