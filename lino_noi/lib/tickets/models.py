@@ -29,7 +29,7 @@ class Ticket(Ticket, Assignable):
             ctx = dict(user=ar.user, what=ar.obj2memo(self))
             def msg(user, mm):
                 subject = _("{user} has assigned you to ticket: {what}").format(**ctx)
-                return (subject , E.tostring(E.span(subject)))
+                return (subject , tostring(E.span(subject)))
 
             mt = rt.models.notify.MessageTypes.tickets
 
@@ -64,7 +64,7 @@ class Ticket(Ticket, Assignable):
             ctx = dict(user=ar.user, what=ar.obj2memo(self))
             def msg(user, mm):
                 subject = _("{user} submitted ticket {what}").format(**ctx)
-                return (subject , E.tostring(E.span(subject)))
+                return (subject , tostring(E.span(subject)))
 
             mt = rt.models.notify.MessageTypes.tickets
             # owner = self.get_change_owner()
