@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2017 Luc Saffre
+# Copyright 2017-2018 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 """Database models for this plugin.
 
@@ -20,15 +20,11 @@ dd.update_field(Event, 'contact_person', verbose_name=_("Contact person"))
 
 
 class RoomDetail(dd.DetailLayout):
-    bottom = """bottom_left:45 tickets.TicketsBySite"""
-    bottom_left = """
-    description
-    cal.EntriesByRoom
-    """
     main = """
     id name
     company contact_person
-    bottom
+    description
+    cal.EntriesByRoom
     """
 
 Rooms.set_detail_layout(RoomDetail())

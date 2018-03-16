@@ -81,8 +81,6 @@ lino_noi.lib.cal
 lino_noi.lib.cal.fixtures
 lino_noi.lib.courses
 lino_noi.lib.tickets
-lino_noi.lib.working
-lino_noi.lib.working.fixtures
 """.splitlines() if n])
 
 SETUP_INFO.update(message_extractors={
