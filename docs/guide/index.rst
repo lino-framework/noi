@@ -17,7 +17,8 @@ writable for everybody. So please don't post any private information
 there.
 
 Alternatively, if you have installed a development environment as
-documented in :ref:`lino.dev.install`, you can type::
+documented in `Installing Lino
+<http://www.lino-framework.org/dev/install.html>`__, you can type::
 
     $ go team
     $ python manage.py prep

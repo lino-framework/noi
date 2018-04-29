@@ -4,7 +4,8 @@ Installing Lino Noi
 ====================
 
 - Lino Noi is part of the Lino framework.  Install a development
-  environment as documented in :ref:`lino.dev.install`, then type::
+  environment as documented in `Installing Lino
+  <http://www.lino-framework.org/dev/install.html>`__, then type::
 
     $ go team
     $ python manage.py prep
