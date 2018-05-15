@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2017 Luc Saffre
+# Copyright 2015-2018 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """
@@ -11,13 +11,14 @@ This is used as the :attr:`user_types_module
 """
 
 
+from lino.modlib.office.roles import OfficeStaff, OfficeUser
+from lino.modlib.users.roles import Helper
+# from lino.modlib.comments.roles import CommentsReader
+from lino.modlib.comments.roles import CommentsUser, CommentsStaff
 from lino.core.roles import SiteUser, SiteAdmin
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsUser, ContactsStaff
 from lino_xl.lib.courses.roles import CoursesUser
-from lino.modlib.office.roles import OfficeStaff, OfficeUser
-# from lino.modlib.comments.roles import CommentsReader
-from lino.modlib.comments.roles import CommentsUser, CommentsStaff
 from lino_xl.lib.tickets.roles import Reporter, Searcher, Triager, TicketsStaff
 from lino_xl.lib.working.roles import Worker
 from lino_xl.lib.cal.roles import CalendarReader
@@ -35,8 +36,8 @@ class EndUser(SiteUser, OfficeUser, VotesUser, Reporter, CommentsUser):
     pass
 
 
-class Consultant(EndUser, Searcher, Worker, ExcerptsUser,
-                 ContactsUser, CoursesUser):
+class Consultant(EndUser, Searcher, Helper, Worker,
+                 ExcerptsUser, ContactsUser, CoursesUser):
     """A **consultant** is somebody who may both report tickets and work
     on them.
 
