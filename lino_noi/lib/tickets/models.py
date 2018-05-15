@@ -153,7 +153,16 @@ class TicketInsertLayout(dd.InsertLayout):
 
 class SiteDetail(SiteDetail):
 
-    main = """general history"""
+    main = """general more history"""
+
+    general = dd.Panel("""
+        id name 
+        company contact_person reporting_type workflow_buttons:20
+        stars.StarsByController:30 TicketsBySite""", label=_("General"))
+    more = dd.Panel("""
+    remark
+    description
+    """, label=_("More"))
 
     history = dd.Panel("""
     meetings.MeetingsBySite
@@ -162,8 +171,8 @@ class SiteDetail(SiteDetail):
 
 
 Tickets.insert_layout = 'tickets.TicketInsertLayout'
-Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site project state priority
-    deployed_to has_project show_assigned show_active show_deployed show_todo show_private
+Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site has_site state priority
+    deployed_to show_assigned show_active show_deployed show_todo show_private
     start_date end_date observed_event topic #feasable_by has_ref"""
 Tickets.column_names = 'id summary:50 #user:10 #topic #faculty priority ' \
                        'workflow_buttons:30 site:10 #project:10'
