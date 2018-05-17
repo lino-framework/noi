@@ -158,7 +158,9 @@ class SiteDetail(SiteDetail):
     general = dd.Panel("""
         id name 
         company contact_person reporting_type workflow_buttons:20
-        stars.StarsByController:30 TicketsBySite""", label=_("General"))
+        stars.StarsByController:30 TicketsBySite
+    """, label=_("General"))
+    
     more = dd.Panel("""
     remark
     description
