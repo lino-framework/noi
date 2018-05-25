@@ -142,9 +142,9 @@ from django.conf import settings
 
 def objects():
 
-    Project = rt.modules.tickets.Project
-    Ticket = rt.modules.tickets.Ticket
-    TicketStates = rt.modules.tickets.TicketStates
+    Project = rt.models.tickets.Project
+    Ticket = rt.models.tickets.Ticket
+    TicketStates = rt.models.tickets.TicketStates
 
     prj = Project(name="Lino")
     yield prj
