@@ -33,7 +33,7 @@ class UserDetail(UserDetail):
     if dd.is_installed('working'):
         working = dd.Panel("""
         open_session_on_new_ticket
-        timezone
+        time_zone
         """, label=_("Clocking"), required_roles=dd.login_required(Worker))
     else:
         working = dd.DummyPanel()

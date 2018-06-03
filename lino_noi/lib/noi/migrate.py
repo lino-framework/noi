@@ -90,7 +90,7 @@ class Migrator(Migrator):
                                   nickname, summary, description, upgrade_notes, ticket_type_id, duplicate_of_id,
                                   reported_for_id, fixed_for_id, assigned_to_id, reporter_id, state, waiting_for,
                                   deadline, priority, feedback, standby, faculty_id):
-            if state: state = settings.SITE.modules.tickets.TicketStates.get_by_value(state)
+            if state: state = settings.SITE.models.tickets.TicketStates.get_by_value(state)
             kw = dict()
             kw.update(id=id)
             kw.update(modified=modified)
@@ -217,8 +217,8 @@ class Migrator(Migrator):
         # def create_tickets_ticket(id, modified, created, assigned_to_id, closed, private, planned_time, project_id, site_id, topic_id, nickname, summary, description, upgrade_notes,
         #     ticket_type_id, duplicate_of_id, reporter_id, state, rating, waiting_for, deadline,
         #     priority, feedback, standby, faculty_id):
-        #     if state: state = settings.SITE.modules.tickets.TicketStates.get_by_value(state)
-        #     if rating: rating = settings.SITE.modules.tickets.Ratings.get_by_value(rating)
+        #     if state: state = settings.SITE.models.tickets.TicketStates.get_by_value(state)
+        #     if rating: rating = settings.SITE.models.tickets.Ratings.get_by_value(rating)
         #     kw = dict()
         #     kw.update(id=id)
         #     kw.update(modified=modified)
@@ -262,7 +262,7 @@ class Migrator(Migrator):
                                   site_id, topic_id, nickname, summary, description, upgrade_notes, ticket_type_id,
                                   duplicate_of_id, reported_for_id, fixed_for_id, reporter_id, state, waiting_for,
                                   deadline, priority, feedback, standby, faculty_id):
-            if state: state = settings.SITE.modules.tickets.TicketStates.get_by_value(state)
+            if state: state = settings.SITE.models.tickets.TicketStates.get_by_value(state)
             kw = dict()
             kw.update(id=id)
             kw.update(modified=modified)
@@ -415,9 +415,9 @@ class Migrator(Migrator):
 
         # @override(globals_dict)
         # def create_users_user(id, email, language, url, phone, gsm, fax, modified, created, country_id, city_id, zip_code, region_id, addr1, street_prefix, street, street_no, street_box, addr2, password, last_login, timezone, username, user_type, initials, first_name, last_name, remarks, partner_id, callme_mode, verification_code, user_state, user_site_id, open_session_on_new_ticket, notify_myself, mail_mode):
-        #     if profile: profile = settings.SITE.modules.users.UserTypes.get_by_value(profile)
-        #     if user_state: user_state = settings.SITE.modules.users.UserStates.get_by_value(user_state)
-        #     if mail_mode: mail_mode = settings.SITE.modules.notify.MailModes.get_by_value(mail_mode)
+        #     if profile: profile = settings.SITE.models.users.UserTypes.get_by_value(profile)
+        #     if user_state: user_state = settings.SITE.models.users.UserStates.get_by_value(user_state)
+        #     if mail_mode: mail_mode = settings.SITE.models.notify.MailModes.get_by_value(mail_mode)
         #     # if contacts_Partner.objects.exists(id=id):
         #     # return create_mti_child(contacts_Person, id, users.User,modified=modified,created=created,password=password,last_login=last_login,timezone=timezone,username=username,profile=profile,initials=initials,partner_id=partner_id,callme_mode=callme_mode,verification_code=verification_code,user_state=user_state,open_session_on_new_ticket=open_session_on_new_ticket,notify_myself=notify_myself,mail_mode=mail_mode)
             
@@ -463,7 +463,7 @@ class Migrator(Migrator):
 
         @override(globals_dict)
         def create_tickets_ticket(id, modified, created, user_id, private, closed, planned_time, project_id, site_id, topic_id, nickname, summary, description, upgrade_notes, ticket_type_id, duplicate_of_id, reported_for_id, fixed_for_id, reporter_id, end_user_id, state, waiting_for, deadline, priority, feedback, standby, faculty_id):
-            if state: state = settings.SITE.modules.tickets.TicketStates.get_by_value(state)
+            if state: state = settings.SITE.models.tickets.TicketStates.get_by_value(state)
             kw = dict()
             kw.update(id=id)
             kw.update(modified=modified)

@@ -6,25 +6,54 @@ Lino Noi User's Guide
 
 A little crash course.
 
-Logging in
+
+Signing in
 ==========
 
 
-- Point your browser to http://team.lino-framework.org/ and log in as
-  user *jean*.  
+Point your browser to http://team.lino-framework.org/. This is the
+public demo database, it contains fictive data and is visible and
+writable for everybody. So please don't post any private information
+there.
 
-  For this course we are using the public demo database. This database
-  contains fictive data and is visible and writable for everybody. So
-  please don't post any private information there.
+Alternatively, if you have installed a development environment as
+documented in `Installing Lino
+<http://www.lino-framework.org/dev/install.html>`__, you can type::
 
+    $ go team
+    $ python manage.py prep
+    $ python manage.py runserver
+
+  and then point your browser to http://127.0.0.1:8000/
+
+Sign in as user *jean*.  You should then see the following screen:
+
+ 
 .. image:: 3.png
+
+
+Note the message :message:`You are busy with #1 (⛶ Föö fails to bar
+when baz) (■)`.  This message is there because you started a work
+session on that ticket, and because you did not yet stop that session.
+
+You can click on "#1 (⛶ Föö fails to bar when baz)" in order to see
+the ticket #1.  Close that window using its Close (X) button in the
+upper right corner.
+
+You can click on the (■) in order to stop working on that ticket.
+
+.. note:: This document needs revision.  You should read it quickly
+          and then try out yourself.
+
 
 
 Opening a new ticket
 ====================
 
-- Open the list of all tickets using the quicklink "[Tickets]" or the
-  menu :menuselection:`Tickets--> Tickets`
+Click the quicklink "[Submit Tickets]"
+
+Open the list of all tickets using the quicklink "[All Tickets]" or
+the menu :menuselection:`Tickets--> All Tickets`
 
 .. image:: 1.png
 
@@ -41,10 +70,10 @@ session on that ticket which starts at current time.  (If it doesn't,
 then go to your user preferences and check the :guilabel:`Open session
 on new ticket` checkbox).
 
-Your session is visible as a row in the lower right table
-"Sessions". You should write at least a few words in the "Summary" of
-your session (by pressing :kbd:`F2` on that field). Type for example
-"Following the crash course."
+Your session is visible as a row in the lower right table "Sessions".
+You should write at least a few words in the "Summary" of your session
+(by pressing :kbd:`F2` on that field).  Type for example "Following
+the crash course."
 
 .. image:: 4.png
 

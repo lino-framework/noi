@@ -25,12 +25,12 @@ help_texts_builder_targets = {
     'lino_noi.': 'lino_noi.lib.noi'
 }
 
-from django.conf import settings
+# from django.conf import settings
 # settings.SITE.title = "Lino Noi"
 
 intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
-interproject.configure(globals(), 'atelier lino lino_xl lino_book')
+interproject.configure(globals(), 'atelier lino_book')
 
 # print(20180202, intersphinx_mapping)
 
