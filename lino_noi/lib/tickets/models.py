@@ -21,7 +21,7 @@ class Ticket(Ticket, Assignable):
 
     def assigned_to_changed(self, ar):
         """Add a star and send notification of Assignment"""
-        self.add_change_watcher(self.assigned_to)
+        # self.add_change_watcher(self.assigned_to)
 
         if (self.assigned_to is not None and
                 self.assigned_to != ar.user and
@@ -37,20 +37,20 @@ class Ticket(Ticket, Assignable):
                 ar, self, mt, msg,
                 [(self.assigned_to, self.assigned_to.mail_mode)]
             )
-    def end_user_changed(self, ar):
-        """Add a star"""
-        self.add_change_watcher(self.end_user)
+    # def end_user_changed(self, ar):
+    #     """Add a star"""
+    #     self.add_change_watcher(self.end_user)
 
-    def user_changed(self, ar):
-        """Add a star"""
-        self.add_change_watcher(self.user)
+    # def user_changed(self, ar):
+    #     """Add a star"""
+    #     self.add_change_watcher(self.user)
 
     def after_ui_create(self, ar):
         # print("Create")
-        self.site_changed(ar)
-        self.assigned_to_changed(ar)
-        self.end_user_changed(ar)
-        self.user_changed(ar)
+        # self.site_changed(ar)
+        # self.assigned_to_changed(ar)
+        # self.end_user_changed(ar)
+        # self.user_changed(ar)
         super(Ticket, self).after_ui_create(ar)
 
         if dd.is_installed('notify'):
