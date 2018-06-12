@@ -61,10 +61,10 @@ class Site(Site):
 
         yield 'lino_noi.lib.topics'
         # yield 'lino_xl.lib.votes'
-        yield 'lino_xl.lib.stars'
+        # yield 'lino_xl.lib.stars'
         yield 'lino_noi.lib.tickets'
         # yield 'lino_xl.lib.faculties'
-        yield 'lino_xl.lib.deploy'
+        # yield 'lino_xl.lib.deploy'
         yield 'lino_xl.lib.working'
         yield 'lino_xl.lib.lists'
         # yield 'lino_xl.lib.blogs'
@@ -88,7 +88,7 @@ class Site(Site):
         yield 'lino_noi.lib.noi'
         # yield 'lino_xl.lib.inbox'
         yield 'lino_xl.lib.mailbox'
-        yield 'lino_xl.lib.meetings'
+        # yield 'lino_xl.lib.meetings'
         yield 'lino_xl.lib.github'
         # yield 'lino.modlib.social_auth'
         yield 'lino_xl.lib.userstats'
@@ -114,7 +114,7 @@ class Site(Site):
     def setup_quicklinks(self, user, tb):
         super(Site, self).setup_quicklinks(user, tb)
         # tb.add_action(self.models.courses.MyActivities)
-        tb.add_action(self.models.meetings.MyMeetings)
+        # tb.add_action(self.models.meetings.MyMeetings)
         # tb.add_action(self.modules.deploy.MyMilestones)
         # tb.add_action(self.models.tickets.MyTickets)
         # tb.add_action(self.models.tickets.TicketsToTriage)

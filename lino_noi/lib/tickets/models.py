@@ -45,13 +45,6 @@ class Ticket(Ticket, Assignable):
         """Add a star"""
         self.add_change_watcher(self.user)
 
-    def site_changed(self, ar):
-        """Leaves a sub-star of old site, but that's OK for now"""
-        if self.site is not None:
-            # print("Change")
-            self.site.add_child_stars(self.site, self)
-            # self.add_change_watcher(star.user)
-
     def after_ui_create(self, ar):
         # print("Create")
         self.site_changed(ar)
@@ -81,8 +74,8 @@ class Ticket(Ticket, Assignable):
 
     show_commits = dd.ShowSlaveTable('github.CommitsByTicket')
     show_changes = dd.ShowSlaveTable('changes.ChangesByMaster')
-    show_wishes = dd.ShowSlaveTable('deploy.DeploymentsByTicket')
-    show_stars = dd.ShowSlaveTable('stars.AllStarsByController')
+    # show_wishes = dd.ShowSlaveTable('deploy.DeploymentsByTicket')
+    # show_stars = dd.ShowSlaveTable('stars.AllStarsByController')
 
 class TicketDetail(TicketDetail):
     """Customized detail_layout for Tickets in Noi
@@ -158,7 +151,7 @@ class SiteDetail(SiteDetail):
     general = dd.Panel("""
         id name 
         company contact_person reporting_type workflow_buttons:20
-        stars.StarsByController:30 TicketsBySite
+        tickets.SubscriptionsBySite:30 TicketsBySite
     """, label=_("General"))
     
     more = dd.Panel("""
@@ -167,7 +160,7 @@ class SiteDetail(SiteDetail):
     """, label=_("More"))
 
     history = dd.Panel("""
-    meetings.MeetingsBySite
+    # meetings.MeetingsBySite
     working.SummariesBySite
     """, label=_("History"))
 
