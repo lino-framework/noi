@@ -25,7 +25,7 @@ class UserDetail(UserDetail):
 
     general = dd.Panel("""
     box1:45 working:15
-    SocialAuthsByUser
+    SocialAuthsByUser tickets.SubscriptionsByUser
     """, label=_("General"))
     
     # faculties.OffersByEndUser 

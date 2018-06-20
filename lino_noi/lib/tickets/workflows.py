@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016-2017 Luc Saffre
+# Copyright 2016-2018 Rumma & Ko Ltd
 #
 # License: BSD (see file COPYING for details)
 """The default :attr:`workflows_module
@@ -25,7 +25,6 @@ from lino.utils.instantiator import create_row
 
 from lino_xl.lib.tickets.choicelists import TicketStates
 from lino_xl.lib.tickets.roles import Triager
-from lino.modlib.notify.actions import NotifyingAction
 
 class TicketAction(dd.ChangeStateAction):
     """Base class for ticket actions.
