@@ -165,12 +165,18 @@ class SiteDetail(SiteDetail):
     """, label=_("History"))
 
 
+# Note in the following lines we don't subclass Tickets because then
+# we would need to also override these attributes for all subclasses
+
 Tickets.insert_layout = 'tickets.TicketInsertLayout'
 Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site has_site state priority
     deployed_to show_assigned show_active show_deployed show_todo show_private
     start_date end_date observed_event topic #feasable_by has_ref"""
 Tickets.column_names = 'id summary:50 #user:10 #topic #faculty priority ' \
                        'workflow_buttons:30 site:10 #project:10'
+Tickets.tablet_columns = "id summary workflow_buttons"
+Tickets.mobile_columns = "summary workflow_buttons"
+
 Tickets.order_by = ["-id"]
 
 MyTickets.params_layout = """
