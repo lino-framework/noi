@@ -97,7 +97,7 @@ class TicketDetail(TicketDetail):
     # summary:  50/56*8 = 7.14 --> 7
     # id:  6/56*8 = 0.85 -> 1
     general1a = """
-    summary:30 id:6
+    summary id:6
     user end_user
     site ticket_type 
     description
