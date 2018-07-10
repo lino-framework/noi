@@ -98,13 +98,13 @@ class TicketDetail(TicketDetail):
     # id:  6/56*8 = 0.85 -> 1
     general1a = """
     summary id:6
-    user end_user
     site ticket_type 
+    workflow_buttons
     description
     """
     general1b = """
+    user end_user
     assigned_to private:10
-    workflow_buttons
     priority:10 planned_time
     working.SessionsByTicket
     """
