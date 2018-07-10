@@ -88,16 +88,25 @@ class TicketDetail(TicketDetail):
     """, label=_("General"))
 
     general1 = """
-    summary id:6
-    user end_user site ticket_type private:10
-    #topic #project 
-    workflow_buttons:30 priority:10 assigned_to planned_time
-    bottom_box
+    general1a:30 general1b:30
     """
 
-    bottom_box = """
-    #faculties.DemandsByDemander:20 #votes.VotesByVotable:20 
-    #deploy.DeploymentsByTicket:20 description:30 working.SessionsByTicket:20
+    # 50+6=56
+    # in XL: label span is 4, so we have 8 units for the fields
+    # 56.0/8 = 7
+    # summary:  50/56*8 = 7.14 --> 7
+    # id:  6/56*8 = 0.85 -> 1
+    general1a = """
+    summary:50 id:6
+    user end_user
+    site ticket_type 
+    description
+    """
+    general1b = """
+    assigned_to private:10
+    workflow_buttons
+    priority:10 planned_time
+    working.SessionsByTicket
     """
 
     more = dd.Panel("""
