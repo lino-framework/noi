@@ -75,7 +75,7 @@ class MarkTicketClosed(TicketAction):
     """
     # label = pgettext("verb", "Close")
     action_name = 'mark_closed'
-    required_states = 'talk started opened ready'
+    required_states = 'new talk started opened ready'
 
 class MarkTicketRefused(TicketAction):
     """Mark this ticket as refused.
