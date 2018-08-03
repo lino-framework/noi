@@ -32,12 +32,15 @@ class TicketAction(dd.ChangeStateAction):
     Make sure that only *triagers* can act on tickets of other users.
 
     """
+    needs_site = False
 
     def get_action_permission(self, ar, obj, state):
         me = ar.get_user()
         if obj.user != me:
             if not me.user_type.has_required_roles([Triager]):
                 return False
+        if self.needs_site and obj.site_id is None:
+            return False
         return super(TicketAction,
                      self).get_action_permission(ar, obj, state)
 
@@ -62,6 +65,7 @@ class MarkTicketStarted(TicketAction):
     action_name = 'mark_started'
     label = pgettext("verb", "Start")
     required_states = 'new talk opened'
+    needs_site = True
 
     
 class MarkTicketReady(TicketAction):
@@ -76,6 +80,7 @@ class MarkTicketClosed(TicketAction):
     # label = pgettext("verb", "Close")
     action_name = 'mark_closed'
     required_states = 'new talk started opened ready'
+    needs_site = True
 
 class MarkTicketRefused(TicketAction):
     """Mark this ticket as refused.
@@ -90,6 +95,7 @@ class MarkTicketTalk(TicketAction):
     label = pgettext("verb", "Talk")
     required_states = "new opened started sleeping ready"
     action_name = 'mark_talk'
+    needs_site = True
 
     # def get_notify_subject(self, ar, obj):
     #     subject = _("{user} wants to talk about {ticket}.").format(
