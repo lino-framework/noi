@@ -61,8 +61,8 @@ class PersonDetail(PersonDetail):
     """, label=_("Contact"))
 
     # skills = dd.Panel("""
-    # faculties.OffersByEndUser faculties.SuggestedTicketsByEndUser
-    # """, label=dd.plugins.faculties.verbose_name)
+    # skills.OffersByEndUser skills.SuggestedTicketsByEndUser
+    # """, label=dd.plugins.skills.verbose_name)
 
     tickets = dd.Panel("""
     tickets.TicketsByEndUser tickets.ProjectsByPerson
@@ -92,8 +92,8 @@ class CompanyDetail(CompanyDetail):
     """, label=_("Contact"))
 
     # skills = dd.Panel("""
-    # faculties.OffersByEndUser topics.InterestsByPartner
-    # """, label=dd.plugins.faculties.verbose_name)
+    # skills.OffersByEndUser topics.InterestsByPartner
+    # """, label=dd.plugins.skills.verbose_name)
 
     tickets = dd.Panel("""
     tickets.TicketsByEndUser tickets.ProjectsByCompany
