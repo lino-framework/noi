@@ -28,7 +28,7 @@ class UserDetail(UserDetail):
     SocialAuthsByUser tickets.SubscriptionsByUser
     """, label=_("General"))
     
-    # faculties.OffersByEndUser 
+    # skills.OffersByEndUser 
 
     if dd.is_installed('working'):
         working = dd.Panel("""

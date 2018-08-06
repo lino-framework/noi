@@ -63,7 +63,7 @@ class Site(Site):
         # yield 'lino_xl.lib.votes'
         # yield 'lino_xl.lib.stars'
         yield 'lino_noi.lib.tickets'
-        # yield 'lino_xl.lib.faculties'
+        # yield 'lino_xl.lib.skills'
         # yield 'lino_xl.lib.deploy'
         yield 'lino_xl.lib.working'
         yield 'lino_xl.lib.lists'
@@ -98,7 +98,7 @@ class Site(Site):
         super(Site, self).setup_plugins()
         # self.plugins.comments.configure(
         #     commentable_model='tickets.Ticket')
-        # self.plugins.faculties.configure(
+        # self.plugins.skills.configure(
         #     demander_model='tickets.Ticket')
         # self.plugins.tickets.configure(
         #     site_model='cal.Room',

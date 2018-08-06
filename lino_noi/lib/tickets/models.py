@@ -128,7 +128,7 @@ class TicketDetail(TicketDetail):
 
     # more2 = dd.Panel("""
     # # deploy.DeploymentsByTicket
-    # # faculties.DemandsByDemander
+    # # skills.DemandsByDemander
     # stars.AllStarsByController
     # uploads.UploadsByController 
     # """, label=_("Even more"))
