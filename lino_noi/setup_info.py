@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2018 Luc Saffre
+# Copyright 2014-2018 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 # $ python setup.py test -s tests.PackagesTests.test_packages
@@ -8,7 +8,7 @@ SETUP_INFO = dict(
     name='lino-noi',
     version='18.04.0',
     install_requires=['lino-xl'
-                      # 'channels<2',
+                      'channels<2',
                       # 'djangorestframework'
     ],
     # tests_require=['pytest', 'mock'],
