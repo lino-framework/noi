@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2017 Luc Saffre
+# Copyright 2014-2018 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 """
 Base Django settings for Lino Noi applications.
@@ -87,12 +87,11 @@ class Site(Site):
 
         yield 'lino_noi.lib.noi'
         # yield 'lino_xl.lib.inbox'
-        yield 'lino_xl.lib.mailbox'
+        # yield 'lino_xl.lib.mailbox'
         # yield 'lino_xl.lib.meetings'
         yield 'lino_xl.lib.github'
         # yield 'lino.modlib.social_auth'
         yield 'lino_xl.lib.userstats'
-
 
     def setup_plugins(self):
         super(Site, self).setup_plugins()
