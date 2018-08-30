@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-noi 0.0.2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-29 07:24+0300\n"
+"POT-Creation-Date: 2018-08-30 08:45+0300\n"
 "PO-Revision-Date: 2017-03-21 15:58+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: et\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.3\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: lino_noi/lib/cal/models.py:17
 msgid "Author"
@@ -31,8 +31,8 @@ msgid "Contact person"
 msgstr ""
 
 #: lino_noi/lib/cal/models.py:43 lino_noi/lib/contacts/models.py:50
-#: lino_noi/lib/contacts/models.py:81 lino_noi/lib/tickets/models.py:95
-#: lino_noi/lib/users/desktop.py:29
+#: lino_noi/lib/contacts/models.py:81 lino_noi/lib/tickets/models.py:88
+#: lino_noi/lib/tickets/models.py:164 lino_noi/lib/users/desktop.py:29
 msgid "General"
 msgstr ""
 
@@ -41,7 +41,7 @@ msgid "Address"
 msgstr ""
 
 #: lino_noi/lib/contacts/models.py:26 lino_noi/lib/contacts/models.py:61
-#: lino_noi/lib/contacts/models.py:92 lino_noi/lib/users/desktop.py:71
+#: lino_noi/lib/contacts/models.py:92 lino_noi/lib/users/desktop.py:67
 msgid "Contact"
 msgstr ""
 
@@ -97,39 +97,39 @@ msgstr ""
 msgid "Layout of User Detail in Lino Noi."
 msgstr ""
 
-#: lino_noi/lib/noi/settings.py:128
+#: lino_noi/lib/noi/settings.py:127
 msgid "Submit a ticket"
 msgstr "Loo uus lipik"
 
-#: lino_noi/lib/noi/settings.py:132
+#: lino_noi/lib/noi/settings.py:131
 msgid "My settings"
 msgstr ""
 
-#: lino_noi/lib/noi/user_types.py:74
+#: lino_noi/lib/noi/user_types.py:75
 msgid "Anonymous"
 msgstr ""
 
-#: lino_noi/lib/noi/user_types.py:76
+#: lino_noi/lib/noi/user_types.py:77
 msgid "User"
 msgstr ""
 
-#: lino_noi/lib/noi/user_types.py:77
+#: lino_noi/lib/noi/user_types.py:78
 msgid "Consultant"
 msgstr ""
 
-#: lino_noi/lib/noi/user_types.py:78
+#: lino_noi/lib/noi/user_types.py:79
 msgid "Hoster"
 msgstr ""
 
-#: lino_noi/lib/noi/user_types.py:79
+#: lino_noi/lib/noi/user_types.py:80
 msgid "Developer"
 msgstr ""
 
-#: lino_noi/lib/noi/user_types.py:80
+#: lino_noi/lib/noi/user_types.py:81
 msgid "Senior developer"
 msgstr ""
 
-#: lino_noi/lib/noi/user_types.py:81
+#: lino_noi/lib/noi/user_types.py:82
 msgid "Administrator"
 msgstr ""
 
@@ -137,29 +137,29 @@ msgstr ""
 msgid "{user} has assigned you to ticket: {what}"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:66
+#: lino_noi/lib/tickets/models.py:59
 msgid "{user} submitted ticket {what}"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:113
+#: lino_noi/lib/tickets/models.py:115 lino_noi/lib/tickets/models.py:169
 msgid "More"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:161
+#: lino_noi/lib/tickets/models.py:174
 msgid "History"
 msgstr ""
 
-#: lino_noi/lib/tickets/workflows.py:50
+#: lino_noi/lib/tickets/workflows.py:52
 msgctxt "verb"
 msgid "Open"
 msgstr ""
 
-#: lino_noi/lib/tickets/workflows.py:64
+#: lino_noi/lib/tickets/workflows.py:66
 msgctxt "verb"
 msgid "Start"
 msgstr ""
 
-#: lino_noi/lib/tickets/workflows.py:91
+#: lino_noi/lib/tickets/workflows.py:95
 msgctxt "verb"
 msgid "Talk"
 msgstr ""
