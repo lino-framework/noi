@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2017 Luc Saffre
+# Copyright 2015-2018 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """Desktop UI for this plugin.
@@ -11,7 +11,6 @@ from lino_xl.lib.online.users.desktop import *
 from lino.api import _
 
 from lino.core import actions
-# from lino.modlib.office.roles import OfficeUser
 from lino_xl.lib.working.roles import Worker
 
 from lino.modlib.users.actions import SendWelcomeMail
