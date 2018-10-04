@@ -5,6 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 
 help_texts = {
     'lino_noi.lib.noi.migrate.Migrator' : _("""The standard migrator for noi."""),
+    'lino_noi.lib.noi.migrate.Migrator.migrate_from_1_0_1' : _("""Move Deployment and Milestone from 'tickets' to new plugin
+'deploy'."""),
     'lino_noi.lib.noi.user_types.EndUser' : _("""An end user is somebody who uses our software and may report
 tickets, but won't work on them."""),
     'lino_noi.lib.noi.user_types.Consultant' : _("""A consultant is somebody who may both report tickets and work
