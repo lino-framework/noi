@@ -87,12 +87,3 @@ class MyEnrolments(Enrolments):
 
 
 
-# Activities.detail_layout = CourseDetail()
-# i = Activities.column_names.find("name") + len("name")
-# Activities.column_names = Activities.column_names[:i] + " ref" + Activities.column_names[i:]
-#
-# i = MyActivities.column_names.find("name") + len("name")
-# MyActivities.column_names = MyActivities.column_names[:i] + " ref" + MyActivities.column_names[i:]
-
-# MyActivities.detail_layout = CourseDetail()
-
