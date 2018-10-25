@@ -78,10 +78,11 @@ class MyEnrolments(Enrolments):
     def get_request_queryset(self, ar):
         qs = super(MyEnrolments, self).get_request_queryset(ar)
         pv = ar.param_values
-        if pv.active == dd.YesNo.yes:
-            qs = qs.filter(course__state__in=[CourseStates.active, CourseStates.draft])
+        exposed_states = CourseStates.filter(is_exposed=True)
+        if pv.show_exposed == dd.YesNo.yes:
+            qs = qs.filter(course__state__in=exposed_states)
         elif pv.active == dd.YesNo.no:
-            qs = qs.filter(course__state__in=[CourseStates.inactive, CourseStates.closed])
+            qs = qs.exclude(course__state__in=exposed_states)
         return qs
 
 
