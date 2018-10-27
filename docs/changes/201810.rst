@@ -1,0 +1,76 @@
+.. _noi.changes.201810: 
+
+================================
+October 2018 changes in Lino Noi
+================================
+
+Overview
+========
+
+.. currentmodule:: lino_xl.lib.tickets
+
+As a result of my meetings with customers in october 2018, I realized
+that we can easily implement "milestones" on Jane using our "sites".
+For bigger customers we will have one :class:`Site` per milestone.  A
+milestone being a concrete project planned with the customer.  We want
+to view and print a backlog per customer.
+
+We had milestones and deployments before in :ref:`noi`
+(:mod:`lino_xl.lib.deploy`), but that implementation had a fundamental
+design flaw: it allowed one ticket to appear as a wish on several
+milestones.  This was overkill.
+
+The contact persons of our customers should be able to sign on Jane as
+"End users" and manage their tickets and write comments.  This is
+nothing new (Matieu and Aurélie have been doing this), but the
+permissions for this user type needs some review.  For example they
+want to see only the sites they are subscribed to.es
+
+DONE
+====
+
+- Make Site inherit from :class:`lino.mixins.referrable.Referrable` to
+  add a :attr:`ref` field.
+
+- Sites must get a life cycle so that they can become inactive.  Add a
+  field :attr:`Site.state` and a choicelist :class:`SiteStates`.
+  Possible states: active, stable, sleeping, closed.  Note some recent
+  new practices about :class:`lino.core.workflows.Workflow`
+  choicelists.
+
+- New filtering parameters for the :class:`Sites` views.
+
+- :ticket:`2611` (Can not submit new Site due to bad layout) is
+  because the insert_layout has only one field (:ticket:`2614`).  This
+  will be fixed as we weil add at least the new ref field to the
+  insert_layout. :ticket:`2614` can wait once more.
+
+- The detail of a site needs some changes:
+  - show the parsed description
+  
+- :class:`TicketsBySite` : add :attr:`ticket_type` to column_names.
+
+- The insert_layout for submitting a new ticket no longer has the site
+  field.  Because the site is potentially being filled automatically
+  depending on whether the end_user or the user has a primary
+  subscription to a site.  For simple end users this means that their
+  site gets set automatically.  For me it means that when I record a
+  customer ticket I just need to specify the end user, and Lino will
+  assign the site automatically.
+  
+
+TODO
+====
+
+- Have per ticket a list of comments and other tickets that refer to
+  this ticket in their text (i.e. the body of a command or the
+  :attr:`description` of a ticket.  Wen saving a comment, Lino parses
+  the :attr:`body` and searches for memo commands.  But this time the
+  purpose is to fill a list of referred objects, not to render
+  them.
+
+  :meth:`lino.utils.memo.Parser.register_django_model`
+
+  :attr:`lino.core.kernel.Kernel.memo_parser`
+
+- Remove topics and projects

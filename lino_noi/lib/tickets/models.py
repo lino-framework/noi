@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016-2018 Luc Saffre
+# Copyright 2016-2018 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """Database models specific for the Team variant of Lino Noi.
@@ -140,10 +140,11 @@ class TicketInsertLayout(dd.InsertLayout):
     """
 
     right = """
-    ticket_type #priority
+    ticket_type 
+    priority
     end_user
     #assigned_to
-    site
+    #site
     """
 
     left = """
@@ -158,15 +159,23 @@ class SiteDetail(SiteDetail):
     main = """general more history"""
 
     general = dd.Panel("""
-        id name 
-        company contact_person reporting_type workflow_buttons:20
-        tickets.SubscriptionsBySite:30 TicketsBySite
+    parsed_description general2
+    TicketsBySite
     """, label=_("General"))
+
+    general2 = """
+    ref id reporting_type 
+    name 
+    company contact_person 
+    workflow_buttons:20
+    """
     
     more = dd.Panel("""
+    description 
     remark
-    description
-    """, label=_("More"))
+    SubscriptionsBySite:30
+    """, label=_("More"), required_roles = dd.login_required(TicketsStaff)
+)
 
     history = dd.Panel("""
     # meetings.MeetingsBySite
@@ -179,8 +188,8 @@ class SiteDetail(SiteDetail):
 
 Tickets.insert_layout = 'tickets.TicketInsertLayout'
 Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site has_site state priority
-    deployed_to show_assigned show_active show_deployed show_todo show_private
-    start_date end_date observed_event topic #feasable_by has_ref"""
+    #deployed_to show_assigned show_active #show_deployed show_todo show_private
+    start_date end_date observed_event #topic #feasable_by has_ref"""
 Tickets.column_names = 'id summary:50 #user:10 #topic #faculty priority ' \
                        'workflow_buttons:30 site:10 #project:10'
 Tickets.tablet_columns = "id summary workflow_buttons"
@@ -189,8 +198,8 @@ Tickets.mobile_columns = "summary workflow_buttons"
 Tickets.order_by = ["-id"]
 
 MyTickets.params_layout = """
-    user end_user site project state priority
-    start_date end_date observed_event topic #feasable_by show_active"""
+    user end_user site #project state priority
+    start_date end_date observed_event #topic #feasable_by show_active"""
 # Sites.detail_layout = """
 # id name partner #responsible_user
 # remark

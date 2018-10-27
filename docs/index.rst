@@ -21,5 +21,5 @@ Content
    install/index
    guide/index
    todo
-   changes
+   changes/index
    

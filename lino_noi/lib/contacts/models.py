@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2017 Luc Saffre
+# Copyright 2015-2018 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 """Database models for :mod:`lino_noi.modlib.contacts`.
 
@@ -57,7 +57,7 @@ class PersonDetail(PersonDetail):
     
     contact = dd.Panel("""
     address_box:60 contact_box:30
-    remarks topics.InterestsByPartner
+    remarks tickets.SitesByPerson #topics.InterestsByPartner
     """, label=_("Contact"))
 
     # skills = dd.Panel("""
@@ -65,7 +65,7 @@ class PersonDetail(PersonDetail):
     # """, label=dd.plugins.skills.verbose_name)
 
     tickets = dd.Panel("""
-    tickets.TicketsByEndUser tickets.ProjectsByPerson
+    tickets.TicketsByEndUser tickets.SitesByPerson
     """, label=dd.plugins.tickets.verbose_name)
 
 
@@ -96,7 +96,7 @@ class CompanyDetail(CompanyDetail):
     # """, label=dd.plugins.skills.verbose_name)
 
     tickets = dd.Panel("""
-    tickets.TicketsByEndUser tickets.ProjectsByCompany
+    tickets.SitesByCompany
     """, label=dd.plugins.tickets.verbose_name)
 
 
@@ -105,6 +105,6 @@ class CompanyDetail(CompanyDetail):
 #     contacts = sender.models.contacts
 #     contacts.Companies.set_detail_layout(contacts.CompanyDetail())
 
-Companies.set_detail_layout(CompanyDetail())
-Persons.set_detail_layout(PersonDetail())
-Person.column_names = 'last_name first_name gsm email city *'
+# Companies.set_detail_layout(CompanyDetail())
+# Persons.set_detail_layout(PersonDetail())
+Persons.column_names = 'last_name first_name gsm email city *'

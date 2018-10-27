@@ -28,42 +28,44 @@ from lino.modlib.users.choicelists import UserTypes
 from django.utils.translation import ugettext_lazy as _
 
 
-class EndUser(SiteUser, OfficeUser, VotesUser, Reporter, CommentsUser):
-    """An **end user** is somebody who uses our software and may report
+class EndUser(SiteUser, OfficeUser, VotesUser, Searcher, Reporter, CommentsUser):
+    """
+    An **end user** is somebody who uses our software and may report
     tickets, but won't work on them.
-
     """
     pass
 
 
 class Consultant(EndUser, Searcher, Helper, Worker,
                  ExcerptsUser, ContactsUser, CoursesUser):
-    """A **consultant** is somebody who may both report tickets and work
+    """
+    A **consultant** is somebody who may both report tickets and work
     on them.
-
     """
     pass
 
 
 class Developer(Consultant):
-    """A **developer** is somebody who may both report tickets and work
+    """
+    A **developer** is somebody who may both report tickets and work
     on them.
-
     """
     pass
 
 
 class Senior(Developer, Triager, ExcerptsStaff, CommentsStaff):
-    """A **senior developer** is a *developer* who is additionally
+    """
+    A **senior developer** is a *developer* who is additionally
     responsible for triaging tickets
-
     """
     pass
 
 
 class SiteAdmin(Senior, SiteAdmin, OfficeStaff, VotesStaff,
                 TicketsStaff, ContactsStaff, CommentsStaff):
-    """Can do everything."""
+    """
+    Can do everything.
+    """
 
 
 # class Anonymous(CommentsReader, CalendarReader):
