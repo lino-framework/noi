@@ -8,6 +8,7 @@ Changes in Lino Noi
 .. toctree::
    :maxdepth: 1
 
-   201810
+   coming
+   18.10
    old
 
