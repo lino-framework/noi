@@ -193,7 +193,11 @@ Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting
 Tickets.column_names = 'id summary:50 #user:10 #topic #faculty priority ' \
                        'workflow_buttons:30 site:10 #project:10'
 Tickets.tablet_columns = "id summary workflow_buttons"
-Tickets.mobile_columns = "summary workflow_buttons"
+#Tickets.tablet_columns_popin = "site project"
+
+Tickets.mobile_columns = "workflow_buttons"
+#Tickets.mobile_columns_pop = "summary workflow_buttons"
+Tickets.popin_columns = "summary"
 
 Tickets.order_by = ["-id"]
 
@@ -206,5 +210,8 @@ MyTickets.params_layout = """
 # #InterestsBySite TicketsBySite deploy.MilestonesBySite
 # """
 
+
+# Not needed, have it be inffered by mobile_columns or tablet_columns if both None, use normal grid.
+#AllTickets.display_mode = "responsive_grid"
 
 
