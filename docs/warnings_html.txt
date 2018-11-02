@@ -1,1 +1,0 @@
-[31m/media/dell1tb/work/noi/docs/api/lino_noi.lib.tickets.choicelists.rst: WARNING: document isn't included in any toctree[39;49;00m

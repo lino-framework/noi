@@ -17,7 +17,7 @@ exec(compile(open(fn, "rb").read(), fn, 'exec'))
 
 __version__ = SETUP_INFO['version']
 
-intersphinx_urls = dict(docs="http://noi.lino-framework.org")
 srcref_url = 'https://github.com/lino-framework/noi/blob/master/%s'
-doc_trees = ['docs']
+# intersphinx_urls = dict(docs="http://noi.lino-framework.org")
+# doc_trees = ['docs']
 
