@@ -1,17 +1,25 @@
-.. _noi.dev: 
+.. _noi.coming: 
 
-==============
-Lino Noi dev
-==============
+===============
+Lino Noi coming
+===============
 
 TODO:
+
+- Remove the online registration feature to fix :ticket:`2624`.
 
 - Don't show the ✋ (assign to me) button on a ticket when it is
   already assigned.
 
+- TicketsBySite : the ticket states in the summary (ready, open,
+  started, etc) should appear in the constant workflow order.
+  Currently the state with then most urgent ticket appears first.
+
 - Don't show closed and sleeping sites in "Sites Overview".
 
-- A virtual field `Commentable.post_comment`.  The field would be
+- A text field "Post a comment" in the detail of a ticket.
+  This would be a virtual field `Commentable.post_comment`, 
+  The field would be
   editable and the setter would add a comment with self as owner.
 
 - Have per ticket a list of comments and other tickets that refer to
