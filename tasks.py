@@ -7,14 +7,6 @@ ns = setup_from_tasks(
     revision_control_system='git',
     locale_dir='lino_noi/lib/noi/locale',
 )
-    # cleanable_files=['docs/api/lino_noi.*'],
-    # demo_projects=[
-    #     'lino_noi.projects.team.settings.demo'])
-    # demo_projects=[
-    #     'lino_noi.projects.team.settings.demo',
-    #     'lino_noi.projects.care.settings.demo',
-    #     'lino_noi.projects.care_de.settings',
-    #     'lino_noi.projects.vilma.settings.demo'])
 
 # The following demo databases use the database file of team, so there is no
 # need initialize them:
