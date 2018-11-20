@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2017 Luc Saffre
+# Copyright 2014-2018 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 """
 The main plugin for Lino Noi.
@@ -7,11 +7,9 @@ The main plugin for Lino Noi.
 .. autosummary::
    :toctree:
 
-    models
     fixtures.linotickets
     migrate
     user_types
-    workflows
 
 """
 

@@ -11,6 +11,8 @@ This is used as the :attr:`user_types_module
 """
 
 
+from django.utils.translation import ugettext_lazy as _
+
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino.modlib.users.roles import Helper
 # from lino.modlib.comments.roles import CommentsReader
@@ -25,7 +27,6 @@ from lino_xl.lib.cal.roles import CalendarReader
 from lino_xl.lib.votes.roles import VotesStaff, VotesUser
 
 from lino.modlib.users.choicelists import UserTypes
-from django.utils.translation import ugettext_lazy as _
 
 
 class EndUser(SiteUser, OfficeUser, VotesUser, Searcher, Reporter, CommentsUser):

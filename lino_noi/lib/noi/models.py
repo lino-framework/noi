@@ -1,13 +1,12 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2016 Luc Saffre
+# Copyright 2014-2018 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
-"""The :xfile:`models.py` module for :mod:`lino_noi`.
 
-Defines a handler for :data:`lino.modlib.smtpd.signals.mail_received`.
+# Defines a handler for
+# :data:`lino.modlib.smtpd.signals.mail_received`.
 
-"""
 
-from email.parser import Parser
+#from email.parser import Parser
 
 from lino.api import dd
 # from lino.modlib.smtpd.signals import mail_received
