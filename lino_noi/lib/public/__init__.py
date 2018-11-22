@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2016 Luc Saffre
+# Copyright 2014-2016 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 """An experimental plugin which provides a customized public vire for
 Lino Noi. Not used in reality.

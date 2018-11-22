@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2015 Luc Saffre
+# Copyright 2014-2015 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 """
 Views for the public web interface of Lino Noi.
