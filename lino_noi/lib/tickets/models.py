@@ -8,13 +8,22 @@ Defines a customized :class:`TicketDetail`.
 
 """
 from __future__ import print_function
+
 from lino_xl.lib.tickets.models import *
 from lino.modlib.users.mixins import Assignable
-
 from lino.api import _
 
+from lino_xl.lib.working.choicelists import ReportingTypes, ZERO_DURATION
+from lino.modlib.summaries.mixins import Summarizable
 
-class Ticket(Ticket, Assignable):
+
+def get_summary_fields():
+    for t in ReportingTypes.get_list_items():
+        yield t.name + '_hours'
+
+
+class Ticket(Ticket, Assignable, Summarizable):
+
     class Meta(Ticket.Meta):
         # app_label = 'tickets'
         abstract = dd.is_abstract_model(__name__, 'Ticket')
@@ -77,6 +86,31 @@ class Ticket(Ticket, Assignable):
     # show_wishes = dd.ShowSlaveTable('deploy.DeploymentsByTicket')
     # show_stars = dd.ShowSlaveTable('stars.AllStarsByController')
 
+    @classmethod
+    def get_layout_aliases(cls):
+        yield ("SUMMARY_FIELDS", ' '.join(get_summary_fields()))
+
+    @classmethod
+    def get_summary_master_model(cls):
+        return cls
+
+    def reset_summary_data(self):
+        for k in get_summary_fields():
+            setattr(self, k, ZERO_DURATION)
+
+    def get_summary_collectors(self):
+        qs = rt.models.working.Session.objects.filter(ticket=self)
+        yield (self.add_from_session, qs)
+
+    def add_from_session(self, obj):
+        d = obj.get_duration()
+        if d:
+            rt = obj.get_reporting_type()
+            k = rt.name + '_hours'
+            value = getattr(self, k) + d
+            setattr(self, k, value)
+
+
 class TicketDetail(TicketDetail):
     """Customized detail_layout for Tickets in Noi
 
@@ -106,6 +140,7 @@ class TicketDetail(TicketDetail):
     user end_user
     assigned_to private:10
     priority:10 planned_time
+    SUMMARY_FIELDS
     working.SessionsByTicket
     """
 
@@ -156,25 +191,27 @@ class TicketInsertLayout(dd.InsertLayout):
 
 class SiteDetail(SiteDetail):
 
-    main = """general more history"""
+    main = """general config history"""
 
     general = dd.Panel("""
-    parsed_description general2
-    TicketsBySite
+    gen_left:20 TicketsBySite:60
     """, label=_("General"))
 
+    gen_left = """
+    overview
+    SubscriptionsBySite 
+    """
+
     general2 = """
-    ref id reporting_type 
-    name 
-    company contact_person 
-    workflow_buttons:20
+    ref name id 
+    company contact_person reporting_type 
+    remark:20 workflow_buttons:20
     """
     
-    more = dd.Panel("""
+    config = dd.Panel("""
+    general2
     description 
-    remark
-    SubscriptionsBySite:30
-    """, label=_("More"), required_roles = dd.login_required(TicketsStaff)
+    """, label=_("Configure"), required_roles = dd.login_required(TicketsStaff)
 )
 
     history = dd.Panel("""
@@ -204,6 +241,9 @@ Tickets.order_by = ["-id"]
 MyTickets.params_layout = """
     user end_user site #project state priority
     start_date end_date observed_event #topic #feasable_by show_active"""
+MyTickets.column_names = "site priority overview planned_time SUMMARY_FIELDS workflow_buttons *"
+
+TicketsBySite.column_names = "priority overview planned_time SUMMARY_FIELDS workflow_buttons *"
 # Sites.detail_layout = """
 # id name partner #responsible_user
 # remark
