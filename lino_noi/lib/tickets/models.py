@@ -241,9 +241,9 @@ Tickets.order_by = ["-id"]
 MyTickets.params_layout = """
     user end_user site #project state priority
     start_date end_date observed_event #topic #feasable_by show_active"""
-MyTickets.column_names = "site priority clickable_description planned_time SUMMARY_FIELDS workflow_buttons *"
+MyTickets.column_names = "priority detail_link planned_time SUMMARY_FIELDS workflow_buttons *"
 
-TicketsBySite.column_names = "priority clickable_description planned_time SUMMARY_FIELDS workflow_buttons *"
+TicketsBySite.column_names = "priority detail_link planned_time SUMMARY_FIELDS workflow_buttons *"
 # Sites.detail_layout = """
 # id name partner #responsible_user
 # remark
