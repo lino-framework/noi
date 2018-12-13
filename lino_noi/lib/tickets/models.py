@@ -14,7 +14,7 @@ from lino.modlib.users.mixins import Assignable
 from lino.api import _
 
 from lino_xl.lib.working.choicelists import ReportingTypes, ZERO_DURATION
-from lino.modlib.summaries.mixins import Summarizable
+from lino.modlib.summaries.mixins import Summarized
 
 
 def get_summary_fields():
@@ -22,7 +22,7 @@ def get_summary_fields():
         yield t.name + '_hours'
 
 
-class Ticket(Ticket, Assignable, Summarizable):
+class Ticket(Ticket, Assignable, Summarized):
 
     class Meta(Ticket.Meta):
         # app_label = 'tickets'
@@ -90,9 +90,9 @@ class Ticket(Ticket, Assignable, Summarizable):
     def get_layout_aliases(cls):
         yield ("SUMMARY_FIELDS", ' '.join(get_summary_fields()))
 
-    @classmethod
-    def get_summary_master_model(cls):
-        return cls
+    # @classmethod
+    # def get_summary_master_model(cls):
+    #     return cls
 
     def reset_summary_data(self):
         for k in get_summary_fields():
