@@ -1,0 +1,19 @@
+.. _noi.v18.11:
+
+====================
+18.11.0 (2018-11-02)
+====================
+
+Bugfix releases until 2018-11-03.
+
+Some optimizations and one bugfix:
+
+- Don't show the ✋ (assign to me) button on a ticket when it is
+  already assigned.
+
+- Hotfix for :ticket:`2624` (simple users being able to edit settings
+  of other users).
+
+- Don't show closed and sleeping sites in "Sites Overview".
+  Renamed "Sites Overview" to "My sites".
+

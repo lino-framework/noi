@@ -1,0 +1,126 @@
+.. _noi.coming: 
+.. _noi.v18.11.1:
+
+=============================
+18.11.1 (released 2018-12-12)
+=============================
+
+.. contents::
+  :local:
+
+DONE
+====
+
+- MyTicketsToWork and TicketsBySite are now a list, not a summary.
+  Both lists are sorted by priority. Not yet
+  sure how to sort tickets of same priority.
+
+- New summary fields showing the worked time per ticket (and per reporting type)
+
+- Reviewed the detail layout of a site.
+
+TODO
+====
+
+- My notification messages : reverse sort order. Add "Mark all read" to toolbar
+  in dashboard.
+
+- AssignToMe should not be possible for new tickets.  Maybe take the
+  whole assignment stuff into a separate virtual field "Assigned to"
+  which says e.g. "Luc --> [Hamza] [Tonis]".
+
+- New model comments.Feedback (comment, user, answer) : comment is a
+  pointer to the question, answer a pointer the comment, user is the user who is
+  asked to respond.  A state field would currently be "Waiting for answer" and
+  "Answered", which can be expressed by answer being None, so there is no need for a state field right now.
+  Maybe later we can add a priority ("urgent", "normal" and "low")
+  A table that shows a list of the comments for which my feedback is requested.
+  A welcome message "You have X feedback requests" if the user doesn't have this table in the dashboard.
+
+  As a user when i have written a comment, i must somehow specify whether i
+  want feedback.  I should be able to specify a precise user, or say "everybody
+  on this site", or "no feedback required". Or automatically if I say @username
+  in the comment text, Lino would automatically generate a feedback request.
+
+
+TALK
+====
+
+- Luc doesn't want to have to manually subscribe to every new site in
+  order to see it in the *My sites* list.  Tonis and Hamza on the
+  other hand don't want to get bothered with sites for which they
+  didn't explicitly subscribe.  Maybe Tonis and Hamza should simply
+  disable the *My sites* widget in their dashboard?
+  
+  Developers who don't care about project management actually
+  shouldn't need to worry about sites.  They shouldn't be allowed to
+  change neither site nor priority of a ticket.  They just look at
+  their todo list and pick a ticket to work on.
+  
+  OTOH at least Tonis uses internal sites for classifying his tickets
+  and priorities.  Should we differentiate between "customer sites"
+  and "internal sites"?
+  
+- Add a filter param on Tickets to show only tickets in sites that are
+  in an exposed state.
+
+  But there are already so many filter parameters on tickets. Can't
+  you just go to the site detail?
+
+- A text field "Post a comment" in the detail of a ticket.  This would
+  be a virtual field `Commentable.post_comment`, The field would be
+  editable and the setter would add a comment with self as owner.
+
+- Have per ticket a list of comments and other tickets that refer to
+  this ticket in their text (i.e. the body of a command or the
+  :attr:`description` of a ticket.  Wen saving a comment, Lino parses
+  the :attr:`body` and searches for memo commands.  But this time the
+  purpose is to fill a list of referred objects, not to render them.
+
+  :meth:`lino.utils.memo.Parser.register_django_model`
+
+  :attr:`lino.core.kernel.Kernel.memo_parser`
+
+- **Notifications** There seems to be a design flaw in our
+  notifications and commenting system. Discussing directly on Jane is
+  not yet efficient. Maybe we could replace the "My notifications" by
+  a table "My discussions" where you get a list of recent comments by
+  others to which you did not yet react. Reacting to a comment could
+  mean to simply click a "Like" or "Seen" button. And the
+  notifications themselves would no longer have a "seen" marker. They
+  just get sent as desktop notification and/or via email and then
+  disappear.
+
+  Deprecate the feature that every notification can be assigned to a
+  database object (`owner`), and subsequent notifications are
+  automatically filtered away as long as there are unseen messages for
+  the same `owner` and recipient.
+
+- Add the concept of **hour contingents** per site.  Each session
+  report would debit the contingent.  The contingent gets credited
+  when the customer buys working hours.  Make new service reports
+  registrable and dated.  New field :attr:`Session.report` which is
+  set to the report when the report is registered.  Disable editing
+  Sessions having this field non-empty because they have been
+  reported.  This could be registered in a working.ServiceReport if we
+  accept to have only one ServiceReport per site.  But currently a
+  ServiceReport covers all the sites and this might be a useful
+  feature.
+
+  So maybe keep the current working.ServiceReport as is and make
+  something similar.  Maybe in a new plugin `contingents` which
+  depends on `working` and `tickets`.  `contingents.ServiceReport`
+  would be similar to the current `working.ServiceReport`.
+  `contingents.ReportsBySite` would be a table of service reports on a
+  site, with columns (date, debit, credit, remark).  A new excerpt
+  type for Site which prints that table.
+
+- Don't allow new sessions on a ticket without a site or whose site is
+  closed.  See :blogref:`20181111`.
+
+- Remove ReportingTypes choicelist and its fields `reporting_type` (in Session,
+  Ticket and Site) and replace it by :attr:`Session.discount`, a percentage
+  expressing how much of this session is given away for free (not to be
+  invoiced).
+  
+
