@@ -108,7 +108,16 @@ class Ticket(Ticket, Assignable, Summarized):
             rt = obj.get_reporting_type()
             k = rt.name + '_hours'
             value = getattr(self, k) + d
-            setattr(self, k, value)
+            setattr(self, k, value)\
+
+    @dd.chooser()
+    def site_choices(cls, end_user, user, _ar):
+        user = user if user is not None else _ar.get_user()
+        sub_user = [user.pk]
+        if end_user: sub_user.append(end_user.pk)
+        pks = rt.models.tickets.Subscription.objects.filter(user__pk__in=sub_user).values_list("site__pk", flat=True)
+        print(pks)
+        return Site.objects.filter(id__in=pks)
 
 
 class TicketDetail(TicketDetail):
@@ -179,7 +188,7 @@ class TicketInsertLayout(dd.InsertLayout):
     priority
     end_user
     #assigned_to
-    #site
+    site
     """
 
     left = """
