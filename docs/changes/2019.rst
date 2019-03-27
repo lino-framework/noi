@@ -1,0 +1,37 @@
+.. _noi.changes.2019:
+
+====
+2019
+====
+
+.. Note: Changes are grouped by date. Every new day gives a new
+   heading. If a release deserves separate release notes, we create a separate
+   document and this file will have a link to it.
+
+.. contents::
+  :local:
+
+2019-03-21
+==========
+
+Add chooser to site, which only allows sites that the author or end_user are
+subscribed to. Added the site field to insert window
+
+
+2019-03-06
+==========
+
+Moved the Noi docs from manuals to the noi repository. Note that these docs are
+just the "user docs",  not the specs and API. The specs and API of noi remain
+in the book because noi is pilot application for some plugins of the xl (e.g.
+:mod:`lino_xl.lib.tickets` and :mod:`lino_xl.lib.working`).
+
+2019-01-03
+==========
+
+The :class:`lino_xl.lib.working.WorkedHours` shows a new Lino feature
+:ticket:`2726` (Lino views as a replacement for extensible calendar). When we
+click on a day to show the sessions of that day, we can now navigate to the
+previous and next days.
+
+

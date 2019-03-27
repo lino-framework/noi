@@ -1,9 +1,18 @@
 .. _noi.changes: 
 
-===================
-Changes in Lino Noi
-===================
+=======
+Changes
+=======
 
+Changes in :ref:`noi`.
+
+.. toctree::
+   :maxdepth: 1
+
+   2019
+
+Release notes
+=============
 
 .. toctree::
    :maxdepth: 1
