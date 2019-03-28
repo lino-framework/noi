@@ -23,7 +23,7 @@ def get_summary_fields():
 
 class Site(Site):
 
-    class Meta(Ticket.Meta):
+    class Meta(Site.Meta):
         # app_label = 'tickets'
         abstract = dd.is_abstract_model(__name__, 'Site')
 
