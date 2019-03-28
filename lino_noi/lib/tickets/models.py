@@ -21,6 +21,28 @@ def get_summary_fields():
     for t in ReportingTypes.get_list_items():
         yield t.name + '_hours'
 
+class Site(Site):
+
+    class Meta(Ticket.Meta):
+        # app_label = 'tickets'
+        abstract = dd.is_abstract_model(__name__, 'Site')
+
+    def get_change_observers(self, ar=None):
+        action = ar.bound_action.action if ar.bound_action else None
+        if ar is not None and isinstance(action, CreateRow) and issubclass(ar.actor.model,Ticket):
+            subs = rt.models.tickets.Subscription.objects.filter(site=ar.selected_rows[-1].site)
+            for (u, um) in [(u, u.mail_mode) for u in [sub.user for sub in subs]
+                            if (u.user_type and u.user_type.has_required_roles([Triager])
+                                and u != ar.get_user())]:
+                yield (u, um)
+        else:
+            for s in rt.models.tickets.Subscription.objects.filter(site=self):
+                yield (s.user, s.user.mail_mode)
+
+    def after_ui_create(self, ar):
+        super(Site, self).after_ui_create(ar)
+        rt.models.tickets.Subscription.objects.create(user=ar.get_user(), site=self)
+
 
 class Ticket(Ticket, Assignable, Summarized):
 
@@ -62,29 +84,37 @@ class Ticket(Ticket, Assignable, Summarized):
         # self.user_changed(ar)
         super(Ticket, self).after_ui_create(ar)
 
-        if dd.is_installed('notify'):
-            ctx = dict(user=ar.user, what=ar.obj2memo(self))
-            def msg(user, mm):
-                subject = _("{user} submitted ticket {what}").format(**ctx)
-                return (subject , tostring(E.span(subject)))
-
-            mt = rt.models.notify.MessageTypes.tickets
-            # owner = self.get_change_owner()
-            # rt.models.notify.Message.emit_notification(
-            #     ar, owner, mt, msg, self.get_change_observers())
-            rt.models.notify.Message.emit_notification(
-                ar, self, mt, msg,
-                [(u, u.mail_mode) for u in rt.models.users.User.objects.all()
-                    if u.user_type and u.user_type.has_required_roles(
-                            [Triager])
-                    and u != ar.get_user()
-                 ]
-            )
-
     show_commits = dd.ShowSlaveTable('github.CommitsByTicket')
     show_changes = dd.ShowSlaveTable('changes.ChangesByMaster')
     # show_wishes = dd.ShowSlaveTable('deploy.DeploymentsByTicket')
     # show_stars = dd.ShowSlaveTable('stars.AllStarsByController')
+
+
+    def get_change_subject(self, ar, cw):
+        ctx = dict(user=ar.user, what=str(self))
+        if cw is None:
+            return _("{user} submitted ticket {what}").format(**ctx)
+        if len(list(cw.get_updates())) == 0:
+            return
+        return _("{user} modified {what}").format(**ctx)
+
+    def get_change_body(self, ar, cw):
+        ctx = dict(user=ar.user, what=ar.obj2memo(self))
+        if cw is None:
+            elems = [E.p(
+                _("{user} submitted ticket {what}").format(**ctx), ".")]
+            elems += list(self.get_change_info(ar, cw))
+        else:
+            items = list(cw.get_updates_html(["_user_cache"]))
+            if len(items) == 0:
+                return
+            elems = []
+            elems += list(self.get_change_info(ar, cw))
+            elems.append(E.p(
+                _("{user} modified {what}").format(**ctx), ":"))
+            elems.append(E.ul(*items))
+        # print("20170210 {}".format(tostring(E.div(*elems))))
+        return tostring(E.div(*elems))
 
     @classmethod
     def get_layout_aliases(cls):

@@ -15,7 +15,7 @@ from lino_xl.lib.tickets import *
 
 class Plugin(Plugin):
 
-    extends_models = ['Ticket']
+    extends_models = ['Ticket', "Site"]
     
     needs_plugins = [
         'lino_xl.lib.excerpts',
