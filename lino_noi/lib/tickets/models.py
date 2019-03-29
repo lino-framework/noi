@@ -141,8 +141,8 @@ class Ticket(Ticket, Assignable, Summarized):
             setattr(self, k, value)\
 
     @dd.chooser()
-    def site_choices(cls, end_user, user, _ar):
-        user = user if user is not None else _ar.get_user()
+    def site_choices(cls, end_user, user, ar):
+        user = user if user is not None else ar.get_user()
         sub_user = [user.pk]
         if end_user: sub_user.append(end_user.pk)
         pks = rt.models.tickets.Subscription.objects.filter(user__pk__in=sub_user).values_list("site__pk", flat=True)
