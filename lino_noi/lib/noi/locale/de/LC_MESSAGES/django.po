@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-noi 0.0.2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-08-30 08:45+0300\n"
+"POT-Creation-Date: 2019-03-29 13:25+0200\n"
 "PO-Revision-Date: 2017-03-20 07:46+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: de\n"
@@ -18,21 +18,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.6.0\n"
 
-#: lino_noi/lib/cal/models.py:17
+#: lino_noi/lib/cal/models.py:82
 msgid "Author"
 msgstr ""
 
-#: lino_noi/lib/cal/models.py:18
+#: lino_noi/lib/cal/models.py:83
 msgid "Organizer"
 msgstr ""
 
-#: lino_noi/lib/cal/models.py:19
+#: lino_noi/lib/cal/models.py:84
 msgid "Contact person"
 msgstr ""
 
-#: lino_noi/lib/cal/models.py:43 lino_noi/lib/contacts/models.py:50
-#: lino_noi/lib/contacts/models.py:81 lino_noi/lib/tickets/models.py:88
-#: lino_noi/lib/tickets/models.py:164 lino_noi/lib/users/desktop.py:29
+#: lino_noi/lib/cal/models.py:108 lino_noi/lib/contacts/models.py:50
+#: lino_noi/lib/contacts/models.py:81 lino_noi/lib/tickets/models.py:161
+#: lino_noi/lib/tickets/models.py:237 lino_noi/lib/users/desktop.py:28
 msgid "General"
 msgstr ""
 
@@ -41,7 +41,7 @@ msgid "Address"
 msgstr ""
 
 #: lino_noi/lib/contacts/models.py:26 lino_noi/lib/contacts/models.py:61
-#: lino_noi/lib/contacts/models.py:92 lino_noi/lib/users/desktop.py:67
+#: lino_noi/lib/contacts/models.py:92 lino_noi/lib/users/desktop.py:66
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -63,38 +63,60 @@ msgstr ""
 
 #: lino_noi/lib/noi/help_texts.py:8
 msgid ""
+"Move Deployment and Milestone from 'tickets' to new plugin\n"
+"'deploy'."
+msgstr ""
+
+#: lino_noi/lib/noi/help_texts.py:10
+msgid ""
 "An end user is somebody who uses our software and may report\n"
 "tickets, but won't work on them."
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:10
+#: lino_noi/lib/noi/help_texts.py:12
 msgid ""
 "A consultant is somebody who may both report tickets and work\n"
 "on them."
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:12
+#: lino_noi/lib/noi/help_texts.py:14
 msgid ""
 "A developer is somebody who may both report tickets and work\n"
 "on them."
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:14
+#: lino_noi/lib/noi/help_texts.py:16
 msgid ""
 "A senior developer is a developer who is additionally\n"
 "responsible for triaging tickets"
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:16
+#: lino_noi/lib/noi/help_texts.py:18
 msgid "Can do everything."
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:17
+#: lino_noi/lib/noi/help_texts.py:19
 msgid "Customized detail_layout for Tickets in Noi"
 msgstr ""
 
-#: lino_noi/lib/noi/help_texts.py:18
+#: lino_noi/lib/noi/help_texts.py:20
 msgid "Layout of User Detail in Lino Noi."
+msgstr ""
+
+#: lino_noi/lib/noi/help_texts.py:21
+msgid ""
+"The Django model used to represent a ticket in Noi. Adds some fields and\n"
+"methods."
+msgstr ""
+
+#: lino_noi/lib/noi/help_texts.py:23
+msgid "The user who is working on this ticket."
+msgstr ""
+
+#: lino_noi/lib/noi/help_texts.py:24
+msgid ""
+"The site this ticket belongs to.\n"
+"You can select only sites you are subscribed to."
 msgstr ""
 
 #: lino_noi/lib/noi/settings.py:127
@@ -105,47 +127,55 @@ msgstr "Anfrage einreichen"
 msgid "My settings"
 msgstr ""
 
-#: lino_noi/lib/noi/user_types.py:75
+#: lino_noi/lib/noi/user_types.py:78
 msgid "Anonymous"
 msgstr ""
 
-#: lino_noi/lib/noi/user_types.py:77
+#: lino_noi/lib/noi/user_types.py:80
 msgid "User"
 msgstr ""
 
-#: lino_noi/lib/noi/user_types.py:78
+#: lino_noi/lib/noi/user_types.py:81
 msgid "Consultant"
 msgstr ""
 
-#: lino_noi/lib/noi/user_types.py:79
+#: lino_noi/lib/noi/user_types.py:82
 msgid "Hoster"
 msgstr ""
 
-#: lino_noi/lib/noi/user_types.py:80
+#: lino_noi/lib/noi/user_types.py:83
 msgid "Developer"
 msgstr ""
 
-#: lino_noi/lib/noi/user_types.py:81
+#: lino_noi/lib/noi/user_types.py:84
 msgid "Senior developer"
 msgstr ""
 
-#: lino_noi/lib/noi/user_types.py:82
+#: lino_noi/lib/noi/user_types.py:85
 msgid "Administrator"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:31
+#: lino_noi/lib/tickets/models.py:62
 msgid "{user} has assigned you to ticket: {what}"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:59
+#: lino_noi/lib/tickets/models.py:96 lino_noi/lib/tickets/models.py:105
 msgid "{user} submitted ticket {what}"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:115 lino_noi/lib/tickets/models.py:169
+#: lino_noi/lib/tickets/models.py:99 lino_noi/lib/tickets/models.py:114
+msgid "{user} modified {what}"
+msgstr ""
+
+#: lino_noi/lib/tickets/models.py:189
 msgid "More"
 msgstr ""
 
-#: lino_noi/lib/tickets/models.py:174
+#: lino_noi/lib/tickets/models.py:253
+msgid "Configure"
+msgstr ""
+
+#: lino_noi/lib/tickets/models.py:259
 msgid "History"
 msgstr ""
 
@@ -164,7 +194,7 @@ msgctxt "verb"
 msgid "Talk"
 msgstr "Besprechen"
 
-#: lino_noi/lib/users/desktop.py:37
+#: lino_noi/lib/users/desktop.py:36
 msgid "Clocking"
 msgstr "Arbeitszeit"
 
