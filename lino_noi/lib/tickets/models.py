@@ -24,7 +24,7 @@ def get_summary_fields():
 class Site(Site):
 
     class Meta(Site.Meta):
-        # app_label = 'tickets'
+        app_label = 'tickets'
         abstract = dd.is_abstract_model(__name__, 'Site')
 
     def get_change_observers(self, ar=None):
