@@ -127,10 +127,18 @@ class Ticket(Ticket, Assignable, Summarized):
     def reset_summary_data(self):
         for k in get_summary_fields():
             setattr(self, k, ZERO_DURATION)
+        self.last_commenter = None
 
     def get_summary_collectors(self):
         qs = rt.models.working.Session.objects.filter(ticket=self)
         yield (self.add_from_session, qs)
+        qs = rt.models.comments.Comment.objects.filter(**gfk2lookup(rt.models.comments.Comment._meta.get_field("owner"),
+                                                                    self)
+                                                       ).order_by("-created")[0:1]
+        yield (self.add_from_comment, qs)
+
+    def add_from_comment(self, obj):
+        self.last_commenter = obj.user
 
     def add_from_session(self, obj):
         d = obj.get_duration()
@@ -265,8 +273,9 @@ class SiteDetail(SiteDetail):
 Tickets.insert_layout = 'tickets.TicketInsertLayout'
 Tickets.params_layout = """user end_user assigned_to not_assigned_to interesting_for site has_site state priority
     #deployed_to show_assigned show_active #show_deployed show_todo show_private
-    start_date end_date observed_event #topic #feasable_by has_ref"""
-Tickets.column_names = 'id summary:50 #user:10 #topic #faculty priority ' \
+    start_date end_date observed_event #topic #feasable_by has_ref
+    last_commenter not_last_commenter subscriber"""
+Tickets.column_names = 'last_commenter id summary:50 #user:10 #topic #faculty priority ' \
                        'workflow_buttons:30 site:10 #project:10'
 Tickets.tablet_columns = "id summary workflow_buttons"
 #Tickets.tablet_columns_popin = "site project"
