@@ -29,7 +29,7 @@ class Plugin(Plugin):
         p = self.get_menu_group()
         m = m.add_menu(p.app_label, p.verbose_name)
         [m.add_action(s) for s in 'tickets.MyTicketsToWork '
-                                  'tickets.TicketsNeedingFeedback '
+                                  'tickets.TicketsNeedingMyFeedback '
                                   'tickets.MyTicketsNeedingFeedback'.split()]
 
     def get_dashboard_items(self, user):
@@ -37,7 +37,7 @@ class Plugin(Plugin):
             yield i
         if user.authenticated:
             yield self.site.models.tickets.MyTicketsToWork
-            yield self.site.models.tickets.TicketsNeedingFeedback
+            yield self.site.models.tickets.TicketsNeedingMyFeedback
             yield self.site.models.tickets.MyTicketsNeedingFeedback
             # else:
             #     yield self.site.models.tickets.   PublicTickets

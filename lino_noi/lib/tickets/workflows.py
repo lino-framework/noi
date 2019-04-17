@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016-2018 Rumma & Ko Ltd
-#
+# Copyright 2016-2019 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 """The default :attr:`workflows_module
 <lino.core.site.Site.workflows_module>` for :ref:`noi` applications.
@@ -59,10 +58,10 @@ class MarkTicketOpened(TicketAction):
     #     return subject
     
     
-class MarkTicketStarted(TicketAction):
-    """Mark this ticket as started.
+class MarkTicketWorking(TicketAction):
+    """Mark this ticket as working.
     """
-    action_name = 'mark_started'
+    action_name = 'mark_working'
     label = pgettext("verb", "Start")
     required_states = 'new talk opened'
     needs_site = True
@@ -72,20 +71,20 @@ class MarkTicketReady(TicketAction):
     """Mark this ticket as ready.
     """
     action_name = 'mark_ready'
-    required_states = "new opened started talk"
+    required_states = "new opened working talk"
     
 class MarkTicketClosed(TicketAction):
     """Mark this ticket as closed.
     """
     # label = pgettext("verb", "Close")
     action_name = 'mark_closed'
-    required_states = 'new talk started opened ready'
+    required_states = 'new talk working opened ready'
     needs_site = True
 
 class MarkTicketRefused(TicketAction):
     """Mark this ticket as refused.
     """
-    required_states = 'talk started opened ready'
+    required_states = 'talk working opened ready'
     action_name = 'mark_refused'
 
 
@@ -93,7 +92,7 @@ class MarkTicketTalk(TicketAction):
     """Mark this ticket as talk.
     """
     label = pgettext("verb", "Talk")
-    required_states = "new opened started sleeping ready"
+    required_states = "new opened working sleeping ready"
     action_name = 'mark_talk'
     needs_site = True
 
@@ -109,10 +108,10 @@ TicketStates.clear_transitions()
 # TicketStates.new.add_transition(
 #     required_states="sticky")
 TicketStates.sleeping.add_transition(
-    required_states="new talk opened started")
+    required_states="new talk opened working")
 TicketStates.talk.add_transition(MarkTicketTalk)
 TicketStates.opened.add_transition(MarkTicketOpened)
-TicketStates.started.add_transition(MarkTicketStarted)
+TicketStates.working.add_transition(MarkTicketWorking)
 TicketStates.ready.add_transition(MarkTicketReady)
 TicketStates.closed.add_transition(MarkTicketClosed)
 TicketStates.cancelled.add_transition(MarkTicketRefused)
