@@ -20,7 +20,7 @@ from lino.modlib.office.roles import OfficeUser
 class UserDetail(UserDetail):
     """Layout of User Detail in Lino Noi."""
 
-    main = "general contact calendar dashboard.WidgetsByUser"
+    main = "general contact calendar dashboard.WidgetsByUser working.SummariesByUser"
 
     general = dd.Panel("""
     box1:45 working:15
@@ -42,7 +42,6 @@ class UserDetail(UserDetail):
     cal.SubscriptionsByUser
     # cal.MembershipsByUser
     """, label=dd.plugins.cal.verbose_name, required_roles=dd.login_required(OfficeUser))
-
 
     box1 = """
     username user_type:20 initials github_username #partner #user_site
