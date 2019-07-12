@@ -10,7 +10,7 @@ class Renderer(Renderer):
     
     def get_detail_url(self, actor, pk, *args, **kw):
         if issubclass(actor.model, Ticket):
-            return self.plugin.build_plain_url(
+            return self.front_end.build_plain_url(
                 'ticket', str(pk), *args, **kw)
         # return super(Renderer, self).get_detail_url(self, obj, *args, **kw)
 
