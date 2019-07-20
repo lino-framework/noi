@@ -8,7 +8,7 @@ from lino_xl.lib.tickets.models import Ticket
 
 class Renderer(Renderer):
     
-    def get_detail_url(self, actor, pk, *args, **kw):
+    def get_detail_url(self, ar, actor, pk, *args, **kw):
         if issubclass(actor.model, Ticket):
             return self.front_end.build_plain_url(
                 'ticket', str(pk), *args, **kw)
