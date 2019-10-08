@@ -11,6 +11,11 @@
 .. contents::
   :local:
 
+2019-10-08
+==========
+
+Released version 19.10.0 to PyPI.
+
 2019-07-02
 ==========
 
@@ -41,5 +46,3 @@ The :class:`lino_xl.lib.working.WorkedHours` shows a new Lino feature
 :ticket:`2726` (Lino views as a replacement for extensible calendar). When we
 click on a day to show the sessions of that day, we can now navigate to the
 previous and next days.
-
-
