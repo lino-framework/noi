@@ -1,5 +1,5 @@
 .. include:: /../docs/shared/include/defs.rst
-             
+
 .. _noi.guide:
 
 ====================
@@ -20,7 +20,7 @@ there.
 
 .. Alternatively, if you have installed a development environment as
    documented in `Installing Lino
-   <http://www.lino-framework.org/dev/install.html>`__, you can type::
+   <http://www.lino-framework.org/dev/install>`__, you can type::
 
     $ go team
     $ python manage.py prep
@@ -31,7 +31,7 @@ there.
 For this crash course please sign in as user *jean*.  You should then
 see the following screen:
 
- 
+
 .. image:: 3.png
 
 
@@ -120,6 +120,3 @@ ticket's summary.
 
 Using this system, you always have an overview of your real hours
 worked.
-
-
-
