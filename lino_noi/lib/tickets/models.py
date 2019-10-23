@@ -163,7 +163,7 @@ class TicketDetail(TicketDetail):
 
     """
     main = "general more #history_tab #more2 #github.CommitsByTicket"
-    
+
     general = dd.Panel("""
     general1:60 comments.CommentsByRFC:30
     """, label=_("General"))
@@ -179,7 +179,7 @@ class TicketDetail(TicketDetail):
     # id:  6/56*8 = 0.85 -> 1
     general1a = """
     summary id:6
-    site ticket_type 
+    site ticket_type
     workflow_buttons
     description
     """
@@ -193,7 +193,7 @@ class TicketDetail(TicketDetail):
 
     more = dd.Panel("""
     more1 DuplicatesByTicket:20 #WishesByTicket
-    upgrade_notes LinksByTicket uploads.UploadsByController 
+    upgrade_notes LinksByTicket uploads.UploadsByController
     """, label=_("More"))
 
     # history_tab = dd.Panel("""
@@ -201,7 +201,7 @@ class TicketDetail(TicketDetail):
     # github.CommitsByTicket
     # """, label=_("History"), required_roles=dd.login_required(Triager))
 
-    
+
     more1 = """
     created modified fixed_since #reported_for #fixed_date #fixed_time
     state ref duplicate_of deadline
@@ -212,7 +212,7 @@ class TicketDetail(TicketDetail):
     # # deploy.DeploymentsByTicket
     # # skills.DemandsByDemander
     # stars.AllStarsByController
-    # uploads.UploadsByController 
+    # uploads.UploadsByController
     # """, label=_("Even more"))
 
 class TicketInsertLayout(dd.InsertLayout):
@@ -222,7 +222,7 @@ class TicketInsertLayout(dd.InsertLayout):
     """
 
     right = """
-    ticket_type 
+    ticket_type
     priority
     end_user
     #assigned_to
@@ -232,7 +232,7 @@ class TicketInsertLayout(dd.InsertLayout):
     left = """
     description
     """
-    
+
     window_size = (80, 20)
 
 
@@ -246,18 +246,18 @@ class SiteDetail(SiteDetail):
 
     gen_left = """
     overview
-    SubscriptionsBySite 
+    SubscriptionsBySite
     """
 
     general2 = """
-    ref name id 
-    company contact_person reporting_type 
-    remark:20 workflow_buttons:20
+    ref name id
+    company contact_person reporting_type
+    group remark:20 workflow_buttons:20
     """
-    
+
     config = dd.Panel("""
     general2
-    description 
+    description
     """, label=_("Configure"), required_roles = dd.login_required(TicketsStaff)
 )
 
@@ -287,6 +287,7 @@ Tickets.popin_columns = "summary"
 Tickets.order_by = ["-id"]
 
 TicketsBySite.column_names = "priority detail_link planned_time SUMMARY_FIELDS workflow_buttons *"
+AllSites.column_names = "ref name company group remark workflow_buttons id *"
 # Sites.detail_layout = """
 # id name partner #responsible_user
 # remark
@@ -296,5 +297,3 @@ TicketsBySite.column_names = "priority detail_link planned_time SUMMARY_FIELDS w
 
 # Not needed, have it be inffered by mobile_columns or tablet_columns if both None, use normal grid.
 #AllTickets.display_mode = "responsive_grid"
-
-

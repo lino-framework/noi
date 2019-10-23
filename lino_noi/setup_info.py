@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2018 Rumma & Ko Ltd
+# Copyright 2014-2019 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 # $ python setup.py test -s tests.PackagesTests.test_packages
@@ -74,6 +74,8 @@ lino_noi.lib.public
 lino_noi.lib.topics
 lino_noi.lib.users
 lino_noi.lib.users.fixtures
+lino_noi.lib.groups
+lino_noi.lib.groups.fixtures
 lino_noi.lib.cal
 lino_noi.lib.cal.fixtures
 lino_noi.lib.courses

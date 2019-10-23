@@ -32,10 +32,10 @@ class Site(Site):
     obj2text_template = "**{0}**"
 
     default_build_method = 'appyodt'
-    
+
     # experimental use of rest_framework:
     # root_urlconf = 'lino_book.projects.team.urls'
-    
+
     # TODO: move migrator to lino_noi.projects.team
     migration_class = 'lino_noi.lib.noi.migrate.Migrator'
 
@@ -92,6 +92,7 @@ class Site(Site):
         yield 'lino_xl.lib.github'
         # yield 'lino.modlib.social_auth'
         yield 'lino_xl.lib.userstats'
+        yield 'lino_noi.lib.groups'
 
     def setup_plugins(self):
         super(Site, self).setup_plugins()
@@ -133,7 +134,7 @@ class Site(Site):
         # handler = "function(){%s}" % handler
         # mysettings = dict(text=_("My settings"),
         #                   handler=js_code(handler))
-        
+
 
     def do_site_startup(self):
         super(Site, self).do_site_startup()
@@ -143,7 +144,7 @@ class Site(Site):
         wc(self.modules.tickets.Ticket, ignore=['_user_cache'])
         wc(self.modules.comments.Comment, master_key='owner')
         # wc(self.modules.working.Session, master_key='owner')
-        
+
         if self.is_installed('votes'):
             wc(self.modules.votes.Vote, master_key='votable')
 
@@ -159,7 +160,7 @@ class Site(Site):
         # for m in (lib.contacts.Company, ):
         #     m.define_action(merge_row=MergeAction(
         #         m, required_roles=set([ContactsStaff])))
-            
+
 # the following line should not be active in a checked-in version
 #~ DATABASES['default']['NAME'] = ':memory:'
 
@@ -167,4 +168,3 @@ USE_TZ = True
 # TIME_ZONE = 'Europe/Brussels'
 # TIME_ZONE = 'Europe/Tallinn'
 TIME_ZONE = 'UTC'
-
