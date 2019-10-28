@@ -162,7 +162,7 @@ class TicketDetail(TicketDetail):
     """Customized detail_layout for Tickets in Noi
 
     """
-    main = "general more comments.MentionsByOwner #history_tab #more2 #github.CommitsByTicket"
+    main = "general more comments.CommentsByMentioned #history_tab #more2 #github.CommitsByTicket"
 
     general = dd.Panel("""
     general1:60 comments.CommentsByRFC:30

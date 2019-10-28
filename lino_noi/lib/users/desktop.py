@@ -24,10 +24,10 @@ class UserDetail(UserDetail):
 
     general = dd.Panel("""
     box1:45 working:15
-    SocialAuthsByUser tickets.SubscriptionsByUser
+    SocialAuthsByUser #tickets.SubscriptionsByUser groups.MembershipsByUser
     """, label=_("General"))
-    
-    # skills.OffersByEndUser 
+
+    # skills.OffersByEndUser
 
     if dd.is_installed('working'):
         working = dd.Panel("""

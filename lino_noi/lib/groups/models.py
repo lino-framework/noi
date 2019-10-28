@@ -21,7 +21,7 @@ dd.update_field(Group, 'user', verbose_name=_("Team manager"))
 
 Groups.column_names = 'ref name user *'
 Groups.detail_layout = """
-ref:10 name:60 user id 
+ref:10 name:60 user id
 description MembershipsByGroup
-comments.CommentsByRFC
+comments.CommentsByRFC tickets.SitesByGroup
 """
