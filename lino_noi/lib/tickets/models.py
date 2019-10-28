@@ -238,7 +238,7 @@ class TicketInsertLayout(dd.InsertLayout):
 
 class SiteDetail(SiteDetail):
 
-    main = """general config history"""
+    main = """general config"""
 
     general = dd.Panel("""
     gen_left:20 TicketsBySite:60
@@ -250,21 +250,22 @@ class SiteDetail(SiteDetail):
     """
 
     general2 = """
-    ref name id
-    company contact_person reporting_type
-    group remark:20 workflow_buttons:20
+    ref name
+    company contact_person
+    reporting_type #start_date end_date hours_paid
+    group remark:20
+    workflow_buttons:20 id
+    working.SummariesBySite
     """
 
     config = dd.Panel("""
-    general2
-    description
-    """, label=_("Configure"), required_roles = dd.login_required(TicketsStaff)
-)
+    general2:50 description:30
+    """, label=_("Configure"), required_roles = dd.login_required(TicketsStaff))
 
-    history = dd.Panel("""
-    # meetings.MeetingsBySite
-    working.SummariesBySite
-    """, label=_("History"))
+    # history = dd.Panel("""
+    # # meetings.MeetingsBySite
+    # working.SummariesBySite
+    # """, label=_("History"))
 
 
 # Note in the following lines we don't subclass Tickets because then
