@@ -10,7 +10,6 @@ This is used as the :attr:`user_types_module
 <lino.core.site.Site.user_types_module>` for :ref:`noi`.
 """
 
-
 from django.utils.translation import ugettext_lazy as _
 
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
@@ -29,41 +28,32 @@ from lino_xl.lib.votes.roles import VotesStaff, VotesUser
 from lino.modlib.users.choicelists import UserTypes
 
 
-class EndUser(SiteUser, OfficeUser, VotesUser, Searcher, Reporter, CommentsUser):
+class Customer(SiteUser, OfficeUser, VotesUser, Searcher, Reporter, CommentsUser):
     """
-    An **end user** is somebody who uses our software and may report
-    tickets, but won't work on them.
-    """
-    pass
-
-
-class Consultant(EndUser, Searcher, Helper, Worker,
-                 ExcerptsUser, ContactsUser, CoursesUser):
-    """
-    A **consultant** is somebody who may both report tickets and work
-    on them.
+    A **Customer** is somebody who uses our software and may report
+    tickets, but won't work on them. Able to comment and view tickets on sites
+    where they are contact people. Unable to see any client data other than orgs
+    where they are a contact person and themselves.
     """
     pass
 
 
-class Developer(Consultant):
+class Contributor(Customer, Searcher, Helper, Worker, ExcerptsUser, ContactsUser, CoursesUser):
     """
-    A **developer** is somebody who may both report tickets and work
-    on them.
-    """
-    pass
-
-
-class Senior(Developer, Triager, ExcerptsStaff, CommentsStaff):
-    """
-    A **senior developer** is a *developer* who is additionally
-    responsible for triaging tickets
+    A **Contributor** is somebody who works on and see tickets of sites they are team members of.
     """
     pass
 
 
-class SiteAdmin(Senior, SiteAdmin, OfficeStaff, VotesStaff,
-                TicketsStaff, ContactsStaff, CommentsStaff):
+class Devloper(Contributor, Triager, ExcerptsStaff, CommentsStaff, TicketsStaff):
+    """
+    A **Devloper** is a trusted user who has signed an NDA, has access to client contacts.
+    Is able to make service reports as well as manage tickets.
+    """
+    pass
+
+
+class SiteAdmin(SiteAdmin, Devloper, OfficeStaff, VotesStaff, ContactsStaff, CommentsStaff):
     """
     Can do everything.
     """
@@ -73,17 +63,15 @@ class SiteAdmin(Senior, SiteAdmin, OfficeStaff, VotesStaff,
 class Anonymous(CalendarReader, Searcher):
     pass
 
+
 UserTypes.clear()
 add = UserTypes.add_item
-add('000', _("Anonymous"),        Anonymous, 'anonymous',
+add('000', _("Anonymous"), Anonymous, 'anonymous',
     readonly=True, authenticated=False)
-add('100', _("User"),             EndUser, 'user')
-add('200', _("Consultant"),       Consultant, 'consultant')
-add('300', _("Hoster"),           Consultant, 'hoster')
-add('400', _("Developer"),        Developer, 'developer')
-add('490', _("Senior developer"), Senior, 'senior')
-add('900', _("Administrator"),    SiteAdmin, 'admin')
-
+add('100', _("Customer"), Customer, 'customer')
+add('200', _("Contributor"), Contributor, 'contributor')
+add('400', _("Developer"), Devloper, 'developer')
+add('900', _("Administrator"), SiteAdmin, 'admin')
 
 # from lino.core.merge import MergeAction
 # from lino.api import rt
