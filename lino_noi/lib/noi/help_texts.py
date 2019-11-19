@@ -7,14 +7,13 @@ help_texts = {
     'lino_noi.lib.noi.migrate.Migrator' : _("""The standard migrator for noi."""),
     'lino_noi.lib.noi.migrate.Migrator.migrate_from_1_0_1' : _("""Move Deployment and Milestone from 'tickets' to new plugin
 'deploy'."""),
-    'lino_noi.lib.noi.user_types.EndUser' : _("""An end user is somebody who uses our software and may report
-tickets, but won't work on them."""),
-    'lino_noi.lib.noi.user_types.Consultant' : _("""A consultant is somebody who may both report tickets and work
-on them."""),
-    'lino_noi.lib.noi.user_types.Developer' : _("""A developer is somebody who may both report tickets and work
-on them."""),
-    'lino_noi.lib.noi.user_types.Senior' : _("""A senior developer is a developer who is additionally
-responsible for triaging tickets"""),
+    'lino_noi.lib.noi.user_types.Customer' : _("""A Customer is somebody who uses our software and may report
+tickets, but won't work on them. Able to comment and view tickets on sites
+where they are contact people. Unable to see any client data other than orgs
+where they are a contact person and themselves."""),
+    'lino_noi.lib.noi.user_types.Contributor' : _("""A Contributor is somebody who works on and see tickets of sites they are team members of."""),
+    'lino_noi.lib.noi.user_types.Devloper' : _("""A Devloper is a trusted user who has signed an NDA, has access to client contacts.
+Is able to make service reports as well as manage tickets."""),
     'lino_noi.lib.noi.user_types.SiteAdmin' : _("""Can do everything."""),
     'lino_noi.lib.tickets.TicketDetail' : _("""Customized detail_layout for Tickets in Noi"""),
     'lino_noi.lib.users.UserDetail' : _("""Layout of User Detail in Lino Noi."""),
