@@ -2,10 +2,8 @@
 {% set active_page = "" %}
 {% block title %}{{title}}{% endblock %}
 {% block content %}
-<p>Welcome to the public user interface of the 
+<p>Welcome to the public user interface of the
 <b>{{settings.SITE.title or settings.SITE.verbose_name}}</b> site.</p>
-
-20170208 {{escape(str(ar.renderer))}}
 
 {{ar.show('tickets.Tickets', header_level=2)}}
 
@@ -19,5 +17,3 @@
 {% endif %}
 
 {% endblock %}
-
-

@@ -246,6 +246,7 @@ class SiteDetail(SiteDetail):
 
     gen_left = """
     overview
+    group
     SubscriptionsBySite
     """
 
@@ -253,7 +254,7 @@ class SiteDetail(SiteDetail):
     ref name
     company contact_person
     reporting_type #start_date end_date hours_paid
-    group remark:20
+    remark:20 private
     workflow_buttons:20 id
     working.SummariesBySite
     """
