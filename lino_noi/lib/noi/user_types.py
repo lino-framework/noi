@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2018 Rumma & Ko Ltd
+# Copyright 2015-2019 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """
@@ -15,7 +15,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino.modlib.users.roles import Helper
 # from lino.modlib.comments.roles import CommentsReader
-from lino.modlib.comments.roles import CommentsUser, CommentsStaff
+from lino.modlib.comments.roles import CommentsUser, CommentsStaff, PrivateCommentsReader
 from lino.core.roles import SiteUser, SiteAdmin
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsUser, ContactsStaff
@@ -45,15 +45,15 @@ class Contributor(Customer, Searcher, Helper, Worker, ExcerptsUser, ContactsUser
     pass
 
 
-class Devloper(Contributor, Triager, ExcerptsStaff, CommentsStaff, TicketsStaff):
+class Developer(Contributor, Triager, ExcerptsStaff, CommentsStaff, TicketsStaff, PrivateCommentsReader):
     """
-    A **Devloper** is a trusted user who has signed an NDA, has access to client contacts.
+    A **Developer** is a trusted user who has signed an NDA, has access to client contacts.
     Is able to make service reports as well as manage tickets.
     """
     pass
 
 
-class SiteAdmin(SiteAdmin, Devloper, OfficeStaff, VotesStaff, ContactsStaff, CommentsStaff):
+class SiteAdmin(SiteAdmin, Developer, OfficeStaff, VotesStaff, ContactsStaff, CommentsStaff):
     """
     Can do everything.
     """
@@ -70,7 +70,7 @@ add('000', _("Anonymous"), Anonymous, 'anonymous',
     readonly=True, authenticated=False)
 add('100', _("Customer"), Customer, 'customer')
 add('200', _("Contributor"), Contributor, 'contributor')
-add('400', _("Developer"), Devloper, 'developer')
+add('400', _("Developer"), Developer, 'developer')
 add('900', _("Administrator"), SiteAdmin, 'admin')
 
 # from lino.core.merge import MergeAction
