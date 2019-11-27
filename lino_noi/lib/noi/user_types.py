@@ -15,7 +15,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino.modlib.users.roles import Helper
 # from lino.modlib.comments.roles import CommentsReader
-from lino.modlib.comments.roles import CommentsUser, CommentsStaff, PrivateCommentsReader
+from lino.modlib.comments.roles import CommentsUser, CommentsStaff, PrivateCommentsReader, CommentsReader
 from lino.core.roles import SiteUser, SiteAdmin
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsUser, ContactsStaff
@@ -60,7 +60,7 @@ class SiteAdmin(SiteAdmin, Developer, OfficeStaff, VotesStaff, ContactsStaff, Co
 
 
 # class Anonymous(CommentsReader, CalendarReader):
-class Anonymous(CalendarReader, Searcher):
+class Anonymous(CalendarReader, CommentsReader, Searcher):
     pass
 
 

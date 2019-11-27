@@ -12,7 +12,7 @@ tickets, but won't work on them. Able to comment and view tickets on sites
 where they are contact people. Unable to see any client data other than orgs
 where they are a contact person and themselves."""),
     'lino_noi.lib.noi.user_types.Contributor' : _("""A Contributor is somebody who works on and see tickets of sites they are team members of."""),
-    'lino_noi.lib.noi.user_types.Devloper' : _("""A Devloper is a trusted user who has signed an NDA, has access to client contacts.
+    'lino_noi.lib.noi.user_types.Developer' : _("""A Developer is a trusted user who has signed an NDA, has access to client contacts.
 Is able to make service reports as well as manage tickets."""),
     'lino_noi.lib.noi.user_types.SiteAdmin' : _("""Can do everything."""),
     'lino_noi.lib.tickets.TicketDetail' : _("""Customized detail_layout for Tickets in Noi"""),
