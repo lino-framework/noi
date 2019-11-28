@@ -8,7 +8,7 @@ from lino.utils import join_words
 from lino_xl.lib.groups.models import *
 from lino.modlib.users.mixins import UserAuthored
 
-@dd.python_2_unicode_compatible
+
 class Group(Group, UserAuthored):
 
     class Meta(Group.Meta):
