@@ -16,7 +16,7 @@ from lino.sphinxcontrib import configure
 configure(globals(), 'lino_book.projects.team.settings.doctests')
 # configure(globals(), 'lino_book.projects.min1.settings.doctests')
 
-extlinks.update(ticket=('http://bugs.saffre-rumma.net/tickets/Ticket/%s', '#'))
+# extlinks.update(ticket=('http://bugs.saffre-rumma.net/tickets/Ticket/%s', '#'))
 
 extensions += ['lino.sphinxcontrib.logo']
 
@@ -76,7 +76,7 @@ language = 'en'
 # List of directories, relative to source directory, that shouldn't be searched
 # for source files.
 exclude_patterns = [
-    '.build/*', 
+    '.build/*',
     'include/*',
 ]
 
@@ -163,4 +163,3 @@ htmlhelp_basename = 'noi'
 suppress_warnings = ['image.nonlocal_uri']
 
 blogref_format = "http://luc.lino-framework.org/blog/%Y/%m%d.html"
-
