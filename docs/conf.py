@@ -16,7 +16,7 @@ from lino.sphinxcontrib import configure
 configure(globals(), 'lino_book.projects.team.settings.doctests')
 # configure(globals(), 'lino_book.projects.min1.settings.doctests')
 
-# extlinks.update(ticket=('http://bugs.saffre-rumma.net/tickets/Ticket/%s', '#'))
+extlinks.update(ticket=('http://bugs.saffre-rumma.net/tickets/Ticket/%s', '#'))
 
 extensions += ['lino.sphinxcontrib.logo']
 
