@@ -45,18 +45,10 @@ interproject.configure(globals(), 'atelier lino_book')
 
 # General information about the project.
 project = "Lino Noi"
-copyright = '2014-2018 Rumma & Ko Ltd'
+copyright = '2014-2019 Rumma & Ko Ltd'
 
-# The version info for the project you're documenting, acts as replacement for
-# |version| and |release|, also used in various other places throughout the
-# built documents.
-#
-# The full version, including alpha/beta/rc tags.
-import lino_noi
-# release = settings.SITE.version
-release = lino_noi.__version__
-
-# The short X.Y version.
+from lino_noi import SETUP_INFO
+release = SETUP_INFO['version']
 version = '.'.join(release.split('.')[:2])
 
 
@@ -95,7 +87,7 @@ exclude_patterns = [
 #show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+# pygments_style = 'sphinx'
 
 
 # Options for HTML output
