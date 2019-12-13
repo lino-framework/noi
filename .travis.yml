@@ -1,9 +1,6 @@
 language: python
 python:
-  - "2.7"
   - "3.6"
-env:
-  - DJANGO=1.11
 
 before_install:
   - sudo apt-get install tidy
@@ -12,18 +9,10 @@ before_install:
 
 install:
   - pip install -U setuptools
-  - pip install coveralls
-  - pip install Django==$DJANGO
-  - pip install -U pytest-cov
-  - test -e "requirements.$TRAVIS_BRANCH.txt" && ( pip install -r "requirements.$TRAVIS_BRANCH.txt" ) || ( pip install -r requirements.txt )
+  - pip install -r requirements.txt
   - pip install -e .
 
 script:
   - export LINO_CACHE_ROOT=$TRAVIS_BUILD_DIR/lino_cache
   - mkdir $LINO_CACHE_ROOT
-  - # if [[ $TRAVIS_PYTHON_VERSION == 2* ]]; then inv cov; fi
   - inv prep test
-
-after_success:
-  - coveralls
-
