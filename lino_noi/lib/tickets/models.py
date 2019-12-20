@@ -149,13 +149,18 @@ class Ticket(Ticket, Assignable, Summarized):
             setattr(self, k, value)\
 
     @dd.chooser()
-    def site_choices(cls, end_user, user, ar):
-        user = user if user is not None else ar.get_user()
-        sub_user = [user.pk]
-        if end_user: sub_user.append(end_user.pk)
-        pks = rt.models.tickets.Subscription.objects.filter(user__pk__in=sub_user).values_list("site__pk", flat=True)
-        print(pks)
-        return Site.objects.filter(id__in=pks)
+    def site_choices(cls, ar):
+        # if user is None:
+        #     user = ar.get_user()
+        user = ar.get_user()
+        # user = user if user is not None else ar.get_user()
+        group_ids = rt.models.groups.Membership.objects.filter(user=user).values_list("group__pk", flat=True)
+        # user_ids = [user.pk]
+        # if end_user: user_ids.append(end_user.pk)
+        # pks = rt.models.tickets.Subscription.objects.filter(user__pk__in=user_ids).values_list("site__pk", flat=True)
+        # # print(pks)
+        # return Site.objects.filter(id__in=pks)
+        return Site.objects.filter(group__in=group_ids)
 
 
 class TicketDetail(TicketDetail):
