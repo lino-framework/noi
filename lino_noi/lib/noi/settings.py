@@ -1,13 +1,10 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2018 Rumma & Ko Ltd
+# Copyright 2014-2019 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 """
 Base Django settings for Lino Noi applications.
 
 """
-
-from __future__ import print_function
-from __future__ import unicode_literals
 
 from lino.projects.std.settings import *
 from lino.api.ad import _
@@ -94,17 +91,24 @@ class Site(Site):
         yield 'lino_xl.lib.userstats'
         yield 'lino_noi.lib.groups'
 
-    def setup_plugins(self):
-        super(Site, self).setup_plugins()
-        # self.plugins.comments.configure(
-        #     commentable_model='tickets.Ticket')
-        # self.plugins.skills.configure(
-        #     demander_model='tickets.Ticket')
-        # self.plugins.tickets.configure(
-        #     site_model='cal.Room',
-        #     milestone_model='courses.Course')
-        self.plugins.working.configure(
-            ticket_model='tickets.Ticket')
+    def get_plugin_configs(self):
+        yield super(Site, self).get_plugin_configs()
+        yield ('tickets', 'end_user_model', 'contacts.Person')
+        yield ('working', 'ticket_model', 'tickets.Ticket'')
+
+
+    # def setup_plugins(self):
+    #     super(Site, self).setup_plugins()
+    #     # self.plugins.comments.configure(
+    #     #     commentable_model='tickets.Ticket')
+    #     # self.plugins.skills.configure(
+    #     #     demander_model='tickets.Ticket')
+    #     # self.plugins.tickets.configure(
+    #     #     site_model='cal.Room',
+    #     #     milestone_model='courses.Course')
+    #     self.plugins.working.configure(
+    #         ticket_model='tickets.Ticket')
+
 
     def get_default_required(self, **kw):
         # overrides the default behaviour which would add
