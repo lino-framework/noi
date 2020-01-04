@@ -93,7 +93,7 @@ class Site(Site):
 
     def get_plugin_configs(self):
         yield super(Site, self).get_plugin_configs()
-        yield ('tickets', 'end_user_model', 'contacts.Person')
+        # yield ('tickets', 'end_user_model', 'contacts.Person')
         yield ('working', 'ticket_model', 'tickets.Ticket')
 
 
