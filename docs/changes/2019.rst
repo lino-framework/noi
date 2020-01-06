@@ -11,6 +11,12 @@
 .. contents::
   :local:
 
+2019-10-24
+==========
+
+Add :class:`lino.comments.MentionsByOwner` as a new panel to the user detail view 
+and the ticket detail view.
+
 2019-10-08
 ==========
 

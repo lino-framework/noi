@@ -1,0 +1,17 @@
+.. _noi.changes.2020:
+
+====
+2020
+====
+
+.. Note: Changes are grouped by date. Every new day gives a new
+   heading. If a release deserves separate release notes, we create a separate
+   document and this file will have a link to it.
+
+.. contents::
+  :local:
+
+2020-01-06
+==========
+
+Released version 20.1 to PyPI.
