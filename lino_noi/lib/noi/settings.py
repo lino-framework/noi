@@ -52,7 +52,8 @@ class Site(Site):
         yield 'lino_noi.lib.contacts'
         yield 'lino_noi.lib.users'
         yield 'lino_noi.lib.cal'
-        yield 'lino_xl.lib.extensible'
+        yield 'lino_xl.lib.calview'
+        # yield 'lino_xl.lib.extensible'
         # yield 'lino_noi.lib.courses'
         # yield 'lino_noi.lib.products'
 

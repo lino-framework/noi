@@ -92,7 +92,7 @@ class RoomDetail(dd.DetailLayout):
     cal.EntriesByRoom
     """
 
-Rooms.set_detail_layout(RoomDetail())
+# Rooms.set_detail_layout(RoomDetail())
 
 class EventDetail(EventDetail):
     start = "start_date start_time"
@@ -102,9 +102,9 @@ class EventDetail(EventDetail):
     event_type:20 summary:60 id
     start end access_class #all_day #assigned_to #duration #state
     user room company contact_person
-    project owner workflow_buttons 
+    project owner workflow_buttons
     # owner created:20 modified:20
     description #blogs.EntriesByController #outbox.MailsByController
     """, label=_("General"))
-    
-Events.set_detail_layout(EventDetail())
+
+# Events.set_detail_layout(EventDetail())
