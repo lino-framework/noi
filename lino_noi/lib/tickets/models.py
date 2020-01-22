@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016-2018 Rumma & Ko Ltd
+# Copyright 2016-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """Database models specific for the Team variant of Lino Noi.
@@ -7,14 +7,12 @@
 Defines a customized :class:`TicketDetail`.
 
 """
-from __future__ import print_function
 
-from lino_xl.lib.tickets.models import *
-from lino.modlib.users.mixins import Assignable
 from lino.api import _
-
-from lino_xl.lib.working.choicelists import ReportingTypes, ZERO_DURATION
+from lino.modlib.users.mixins import Assignable
 from lino.modlib.summaries.mixins import Summarized
+from lino_xl.lib.tickets.models import *
+from lino_xl.lib.working.choicelists import ReportingTypes, ZERO_DURATION
 
 
 def get_summary_fields():
