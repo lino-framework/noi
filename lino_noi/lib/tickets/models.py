@@ -188,7 +188,7 @@ class TicketDetail(TicketDetail):
     """
     general1b = """
     user end_user
-    assigned_to private:10
+    quick_assign_to private:10
     priority:10 planned_time
     SUMMARY_FIELDS
     working.SessionsByTicket
@@ -207,7 +207,7 @@ class TicketDetail(TicketDetail):
 
     more1 = """
     created modified fixed_since #reported_for #fixed_date #fixed_time
-    state ref duplicate_of deadline
+    state assigned_to ref duplicate_of deadline
     # standby feedback closed
     """
 
