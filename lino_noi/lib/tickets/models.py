@@ -28,18 +28,22 @@ class Site(Site):
     def get_change_observers(self, ar=None):
         action = ar.bound_action.action if ar.bound_action else None
         if ar is not None and isinstance(action, CreateRow) and issubclass(ar.actor.model,Ticket):
-            subs = rt.models.tickets.Subscription.objects.filter(site=ar.selected_rows[-1].site)
-            for (u, um) in [(u, u.mail_mode) for u in [sub.user for sub in subs]
-                            if (u.user_type and u.user_type.has_required_roles([Triager])
-                                and u != ar.get_user())]:
-                yield (u, um)
+            subs = rt.models.groups.Group.objects.filter(site=ar.selected_rows[-1].site)
+            #subs = rt.models.tickets.Subscription.objects.filter(site=ar.selected_rows[-1].site)
+            for s in subs.members.all():
+                for (u, um) in [(u, u.mail_mode) for u in [sub.user for sub in s]
+                                if (u.user_type and u.user_type.has_required_roles([Triager])
+                                    and u != ar.get_user())]:
+                    yield (u, um)
         else:
-            for s in rt.models.tickets.Subscription.objects.filter(site=self):
-                yield (s.user, s.user.mail_mode)
+            #for s in rt.models.tickets.Subscription.objects.filter(site=self):
+            for s in rt.models.groups.Group.objects.filter(site=self):
+                for sub in s.members.all():
+                    yield (sub.user, sub.user.mail_mode)
 
-    def after_ui_create(self, ar):
-        super(Site, self).after_ui_create(ar)
-        rt.models.tickets.Subscription.objects.create(user=ar.get_user(), site=self)
+    #def after_ui_create(self, ar):
+    #    super(Site, self).after_ui_create(ar)
+    #    rt.models.tickets.Subscription.objects.create(user=ar.get_user(), site=self)
 
 
 class Ticket(Ticket, Assignable, Summarized):
