@@ -252,9 +252,8 @@ class SiteDetail(SiteDetail):
     """, label=_("General"))
 
     gen_left = """
-    overview
     group
-    SubscriptionsBySite
+    overview
     """
 
     general2 = """
