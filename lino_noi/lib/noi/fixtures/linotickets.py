@@ -2,9 +2,6 @@
 # Copyright 2014-2015 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
-from __future__ import print_function
-from __future__ import unicode_literals
-
 import logging
 logger = logging.getLogger(__name__)
 
@@ -176,6 +173,3 @@ def objects():
             kw.update(description=fn.read_file())
             # fd = open(fn)
             yield Ticket(**kw)
-
-            
-        
