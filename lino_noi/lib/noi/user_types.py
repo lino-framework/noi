@@ -73,6 +73,8 @@ add('200', _("Contributor"), Contributor, 'contributor')
 add('400', _("Developer"), Developer, 'developer')
 add('900', _("Administrator"), SiteAdmin, 'admin')
 
+UserTypes.user = UserTypes.customer
+
 # from lino.core.merge import MergeAction
 # from lino.api import rt
 # lib = rt.models
