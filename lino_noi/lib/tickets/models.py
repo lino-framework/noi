@@ -188,7 +188,7 @@ class TicketDetail(TicketDetail):
     summary id:6
     site ticket_type
     workflow_buttons
-    description
+    LinksByTicket
     """
     general1b = """
     user end_user
@@ -200,7 +200,7 @@ class TicketDetail(TicketDetail):
 
     more = dd.Panel("""
     more1 DuplicatesByTicket:20 #WishesByTicket
-    upgrade_notes LinksByTicket uploads.UploadsByController
+    upgrade_notes description uploads.UploadsByController
     """, label=_("More"))
 
     # history_tab = dd.Panel("""
