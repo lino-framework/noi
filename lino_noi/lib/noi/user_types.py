@@ -68,12 +68,12 @@ UserTypes.clear()
 add = UserTypes.add_item
 add('000', _("Anonymous"), Anonymous, 'anonymous',
     readonly=True, authenticated=False)
-add('100', _("Customer"), Customer, 'customer')
+add('100', _("Customer"), Customer, 'customer user')
 add('200', _("Contributor"), Contributor, 'contributor')
 add('400', _("Developer"), Developer, 'developer')
 add('900', _("Administrator"), SiteAdmin, 'admin')
 
-UserTypes.user = UserTypes.customer
+# UserTypes.user = UserTypes.customer
 
 # from lino.core.merge import MergeAction
 # from lino.api import rt
