@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2019 Rumma & Ko Ltd
+# Copyright 2014-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 """
 Base Django settings for Lino Noi applications.
@@ -16,7 +16,7 @@ class Site(Site):
     version = SETUP_INFO['version']
     url = "http://noi.lino-framework.org/"
 
-    demo_fixtures = ['std', 'demo', 'demo2', 'checksummaries']
+    demo_fixtures = ['std', 'minimal_ledger', 'demo', 'demo2', 'checksummaries']
                      # 'linotickets',
                      # 'tractickets', 'luc']
 
@@ -91,6 +91,9 @@ class Site(Site):
         # yield 'lino.modlib.social_auth'
         yield 'lino_xl.lib.userstats'
         yield 'lino_noi.lib.groups'
+
+        yield 'lino_noi.lib.products'
+        yield 'lino_xl.lib.invoicing'
 
     def get_plugin_configs(self):
         yield super(Site, self).get_plugin_configs()

@@ -24,6 +24,8 @@ from lino_xl.lib.tickets.roles import Reporter, Searcher, Triager, TicketsStaff
 from lino_xl.lib.working.roles import Worker
 from lino_xl.lib.cal.roles import CalendarReader
 from lino_xl.lib.votes.roles import VotesStaff, VotesUser
+from lino_xl.lib.products.roles import ProductsStaff
+from lino_xl.lib.ledger.roles import LedgerStaff
 
 from lino.modlib.users.choicelists import UserTypes
 
@@ -53,7 +55,7 @@ class Developer(Contributor, Triager, ExcerptsStaff, CommentsStaff, TicketsStaff
     pass
 
 
-class SiteAdmin(SiteAdmin, Developer, OfficeStaff, VotesStaff, ContactsStaff, CommentsStaff):
+class SiteAdmin(SiteAdmin, Developer, OfficeStaff, VotesStaff, ContactsStaff, CommentsStaff, ProductsStaff, LedgerStaff):
     """
     Can do everything.
     """

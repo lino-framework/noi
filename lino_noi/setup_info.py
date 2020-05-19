@@ -2,7 +2,7 @@
 # Copyright 2014-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
-# $ python setup.py test -s tests.PackagesTests.test_packages
+# $ python setup.py test -s tests.test_packages
 
 SETUP_INFO = dict(
     name='lino-noi',
@@ -74,6 +74,7 @@ lino_noi.lib.public
 lino_noi.lib.topics
 lino_noi.lib.users
 lino_noi.lib.users.fixtures
+lino_noi.lib.products
 lino_noi.lib.groups
 lino_noi.lib.cal
 lino_noi.lib.cal.fixtures
