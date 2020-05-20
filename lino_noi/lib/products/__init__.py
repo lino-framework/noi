@@ -9,5 +9,5 @@ An extension of :mod:`lino_xl.lib.products`
 from lino_xl.lib.products import Plugin
 
 class Plugin(Plugin):
-    
-    fee_selector = "working.SessionType"
+
+    price_selector = "working.SessionType"
