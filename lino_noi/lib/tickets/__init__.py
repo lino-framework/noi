@@ -16,7 +16,7 @@ from lino_xl.lib.tickets import *
 class Plugin(Plugin):
 
     extends_models = ['Ticket', "Site"]
-    
+
     needs_plugins = [
         'lino_xl.lib.excerpts',
         # 'lino_xl.lib.topics',
@@ -35,10 +35,9 @@ class Plugin(Plugin):
     def get_dashboard_items(self, user):
         for i in super(Plugin, self).get_dashboard_items(user):
             yield i
-        if user.authenticated:
+        if user.is_authenticated:
             yield self.site.models.tickets.MyTicketsToWork
             yield self.site.models.tickets.TicketsNeedingMyFeedback
             yield self.site.models.tickets.MyTicketsNeedingFeedback
             # else:
             #     yield self.site.models.tickets.   PublicTickets
-
