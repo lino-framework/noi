@@ -6,7 +6,7 @@
 
 SETUP_INFO = dict(
     name='lino-noi',
-    version='20.1',
+    version='20.7.0',
     install_requires=['lino-xl'],
     # tests_require=['pytest', 'mock'],
     test_suite='tests',
@@ -49,7 +49,6 @@ system to use when time is more than money.
     license='BSD-2-Clause',
     classifiers="""\
 Programming Language :: Python
-Programming Language :: Python :: 2
 Programming Language :: Python :: 3
 Development Status :: 4 - Beta
 Environment :: Web Environment
