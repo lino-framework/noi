@@ -201,6 +201,7 @@ class TicketDetail(TicketDetail):
     more = dd.Panel("""
     more1 DuplicatesByTicket:20 #WishesByTicket
     upgrade_notes description uploads.UploadsByController
+    tickets.CheckListItemsByTicket
     """, label=_("More"))
 
     # history_tab = dd.Panel("""
