@@ -35,11 +35,11 @@ see the following screen:
 .. image:: 3.png
 
 
-Note the message :message:`You are busy with #1 (⛶ Föö fails to bar
+Note the message :message:`You are busy with #1 (⚹ Föö fails to bar
 when baz) (■)`.  This message is there because you started a work
 session on that ticket, and because you did not yet stop that session.
 
-You can click on "#1 (⛶ Föö fails to bar when baz)" in order to see
+You can click on "#1 (⚹ Föö fails to bar when baz)" in order to see
 the ticket #1.  Close that window using its Close (X) button in the
 upper right corner.
 

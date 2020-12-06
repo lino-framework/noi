@@ -2,7 +2,7 @@
 # Copyright 2016-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
-"""Database models specific for the Team variant of Lino Noi.
+"""Database models specific for Lino Noi.
 
 Defines a customized :class:`TicketDetail`.
 
@@ -169,39 +169,35 @@ class TicketDetail(TicketDetail):
     """Customized detail_layout for Tickets in Noi
 
     """
-    main = "general more comments.CommentsByMentioned #history_tab #more2 #github.CommitsByTicket"
+    main = "general_tab more_tab links #history_tab #more2 #github.CommitsByTicket"
 
-    general = dd.Panel("""
-    general1:60 comments.CommentsByRFC:30
+    general_tab = dd.Panel("""
+    general1:30 general2:30 general3:30
     """, label=_("General"))
-
-    general1 = """
-    general1a:30 general1b:30
-    """
 
     # 50+6=56
     # in XL: label span is 4, so we have 8 units for the fields
     # 56.0/8 = 7
     # summary:  50/56*8 = 7.14 --> 7
     # id:  6/56*8 = 0.85 -> 1
-    general1a = """
-    summary id:6
-    site ticket_type
-    workflow_buttons
-    LinksByTicket
+    general1 = """
+    overview
     """
-    general1b = """
-    user end_user
+    general2 = """
+    site end_user ticket_type
     quick_assign_to private:10
-    priority:10 planned_time
+    priority:10 planned_time deadline
     SUMMARY_FIELDS
     working.SessionsByTicket
     """
 
-    more = dd.Panel("""
-    more1 DuplicatesByTicket:20 #WishesByTicket
-    upgrade_notes description uploads.UploadsByController
-    tickets.CheckListItemsByTicket
+    general3 = """
+    workflow_buttons
+    comments.CommentsByRFC:30
+    """
+
+    more_tab = dd.Panel("""
+    more1 more2 more3
     """, label=_("More"))
 
     # history_tab = dd.Panel("""
@@ -209,12 +205,33 @@ class TicketDetail(TicketDetail):
     # github.CommitsByTicket
     # """, label=_("History"), required_roles=dd.login_required(Triager))
 
-
     more1 = """
-    created modified fixed_since #reported_for #fixed_date #fixed_time
-    state assigned_to ref duplicate_of deadline
+    state
+    assigned_to
+    duplicate_of
     # standby feedback closed
+    uploads.UploadsByController
     """
+
+    more2 = """
+    description
+    upgrade_notes
+    tickets.CheckListItemsByTicket
+    """
+
+    more3 = """
+    id:6 ref
+    summary
+    user created
+    modified fixed_since
+    DuplicatesByTicket:20 #WishesByTicket
+    """
+
+    # more1 = """
+    # created modified fixed_since #reported_for #fixed_date #fixed_time
+    # state assigned_to ref duplicate_of deadline
+    # # standby feedback closed
+    # """
 
     # more2 = dd.Panel("""
     # # deploy.DeploymentsByTicket
@@ -222,6 +239,10 @@ class TicketDetail(TicketDetail):
     # stars.AllStarsByController
     # uploads.UploadsByController
     # """, label=_("Even more"))
+
+    links = dd.Panel("""
+    comments.CommentsByMentioned LinksByTicket
+    """, label=_("Links"))
 
 class TicketInsertLayout(dd.InsertLayout):
     main = """

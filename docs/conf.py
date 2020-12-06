@@ -30,7 +30,9 @@ help_texts_builder_targets = {
 
 intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
-interproject.configure(globals(), 'atelier lino_book')
+interproject.configure(globals(), 'atelier')
+intersphinx_mapping['cg'] = ('https://community.lino-framework.org/', None)
+intersphinx_mapping['book'] = ('https://www.lino-framework.org/', None)
 
 # print(20180202, intersphinx_mapping)
 
@@ -45,7 +47,7 @@ interproject.configure(globals(), 'atelier lino_book')
 
 # General information about the project.
 project = "Lino Noi"
-copyright = '2014-2019 Rumma & Ko Ltd'
+copyright = '2014-2020 Rumma & Ko Ltd'
 
 from lino_noi import SETUP_INFO
 release = SETUP_INFO['version']
