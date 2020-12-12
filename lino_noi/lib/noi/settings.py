@@ -31,7 +31,7 @@ class Site(Site):
     default_build_method = 'appyodt'
 
     # experimental use of rest_framework:
-    # root_urlconf = 'lino_book.projects.team.urls'
+    # root_urlconf = 'lino_book.projects.noi1e.urls'
 
     # TODO: move migrator to lino_noi.projects.team
     migration_class = 'lino_noi.lib.noi.migrate.Migrator'
