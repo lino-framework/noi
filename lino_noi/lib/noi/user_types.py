@@ -10,7 +10,7 @@ This is used as the :attr:`user_types_module
 <lino.core.site.Site.user_types_module>` for :ref:`noi`.
 """
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from lino.modlib.office.roles import OfficeStaff, OfficeUser
 from lino.modlib.users.roles import Helper
