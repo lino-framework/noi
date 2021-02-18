@@ -3,12 +3,6 @@
 # License: BSD (see file COPYING for details)
 """Fixtures specific for the Team variant of Lino Noi.
 
-.. autosummary::
-   :toctree:
-
-   models
-
-
 """
 
 from lino_xl.lib.tickets import *

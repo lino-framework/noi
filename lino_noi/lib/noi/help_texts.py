@@ -14,8 +14,6 @@ where they are a contact person and themselves."""),
     'lino_noi.lib.noi.user_types.Developer' : _("""A Developer is a trusted user who has signed an NDA, has access to client contacts.
 Is able to make service reports as well as manage tickets."""),
     'lino_noi.lib.noi.user_types.SiteAdmin' : _("""Can do everything."""),
-    'lino_noi.lib.tickets.TicketDetail' : _("""Customized detail_layout for Tickets in Noi"""),
-    'lino_noi.lib.users.UserDetail' : _("""Layout of User Detail in Lino Noi."""),
     'lino_noi.lib.tickets.Ticket' : _("""The Django model used to represent a ticket in Noi. Adds some fields and
 methods."""),
     'lino_noi.lib.tickets.Ticket.assigned_to' : _("""The user who is working on this ticket."""),
