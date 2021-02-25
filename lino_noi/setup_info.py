@@ -6,7 +6,7 @@
 
 SETUP_INFO = dict(
     name='lino-noi',
-    version='20.7.0',
+    version='21.2.0',
     install_requires=['lino-xl'],
     # tests_require=['pytest', 'mock'],
     test_suite='tests',
