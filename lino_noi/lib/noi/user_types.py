@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2019 Rumma & Ko Ltd
+# Copyright 2015-2021 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """
@@ -40,14 +40,14 @@ class Customer(SiteUser, OfficeUser, VotesUser, Searcher, Reporter, CommentsUser
     pass
 
 
-class Contributor(Customer, Searcher, Helper, Worker, ExcerptsUser, ContactsUser, CoursesUser):
+class Contributor(Customer, Searcher, Helper, Worker, ExcerptsUser, CoursesUser):
     """
     A **Contributor** is somebody who works on and see tickets of sites they are team members of.
     """
     pass
 
 
-class Developer(Contributor, Triager, ExcerptsStaff, CommentsStaff, TicketsStaff, PrivateCommentsReader):
+class Developer(Contributor, ContactsUser, Triager, ExcerptsStaff, CommentsStaff, TicketsStaff, PrivateCommentsReader):
     """
     A **Developer** is a trusted user who has signed an NDA, has access to client contacts.
     Is able to make service reports as well as manage tickets.
