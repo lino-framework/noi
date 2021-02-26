@@ -19,4 +19,13 @@ methods."""),
     'lino_noi.lib.tickets.Ticket.assigned_to' : _("""The user who is working on this ticket."""),
     'lino_noi.lib.tickets.Ticket.site' : _("""The site this ticket belongs to.
 You can select only sites you are subscribed to."""),
+    'lino_noi.lib.noi.UserTypes.user' : _("""An alias for customer."""),
+    'lino_noi.lib.noi.UserTypes.customer' : _("""Somebody who uses some part of the software being developed by
+the team. This is usually the contact person of a customer."""),
+    'lino_noi.lib.noi.UserTypes.contributor' : _("""Can submit tickets, work on them and discuss with other team members.  Does
+not see confidential data nor the tickets of other teams."""),
+    'lino_noi.lib.noi.UserTypes.developer' : _("""A trusted contributor who can do almost everything except managing other
+users."""),
+    'lino_noi.lib.noi.UserTypes.admin' : _("""Can see everything including create new end users, change
+their passwords, assign them to teams."""),
 }
