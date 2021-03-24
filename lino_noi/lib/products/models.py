@@ -14,7 +14,7 @@ add('100', _("Services"), 'default', table_name="products.Products")
 class ProductDetail(ProductDetail):
     # Make the sales_price visible
     main = """
-    id cat sales_price vat_class delivery_unit
+    id category sales_price vat_class delivery_unit
     name
     description
     """

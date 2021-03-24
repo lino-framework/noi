@@ -37,7 +37,7 @@ class Migrator(Migrator):
 
         bv2kw = globals_dict['bv2kw']
         products_Product = rt.models.topics.Topic
-        products_ProductCat = rt.models.topics.TopicGroup
+        products_Category = rt.models.topics.TopicGroup
         faculties_Competence = rt.models.faculties.Competence
         faculties_Faculty = rt.models.faculties.Faculty
         tickets_Site = rt.models.tickets.Site
@@ -73,16 +73,16 @@ class Migrator(Migrator):
             kw.update(id=id)
             if name is not None: kw.update(bv2kw('name', name))
             kw.update(description=description)
-            return products_ProductCat(**kw)
+            return products_Category(**kw)
 
         @override(globals_dict)
-        def create_products_product(id, ref, name, description, cat_id):
+        def create_products_product(id, ref, name, description, category_id):
             kw = dict()
             kw.update(id=id)
             kw.update(ref=ref)
             if name is not None: kw.update(bv2kw('name', name))
             if description is not None: kw.update(bv2kw('description', description))
-            kw.update(topic_group_id=cat_id)
+            kw.update(topic_group_id=category_id)
             return products_Product(**kw)
 
         @override(globals_dict)
