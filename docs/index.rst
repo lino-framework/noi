@@ -2,12 +2,11 @@
 Lino Noi
 ========
 
-Welcome to the **Lino Noi User's Guide**
+Welcome to the **Lino Noi documentation tree**.
 
 
 .. toctree::
    :maxdepth: 1
-   :hidden:
 
    about
    guide/index
