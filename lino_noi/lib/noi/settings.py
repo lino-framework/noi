@@ -135,15 +135,6 @@ class Site(Site):
             self.models.tickets.AllTickets.insert_action,
             label=_("Submit a ticket"))
 
-        a = self.models.users.MySettings.default_action
-        tb.add_instance_action(
-            user, action=a, label=_("My settings"))
-        # handler = self.action_call(None, a, dict(record_id=user.pk))
-        # handler = "function(){%s}" % handler
-        # mysettings = dict(text=_("My settings"),
-        #                   handler=js_code(handler))
-
-
     def do_site_startup(self):
         super(Site, self).do_site_startup()
 
