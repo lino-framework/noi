@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2016 Rumma & Ko Ltd
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """This is a real-world example of how the application developer
 can provide automatic data migrations for :ref:`dpy`.

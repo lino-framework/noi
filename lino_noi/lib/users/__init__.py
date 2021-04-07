@@ -1,5 +1,5 @@
 # Copyright 2015-2017 Rumma & Ko Ltd
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 """
 Lino Noi extension of :mod:`lino_xl.lib.online.auth`.
 
