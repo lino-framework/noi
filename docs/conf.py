@@ -20,6 +20,4 @@ copyright = '2014-2021 Rumma & Ko Ltd'
 suppress_warnings = ['image.nonlocal_uri']
 blogref_format = "https://luc.lino-framework.org/blog/%Y/%m%d.html"
 
-html_context.update({
-    'public_url': 'https://noi.lino-framework.org',
-})
+html_context.update(public_url='https://noi.lino-framework.org')
