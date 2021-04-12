@@ -2,7 +2,7 @@
 The ``lino-noi`` package
 ========================
 
-
+Warning: This repository is no longer maintained. Development has moved to https://gitlab.com/lino-framework/noi
 
 
 Lino Noi is a customizable ticket management and time tracking
